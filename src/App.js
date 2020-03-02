@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class StatsCalculator extends React.Component {
   constructor(props) {
@@ -66,7 +64,7 @@ class StatsCalculator extends React.Component {
   render() {
     return (
       <div className="statsCalculator">
-        <p>
+        <p className="points">
           Punkty statystyk: {this.state.statPts}{" "}
           <button className={"inlineButton"} onClick={() => this.reset()}>
             Reset
@@ -160,7 +158,7 @@ class StatDecrementButton extends React.Component {
     if (
       ["strength", "agility", "power", "knowledge"].includes(this.props.stat)
     ) {
-      if (this.props.statvalue == 10) {
+      if (this.props.statvalue === 10) {
         return (
           <button className="inlineButton inactive" disabled={true}>
             -{-this.props.value}
@@ -179,7 +177,7 @@ class StatDecrementButton extends React.Component {
         );
       }
     } else {
-      if (this.props.statvalue == 200) {
+      if (this.props.statvalue === 200) {
         return (
           <button className="inlineButton inactive" disabled={true}>
             -{-this.props.value * 10}
@@ -215,8 +213,10 @@ class StatLine extends React.Component {
   render() {
     return (
       <div className="statLine">
+      <img src={"images/" + this.props.stat + ".png"} alt={this.props.stat} />
+      <div>
         <div className="statName">
-          {this.props.statName} {this.props.value}
+         {this.props.statName} {this.props.value}
         </div>
         <div className="statButtons">
           <StatDecrementButton
@@ -243,6 +243,7 @@ class StatLine extends React.Component {
             statvalue={this.props.value}
             value={5}
           />
+        </div>
         </div>
       </div>
     );
@@ -496,7 +497,7 @@ class SkillLine extends React.Component {
     return (
       <div className="skillLine">
         <div className="image">
-          <img src={this.props.skill.image} />
+          <img src={this.props.skill.image} alt={this.props.skill.name} />
         </div>
         <div className="skillName">
           <p>{this.props.skill.name}</p>
@@ -506,11 +507,11 @@ class SkillLine extends React.Component {
         </div>
         <div className="reqLvl">
           <div className="reqLvlText">
-            <p>Wymagany poziom postaci:</p>
+            <p>Wym. poziom postaci:</p>
           </div>
           <div className="reqLvlNumber">
             <p>
-              {this.props.skill.level == this.props.skill.maxLvl
+              {this.props.skill.level === this.props.skill.maxLvl
                 ? "-"
                 : this.props.skill.requiredCharLevel}
             </p>
@@ -518,7 +519,7 @@ class SkillLine extends React.Component {
         </div>
         <div className="skillButtons">
           <div className="minusButton">
-            {this.props.skill.level == this.props.skill.minLvl ? (
+            {this.props.skill.level === this.props.skill.minLvl ? (
               <SkillDecrementButton
                 spendSkillPoints={this.props.spendSkillPoints}
                 skillLevel={this.props.skill.level}
@@ -537,7 +538,7 @@ class SkillLine extends React.Component {
             )}
           </div>
           <div className="plusButton">
-            {((this.props.skill.level == this.props.skill.maxLvl) || (this.props.skill.requiredCharLevel > this.props.level) || (this.props.checkIfSkillCanIncrease(this.props.skill.level, this.props.skill.level + 1, 1) == false)) ? (
+            {((this.props.skill.level === this.props.skill.maxLvl) || (this.props.skill.requiredCharLevel > this.props.level) || (this.props.checkIfSkillCanIncrease(this.props.skill.level, this.props.skill.level + 1, 1) === false)) ? (
               <SkillIncrementButton
                 spendSkillPoints={this.props.spendSkillPoints}
                 skillLevel={this.props.skill.level}
@@ -568,8 +569,8 @@ class SkillIncrementButton extends React.Component {
   render() {
     return (
       <button
-        className={"inlineButton" + " " + this.props.active}
-        disabled={this.props.active == "active" ? false : true}
+        className={"inlineButton " + this.props.active}
+        disabled={this.props.active === "active" ? false : true}
         onClick={() => {
           this.props.spendSkillPoints(
             this.props.skillLevel,
@@ -592,7 +593,7 @@ class SkillDecrementButton extends React.Component {
     return (
       <button
         className={"inlineButton" + " " + this.props.active}
-        disabled={this.props.active == "active" ? false : true}
+        disabled={this.props.active === "active" ? false : true}
         onClick={() => {
           this.props.spendSkillPoints(
             this.props.skillLevel,

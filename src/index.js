@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import Calculator from './App';
 import * as serviceWorker from './serviceWorker';
 
@@ -1274,7 +1274,8 @@ class SkillSet {
           <p>Pobiera 30 kondycji.</p>
           <p>Nie można awansować na wyższy poziom</p>
         </div>
-      )
+      ),
+      image: "images/Rootbreaker.jpg"
     };
     for (let i = 9; i <= 17; i++) {
       this["skill" + i] = new Skill(charClass, i - 8, database);

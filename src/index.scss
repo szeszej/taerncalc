@@ -1,0 +1,351 @@
+@import url("https://fonts.googleapis.com/css?family=Eczar&display=swap");
+$main-font: "Eczar", serif;
+
+body {
+  margin: 0;
+}
+
+.wrapper {
+  font-size: 16px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  font-family: $main-font;
+  display: grid;
+  grid-template-columns: 15% auto 15%;
+  grid-template-rows: 15em auto 8em;
+  grid-template-areas: "header header header" "leftsidebar content rightsidebar" "footer footer footer";
+  margin: 0;
+  background: black;
+
+  button,
+  input,
+  select {
+    font-family: $main-font;
+  }
+
+  button {
+    border-radius: 8px;
+    background-color: #bdac6f;
+    border: 2px solid #d6c1a9;
+  }
+
+  button:hover {
+    background-color: #bd996f;
+  }
+
+  button:focus,
+  select:focus {
+    outline-style: none;
+    box-shadow: none;
+    border-color: transparent;
+  }
+
+  button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    background-color: #bdac6f;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  .header {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .logo {
+      margin-top: 2.5em;
+
+      img {
+        max-height: 4em;
+      }
+    }
+
+    .title {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .header {
+        h1 {
+          text-align: center;
+          text-transform: uppercase;
+          // background: linear-gradient(to bottom, #cb93bd 9%,#be1414 50%,#f78b8b 92%);
+          background: linear-gradient(to bottom, #8e057e 26%, #981010 50%, #f43f3f 91%);
+          // background: linear-gradient(to bottom, #cb93bd 9%,#870e0e 50%,#f78b8b 92%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    }
+  }
+
+  .intro {
+    width: 80%;
+    margin: 0 auto;
+    text-align: justify;
+  }
+
+  .footer {
+    grid-area: footer;
+    color: white;
+    padding-bottom: 1em;
+
+    .authors {
+      width: 50%;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  .leftSidebar {
+    grid-area: leftsidebar;
+  }
+
+  .rightSidebar {
+    grid-area: rightsidebar;
+  }
+
+  .calculator {
+    padding-top: 2.5em;
+    padding-bottom: 4em;
+    grid-area: content;
+    display: grid;
+    grid-template-rows: 7em auto;
+    grid-template-areas: "classLevel" "calculators";
+    background-color: #d6cca9;
+    clip-path: polygon(3% 0, 7% 1%, 11% 0%, 16% 2%, 20% 0, 23% 2%, 28% 2%, 32% 1%, 35% 1%, 39% 3%, 41% 1%, 45% 0%, 47% 2%, 50% 2%, 53% 0, 58% 2%, 60% 2%, 63% 1%, 65% 0%, 67% 2%, 69% 2%, 73% 1%, 76% 1%, 79% 0, 82% 1%, 85% 0, 87% 1%, 89% 0, 92% 1%, 96% 0, 98% 3%, 99% 3%, 99% 6%, 100% 11%, 98% 15%, 100% 21%, 99% 28%, 100% 32%, 99% 35%, 99% 40%, 100% 43%, 99% 48%, 100% 53%, 100% 57%, 99% 60%, 100% 64%, 100% 68%, 99% 72%, 100% 75%, 100% 79%, 99% 83%, 100% 86%, 100% 90%, 99% 94%, 99% 98%, 95% 99%, 92% 99%, 89% 100%, 86% 99%, 83% 100%, 77% 99%, 72% 100%, 66% 98%, 62% 100%, 59% 99%, 54% 99%, 49% 100%, 46% 98%, 43% 100%, 40% 98%, 38% 100%, 35% 99%, 31% 100%, 28% 99%, 25% 99%, 22% 100%, 19% 99%, 16% 100%, 13% 99%, 10% 99%, 7% 100%, 4% 99%, 2% 97%, 1% 97%, 0% 94%, 1% 89%, 0% 84%, 1% 81%, 0 76%, 0 71%, 1% 66%, 0% 64%, 0% 61%, 0% 59%, 1% 54%, 0% 49%, 1% 45%, 0% 40%, 1% 37%, 0% 34%, 1% 29%, 0% 23%, 2% 20%, 1% 17%, 1% 13%, 0 10%, 1% 6%, 1% 3%);
+
+    .placeholder {
+      display: none;
+    }
+
+    #classLvlWrapper {
+      grid-area: classLevel;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
+
+      form {
+        display: flex;
+        width: 80%;
+        justify-content: center;
+        font-size: 1.5em;
+
+        select {
+          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+          width: 30%;
+          border-radius: 8px;
+          font-size: 0.8em;
+          color: #444;
+          border: 1px solid #d6c1a9;
+          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+          padding-left: 0.5em;
+          margin-right: 0.5em;
+        }
+
+        #charLvl {
+          width: 30%;
+          border-radius: 8px;
+          font-size: 0.8em;
+          border: 1px solid #d6c1a9;
+          padding-left: 0.5em;
+        }
+
+        .submit {
+          border-radius: 8px;
+          font-size: 0.8em;
+          color: #444;
+          border: 2px solid #aaa;
+          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+          cursor: pointer;
+          margin-left: 0.5em;
+          text-transform: uppercase;
+          background-color: #bdac6f;
+          border: 2px solid #d6c1a9;
+          padding: 0.3em 0.75em;
+        }
+
+        .submit:hover {
+          background-color: #bd996f;
+        }
+      }
+    }
+
+    .calculators {
+      grid-area: calculators;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .skillCalculator {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .skills {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+
+          .classSkills {
+            position: relative;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+
+            .skillLine {
+              border: 2px solid #d6c1a9;
+              background-color: #d4d6a9;
+              position: relative;
+              font-size: 0.75em;
+              width: 80%;
+              margin: 1em;
+              display: grid;
+              grid-template-areas: "image name skillvalue buttons" "image reqlvl skillvalue buttons";
+              grid-template-columns: 7em 4fr 1fr 1fr;
+              grid-template-rows: 2.5em auto;
+              padding: 1em;
+              border-radius: 8px;
+
+              .image {
+                display: flex;
+                grid-area: image;
+                height: 7em;
+                align-self: center;
+                margin-right: 0.5em;
+
+                img {
+                  border: 3px solid #d6c1a9;
+                  border-radius: 50%;
+                }
+              }
+
+              .skillName {
+                grid-area: name;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-size: 1.5em;
+                font-weight: bold;
+                letter-spacing: 1px;
+              }
+
+              .skillValue {
+                border: 2px solid #d6c1a9;
+                grid-area: skillvalue;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 4em;
+                line-height: 0;
+                background-color: #b9bd6f;
+                border-radius: 5px;
+
+                p {
+                  margin: 0;
+                  margin-block-start: 0;
+                  margin-block-end: 0;
+                }
+              }
+
+              .reqLvl {
+                grid-area: reqlvl;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                .reqLvlText {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  justify-content: center;
+                  margin-right: 0.5em;
+                }
+
+                .reqLvlNumber {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  justify-content: center;
+                }
+              }
+
+              .skillButtons {
+                grid-area: buttons;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+
+                button {
+                  height: 3em;
+                  width: 3em;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .statsCalculator {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .points {
+          margin-bottom: 4em;
+        }
+
+        .statLine {
+          margin: 0.5em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 2px solid #d6c1a9;
+          background-color: #d4d6a9;
+          padding: 0.5em;
+          border-radius: 8px;
+
+          img {
+            align-self: center;
+            margin-right: 0.25em;
+          }
+
+          .statName {
+            text-align: center;
+          }
+
+          .statButtons {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
