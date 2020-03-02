@@ -4,14 +4,13 @@ import './index.css';
 import Calculator from './App';
 import * as serviceWorker from './serviceWorker';
 
-const classForm = document.getElementById("charClass");
-const levelForm = document.getElementById("charLvl");
 const calculator = document.getElementById("calc");
 
 document.getElementById("classLvl").addEventListener(
   "submit",
   function(event) {
     event.preventDefault();
+    showCalc(event.target[0].value, event.target[1].value, skillDatabase);
   },
   false
 );
@@ -808,7 +807,7 @@ class SkillSet {
               <td>Szansa trafienia</td>
               <td>Kondycja</td>
             </tr>
-            <tr style="">
+            <tr>
               <td>I</td>
               <td>80%</td>
               <td>+20%</td>
@@ -884,7 +883,7 @@ class SkillSet {
               <td>Szansa trafienia wszelkich ataków</td>
               <td>Mana</td>
             </tr>
-            <tr style="">
+            <tr>
               <td>I</td>
               <td>5</td>
               <td>-15%</td>
