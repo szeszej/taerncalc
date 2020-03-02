@@ -1,43 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-</html>
+<html lang="pl">
+<head>
+  <!--  Meta  -->
+  <title>Taern - kalkulator statystyk i umiejętności</title>
+  <meta name="description" content="Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fee12b" />
+  <!--  Styles  -->
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="logo"><img
+          src="https://data1.cupsell.pl/upload/generator/82491/640x420/977819_print-trimmed-2.png?resize=max_sizes&key=55f9a22768eed085006592c1174c0235"
+          alt="Taern"></div>
+      <div class="title">
+        <div class="header">
+          <h1>Kalkulator umiejętności i statystyk</h1>
+        </div>
+      </div>
+    </div>
+    <div class="leftsidebar"></div>
+    <div class="calculator">
+      <div id="classLvlWrapper">
+        <form id="classLvl" onsubmit="showCalc(classForm.value, levelForm.value, skillDatabase)">
+          <select id="charClass" required>
+            <option selected disabled value="" class="placeholder">Wybierz klasę</option>
+            <option value="barbarian">Barbarzyńca</option>
+            <option value="knight">Rycerz</option>
+            <option value="sheed">Sheed</option>
+            <option value="druid">Druid</option>
+            <option value="firemage">Mag Ognia</option>
+            <option value="archer">Łucznik</option>
+            <option value="voodoo">VooDoo</option>
+          </select>
+          <input type="number" min="1" max="140" placeholder="Poziom postaci" id="charLvl" required></input>
+          <input class="submit" type="submit" value="Zatwierdź"></input>
+        </form>
+      </div>
+      <div id="calc">
+        <div class=intro>
+          <h2>Jak używać kalkulatora umiejętności i statystyk Taern?</h2>
+          <p>Używanie kalkulatora jest bardzo proste - w formularzu powyżej wpisz:</p>
+          <ol>
+            <li>Dla jakiej klasy chcesz wyliczyć statystyki i umiejętności (pole "Wybierz klasę")</li>
+            <li>Dla jakiego poziomu postaci chcesz dokonać obliczeń (pole "Poziom postaci")</li>
+            umiejętności (pole "Wybierz klasę")</li>
+            <li>Kliknij "Zatwierdź"</li>
+          </ol>
+          <p>
+            Po przejściu powyższych korków wyświetlą się dwie tabelki kalkulatora - jedna z listą statystyk, a druga z
+            listą umiejętności. Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności.
+            Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset".
+          </p>
+          <h2>MMORPG - The Pride of Taern</h2>
+          <p>The Pride of Taern to polska gra MMORPG, która łączy w sobie cechy klasycznych, izometrycznych RPG-ów z
+            dynamicznym turowym systemem walki i dojrzałą, nieliniową fabułą. Dołącz do tysięcy graczy online, którzy już
+            od 6-ciu lat przemierzają ogromny świat The Pride of Taern, wypróbuj nasz unikalny system walki, odkrywaj
+            ogromny świat i po prostu baw się dobrze.</p>
+          <p>
+            W The Pride of Taern znajdziesz 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki
+            potężnych przedmiotów do odnalezienia i nieskończona ilość losowo generowanego sprzętu do zdobycia. Ponad 100
+            questów, dynamiczne eventy i niezliczoną ilość godzin emocjonującej gry.</p>
+          <h2>
+            Fabuła
+          </h2>
+          <p>Spokojne życie, które do tej pory wiodłeś, zostało zniszczone przez inwazję brutalnego najeźdźcy. Przewaga
+            wroga była ogromna i kiedy dalsza walka nie miała sensu, zostałeś zmuszony do ucieczki. W nowym kraju, na
+            nowym lądzie, pamiętasz o powinnościach wobec utraconej ojczyzny. Przyłączasz się do ocalałych taernijskich
+            oddziałów i odkrywasz, że walka o Taern często toczy się na granicy dobra i zła. Jaką podążysz ścieżką?
+            Uznasz, że cel uświęca środki, czy jednak będziesz ważył swoje czyny na szali moralności? Ogromny świat, który
+            będziesz przemierzał, pełen jest wyzwań i wyborów, a twoje czyny zdefiniują, co to znaczy być Dumą Taernu.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="rightSidebar"></div>
+    <div class="footer">
+      <div class="authors">
+        <p class="created">Stworzone przez szeszej</p>
+        <p class="created">Gra Taern, a także wszystkie grafiki i logo, są własnością Whitemoon System
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
