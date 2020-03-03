@@ -440,8 +440,45 @@ body {
           align-items: center;
           margin-bottom: 1em;
           justify-content: space-around;
+          input {
+            width: 40%;
+          }
+          select {
+            width: 62%;
+          }
+          #charLvl {
+            width: 60%;
+          }
+        }
+      }
+      .calculators {
+        .skillCalculator {
+          .skills {
+            width: 100%;
+            .classSkills {
+              width: 100%;
+            }
+          }
+        }
+        .statsCalculator {
+          width: 50%;
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 625px) {
+  .wrapper .calculator .calculators .statsCalculator {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .wrapper .calculator .calculators .statsCalculator {
+    width: 70%;
+  }
+  .wrapper .header .title .header h1 {
+    font-size: 20px;
   }
 }
