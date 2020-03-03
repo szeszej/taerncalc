@@ -15,7 +15,7 @@ body {
   font-family: $main-font;
   display: grid;
   grid-template-columns: 10% auto 10%;
-  grid-template-rows: 15em auto 8em;
+  grid-template-rows: 15em auto auto;
   grid-template-areas: "header header header" "leftsidebar content rightsidebar" "footer footer footer";
   margin: 0;
   background: black;
@@ -441,7 +441,7 @@ body {
           margin-bottom: 1em;
           justify-content: space-around;
           input {
-            width: 40%;
+            width: auto;
           }
           select {
             width: 62%;
@@ -480,5 +480,17 @@ body {
   }
   .wrapper .header .title .header h1 {
     font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .wrapper {
+    font-size: 10px;
+  }
+  .wrapper .calculator .calculators .statsCalculator {
+    width: 80%;
+  }
+  .wrapper .header .title .header h1 {
+    font-size: 16px;
   }
 }
