@@ -343,10 +343,11 @@ body {
           img {
             align-self: center;
             margin-right: 0.25em;
-
           }
+
           .statNameButtons {
             width: 70%;
+
             .statName {
               text-align: center;
             }
@@ -355,7 +356,6 @@ body {
               text-align: center;
             }
           }
-
         }
       }
     }
@@ -363,51 +363,53 @@ body {
       #classLvlWrapper {
         margin-top: 2.5em;
       }
+
       .calculators {
         flex-direction: column;
         align-items: center;
 
         .statsCalculator {
           width: 30%;
+
           .points {
             margin-bottom: 1em;
           }
         }
+
         .skillCalculator {
           width: 90%;
         }
-
       }
     }
     @media only screen and (max-width: 1030px) {
       #classLvlWrapper {
         margin-top: 7em;
       }
+
       .calculators {
         .statsCalculator {
           width: 40%;
-
         }
 
         .skillCalculator {
           width: 90%;
+
           .skills {
             width: 100%;
+
             .classSkills {
               width: 80%;
             }
           }
-
         }
-
       }
     }
   }
 }
-
 @media only screen and (max-width: 1615px) {
   .wrapper {
     font-size: 14px;
+
     button {
       font-size: 0.75rem;
     }
@@ -421,7 +423,25 @@ body {
   }
 }
 @media only screen and (max-width: 720px) {
-  .wrapper .calculator #classLvlWrapper form select, .wrapper .calculator #classLvlWrapper form input {
-    font-size: 0.6em
+  .wrapper {
+    font-size: 12px;
+
+    .calculator {
+      grid-template-rows: 15em auto;
+
+      #classLvlWrapper {
+        margin-top: 4.5em;
+        margin-bottom: 0.75em;
+
+        form {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 1em;
+          justify-content: space-around;
+        }
+      }
+    }
   }
 }
