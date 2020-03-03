@@ -592,7 +592,7 @@ class SkillDecrementButton extends React.Component {
   render() {
     return (
       <button
-        className={"inlineButton" + " " + this.props.active}
+        className={"inlineButton " + this.props.active}
         disabled={this.props.active === "active" ? false : true}
         onClick={() => {
           this.props.spendSkillPoints(

@@ -844,10 +844,158 @@ const skillDatabase = {
       image: "images/Uderzenie_chi.jpg"
     }
   },
-  druid: {},
-  firemage: {},
-  archer: {},
-  voodoo: {}
+  druid: {
+    skill1: {
+      name: "Leczenie",
+      image: "images/Leczenie.jpg"
+    },
+    skill2: {
+      name: "Odczarowanie",
+      image: "images/Odczarowanie.jpg"
+    },
+    skill3: {
+      name: "Rój os",
+      image: "images/Rój_os.jpg"
+    },
+    skill4: {
+      name: "Wtapianie",
+      image: "images/Wtapianie.jpg"
+    },
+    skill5: {
+      name: "Wzmocnienie",
+      image: "images/Wzmocnienie.jpg"
+    },
+    skill6: {
+      name: "Uderzenie",
+      image: "images/Uderzenie.jpg"
+    },
+    skill7: {
+      name: "Źródło natury",
+      image: "images/Źródło_natury.jpg"
+    },
+    skill8: {
+      name: "Leczenie grupowe",
+      image: "images/Leczenie_grupowe.jpg"
+    },
+    skill9: {
+      name: "Korzenie",
+      image: "images/Korzenie.jpg"
+    }
+  },
+  firemage: {
+    skill1: {
+      name: "Magiczna iskra",
+      image: "images/Magiczna_iskra.jpg"
+    },
+    skill2: {
+      name: "Wrażliwość na ogień",
+      image: "images/Wrażliwość_na_ogień.jpg"
+    },
+    skill3: {
+      name: "Ognista sfera",
+      image: "images/Ognista_sfera.jpg"
+    },
+    skill4: {
+      name: "Inkantacja",
+      image: "images/Inkantacja.jpg"
+    },
+    skill5: {
+      name: "Aura rozproszenia",
+      image: "images/Aura.jpg"
+    },
+    skill6: {
+      name: "Podpalenie",
+      image: "images/Podpalenie.jpg"
+    },
+    skill7: {
+      name: "Kula ognia",
+      image: "images/Kula_ognia.jpg"
+    },
+    skill8: {
+      name: "Deszcz ognia",
+      image: "images/Deszcz_ognia.jpg"
+    },
+    skill9: {
+      name: "Meteoryt",
+      image: "images/Meteoryt.jpg"
+    }
+  },
+  archer: {
+    skill1: {
+      name: "Precyzyjny strzał",
+      image: "images/Precyzyjny_strzał.jpg"
+    },
+    skill2: {
+      name: "Twoja stara",
+      image: "images/Twoja_stara.jpg"
+    },
+    skill3: {
+      name: "Zatruta strzała",
+      image: "images/Zatruta_strzała.jpg"
+    },
+    skill4: {
+      name: "Wyostrzone zmysły",
+      image: "images/Wyostrzone_zmysły.jpg"
+    },
+    skill5: {
+      name: "Ognista strzała",
+      image: "images/Ognista_strzała.jpg"
+    },
+    skill6: {
+      name: "Piach w oczy",
+      image: "images/Piach_w_oczy.jpg"
+    },
+    skill7: {
+      name: "Strzał strategiczny",
+      image: "images/Strzał_strategiczny.jpg"
+    },
+    skill8: {
+      name: "Lodowa strzała",
+      image: "images/Lodowa_strzała.jpg"
+    },
+    skill9: {
+      name: "Grad strzał",
+      image: "images/Grad_strzał.jpg"
+    }
+  },
+  voodoo: {
+    skill1: {
+      name: "Ukłucie lalki",
+      image: "images/Ukłucie_lalki.jpg"
+    },
+    skill2: {
+      name: "Szpila w oko",
+      image: "images/Szpila_w_oko.jpg"
+    },
+    skill3: {
+      name: "Wyssanie duszy",
+      image: "images/Wyssanie_duszy.jpg"
+    },
+    skill4: {
+      name: "Hak w brzuch",
+      image: "images/Hak_w_brzuch.jpg"
+    },
+    skill5: {
+      name: "Zatrucie",
+      image: "images/Zatrucie.jpg"
+    },
+    skill6: {
+      name: "Uderzenie cienia",
+      image: "images/Uderzenie_cienia.jpg"
+    },
+    skill7: {
+      name: "Otępienie",
+      image: "images/Otępienie.jpg"
+    },
+    skill8: {
+      name: "Aura cienia",
+      image: "images/Aura_cienia.jpg"
+    },
+    skill9: {
+      name: "Ukazanie śmierci",
+      image: "images/Ukazanie_śmierci.jpg"
+    }
+  }
 };
 
 class SkillSet {
