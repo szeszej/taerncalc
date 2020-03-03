@@ -214,7 +214,7 @@ class StatLine extends React.Component {
     return (
       <div className="statLine">
       <img src={"images/" + this.props.stat + ".png"} alt={this.props.stat} />
-      <div>
+      <div className="statNameButtons">
         <div className="statName">
          {this.props.statName} {this.props.value}
         </div>

@@ -283,7 +283,7 @@ body {
                   flex-direction: column;
                   align-items: flex-start;
                   justify-content: center;
-                  margin-right: 0.5em;
+                  margin-right: 0.7em;
                 }
 
                 .reqLvlNumber {
@@ -319,13 +319,14 @@ body {
         align-items: center;
 
         .points {
-          margin-bottom: 4em;
+          margin-bottom: 5em;
         }
 
         .statLine {
+          width: 80%;
           margin: 0.5em;
           display: flex;
-          justify-content: center;
+          justify-content: space-evenly;
           align-items: center;
           border: 2px solid #d6c1a9;
           background-color: #d4d6a9;
@@ -335,15 +336,19 @@ body {
           img {
             align-self: center;
             margin-right: 0.25em;
+
+          }
+          .statNameButtons {
+            width: 70%;
+            .statName {
+              text-align: center;
+            }
+
+            .statButtons {
+              text-align: center;
+            }
           }
 
-          .statName {
-            text-align: center;
-          }
-
-          .statButtons {
-            text-align: center;
-          }
         }
       }
     }

@@ -93,7 +93,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/PNc8XxF.jpg"
+      image: "images/Szybkie_Cięcie.jpg"
     },
     skill2: {
       name: "Mierzony Cios",
@@ -183,7 +183,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/OrUUbyZ.jpg"
+      image: "images/Mierzony_Cios.jpg"
     },
     skill3: {
       name: "Blok Tarczą",
@@ -264,7 +264,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/6msmcV8.jpg"
+      image: "images/Blok_Tarczą.jpg"
     },
     skill4: {
       name: "Trans",
@@ -352,7 +352,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/KSejrWJ.jpg"
+      image: "images/Trans.jpg"
     },
     skill5: {
       name: "Ochrona",
@@ -424,7 +424,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/rZiWeSN.jpg"
+      image: "images/Ochrona.jpg"
     },
     skill6: {
       name: "Potężne Uderzenie",
@@ -497,7 +497,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/ghvqTpg.jpg"
+      image: "images/Potężne_Uderzenie.jpg"
     },
     skill7: {
       name: "Aura Czystości",
@@ -583,7 +583,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/vCfsYiI.jpg"
+      image: "images/Aura_Czystości.jpg"
     },
     skill8: {
       name: "Poświęcenie",
@@ -669,7 +669,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/QOyrV99.jpg"
+      image: "images/Poświęcenie.jpg"
     },
     skill9: {
       name: "Siła Jedności",
@@ -765,11 +765,85 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "https://i.imgur.com/TPkFqtD.jpg"
+      image: "images/Siła_Jedności.jpg"
     }
   },
-  barbarian: {},
-  sheed: {},
+  barbarian: {
+    skill1: {
+      name: "Dynka",
+      image: "images/Dynka.jpg"
+    },
+    skill2: {
+      name: "Atak dwuręczny",
+      image: "images/Dwuręczny.jpg"
+    },
+    skill3: {
+      name: "Taran",
+      image: "images/Taran.jpg"
+    },
+    skill4: {
+      name: "Gruboskórność",
+      image: "images/Gruboskórność.jpg"
+    },
+    skill5: {
+      name: "Gryzienie",
+      image: "images/Gryzienie.jpg"
+    },
+    skill6: {
+      name: "Furia",
+      image: "images/Furia.jpg"
+    },
+    skill7: {
+      name: "Zakażenie",
+      image: "images/Zakażenie.jpg"
+    },
+    skill8: {
+      name: "Ryk",
+      image: "images/Ryk.jpg"
+    },
+    skill9: {
+      name: "Krytyczne",
+      image: "images/Krytyczne.jpg"
+    }
+  },
+  sheed: {
+    skill1: {
+      name: "Lewy prawy",
+      image: "images/Lewy,_Prawy.jpg"
+    },
+    skill2: {
+      name: "Front kick",
+      image: "images/Front_Kick.jpg"
+    },
+    skill3: {
+      name: "Kontrola oddechu",
+      image: "images/Kontrola_oddechu.jpg"
+    },
+    skill4: {
+      name: "Dotkliwe uderzenie",
+      image: "images/Dotkliwe_uderzenie.jpg"
+    },
+    skill5: {
+      name: "Cios w wątrobę",
+      image: "images/Cios_w_wątrobę.jpg"
+    },
+    skill6: {
+      name: "Latające kolano",
+      image: "images/Latające_kolano.jpg"
+    },
+    skill7: {
+      name: "Uniki",
+      image: "images/Uniki.jpg"
+    },
+    skill8: {
+      name: "Haduoken",
+      image: "images/Haduoken.jpg"
+    },
+    skill9: {
+      name: "Uderzenie Chi",
+      image: "images/Uderzenie_chi.jpg"
+    }
+  },
   druid: {},
   firemage: {},
   archer: {},
@@ -852,7 +926,7 @@ class SkillSet {
           </tbody>
         </table>
       ),
-      image: "https://wiki.taern.com/images/8/8f/Punch.png"
+      image: "images/Cios_pięścią.jpg"
     };
     this.skill2 = {
       name: "Okrzyk bojowy",
@@ -928,7 +1002,7 @@ class SkillSet {
           </tbody>
         </table>
       ),
-      image: "https://wiki.taern.com/images/9/9a/Warcry.png"
+      image: "images/Okrzyk_bojowy.jpg"
     };
     this.skill3 = {
       name: "Rzut kamieniem",
@@ -1004,7 +1078,7 @@ class SkillSet {
           </tbody>
         </table>
       ),
-      image: "https://wiki.taern.com/images/e/e1/Throw.png"
+      image: "images/Rzut_kamieniem.jpg"
     };
     this.skill4 = {
       name: "Strzał",
@@ -1080,7 +1154,7 @@ class SkillSet {
           </tbody>
         </table>
       ),
-      image: "https://wiki.taern.com/images/d/dc/Shot.png"
+      image: "images/Strzał.jpg"
     };
     this.skill5 = {
       name: "Zwykły atak",
@@ -1157,7 +1231,7 @@ class SkillSet {
           </tbody>
         </table>
       ),
-      image: "https://wiki.taern.com/images/8/8f/Melee.png"
+      image: "images/Zwykły_atak.jpg"
     };
     this.skill6 = {
       name: "Ucieczka",
@@ -1181,7 +1255,7 @@ class SkillSet {
           <p>Nie można awansować na wyższy poziom</p>
         </div>
       ),
-      image: "https://wiki.taern.com/images/4/41/Flee.png"
+      image: "images/Ucieczka.jpg"
     };
     this.skill7 = {
       name: "Wataha",
@@ -1250,7 +1324,7 @@ class SkillSet {
           </tbody>
         </table>
       ),
-      image: "https://wiki.taern.com/images/3/3a/Pack.png"
+      image: "images/Wataha.jpg"
     };
     this.skill8 = {
       name: "Wyrwanie z korzeni",
