@@ -765,7 +765,7 @@ const skillDatabase = {
           </tbody>
         </table>
       ),
-      image: "images/Siła_Jedności.jpg"
+      image: "images/Siła_jedności.jpg"
     }
   },
   barbarian: {

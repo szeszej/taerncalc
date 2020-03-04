@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Eczar&display=swap");
 $main-font: "Eczar", serif;
+$border-color: #d6c1a9;
 
 body {
   margin: 0;
@@ -43,7 +44,7 @@ body {
   button {
     border-radius: 8px;
     background-color: #bdac6f;
-    border: 2px solid #d6c1a9;
+    border: 2px solid $border-color;
   }
 
   button:hover {
@@ -51,7 +52,7 @@ body {
   }
 
   button:focus,
-  select:focus {
+  select:focus, input:focus {
     outline-style: none;
     box-shadow: none;
     border-color: transparent;
@@ -164,7 +165,7 @@ body {
           border-radius: 8px;
           font-size: 0.8em;
           color: #444;
-          border: 1px solid #d6c1a9;
+          border: 1px solid $border-color;
           box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
           padding-left: 0.5em;
           margin-right: 0.5em;
@@ -174,7 +175,7 @@ body {
           width: 30%;
           border-radius: 8px;
           font-size: 0.8em;
-          border: 1px solid #d6c1a9;
+          border: 1px solid $border-color;
           padding-left: 0.5em;
         }
 
@@ -188,7 +189,7 @@ body {
           margin-left: 0.5em;
           text-transform: uppercase;
           background-color: #bdac6f;
-          border: 2px solid #d6c1a9;
+          border: 2px solid $border-color;
           padding: 0.3em 0.75em;
         }
 
@@ -230,7 +231,7 @@ body {
             align-items: center;
 
             .skillLine {
-              border: 2px solid #d6c1a9;
+              border: 2px solid $border-color;
               background-color: #d4d6a9;
               position: relative;
               font-size: 0.75em;
@@ -251,7 +252,7 @@ body {
                 margin-right: 0.5em;
 
                 img {
-                  border: 3px solid #d6c1a9;
+                  border: 3px solid $border-color;
                   border-radius: 50%;
                 }
               }
@@ -268,7 +269,7 @@ body {
               }
 
               .skillValue {
-                border: 2px solid #d6c1a9;
+                border: 2px solid $border-color;
                 grid-area: skillvalue;
                 display: flex;
                 align-items: center;
@@ -348,7 +349,7 @@ body {
           display: flex;
           justify-content: space-evenly;
           align-items: center;
-          border: 2px solid #d6c1a9;
+          border: 2px solid $border-color;
           background-color: #d4d6a9;
           padding: 0.5em;
           border-radius: 8px;
@@ -468,15 +469,18 @@ body {
           .submit {
             width: auto;
             margin-left: 0;
+
           }
           select {
             width: 62%;
             margin-right: 0;
             text-align-last: center;
+            padding-left: 0;
           }
           #charLvl {
             width: 60%;
             text-align: center;
+            padding-left: 0;
           }
         }
       }
@@ -506,5 +510,11 @@ body {
 @media only screen and (max-width: 450px) {
   .wrapper .header .title .header h1 {
     font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .wrapper .calculator .calculators .statsCalculator {
+    width: 80%;
   }
 }
