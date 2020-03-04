@@ -127,7 +127,6 @@ class StatIncrementButton extends React.Component {
     ) {
       return (
         <button
-          className="inlineButton active"
           onClick={() => {
             this.props.spendStatPoints(this.props.stat, this.props.value);
           }}
@@ -138,7 +137,6 @@ class StatIncrementButton extends React.Component {
     } else {
       return (
         <button
-          className="inlineButton active"
           onClick={() => {
             this.props.spendStatPoints(this.props.stat, this.props.value);
           }}
@@ -158,16 +156,15 @@ class StatDecrementButton extends React.Component {
     if (
       ["strength", "agility", "power", "knowledge"].includes(this.props.stat)
     ) {
-      if (this.props.statvalue === 10) {
+      if (this.props.statValue === 10 || (this.props.statValue + this.props.value < 10)) {
         return (
-          <button className="inlineButton inactive" disabled={true}>
+          <button disabled={true}>
             -{-this.props.value}
           </button>
         );
       } else {
         return (
           <button
-            className="inlineButton active"
             onClick={() => {
               this.props.spendStatPoints(this.props.stat, this.props.value);
             }}
@@ -177,16 +174,15 @@ class StatDecrementButton extends React.Component {
         );
       }
     } else {
-      if (this.props.statvalue === 200) {
+      if (this.props.statValue === 200 || (this.props.statValue + this.props.value * 10 < 200)) {
         return (
-          <button className="inlineButton inactive" disabled={true}>
+          <button disabled={true}>
             -{-this.props.value * 10}
           </button>
         );
       } else {
         return (
           <button
-            className="inlineButton active"
             onClick={() => {
               this.props.spendStatPoints(this.props.stat, this.props.value);
             }}
@@ -222,25 +218,25 @@ class StatLine extends React.Component {
           <StatDecrementButton
             spendStatPoints={this.props.spendStatPoints}
             stat={this.props.stat}
-            statvalue={this.props.value}
+            statValue={this.props.value}
             value={-5}
           />
           <StatDecrementButton
             spendStatPoints={this.props.spendStatPoints}
             stat={this.props.stat}
-            statvalue={this.props.value}
+            statValue={this.props.value}
             value={-1}
           />
           <StatIncrementButton
             spendStatPoints={this.props.spendStatPoints}
             stat={this.props.stat}
-            statvalue={this.props.value}
+            statValue={this.props.value}
             value={1}
           />
           <StatIncrementButton
             spendStatPoints={this.props.spendStatPoints}
             stat={this.props.stat}
-            statvalue={this.props.value}
+            statValue={this.props.value}
             value={5}
           />
         </div>
