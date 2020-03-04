@@ -75,42 +75,49 @@ class StatsCalculator extends React.Component {
           stat="strength"
           statName={"Siła"}
           value={this.state.strength}
+          pointsLeft={this.state.statPts}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="agility"
           statName={"Zręczność"}
           value={this.state.agility}
+          pointsLeft={this.state.statPts}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="knowledge"
           statName={"Wiedza"}
           value={this.state.knowledge}
+          pointsLeft={this.state.statPts}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="power"
           statName={"Moc"}
           value={this.state.power}
+          pointsLeft={this.state.statPts}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="hp"
           statName={"Punkty życia"}
           value={this.state.hp}
+          pointsLeft={this.state.statPts}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="endurance"
           statName={"Kondycja"}
           value={this.state.endurance}
+          pointsLeft={this.state.statPts}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="mana"
           statName={"Mana"}
           value={this.state.mana}
+          pointsLeft={this.state.statPts}
         />
       </div>
     );
@@ -127,6 +134,7 @@ class StatIncrementButton extends React.Component {
     ) {
       return (
         <button
+          disabled={this.props.pointsLeft >= this.props.value ? false : true}
           onClick={() => {
             this.props.spendStatPoints(this.props.stat, this.props.value);
           }}
@@ -137,6 +145,7 @@ class StatIncrementButton extends React.Component {
     } else {
       return (
         <button
+        disabled={this.props.pointsLeft >= this.props.value * 10 ? false : true}
           onClick={() => {
             this.props.spendStatPoints(this.props.stat, this.props.value);
           }}
@@ -232,12 +241,14 @@ class StatLine extends React.Component {
             stat={this.props.stat}
             statValue={this.props.value}
             value={1}
+            pointsLeft={this.props.pointsLeft}
           />
           <StatIncrementButton
             spendStatPoints={this.props.spendStatPoints}
             stat={this.props.stat}
             statValue={this.props.value}
             value={5}
+            pointsLeft={this.props.pointsLeft}
           />
         </div>
         </div>
