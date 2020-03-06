@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import Calculator from './App';
+import './styles/index.scss';
+import {Calculator} from './App.js';
 import * as serviceWorker from './serviceWorker';
 
 const calculator = document.getElementById("calc");

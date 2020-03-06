@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Eczar&display=swap");
+@import "skillscalculator";
+@import "statscalculator";
 $main-font: "Eczar", serif;
 $border-color: #d6c1a9;
 
@@ -207,215 +209,19 @@ body {
       justify-content: center;
       flex-wrap: wrap;
 
-      .skillCalculator {
-        width: 75%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-
-        .skills {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          .classSkills {
-            position: relative;
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            align-items: center;
-
-            .skillLine {
-              border: 2px solid $border-color;
-              background-color: #d4d6a9;
-              position: relative;
-              font-size: 0.75em;
-              width: 80%;
-              margin: 1em;
-              display: grid;
-              grid-template-areas: "image name skillvalue buttons" "image reqlvl skillvalue buttons";
-              grid-template-columns: 7em 4fr 1fr 1fr;
-              grid-template-rows: 2.5em auto;
-              padding: 1em;
-              border-radius: 8px;
-
-              .image {
-                display: flex;
-                grid-area: image;
-                height: 7em;
-                align-self: center;
-                margin-right: 0.5em;
-
-                img {
-                  border: 3px solid $border-color;
-                  border-radius: 50%;
-                }
-              }
-
-              .skillName {
-                grid-area: name;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                font-size: 1.5em;
-                font-weight: bold;
-                letter-spacing: 1px;
-              }
-
-              .skillValue {
-                border: 2px solid $border-color;
-                grid-area: skillvalue;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 4em;
-                line-height: 0;
-                background-color: #b9bd6f;
-                border-radius: 5px;
-
-                p {
-                  margin: 0;
-                  margin-block-start: 0;
-                  margin-block-end: 0;
-                }
-              }
-
-              .reqLvl {
-                grid-area: reqlvl;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-
-                .reqLvlText {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: flex-start;
-                  justify-content: center;
-                  margin-right: 0.7em;
-                }
-
-                .reqLvlNumber {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: flex-start;
-                  justify-content: center;
-                }
-              }
-
-              .skillButtons {
-                grid-area: buttons;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-around;
-
-                button {
-                  height: 3em;
-                  width: 3em;
-                }
-              }
-            }
-          }
-        }
-        @media only screen and (max-width: 1030px) {
-          .skills {
-            flex-direction: column;
-            align-items: center;
-          }
-        }
-      }
-
-      .statsCalculator {
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .points {
-          margin-bottom: 5em;
-        }
-
-        .statLine {
-          width: 80%;
-          margin: 0.5em;
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          border: 2px solid $border-color;
-          background-color: #d4d6a9;
-          padding: 0.5em;
-          border-radius: 8px;
-
-          img {
-            align-self: center;
-            margin-right: 0.25em;
-          }
-
-          .statNameButtons {
-            width: 70%;
-
-            .statName {
-              text-align: center;
-            }
-
-            .statButtons {
-              text-align: center;
-            }
-          }
-        }
-      }
     }
     @media only screen and (max-width: 1525px) {
       #classLvlWrapper {
         margin-top: 2.5em;
       }
-
       .calculators {
         flex-direction: column;
         align-items: center;
-
-        .statsCalculator {
-          width: 30%;
-
-          .points {
-            margin-bottom: 1em;
-          }
-        }
-
-        .skillCalculator {
-          width: 90%;
-        }
       }
     }
     @media only screen and (max-width: 1030px) {
       #classLvlWrapper {
         margin-top: 7em;
-      }
-
-      .calculators {
-        .statsCalculator {
-          width: 40%;
-        }
-
-        .skillCalculator {
-          width: 90%;
-
-          .skills {
-            width: 100%;
-
-            .classSkills {
-              width: 80%;
-            }
-          }
-        }
       }
     }
   }
@@ -434,12 +240,6 @@ body {
     .calculator {
       grid-template-rows: 10em auto;
     }
-  }
-}
-
-@media only screen and (max-width: 770px) {
-  .wrapper .calculator .calculators .statsCalculator {
-    width: 45%;
   }
 }
 
@@ -484,19 +284,6 @@ body {
           }
         }
       }
-      .calculators {
-        .skillCalculator {
-          .skills {
-            width: 100%;
-            .classSkills {
-              width: 100%;
-            }
-          }
-        }
-        .statsCalculator {
-          width: 65%;
-        }
-      }
     }
   }
 }
@@ -510,11 +297,5 @@ body {
 @media only screen and (max-width: 450px) {
   .wrapper .header .title .header h1 {
     font-size: 16px;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .wrapper .calculator .calculators .statsCalculator {
-    width: 80%;
   }
 }

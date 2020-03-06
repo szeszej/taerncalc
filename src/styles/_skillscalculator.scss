@@ -1,0 +1,156 @@
+$border-color: #d6c1a9;
+
+.skillCalculator {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .skills {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .classSkills {
+      position: relative;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .skillLine {
+        border: 2px solid $border-color;
+        background-color: #d4d6a9;
+        position: relative;
+        font-size: 0.75em;
+        width: 80%;
+        margin: 1em;
+        display: grid;
+        grid-template-areas: "image name skillvalue buttons" "image reqlvl skillvalue buttons";
+        grid-template-columns: 7em 4fr 1fr 1fr;
+        grid-template-rows: 2.5em auto;
+        padding: 1em;
+        border-radius: 8px;
+
+        .image {
+          display: flex;
+          grid-area: image;
+          height: 7em;
+          align-self: center;
+          margin-right: 0.5em;
+
+          img {
+            border: 3px solid $border-color;
+            border-radius: 50%;
+          }
+        }
+
+        .skillName {
+          grid-area: name;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          font-size: 1.5em;
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
+
+        .skillValue {
+          border: 2px solid $border-color;
+          grid-area: skillvalue;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 4em;
+          line-height: 0;
+          background-color: #b9bd6f;
+          border-radius: 5px;
+
+          p {
+            margin: 0;
+            margin-block-start: 0;
+            margin-block-end: 0;
+          }
+        }
+
+        .reqLvl {
+          grid-area: reqlvl;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+
+          .reqLvlText {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            margin-right: 0.7em;
+          }
+
+          .reqLvlNumber {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+          }
+        }
+
+        .skillButtons {
+          grid-area: buttons;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-around;
+
+          button {
+            height: 3em;
+            width: 3em;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 1030px) {
+    .skills {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  @media only screen and (max-width: 720px) {
+    .skills {
+      width: 100%;
+
+      .classSkills {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1525px) {
+  .skillCalculator {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1030px) {
+  .skillCalculator {
+    width: 90%;
+
+    .skills {
+      width: 100%;
+
+      .classSkills {
+        width: 80%;
+      }
+    }
+  }
+}
