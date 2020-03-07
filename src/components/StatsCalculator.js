@@ -1,4 +1,5 @@
 import React from 'react';
+import {Equipment} from "./Equipment.js"
 
 class StatsCalculator extends React.Component {
   constructor(props) {
@@ -64,12 +65,18 @@ class StatsCalculator extends React.Component {
   render() {
     return (
       <div className="statsCalculator" style={this.props.active === "stats" ? null : {display: "none"}}>
+      <div className="stats">
+
         <p className="points">
           Punkty statystyk: {this.state.statPts}{" "}
           <button className={"inlineButton"} onClick={() => this.reset()}>
             Reset
           </button>
         </p>
+
+      <div className="linesAndEq">
+      <Equipment />
+      <div className="statLines">
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="strength"
@@ -119,6 +126,9 @@ class StatsCalculator extends React.Component {
           value={this.state.mana}
           pointsLeft={this.state.statPts}
         />
+        </div>
+        </div>
+        </div>
       </div>
     );
   }
