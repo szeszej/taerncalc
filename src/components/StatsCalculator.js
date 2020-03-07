@@ -198,7 +198,7 @@ class StatIncrementButton extends React.Component {
     } else {
       return (
         <button
-        disabled={this.props.pointsLeft >= this.props.value * 10 ? false : true}
+        disabled={this.props.pointsLeft >= this.props.value ? false : true}
           onClick={() => {
             this.props.spendStatPoints(this.props.stat, this.props.value);
           }}
