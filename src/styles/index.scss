@@ -205,9 +205,22 @@ body {
       grid-area: calculators;
       width: 100%;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
       flex-wrap: wrap;
+      .tabs {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        button {
+          font-size: 2em;
+          border: none;
+          background-color: #d6cca9;
+          cursor: pointer;
+        }
+      }
 
     }
     @media only screen and (max-width: 1525px) {

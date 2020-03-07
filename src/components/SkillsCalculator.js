@@ -73,7 +73,7 @@ class SkillsCalculator extends React.Component {
   }
   render() {
     return (
-      <div className="skillCalculator">
+      <div className="skillCalculator" style={this.props.active === "skills" ? null : {display: "none"}}>
         <div className="statPts">
           <p>
             Punkty umiejętności: {this.state.skillPts}{" "}

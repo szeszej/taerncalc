@@ -63,7 +63,7 @@ class StatsCalculator extends React.Component {
   }
   render() {
     return (
-      <div className="statsCalculator">
+      <div className="statsCalculator" style={this.props.active === "stats" ? null : {display: "none"}}>
         <p className="points">
           Punkty statystyk: {this.state.statPts}{" "}
           <button className={"inlineButton"} onClick={() => this.reset()}>
@@ -198,7 +198,7 @@ class StatIncrementButton extends React.Component {
     } else {
       return (
         <button
-        disabled={this.props.pointsLeft >= this.props.value * 10 ? false : true}
+        disabled={this.props.pointsLeft >= this.props.value ? false : true}
           onClick={() => {
             this.props.spendStatPoints(this.props.stat, this.props.value);
           }}
