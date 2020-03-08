@@ -22,7 +22,7 @@ class Calculator extends React.Component {
         <button style={this.state.active === "skills" ? active : inactive} onClick={() => this.changeTabs("skills")}>Umiejętności</button>
       </div>
         <SkillsCalculator class={this.props.class} level={this.props.level} active={this.state.active} />
-        <StatsCalculator level={this.props.level} active={this.state.active} />
+        <StatsCalculator  class={this.props.className} level={this.props.level} active={this.state.active} />
       </div>
     );
   }

@@ -8,49 +8,70 @@
     width: 7em;
     height: 7em;
     border: 1px solid #bd996f;
-    margin: 1px
+    margin: 1px;
+    background-size: cover;
+    cursor: pointer;
+    &:hover {
+      background-color: #bd996f;
+    }
+  }
+
+  .itemsList {
+    position: absolute;
+    width: 22em;
+    background-color: black;
+    color: blue;
+    margin-top: -2em;
+    margin-left: -2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .itemOnList {
+      width: 7em;
+      height: 7em;
+      border: 1px solid #bd996f;
+      margin: 1px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+    }
   }
 
   .armor {
     grid-area: armor;
     background-image: url("/images/armor.png");
-    background-size: cover;
   }
 
   .helmet {
     grid-area: helmet;
     background-image: url("/images/helmet.png");
-    background-size: cover;
   }
 
   .neck {
     grid-area: neck;
     background-image: url("/images/necklace.png");
-    background-size: cover;
   }
 
   .gloves {
     grid-area: gloves;
     background-image: url("/images/gloves.png");
-    background-size: cover;
   }
 
   .cape {
     grid-area: cape;
     background-image: url("/images/cloak.png");
-    background-size: cover;
   }
 
   .weapon {
     grid-area: weapon;
     background-image: url("/images/axe-sword.png");
-    background-size: cover;
   }
 
   .special {
     grid-area: special;
     background-image: url("/images/star.png");
-    background-size: cover;
   }
 
   .shield {
@@ -62,46 +83,38 @@
   .pants {
     grid-area: pants;
     background-image: url("/images/pants.png");
-    background-size: cover;
   }
 
   .belt {
     grid-area: belt;
     background-image: url("/images/belt.png");
-    background-size: cover;
   }
 
   .ring1 {
     grid-area: ring1;
     background-image: url("/images/ring1.png");
-    background-size: cover;
   }
 
   .ring2 {
     grid-area: ring2;
     background-image: url("/images/ring2.png");
-    background-size: cover;
   }
 
   .boots {
     grid-area: boots;
     background-image: url("/images/boots.png");
-    background-size: cover;
   }
 
   .empty {
     grid-area: empty;
     background-image: url("/images/empty.png");
-    background-size: cover;
   }
 
   .middle {
     grid-area: middle;
-    background-image: url("/images/barbarian.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    margin: 5px;
   }
 
 }

@@ -19,7 +19,7 @@ function showCalc(charClass, charLvl, database) {
   ReactDOM.unmountComponentAtNode(calculator);
   let skillSet = new SkillSet(charClass, database);
   ReactDOM.render(
-    <Calculator level={parseInt(charLvl)} class={skillSet} />,
+    <Calculator level={parseInt(charLvl)} class={skillSet} className={charClass}/>,
     calculator
   );
 }

@@ -83,7 +83,7 @@ class StatsCalculator extends React.Component {
         </p>
 
       <div className="linesAndEq">
-      <Equipment />
+      <Equipment class={this.props.class} />
       <div className="statsAndRes">
       <div className="statLines">
         <StatLine
