@@ -14,7 +14,15 @@ class StatsCalculator extends React.Component {
       knowledge: 10,
       hp: 200,
       endurance: 200,
-      mana: 200
+      mana: 200,
+      damage: 0,
+      fireRes: 0,
+      frostRes: 0,
+      energyRes: 0,
+      curseRes: 0,
+      pierceRes: 0,
+      cutRes: 0,
+      bluntRes: 0
     };
   }
   componentDidMount() {
@@ -76,6 +84,7 @@ class StatsCalculator extends React.Component {
 
       <div className="linesAndEq">
       <Equipment />
+      <div className="statsAndRes">
       <div className="statLines">
         <StatLine
           spendStatPoints={this.spendStatPoints}
@@ -126,6 +135,44 @@ class StatsCalculator extends React.Component {
           value={this.state.mana}
           pointsLeft={this.state.statPts}
         />
+        </div>
+        <div className="resLines">
+        <ResLine
+          stat={"cutRes"}
+          statName={"Odp. na sieczne"}
+          value={this.state.cutRes}
+        />
+        <ResLine
+          stat={"bluntRes"}
+          statName={"Odp. na obuchowe"}
+          value={this.state.bluntRes}
+        />
+        <ResLine
+          stat={"pierceRes"}
+          statName={"Odp. na kłute"}
+          value={this.state.pierceRes}
+        />
+        <ResLine
+          stat={"fireRes"}
+          statName={"Odp. na ogień"}
+          value={this.state.fireRes}
+        />
+        <ResLine
+          stat={"energyRes"}
+          statName={"Odp. na energię"}
+          value={this.state.energyRes}
+        />
+        <ResLine
+          stat={"frostRes"}
+          statName={"Odp. na zimno"}
+          value={this.state.frostRes}
+        />
+        <ResLine
+          stat={"curseRes"}
+          statName={"Odp. na uroki"}
+          value={this.state.curseRes}
+        />
+        </div>
         </div>
         </div>
         </div>
@@ -181,6 +228,31 @@ class StatLine extends React.Component {
             pointsLeft={this.props.pointsLeft}
           />
         </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class ResLine extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps === this.props) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  render() {
+    return (
+      <div className="statLine">
+        <img src={"images/" + this.props.stat + ".png"} alt={this.props.stat} />
+        <div className="statNameButtons">
+          <div className="statName">
+            {this.props.statName} {this.props.value} ({this.props.value * 1.1}%)
+          </div>
         </div>
       </div>
     );

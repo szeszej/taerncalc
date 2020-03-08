@@ -3,6 +3,7 @@
   grid-template-areas: "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots empty";
   box-sizing: border-box;
 
+
   .armor, .helmet, .neck, .gloves, .cape, .weapon, .special, .shield, .pants, .belt, .ring1, .ring2, .boots, .empty {
     width: 7em;
     height: 7em;
