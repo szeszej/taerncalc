@@ -6,6 +6,7 @@ class StatsCalculator extends React.Component {
     super(props);
     this.spendStatPoints = this.spendStatPoints.bind(this);
     this.reset = this.reset.bind(this);
+    this.addStatsFromEquipment = this.addStatsFromEquipment.bind(this);
     this.state = {
       statPts: this.calculateStatPoints(this.props.level),
       strength: 10,
@@ -15,14 +16,22 @@ class StatsCalculator extends React.Component {
       hp: 200,
       endurance: 200,
       mana: 200,
-      damage: 0,
-      fireRes: 0,
-      frostRes: 0,
-      energyRes: 0,
-      curseRes: 0,
-      pierceRes: 0,
-      cutRes: 0,
-      bluntRes: 0
+      statsFromItems: {
+        strength: 0,
+        agility: 0,
+        power: 0,
+        knowledge: 0,
+        hp: 0,
+        endurance: 0,
+        mana: 0,
+        damage: 0,
+        fireRes: 0,
+        frostRes: 0,
+        energyRes: 0,
+        curseRes: 0,
+        pierceRes: 0,
+        cutRes: 0,
+        bluntRes: 0}
     };
   }
   componentDidMount() {
@@ -58,6 +67,11 @@ class StatsCalculator extends React.Component {
       }
     }
   }
+  addStatsFromEquipment(stats) {
+    this.setState({
+      statsFromItems: stats
+    })
+  }
   reset() {
     this.setState({
       statPts: this.state.initState.statPts,
@@ -83,7 +97,7 @@ class StatsCalculator extends React.Component {
         </p>
 
       <div className="linesAndEq">
-      <Equipment class={this.props.class} />
+      <Equipment addStatsFromEquipment={this.addStatsFromEquipment} class={this.props.class} level={this.props.level} strength={this.state.strength + this.state.statsFromItems.strength} agility={this.state.agility + this.state.statsFromItems.agility} power={this.state.power+this.state.statsFromItems.power} knowledge={this.state.knowledge + this.state.statsFromItems.knowledge}/>
       <div className="statsAndRes">
       <div className="statLines">
         <StatLine
@@ -92,6 +106,7 @@ class StatsCalculator extends React.Component {
           statName={"Siła"}
           value={this.state.strength}
           pointsLeft={this.state.statPts}
+          fromItems={this.state.statsFromItems.strength}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
@@ -99,6 +114,7 @@ class StatsCalculator extends React.Component {
           statName={"Zręczność"}
           value={this.state.agility}
           pointsLeft={this.state.statPts}
+          fromItems={this.state.statsFromItems.agility}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
@@ -106,13 +122,14 @@ class StatsCalculator extends React.Component {
           statName={"Wiedza"}
           value={this.state.knowledge}
           pointsLeft={this.state.statPts}
+          fromItems={this.state.statsFromItems.knowledge}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
           stat="power"
           statName={"Moc"}
           value={this.state.power}
-          pointsLeft={this.state.statPts}
+          fromItems={this.state.statsFromItems.power}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
@@ -120,6 +137,7 @@ class StatsCalculator extends React.Component {
           statName={"Punkty życia"}
           value={this.state.hp}
           pointsLeft={this.state.statPts}
+          fromItems={this.state.statsFromItems.hp}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
@@ -127,6 +145,7 @@ class StatsCalculator extends React.Component {
           statName={"Kondycja"}
           value={this.state.endurance}
           pointsLeft={this.state.statPts}
+          fromItems={this.state.statsFromItems.endurance}
         />
         <StatLine
           spendStatPoints={this.spendStatPoints}
@@ -134,43 +153,44 @@ class StatsCalculator extends React.Component {
           statName={"Mana"}
           value={this.state.mana}
           pointsLeft={this.state.statPts}
+          fromItems={this.state.statsFromItems.mana}
         />
         </div>
         <div className="resLines">
         <ResLine
           stat={"cutRes"}
           statName={"Odp. na sieczne"}
-          value={this.state.cutRes}
+          value={this.state.statsFromItems.cutRes}
         />
         <ResLine
           stat={"bluntRes"}
           statName={"Odp. na obuchowe"}
-          value={this.state.bluntRes}
+          value={this.state.statsFromItems.bluntRes}
         />
         <ResLine
           stat={"pierceRes"}
           statName={"Odp. na kłute"}
-          value={this.state.pierceRes}
+          value={this.state.statsFromItems.pierceRes}
         />
         <ResLine
           stat={"fireRes"}
           statName={"Odp. na ogień"}
-          value={this.state.fireRes}
+          value={this.state.statsFromItems.fireRes}
         />
         <ResLine
           stat={"energyRes"}
           statName={"Odp. na energię"}
-          value={this.state.energyRes}
+          value={this.state.statsFromItems.energyRes}
         />
         <ResLine
           stat={"frostRes"}
           statName={"Odp. na zimno"}
-          value={this.state.frostRes}
+          value={this.state.statsFromItems.frostRes}
         />
         <ResLine
           stat={"curseRes"}
           statName={"Odp. na uroki"}
-          value={this.state.curseRes}
+          value={this.state.statsFromItems.curseRes}
         />
         </div>
         </div>
@@ -198,7 +218,7 @@ class StatLine extends React.Component {
       <img src={"images/" + this.props.stat + ".svg"} alt={this.props.stat} className={this.props.stat} />
       <div className="statNameButtons">
         <div className="statName">
-         {this.props.statName} {this.props.value}
+         {this.props.statName} {this.props.value} ({this.props.value + this.props.fromItems})
         </div>
         <div className="statButtons">
           <StatDecrementButton

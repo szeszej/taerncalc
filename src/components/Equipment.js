@@ -3,7 +3,9 @@ import React from 'react';
 class Equipment extends React.Component {
   constructor(props) {
     super(props);
+    this.equipItem = this.equipItem.bind(this);
     this.state = {
+      equipment:{
       armor: null,
       helmet: null,
       neck: null,
@@ -16,17 +18,82 @@ class Equipment extends React.Component {
       belt: null,
       ring1: null,
       ring2: null,
-      boots: null,
+      boots: null
+    },
       displayList: false,
       itemsList: null,
+      statsFromItems: {}
     }
   }
+  componentDidUpdate(prevProps, prevState) {
+      let equipmentTypes = Object.keys(this.state.equipment);
+      let equipment = equipmentTypes.map(x => this.state.equipment[x]);
+      let equipmentStats = {
+        strength: equipment.reduce((total, x) => x != null ? total += x.strength : total += 0, 0),
+        agility: equipment.reduce((total, x) => x != null ? total += x.agility : total += 0, 0),
+        power: equipment.reduce((total, x) => x != null ? total += x.power : total += 0, 0),
+        knowledge: equipment.reduce((total, x) => x != null ? total += x.knowledge : total += 0, 0),
+        hp: equipment.reduce((total, x) => x != null ? total += x.hp : total += 0, 0),
+        endurance: equipment.reduce((total, x) => x != null ? total += x.endurance : total += 0, 0),
+        mana: equipment.reduce((total, x) => x != null ? total += x.mana : total += 0, 0),
+        damage: equipment.reduce((total, x) => x != null ? total += x.damage : total += 0, 0),
+        fireRes: equipment.reduce((total, x) => x != null ? total += x.fireRes : total += 0, 0),
+        frostRes: equipment.reduce((total, x) => x != null ? total += x.frostRes : total += 0, 0),
+        energyRes: equipment.reduce((total, x) => x != null ? total += x.energyRes : total += 0, 0),
+        curseRes: equipment.reduce((total, x) => x != null ? total += x.curseRes : total += 0, 0),
+        pierceRes: equipment.reduce((total, x) => x != null ? total += x.pierceRes : total += 0, 0),
+        cutRes: equipment.reduce((total, x) => x != null ? total += x.cutRes : total += 0, 0),
+        bluntRes: equipment.reduce((total, x) => x != null ? total += x.bluntRes : total += 0, 0)
+      }
+      if (this.isEquivalent(prevState.statsFromItems, equipmentStats) === false) {
+        this.setState({statsFromItems: equipmentStats})
+        this.props.addStatsFromEquipment(equipmentStats)
+      }
+  }
+  isEquivalent(a, b) {
+    // Create arrays of property names
+    var aProps = Object.getOwnPropertyNames(a);
+    var bProps = Object.getOwnPropertyNames(b);
+
+    // If number of properties is different,
+    // objects are not equivalent
+    if (aProps.length != bProps.length) {
+      return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+      var propName = aProps[i];
+
+      // If values of same property are not equal,
+      // objects are not equivalent
+      if (a[propName] !== b[propName]) {
+          return false;
+      }
+    }
+    // If we made it this far, objects
+    // are considered equivalent
+    return true;
+  }
   showItemsList (filteredItems) {
-    let itemComponents = <div className={"itemsList"}>{filteredItems.map(x => <ItemComponent key={x.name} item={x} />)}</div>;
-    console.log(itemComponents);
+    let itemComponents = <div className={"itemsList"}>{filteredItems.map(x => <ItemComponent key={x.name} item={x} equipItem={this.equipItem} />)}</div>;
     this.setState({
       displayList: true,
       itemsList: itemComponents
+    })
+  }
+  setItemBackground (image) {
+    let itemBackground = {
+      backgroundImage: `url("/images/items/` + image + `")`
+    }
+    return itemBackground
+  }
+  equipItem (item) {
+    this.setState(prevState => {
+      let newState = prevState;
+      newState.equipment[item.type] = item;
+      newState.displayList = false;
+      newState.itemsList = null;
+      return newState
     })
   }
   render() {
@@ -36,19 +103,19 @@ class Equipment extends React.Component {
     return (
       <div className="equipment">
         {this.state.displayList && this.state.itemsList !== null ? this.state.itemsList : null}
-        <div className="armor" onClick={() => this.showItemsList(items.filter(x => x.type === "armor"))}></div>
-        <div className="helmet" onClick={() => this.showItemsList(items.filter(x => x.type === "helmet"))}></div>
-        <div className="neck" onClick={() => this.showItemsList(items.filter(x => x.type === "neck"))}></div>
-        <div className="gloves" onClick={() => this.showItemsList(items.filter(x => x.type === "gloves"))}></div>
-        <div className="cape" onClick={() => this.showItemsList(items.filter(x => x.type === "cape"))}></div>
-        <div className="weapon" onClick={() => this.showItemsList(items.filter(x => x.type === "weapon"))}></div>
+        <div className="armor" onClick={() => this.showItemsList(items.filter(x => x.type === "armor"))} style={this.state.equipment.armor ? this.setItemBackground(this.state.equipment.armor.image) : null}></div>
+        <div className="helmet" onClick={() => this.showItemsList(items.filter(x => x.type === "helmet"))} style={this.state.equipment.helmet ? this.setItemBackground(this.state.equipment.helmet.image) : null}></div>
+        <div className="neck" onClick={() => this.showItemsList(items.filter(x => x.type === "neck"))} style={this.state.equipment.neck ? this.setItemBackground(this.state.equipment.neck.image) : null}></div>
+        <div className="gloves" onClick={() => this.showItemsList(items.filter(x => x.type === "gloves"))} style={this.state.equipment.gloves ? this.setItemBackground(this.state.equipment.gloves.image) : null}></div>
+        <div className="cape" onClick={() => this.showItemsList(items.filter(x => x.type === "cape"))} style={this.state.equipment.cape ? this.setItemBackground(this.state.equipment.cape.image) : null}></div>
+        <div className="weapon" onClick={() => this.showItemsList(items.filter(x => x.type === "weapon"))} style={this.state.equipment.weapon ? this.setItemBackground(this.state.equipment.weapon.image) : null}></div>
         <div className="special"></div>
-        <div className="shield" onClick={() => this.showItemsList(items.filter(x => x.type === "shield"))}></div>
-        <div className="pants" onClick={() => this.showItemsList(items.filter(x => x.type === "pants"))}></div>
-        <div className="belt" onClick={() => this.showItemsList(items.filter(x => x.type === "belt"))}></div>
-        <div className="ring1" onClick={() => this.showItemsList(items.filter(x => x.type === "ring"))}></div>
-        <div className="ring2" onClick={() => this.showItemsList(items.filter(x => x.type === "ring"))}></div>
-        <div className="boots" onClick={() => this.showItemsList(items.filter(x => x.type === "boots"))}></div>
+        <div className="shield" onClick={() => this.showItemsList(items.filter(x => x.type === "shield"))} style={this.state.equipment.shield ? this.setItemBackground(this.state.equipment.shield.image) : null}></div>
+        <div className="pants" onClick={() => this.showItemsList(items.filter(x => x.type === "pants"))} style={this.state.equipment.pants ? this.setItemBackground(this.state.equipment.pants.image) : null}></div>
+        <div className="belt" onClick={() => this.showItemsList(items.filter(x => x.type === "belt"))} style={this.state.equipment.belt ? this.setItemBackground(this.state.equipment.belt.image) : null}></div>
+        <div className="ring1" onClick={() => this.showItemsList(items.filter(x => x.type === "ring"))} style={this.state.equipment.ring1 ? this.setItemBackground(this.state.equipment.ring1.image) : null}></div>
+        <div className="ring2" onClick={() => this.showItemsList(items.filter(x => x.type === "ring"))} style={this.state.equipment.ring2 ? this.setItemBackground(this.state.equipment.ring2.image) : null}></div>
+        <div className="boots" onClick={() => this.showItemsList(items.filter(x => x.type === "boots"))} style={this.state.equipment.boots ? this.setItemBackground(this.state.equipment.boots.image) : null}></div>
         <div className="empty"></div>
         <div className="middle" style={classBackground}></div>
       </div>
@@ -64,9 +131,8 @@ class ItemComponent extends React.Component {
     let itemImage = {
       backgroundImage: `url("/images/items/` + this.props.item.image + `")`
     }
-    console.log(itemImage);
     return(
-      <div className="itemOnList" style={itemImage}></div>
+      <div className="itemOnList" style={itemImage} onClick={() => this.props.equipItem(this.props.item)}></div>
     )
   }
 }
