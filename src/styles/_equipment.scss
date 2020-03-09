@@ -9,10 +9,12 @@
     height: 7em;
     border: 1px solid #bd996f;
     margin: 1px;
-    background-size: cover;
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
     cursor: pointer;
     &:hover {
-      background-color: #bd996f;
+      background-color: #AE3B48;
     }
   }
 
