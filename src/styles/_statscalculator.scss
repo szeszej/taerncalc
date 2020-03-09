@@ -42,6 +42,15 @@
             height: 3em;
           }
 
+          .hp {
+            filter: invert(12%) sepia(91%) saturate(5955%) hue-rotate(4deg) brightness(101%) contrast(118%);
+          }
+          .mana {
+            filter: invert(10%) sepia(100%) saturate(4739%) hue-rotate(243deg) brightness(110%) contrast(149%);
+          }
+          .endurance {
+            filter: invert(14%) sepia(43%) saturate(1169%) hue-rotate(115deg) brightness(97%) contrast(102%);
+          }
           .statNameButtons {
             width: 70%;
 

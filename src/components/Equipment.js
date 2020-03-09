@@ -31,7 +31,7 @@ class Equipment extends React.Component {
   }
   render() {
     let classBackground = {
-      backgroundImage: `url("/images/` + this.props.class + `.png")`
+      backgroundImage: `url("/images/` + this.props.class + `.svg")`
     }
     return (
       <div className="equipment">

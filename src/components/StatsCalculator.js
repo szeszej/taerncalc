@@ -194,8 +194,8 @@ class StatLine extends React.Component {
   }
   render() {
     return (
-      <div className="statLine">
-      <img src={"images/" + this.props.stat + ".png"} alt={this.props.stat} />
+      <div className={"statLine"}>
+      <img src={"images/" + this.props.stat + ".svg"} alt={this.props.stat} className={this.props.stat} />
       <div className="statNameButtons">
         <div className="statName">
          {this.props.statName} {this.props.value}
@@ -245,10 +245,21 @@ class ResLine extends React.Component {
       return true;
     }
   }
+  calculateResistances (res) {
+    let resPercentage = 0;
+    if (res <= 30) {
+      resPercentage = res;
+    } else if (res >= 200) {
+      resPercentage = 80
+    } else {
+      resPercentage = Math.round((Math.log(res + 34.3742) / Math.log(1.02429)) - 147.41749);
+    }
+    return resPercentage + "%";
+  }
   render() {
     return (
-      <div className="statLine">
-        <img src={"images/" + this.props.stat + ".png"} alt={this.props.stat} />
+      <div className={"statLine"}>
+        <img src={"images/" + this.props.stat + ".svg"} alt={this.props.stat} className={this.props.stat} />
         <div className="statNameButtons">
           <div className="statName">
             {this.props.statName} {this.props.value} ({this.props.value * 1.1}%)
