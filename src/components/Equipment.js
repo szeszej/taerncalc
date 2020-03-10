@@ -14,7 +14,7 @@ class Equipment extends React.Component {
   constructor(props) {
     super(props);
     this.equipItem = this.equipItem.bind(this);
-    this.hideItemsList = this.hideItemsList.bind(this);
+    this.unequipItem = this.unequipItem.bind(this);
     this.state = {
       equipment:{
       armor: null,
@@ -85,30 +85,33 @@ class Equipment extends React.Component {
     // are considered equivalent
     return true;
   }
-  showItemsList (filteredItems) {
-    this.setState({
-      displayList: true,
-      itemsList: filteredItems
-    })
-  }
-  hideItemsList () {
-    this.setState({
-      displayList: false,
-      itemsList: null
-    })
-  }
-  setItemBackground (image) {
-    let itemBackground = {
-      backgroundImage: `url("/images/items/` + image + `")`
+  equipItem (item, type) {
+    if (type === "weapon" && item.weaponType === "Dwuręczna") {
+      this.setState(prevState => {
+        let newState = prevState;
+        newState.equipment.shield = null;
+        newState.equipment[type] = item;
+        return newState
+      })
+    } else if (type === "shield" && this.state.equipment.weapon.weaponType === "Dwuręczna") {
+      this.setState(prevState => {
+        let newState = prevState;
+        newState.equipment.weapon = null;
+        newState.equipment[type] = item;
+        return newState
+      })
+    } else {
+      this.setState(prevState => {
+        let newState = prevState;
+        newState.equipment[type] = item;
+        return newState
+      })
     }
-    return itemBackground
   }
-  equipItem (item) {
+  unequipItem(slot) {
     this.setState(prevState => {
       let newState = prevState;
-      newState.equipment[item.type] = item;
-      newState.displayList = false;
-      newState.itemsList = null;
+      newState.equipment[slot] = null;
       return newState
     })
   }
@@ -136,26 +139,52 @@ class Equipment extends React.Component {
     let classBackground = {
       backgroundImage: `url("/images/` + this.props.class + `.svg")`
     }
+    let equipmentSlots = Object.keys(this.state.equipment);
+    let equipmentSlotComponents = equipmentSlots.map(x => <ItemSlot key={x} type={x} items={x === "ring1" || x === "ring2" ? this.props.items.filter(y => y.type === "ring") : this.props.items.filter(y => y.type === x)} inSlot={this.state.equipment[x]} equipItem={this.equipItem} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} unequipItem={this.unequipItem} />);
     return (
       <div className="equipment">
-        {this.state.displayList && this.state.itemsList !== null ? <ItemsList filteredItems={this.state.itemsList} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} hideItemsList={this.hideItemsList} /> : null}
-        <div className="armor" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "armor"))} style={this.state.equipment.armor ? this.setItemBackground(this.state.equipment.armor.image) : null}></div>
-        <div className="helmet" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "helmet"))} style={this.state.equipment.helmet ? this.setItemBackground(this.state.equipment.helmet.image) : null}></div>
-        <div className="neck" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "neck"))} style={this.state.equipment.neck ? this.setItemBackground(this.state.equipment.neck.image) : null}></div>
-        <div className="gloves" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "gloves"))} style={this.state.equipment.gloves ? this.setItemBackground(this.state.equipment.gloves.image) : null}></div>
-        <div className="cape" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "cape"))} style={this.state.equipment.cape ? this.setItemBackground(this.state.equipment.cape.image) : null}></div>
-        <div className="weapon" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "weapon"))} style={this.state.equipment.weapon ? this.setItemBackground(this.state.equipment.weapon.image) : null}></div>
-        <div className="special"></div>
-        <div className="shield" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "shield"))} style={this.state.equipment.shield ? this.setItemBackground(this.state.equipment.shield.image) : null}></div>
-        <div className="pants" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "pants"))} style={this.state.equipment.pants ? this.setItemBackground(this.state.equipment.pants.image) : null}></div>
-        <div className="belt" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "belt"))} style={this.state.equipment.belt ? this.setItemBackground(this.state.equipment.belt.image) : null}></div>
-        <div className="ring1" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "ring"))} style={this.state.equipment.ring1 ? this.setItemBackground(this.state.equipment.ring1.image) : null}></div>
-        <div className="ring2" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "ring"))} style={this.state.equipment.ring2 ? this.setItemBackground(this.state.equipment.ring2.image) : null}></div>
-        <div className="boots" onClick={() => this.showItemsList(this.props.items.filter(x => x.type === "boots"))} style={this.state.equipment.boots ? this.setItemBackground(this.state.equipment.boots.image) : null}></div>
+        {equipmentSlotComponents}
         <div className="empty" onClick={() => this.unequipItems()}></div>
         <div className="middle" style={classBackground}></div>
       </div>
     );
+  }
+}
+
+class ItemSlot extends React.Component {
+  constructor (props) {
+    super(props);
+    this.hideItemsList = this.hideItemsList.bind(this);
+    this.state = {
+      displayList: false,
+    }
+  }
+  showItemsList () {
+    this.setState({
+      displayList: true,
+    })
+  }
+  hideItemsList () {
+    this.setState({
+      displayList: false,
+    })
+  }
+  setItemBackground (image) {
+    console.log(this.props.inSlot.image);
+    let itemBackground = {
+      backgroundImage: `url("/images/items/` + image + `")`
+    }
+    return itemBackground
+  }
+  handleChildClick(event, functionToRun) {
+    event.stopPropagation();
+    functionToRun(this.props.type);
+  }
+  render() {
+    let unequipButton = <button className={"unequipButton"} onClick={(event) => this.handleChildClick(event, this.props.unequipItem)}>×</button>;
+    return (
+      <div className={this.props.type} onClick={() => this.showItemsList()} style={this.props.inSlot ? this.setItemBackground(this.props.inSlot.image) : null}>{this.state.displayList ? <ItemsList items={this.props.items} type={this.props.type} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} hideItemsList={this.hideItemsList} equipItem={this.props.equipItem}/> : null}{this.props.inSlot ? unequipButton : null}</div>
+    )
   }
 }
 
