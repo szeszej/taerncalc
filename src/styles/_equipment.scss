@@ -5,39 +5,58 @@
 
 
   .armor, .helmet, .neck, .gloves, .cape, .weapon, .special, .shield, .pants, .belt, .ring1, .ring2, .boots, .empty {
+    box-sizing: border-box;
     width: 7em;
     height: 7em;
     border: 1px solid #bd996f;
-    margin: 1px;
+    margin: 3px;
     background-size: auto 80%;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
     &:hover {
-      background-color: #AE3B48;
+      border: 3px solid #AE3B48;
     }
   }
 
   .itemsList {
     position: absolute;
-    width: 22em;
+    width: 23em;
     background-color: black;
-    color: blue;
     margin-top: -2em;
     margin-left: -2em;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    .itemOnList {
+    flex-direction: column;
+    padding: 0.5em;
+    .equippableItems {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: space-evenly;
+      justify-content: space-evenly;
+    }
+    .unequippableItems {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: space-evenly;
+      justify-content: space-evenly;
+    }
+    .itemOnList  {
       width: 7em;
       height: 7em;
-      border: 1px solid #bd996f;
-      margin: 1px;
-      background-size: contain;
+      border: 2px solid #0161E7;
+      margin: 2px;
+      background-size:  auto 80%;
       background-repeat: no-repeat;
       background-position: center;
       cursor: pointer;
+    }
+    button {
+      position: absolute;
+      right: -0.5em;
+      top: -0.75em;
+      font-weight: bold;
+      border-radius: 0;
     }
   }
 

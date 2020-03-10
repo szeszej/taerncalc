@@ -97,7 +97,7 @@ class StatsCalculator extends React.Component {
         </p>
 
       <div className="linesAndEq">
-      <Equipment addStatsFromEquipment={this.addStatsFromEquipment} class={this.props.class} level={this.props.level} strength={this.state.strength + this.state.statsFromItems.strength} agility={this.state.agility + this.state.statsFromItems.agility} power={this.state.power+this.state.statsFromItems.power} knowledge={this.state.knowledge + this.state.statsFromItems.knowledge}/>
+      <Equipment items={this.props.items} addStatsFromEquipment={this.addStatsFromEquipment} class={this.props.class} level={this.props.level} strength={this.state.strength + this.state.statsFromItems.strength} agility={this.state.agility + this.state.statsFromItems.agility} power={this.state.power+this.state.statsFromItems.power} knowledge={this.state.knowledge + this.state.statsFromItems.knowledge}/>
       <div className="statsAndRes">
       <div className="statLines">
         <StatLine
@@ -129,6 +129,7 @@ class StatsCalculator extends React.Component {
           stat="power"
           statName={"Moc"}
           value={this.state.power}
+          pointsLeft={this.state.statPts}
           fromItems={this.state.statsFromItems.power}
         />
         <StatLine
@@ -267,14 +268,14 @@ class ResLine extends React.Component {
   }
   calculateResistances (res) {
     let resPercentage = 0;
-    if (res <= 30) {
+    if (res <= 31) {
       resPercentage = res;
     } else if (res >= 200) {
       resPercentage = 80
     } else {
-      resPercentage = Math.round((Math.log(res + 34.3742) / Math.log(1.02429)) - 147.41749);
+      resPercentage = Math.floor((342.227 * Math.pow(res, 0.0583441879)) - 387.92);
     }
-    return resPercentage + "%";
+    return resPercentage;
   }
   render() {
     return (
@@ -282,7 +283,7 @@ class ResLine extends React.Component {
         <img src={"images/" + this.props.stat + ".svg"} alt={this.props.stat} className={this.props.stat} />
         <div className="statNameButtons">
           <div className="statName">
-            {this.props.statName} {this.props.value} ({this.props.value * 1.1}%)
+            {this.props.statName} {this.props.value} ({this.calculateResistances(this.props.value)}%)
           </div>
         </div>
       </div>
