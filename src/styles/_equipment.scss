@@ -115,21 +115,20 @@
     background-color: black;
     color: white;
     z-index: 3;
-    opacity: default;
     width: max-content;
     border: 1px solid;
     border-color: inherit;
     padding: 5px;
-    opacity: 1;
+    opacity: 100%;
     cursor: default;
     animation: fadein 0.5s;
     @keyframes fadein {
       from {
-        opacity: 0;
+        opacity: 0%;
       }
 
       to {
-        opacity: 1;
+        opacity: 100%;
       }
     }
 
