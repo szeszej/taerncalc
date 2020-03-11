@@ -3,8 +3,20 @@
   grid-template-areas: "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots empty";
   box-sizing: border-box;
 
-
-  .armor, .helmet, .neck, .gloves, .cape, .weapon, .special, .shield, .pants, .belt, .ring1, .ring2, .boots, .empty {
+  .armor,
+  .belt,
+  .boots,
+  .cape,
+  .empty,
+  .gloves,
+  .helmet,
+  .neck,
+  .pants,
+  .ring1,
+  .ring2,
+  .shield,
+  .special,
+  .weapon {
     position: relative;
     box-sizing: border-box;
     width: 7em;
@@ -18,6 +30,7 @@
     &:hover {
       border: 2px solid #AE3B48;
     }
+
     .unequipButton {
       border: 0;
       font-size: 0.75em;
@@ -38,51 +51,95 @@
     cursor: default;
     position: absolute;
     max-width: 80vw;
-    min-width: 50em;
+    min-width: 27em;
     background-color: black;
     margin-top: -2em;
-    margin-left: -2em;
+    left: 0;
+    margin-left: -5em;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     padding: 0.5em;
-    z-index: 1;
+    z-index: 2;
     opacity: 90%;
+
     .equippableItems {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      align-items: space-evenly;
+      align-items: center;
       justify-content: flex-start;
     }
+
     .unequippableItems {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      align-items: space-evenly;
+      align-items: center;
       justify-content: flex-start;
     }
+
     .itemOnList {
-      width: 5em;
-      height: 5em;
+      position: relative;
+      width: 4em;
+      height: 4em;
       border: 2px solid #0161E7;
       margin: 2px;
       background-size: auto 80%;
       background-repeat: no-repeat;
       background-position: center;
     }
+
     .unequippableItems .itemOnList {
       cursor: not-allowed;
     }
+
     .equippableItems .itemOnList {
       cursor: pointer;
     }
+
     .closeList {
       position: absolute;
       right: -0.5em;
       top: -0.75em;
       font-weight: bold;
       border-radius: 0;
+    }
+  }
+
+  .itemTooltip {
+    position: absolute;
+    left: 90%;
+    bottom: 90%;
+    font-size: 0.75em;
+    background-color: black;
+    color: white;
+    z-index: 3;
+    opacity: default;
+    width: max-content;
+    border: 1px solid;
+    border-color: inherit;
+    padding: 5px;
+    opacity: 1;
+    cursor: default;
+    animation: fadein 0.5s;
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    p {
+      margin-top: -0.25em;
+      margin-bottom: -0.5em;
+    }
+
+    .itemName {
+      font-size: 1.5em;
     }
   }
 
@@ -114,6 +171,12 @@
   .weapon {
     grid-area: weapon;
     background-image: url("/images/axe-sword.svg");
+
+    .itemsList {
+      right: 0;
+      margin-right: -5em;
+      left: auto;
+    }
   }
 
   .special {
@@ -124,6 +187,14 @@
   .shield {
     grid-area: shield;
     background-image: url("/images/shield.svg");
+
+    .itemsList {
+      right: 0;
+      margin-right: -5em;
+      left: auto;
+      min-width: 9em;
+      max-width: 14em;
+    }
   }
 
   .pants {
@@ -162,5 +233,4 @@
     background-repeat: no-repeat;
     background-position: center;
   }
-
 }

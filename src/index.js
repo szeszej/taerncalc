@@ -1561,7 +1561,12 @@ class Item {
     this.name = item.name;
     this.type = item.type;
     this.image = item.image;
-    this.otherProperties = item.otherProperties;
+
+    if (item.hasOwnProperty("otherProperties")) {
+      this.otherProperties = item.otherProperties;
+    } else {
+      this.otherProperties = []
+    };
     if (item.hasOwnProperty("rarity")) {
       this.rarity = item.rarity
     } else {
@@ -2157,6 +2162,33 @@ const itemDatabase = [
     otherProperties: ["Dodatkowe PA: 1", "Modyfikator obrażeń fizycznych: 12% (+1% na poziom)", "Szansa na trafienie krytyczne: 9% (+1% na poziom)"]
   },
   {
+    name: "Isthrimm II",
+    type: "shield",
+    image: "[www.taernopedia.pl][606]Isthrimm20II.png",
+    reqLvl: 34,
+    reqStr: 55,
+    strength: 5,
+    hp: 80,
+    cutRes: 31,
+    bluntRes: 30,
+    pierceRes: 30,
+    fireRes: 25
+  },
+  {
+    name: "Smocze Skrzydło",
+    type: "shield",
+    image: "[www.taernopedia.pl][0]Smocze20SkrzydC582o.png",
+    reqLvl: 45,
+    reqStr: 60,
+    strength: 10,
+    agility: 6,
+    hp: 100,
+    endurance: 60,
+    cutRes: 36,
+    bluntRes: 36,
+    pierceRes: 36
+  },
+  {
     name: "Kil",
     type: "shield",
     image: "[www.taernopedia.pl][849]Kil.png",
@@ -2202,6 +2234,134 @@ const itemDatabase = [
   cutRes: 32,
   bluntRes: 30,
   pierceRes: 33
+  },
+  {
+  name: "Martumal",
+  type: "helmet",
+  image: "[www.taernopedia.pl][433]Martumal.png",
+  reqLvl: 20,
+  reqPow: 35,
+  reqKno: 20,
+  power: 8,
+  knowledge: 7,
+  mana: 40,
+  cutRes: 16,
+  bluntRes: 16,
+  pierceRes: 20,
+  curseRes: 20
+  },
+  {
+  name: "Grzebień",
+  type: "helmet",
+  image: "[www.taernopedia.pl][450]GrzebieC584.png",
+  reqLvl: 28,
+  reqStr: 30,
+  strength: 4,
+  agility: 4,
+  hp: 30,
+  endurance: 70,
+  cutRes: 23,
+  bluntRes: 24,
+  pierceRes: 27,
+  frostRes: 10,
+  curseRes: 10
+  },
+  {
+  name: "Ishelm",
+  type: "helmet",
+  image: "[www.taernopedia.pl][306]Ishelm.png",
+  reqLvl: 34,
+  strength: 6,
+  agility: 10,
+  hp: 80,
+  cutRes: 29,
+  bluntRes: 32,
+  pierceRes: 31
+  },
+  {
+  name: "Khalam",
+  type: "helmet",
+  image: "[www.taernopedia.pl][87]Khalam.png",
+  reqLvl: 28,
+  power: 8,
+  knowledge: 8,
+  mana: 60,
+  cutRes: 27,
+  bluntRes: 24,
+  pierceRes: 24,
+  curseRes: 20
+  },
+  {
+  name: "Gathril",
+  type: "helmet",
+  image: "[www.taernopedia.pl][209]Gathril.png",
+  reqLvl: 55,
+  reqStr: 70,
+  hp: 190,
+  cutRes: 35,
+  bluntRes: 37,
+  pierceRes: 38,
+  fireRes: 30,
+  frostRes: 30,
+  energyRes: 30,
+  curseRes: 20
+  },
+  {
+  name: "Czacha",
+  type: "helmet",
+  image: "[www.taernopedia.pl][525]Czacha.png",
+  reqLvl: 57,
+  reqPow: 70,
+  power: 12,
+  knowledge: 12,
+  hp: 100,
+  cutRes: 30,
+  bluntRes: 30,
+  pierceRes: 30
+  },
+  {
+  name: "Ghaitarog",
+  type: "helmet",
+  image: "[www.taernopedia.pl][401]Ghaitarog.png",
+  reqLvl: 60,
+  reqStr: 80,
+  strength: 7,
+  agility: 9,
+  hp: 100,
+  endurance: 100,
+  cutRes: 32,
+  bluntRes: 29,
+  pierceRes: 32
+  },
+  {
+  name: "Sigil",
+  type: "helmet",
+  image: "[www.taernopedia.pl][421]Sigil.png",
+  reqLvl: 75,
+  reqKno: 90,
+  power: 10,
+  knowledge: 10,
+  hp: 160,
+  mana: 50,
+  cutRes: 31,
+  bluntRes: 31,
+  pierceRes: 31,
+  energyRes: 25
+  },
+  {
+  name: "Pysk",
+  type: "helmet",
+  image: "[www.taernopedia.pl][695]Pysk.png",
+  reqLvl: 90,
+  reqStr: 95,
+  strength: 11,
+  agility: 11,
+  hp: 180,
+  mana: 50,
+  endurance: 100,
+  cutRes: 31,
+  bluntRes: 31,
+  pierceRes: 31
   },
   {
   name: "Pamięć Morany",
@@ -2629,10 +2789,10 @@ const itemDatabase = [
 ]
 
 const items = itemDatabase.map(item => new Item(item));
-
+const sortedItems = items.sort((x, y) => y.reqLvl - x.reqLvl);
 const taernDatabase = {
   skills: skillDatabase,
-  items: items
+  items: sortedItems
 }
 
 // If you want your app to work offline and load faster, you can change

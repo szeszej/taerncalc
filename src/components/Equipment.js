@@ -1,14 +1,11 @@
-// lista itemów ma się pojawiać bliżej slotu
 //dodanie customowych itemów po naciśnięciu gwiazdki
 //wsparcie dla setów
 //wsparcie dla ładowania psychorarów
-//tooltipy na liscie wyboru i w ekwipunku
 //wyostrzyć ramki w statach?
-//pierścionki nie działają
-//sprawdzenie wymagań przedmiotu
+//odekwipowanie jak item nie spełnia wymagań
 
 import React from 'react';
-import {ItemsList} from "./Items.js";
+import {ItemsList, ItemTooltip} from "./Items.js";
 
 class Equipment extends React.Component {
   constructor(props) {
@@ -93,7 +90,7 @@ class Equipment extends React.Component {
         newState.equipment[type] = item;
         return newState
       })
-    } else if (type === "shield" && this.state.equipment.weapon.weaponType === "Dwuręczna") {
+    } else if (type === "shield" && this.state.equipment.weapon !== null && this.state.equipment.weapon.weaponType === "Dwuręczna") {
       this.setState(prevState => {
         let newState = prevState;
         newState.equipment.weapon = null;
@@ -155,22 +152,35 @@ class ItemSlot extends React.Component {
   constructor (props) {
     super(props);
     this.hideItemsList = this.hideItemsList.bind(this);
+    this.showTooltip = this.showTooltip.bind(this);
+    this.hideTooltip = this.hideTooltip.bind(this);
     this.state = {
       displayList: false,
+      displayTooltip: false,
     }
   }
   showItemsList () {
     this.setState({
       displayList: true,
+      displayTooltip: false
     })
   }
   hideItemsList () {
     this.setState({
-      displayList: false,
+      displayList: false
+    })
+  }
+  showTooltip() {
+    this.setState({
+      displayTooltip: true
+    })
+  }
+  hideTooltip() {
+    this.setState({
+      displayTooltip: false
     })
   }
   setItemBackground (image) {
-    console.log(this.props.inSlot.image);
     let itemBackground = {
       backgroundImage: `url("/images/items/` + image + `")`
     }
@@ -178,12 +188,19 @@ class ItemSlot extends React.Component {
   }
   handleChildClick(event, functionToRun) {
     event.stopPropagation();
+    this.setState({
+      displayTooltip: false
+    })
     functionToRun(this.props.type);
   }
   render() {
     let unequipButton = <button className={"unequipButton"} onClick={(event) => this.handleChildClick(event, this.props.unequipItem)}>×</button>;
     return (
-      <div className={this.props.type} onClick={() => this.showItemsList()} style={this.props.inSlot ? this.setItemBackground(this.props.inSlot.image) : null}>{this.state.displayList ? <ItemsList items={this.props.items} type={this.props.type} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} hideItemsList={this.hideItemsList} equipItem={this.props.equipItem}/> : null}{this.props.inSlot ? unequipButton : null}</div>
+      <div className={this.props.type} onClick={() => this.showItemsList()} onMouseEnter={this.props.inSlot && !this.state.displayList ? () => this.showTooltip() : null} onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null} style={this.props.inSlot ? this.setItemBackground(this.props.inSlot.image) : null}>
+      {this.state.displayList ? <ItemsList items={this.props.items} type={this.props.type} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} hideItemsList={this.hideItemsList} equipItem={this.props.equipItem}/> : null}
+      {this.state.displayTooltip ? <ItemTooltip item={this.props.inSlot} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} /> : null}
+      {this.props.inSlot ? unequipButton : null}
+      </div>
     )
   }
 }
