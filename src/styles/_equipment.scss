@@ -23,12 +23,20 @@
     height: 7em;
     border: 2px solid #bd996f;
     margin: 1px;
-    background-size: 80%;
+    background-size: auto 6em;
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     &:hover {
       border: 2px solid #AE3B48;
+    }
+
+    img {
+      max-width: 6em;
+      max-height: 6em;
     }
 
     .unequipButton {

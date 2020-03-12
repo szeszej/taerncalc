@@ -3,6 +3,7 @@
 //wsparcie dla ładowania psychorarów
 //wyostrzyć ramki w statach?
 //odekwipowanie jak item nie spełnia wymagań
+//dodawanie i odejmowanie poziomu
 
 import React from 'react';
 import {ItemsList, ItemTooltip} from "./Items.js";
@@ -12,6 +13,8 @@ class Equipment extends React.Component {
     super(props);
     this.equipItem = this.equipItem.bind(this);
     this.unequipItem = this.unequipItem.bind(this);
+    this.showItemsList = this.showItemsList.bind(this);
+    this.hideItemsList = this.hideItemsList.bind(this);
     this.state = {
       equipment:{
       armor: null,
@@ -28,8 +31,7 @@ class Equipment extends React.Component {
       ring2: null,
       boots: null
     },
-      displayList: false,
-      itemsList: null,
+      listToDisplay: "",
       statsFromItems: {}
     }
   }
@@ -81,6 +83,16 @@ class Equipment extends React.Component {
     // If we made it this far, objects
     // are considered equivalent
     return true;
+  }
+  showItemsList (type) {
+    this.setState({
+      listToDisplay: type
+    })
+  }
+  hideItemsList () {
+    this.setState({
+      listToDisplay: ""
+    })
   }
   equipItem (item, type) {
     if (type === "weapon" && item.weaponType === "Dwuręczna") {
@@ -134,10 +146,10 @@ class Equipment extends React.Component {
   }
   render() {
     let classBackground = {
-      backgroundImage: `url("/images/` + this.props.class + `.svg")`
+      backgroundImage: `url("images/` + this.props.class + `.svg")`
     }
     let equipmentSlots = Object.keys(this.state.equipment);
-    let equipmentSlotComponents = equipmentSlots.map(x => <ItemSlot key={x} type={x} items={x === "ring1" || x === "ring2" ? this.props.items.filter(y => y.type === "ring") : this.props.items.filter(y => y.type === x)} inSlot={this.state.equipment[x]} equipItem={this.equipItem} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} unequipItem={this.unequipItem} />);
+    let equipmentSlotComponents = equipmentSlots.map(x => <ItemSlot key={x} type={x} items={x === "ring1" || x === "ring2" ? this.props.items.filter(y => y.type === "ring") : this.props.items.filter(y => y.type === x)} inSlot={this.state.equipment[x]} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} listToDisplay={this.state.listToDisplay} equipItem={this.equipItem} unequipItem={this.unequipItem} showItemsList={this.showItemsList} hideItemsList={this.hideItemsList} />);
     return (
       <div className="equipment">
         {equipmentSlotComponents}
@@ -151,24 +163,16 @@ class Equipment extends React.Component {
 class ItemSlot extends React.Component {
   constructor (props) {
     super(props);
-    this.hideItemsList = this.hideItemsList.bind(this);
     this.showTooltip = this.showTooltip.bind(this);
     this.hideTooltip = this.hideTooltip.bind(this);
     this.state = {
-      displayList: false,
-      displayTooltip: false,
+      displayTooltip: false
     }
   }
-  showItemsList () {
-    this.setState({
-      displayList: true,
-      displayTooltip: false
-    })
-  }
-  hideItemsList () {
-    this.setState({
-      displayList: false
-    })
+      // displayTooltip: false
+  hideTooltipWithListUp (hideTip, showList, type) {
+    hideTip();
+    showList(type);
   }
   showTooltip() {
     this.setState({
@@ -180,9 +184,9 @@ class ItemSlot extends React.Component {
       displayTooltip: false
     })
   }
-  setItemBackground (image) {
+  clearBackground (image) {
     let itemBackground = {
-      backgroundImage: `url("/images/items/` + image + `")`
+      backgroundImage: "none"
     }
     return itemBackground
   }
@@ -196,9 +200,10 @@ class ItemSlot extends React.Component {
   render() {
     let unequipButton = <button className={"unequipButton"} onClick={(event) => this.handleChildClick(event, this.props.unequipItem)}>×</button>;
     return (
-      <div className={this.props.type} onClick={() => this.showItemsList()} onMouseEnter={this.props.inSlot && !this.state.displayList ? () => this.showTooltip() : null} onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null} style={this.props.inSlot ? this.setItemBackground(this.props.inSlot.image) : null}>
-      {this.state.displayList ? <ItemsList items={this.props.items} type={this.props.type} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} hideItemsList={this.hideItemsList} equipItem={this.props.equipItem}/> : null}
-      {this.state.displayTooltip ? <ItemTooltip item={this.props.inSlot} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} /> : null}
+      <div className={this.props.type} onClick={() => this.hideTooltipWithListUp(this.hideTooltip, this.props.showItemsList, this.props.type)} onMouseEnter={this.props.inSlot ? () => this.showTooltip() : null} onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null} style={this.props.inSlot ? this.clearBackground() : null}>
+      {this.props.listToDisplay === this.props.type ? <ItemsList items={this.props.items} type={this.props.type} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} hideItemsList={this.props.hideItemsList} equipItem={this.props.equipItem}/> : null}
+      {this.state.displayTooltip && !(this.props.listToDisplay === this.props.type) ? <ItemTooltip item={this.props.inSlot} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} /> : null}
+      {this.props.inSlot ? <img src={`images/items/` + this.props.inSlot.image} /> : null}
       {this.props.inSlot ? unequipButton : null}
       </div>
     )

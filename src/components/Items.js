@@ -45,7 +45,7 @@ class ItemComponent extends React.Component {
   }
   render() {
     let itemStyle = {
-      backgroundImage: `url("/images/items/` + this.props.item.image + `")`,
+      backgroundImage: `url("images/items/` + this.props.item.image + `")`,
       borderColor: "#0161E7"
     }
 
@@ -69,21 +69,64 @@ class ItemTooltip extends React.Component {
   constructor (props) {
     super(props);
   }
+  nameColor(rarity) {
+    let color = {
+      color: "#0161E7"
+    };
+    if (rarity === "Psychorare") {
+        color.color = "#35CBEF"
+    } else if (rarity === "Zestaw") {
+        color.color = "#3DEF01"
+    } else if (rarity === "Epik") {
+        color.color = "#E7CC00"
+    }
+    return color;
+  }
+  translateCharacterClass(characterClass) {
+    let translatedClass = "";
+    switch (characterClass) {
+      case "druid":
+        translatedClass = "Druid";
+        break;
+      case "barbarian":
+        translatedClass = "Barbarzyńca";
+        break;
+      case "archer":
+        translatedClass = "Łucznik";
+        break;
+      case "firemage":
+        translatedClass = "Mag Ognia";
+        break;
+      case "knight":
+        translatedClass = "Rycerz";
+        break;
+      case "voodoo":
+        translatedClass = "VooDoo";
+        break;
+      case "sheed":
+        translatedClass = "Sheed";
+        break;
+      default:
+        translatedClass = "";
+        break;
+    }
+    return translatedClass;
+  }
   render() {
     let otherProperties = this.props.item.otherProperties.map(x => <p className="otherProperties" key={x}>{x}</p>);
     let notMeetingRequirements = {
       color: "red"
-    }
+    };
     return (
       <div className="itemTooltip">
-        <p className="itemName">{this.props.item.name}</p>
+        <p className="itemName" style={this.nameColor(this.props.item.rarity)}>{this.props.item.name}</p>
         {this.props.item.set ? <p className="itemSet">Zestaw: {this.props.item.set}</p> : null}
-        {this.props.item.class ? <p style={this.props.item.class !== this.props.class ? notMeetingRequirements : null} className="itemClass">Wym. klasa {this.props.item.class}</p> : null}
-        {this.props.item.reqLvl ? <p style={this.props.item.reqLvl > this.props.level ? notMeetingRequirements : null} className="itemReq">Wym. poziom {this.props.item.reqLvl}</p> : null}
-        {this.props.item.reqStr ? <p style={this.props.item.reqStr > this.props.strength ? notMeetingRequirements : null} className="itemReq">Wym. siła {this.props.item.reqStr}</p> : null}
-        {this.props.item.reqAgi ? <p style={this.props.item.reqAgi > this.props.agility ? notMeetingRequirements : null} className="itemReq">Wym. zręczność {this.props.item.reqAgi}</p> : null}
-        {this.props.item.reqPow ? <p style={this.props.item.reqPow > this.props.power ? notMeetingRequirements : null} className="itemReq">Wym. moc {this.props.item.reqPow}</p> : null}
-        {this.props.item.reqKno ? <p style={this.props.item.reqKno > this.props.knowledge ? notMeetingRequirements : null} className="itemReq">Wym. wiedza {this.props.item.reqKno}</p> : null}
+        {this.props.item.class ? <p style={this.props.item.class !== this.props.class ? notMeetingRequirements : null} className="itemClass">Wym. klasa: {this.translateCharacterClass(this.props.item.class)}</p> : null}
+        {this.props.item.reqLvl ? <p style={this.props.item.reqLvl > this.props.level ? notMeetingRequirements : null} className="itemReq">Wym. poziom: {this.props.item.reqLvl}</p> : null}
+        {this.props.item.reqStr ? <p style={this.props.item.reqStr > this.props.strength ? notMeetingRequirements : null} className="itemReq">Wym. siła: {this.props.item.reqStr}</p> : null}
+        {this.props.item.reqAgi ? <p style={this.props.item.reqAgi > this.props.agility ? notMeetingRequirements : null} className="itemReq">Wym. zręczność: {this.props.item.reqAgi}</p> : null}
+        {this.props.item.reqPow ? <p style={this.props.item.reqPow > this.props.power ? notMeetingRequirements : null} className="itemReq">Wym. moc: {this.props.item.reqPow}</p> : null}
+        {this.props.item.reqKno ? <p style={this.props.item.reqKno > this.props.knowledge ? notMeetingRequirements : null} className="itemReq">Wym. wiedza: {this.props.item.reqKno}</p> : null}
         {this.props.item.weaponType ? <p className="itemProperty">Typ broni: {this.props.item.weaponType}</p> : null}
         {this.props.item.damageType ? <p className="itemProperty">Typ obrażeń: {this.props.item.damageType}</p> : null}
         {this.props.item.damage ? <p className="itemProperty">Obrażenia: {this.props.item.damage}</p> : null}

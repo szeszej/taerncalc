@@ -1552,6 +1552,10 @@ class Skill {
         this.requiredCharLevel = 30;
         this.initReqLvl = 30;
         break;
+      default:
+        this.requiredCharLevel = 0;
+        this.initReqLvl = 0;
+        break;
     }
   }
 }
@@ -2422,6 +2426,134 @@ const itemDatabase = [
   curseRes: 10
   },
   {
+  name: "Bartaur",
+  type: "armor",
+  image: "[www.taernopedia.pl][826]Bartaur.png",
+  reqLvl: 30,
+  reqStr: 40,
+  strength: 9,
+  agility: 8,
+  endurance: 50,
+  cutRes: 30,
+  bluntRes: 30,
+  pierceRes: 30
+  },
+  {
+  name: "Brunnle",
+  type: "armor",
+  image: "[www.taernopedia.pl][627]Brunnle.png",
+  reqLvl: 40,
+  reqStr: 40,
+  strength: 6,
+  agility: 6,
+  hp: 60,
+  endurance: 80,
+  cutRes: 29,
+  bluntRes: 31,
+  pierceRes: 29
+  },
+  {
+  name: "Pancerz Komandorski",
+  type: "armor",
+  image: "[www.taernopedia.pl][251]Pancerz20Komandorski.png",
+  reqLvl: 45,
+  power: 8,
+  knowledge: 10,
+  hp: 60,
+  mana: 40,
+  cutRes: 25,
+  bluntRes: 27,
+  pierceRes: 25
+  },
+  {
+  name: "Virthil II",
+  type: "armor",
+  image: "[www.taernopedia.pl][19]Virthil20II.png",
+  reqLvl: 55,
+  reqStr: 80,
+  agility: 10,
+  hp: 100,
+  endurance: 70,
+  cutRes: 35,
+  bluntRes: 37,
+  pierceRes: 36,
+  fireRes: 10,
+  curseRes: 10
+  },
+  {
+  name: "Diabolo",
+  type: "armor",
+  image: "[www.taernopedia.pl][163]Diabolo.png",
+  reqLvl: 60,
+  reqPow: 70,
+  power: 19,
+  knowledge: -5,
+  hp: 150,
+  mana: 50,
+  cutRes: 25,
+  bluntRes: 28,
+  pierceRes: 30
+  },
+  {
+  name: "Opoka Bogów",
+  type: "armor",
+  image: "[www.taernopedia.pl][673]Opoka20BogC3B3w.png",
+  reqLvl: 55,
+  reqStr: 40,
+  strength: 8,
+  agility: 8,
+  hp: 80,
+  endurance: 120,
+  cutRes: 37,
+  bluntRes: 34,
+  pierceRes: 38
+  },
+  {
+  name: "Nadzieja Pokoleń",
+  type: "armor",
+  image: "[www.taernopedia.pl][499]Nadzieja20PokoleC584.png",
+  reqLvl: 80,
+  reqPow: 80,
+  power: 13,
+  knowledge: 20,
+  hp: 120,
+  mana: 60,
+  cutRes: 32,
+  bluntRes: 35,
+  pierceRes: 32
+  },
+  {
+  name: "Harttraum",
+  type: "armor",
+  image: "[www.taernopedia.pl][63]Harttraum.png",
+  reqLvl: 75,
+  reqAgi: 90,
+  strength: 16,
+  agility: 21,
+  hp: 120,
+  endurance: 30,
+  cutRes: 35,
+  bluntRes: 35,
+  pierceRes: 35
+  },
+  {
+  name: "Vorleah",
+  type: "armor",
+  rarity: "Psychorare",
+  image: "[www.taernopedia.pl][388]Vorleah.png",
+  reqLvl: 95,
+  reqKno: 100,
+  power: 20,
+  knowledge: 15,
+  hp: 220,
+  mana: 80,
+  cutRes: 35,
+  bluntRes: 35,
+  pierceRes: 35,
+  frostRes: 15,
+  otherProperties: ["Skok Farida: 4% (+1% co poziom)"]
+  },
+  {
   name: "Zalla",
   type: "armor",
   rarity: "Psychorare",
@@ -2789,7 +2921,7 @@ const itemDatabase = [
 ]
 
 const items = itemDatabase.map(item => new Item(item));
-const sortedItems = items.sort((x, y) => y.reqLvl - x.reqLvl);
+const sortedItems = items.sort((x, y) => x.reqLvl - y.reqLvl);
 const taernDatabase = {
   skills: skillDatabase,
   items: sortedItems
