@@ -2,7 +2,6 @@
 //wsparcie dla setów
 //wsparcie dla ładowania psychorarów
 //wyostrzyć ramki w statach?
-//odekwipowanie jak item nie spełnia wymagań
 //dodawanie i odejmowanie poziomu
 
 import React from 'react';
@@ -148,13 +147,16 @@ class Equipment extends React.Component {
     let classBackground = {
       backgroundImage: `url("images/` + this.props.class + `.svg")`
     }
-    let equipmentSlots = Object.keys(this.state.equipment);
-    let equipmentSlotComponents = equipmentSlots.map(x => <ItemSlot key={x} type={x} items={x === "ring1" || x === "ring2" ? this.props.items.filter(y => y.type === "ring") : this.props.items.filter(y => y.type === x)} inSlot={this.state.equipment[x]} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} listToDisplay={this.state.listToDisplay} equipItem={this.equipItem} unequipItem={this.unequipItem} showItemsList={this.showItemsList} hideItemsList={this.hideItemsList} />);
+    let equipment = Object.keys(this.state.equipment);
+    let equipmentSlots = equipment.filter(x => x !== "special")
+
+    let equipmentSlotComponents = equipmentSlots.map(x => <ItemSlot key={x} type={x} items={x === "ring1" || x === "ring2" ? this.props.items.filter(y => y.type === "ring") : this.props.items.filter(y => y.type === x)} inSlot={this.state.equipment[x]} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} listToDisplay={this.state.listToDisplay} equipItem={this.equipItem} unequipItem={this.unequipItem} showItemsList={this.showItemsList} hideItemsList={this.hideItemsList} isEquivalent={this.isEquivalent} />);
     return (
       <div className="equipment">
         {equipmentSlotComponents}
         <div className="empty" onClick={() => this.unequipItems()}></div>
         <div className="middle" style={classBackground}></div>
+        <SpecialSlot type={"special"} inSlot={this.state.equipment.special} listToDisplay={this.state.listToDisplay} equipItem={this.equipItem} unequipItem={this.unequipItem} showItemsList={this.showItemsList} hideItemsList={this.hideItemsList} />
       </div>
     );
   }
@@ -169,7 +171,13 @@ class ItemSlot extends React.Component {
       displayTooltip: false
     }
   }
-      // displayTooltip: false
+  componentDidUpdate(prevProps) {
+    if (this.props.inSlot && !(this.props.isEquivalent(prevProps, this.props))) {
+        if (this.props.level < this.props.inSlot.reqLvl || this.props.strength < this.props.inSlot.reqStr || this.props.agility < this.props.inSlot.reqAgi || this.props.knowledge < this.props.inSlot.reqKno || this.props.power < this.props.inSlot.reqPow) {
+        this.props.unequipItem(this.props.type);
+      }
+    }
+  }
   hideTooltipWithListUp (hideTip, showList, type) {
     hideTip();
     showList(type);
@@ -203,9 +211,21 @@ class ItemSlot extends React.Component {
       <div className={this.props.type} onClick={() => this.hideTooltipWithListUp(this.hideTooltip, this.props.showItemsList, this.props.type)} onMouseEnter={this.props.inSlot ? () => this.showTooltip() : null} onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null} style={this.props.inSlot ? this.clearBackground() : null}>
       {this.props.listToDisplay === this.props.type ? <ItemsList items={this.props.items} type={this.props.type} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} hideItemsList={this.props.hideItemsList} equipItem={this.props.equipItem}/> : null}
       {this.state.displayTooltip && !(this.props.listToDisplay === this.props.type) ? <ItemTooltip item={this.props.inSlot} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} /> : null}
-      {this.props.inSlot ? <img src={`images/items/` + this.props.inSlot.image} /> : null}
+      {this.props.inSlot ? <img src={`images/items/` + this.props.inSlot.image} alt={this.props.inSlot.name} /> : null}
       {this.props.inSlot ? unequipButton : null}
       </div>
+    )
+  }
+}
+
+class SpecialSlot extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div className="special"></div>
     )
   }
 }
