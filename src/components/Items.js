@@ -121,20 +121,22 @@ class ItemTooltip extends React.Component {
       <div className="itemTooltip">
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>{this.props.item.name}</p>
         {this.props.item.set ? <p className="itemSet">Zestaw: {this.props.item.set}</p> : null}
+        <hr />
         {this.props.item.class ? <p style={this.props.item.class !== this.props.class ? notMeetingRequirements : null} className="itemClass">Wym. klasa: {this.translateCharacterClass(this.props.item.class)}</p> : null}
         {this.props.item.reqLvl ? <p style={this.props.item.reqLvl > this.props.level ? notMeetingRequirements : null} className="itemReq">Wym. poziom: {this.props.item.reqLvl}</p> : null}
         {this.props.item.reqStr ? <p style={this.props.item.reqStr > this.props.strength ? notMeetingRequirements : null} className="itemReq">Wym. siła: {this.props.item.reqStr}</p> : null}
         {this.props.item.reqAgi ? <p style={this.props.item.reqAgi > this.props.agility ? notMeetingRequirements : null} className="itemReq">Wym. zręczność: {this.props.item.reqAgi}</p> : null}
         {this.props.item.reqPow ? <p style={this.props.item.reqPow > this.props.power ? notMeetingRequirements : null} className="itemReq">Wym. moc: {this.props.item.reqPow}</p> : null}
         {this.props.item.reqKno ? <p style={this.props.item.reqKno > this.props.knowledge ? notMeetingRequirements : null} className="itemReq">Wym. wiedza: {this.props.item.reqKno}</p> : null}
+        <hr />
         {this.props.item.weaponType ? <p className="itemProperty">Typ broni: {this.props.item.weaponType}</p> : null}
         {this.props.item.damageType ? <p className="itemProperty">Typ obrażeń: {this.props.item.damageType}</p> : null}
-        {this.props.item.damage ? <p className="itemProperty">Obrażenia: {this.props.item.damage}</p> : null}
+        {this.props.item.damage ? <p className="damage">Obrażenia: {this.props.item.damage}</p> : null}
         {this.props.item.strength ? <p className="itemProperty">Siła: +{this.props.item.strength}</p> : null}
         {this.props.item.agility ? <p className="itemProperty">Zręczność: +{this.props.item.agility}</p> : null}
         {this.props.item.power ? <p className="itemProperty">Moc: +{this.props.item.power}</p> : null}
-        {this.props.item.knowledge ? <p className="itemProperty">Wiedza: +{this.props.item.knowledge}</p> : null}
-        {this.props.item.hp ? <p className="itemProperty">Punkty życia: +{this.props.item.hp}</p> : null}
+        {this.props.item.knowledge ? <p className="itemProperty" style={this.props.item.knowledge > 0 ? null : {color: "#961291"}} >Wiedza: {this.props.item.knowledge > 0 ? "+" : null}{this.props.item.knowledge}</p> : null}
+        {this.props.item.hp ? <p className="itemProperty" style={this.props.item.hp > 0 ? null : {color: "#961291"}} >Punkty życia: {this.props.item.hp > 0 ? "+" : null}{this.props.item.hp}</p> : null}
         {this.props.item.endurance ? <p className="itemProperty">Kondycja: +{this.props.item.endurance}</p> : null}
         {this.props.item.mana ? <p className="itemProperty">Mana: +{this.props.item.mana}</p> : null}
         {this.props.item.cutRes ? <p className="itemProperty">Odp. na sieczne: +{this.props.item.cutRes}</p> : null}

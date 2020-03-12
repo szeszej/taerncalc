@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {ItemsList, ItemTooltip} from "./Items.js";
+import {Item} from "../index.js"
 
 class Equipment extends React.Component {
   constructor(props) {
@@ -222,10 +223,18 @@ class SpecialSlot extends React.Component {
   constructor(props) {
     super(props)
   }
-
+  createItem(properties) {
+    let specialItem = new Item(properties)
+    return specialItem
+  }
   render() {
     return (
-      <div className="special"></div>
+      <div className="special">
+        <form style={{display: "none"}}>
+        <input type="number" min="-999" max="999" placeholder="Siła"></input>
+        <input class="submit" type="submit" value="Zatwierdź"></input>
+        </form>
+      </div>
     )
   }
 }

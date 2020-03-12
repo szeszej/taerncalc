@@ -2615,6 +2615,97 @@ const itemDatabase = [
   frostRes: 15
   },
   {
+  name: "Angwallion",
+  type: "cape",
+  image: "[www.taernopedia.pl][970]Angwallion.png",
+  reqLvl: 100,
+  reqAgi: 105,
+  agility: 30,
+  hp: 100,
+  mana: 100,
+  endurance: 100,
+  curseRes: 10
+  },
+  {
+  name: "Dracorporis",
+  type: "cape",
+  image: "[www.taernopedia.pl][168]Dracorporis.png",
+  reqLvl: 85,
+  reqPow: 90,
+  power: 20,
+  knowledge: 20,
+  hp: 100,
+  mana: 50
+  },
+  {
+  name: "Nurthil",
+  type: "cape",
+  image: "[www.taernopedia.pl][65]Nurthil.png",
+  reqLvl: 55,
+  reqPow: 90,
+  power: 19,
+  knowledge: 14,
+  hp: -50,
+  fireRes: 15
+  },
+  {
+  name: "Debba",
+  type: "cape",
+  image: "[www.taernopedia.pl][535]Debba.png",
+  reqLvl: 61,
+  agility: 20,
+  hp: 100,
+  endurance: 60
+  },
+  {
+  name: "Xenothor",
+  type: "cape",
+  image: "[www.taernopedia.pl][157]Xenothor.png",
+  reqLvl: 64,
+  reqAgi: 80,
+  strength: 10,
+  agility: 18,
+  hp: 80,
+  endurance: -30,
+  fireRes: 15
+  },
+  {
+  name: "Bryza",
+  type: "cape",
+  image: "[www.taernopedia.pl][911]Bryza.png",
+  reqLvl: 45,
+  strength: 7,
+  agility: 9,
+  hp: 90,
+  endurance: 30
+  },
+  {
+  name: "Powrót Ivravula",
+  type: "cape",
+  image: "[www.taernopedia.pl][670]PowrC3B3t20Ivravula.png",
+  reqLvl: 80,
+  reqStr: 80,
+  strength: 14,
+  agility: 23,
+  hp: 50,
+  mana: 20,
+  fireRes: 15,
+  frostRes: 15
+  },
+  {
+  name: "Tsunami II",
+  type: "cape",
+  rarity: "Psychorare",
+  image: "[www.taernopedia.pl][61]Tsunami20II.png",
+  reqLvl: 85,
+  reqPow: 90,
+  reqKno: 90,
+  power: 8,
+  knowledge: 16,
+  hp: 100,
+  otherProperties: ["Odporność na trafienie krytyczne: 0% (+1% co poziom)", "Modyfikator trafień magicznych LUB dystansowych: 4% (+2% na poziom)"]
+  },
+  {
   name: "Cień Tarula",
   type: "cape",
   rarity: "Psychorare",
@@ -2631,6 +2722,7 @@ const itemDatabase = [
   {
   name: "Admiralski gronostaj",
   type: "cape",
+  rarity: "Psychorare",
   image: "[www.taernopedia.pl][869]Admiralski20Gronostaj.png",
   reqLvl: 115,
   reqStr: 100,
@@ -2926,6 +3018,8 @@ const taernDatabase = {
   skills: skillDatabase,
   items: sortedItems
 }
+
+export {Item}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

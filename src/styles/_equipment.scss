@@ -37,6 +37,16 @@
     img {
       max-width: 6em;
       max-height: 6em;
+      animation: fadein 1s;
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
     }
 
     .unequipButton {
@@ -137,6 +147,7 @@
     border: 1px solid;
     border-color: inherit;
     padding: 5px;
+    border-radius: 5px;
     opacity: 0.9;
     cursor: default;
     animation: fadein 1s;
@@ -157,6 +168,14 @@
 
     .itemName {
       font-size: 1.5em;
+    }
+    .damage {
+      color: #d7d50e;
+    }
+    hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(44, 130, 201, 0), rgba(44, 130, 201, 0.75), rgba(44, 130, 201, 0));
     }
   }
 
