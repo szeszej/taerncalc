@@ -12,7 +12,7 @@ class ItemsList extends React.Component {
     let closeButton = <button className="closeList" onClick={(event) => this.handleClick(event, this.props.hideItemsList)}>×</button>;
     let equippableItems = this.props.items.filter(x => this.props.level >= x.reqLvl && this.props.strength >= x.reqStr && this.props.agility >= x.reqAgi && this.props.knowledge >= x.reqKno && this.props.power >= x.reqPow && (x.class === null || x.class === this.props.class));
     let unequippableItems = this.props.items.filter(x => this.props.level < x.reqLvl || this.props.strength < x.reqStr || this.props.agility < x.reqAgi || this.props.knowledge < x.reqKno || this.props.power < x.reqPow || (x.class !== null && x.class !== this.props.class));
-    let equippableItemsComponents = <div className={"equippableItems"}>{equippableItems.map(x => <ItemComponent key={x.name} class={this.props.class} type={this.props.type} item={x} equipItem={this.props.equipItem} hideItemsList={this.props.hideItemsList} />)}</div>;
+    let equippableItemsComponents = <div className={"equippableItems"}>{equippableItems.map(x => <ItemComponent key={x.name} class={this.props.class} type={this.props.type} item={x} level={this.props.level} equipItem={this.props.equipItem} hideItemsList={this.props.hideItemsList} />)}</div>;
     let unequippableItemsComponents = <div className={"unequippableItems"}>{unequippableItems.map(x => <ItemComponent key={x.name} item={x} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} />)}</div>;
     return (
         <div className={"itemsList"}>{equippableItemsComponents}{unequippableItemsComponents}{closeButton}</div>
@@ -112,6 +112,12 @@ class ItemTooltip extends React.Component {
     }
     return translatedClass;
   }
+  calculateDamage(damage, level) {
+    let totalDamage = 0;
+    totalDamage += parseInt(damage);
+    totalDamage += level;
+    return totalDamage
+  }
   render() {
     let otherProperties = this.props.item.otherProperties.map(x => <p className="otherProperties" key={x}>{x}</p>);
     let notMeetingRequirements = {
@@ -128,13 +134,13 @@ class ItemTooltip extends React.Component {
         {this.props.item.reqAgi ? <p style={this.props.item.reqAgi > this.props.agility ? notMeetingRequirements : null} className="itemReq">Wym. zręczność: {this.props.item.reqAgi}</p> : null}
         {this.props.item.reqPow ? <p style={this.props.item.reqPow > this.props.power ? notMeetingRequirements : null} className="itemReq">Wym. moc: {this.props.item.reqPow}</p> : null}
         {this.props.item.reqKno ? <p style={this.props.item.reqKno > this.props.knowledge ? notMeetingRequirements : null} className="itemReq">Wym. wiedza: {this.props.item.reqKno}</p> : null}
-        <hr />
+        {this.props.item.reqLvl > 0 || this.props.item.reqStr > 0 || this.props.item.reqAgi > 0 || this.props.item.reqPow > 0 || this.props.item.reqKno > 0 ? <hr /> : null}
         {this.props.item.weaponType ? <p className="itemProperty">Typ broni: {this.props.item.weaponType}</p> : null}
         {this.props.item.damageType ? <p className="itemProperty">Typ obrażeń: {this.props.item.damageType}</p> : null}
-        {this.props.item.damage ? <p className="damage">Obrażenia: {this.props.item.damage}</p> : null}
+        {this.props.item.damage ? <p className="damage">Obrażenia: {typeof this.props.item.damage === "string" ? this.props.item.damage + " (" + this.calculateDamage(this.props.item.damage, this.props.level) + ")" : this.props.item.damage}</p> : null}
         {this.props.item.strength ? <p className="itemProperty">Siła: +{this.props.item.strength}</p> : null}
         {this.props.item.agility ? <p className="itemProperty">Zręczność: +{this.props.item.agility}</p> : null}
-        {this.props.item.power ? <p className="itemProperty">Moc: +{this.props.item.power}</p> : null}
+        {this.props.item.power ? <p className="itemProperty" style={this.props.item.power > 0 ? null : {color: "#961291"}} >Moc: +{this.props.item.power}</p> : null}
         {this.props.item.knowledge ? <p className="itemProperty" style={this.props.item.knowledge > 0 ? null : {color: "#961291"}} >Wiedza: {this.props.item.knowledge > 0 ? "+" : null}{this.props.item.knowledge}</p> : null}
         {this.props.item.hp ? <p className="itemProperty" style={this.props.item.hp > 0 ? null : {color: "#961291"}} >Punkty życia: {this.props.item.hp > 0 ? "+" : null}{this.props.item.hp}</p> : null}
         {this.props.item.endurance ? <p className="itemProperty">Kondycja: +{this.props.item.endurance}</p> : null}

@@ -37,16 +37,6 @@
     img {
       max-width: 6em;
       max-height: 6em;
-      animation: fadein 1s;
-      @keyframes fadein {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
-      }
     }
 
     .unequipButton {
@@ -232,6 +222,63 @@
   .special {
     grid-area: special;
     background-image: url("/images/star.svg");
+    .itemsList {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      margin-left: 3em;
+      .title {
+        font-size: 1.25em;
+        align-self: center;
+        color: #d7d50e;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .property {
+          width: 80%;
+          margin: 2px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          p, input {
+            height: 1.25em;
+            font-size: 1em;
+          }
+          p {
+            margin: 0;
+            margin-top: -0.3em;
+          }
+          input:not(.textInput) {
+            width: 40%
+          }
+        }
+
+        .submit {
+          margin-top: 1.5em;
+          input {
+            border-radius: 8px;
+            font-size: 1.5em;
+            color: #d7d50e;
+            box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+            cursor: pointer;
+            background-color: black;
+            border: 2px solid #EC8C42;
+            &:hover {
+              background-color: #322F3E;
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+
   }
 
   .shield {
