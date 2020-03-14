@@ -17,22 +17,28 @@
       width: 100%;
       flex-wrap: wrap;
       .statsAndRes {
+        font-size: 1.1em;
         width: 50%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
       .statLines, .resLines {
-        width: 50%;
+        width: 49%;
+        // border: 2px solid #bd996f;
+        // border-radius: 5px;
+        box-sizing: border-box;
+        margin: 2px;
         .statLine {
-          width: 90%;
+          width: 100%;
           margin: 0.5em;
           display: flex;
           justify-content: space-evenly;
           align-items: center;
-          border: 2px solid $border-color;
-          background-color: #d4d6a9;
+          // border: 2px solid $border-color;
+          // background-color: #d4d6a9;
           padding: 0.5em;
+          padding-left: 0;
           border-radius: 8px;
           min-height: 4em;
 
@@ -42,17 +48,8 @@
             height: 3em;
           }
 
-          // .hp {
-          //   filter: invert(12%) sepia(91%) saturate(5955%) hue-rotate(4deg) brightness(101%) contrast(118%);
-          // }
-          // .mana {
-          //   filter: invert(10%) sepia(100%) saturate(4739%) hue-rotate(243deg) brightness(110%) contrast(149%);
-          // }
-          // .endurance {
-          //   filter: invert(14%) sepia(43%) saturate(1169%) hue-rotate(115deg) brightness(97%) contrast(102%);
-          // }
           .statNameButtons {
-            width: 70%;
+            width: 80%;
 
             .statName {
               text-align: center;
@@ -63,8 +60,40 @@
             }
           }
         }
-      }}
+      }
 
     }
+
+    }
+    @media only screen and (max-width: 1340px) {
+      .linesAndEq {
+        flex-direction: column;
+        .statsAndRes {
+          width: 80%;
+          justify-content: space-around;
+          .statLines, .resLines {
+            width: 35%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1070px) {
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines, .statsCalculator .stats .linesAndEq .statsAndRes .resLines {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines, .statsCalculator .stats .linesAndEq .statsAndRes .resLines {
+    width: 49%;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines, .statsCalculator .stats .linesAndEq .statsAndRes .resLines {
+    width: 70%;
   }
 }

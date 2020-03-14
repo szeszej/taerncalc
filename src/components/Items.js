@@ -51,7 +51,7 @@ class ItemComponent extends React.Component {
 
     if (this.props.item.rarity === "Psychorare") {
         itemStyle.borderColor = "#35CBEF"
-    } else if (this.props.item.rarity === "Zestaw") {
+    } else if (this.props.item.rarity === "Set") {
         itemStyle.borderColor = "#3DEF01"
     } else if (this.props.item.rarity === "Epik") {
         itemStyle.borderColor = "#E7CC00"
@@ -75,7 +75,7 @@ class ItemTooltip extends React.Component {
     };
     if (rarity === "Psychorare") {
         color.color = "#35CBEF"
-    } else if (rarity === "Zestaw") {
+    } else if (rarity === "Set") {
         color.color = "#3DEF01"
     } else if (rarity === "Epik") {
         color.color = "#E7CC00"
@@ -123,11 +123,14 @@ class ItemTooltip extends React.Component {
     let notMeetingRequirements = {
       color: "red"
     };
+    let negativeStats = {
+      color: "#961291"
+    }
     return (
       <div className="itemTooltip">
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>{this.props.item.name}</p>
         {this.props.item.set ? <p className="itemSet">Zestaw: {this.props.item.set}</p> : null}
-        <hr />
+        {this.props.name ? <hr /> : null}
         {this.props.item.class ? <p style={this.props.item.class !== this.props.class ? notMeetingRequirements : null} className="itemClass">Wym. klasa: {this.translateCharacterClass(this.props.item.class)}</p> : null}
         {this.props.item.reqLvl ? <p style={this.props.item.reqLvl > this.props.level ? notMeetingRequirements : null} className="itemReq">Wym. poziom: {this.props.item.reqLvl}</p> : null}
         {this.props.item.reqStr ? <p style={this.props.item.reqStr > this.props.strength ? notMeetingRequirements : null} className="itemReq">Wym. siła: {this.props.item.reqStr}</p> : null}
@@ -140,9 +143,9 @@ class ItemTooltip extends React.Component {
         {this.props.item.damage ? <p className="damage">Obrażenia: {typeof this.props.item.damage === "string" ? this.props.item.damage + " (" + this.calculateDamage(this.props.item.damage, this.props.level) + ")" : this.props.item.damage}</p> : null}
         {this.props.item.strength ? <p className="itemProperty">Siła: +{this.props.item.strength}</p> : null}
         {this.props.item.agility ? <p className="itemProperty">Zręczność: +{this.props.item.agility}</p> : null}
-        {this.props.item.power ? <p className="itemProperty" style={this.props.item.power > 0 ? null : {color: "#961291"}} >Moc: +{this.props.item.power}</p> : null}
-        {this.props.item.knowledge ? <p className="itemProperty" style={this.props.item.knowledge > 0 ? null : {color: "#961291"}} >Wiedza: {this.props.item.knowledge > 0 ? "+" : null}{this.props.item.knowledge}</p> : null}
-        {this.props.item.hp ? <p className="itemProperty" style={this.props.item.hp > 0 ? null : {color: "#961291"}} >Punkty życia: {this.props.item.hp > 0 ? "+" : null}{this.props.item.hp}</p> : null}
+        {this.props.item.power ? <p className="itemProperty" style={this.props.item.power > 0 ? null : negativeStats} >Moc: +{this.props.item.power}</p> : null}
+        {this.props.item.knowledge ? <p className="itemProperty" style={this.props.item.knowledge > 0 ? null : negativeStats} >Wiedza: {this.props.item.knowledge > 0 ? "+" : null}{this.props.item.knowledge}</p> : null}
+        {this.props.item.hp ? <p className="itemProperty" style={this.props.item.hp > 0 ? null : negativeStats} >Punkty życia: {this.props.item.hp > 0 ? "+" : null}{this.props.item.hp}</p> : null}
         {this.props.item.endurance ? <p className="itemProperty">Kondycja: +{this.props.item.endurance}</p> : null}
         {this.props.item.mana ? <p className="itemProperty">Mana: +{this.props.item.mana}</p> : null}
         {this.props.item.cutRes ? <p className="itemProperty">Odp. na sieczne: +{this.props.item.cutRes}</p> : null}

@@ -7,24 +7,33 @@ class SkillsCalculator extends React.Component {
     this.checkIfSkillCanIncrease = this.checkIfSkillCanIncrease.bind(this);
     this.reset = this.reset.bind(this);
     this.state = {
-      skillPts: this.calculateSkillPoints(this.props.level),
+      skillPts: 0,
       skillSet: this.props.class
     };
   }
   componentDidMount() {
-    let initState = this.state;
-    this.setState({ initState: initState });
+    this.setState({
+      skillPts: this.calculateSkillPoints(this.props.level),
+     });
   }
-
+  componentDidUpdate(prevProps) {
+    if (prevProps.level !== this.props.level) {
+      this.setState(() => {
+        let updatedPoints = {};
+        updatedPoints.skillPts = this.state.skillPts + ((this.props.level - prevProps.level) * 2);
+        return updatedPoints;
+      })
+    }
+  }
   reset() {
     this.setState(() => {
-      let zeroSkill = this.state.initState.skillSet;
+      let zeroSkill = this.props.class;
       for (let property in zeroSkill) {
         zeroSkill[property].level = zeroSkill[property].minLvl;
         zeroSkill[property].requiredCharLevel = zeroSkill[property].initReqLvl;
       }
       return {
-        skillPts: this.state.initState.skillPts,
+        skillPts: this.calculateSkillPoints(this.props.level),
         skillSet: zeroSkill
       };
     });
@@ -230,6 +239,9 @@ class SkillLine extends React.Component {
     }
   }
   render() {
+    let notMeetingRequirements = {
+      color: "red"
+    };
     return (
       <div className="skillLine">
         <div className="image">
@@ -241,18 +253,17 @@ class SkillLine extends React.Component {
         <div className="skillValue">
           <p>{this.props.skill.level}</p>
         </div>
-        <div className="reqLvl">
+        {this.props.skill.level === this.props.skill.maxLvl ? <div className="reqLvl"><p>Maks. poziom osiągnięty</p></div> :
+        <div className="reqLvl" style={this.props.skill.requiredCharLevel > this.props.level ? notMeetingRequirements : null}>
           <div className="reqLvlText">
             <p>Wym. poziom postaci:</p>
           </div>
           <div className="reqLvlNumber">
             <p>
-              {this.props.skill.level === this.props.skill.maxLvl
-                ? "-"
-                : this.props.skill.requiredCharLevel}
+              {this.props.skill.requiredCharLevel}
             </p>
           </div>
-        </div>
+        </div>}
         <div className="skillButtons">
           <div className="minusButton">
             {this.props.skill.level === this.props.skill.minLvl ? (

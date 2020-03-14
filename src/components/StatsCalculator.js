@@ -8,7 +8,7 @@ class StatsCalculator extends React.Component {
     this.reset = this.reset.bind(this);
     this.addStatsFromEquipment = this.addStatsFromEquipment.bind(this);
     this.state = {
-      statPts: this.calculateStatPoints(this.props.level),
+      statPts: 0,
       strength: 10,
       agility: 10,
       power: 10,
@@ -35,15 +35,23 @@ class StatsCalculator extends React.Component {
     };
   }
   componentDidMount() {
-    let initState = this.state;
-    this.setState({ initState: initState });
+    this.setState({ statPts: this.calculateStatPoints(this.props.level) });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.level !== this.props.level) {
+      this.setState(() => {
+        let updatedPoints = {};
+        updatedPoints.statPts = this.state.statPts + ((this.props.level - prevProps.level) * 4);
+        return updatedPoints;
+      })
+    }
   }
   calculateStatPoints(level) {
     return level * 4 + 1;
   }
   spendStatPoints(stat, number) {
     if (["strength", "agility", "power", "knowledge"].includes(stat)) {
-      if (this.state.statPts - number < 0 || this.state[stat] + number < 10) {
+      if (this.state[stat] + number < 10) {
       } else {
         this.setState(prevState => {
           return {
@@ -54,7 +62,6 @@ class StatsCalculator extends React.Component {
       }
     } else {
       if (
-        this.state.statPts - number < 0 ||
         this.state[stat] + number * 10 < 200
       ) {
       } else {
@@ -74,14 +81,14 @@ class StatsCalculator extends React.Component {
   }
   reset() {
     this.setState({
-      statPts: this.state.initState.statPts,
-      agility: this.state.initState.agility,
-      strength: this.state.initState.strength,
-      power: this.state.initState.power,
-      knowledge: this.state.initState.knowledge,
-      hp: this.state.initState.hp,
-      endurance: this.state.initState.endurance,
-      mana: this.state.initState.mana
+      statPts: this.calculateStatPoints(this.props.level),
+      agility: 10,
+      strength: 10,
+      power: 10,
+      knowledge: 10,
+      hp: 200,
+      endurance: 200,
+      mana: 200
     });
   }
   render() {

@@ -1,8 +1,7 @@
 //wsparcie dla setów
 //wsparcie dla ładowania psychorarów
-//wyostrzyć ramki w statach?
-//dodawanie i odejmowanie poziomu
-//eksport i import
+//eksport i import buildówar
+//upload własnego obrazka
 
 import React from 'react';
 import {ItemsList, ItemTooltip} from "./Items.js";
@@ -67,7 +66,7 @@ class Equipment extends React.Component {
 
     // If number of properties is different,
     // objects are not equivalent
-    if (aProps.length != bProps.length) {
+    if (aProps.length !== bProps.length) {
       return false;
     }
 
