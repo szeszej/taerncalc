@@ -3,17 +3,15 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142836926-2"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142836926-3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-142836926-2');
-  </script> -->
+    gtag('config', 'UA-142836926-3');
+  </script>
+
 
   <!--  Meta  -->
   <title>Pride of Taern - kalkulator statystyk i umiejętności</title>
@@ -49,8 +47,7 @@
             <option value="voodoo">VooDoo</option>
           </select>
           <input type="number" min="1" max="140" placeholder="Poziom postaci" id="charLvl" required></input>
-          <input class="submit" type="submit" value="Zatwierdź"></input>
-          <!-- onclick="gtag('event', 'click', {'event_category': 'Form', 'event_label': 'Click Form'});" -->
+          <input class="submit" type="submit" value="Zatwierdź" onclick="gtag('event', 'click', {'event_category': 'Form', 'event_label': 'Click Form'});"></input>
         </form>
       </div>
       <div id="calc">

@@ -92,7 +92,6 @@ class Calculator extends React.Component {
     flatArrayOfProperties.push(["level", this.state.level], ["className", this.props.className])
     let stringsForUrl = flatArrayOfProperties.map(x => x[0] + "=" + x[1]);
     let urlString = stringsForUrl.join("&")
-    console.log(urlString);
   }
   render() {
     let inactive = {opacity: 0.45}
