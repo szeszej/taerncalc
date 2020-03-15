@@ -24,6 +24,13 @@ class SkillsCalculator extends React.Component {
         return updatedPoints;
       })
     }
+    let stateForExport = {
+        skillPts: this.state.skillPts,
+      }
+    for (let i = 1; i < 18; i++) {
+      stateForExport["skill" + i] = this.state.skillSet["skill" + i].level
+    }
+    this.props.getStateForExport(stateForExport, "skills")
   }
   reset() {
     this.setState(() => {

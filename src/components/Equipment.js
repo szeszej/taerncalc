@@ -58,6 +58,15 @@ class Equipment extends React.Component {
         this.setState({statsFromItems: equipmentStats})
         this.props.addStatsFromEquipment(equipmentStats)
       }
+      let stateForExport = {};
+      equipmentTypes.map(x => {
+        if (x === "special") {
+          this.state.equipment.special !== null ? stateForExport[x] = this.state.equipment.special : stateForExport[x] = null
+        } else {
+          this.state.equipment[x] !== null ? stateForExport[x] = this.state.equipment[x].name : stateForExport[x] = null
+        }
+      })
+      this.props.getStateForExport(stateForExport, "equipment");
   }
   isEquivalent(a, b) {
     // Create arrays of property names
@@ -359,7 +368,7 @@ class SpecialSlot extends React.Component {
         <div className={"itemsList"}>
           <div className={"title"}><p>Tutaj możesz stworzyć własny przedmiot</p></div>
           <form onSubmit={this.handleSubmit}>
-            <div className="property" onChange={(event) => this.handleChangeString(event, "name")} value={this.state.name}><p>Nazwa: </p><input className="textInput" type="text" maxlength={30} placeholder="Wpisz nazwę"></input></div>
+            <div className="property" onChange={(event) => this.handleChangeString(event, "name")} value={this.state.name}><p>Nazwa: </p><input className="textInput" type="text" maxLength={30} placeholder="Wpisz nazwę"></input></div>
             <div className="property" onChange={(event) => this.handleChangeString(event, "image")} value={this.state.image}><p>Obrazek: </p><input className="textInput" type="text" placeholder="Wklej adres obrazka"></input></div>
             {propertyInputs}
             <div className="submit"><input onSubmit={this.handleSubmit} type="submit" value="Zatwierdź"></input></div>

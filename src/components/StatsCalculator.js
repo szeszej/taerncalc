@@ -37,7 +37,7 @@ class StatsCalculator extends React.Component {
   componentDidMount() {
     this.setState({ statPts: this.calculateStatPoints(this.props.level) });
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.level !== this.props.level) {
       this.setState(() => {
         let updatedPoints = {};
@@ -45,6 +45,17 @@ class StatsCalculator extends React.Component {
         return updatedPoints;
       })
     }
+    let stateForExport = {
+        statPts: this.state.statPts,
+        strength: this.state.strength,
+        agility: this.state.agility,
+        power: this.state.power,
+        knowledge: this.state.knowledge,
+        hp: this.state.hp,
+        endurance: this.state.endurance,
+        mana: this.state.mana
+      }
+    this.props.getStateForExport(stateForExport, "stats")
   }
   calculateStatPoints(level) {
     return level * 4 + 1;
@@ -104,7 +115,7 @@ class StatsCalculator extends React.Component {
         </p>
 
       <div className="linesAndEq">
-      <Equipment items={this.props.items} addStatsFromEquipment={this.addStatsFromEquipment} class={this.props.class} level={this.props.level} strength={this.state.strength + this.state.statsFromItems.strength} agility={this.state.agility + this.state.statsFromItems.agility} power={this.state.power+this.state.statsFromItems.power} knowledge={this.state.knowledge + this.state.statsFromItems.knowledge}/>
+      <Equipment items={this.props.items} addStatsFromEquipment={this.addStatsFromEquipment} getStateForExport={this.props.getStateForExport} class={this.props.class} level={this.props.level} strength={this.state.strength + this.state.statsFromItems.strength} agility={this.state.agility + this.state.statsFromItems.agility} power={this.state.power+this.state.statsFromItems.power} knowledge={this.state.knowledge + this.state.statsFromItems.knowledge}/>
       <div className="statsAndRes">
       <div className="statLines">
         <StatLine
