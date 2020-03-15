@@ -129,7 +129,7 @@ class ItemTooltip extends React.Component {
     return (
       <div className="itemTooltip">
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>{this.props.item.name}</p>
-        {this.props.item.set ? <p className="itemSet">Zestaw: {this.props.item.set}</p> : null}
+        {this.props.item.set ? <p className="itemSet" style={{color: "#3DEF01"}}>Zestaw: {this.props.item.set}</p> : null}
         {this.props.name ? <hr /> : null}
         {this.props.item.class ? <p style={this.props.item.class !== this.props.class ? notMeetingRequirements : null} className="itemClass">Wym. klasa: {this.translateCharacterClass(this.props.item.class)}</p> : null}
         {this.props.item.reqLvl ? <p style={this.props.item.reqLvl > this.props.level ? notMeetingRequirements : null} className="itemReq">Wym. poziom: {this.props.item.reqLvl}</p> : null}
@@ -141,13 +141,13 @@ class ItemTooltip extends React.Component {
         {this.props.item.weaponType ? <p className="itemProperty">Typ broni: {this.props.item.weaponType}</p> : null}
         {this.props.item.damageType ? <p className="itemProperty">Typ obrażeń: {this.props.item.damageType}</p> : null}
         {this.props.item.damage ? <p className="damage">Obrażenia: {typeof this.props.item.damage === "string" ? this.props.item.damage + " (" + this.calculateDamage(this.props.item.damage, this.props.level) + ")" : this.props.item.damage}</p> : null}
-        {this.props.item.strength ? <p className="itemProperty">Siła: +{this.props.item.strength}</p> : null}
-        {this.props.item.agility ? <p className="itemProperty">Zręczność: +{this.props.item.agility}</p> : null}
+        {this.props.item.strength ? <p className="itemProperty" style={this.props.item.strength > 0 ? null : negativeStats} >Siła: +{this.props.item.strength}</p> : null}
+        {this.props.item.agility ? <p className="itemProperty" style={this.props.item.agility > 0 ? null : negativeStats} >Zręczność: +{this.props.item.agility}</p> : null}
         {this.props.item.power ? <p className="itemProperty" style={this.props.item.power > 0 ? null : negativeStats} >Moc: +{this.props.item.power}</p> : null}
         {this.props.item.knowledge ? <p className="itemProperty" style={this.props.item.knowledge > 0 ? null : negativeStats} >Wiedza: {this.props.item.knowledge > 0 ? "+" : null}{this.props.item.knowledge}</p> : null}
         {this.props.item.hp ? <p className="itemProperty" style={this.props.item.hp > 0 ? null : negativeStats} >Punkty życia: {this.props.item.hp > 0 ? "+" : null}{this.props.item.hp}</p> : null}
-        {this.props.item.endurance ? <p className="itemProperty">Kondycja: +{this.props.item.endurance}</p> : null}
-        {this.props.item.mana ? <p className="itemProperty">Mana: +{this.props.item.mana}</p> : null}
+        {this.props.item.endurance ? <p className="itemProperty" style={this.props.item.endurance > 0 ? null : negativeStats} >Kondycja: +{this.props.item.endurance}</p> : null}
+        {this.props.item.mana ? <p className="itemProperty" style={this.props.item.mana > 0 ? null : negativeStats} >Mana: +{this.props.item.mana}</p> : null}
         {this.props.item.cutRes ? <p className="itemProperty">Odp. na sieczne: +{this.props.item.cutRes}</p> : null}
         {this.props.item.bluntRes ? <p className="itemProperty">Odp. na obuchowe: +{this.props.item.bluntRes}</p> : null}
         {this.props.item.pierceRes ? <p className="itemProperty">Odp. na kłute: +{this.props.item.pierceRes}</p> : null}
