@@ -22,13 +22,13 @@ class Equipment extends React.Component {
       gloves: null,
       cape: null,
       weapon: null,
-      special: null,
       shield: null,
       pants: null,
       belt: null,
       ring1: null,
       ring2: null,
-      boots: null
+      boots: null,
+      special: null,
     },
       listToDisplay: "",
       statsFromItems: {}
@@ -82,11 +82,14 @@ class Equipment extends React.Component {
       let stateForExport = {};
       equipmentTypes.map(x => {
         if (x === "special") {
-          this.state.equipment.special !== null ? stateForExport[x] = this.state.equipment.special : stateForExport[x] = null
+          if (this.state.equipment.special !== null) {
+            stateForExport[x] = this.state.equipment.special
+          }
         } else {
           this.state.equipment[x] !== null ? stateForExport[x] = this.state.equipment[x].name : stateForExport[x] = null
         }
       })
+
       this.props.getStateForExport(stateForExport, "equipment");
   }
   isEquivalent(a, b) {

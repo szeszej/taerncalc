@@ -97,25 +97,31 @@ window.onload = function() {
     } else {
       initialEquipment.boots = null;
     }
-    // initialEquipment.special = null;
-    let special = {};
-    initialProperties.hasOwnProperty("specialname") ? special.name = initialProperties.specialname : special.name = "";
-    initialProperties.hasOwnProperty("specialimage") ? special.image = initialProperties.specialimage : special.name = "";
-    initialProperties.hasOwnProperty("specialstrength") ? special.strength = parseInt(initialProperties.specialstrength) : special.strength = 0;
-    initialProperties.hasOwnProperty("specialagility") ? special.agility = parseInt(initialProperties.specialagility) : special.agility = 0;
-    initialProperties.hasOwnProperty("specialknowledge") ? special.knowledge = parseInt(initialProperties.specialknowledge) : special.knowledge = 0;
-    initialProperties.hasOwnProperty("specialpower") ? special.power = parseInt(initialProperties.specialpower) : special.power = 0;
-    initialProperties.hasOwnProperty("specialhp") ? special.hp = parseInt(initialProperties.specialhp) : special.hp = 0;
-    initialProperties.hasOwnProperty("specialmana") ? special.mana = parseInt(initialProperties.specialmana) : special.mana = 0;
-    initialProperties.hasOwnProperty("specialcutRes") ? special.cutRes = parseInt(initialProperties.specialcutRes) : special.cutRes = 0;
-    initialProperties.hasOwnProperty("specialbluntRes") ? special.bluntRes = parseInt(initialProperties.specialbluntRes) : special.bluntRes = 0;
-    initialProperties.hasOwnProperty("specialpierceRes") ? special.strength = parseInt(initialProperties.specialpierceRes) : special.pierceRes = 0;
-    initialProperties.hasOwnProperty("specialdamage") ? special.damage = parseInt(initialProperties.specialdamage) : special.damage = 0;
-    initialProperties.hasOwnProperty("specialfireRes") ? special.fireRes = parseInt(initialProperties.specialfireRes) : special.fireRes = 0;
-    initialProperties.hasOwnProperty("specialfrostRes") ? special.frostRes = parseInt(initialProperties.specialfrostRes) : special.frostRes = 0;
-    initialProperties.hasOwnProperty("specialenergyRes") ? special.energyRes = parseInt(initialProperties.specialenergyRes) : special.energyRes = 0;
-    initialProperties.hasOwnProperty("specialcurseRes") ? special.curseRes = parseInt(initialProperties.specialcurseRes) : special.curseRes = 0;
-    initialEquipment.special = new Item (special);
+    console.log(initialProperties);
+    if (Object.keys(initialProperties).some(x => /^special+/.test(x))) {
+      let special = {};
+      initialProperties.hasOwnProperty("specialname") ? special.name = initialProperties.specialname : special.name = "";
+      initialProperties.hasOwnProperty("specialimage") ? special.image = initialProperties.specialimage : special.name = "";
+      special.type = "special";
+      initialProperties.hasOwnProperty("specialstrength") ? special.strength = parseInt(initialProperties.specialstrength) : special.strength = 0;
+      initialProperties.hasOwnProperty("specialagility") ? special.agility = parseInt(initialProperties.specialagility) : special.agility = 0;
+      initialProperties.hasOwnProperty("specialknowledge") ? special.knowledge = parseInt(initialProperties.specialknowledge) : special.knowledge = 0;
+      initialProperties.hasOwnProperty("specialpower") ? special.power = parseInt(initialProperties.specialpower) : special.power = 0;
+      initialProperties.hasOwnProperty("specialhp") ? special.hp = parseInt(initialProperties.specialhp) : special.hp = 0;
+      initialProperties.hasOwnProperty("specialmana") ? special.mana = parseInt(initialProperties.specialmana) : special.mana = 0;
+      initialProperties.hasOwnProperty("specialmana") ? special.endurance = parseInt(initialProperties.specialendurance) : special.endurance = 0;
+      initialProperties.hasOwnProperty("specialcutRes") ? special.cutRes = parseInt(initialProperties.specialcutRes) : special.cutRes = 0;
+      initialProperties.hasOwnProperty("specialbluntRes") ? special.bluntRes = parseInt(initialProperties.specialbluntRes) : special.bluntRes = 0;
+      initialProperties.hasOwnProperty("specialpierceRes") ? special.pierceRes = parseInt(initialProperties.specialpierceRes) : special.pierceRes = 0;
+      initialProperties.hasOwnProperty("specialdamage") ? special.damage = parseInt(initialProperties.specialdamage) : special.damage = 0;
+      initialProperties.hasOwnProperty("specialfireRes") ? special.fireRes = parseInt(initialProperties.specialfireRes) : special.fireRes = 0;
+      initialProperties.hasOwnProperty("specialfrostRes") ? special.frostRes = parseInt(initialProperties.specialfrostRes) : special.frostRes = 0;
+      initialProperties.hasOwnProperty("specialenergyRes") ? special.energyRes = parseInt(initialProperties.specialenergyRes) : special.energyRes = 0;
+      initialProperties.hasOwnProperty("specialcurseRes") ? special.curseRes = parseInt(initialProperties.specialcurseRes) : special.curseRes = 0;
+      initialEquipment.special = new Item (special);
+    } else {
+      initialEquipment.special = null;
+    }
     let skillSet = new SkillSet(initialProperties.className, taernDatabase.skills);
     for (let i = 1; i < 18; i++) {
       skillSet["skill" + i].level = parseInt(initialProperties["skill" + i])

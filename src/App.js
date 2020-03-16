@@ -77,14 +77,13 @@ class Calculator extends React.Component {
     let arrayOfProperties = Object.entries(propertiesForUrl);
     arrayOfProperties[0] = Object.entries(arrayOfProperties[0][1]);
     arrayOfProperties[1] = Object.entries(arrayOfProperties[1][1]);
-    if (arrayOfProperties[1][6]) {
-      if (arrayOfProperties[1][6][1] !== null) {
-        arrayOfProperties[1][6][1] = Object.entries(arrayOfProperties[1][6][1]);
-        let filteredSpecialProperties = arrayOfProperties[1][6][1].filter(x => x[1] != false && x[1] !== null && x[0] != "type" && x[0] != "rarity");
+    if (arrayOfProperties[1].length > 12 && arrayOfProperties[1][12][0] === "special") {
+      if (arrayOfProperties[1][12][1] !== null) {
+        arrayOfProperties[1][12][1] = Object.entries(arrayOfProperties[1][12][1]);
+        let filteredSpecialProperties = arrayOfProperties[1][12][1].filter(x => x[1] != false && x[1] !== null && x[0] != "type" && x[0] != "rarity");
         filteredSpecialProperties.forEach(x => x[0] = "special" + x[0]);
-        arrayOfProperties[1][6] = filteredSpecialProperties;
-        arrayOfProperties[1][6].map(x => arrayOfProperties[1].push(x));
-        arrayOfProperties[1].splice(6, 1);
+        arrayOfProperties[1][12] = filteredSpecialProperties;
+        arrayOfProperties[1][12].map(x => arrayOfProperties[1].push(x));
       }
     }
     arrayOfProperties[2] = Object.entries(arrayOfProperties[2][1]);
@@ -99,7 +98,6 @@ class Calculator extends React.Component {
   render() {
     let inactive = {opacity: 0.45}
     let active = {borderBottom: "10px solid #bd996f"}
-    this.createUrlForExport()
     return (
       <div className="calculators">
       <div className="changeLevel">
@@ -137,7 +135,9 @@ class Calculator extends React.Component {
       </div>
         <SkillsCalculator class={this.props.class} level={this.state.level} active={this.state.active} getStateForExport={this.getStateForExport} initialSkills={this.props.initialSkills} />
         <StatsCalculator  class={this.props.className} level={this.state.level} active={this.state.active} items={this.props.items} getStateForExport={this.getStateForExport} initialStats={this.props.initialStats} initialEquipment={this.props.initialEquipment}/>
+        <button onClick={(() => this.createUrlForExport())} >Eksportuj</button>
       </div>
+
     );
   }
 }
