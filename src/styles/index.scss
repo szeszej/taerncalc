@@ -110,6 +110,11 @@ body {
     width: 80%;
     margin: 0 auto;
     text-align: justify;
+    img {
+      display: inline;
+      max-height: 1.5em;
+      max-width: 1.5em;
+    }
   }
 
   .footer {
@@ -121,6 +126,10 @@ body {
       width: 50%;
       margin: 0 auto;
       text-align: center;
+
+      a {
+        color: inherit;
+      }
     }
   }
 
