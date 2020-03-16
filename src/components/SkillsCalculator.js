@@ -12,9 +12,15 @@ class SkillsCalculator extends React.Component {
     };
   }
   componentDidMount() {
-    this.setState({
-      skillPts: this.calculateSkillPoints(this.props.level),
-     });
+    if (this.props.initialSkills) {
+      this.setState({
+        skillPts: this.props.initialSkills.skillPts,
+       });
+    } else {
+      this.setState({
+        skillPts: this.calculateSkillPoints(this.props.level),
+       });
+    }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.level !== this.props.level) {

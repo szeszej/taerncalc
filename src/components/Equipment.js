@@ -34,6 +34,27 @@ class Equipment extends React.Component {
       statsFromItems: {}
     }
   }
+  componentDidMount() {
+    if (this.props.initialEquipment) {
+      this.setState({
+        equipment: {
+          armor: this.props.initialEquipment.armor,
+          helmet: this.props.initialEquipment.helmet,
+          neck: this.props.initialEquipment.neck,
+          gloves: this.props.initialEquipment.gloves,
+          cape: this.props.initialEquipment.cape,
+          weapon: this.props.initialEquipment.weapon,
+          shield: this.props.initialEquipment.shield,
+          pants: this.props.initialEquipment.pants,
+          belt: this.props.initialEquipment.belt,
+          ring1: this.props.initialEquipment.ring1,
+          ring2: this.props.initialEquipment.ring2,
+          boots: this.props.initialEquipment.boots,
+          special: this.props.initialEquipment.special
+        }
+      })
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
       let equipmentTypes = Object.keys(this.state.equipment);
       let equipment = equipmentTypes.map(x => this.state.equipment[x]);
@@ -158,7 +179,6 @@ class Equipment extends React.Component {
     }
     let equipment = Object.keys(this.state.equipment);
     let equipmentSlots = equipment.filter(x => x !== "special")
-
     let equipmentSlotComponents = equipmentSlots.map(x => <ItemSlot key={x} type={x} items={x === "ring1" || x === "ring2" ? this.props.items.filter(y => y.type === "ring") : this.props.items.filter(y => y.type === x)} inSlot={this.state.equipment[x]} class={this.props.class} level={this.props.level} strength={this.props.strength} agility={this.props.agility} power={this.props.power} knowledge={this.props.knowledge} listToDisplay={this.state.listToDisplay} equipItem={this.equipItem} unequipItem={this.unequipItem} showItemsList={this.showItemsList} hideItemsList={this.hideItemsList} isEquivalent={this.isEquivalent} />);
     return (
       <div className="equipment">

@@ -173,6 +173,7 @@
     grid-area: armor;
     background-image: url("/images/armor.svg");
     .itemsList {
+      margin-top: 4em;
       margin-left: 3em;
     }
   }
@@ -181,6 +182,7 @@
     grid-area: helmet;
     background-image: url("/images/helmet.svg");
     .itemsList {
+      margin-top: 4em;
       margin-left: 3em;
     }
   }
@@ -188,6 +190,9 @@
   .neck {
     grid-area: neck;
     background-image: url("/images/necklace.svg");
+    .itemsList {
+      margin-top: 4em;
+    }
   }
 
   .gloves {
@@ -195,6 +200,7 @@
     background-image: url("/images/gloves.svg");
     .itemsList {
       right: 0;
+      margin-top: 4em;
       margin-right: -5em;
       left: auto;
     }

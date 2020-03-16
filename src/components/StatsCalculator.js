@@ -35,7 +35,30 @@ class StatsCalculator extends React.Component {
     };
   }
   componentDidMount() {
-    this.setState({ statPts: this.calculateStatPoints(this.props.level) });
+    if (this.props.initialStats) {
+      this.setState({
+        statPts: 1000,
+        strength: 1000,
+        agility: 1000,
+        power: 1000,
+        knowledge: 1000
+      });
+      setTimeout(() => {
+        this.setState({
+          statPts: this.props.initialStats.statPts,
+          strength: this.props.initialStats.strength,
+          agility: this.props.initialStats.agility,
+          power: this.props.initialStats.power,
+          knowledge: this.props.initialStats.knowledge,
+          hp: this.props.initialStats.hp,
+          endurance: this.props.initialStats.endurance,
+          mana: this.props.initialStats.mana,
+        })}
+        , 1);
+    } else {
+      this.setState({ statPts: this.calculateStatPoints(this.props.level) });
+    }
+
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.level !== this.props.level) {
@@ -115,7 +138,7 @@ class StatsCalculator extends React.Component {
         </p>
 
       <div className="linesAndEq">
-      <Equipment items={this.props.items} addStatsFromEquipment={this.addStatsFromEquipment} getStateForExport={this.props.getStateForExport} class={this.props.class} level={this.props.level} strength={this.state.strength + this.state.statsFromItems.strength} agility={this.state.agility + this.state.statsFromItems.agility} power={this.state.power+this.state.statsFromItems.power} knowledge={this.state.knowledge + this.state.statsFromItems.knowledge}/>
+      <Equipment items={this.props.items} addStatsFromEquipment={this.addStatsFromEquipment} getStateForExport={this.props.getStateForExport} class={this.props.class} level={this.props.level} strength={this.state.strength + this.state.statsFromItems.strength} agility={this.state.agility + this.state.statsFromItems.agility} power={this.state.power+this.state.statsFromItems.power} knowledge={this.state.knowledge + this.state.statsFromItems.knowledge} initialEquipment={this.props.initialEquipment}/>
       <div className="statsAndRes">
       <div className="statLines">
         <StatLine

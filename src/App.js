@@ -91,7 +91,10 @@ class Calculator extends React.Component {
     let flatArrayOfProperties = arrayOfProperties.flat();
     flatArrayOfProperties.push(["level", this.state.level], ["className", this.props.className])
     let stringsForUrl = flatArrayOfProperties.map(x => x[0] + "=" + x[1]);
-    let urlString = stringsForUrl.join("&")
+    let urlString = stringsForUrl.join("&");
+    let url = "http://localhost:3000/?" + urlString;
+    let encodedUrl = encodeURI(url)
+    console.log(encodedUrl);
   }
   render() {
     let inactive = {opacity: 0.45}
@@ -132,8 +135,8 @@ class Calculator extends React.Component {
         <button style={this.state.active === "stats" ? active : inactive} onClick={() => this.changeTabs("stats")}>Statystyki i przedmioty</button>
         <button style={this.state.active === "skills" ? active : inactive} onClick={() => this.changeTabs("skills")}>Umiejętności</button>
       </div>
-        <SkillsCalculator class={this.props.class} level={this.state.level} active={this.state.active} getStateForExport={this.getStateForExport} />
-        <StatsCalculator  class={this.props.className} level={this.state.level} active={this.state.active} items={this.props.items} getStateForExport={this.getStateForExport} />
+        <SkillsCalculator class={this.props.class} level={this.state.level} active={this.state.active} getStateForExport={this.getStateForExport} initialSkills={this.props.initialSkills} />
+        <StatsCalculator  class={this.props.className} level={this.state.level} active={this.state.active} items={this.props.items} getStateForExport={this.getStateForExport} initialStats={this.props.initialStats} initialEquipment={this.props.initialEquipment}/>
       </div>
     );
   }
