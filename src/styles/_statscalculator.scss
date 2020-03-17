@@ -16,6 +16,7 @@
       justify-content: space-around;
       width: 100%;
       flex-wrap: wrap;
+
       .statsAndRes {
         font-size: 1.1em;
         width: 50%;
@@ -23,55 +24,58 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
-      .statLines, .resLines {
-        width: 49%;
-        // border: 2px solid #bd996f;
-        // border-radius: 5px;
-        box-sizing: border-box;
-        margin: 2px;
-        .statLine {
-          width: 100%;
-          margin: 0.5em;
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          // border: 2px solid $border-color;
-          // background-color: #d4d6a9;
-          padding: 0.5em;
-          padding-left: 0;
-          border-radius: 8px;
-          min-height: 4em;
 
-          img {
-            align-self: center;
-            width: 3em;
-            height: 3em;
-          }
+        .resLines,
+        .statLines {
+          width: 49%;
+          // border: 2px solid #bd996f;
+          // border-radius: 5px;
+          box-sizing: border-box;
+          margin: 2px;
 
-          .statNameButtons {
-            width: 80%;
+          .statLine {
+            width: 100%;
+            margin: 0.5em;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            // border: 2px solid $border-color;
+            // background-color: #d4d6a9;
+            padding: 0.5em 0.5em 0.5em 0;
+            border-radius: 8px;
+            min-height: 4em;
 
-            .statName {
-              text-align: center;
+            img {
+              align-self: center;
+              width: 3em;
+              height: 3em;
             }
 
-            .statButtons {
-              text-align: center;
+            .statNameButtons {
+              width: 80%;
+
+              .statName {
+                text-align: center;
+              }
+
+              .statButtons {
+                text-align: center;
+              }
             }
           }
         }
       }
-
-    }
-
     }
     @media only screen and (max-width: 1340px) {
       .linesAndEq {
         flex-direction: column;
+
         .statsAndRes {
           width: 80%;
           justify-content: space-around;
-          .statLines, .resLines {
+
+          .resLines,
+          .statLines {
             width: 35%;
           }
         }
@@ -79,21 +83,21 @@
     }
   }
 }
-
 @media only screen and (max-width: 1070px) {
-  .statsCalculator .stats .linesAndEq .statsAndRes .statLines, .statsCalculator .stats .linesAndEq .statsAndRes .resLines {
+  .statsCalculator .stats .linesAndEq .statsAndRes .resLines,
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines {
     width: 45%;
   }
 }
-
 @media only screen and (max-width: 850px) {
-  .statsCalculator .stats .linesAndEq .statsAndRes .statLines, .statsCalculator .stats .linesAndEq .statsAndRes .resLines {
+  .statsCalculator .stats .linesAndEq .statsAndRes .resLines,
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines {
     width: 49%;
   }
 }
-
 @media only screen and (max-width: 570px) {
-  .statsCalculator .stats .linesAndEq .statsAndRes .statLines, .statsCalculator .stats .linesAndEq .statsAndRes .resLines {
+  .statsCalculator .stats .linesAndEq .statsAndRes .resLines,
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines {
     width: 70%;
   }
 }

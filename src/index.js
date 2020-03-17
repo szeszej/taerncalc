@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/index.scss';
-import {Calculator} from './App.js';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles/index.scss";
+import { Calculator } from "./App.js";
+import * as serviceWorker from "./serviceWorker";
 
 const calculator = document.getElementById("calc");
 
@@ -19,7 +19,12 @@ function showCalc(charClass, charLvl, database) {
   ReactDOM.unmountComponentAtNode(calculator);
   let skillSet = new SkillSet(charClass, database.skills);
   ReactDOM.render(
-    <Calculator level={parseInt(charLvl)} class={skillSet} className={charClass} items={database.items}/>,
+    <Calculator
+      level={parseInt(charLvl)}
+      class={skillSet}
+      className={charClass}
+      items={database.items}
+    />,
     calculator
   );
 }
@@ -38,852 +43,981 @@ window.onload = function() {
     initialStats.mana = parseInt(initialProperties.mana);
     let initialEquipment = {};
     if (initialProperties.armor !== "null") {
-      initialEquipment.armor = taernDatabase.items.filter(x => x.name === initialProperties.armor)[0];
+      initialEquipment.armor = taernDatabase.items.filter(
+        x => x.name === initialProperties.armor
+      )[0];
     } else {
       initialEquipment.armor = null;
     }
     if (initialProperties.helmet !== "null") {
-      initialEquipment.helmet = taernDatabase.items.filter(x => x.name === initialProperties.helmet)[0];
+      initialEquipment.helmet = taernDatabase.items.filter(
+        x => x.name === initialProperties.helmet
+      )[0];
     } else {
       initialEquipment.helmet = null;
     }
     if (initialProperties.neck !== "null") {
-      initialEquipment.neck = taernDatabase.items.filter(x => x.name === initialProperties.neck)[0];
+      initialEquipment.neck = taernDatabase.items.filter(
+        x => x.name === initialProperties.neck
+      )[0];
     } else {
       initialEquipment.neck = null;
     }
     if (initialProperties.gloves !== "null") {
-      initialEquipment.gloves = taernDatabase.items.filter(x => x.name === initialProperties.gloves)[0];
+      initialEquipment.gloves = taernDatabase.items.filter(
+        x => x.name === initialProperties.gloves
+      )[0];
     } else {
       initialEquipment.gloves = null;
     }
     if (initialProperties.cape !== "null") {
-      initialEquipment.cape = taernDatabase.items.filter(x => x.name === initialProperties.cape)[0];
+      initialEquipment.cape = taernDatabase.items.filter(
+        x => x.name === initialProperties.cape
+      )[0];
     } else {
       initialEquipment.cape = null;
     }
     if (initialProperties.weapon !== "null") {
-      initialEquipment.weapon = taernDatabase.items.filter(x => x.name === initialProperties.weapon)[0];
+      initialEquipment.weapon = taernDatabase.items.filter(
+        x => x.name === initialProperties.weapon
+      )[0];
     } else {
       initialEquipment.weapon = null;
     }
     if (initialProperties.shield !== "null") {
-      initialEquipment.shield = taernDatabase.items.filter(x => x.name === initialProperties.shield)[0];
+      initialEquipment.shield = taernDatabase.items.filter(
+        x => x.name === initialProperties.shield
+      )[0];
     } else {
       initialEquipment.shield = null;
     }
     if (initialProperties.pants !== "null") {
-      initialEquipment.pants = taernDatabase.items.filter(x => x.name === initialProperties.pants)[0];
+      initialEquipment.pants = taernDatabase.items.filter(
+        x => x.name === initialProperties.pants
+      )[0];
     } else {
       initialEquipment.pants = null;
     }
     if (initialProperties.belt !== "null") {
-      initialEquipment.belt = taernDatabase.items.filter(x => x.name === initialProperties.belt)[0];
+      initialEquipment.belt = taernDatabase.items.filter(
+        x => x.name === initialProperties.belt
+      )[0];
     } else {
       initialEquipment.belt = null;
     }
     if (initialProperties.ring1 !== "null") {
-      initialEquipment.ring1 = taernDatabase.items.filter(x => x.name === initialProperties.ring1)[0];
+      initialEquipment.ring1 = taernDatabase.items.filter(
+        x => x.name === initialProperties.ring1
+      )[0];
     } else {
       initialEquipment.ring1 = null;
     }
     if (initialProperties.ring2 !== "null") {
-      initialEquipment.ring2 = taernDatabase.items.filter(x => x.name === initialProperties.ring2)[0];
+      initialEquipment.ring2 = taernDatabase.items.filter(
+        x => x.name === initialProperties.ring2
+      )[0];
     } else {
       initialEquipment.ring2 = null;
     }
     if (initialProperties.boots !== "null") {
-      initialEquipment.boots = taernDatabase.items.filter(x => x.name === initialProperties.boots)[0];
+      initialEquipment.boots = taernDatabase.items.filter(
+        x => x.name === initialProperties.boots
+      )[0];
     } else {
       initialEquipment.boots = null;
     }
-    console.log(initialProperties);
     if (Object.keys(initialProperties).some(x => /^special+/.test(x))) {
+      console.log(initialProperties);
       let special = {};
-      initialProperties.hasOwnProperty("specialname") ? special.name = initialProperties.specialname : special.name = "";
-      initialProperties.hasOwnProperty("specialimage") ? special.image = initialProperties.specialimage : special.name = "";
+      initialProperties.hasOwnProperty("specialname")
+        ? (special.name = initialProperties.specialname)
+        : (special.name = "");
+      initialProperties.hasOwnProperty("specialimage")
+        ? (special.image = initialProperties.specialimage)
+        : (special.image = "");
       special.type = "special";
-      initialProperties.hasOwnProperty("specialstrength") ? special.strength = parseInt(initialProperties.specialstrength) : special.strength = 0;
-      initialProperties.hasOwnProperty("specialagility") ? special.agility = parseInt(initialProperties.specialagility) : special.agility = 0;
-      initialProperties.hasOwnProperty("specialknowledge") ? special.knowledge = parseInt(initialProperties.specialknowledge) : special.knowledge = 0;
-      initialProperties.hasOwnProperty("specialpower") ? special.power = parseInt(initialProperties.specialpower) : special.power = 0;
-      initialProperties.hasOwnProperty("specialhp") ? special.hp = parseInt(initialProperties.specialhp) : special.hp = 0;
-      initialProperties.hasOwnProperty("specialmana") ? special.mana = parseInt(initialProperties.specialmana) : special.mana = 0;
-      initialProperties.hasOwnProperty("specialmana") ? special.endurance = parseInt(initialProperties.specialendurance) : special.endurance = 0;
-      initialProperties.hasOwnProperty("specialcutRes") ? special.cutRes = parseInt(initialProperties.specialcutRes) : special.cutRes = 0;
-      initialProperties.hasOwnProperty("specialbluntRes") ? special.bluntRes = parseInt(initialProperties.specialbluntRes) : special.bluntRes = 0;
-      initialProperties.hasOwnProperty("specialpierceRes") ? special.pierceRes = parseInt(initialProperties.specialpierceRes) : special.pierceRes = 0;
-      initialProperties.hasOwnProperty("specialdamage") ? special.damage = parseInt(initialProperties.specialdamage) : special.damage = 0;
-      initialProperties.hasOwnProperty("specialfireRes") ? special.fireRes = parseInt(initialProperties.specialfireRes) : special.fireRes = 0;
-      initialProperties.hasOwnProperty("specialfrostRes") ? special.frostRes = parseInt(initialProperties.specialfrostRes) : special.frostRes = 0;
-      initialProperties.hasOwnProperty("specialenergyRes") ? special.energyRes = parseInt(initialProperties.specialenergyRes) : special.energyRes = 0;
-      initialProperties.hasOwnProperty("specialcurseRes") ? special.curseRes = parseInt(initialProperties.specialcurseRes) : special.curseRes = 0;
-      initialEquipment.special = new Item (special);
+      initialProperties.hasOwnProperty("specialstrength")
+        ? (special.strength = parseInt(initialProperties.specialstrength))
+        : (special.strength = 0);
+      initialProperties.hasOwnProperty("specialagility")
+        ? (special.agility = parseInt(initialProperties.specialagility))
+        : (special.agility = 0);
+      initialProperties.hasOwnProperty("specialknowledge")
+        ? (special.knowledge = parseInt(initialProperties.specialknowledge))
+        : (special.knowledge = 0);
+      initialProperties.hasOwnProperty("specialpower")
+        ? (special.power = parseInt(initialProperties.specialpower))
+        : (special.power = 0);
+      initialProperties.hasOwnProperty("specialhp")
+        ? (special.hp = parseInt(initialProperties.specialhp))
+        : (special.hp = 0);
+      initialProperties.hasOwnProperty("specialmana")
+        ? (special.mana = parseInt(initialProperties.specialmana))
+        : (special.mana = 0);
+      initialProperties.hasOwnProperty("specialmana")
+        ? (special.endurance = parseInt(initialProperties.specialendurance))
+        : (special.endurance = 0);
+      initialProperties.hasOwnProperty("specialcutRes")
+        ? (special.cutRes = parseInt(initialProperties.specialcutRes))
+        : (special.cutRes = 0);
+      initialProperties.hasOwnProperty("specialbluntRes")
+        ? (special.bluntRes = parseInt(initialProperties.specialbluntRes))
+        : (special.bluntRes = 0);
+      initialProperties.hasOwnProperty("specialpierceRes")
+        ? (special.pierceRes = parseInt(initialProperties.specialpierceRes))
+        : (special.pierceRes = 0);
+      initialProperties.hasOwnProperty("specialdamage")
+        ? (special.damage = parseInt(initialProperties.specialdamage))
+        : (special.damage = 0);
+      initialProperties.hasOwnProperty("specialfireRes")
+        ? (special.fireRes = parseInt(initialProperties.specialfireRes))
+        : (special.fireRes = 0);
+      initialProperties.hasOwnProperty("specialfrostRes")
+        ? (special.frostRes = parseInt(initialProperties.specialfrostRes))
+        : (special.frostRes = 0);
+      initialProperties.hasOwnProperty("specialenergyRes")
+        ? (special.energyRes = parseInt(initialProperties.specialenergyRes))
+        : (special.energyRes = 0);
+      initialProperties.hasOwnProperty("specialcurseRes")
+        ? (special.curseRes = parseInt(initialProperties.specialcurseRes))
+        : (special.curseRes = 0);
+      initialEquipment.special = new Item(special);
     } else {
       initialEquipment.special = null;
     }
-    let skillSet = new SkillSet(initialProperties.className, taernDatabase.skills);
+    let skillSet = new SkillSet(
+      initialProperties.className,
+      taernDatabase.skills
+    );
     for (let i = 1; i < 18; i++) {
-      skillSet["skill" + i].level = parseInt(initialProperties["skill" + i])
-    };
+      skillSet["skill" + i].level = parseInt(initialProperties["skill" + i]);
+    }
     let initialSkills = {};
     initialSkills.skillPts = parseInt(initialProperties.skillPts);
     ReactDOM.render(
-      <Calculator level={initialProperties.level} class={skillSet} className={initialProperties.className} items={taernDatabase.items} initialStats={initialStats} initialEquipment={initialEquipment} initialSkills={initialSkills} />,
+      <Calculator
+        level={initialProperties.level}
+        class={skillSet}
+        className={initialProperties.className}
+        items={taernDatabase.items}
+        initialStats={initialStats}
+        initialEquipment={initialEquipment}
+        initialSkills={initialSkills}
+      />,
       calculator
     );
   }
-}
+};
 
 function getUrlVars() {
-    let vars = {};
-    let decodedUrl = decodeURI(window.location.href)
-    let parts = decodedUrl.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+  let vars = {};
+  let decodedUrl = decodeURI(window.location.href);
+  let parts = decodedUrl.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
+    m,
+    key,
+    value
+  ) {
+    vars[key] = value;
+  });
+  return vars;
 }
+
 
 const skillDatabase = {
   knight: {
     skill1: {
       name: "Szybkie Cięcie",
-      description: (
-        <div>
-          <p>
-            Podstawa rycerskiego rzemiosła. Cios ćwiczony przez Rycerzy na
-            każdym dworze Taernu. Celny i błyskawiczny atak bronią, zaskakujący
-            przeciwnika. Silniejszy i celniejszy niż podstawowy Cios bronią.
-          </p>
-          <p>Dostępne od 2 poziomu doświadczenia</p>
-          <p>OBR: 0.7 * Siła + 0.3 * Zręczność + broń</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Podstawa rycerskiego rzemiosła.Cios ćwiczony przez Rycerzy na każdym dworze Taernu.Celny i błyskawiczny atak bronią, zaskakujący przeciwnika.Silniejszy i celniejszy niż podstawowy Cios bronią. <
+        /p> <
+        p > Dostępne od 2 poziomu doświadczenia < /p> <
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia</td>
-              <td>Szansa trafienia</td>
-              <td>Kondycja</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>110%</td>
-              <td>120%</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>120%</td>
-              <td>125%</td>
-              <td>14</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>130%</td>
-              <td>130%</td>
-              <td>16</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>140%</td>
-              <td>135%</td>
-              <td>18</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>150%</td>
-              <td>140%</td>
-              <td>19</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>160%</td>
-              <td>145%</td>
-              <td>21</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>170%</td>
-              <td>155%</td>
-              <td>23</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia < /td> <
+        td > Szansa trafienia < /td> <
+        td > Kondycja < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 110 % < /td> <
+        td > 120 % < /td> <
+        td > 12 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 120 % < /td> <
+        td > 125 % < /td> <
+        td > 14 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 130 % < /td> <
+        td > 130 % < /td> <
+        td > 16 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 140 % < /td> <
+        td > 135 % < /td> <
+        td > 18 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 150 % < /td> <
+        td > 140 % < /td> <
+        td > 19 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 160 % < /td> <
+        td > 145 % < /td> <
+        td > 21 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 170 % < /td> <
+        td > 155 % < /td> <
+        td > 23 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Szybkie_Cięcie.jpg"
     },
     skill2: {
       name: "Mierzony Cios",
-      description: (
-        <div>
-          <p>
-            Wieloletnie treningi sztuk walki i dbanie o kondycję fizyczną
-            sprawiły, że większość Rycerzy zaniedbała swoją wiedzę (nie mylić z
-            ich stroną duchową), przez co stali się bardziej podatni na uroki.
-            Opracowany przeciwko magom, czarownikom i łucznikom Mierzony cios
-            jest techniką mającą odwrócić tę tendencję. Skutecznie
-            przeprowadzony oszałamia ofiarę obniżając efektywność jej ataków
-            dystansowych i uroków. Dodatkowo podnosi obrażenia Potężnego
-            uderzenia o 15%.
-          </p>
-          <p>Dostępne od 5 poziomu doświadczenia</p>
-          <p>OBR: 0.7 * Siła + 0.3 * Zręczność + broń</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Wieloletnie treningi sztuk walki i dbanie o kondycję fizyczną sprawiły, że większość Rycerzy zaniedbała swoją wiedzę(nie mylić z ich stroną duchową), przez co stali się bardziej podatni na uroki.Opracowany przeciwko magom, czarownikom i łucznikom Mierzony cios jest techniką mającą odwrócić tę tendencję.Skutecznie przeprowadzony oszałamia ofiarę obniżając efektywność jej ataków dystansowych i uroków.Dodatkowo podnosi obrażenia Potężnego uderzenia o 15 % . <
+        /p> <
+        p > Dostępne od 5 poziomu doświadczenia < /p> <
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia</td>
-              <td>Szansa trafienia</td>
-              <td>Kondycja</td>
-              <td>Atak magiczny i dystansowy (szansa trafienia)</td>
-              <td>Czas</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>80%</td>
-              <td>100%</td>
-              <td>20</td>
-              <td>-25%</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>85%</td>
-              <td>103%</td>
-              <td>23</td>
-              <td>-28%</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>90%</td>
-              <td>107%</td>
-              <td>26</td>
-              <td>-31%</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>95%</td>
-              <td>110%</td>
-              <td>29</td>
-              <td>-34%</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>100%</td>
-              <td>112%</td>
-              <td>32</td>
-              <td>-37%</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>110%</td>
-              <td>115%</td>
-              <td>35</td>
-              <td>-41%</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>120%</td>
-              <td>118%</td>
-              <td>38</td>
-              <td>-45%</td>
-              <td>5</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia < /td> <
+        td > Szansa trafienia < /td> <
+        td > Kondycja < /td> <
+        td > Atak magiczny i dystansowy(szansa trafienia) < /td> <
+        td > Czas < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 80 % < /td> <
+        td > 100 % < /td> <
+        td > 20 < /td> <
+        td > -25 % < /td> <
+        td > 3 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 85 % < /td> <
+        td > 103 % < /td> <
+        td > 23 < /td> <
+        td > -28 % < /td> <
+        td > 3 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 90 % < /td> <
+        td > 107 % < /td> <
+        td > 26 < /td> <
+        td > -31 % < /td> <
+        td > 4 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 95 % < /td> <
+        td > 110 % < /td> <
+        td > 29 < /td> <
+        td > -34 % < /td> <
+        td > 4 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 100 % < /td> <
+        td > 112 % < /td> <
+        td > 32 < /td> <
+        td > -37 % < /td> <
+        td > 5 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 110 % < /td> <
+        td > 115 % < /td> <
+        td > 35 < /td> <
+        td > -41 % < /td> <
+        td > 5 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 120 % < /td> <
+        td > 118 % < /td> <
+        td > 38 < /td> <
+        td > -45 % < /td> <
+        td > 5 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Mierzony_Cios.jpg"
     },
     skill3: {
       name: "Blok Tarczą",
-      description: (
-        <div>
-          <p>
-            Tarcza to nie płot, za którym można się schować, tarczą trzeba umieć
-            się posługiwać. Do tego służy umiejętność Blok Tarczą. Dzięki
-            morderczemu treningowi Rycerz wie, kiedy i jak należy postawić blok,
-            aby udany atak nawet kilku przeciwników zadał minimalne obrażenia.
-            Każdy udany blok jest o 3% słabszy od poprzedniego i nie wpływa na
-            redukcję obrażeń od żywiołów zaklętą w broniach. Użyta równocześnie
-            Ochrona osłabia o kolejne 3% skuteczność bloku. Taka zasłona obniża
-            też szansę na trafienie przeciwnika w zwarciu o 22%.
-          </p>
-          <p>Dostępne od 8 poziomu doświadczenia</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Tarcza to nie płot, za którym można się schować, tarczą trzeba umieć się posługiwać.Do tego służy umiejętność Blok Tarczą.Dzięki morderczemu treningowi Rycerz wie, kiedy i jak należy postawić blok,
+        aby udany atak nawet kilku przeciwników zadał minimalne obrażenia.Każdy udany blok jest o 3 % słabszy od poprzedniego i nie wpływa na redukcję obrażeń od żywiołów zaklętą w broniach.Użyta równocześnie Ochrona osłabia o kolejne 3 % skuteczność bloku.Taka zasłona obniża też szansę na trafienie przeciwnika w zwarciu o 22 % . <
+        /p> <
+        p > Dostępne od 8 poziomu doświadczenia < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Ilość bloków</td>
-              <td>Skuteczność bloku</td>
-              <td>Kondycja</td>
-              <td>Trudność</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>2</td>
-              <td>45%</td>
-              <td>20</td>
-              <td>90</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>3</td>
-              <td>50%</td>
-              <td>23</td>
-              <td>85</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>3</td>
-              <td>55%</td>
-              <td>26</td>
-              <td>80</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>4</td>
-              <td>60%</td>
-              <td>29</td>
-              <td>75</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>4</td>
-              <td>65%</td>
-              <td>32</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>5</td>
-              <td>70%</td>
-              <td>35</td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>5</td>
-              <td>75%</td>
-              <td>38</td>
-              <td>60</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Ilość bloków < /td> <
+        td > Skuteczność bloku < /td> <
+        td > Kondycja < /td> <
+        td > Trudność < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 2 < /td> <
+        td > 45 % < /td> <
+        td > 20 < /td> <
+        td > 90 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 3 < /td> <
+        td > 50 % < /td> <
+        td > 23 < /td> <
+        td > 85 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 3 < /td> <
+        td > 55 % < /td> <
+        td > 26 < /td> <
+        td > 80 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 4 < /td> <
+        td > 60 % < /td> <
+        td > 29 < /td> <
+        td > 75 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 4 < /td> <
+        td > 65 % < /td> <
+        td > 32 < /td> <
+        td > 70 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 5 < /td> <
+        td > 70 % < /td> <
+        td > 35 < /td> <
+        td > 65 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 5 < /td> <
+        td > 75 % < /td> <
+        td > 38 < /td> <
+        td > 60 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Blok_Tarczą.jpg"
     },
     skill4: {
       name: "Trans",
-      description: (
-        <div>
-          <p>
-            Wieloletnie szkolenie Rycerza nie ograniczało się wyłącznie do
-            poprawiania jego warunków fizycznych i zdolności bojowych. Rycerstwo
-            to również stan ducha. Obowiązkowe medytacje i mistyczne praktyki
-            umożliwiły członkom rycerskiego stanu wchodzenie w Trans.
-            Nadnaturalne skupienie i niebywała koncentracja sprawiły, że Rycerz
-            w stopniu doskonałym panuje nad swoimi ruchami, dzięki czemu jego
-            trafienia są pewniejsze, a rany zadawane wrogom - głębsze.
-          </p>
-          <p>Dostępne od 12 poziomu doświadczenia</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Wieloletnie szkolenie Rycerza nie ograniczało się wyłącznie do
+          poprawiania jego warunków fizycznych i zdolności bojowych.Rycerstwo
+        to również stan ducha.Obowiązkowe medytacje i mistyczne praktyki umożliwiły członkom rycerskiego stanu wchodzenie w Trans.Nadnaturalne skupienie i niebywała koncentracja sprawiły, że Rycerz w stopniu doskonałym panuje nad swoimi ruchami, dzięki czemu jego trafienia są pewniejsze, a rany zadawane wrogom - głębsze. <
+        /p> <
+        p > Dostępne od 12 poziomu doświadczenia < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia fizyczne</td>
-              <td>Atak fizyczny (szansa trafienia)</td>
-              <td>Czas</td>
-              <td>Mana</td>
-              <td>Trudność</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>+15%</td>
-              <td>+20%</td>
-              <td>3</td>
-              <td>20</td>
-              <td>85</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>+16%</td>
-              <td>+23%</td>
-              <td>3</td>
-              <td>23</td>
-              <td>80</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>+17%</td>
-              <td>+26%</td>
-              <td>4</td>
-              <td>26</td>
-              <td>75</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>+18%</td>
-              <td>+29%</td>
-              <td>4</td>
-              <td>29</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>+19%</td>
-              <td>+32%</td>
-              <td>5</td>
-              <td>32</td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>+20%</td>
-              <td>+35%</td>
-              <td>5</td>
-              <td>35</td>
-              <td>60</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>+22%</td>
-              <td>+38%</td>
-              <td>5</td>
-              <td>38</td>
-              <td>55</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia fizyczne < /td> <
+        td > Atak fizyczny(szansa trafienia) < /td> <
+        td > Czas < /td> <
+        td > Mana < /td> <
+        td > Trudność < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > +15 % < /td> <
+        td > +20 % < /td> <
+        td > 3 < /td> <
+        td > 20 < /td> <
+        td > 85 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > +16 % < /td> <
+        td > +23 % < /td> <
+        td > 3 < /td> <
+        td > 23 < /td> <
+        td > 80 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > +17 % < /td> <
+        td > +26 % < /td> <
+        td > 4 < /td> <
+        td > 26 < /td> <
+        td > 75 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > +18 % < /td> <
+        td > +29 % < /td> <
+        td > 4 < /td> <
+        td > 29 < /td> <
+        td > 70 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > +19 % < /td> <
+        td > +32 % < /td> <
+        td > 5 < /td> <
+        td > 32 < /td> <
+        td > 65 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > +20 % < /td> <
+        td > +35 % < /td> <
+        td > 5 < /td> <
+        td > 35 < /td> <
+        td > 60 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > +22 % < /td> <
+        td > +38 % < /td> <
+        td > 5 < /td> <
+        td > 38 < /td> <
+        td > 55 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Trans.jpg"
     },
     skill5: {
       name: "Ochrona",
-      description: (
-        <div>
-          <p>
-            Rycerz to przede wszystkim przewodnik i obrońca. Etos, który
-            definiuje tę klasę społeczną, nakazuje mu wręcz rzucenie się na
-            ratunek, gdy zagrożone jest życie towarzysza. Umiejętność Ochrony
-            daje szansę, że ataki przeciwników wymierzone w bronioną przez
-            rycerza postać zostaną przekierowane na rycerza. Działa na ataki
-            wręcz oraz dystansowe, z wyłączeniem ataków obszarowych. Użyta
-            ochrona osłabia o 3% skuteczność Bloku Tarczą.
-          </p>
-          <p>Dostępne od 15 poziomu doświadczenia</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Rycerz to przede wszystkim przewodnik i obrońca.Etos, który definiuje tę klasę społeczną, nakazuje mu wręcz rzucenie się na ratunek, gdy zagrożone jest życie towarzysza.Umiejętność Ochrony daje szansę, że ataki przeciwników wymierzone w bronioną przez rycerza postać zostaną przekierowane na rycerza.Działa na ataki wręcz oraz dystansowe, z wyłączeniem ataków obszarowych.Użyta ochrona osłabia o 3 % skuteczność Bloku Tarczą. <
+        /p> <
+        p > Dostępne od 15 poziomu doświadczenia < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Skuteczność Ochrony</td>
-              <td>Kondycja</td>
-              <td>Trudność</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>70%</td>
-              <td>40</td>
-              <td>85</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>74%</td>
-              <td>46</td>
-              <td>80</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>78%</td>
-              <td>52</td>
-              <td>75</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>82%</td>
-              <td>58</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>86%</td>
-              <td>64</td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>90%</td>
-              <td>70</td>
-              <td>60</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>95%</td>
-              <td>76</td>
-              <td>55</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Skuteczność Ochrony < /td> <
+        td > Kondycja < /td> <
+        td > Trudność < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 70 % < /td> <
+        td > 40 < /td> <
+        td > 85 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 74 % < /td> <
+        td > 46 < /td> <
+        td > 80 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 78 % < /td> <
+        td > 52 < /td> <
+        td > 75 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 82 % < /td> <
+        td > 58 < /td> <
+        td > 70 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 86 % < /td> <
+        td > 64 < /td> <
+        td > 65 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 90 % < /td> <
+        td > 70 < /td> <
+        td > 60 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 95 % < /td> <
+        td > 76 < /td> <
+        td > 55 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Ochrona.jpg"
     },
     skill6: {
       name: "Potężne Uderzenie",
-      description: (
-        <div>
-          <p>
-            Nawet tak opanowany i skoncentrowany Taernijczyk jak Rycerz czasami
-            wpada w furię. Poskramiając zło i niesprawiedliwość nie zawsze
-            zachowuje właściwe proporcje i czasami po prostu pragnie pierdolnąć
-            najmocniej jak potrafi. Do tego właśnie służy Potężne uderzenie.
-            Bardzo energochłonny atak zadaje ogromną ilość ran i dziesiątkuję
-            przeciwników. Zawczasu oszołomione postacie otrzymują znacznie
-            więcej obrażeń.
-          </p>
-          <p>Dostępne od 18 poziomu doświadczenia</p>
-          <p>OBR: 0.7 * Siła + 0.3 * Zręczność + broń</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Nawet tak opanowany i skoncentrowany Taernijczyk jak Rycerz czasami wpada w furię.Poskramiając zło i niesprawiedliwość nie zawsze zachowuje właściwe proporcje i czasami po prostu pragnie pierdolnąć najmocniej jak potrafi.Do tego właśnie służy Potężne uderzenie.Bardzo energochłonny atak zadaje ogromną ilość ran i dziesiątkuję przeciwników.Zawczasu oszołomione postacie otrzymują znacznie więcej obrażeń. <
+        /p> <
+        p > Dostępne od 18 poziomu doświadczenia < /p> <
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia</td>
-              <td>Szansa trafienia</td>
-              <td>Kondycja</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>160%</td>
-              <td>100%</td>
-              <td>20</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>175%</td>
-              <td>103%</td>
-              <td>23</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>190%</td>
-              <td>107%</td>
-              <td>26</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>205%</td>
-              <td>110%</td>
-              <td>29</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>220%</td>
-              <td>112%</td>
-              <td>32</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>235%</td>
-              <td>114%</td>
-              <td>35</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>255%</td>
-              <td>117%</td>
-              <td>38</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia < /td> <
+        td > Szansa trafienia < /td> <
+        td > Kondycja < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 160 % < /td> <
+        td > 100 % < /td> <
+        td > 20 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 175 % < /td> <
+        td > 103 % < /td> <
+        td > 23 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 190 % < /td> <
+        td > 107 % < /td> <
+        td > 26 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 205 % < /td> <
+        td > 110 % < /td> <
+        td > 29 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 220 % < /td> <
+        td > 112 % < /td> <
+        td > 32 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 235 % < /td> <
+        td > 114 % < /td> <
+        td > 35 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 255 % < /td> <
+        td > 117 % < /td> <
+        td > 38 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Potężne_Uderzenie.jpg"
     },
     skill7: {
       name: "Aura Czystości",
-      description: (
-        <div>
-          <p>
-            Rycerz to prawy i sprawiedliwy człowiek walczący z podłością i
-            niegodziwością. Wyrazem tego jest umiejętność wywołania wokół siebie
-            aury, która daje mu duchową odporność na uroki oraz zmniejsza jego
-            podatność na czary przeciwników. Aura może służyć tak Rycerzowi jak
-            i wybranej przez niego sojuszniczej postaci.
-          </p>
-          <p>Dostępne od 22 poziomu doświadczenia</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Rycerz to prawy i sprawiedliwy człowiek walczący z podłością i niegodziwością.Wyrazem tego jest umiejętność wywołania wokół siebie aury, która daje mu duchową odporność na uroki oraz zmniejsza jego podatność na czary przeciwników.Aura może służyć tak Rycerzowi jak i wybranej przez niego sojuszniczej postaci. <
+        /p> <
+        p > Dostępne od 22 poziomu doświadczenia < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrona przed urokami</td>
-              <td>Odporność na obrażenia od magii</td>
-              <td>Czas</td>
-              <td>Mana</td>
-              <td>Trudność</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>+23%</td>
-              <td>+15%</td>
-              <td>3</td>
-              <td>30</td>
-              <td>85</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>+27%</td>
-              <td>+18%</td>
-              <td>3</td>
-              <td>35</td>
-              <td>80</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>+30%</td>
-              <td>+21%</td>
-              <td>4</td>
-              <td>39</td>
-              <td>75</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>+34%</td>
-              <td>+24%</td>
-              <td>4</td>
-              <td>44</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>+37%</td>
-              <td>+27%</td>
-              <td>5</td>
-              <td>48</td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>+40%</td>
-              <td>+30%</td>
-              <td>5</td>
-              <td>53</td>
-              <td>60</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>+45%</td>
-              <td>+34%</td>
-              <td>5</td>
-              <td>57</td>
-              <td>55</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrona przed urokami < /td> <
+        td > Odporność na obrażenia od magii < /td> <
+        td > Czas < /td> <
+        td > Mana < /td> <
+        td > Trudność < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > +23 % < /td> <
+        td > +15 % < /td> <
+        td > 3 < /td> <
+        td > 30 < /td> <
+        td > 85 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > +27 % < /td> <
+        td > +18 % < /td> <
+        td > 3 < /td> <
+        td > 35 < /td> <
+        td > 80 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > +30 % < /td> <
+        td > +21 % < /td> <
+        td > 4 < /td> <
+        td > 39 < /td> <
+        td > 75 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > +34 % < /td> <
+        td > +24 % < /td> <
+        td > 4 < /td> <
+        td > 44 < /td> <
+        td > 70 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > +37 % < /td> <
+        td > +27 % < /td> <
+        td > 5 < /td> <
+        td > 48 < /td> <
+        td > 65 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > +40 % < /td> <
+        td > +30 % < /td> <
+        td > 5 < /td> <
+        td > 53 < /td> <
+        td > 60 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > +45 % < /td> <
+        td > +34 % < /td> <
+        td > 5 < /td> <
+        td > 57 < /td> <
+        td > 55 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Aura_Czystości.jpg"
     },
     skill8: {
       name: "Poświęcenie",
-      description: (
-        <div>
-          <p>
-            Ofiarność i chęć czynienia dobra jest priorytetem Rycerza, dlatego w
-            momencie zagrożenia wartości nadrzędnych Rycerz, rzuca na siebie
-            urok pozytywny, który obniża jego obronę, wzmacnia za to ataki.
-            Odsłaniając się i odnosząc większe obrażenia, dziesiątkuje wrogów
-            broniąc zasad, za które gotów jest oddać życie.
-          </p>
-          <p>Dostępne od 26 poziomu doświadczenia</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Ofiarność i chęć czynienia dobra jest priorytetem Rycerza, dlatego w momencie zagrożenia wartości nadrzędnych Rycerz, rzuca na siebie urok pozytywny, który obniża jego obronę, wzmacnia za to ataki.Odsłaniając się i odnosząc większe obrażenia, dziesiątkuje wrogów broniąc zasad, za które gotów jest oddać życie. <
+        /p> <
+        p > Dostępne od 26 poziomu doświadczenia < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia fizyczne</td>
-              <td>Obrona fizyczna</td>
-              <td>Czas</td>
-              <td>Mana</td>
-              <td>Trudność</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>+30%</td>
-              <td>-15%</td>
-              <td>5</td>
-              <td>30</td>
-              <td>90</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>+32%</td>
-              <td>-16%</td>
-              <td>5</td>
-              <td>35</td>
-              <td>85</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>+34%</td>
-              <td>-17%</td>
-              <td>6</td>
-              <td>39</td>
-              <td>80</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>+36%</td>
-              <td>-18%</td>
-              <td>6</td>
-              <td>44</td>
-              <td>75</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>+38%</td>
-              <td>-19%</td>
-              <td>7</td>
-              <td>48</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>+40%</td>
-              <td>-20%</td>
-              <td>7</td>
-              <td>52</td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>+43%</td>
-              <td>-20%</td>
-              <td>7</td>
-              <td>57</td>
-              <td>60</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia fizyczne < /td> <
+        td > Obrona fizyczna < /td> <
+        td > Czas < /td> <
+        td > Mana < /td> <
+        td > Trudność < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > +30 % < /td> <
+        td > -15 % < /td> <
+        td > 5 < /td> <
+        td > 30 < /td> <
+        td > 90 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > +32 % < /td> <
+        td > -16 % < /td> <
+        td > 5 < /td> <
+        td > 35 < /td> <
+        td > 85 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > +34 % < /td> <
+        td > -17 % < /td> <
+        td > 6 < /td> <
+        td > 39 < /td> <
+        td > 80 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > +36 % < /td> <
+        td > -18 % < /td> <
+        td > 6 < /td> <
+        td > 44 < /td> <
+        td > 75 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > +38 % < /td> <
+        td > -19 % < /td> <
+        td > 7 < /td> <
+        td > 48 < /td> <
+        td > 70 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > +40 % < /td> <
+        td > -20 % < /td> <
+        td > 7 < /td> <
+        td > 52 < /td> <
+        td > 65 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > +43 % < /td> <
+        td > -20 % < /td> <
+        td > 7 < /td> <
+        td > 57 < /td> <
+        td > 60 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Poświęcenie.jpg"
     },
     skill9: {
       name: "Siła Jedności",
-      description: (
-        <div>
-          <p>
-            Rycerz, wykorzystując swoje naturalne zdolności przywódcze i
-            charyzmę, skupia wokół siebie całą drużynę. Dzięki zapalczywym mowom
-            i okrzykom wznoszonym na polu walki, wśród walczących po swojej
-            stronie wywołuje poczucie jedności, które zwiększa ich zapał i siłę.
-            Postacie pod wpływem siły jedności zadają większe obrażenia oraz są
-            skuteczniejsze.
-          </p>
-          <p>Dostępne od 30 poziomu doświadczenia</p>
-          <p>Zwiększa obrażenia oraz celność całej drużyny</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Rycerz, wykorzystując swoje naturalne zdolności przywódcze i charyzmę, skupia wokół siebie całą drużynę.Dzięki zapalczywym mowom i okrzykom wznoszonym na polu walki, wśród walczących po swojej stronie wywołuje poczucie jedności, które zwiększa ich zapał i siłę.Postacie pod wpływem siły jedności zadają większe obrażenia oraz są skuteczniejsze. <
+        /p> <
+        p > Dostępne od 30 poziomu doświadczenia < /p> <
+        p > Zwiększa obrażenia oraz celność całej drużyny < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Zadawane obrażenia</td>
-              <td>Skuteczność ataków</td>
-              <td>Czas</td>
-              <td>Kondycja</td>
-              <td>Mana</td>
-              <td>Trudność</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>+15%</td>
-              <td>+15%</td>
-              <td>3</td>
-              <td>15</td>
-              <td>40</td>
-              <td>85</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>+17%</td>
-              <td>+17%</td>
-              <td>3</td>
-              <td>18</td>
-              <td>46</td>
-              <td>80</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>+19%</td>
-              <td>+19%</td>
-              <td>4</td>
-              <td>20</td>
-              <td>52</td>
-              <td>75</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>+21%</td>
-              <td>+21%</td>
-              <td>4</td>
-              <td>22</td>
-              <td>58</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>+23%</td>
-              <td>+23%</td>
-              <td>5</td>
-              <td>24</td>
-              <td>64</td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>+25%</td>
-              <td>+25%</td>
-              <td>5</td>
-              <td>27</td>
-              <td>70</td>
-              <td>60</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>+29%</td>
-              <td>+29%</td>
-              <td>5</td>
-              <td>28</td>
-              <td>76</td>
-              <td>55</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Zadawane obrażenia < /td> <
+        td > Skuteczność ataków < /td> <
+        td > Czas < /td> <
+        td > Kondycja < /td> <
+        td > Mana < /td> <
+        td > Trudność < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > +15 % < /td> <
+        td > +15 % < /td> <
+        td > 3 < /td> <
+        td > 15 < /td> <
+        td > 40 < /td> <
+        td > 85 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > +17 % < /td> <
+        td > +17 % < /td> <
+        td > 3 < /td> <
+        td > 18 < /td> <
+        td > 46 < /td> <
+        td > 80 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > +19 % < /td> <
+        td > +19 % < /td> <
+        td > 4 < /td> <
+        td > 20 < /td> <
+        td > 52 < /td> <
+        td > 75 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > +21 % < /td> <
+        td > +21 % < /td> <
+        td > 4 < /td> <
+        td > 22 < /td> <
+        td > 58 < /td> <
+        td > 70 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > +23 % < /td> <
+        td > +23 % < /td> <
+        td > 5 < /td> <
+        td > 24 < /td> <
+        td > 64 < /td> <
+        td > 65 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > +25 % < /td> <
+        td > +25 % < /td> <
+        td > 5 < /td> <
+        td > 27 < /td> <
+        td > 70 < /td> <
+        td > 60 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > +29 % < /td> <
+        td > +29 % < /td> <
+        td > 5 < /td> <
+        td > 28 < /td> <
+        td > 76 < /td> <
+        td > 55 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Siła_jedności.jpg"
     }
@@ -1128,71 +1262,80 @@ class SkillSet {
       requiredCharLevel: 1,
       requiredCharLevelInc: 1,
       initReqLvl: 1,
-      description: (
-        <div>
-          <p>
-            Podstawowy atak fizyczny. Ma większą szansę powodzenia niż atak za
-            pomocą oręża, lecz zadaje mniejszą liczbę obrażeń. Zastosowanie
-            kastetu zwiększa siłę ataku.
-          </p>
-          <p>Dostępne od 1 poziomu doświadczenia</p>
-          <p>Atak fizyczny</p>
-          <p>OBR: 0.7 * Siła + 0.5 * Zręczność + (70% lub broń)</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Podstawowy atak fizyczny.Ma większą szansę powodzenia niż atak za pomocą oręża, lecz zadaje mniejszą liczbę obrażeń.Zastosowanie kastetu zwiększa siłę ataku. <
+        /p> <
+        p > Dostępne od 1 poziomu doświadczenia < /p> <
+        p > Atak fizyczny < /p> <
+        p > OBR: 0.7 * Siła + 0.5 * Zręczność + (70 % lub broń) < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia</td>
-              <td>Szansa trafienia</td>
-              <td>Kondycja</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>80%</td>
-              <td>+20%</td>
-              <td>8</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>85%</td>
-              <td>+25%</td>
-              <td>9</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>90%</td>
-              <td>+30%</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>95%</td>
-              <td>+35%</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>100%</td>
-              <td>+40%</td>
-              <td>13</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>110%</td>
-              <td>+45%</td>
-              <td>14</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>120%</td>
-              <td>+50%</td>
-              <td>15</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia < /td> <
+        td > Szansa trafienia < /td> <
+        td > Kondycja < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 80 % < /td> <
+        td > +20 % < /td> <
+        td > 8 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 85 % < /td> <
+        td > +25 % < /td> <
+        td > 9 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 90 % < /td> <
+        td > +30 % < /td> <
+        td > 10 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 95 % < /td> <
+        td > +35 % < /td> <
+        td > 12 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 100 % < /td> <
+        td > +40 % < /td> <
+        td > 13 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 110 % < /td> <
+        td > +45 % < /td> <
+        td > 14 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 120 % < /td> <
+        td > +50 % < /td> <
+        td > 15 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Cios_pięścią.jpg"
     };
@@ -1204,71 +1347,81 @@ class SkillSet {
       requiredCharLevel: 1,
       requiredCharLevelInc: 1,
       initReqLvl: 1,
-      description: (
-        <div>
-          <p>
-            Podstawowy urok. Wywołuje lęk u przeciwnika, obniżając jego
-            skuteczność. Zmniejsza szansę powodzenia jego ataków fizycznych,
-            dystansowych oraz magicznych.
-          </p>
-          <p>Dostępne od 1 poziomu doświadczenia</p>
-          <p>Atak psychiczny</p>
-          <p>Efekt: Strach</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Podstawowy urok.Wywołuje lęk u przeciwnika, obniżając jego skuteczność.Zmniejsza szansę powodzenia jego ataków fizycznych,
+        dystansowych oraz magicznych. <
+        /p> <
+        p > Dostępne od 1 poziomu doświadczenia < /p> <
+        p > Atak psychiczny < /p> <
+        p > Efekt: Strach < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Czas trwania</td>
-              <td>Szansa trafienia wszelkich ataków</td>
-              <td>Mana</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>5</td>
-              <td>-15%</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>5</td>
-              <td>-20%</td>
-              <td>34</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>6</td>
-              <td>-25%</td>
-              <td>39</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>6</td>
-              <td>-30%</td>
-              <td>44</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>6</td>
-              <td>-35%</td>
-              <td>48</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>6</td>
-              <td>-40%</td>
-              <td>53</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>6</td>
-              <td>-45%</td>
-              <td>57</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Czas trwania < /td> <
+        td > Szansa trafienia wszelkich ataków < /td> <
+        td > Mana < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 5 < /td> <
+        td > -15 % < /td> <
+        td > 30 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 5 < /td> <
+        td > -20 % < /td> <
+        td > 34 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 6 < /td> <
+        td > -25 % < /td> <
+        td > 39 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 6 < /td> <
+        td > -30 % < /td> <
+        td > 44 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 6 < /td> <
+        td > -35 % < /td> <
+        td > 48 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 6 < /td> <
+        td > -40 % < /td> <
+        td > 53 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 6 < /td> <
+        td > -45 % < /td> <
+        td > 57 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Okrzyk_bojowy.jpg"
     };
@@ -1280,71 +1433,80 @@ class SkillSet {
       requiredCharLevel: 1,
       requiredCharLevelInc: 1,
       initReqLvl: 1,
-      description: (
-        <div>
-          <p>
-            Podstawowy atak dystansowy. Zadaje niewielką liczbę obrażeń, ale
-            może być wykonywany nawet gdy postać wyposażona jest w miecz i
-            tarczę. Nie wymaga żadnej broni dystansowej.
-          </p>
-          <p>Dostępne od 1 poziomu doświadczenia</p>
-          <p>Atak dystansowy</p>
-          <p>OBR: (0.7 * Siła + 0.3 * Zręczność) * 1.8</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Podstawowy atak dystansowy.Zadaje niewielką liczbę obrażeń, ale może być wykonywany nawet gdy postać wyposażona jest w miecz i tarczę.Nie wymaga żadnej broni dystansowej. <
+        /p> <
+        p > Dostępne od 1 poziomu doświadczenia < /p> <
+        p > Atak dystansowy < /p> <
+        p > OBR: (0.7 * Siła + 0.3 * Zręczność) * 1.8 < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia</td>
-              <td>Szansa trafienia</td>
-              <td>Kondycja</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>80%</td>
-              <td>+20%</td>
-              <td>8</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>85%</td>
-              <td>+25%</td>
-              <td>9</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>90%</td>
-              <td>+30%</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>95%</td>
-              <td>+35%</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>100%</td>
-              <td>+40%</td>
-              <td>13</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>110%</td>
-              <td>+45%</td>
-              <td>14</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>120%</td>
-              <td>+50%</td>
-              <td>15</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia < /td> <
+        td > Szansa trafienia < /td> <
+        td > Kondycja < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 80 % < /td> <
+        td > +20 % < /td> <
+        td > 8 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 85 % < /td> <
+        td > +25 % < /td> <
+        td > 9 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 90 % < /td> <
+        td > +30 % < /td> <
+        td > 10 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 95 % < /td> <
+        td > +35 % < /td> <
+        td > 12 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 100 % < /td> <
+        td > +40 % < /td> <
+        td > 13 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 110 % < /td> <
+        td > +45 % < /td> <
+        td > 14 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 120 % < /td> <
+        td > +50 % < /td> <
+        td > 15 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Rzut_kamieniem.jpg"
     };
@@ -1356,71 +1518,81 @@ class SkillSet {
       requiredCharLevel: 1,
       requiredCharLevelInc: 1,
       initReqLvl: 1,
-      description: (
-        <div>
-          <p>
-            Podstawowy atak dystansowy przy użyciu broni dalekiego zasięgu.
-            Korzystając z tej umiejętności możemy atakować za pomocą łuku.
-          </p>
-          <p>Dostępne od 1 poziomu doświadczenia</p>
-          <p>Atak dystansowy</p>
-          <p>OBR: 0.7 * Siła + 0.3 * Zręczność + broń</p>
-          <p>Wymagania: założona broń dystansowa</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Podstawowy atak dystansowy przy użyciu broni dalekiego zasięgu.Korzystając z tej umiejętności możemy atakować za pomocą łuku. <
+        /p> <
+        p > Dostępne od 1 poziomu doświadczenia < /p> <
+        p > Atak dystansowy < /p> <
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
+        p > Wymagania: założona broń dystansowa < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia</td>
-              <td>Szansa trafienia</td>
-              <td>Kondycja</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>100%</td>
-              <td>+0%</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>110%</td>
-              <td>+3%</td>
-              <td>11</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>120%</td>
-              <td>+7%</td>
-              <td>13</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>130%</td>
-              <td>+10%</td>
-              <td>14</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>140%</td>
-              <td>+12%</td>
-              <td>16</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>150%</td>
-              <td>+15%</td>
-              <td>17</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>160%</td>
-              <td>+20%</td>
-              <td>19</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia < /td> <
+        td > Szansa trafienia < /td> <
+        td > Kondycja < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 100 % < /td> <
+        td > +0 % < /td> <
+        td > 10 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 110 % < /td> <
+        td > +3 % < /td> <
+        td > 11 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 120 % < /td> <
+        td > +7 % < /td> <
+        td > 13 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 130 % < /td> <
+        td > +10 % < /td> <
+        td > 14 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 140 % < /td> <
+        td > +12 % < /td> <
+        td > 16 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 150 % < /td> <
+        td > +15 % < /td> <
+        td > 17 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 160 % < /td> <
+        td > +20 % < /td> <
+        td > 19 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Strzał.jpg"
     };
@@ -1432,72 +1604,81 @@ class SkillSet {
       requiredCharLevel: 1,
       requiredCharLevelInc: 1,
       initReqLvl: 1,
-      description: (
-        <div>
-          <p>
-            Podstawowy atak fizyczny wymagający użycia oręża. Umożliwia
-            wyprowadzanie ciosów za pomocą każdego rodzaju broni białej poza
-            kastetami.
-          </p>
-          <p>Dostępne od 1 poziomu doświadczenia</p>
-          <p>Atak fizyczny</p>
-          <p>OBR: 0.7 * Siła + 0.3 * Zręczność + broń</p>
-          <p>Wymagania: założona broń biała</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Podstawowy atak fizyczny wymagający użycia oręża.Umożliwia wyprowadzanie ciosów za pomocą każdego rodzaju broni białej poza kastetami. <
+        /p> <
+        p > Dostępne od 1 poziomu doświadczenia < /p> <
+        p > Atak fizyczny < /p> <
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
+        p > Wymagania: założona broń biała < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Obrażenia</td>
-              <td>Szansa trafienia</td>
-              <td>Kondycja</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>100%</td>
-              <td>+0%</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>110%</td>
-              <td>+3%</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>120%</td>
-              <td>+7%</td>
-              <td>13</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>130%</td>
-              <td>+10%</td>
-              <td>15</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>140%</td>
-              <td>+12%</td>
-              <td>16</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>150%</td>
-              <td>+15%</td>
-              <td>18</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>160%</td>
-              <td>+20%</td>
-              <td>19</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Obrażenia < /td> <
+        td > Szansa trafienia < /td> <
+        td > Kondycja < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 100 % < /td> <
+        td > +0 % < /td> <
+        td > 10 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 110 % < /td> <
+        td > +3 % < /td> <
+        td > 12 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 120 % < /td> <
+        td > +7 % < /td> <
+        td > 13 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 130 % < /td> <
+        td > +10 % < /td> <
+        td > 15 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 140 % < /td> <
+        td > +12 % < /td> <
+        td > 16 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 150 % < /td> <
+        td > +15 % < /td> <
+        td > 18 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 160 % < /td> <
+        td > +20 % < /td> <
+        td > 19 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Zwykły_atak.jpg"
     };
@@ -1509,19 +1690,18 @@ class SkillSet {
       requiredCharLevel: 1,
       requiredCharLevelInc: 1,
       initReqLvl: 1,
-      description: (
-        <div>
-          <p>
-            Umiejętność przydatna gdy nie ma już wątpliwości, że walka skończy
-            się porażką. Jeśli uda się z niej skorzystać postać wycofuje się do
-            ostatniego bezpiecznego miejsca, w którym była. Ucieczka jest pewną
-            formą pozytywnego uroku - każdy przydzielony jej PA zwiększa szansę
-            dania nóg za pas o 20%.
-          </p>
-          <p>Dostępne od 1 poziomu doświadczenia</p>
-          <p>Ostatnia czynność w walce</p>
-          <p>Nie można awansować na wyższy poziom</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Umiejętność przydatna gdy nie ma już wątpliwości, że walka skończy się porażką.Jeśli uda się z niej skorzystać postać wycofuje się do
+          ostatniego bezpiecznego miejsca, w którym była.Ucieczka jest pewną
+        formą pozytywnego uroku - każdy przydzielony jej PA zwiększa szansę dania nóg za pas o 20 % . <
+        /p> <
+        p > Dostępne od 1 poziomu doświadczenia < /p> <
+        p > Ostatnia czynność w walce < /p> <
+        p > Nie można awansować na wyższy poziom < /p> <
+        /div>
       ),
       image: "images/Ucieczka.jpg"
     };
@@ -1533,64 +1713,71 @@ class SkillSet {
       requiredCharLevel: 35,
       requiredCharLevelInc: 10,
       initReqLvl: 35,
-      description: (
-        <div>
-          <p>
-            Umiejętność wykształcona przez wojowników samotników. Przemierzając
-            rozległe krainy, udręczeni walką o przetrwanie i samotnością
-            wykształcili w sobie unikalny system porozumiewania się ze
-            zwierzakami. Dzięki niemu potrafią współpracować z więcej niż jednym
-            zwierzem w drużynie.
-          </p>
-          <p>Dostępne od 35 poziomu doświadczenia</p>
-          <p>Awansować można o jeden poziom co 10 lvl postaci</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Umiejętność wykształcona przez wojowników samotników.Przemierzając rozległe krainy, udręczeni walką o przetrwanie i samotnością wykształcili w sobie unikalny system porozumiewania się ze zwierzakami.Dzięki niemu potrafią współpracować z więcej niż jednym zwierzem w drużynie. <
+        /p> <
+        p > Dostępne od 35 poziomu doświadczenia < /p> <
+        p > Awansować można o jeden poziom co 10 lvl postaci < /p> <
+        /div>
       ),
-      table: (
-        <table>
-          <tbody>
-            <tr>
-              <td>Poziom Um</td>
-              <td>Suma Rang</td>
-              <td>Maksymalna ilość petów w drużynie</td>
-            </tr>
-            <tr>
-              <td>I</td>
-              <td>3</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>II</td>
-              <td>4</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>III</td>
-              <td>5</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>IV</td>
-              <td>6</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>V</td>
-              <td>8</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>VI</td>
-              <td>12</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>VII</td>
-              <td>19</td>
-              <td>3</td>
-            </tr>
-          </tbody>
-        </table>
+      table: ( <
+        table >
+        <
+        tbody >
+        <
+        tr >
+        <
+        td > Poziom Um < /td> <
+        td > Suma Rang < /td> <
+        td > Maksymalna ilość petów w drużynie < /td> <
+        /tr> <
+        tr >
+        <
+        td > I < /td> <
+        td > 3 < /td> <
+        td > 2 < /td> <
+        /tr> <
+        tr >
+        <
+        td > II < /td> <
+        td > 4 < /td> <
+        td > 2 < /td> <
+        /tr> <
+        tr >
+        <
+        td > III < /td> <
+        td > 5 < /td> <
+        td > 2 < /td> <
+        /tr> <
+        tr >
+        <
+        td > IV < /td> <
+        td > 6 < /td> <
+        td > 2 < /td> <
+        /tr> <
+        tr >
+        <
+        td > V < /td> <
+        td > 8 < /td> <
+        td > 2 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VI < /td> <
+        td > 12 < /td> <
+        td > 3 < /td> <
+        /tr> <
+        tr >
+        <
+        td > VII < /td> <
+        td > 19 < /td> <
+        td > 3 < /td> <
+        /tr> <
+        /tbody> <
+        /table>
       ),
       image: "images/Wataha.jpg"
     };
@@ -1602,20 +1789,16 @@ class SkillSet {
       initReqLvl: 1,
       requiredCharLevel: 1,
       requiredCharLevelInc: 1,
-      description: (
-        <div>
-          <p>
-            Lata doświadczeń w boju pozwoliły wypracować umiejętność wyrwania
-            się z uwięzi Korzeni. Dzięki medytacji i ćwiczeniom można
-            przekierować swoją energię i pozbyć się wszystkich efektów tej
-            potężnej umiejętności. Wyrwanie z korzenia wymaga tyle PA, na ile
-            rund są wrzucone Korzenie x 2. (np. Korzenie na 2 rundy, więc 4 PA).
-            Działa tylko na rzucającego.
-          </p>
-          <p>Dostępne od 1 poziomu doświadczenia</p>
-          <p>Pobiera 30 kondycji.</p>
-          <p>Nie można awansować na wyższy poziom</p>
-        </div>
+      description: ( <
+        div >
+        <
+        p >
+        Lata doświadczeń w boju pozwoliły wypracować umiejętność wyrwania się z uwięzi Korzeni.Dzięki medytacji i ćwiczeniom można przekierować swoją energię i pozbyć się wszystkich efektów tej potężnej umiejętności.Wyrwanie z korzenia wymaga tyle PA, na ile rund są wrzucone Korzenie x 2.(np.Korzenie na 2 rundy, więc 4 PA).Działa tylko na rzucającego. <
+        /p> <
+        p > Dostępne od 1 poziomu doświadczenia < /p> <
+        p > Pobiera 30 kondycji. < /p> <
+        p > Nie można awansować na wyższy poziom < /p> <
+        /div>
       ),
       image: "images/Rootbreaker.jpg"
     };
@@ -1681,7 +1864,7 @@ class Skill {
 }
 
 class Item {
-  constructor (item) {
+  constructor(item) {
     this.name = item.name;
     this.type = item.type;
     this.image = item.image;
@@ -1724,8 +1907,7 @@ class Item {
   }
 }
 
-const itemDatabase = [
-  {
+const itemDatabase = [{
     name: "Derengil",
     type: "weapon",
     image: "[www.taernopedia.pl][649]Derengil.png",
@@ -2344,709 +2526,709 @@ const itemDatabase = [
     pierceRes: 40
   },
   {
-  name: "Smuga",
-  type: "shield",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][736]Smuga.png",
-  reqLvl: 75,
-  reqStr: 50,
-  reqPow: 80,
-  power: 10,
-  knowledge: 15,
-  hp: 200,
-  mana: 50,
-  cutRes: 32,
-  bluntRes: 30,
-  pierceRes: 33
+    name: "Smuga",
+    type: "shield",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][736]Smuga.png",
+    reqLvl: 75,
+    reqStr: 50,
+    reqPow: 80,
+    power: 10,
+    knowledge: 15,
+    hp: 200,
+    mana: 50,
+    cutRes: 32,
+    bluntRes: 30,
+    pierceRes: 33
   },
   {
-  name: "Martumal",
-  type: "helmet",
-  image: "[www.taernopedia.pl][433]Martumal.png",
-  reqLvl: 20,
-  reqPow: 35,
-  reqKno: 20,
-  power: 8,
-  knowledge: 7,
-  mana: 40,
-  cutRes: 16,
-  bluntRes: 16,
-  pierceRes: 20,
-  curseRes: 20
+    name: "Martumal",
+    type: "helmet",
+    image: "[www.taernopedia.pl][433]Martumal.png",
+    reqLvl: 20,
+    reqPow: 35,
+    reqKno: 20,
+    power: 8,
+    knowledge: 7,
+    mana: 40,
+    cutRes: 16,
+    bluntRes: 16,
+    pierceRes: 20,
+    curseRes: 20
   },
   {
-  name: "Grzebień",
-  type: "helmet",
-  image: "[www.taernopedia.pl][450]GrzebieC584.png",
-  reqLvl: 28,
-  reqStr: 30,
-  strength: 4,
-  agility: 4,
-  hp: 30,
-  endurance: 70,
-  cutRes: 23,
-  bluntRes: 24,
-  pierceRes: 27,
-  frostRes: 10,
-  curseRes: 10
+    name: "Grzebień",
+    type: "helmet",
+    image: "[www.taernopedia.pl][450]GrzebieC584.png",
+    reqLvl: 28,
+    reqStr: 30,
+    strength: 4,
+    agility: 4,
+    hp: 30,
+    endurance: 70,
+    cutRes: 23,
+    bluntRes: 24,
+    pierceRes: 27,
+    frostRes: 10,
+    curseRes: 10
   },
   {
-  name: "Ishelm",
-  type: "helmet",
-  image: "[www.taernopedia.pl][306]Ishelm.png",
-  reqLvl: 34,
-  strength: 6,
-  agility: 10,
-  hp: 80,
-  cutRes: 29,
-  bluntRes: 32,
-  pierceRes: 31
+    name: "Ishelm",
+    type: "helmet",
+    image: "[www.taernopedia.pl][306]Ishelm.png",
+    reqLvl: 34,
+    strength: 6,
+    agility: 10,
+    hp: 80,
+    cutRes: 29,
+    bluntRes: 32,
+    pierceRes: 31
   },
   {
-  name: "Khalam",
-  type: "helmet",
-  image: "[www.taernopedia.pl][87]Khalam.png",
-  reqLvl: 28,
-  power: 8,
-  knowledge: 8,
-  mana: 60,
-  cutRes: 27,
-  bluntRes: 24,
-  pierceRes: 24,
-  curseRes: 20
+    name: "Khalam",
+    type: "helmet",
+    image: "[www.taernopedia.pl][87]Khalam.png",
+    reqLvl: 28,
+    power: 8,
+    knowledge: 8,
+    mana: 60,
+    cutRes: 27,
+    bluntRes: 24,
+    pierceRes: 24,
+    curseRes: 20
   },
   {
-  name: "Gathril",
-  type: "helmet",
-  image: "[www.taernopedia.pl][209]Gathril.png",
-  reqLvl: 55,
-  reqStr: 70,
-  hp: 190,
-  cutRes: 35,
-  bluntRes: 37,
-  pierceRes: 38,
-  fireRes: 30,
-  frostRes: 30,
-  energyRes: 30,
-  curseRes: 20
+    name: "Gathril",
+    type: "helmet",
+    image: "[www.taernopedia.pl][209]Gathril.png",
+    reqLvl: 55,
+    reqStr: 70,
+    hp: 190,
+    cutRes: 35,
+    bluntRes: 37,
+    pierceRes: 38,
+    fireRes: 30,
+    frostRes: 30,
+    energyRes: 30,
+    curseRes: 20
   },
   {
-  name: "Czacha",
-  type: "helmet",
-  image: "[www.taernopedia.pl][525]Czacha.png",
-  reqLvl: 57,
-  reqPow: 70,
-  power: 12,
-  knowledge: 12,
-  hp: 100,
-  cutRes: 30,
-  bluntRes: 30,
-  pierceRes: 30
+    name: "Czacha",
+    type: "helmet",
+    image: "[www.taernopedia.pl][525]Czacha.png",
+    reqLvl: 57,
+    reqPow: 70,
+    power: 12,
+    knowledge: 12,
+    hp: 100,
+    cutRes: 30,
+    bluntRes: 30,
+    pierceRes: 30
   },
   {
-  name: "Ghaitarog",
-  type: "helmet",
-  image: "[www.taernopedia.pl][401]Ghaitarog.png",
-  reqLvl: 60,
-  reqStr: 80,
-  strength: 7,
-  agility: 9,
-  hp: 100,
-  endurance: 100,
-  cutRes: 32,
-  bluntRes: 29,
-  pierceRes: 32
+    name: "Ghaitarog",
+    type: "helmet",
+    image: "[www.taernopedia.pl][401]Ghaitarog.png",
+    reqLvl: 60,
+    reqStr: 80,
+    strength: 7,
+    agility: 9,
+    hp: 100,
+    endurance: 100,
+    cutRes: 32,
+    bluntRes: 29,
+    pierceRes: 32
   },
   {
-  name: "Sigil",
-  type: "helmet",
-  image: "[www.taernopedia.pl][421]Sigil.png",
-  reqLvl: 75,
-  reqKno: 90,
-  power: 10,
-  knowledge: 10,
-  hp: 160,
-  mana: 50,
-  cutRes: 31,
-  bluntRes: 31,
-  pierceRes: 31,
-  energyRes: 25
+    name: "Sigil",
+    type: "helmet",
+    image: "[www.taernopedia.pl][421]Sigil.png",
+    reqLvl: 75,
+    reqKno: 90,
+    power: 10,
+    knowledge: 10,
+    hp: 160,
+    mana: 50,
+    cutRes: 31,
+    bluntRes: 31,
+    pierceRes: 31,
+    energyRes: 25
   },
   {
-  name: "Pysk",
-  type: "helmet",
-  image: "[www.taernopedia.pl][695]Pysk.png",
-  reqLvl: 90,
-  reqStr: 95,
-  strength: 11,
-  agility: 11,
-  hp: 180,
-  mana: 50,
-  endurance: 100,
-  cutRes: 31,
-  bluntRes: 31,
-  pierceRes: 31
+    name: "Pysk",
+    type: "helmet",
+    image: "[www.taernopedia.pl][695]Pysk.png",
+    reqLvl: 90,
+    reqStr: 95,
+    strength: 11,
+    agility: 11,
+    hp: 180,
+    mana: 50,
+    endurance: 100,
+    cutRes: 31,
+    bluntRes: 31,
+    pierceRes: 31
   },
   {
-  name: "Pamięć Morany",
-  type: "helmet",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][503]PamiC499C48720Morany.png",
-  reqLvl: 120,
-  reqStr: 115,
-  reqAgi: 120,
-  strength: 23,
-  agility: 33,
-  hp: 270,
-  mana: 20,
-  endurance: 100,
-  cutRes: 40,
-  bluntRes: 40,
-  pierceRes: 40,
-  curseRes: 15,
-  fireRes: 15,
-  energyRes: 15,
-  frostRes: 15,
-  otherProperties: ["Modyfikator obrażeń fizycznych: 7% (+1% co poziom)", "Obrona przeciw urokom: 3% (+2% na poziom)", "Odporność na zamrożenie: 10% (+2% co poziom)"]
+    name: "Pamięć Morany",
+    type: "helmet",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][503]PamiC499C48720Morany.png",
+    reqLvl: 120,
+    reqStr: 115,
+    reqAgi: 120,
+    strength: 23,
+    agility: 33,
+    hp: 270,
+    mana: 20,
+    endurance: 100,
+    cutRes: 40,
+    bluntRes: 40,
+    pierceRes: 40,
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15,
+    otherProperties: ["Modyfikator obrażeń fizycznych: 7% (+1% co poziom)", "Obrona przeciw urokom: 3% (+2% na poziom)", "Odporność na zamrożenie: 10% (+2% co poziom)"]
   },
   {
-  name: "Miłość Morany",
-  type: "helmet",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][434]MiC582oC59BC48720Morany.png",
-  reqLvl: 120,
-  reqPow: 115,
-  reqKno: 120,
-  power: 23,
-  knowledge: 28,
-  hp: 310,
-  mana: 130,
-  cutRes: 40,
-  bluntRes: 40,
-  pierceRes: 40,
-  curseRes: 15,
-  fireRes: 15,
-  energyRes: 15,
-  frostRes: 15,
-  otherProperties: ["Modyfikator obrażeń magicznych: 7% (+1% co poziom)", "Obrona wręcz: 3% (+2% na poziom)", "Odporność na zamrożenie: 10% (+2% co poziom)"]
+    name: "Miłość Morany",
+    type: "helmet",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][434]MiC582oC59BC48720Morany.png",
+    reqLvl: 120,
+    reqPow: 115,
+    reqKno: 120,
+    power: 23,
+    knowledge: 28,
+    hp: 310,
+    mana: 130,
+    cutRes: 40,
+    bluntRes: 40,
+    pierceRes: 40,
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15,
+    otherProperties: ["Modyfikator obrażeń magicznych: 7% (+1% co poziom)", "Obrona wręcz: 3% (+2% na poziom)", "Odporność na zamrożenie: 10% (+2% co poziom)"]
   },
   {
-  name: "Htagan",
-  type: "helmet",
-  image: "[www.taernopedia.pl][1]Htagan.png",
-  reqLvl: 100,
-  reqPow: 105,
-  power: 20,
-  knowledge: 15,
-  hp: 250,
-  mana: 50,
-  cutRes: 35,
-  bluntRes: 35,
-  pierceRes: 35,
-  curseRes: 10
+    name: "Htagan",
+    type: "helmet",
+    image: "[www.taernopedia.pl][1]Htagan.png",
+    reqLvl: 100,
+    reqPow: 105,
+    power: 20,
+    knowledge: 15,
+    hp: 250,
+    mana: 50,
+    cutRes: 35,
+    bluntRes: 35,
+    pierceRes: 35,
+    curseRes: 10
   },
   {
-  name: "Bartaur",
-  type: "armor",
-  image: "[www.taernopedia.pl][826]Bartaur.png",
-  reqLvl: 30,
-  reqStr: 40,
-  strength: 9,
-  agility: 8,
-  endurance: 50,
-  cutRes: 30,
-  bluntRes: 30,
-  pierceRes: 30
+    name: "Bartaur",
+    type: "armor",
+    image: "[www.taernopedia.pl][826]Bartaur.png",
+    reqLvl: 30,
+    reqStr: 40,
+    strength: 9,
+    agility: 8,
+    endurance: 50,
+    cutRes: 30,
+    bluntRes: 30,
+    pierceRes: 30
   },
   {
-  name: "Brunnle",
-  type: "armor",
-  image: "[www.taernopedia.pl][627]Brunnle.png",
-  reqLvl: 40,
-  reqStr: 40,
-  strength: 6,
-  agility: 6,
-  hp: 60,
-  endurance: 80,
-  cutRes: 29,
-  bluntRes: 31,
-  pierceRes: 29
+    name: "Brunnle",
+    type: "armor",
+    image: "[www.taernopedia.pl][627]Brunnle.png",
+    reqLvl: 40,
+    reqStr: 40,
+    strength: 6,
+    agility: 6,
+    hp: 60,
+    endurance: 80,
+    cutRes: 29,
+    bluntRes: 31,
+    pierceRes: 29
   },
   {
-  name: "Pancerz Komandorski",
-  type: "armor",
-  image: "[www.taernopedia.pl][251]Pancerz20Komandorski.png",
-  reqLvl: 45,
-  power: 8,
-  knowledge: 10,
-  hp: 60,
-  mana: 40,
-  cutRes: 25,
-  bluntRes: 27,
-  pierceRes: 25
+    name: "Pancerz Komandorski",
+    type: "armor",
+    image: "[www.taernopedia.pl][251]Pancerz20Komandorski.png",
+    reqLvl: 45,
+    power: 8,
+    knowledge: 10,
+    hp: 60,
+    mana: 40,
+    cutRes: 25,
+    bluntRes: 27,
+    pierceRes: 25
   },
   {
-  name: "Virthil II",
-  type: "armor",
-  image: "[www.taernopedia.pl][19]Virthil20II.png",
-  reqLvl: 55,
-  reqStr: 80,
-  agility: 10,
-  hp: 100,
-  endurance: 70,
-  cutRes: 35,
-  bluntRes: 37,
-  pierceRes: 36,
-  fireRes: 10,
-  curseRes: 10
+    name: "Virthil II",
+    type: "armor",
+    image: "[www.taernopedia.pl][19]Virthil20II.png",
+    reqLvl: 55,
+    reqStr: 80,
+    agility: 10,
+    hp: 100,
+    endurance: 70,
+    cutRes: 35,
+    bluntRes: 37,
+    pierceRes: 36,
+    fireRes: 10,
+    curseRes: 10
   },
   {
-  name: "Diabolo",
-  type: "armor",
-  image: "[www.taernopedia.pl][163]Diabolo.png",
-  reqLvl: 60,
-  reqPow: 70,
-  power: 19,
-  knowledge: -5,
-  hp: 150,
-  mana: 50,
-  cutRes: 25,
-  bluntRes: 28,
-  pierceRes: 30
+    name: "Diabolo",
+    type: "armor",
+    image: "[www.taernopedia.pl][163]Diabolo.png",
+    reqLvl: 60,
+    reqPow: 70,
+    power: 19,
+    knowledge: -5,
+    hp: 150,
+    mana: 50,
+    cutRes: 25,
+    bluntRes: 28,
+    pierceRes: 30
   },
   {
-  name: "Opoka Bogów",
-  type: "armor",
-  image: "[www.taernopedia.pl][673]Opoka20BogC3B3w.png",
-  reqLvl: 55,
-  reqStr: 40,
-  strength: 8,
-  agility: 8,
-  hp: 80,
-  endurance: 120,
-  cutRes: 37,
-  bluntRes: 34,
-  pierceRes: 38
+    name: "Opoka Bogów",
+    type: "armor",
+    image: "[www.taernopedia.pl][673]Opoka20BogC3B3w.png",
+    reqLvl: 55,
+    reqStr: 40,
+    strength: 8,
+    agility: 8,
+    hp: 80,
+    endurance: 120,
+    cutRes: 37,
+    bluntRes: 34,
+    pierceRes: 38
   },
   {
-  name: "Nadzieja Pokoleń",
-  type: "armor",
-  image: "[www.taernopedia.pl][499]Nadzieja20PokoleC584.png",
-  reqLvl: 80,
-  reqPow: 80,
-  power: 13,
-  knowledge: 20,
-  hp: 120,
-  mana: 60,
-  cutRes: 32,
-  bluntRes: 35,
-  pierceRes: 32
+    name: "Nadzieja Pokoleń",
+    type: "armor",
+    image: "[www.taernopedia.pl][499]Nadzieja20PokoleC584.png",
+    reqLvl: 80,
+    reqPow: 80,
+    power: 13,
+    knowledge: 20,
+    hp: 120,
+    mana: 60,
+    cutRes: 32,
+    bluntRes: 35,
+    pierceRes: 32
   },
   {
-  name: "Harttraum",
-  type: "armor",
-  image: "[www.taernopedia.pl][63]Harttraum.png",
-  reqLvl: 75,
-  reqAgi: 90,
-  strength: 16,
-  agility: 21,
-  hp: 120,
-  endurance: 30,
-  cutRes: 35,
-  bluntRes: 35,
-  pierceRes: 35
+    name: "Harttraum",
+    type: "armor",
+    image: "[www.taernopedia.pl][63]Harttraum.png",
+    reqLvl: 75,
+    reqAgi: 90,
+    strength: 16,
+    agility: 21,
+    hp: 120,
+    endurance: 30,
+    cutRes: 35,
+    bluntRes: 35,
+    pierceRes: 35
   },
   {
-  name: "Vorleah",
-  type: "armor",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][388]Vorleah.png",
-  reqLvl: 95,
-  reqKno: 100,
-  power: 20,
-  knowledge: 15,
-  hp: 220,
-  mana: 80,
-  cutRes: 35,
-  bluntRes: 35,
-  pierceRes: 35,
-  frostRes: 15,
-  otherProperties: ["Skok Farida: 4% (+1% co poziom)"]
+    name: "Vorleah",
+    type: "armor",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][388]Vorleah.png",
+    reqLvl: 95,
+    reqKno: 100,
+    power: 20,
+    knowledge: 15,
+    hp: 220,
+    mana: 80,
+    cutRes: 35,
+    bluntRes: 35,
+    pierceRes: 35,
+    frostRes: 15,
+    otherProperties: ["Skok Farida: 4% (+1% co poziom)"]
   },
   {
-  name: "Zalla",
-  type: "armor",
-  rarity: "Psychorare",
-  image: "Zalla.png",
-  reqLvl: 135,
-  reqPow: 50,
-  reqKno: 50,
-  power: 22,
-  knowledge: 37,
-  hp: 280,
-  mana: 100,
-  endurance: 30,
-  cutRes: 45,
-  bluntRes: 45,
-  pierceRes: 45,
-  curseRes: 20,
-  fireRes: 20,
-  energyRes: 20,
-  frostRes: 20,
-  otherProperties: ["Podwójne losowanie obrony: 2% (+2% co poziom)", "Redukcja otrzymanych obrażeń: 2% (+1% na poziom)", "Obrona wręcz: 2% (+2% co poziom)"]
+    name: "Zalla",
+    type: "armor",
+    rarity: "Psychorare",
+    image: "Zalla.png",
+    reqLvl: 135,
+    reqPow: 50,
+    reqKno: 50,
+    power: 22,
+    knowledge: 37,
+    hp: 280,
+    mana: 100,
+    endurance: 30,
+    cutRes: 45,
+    bluntRes: 45,
+    pierceRes: 45,
+    curseRes: 20,
+    fireRes: 20,
+    energyRes: 20,
+    frostRes: 20,
+    otherProperties: ["Podwójne losowanie obrony: 2% (+2% co poziom)", "Redukcja otrzymanych obrażeń: 2% (+1% na poziom)", "Obrona wręcz: 2% (+2% co poziom)"]
   },
   {
-  name: "Salmurn",
-  type: "armor",
-  rarity: "Psychorare",
-  image: "Salmurn.png",
-  reqLvl: 135,
-  reqStr: 50,
-  reqAgi: 50,
-  strength: 25,
-  agility: 34,
-  hp: 230,
-  endurance: 100,
-  mana: 80,
-  cutRes: 50,
-  bluntRes: 50,
-  pierceRes: 50,
-  curseRes: 15,
-  fireRes: 15,
-  energyRes: 15,
-  frostRes: 15,
-  otherProperties: ["Podwójne losowanie obrony: 2% (+2% co poziom)", "Redukcja otrzymanych obrażeń: 2% (+1% na poziom)", "Obrona przeciw urokom: 2% (+2% co poziom)"]
+    name: "Salmurn",
+    type: "armor",
+    rarity: "Psychorare",
+    image: "Salmurn.png",
+    reqLvl: 135,
+    reqStr: 50,
+    reqAgi: 50,
+    strength: 25,
+    agility: 34,
+    hp: 230,
+    endurance: 100,
+    mana: 80,
+    cutRes: 50,
+    bluntRes: 50,
+    pierceRes: 50,
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15,
+    otherProperties: ["Podwójne losowanie obrony: 2% (+2% co poziom)", "Redukcja otrzymanych obrażeń: 2% (+1% na poziom)", "Obrona przeciw urokom: 2% (+2% co poziom)"]
   },
   {
-  name: "Dmorlung",
-  type: "armor",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][932]Dmorlung.png",
-  reqLvl: 95,
-  reqStr: 100,
-  strength: 18,
-  agility: 18,
-  hp: 150,
-  endurance: 120,
-  mana: 20,
-  cutRes: 40,
-  bluntRes: 40,
-  pierceRes: 40,
-  frostRes: 15
+    name: "Dmorlung",
+    type: "armor",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][932]Dmorlung.png",
+    reqLvl: 95,
+    reqStr: 100,
+    strength: 18,
+    agility: 18,
+    hp: 150,
+    endurance: 120,
+    mana: 20,
+    cutRes: 40,
+    bluntRes: 40,
+    pierceRes: 40,
+    frostRes: 15
   },
   {
-  name: "Angwallion",
-  type: "cape",
-  image: "[www.taernopedia.pl][970]Angwallion.png",
-  reqLvl: 100,
-  reqAgi: 105,
-  agility: 30,
-  hp: 100,
-  mana: 100,
-  endurance: 100,
-  curseRes: 10
+    name: "Angwallion",
+    type: "cape",
+    image: "[www.taernopedia.pl][970]Angwallion.png",
+    reqLvl: 100,
+    reqAgi: 105,
+    agility: 30,
+    hp: 100,
+    mana: 100,
+    endurance: 100,
+    curseRes: 10
   },
   {
-  name: "Dracorporis",
-  type: "cape",
-  image: "[www.taernopedia.pl][168]Dracorporis.png",
-  reqLvl: 85,
-  reqPow: 90,
-  power: 20,
-  knowledge: 20,
-  hp: 100,
-  mana: 50
+    name: "Dracorporis",
+    type: "cape",
+    image: "[www.taernopedia.pl][168]Dracorporis.png",
+    reqLvl: 85,
+    reqPow: 90,
+    power: 20,
+    knowledge: 20,
+    hp: 100,
+    mana: 50
   },
   {
-  name: "Nurthil",
-  type: "cape",
-  image: "[www.taernopedia.pl][65]Nurthil.png",
-  reqLvl: 55,
-  reqPow: 90,
-  power: 19,
-  knowledge: 14,
-  hp: -50,
-  fireRes: 15
+    name: "Nurthil",
+    type: "cape",
+    image: "[www.taernopedia.pl][65]Nurthil.png",
+    reqLvl: 55,
+    reqPow: 90,
+    power: 19,
+    knowledge: 14,
+    hp: -50,
+    fireRes: 15
   },
   {
-  name: "Debba",
-  type: "cape",
-  image: "[www.taernopedia.pl][535]Debba.png",
-  reqLvl: 61,
-  agility: 20,
-  hp: 100,
-  endurance: 60
+    name: "Debba",
+    type: "cape",
+    image: "[www.taernopedia.pl][535]Debba.png",
+    reqLvl: 61,
+    agility: 20,
+    hp: 100,
+    endurance: 60
   },
   {
-  name: "Xenothor",
-  type: "cape",
-  image: "[www.taernopedia.pl][157]Xenothor.png",
-  reqLvl: 64,
-  reqAgi: 80,
-  strength: 10,
-  agility: 18,
-  hp: 80,
-  endurance: -30,
-  fireRes: 15
+    name: "Xenothor",
+    type: "cape",
+    image: "[www.taernopedia.pl][157]Xenothor.png",
+    reqLvl: 64,
+    reqAgi: 80,
+    strength: 10,
+    agility: 18,
+    hp: 80,
+    endurance: -30,
+    fireRes: 15
   },
   {
-  name: "Bryza",
-  type: "cape",
-  image: "[www.taernopedia.pl][911]Bryza.png",
-  reqLvl: 45,
-  strength: 7,
-  agility: 9,
-  hp: 90,
-  endurance: 30
+    name: "Bryza",
+    type: "cape",
+    image: "[www.taernopedia.pl][911]Bryza.png",
+    reqLvl: 45,
+    strength: 7,
+    agility: 9,
+    hp: 90,
+    endurance: 30
   },
   {
-  name: "Powrót Ivravula",
-  type: "cape",
-  image: "[www.taernopedia.pl][670]PowrC3B3t20Ivravula.png",
-  reqLvl: 80,
-  reqStr: 80,
-  strength: 14,
-  agility: 23,
-  hp: 50,
-  mana: 20,
-  fireRes: 15,
-  frostRes: 15
+    name: "Powrót Ivravula",
+    type: "cape",
+    image: "[www.taernopedia.pl][670]PowrC3B3t20Ivravula.png",
+    reqLvl: 80,
+    reqStr: 80,
+    strength: 14,
+    agility: 23,
+    hp: 50,
+    mana: 20,
+    fireRes: 15,
+    frostRes: 15
   },
   {
-  name: "Tsunami II",
-  type: "cape",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][61]Tsunami20II.png",
-  reqLvl: 85,
-  reqPow: 90,
-  reqKno: 90,
-  power: 8,
-  knowledge: 16,
-  hp: 100,
-  otherProperties: ["Odporność na trafienie krytyczne: 0% (+1% co poziom)", "Modyfikator trafień magicznych LUB dystansowych: 4% (+2% na poziom)"]
+    name: "Tsunami II",
+    type: "cape",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][61]Tsunami20II.png",
+    reqLvl: 85,
+    reqPow: 90,
+    reqKno: 90,
+    power: 8,
+    knowledge: 16,
+    hp: 100,
+    otherProperties: ["Odporność na trafienie krytyczne: 0% (+1% co poziom)", "Modyfikator trafień magicznych LUB dystansowych: 4% (+2% na poziom)"]
   },
   {
-  name: "Cień Tarula",
-  type: "cape",
-  rarity: "Psychorare",
-  image: "Cień_Tarula.png",
-  reqLvl: 130,
-  reqPow: 130,
-  power: 26,
-  knowledge: 24,
-  hp: 200,
-  mana: 80,
-  endurance: 20,
-  otherProperties: ["Podwójne losowanie trafienia: 4% (+1% co poziom)", "Redukcja otrzymanych obrażeń krytycznych: 7% (+4% na poziom)", "Zużycie many: -2% (-2% co poziom)"]
+    name: "Cień Tarula",
+    type: "cape",
+    rarity: "Psychorare",
+    image: "Cień_Tarula.png",
+    reqLvl: 130,
+    reqPow: 130,
+    power: 26,
+    knowledge: 24,
+    hp: 200,
+    mana: 80,
+    endurance: 20,
+    otherProperties: ["Podwójne losowanie trafienia: 4% (+1% co poziom)", "Redukcja otrzymanych obrażeń krytycznych: 7% (+4% na poziom)", "Zużycie many: -2% (-2% co poziom)"]
   },
   {
-  name: "Admiralski gronostaj",
-  type: "cape",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][869]Admiralski20Gronostaj.png",
-  reqLvl: 115,
-  reqStr: 100,
-  strength: 15,
-  agility: 32,
-  hp: 170,
-  mana: 80,
-  endurance: 130,
-  otherProperties: ["Podwójne losowanie trafienia: +2% (+1% co poziom)", "Szansa na odczarowanie: +7% (+1% na poziom)"]
+    name: "Admiralski gronostaj",
+    type: "cape",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][869]Admiralski20Gronostaj.png",
+    reqLvl: 115,
+    reqStr: 100,
+    strength: 15,
+    agility: 32,
+    hp: 170,
+    mana: 80,
+    endurance: 130,
+    otherProperties: ["Podwójne losowanie trafienia: +2% (+1% co poziom)", "Szansa na odczarowanie: +7% (+1% na poziom)"]
   },
   {
-  name: "Hańba Seleny",
-  type: "cape",
-  image: "[www.taernopedia.pl][5]HaC584ba20Seleny.png",
-  reqLvl: 115,
-  reqPow: 100,
-  power: 12,
-  knowledge: 20,
-  hp: 250,
-  mana: 180,
-  endurance: 20,
-  curseRes: 15,
-  fireRes: 15,
-  energyRes: 15,
-  frostRes: 15
+    name: "Hańba Seleny",
+    type: "cape",
+    image: "[www.taernopedia.pl][5]HaC584ba20Seleny.png",
+    reqLvl: 115,
+    reqPow: 100,
+    power: 12,
+    knowledge: 20,
+    hp: 250,
+    mana: 180,
+    endurance: 20,
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15
   },
   {
-  name: "Erbaile",
-  type: "pants",
-  image: "[www.taernopedia.pl][942]Erbaile.png",
-  reqLvl: 115,
-  reqStr: 100,
-  strength: 11,
-  agility: 29,
-  hp: 220,
-  endurance: 130,
-  cutRes: 40,
-  bluntRes: 40,
-  pierceRes: 40,
-  curseRes: 15,
-  fireRes: 15,
-  energyRes: 15,
-  frostRes: 15
+    name: "Erbaile",
+    type: "pants",
+    image: "[www.taernopedia.pl][942]Erbaile.png",
+    reqLvl: 115,
+    reqStr: 100,
+    strength: 11,
+    agility: 29,
+    hp: 220,
+    endurance: 130,
+    cutRes: 40,
+    bluntRes: 40,
+    pierceRes: 40,
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15
   },
   {
-  name: "Varrvy",
-  type: "pants",
-  image: "[www.taernopedia.pl][916]Varrvy.png",
-  reqLvl: 85,
-  strength: 20,
-  agility: 15,
-  hp: 100,
-  endurance: 100,
-  cutRes: 38,
-  bluntRes: 39,
-  pierceRes: 39
+    name: "Varrvy",
+    type: "pants",
+    image: "[www.taernopedia.pl][916]Varrvy.png",
+    reqLvl: 85,
+    strength: 20,
+    agility: 15,
+    hp: 100,
+    endurance: 100,
+    cutRes: 38,
+    bluntRes: 39,
+    pierceRes: 39
   },
   {
-  name: "Gnaty Reffa",
-  type: "armor",
-  rarity: "Set",
-  set: "Resztki Reffa",
-  image: "[www.taernopedia.pl][668]Gnaty20Reffa.png",
-  reqLvl: 22,
-  agility: 5,
-  endurance: 70,
-  cutRes: 23,
-  bluntRes: 22,
-  pierceRes: 20,
-  energyRes: 15
+    name: "Gnaty Reffa",
+    type: "armor",
+    rarity: "Set",
+    set: "Resztki Reffa",
+    image: "[www.taernopedia.pl][668]Gnaty20Reffa.png",
+    reqLvl: 22,
+    agility: 5,
+    endurance: 70,
+    cutRes: 23,
+    bluntRes: 22,
+    pierceRes: 20,
+    energyRes: 15
   },
   {
-  name: "Łeb Reffa",
-  type: "helmet",
-  rarity: "Set",
-  set: "Resztki Reffa",
-  image: "[www.taernopedia.pl][205]C581eb20Reffa.png",
-  reqLvl: 22,
-  strength: 4,
-  agility: 4,
-  hp: 40,
-  endurance: 40,
-  cutRes: 18,
-  bluntRes: 19,
-  pierceRes: 20
+    name: "Łeb Reffa",
+    type: "helmet",
+    rarity: "Set",
+    set: "Resztki Reffa",
+    image: "[www.taernopedia.pl][205]C581eb20Reffa.png",
+    reqLvl: 22,
+    strength: 4,
+    agility: 4,
+    hp: 40,
+    endurance: 40,
+    cutRes: 18,
+    bluntRes: 19,
+    pierceRes: 20
   },
   {
-  name: "Kulosy Reffa",
-  type: "pants",
-  rarity: "Set",
-  set: "Resztki Reffa",
-  image: "[www.taernopedia.pl][196]Kulosy20Reffa.png",
-  reqLvl: 22,
-  strength: 5,
-  hp: 70,
-  cutRes: 22,
-  bluntRes: 22,
-  pierceRes: 22,
-  fireRes: 15
+    name: "Kulosy Reffa",
+    type: "pants",
+    rarity: "Set",
+    set: "Resztki Reffa",
+    image: "[www.taernopedia.pl][196]Kulosy20Reffa.png",
+    reqLvl: 22,
+    strength: 5,
+    hp: 70,
+    cutRes: 22,
+    bluntRes: 22,
+    pierceRes: 22,
+    fireRes: 15
   },
   {
-  name: "Rękawice Oddalenia",
-  type: "gloves",
-  rarity: "Set",
-  set: "Okowy Snu",
-  image: "[www.taernopedia.pl][535]RC499kawice20Oddalenia.png",
-  reqLvl: 22,
-  power: 7,
-  knowledge: 5,
-  hp: 70,
-  energyRes: 15
+    name: "Rękawice Oddalenia",
+    type: "gloves",
+    rarity: "Set",
+    set: "Okowy Snu",
+    image: "[www.taernopedia.pl][535]RC499kawice20Oddalenia.png",
+    reqLvl: 22,
+    power: 7,
+    knowledge: 5,
+    hp: 70,
+    energyRes: 15
   },
   {
-  name: "Buty Wymiarów",
-  type: "boots",
-  rarity: "Set",
-  set: "Okowy Snu",
-  image: "[www.taernopedia.pl][574]Buty20WymiarC3B3w.png",
-  reqLvl: 22,
-  power: 6,
-  knowledge: 6,
-  hp: 60,
-  cutRes: 21,
-  bluntRes: 22,
-  pierceRes: 20
+    name: "Buty Wymiarów",
+    type: "boots",
+    rarity: "Set",
+    set: "Okowy Snu",
+    image: "[www.taernopedia.pl][574]Buty20WymiarC3B3w.png",
+    reqLvl: 22,
+    power: 6,
+    knowledge: 6,
+    hp: 60,
+    cutRes: 21,
+    bluntRes: 22,
+    pierceRes: 20
   },
   {
-  name: "Pas Ofiarowania",
-  type: "belt",
-  rarity: "Set",
-  set: "Przebranie Ludobójcy",
-  image: "[www.taernopedia.pl][700]Pas20ofiarowania.png",
-  reqLvl: 40,
-  power: 10,
-  hp: 50,
-  mana: 50,
+    name: "Pas Ofiarowania",
+    type: "belt",
+    rarity: "Set",
+    set: "Przebranie Ludobójcy",
+    image: "[www.taernopedia.pl][700]Pas20ofiarowania.png",
+    reqLvl: 40,
+    power: 10,
+    hp: 50,
+    mana: 50,
   },
   {
-  name: "Spodnie Hekatomby",
-  type: "pants",
-  rarity: "Set",
-  set: "Przebranie Ludobójcy",
-  image: "[www.taernopedia.pl][223]Spodnie20Hekatomby.png",
-  reqLvl: 40,
-  power: 4,
-  knowledge: 7,
-  hp: 80,
-  mana: 40,
-  cutRes: 25,
-  bluntRes: 27,
-  pierceRes: 26
+    name: "Spodnie Hekatomby",
+    type: "pants",
+    rarity: "Set",
+    set: "Przebranie Ludobójcy",
+    image: "[www.taernopedia.pl][223]Spodnie20Hekatomby.png",
+    reqLvl: 40,
+    power: 4,
+    knowledge: 7,
+    hp: 80,
+    mana: 40,
+    cutRes: 25,
+    bluntRes: 27,
+    pierceRes: 26
   },
   {
-  name: "Oblicze Sprawcy",
-  type: "helmet",
-  rarity: "Set",
-  set: "Przebranie Ludobójcy",
-  image: "[www.taernopedia.pl][780]Oblicze20Sprawcy.png",
-  reqLvl: 40,
-  power: 4,
-  hp: 80,
-  mana: 70,
-  cutRes: 25,
-  bluntRes: 26,
-  pierceRes: 27,
-  fireRes: 20
+    name: "Oblicze Sprawcy",
+    type: "helmet",
+    rarity: "Set",
+    set: "Przebranie Ludobójcy",
+    image: "[www.taernopedia.pl][780]Oblicze20Sprawcy.png",
+    reqLvl: 40,
+    power: 4,
+    hp: 80,
+    mana: 70,
+    cutRes: 25,
+    bluntRes: 26,
+    pierceRes: 27,
+    fireRes: 20
   },
   {
-  name: "Całun Ludzkości",
-  type: "cape",
-  rarity: "Set",
-  set: "Przebranie Ludobójcy",
-  image: "[www.taernopedia.pl][780]Oblicze20Sprawcy.png",
-  reqLvl: 40,
-  power: 7,
-  knowledge: 8,
-  hp: 40
+    name: "Całun Ludzkości",
+    type: "cape",
+    rarity: "Set",
+    set: "Przebranie Ludobójcy",
+    image: "[www.taernopedia.pl][780]Oblicze20Sprawcy.png",
+    reqLvl: 40,
+    power: 7,
+    knowledge: 8,
+    hp: 40
   },
   {
-  name: "Szpony Szamana",
-  type: "gloves",
-  rarity: "Set",
-  set: "Zbroja Pinari",
-  image: "[www.taernopedia.pl][477]Szpony20Szamana.png",
-  reqLvl: 40,
-  strength: 6,
-  agility: 10,
-  endurance: 80,
-  curseRes: 20
+    name: "Szpony Szamana",
+    type: "gloves",
+    rarity: "Set",
+    set: "Zbroja Pinari",
+    image: "[www.taernopedia.pl][477]Szpony20Szamana.png",
+    reqLvl: 40,
+    strength: 6,
+    agility: 10,
+    endurance: 80,
+    curseRes: 20
   },
   {
-  name: "Orcza Zbroja",
-  type: "armor",
-  rarity: "Set",
-  set: "Zbroja Pinari",
-  image: "[www.taernopedia.pl][635]Orcza20Zbroja.png",
-  reqLvl: 40,
-  strength: 6,
-  hp: 90,
-  endurance: 80,
-  cutRes: 31,
-  bluntRes: 32,
-  pierceRes: 30,
-  frostRes: 20
+    name: "Orcza Zbroja",
+    type: "armor",
+    rarity: "Set",
+    set: "Zbroja Pinari",
+    image: "[www.taernopedia.pl][635]Orcza20Zbroja.png",
+    reqLvl: 40,
+    strength: 6,
+    hp: 90,
+    endurance: 80,
+    cutRes: 31,
+    bluntRes: 32,
+    pierceRes: 30,
+    frostRes: 20
   },
   {
     name: "Miecz Pinari",
@@ -4219,948 +4401,948 @@ const itemDatabase = [
     fireRes: 25
   },
   {
-  name: "Szarfa Nieistnienia",
-  type: "belt",
-  rarity: "Set",
-  set: "Okowy Snu",
-  image: "[www.taernopedia.pl][142]Szarfa20Nieistnienia.png",
-  reqLvl: 22,
-  hp: 60,
-  mana: 60,
-  fireRes: 15
-  },
-  {
-  name: "Obdartusy",
-  type: "pants",
-  image: "[www.taernopedia.pl][937]Obdartusy.png",
-  reqLvl: 57,
-  reqStr: 70,
-  strength: 14,
-  agility: 10,
-  hp: 110,
-  cutRes: 36,
-  bluntRes: 32,
-  pierceRes: 37
-  },
-  {
-  name: "Wzorek",
-  type: "pants",
-  image: "[www.taernopedia.pl][526]Wzorek.png",
-  reqLvl: 55,
-  reqKno: 70,
-  power: 12,
-  knowledge: 12,
-  hp: 80,
-  mana: 20,
-  cutRes: 30,
-  bluntRes: 30,
-  pierceRes: 30
-  },
-  {
-  name: "Tirhel II",
-  type: "pants",
-  image: "[www.taernopedia.pl][614]Tirhel20II.png",
-  reqLvl: 55,
-  reqPow: 80,
-  power: 6,
-  knowledge: 10,
-  hp: 110,
-  cutRes: 36,
-  bluntRes: 32,
-  pierceRes: 34,
-  fireRes: 10,
-  curseRes: 10
-  },
-  {
-  name: "Skiilfy",
-  type: "pants",
-  image: "[www.taernopedia.pl][325]Skiilfy.png",
-  reqLvl: 85,
-  reqPow: 90,
-  reqKno: 90,
-  power: 15,
-  knowledge: 20,
-  hp: 150,
-  mana: 50,
-  cutRes: 35,
-  bluntRes: 35,
-  pierceRes: 35
-  },
-  {
-  name: "Aquariusy II",
-  type: "pants",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][995]Aquariusy20II.png",
-  reqLvl: 85,
-  reqStr: 90,
-  reqAgi: 90,
-  strength: 10,
-  agility: 18,
-  endurance: 60,
-  cutRes: 40,
-  bluntRes: 40,
-  pierceRes: 40,
-  otherProperties: ["Odporność na trafienie krytyczne: 0% (+1% co poziom)", "Modyfikator trafień fizycznych LUB dystansowych: 4% (+2% na poziom)"]
-  },
-  {
-  name: "Ziraki",
-  type: "pants",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][91]Ziraki.png",
-  reqLvl: 130,
-  reqStr: 130,
-  strength: 27,
-  agility: 23,
-  hp: 180,
-  endurance: 80,
-  mana: 40,
-  cutRes: 30,
-  bluntRes: 30,
-  pierceRes: 30,
-  otherProperties: ["Podwójne losowanie trafienia: 4% (+1% co poziom)", "Redukcja otrzymanych obrażeń krytycznych: 7% (+4% na poziom)", "Zużycie kondycji: -2% (-2% co poziom)"]
-  },
-  {
-  name: "Temary II",
-  type: "pants",
-  rarity: "Psychorare",
-  image: "Temary.png",
-  reqLvl: 125,
-  reqPow: 50,
-  reqKno: 50,
-  knowledge: 25,
-  hp: 750,
-  cutRes: 45,
-  bluntRes: 45,
-  pierceRes: 45,
-  curseRes: 20,
-  fireRes: 20,
-  energyRes: 20,
-  frostRes: 20,
-  otherProperties: ["Redukcja otrzymanych obrażeń biernych: 1% (+2% co poziom)", "Szansa na odczarowanie: 1% (+1% na poziom)"]
-  },
-  {
-  name: "Udręki",
-  type: "pants",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][131]UdrC499ki.png",
-  reqLvl: 110,
-  reqPow: 100,
-  power: 10,
-  knowledge: 30,
-  hp: 250,
-  mana: 110,
-  cutRes: 39,
-  bluntRes: 39,
-  pierceRes: 39,
-  otherProperties: ["Modyfikator obrażeń magicznych: 4% (+1% co poziom)", "Przełamanie odporności na urok: 4% (+1% na poziom)"]
-  },
-  {
-  name: "Arhauty II",
-  type: "boots",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][361]Arhauty20II.png",
-  reqLvl: 125,
-  reqStr: 50,
-  reqAgi: 50,
-  agility: 25,
-  hp: 750,
-  cutRes: 50,
-  bluntRes: 50,
-  pierceRes: 50,
-  curseRes: 15,
-  fireRes: 15,
-  energyRes: 15,
-  frostRes: 15,
-  otherProperties: ["Redukcja otrzymanych obrażeń biernych: 1% (+2% co poziom)", "Szansa na odczarowanie: 1% (+1% na poziom)"]
-  },
-  {
-  name: "Moczary",
-  type: "boots",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][415]Moczary.png",
-  reqLvl: 30,
-  reqStr: 45,
-  strength: 5,
-  agility: 4,
-  hp: 30,
-  cutRes: 23,
-  bluntRes: 22,
-  pierceRes: 25,
-  otherProperties: ["Modyfikator trafień fizycznych: 10% (+2% co poziom)"]
-  },
-  {
-  name: "Virveny",
-  type: "boots",
-  image: "[www.taernopedia.pl][403]Virveny.png",
-  reqLvl: 75,
-  reqStr: 90,
-  reqAgi: 90,
-  strength: 10,
-  agility: 8,
-  hp: 150,
-  mana: 50,
-  endurance: 150,
-  cutRes: 33,
-  bluntRes: 34,
-  pierceRes: 32,
-  fireRes: 15
-  },
-  {
-  name: "Jeroszki",
-  type: "boots",
-  image: "[www.taernopedia.pl][260]Jeroszki.png",
-  reqLvl: 34,
-  reqStr: 40,
-  strength: 4,
-  hp: 120,
-  endurance: 120,
-  cutRes: 29,
-  bluntRes: 30,
-  pierceRes: 30,
-  fireRes: 10
-  },
-  {
-  name: "Tangnary",
-  type: "boots",
-  image: "[www.taernopedia.pl][91]Tangnary.png",
-  reqLvl: 50,
-  reqAgi: 70,
-  strength: 11,
-  agility: 11,
-  hp: 50,
-  endurance: 30,
-  cutRes: 33,
-  bluntRes: 27,
-  pierceRes: 33,
-  energyRes: 15
-  },
-  {
-  name: "Lysmary",
-  type: "boots",
-  image: "[www.taernopedia.pl][59]Lysmary.png",
-  reqLvl: 34,
-  reqKno: 40,
-  power: 8,
-  knowledge: 2,
-  hp: 80,
-  mana: 60,
-  cutRes: 30,
-  bluntRes: 29,
-  pierceRes: 31
-  },
-  {
-  name: "Czengsvesy",
-  type: "boots",
-  image: "[www.taernopedia.pl][692]Czengsvesy.png",
-  reqLvl: 27,
-  power: 6,
-  knowledge: 9,
-  mana: 50,
-  cutRes: 17,
-  bluntRes: 20,
-  pierceRes: 20
-  },
-  {
-  name: "Alendry",
-  type: "boots",
-  image: "[www.taernopedia.pl][511]Alendry.png",
-  reqLvl: 110,
-  reqPow: 100,
-  power: 20,
-  knowledge: 44,
-  hp: 140,
-  mana: 70,
-  cutRes: 37,
-  bluntRes: 37,
-  pierceRes: 37,
-  frostRes: 10
-  },
-  {
-  name: "Thorimmy",
-  type: "boots",
-  image: "[www.taernopedia.pl][837]Thorimmy.png",
-  reqLvl: 72,
-  reqKno: 90,
-  power: 10,
-  knowledge: 10,
-  hp: 160,
-  mana: 20,
-  cutRes: 35,
-  bluntRes: 35,
-  pierceRes: 30,
-  frostRes: 15
-  },
-  {
-  name: "Aqueniry",
-  type: "boots",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][856]Aqueniry.png",
-  reqLvl: 85,
-  reqPow: 85,
-  reqKno: 85,
-  power: 19,
-  knowledge: 16,
-  hp: 150,
-  mana: 20,
-  cutRes: 34,
-  bluntRes: 37,
-  pierceRes: 37,
-  otherProperties: ["Zużycie many: +26% (-2% co poziom)", "Szansa na podwójny atak: +4% (+1% na poziom)"]
-  },
-  {
-  name: "Envile",
-  type: "boots",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][637]Envile.png",
-  reqLvl: 120,
-  reqPow: 100,
-  power: 25,
-  knowledge: 28,
-  hp: 160,
-  mana: 110,
-  cutRes: 30,
-  bluntRes: 30,
-  pierceRes: 30,
-  otherProperties: ["Szansa na podwójny atak: +2% (+1% co poziom)", "Modyfikator obrażeń magicznych: 2% (+1% na poziom)"]
-  },
-  {
-  name: "Cierpiętniki",
-  type: "boots",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][134]CierpiC499tniki.png",
-  reqLvl: 110,
-  reqStr: 100,
-  reqAgi: 50,
-  strength: 22,
-  agility: 28,
-  hp: 240,
-  endurance: 110,
-  cutRes: 40,
-  bluntRes: 40,
-  pierceRes: 40,
-  otherProperties: ["Modyfikator obrażeń fizycznych: 4% (+1% co poziom)", "Modyfikator trafień fizycznych: 10% (+2% na poziom)"]
-  },
-  {
-  name: "Objęcia Morany",
-  type: "belt",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][202]ObjC499cia20Morany.png",
-  reqLvl: 115,
-  reqPow: 100,
-  reqKno: 125,
-  power: 22,
-  knowledge: 29,
-  hp: 230,
-  mana: 160,
-  otherProperties: ["Obrona wręcz: 5% (+2% co poziom)", "Obrona dystansowa: 3% (+2% na poziom)", "Obrona przeciw urokom: 1% (+2% co poziom)"]
-  },
-  {
-  name: "Exuvium",
-  type: "belt",
-  image: "[www.taernopedia.pl][199]Exuvium.png",
-  reqLvl: 90,
-  reqKno: 90,
-  power: 5,
-  knowledge: 35,
-  hp: 100,
-  mana: 50
-  },
-  {
-  name: "Radius Electricum",
-  type: "belt",
-  image: "[www.taernopedia.pl][206]Radius20Electricum.png",
-  reqLvl: 36,
-  reqPow: 40,
-  power: 10,
-  knowledge: 6,
-  mana: 70
-  },
-  {
-  name: "Sentrion",
-  type: "belt",
-  image: "[www.taernopedia.pl][740]Sentrion.png",
-  reqLvl: 64,
-  reqPow: 90,
-  power: -5,
-  knowledge: 30,
-  hp: 50,
-  mana: 50
-  },
-  {
-  name: "Anabolik",
-  type: "belt",
-  image: "[www.taernopedia.pl][309]Anabolik.png",
-  reqLvl: 19,
-  reqStr: 25,
-  strength: 8,
-  hp: 110
-  },
-  {
-  name: "Dagorilm",
-  type: "belt",
-  image: "[www.taernopedia.pl][526]Dagorilm.png",
-  reqLvl: 71,
-  reqStr: 90,
-  strength: 5,
-  agility: 10,
-  knowledge: 6,
-  hp: 150,
-  endurance: 40
-  },
-  {
-  name: "Koriatula",
-  type: "belt",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][773]Koriatula.png",
-  reqLvl: 35,
-  reqKno: 45,
-  power: 5,
-  knowledge: 3,
-  hp: 60,
-  otherProperties: ["Modyfikator trafień dystansowych: 10% (+2% co poziom)"]
-  },
-  {
-  name: "Promuris",
-  type: "belt",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][873]Promuris.png",
-  reqLvl: 35,
-  reqAgi: 45,
-  strength: 4,
-  agility: 5,
-  hp: 50,
-  otherProperties: ["Odporność na korzenie: 10% (+2% co poziom)", "Modyfikator obrażeń fizycznych: 3% (+1% na poziom)"]
-  },
-  {
-  name: "Nurt",
-  type: "belt",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][135]Nurt.png",
-  reqLvl: 85,
-  reqStr: 85,
-  reqAgi: 85,
-  strength: 17,
-  agility: 15,
-  hp: 160,
-  endurance: 40,
-  otherProperties: ["Zużycie kondycji: +26% (-2% co poziom)", "Szansa na podwójny atak: +4% (+1% na poziom)"]
-  },
-  {
-  name: "Nienawiść Draugula",
-  type: "belt",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][67]NienawiC59BC48720Draugula.png",
-  reqLvl: 120,
-  reqStr: 100,
-  strength: 21,
-  agility: 32,
-  hp: 170,
-  mana: 50,
-  endurance: 50,
-  otherProperties: ["Szansa na podwójny atak: +2% (+1% co poziom)", "Modyfikator obrażeń fizycznych: 2% (+1% na poziom)"]
-  },
-  {
-  name: "Groza Seleny",
-  type: "belt",
-  image: "[www.taernopedia.pl][281]Groza20Seleny.png",
-  reqLvl: 110,
-  reqStr: 100,
-  strength: 20,
-  agility: 45,
-  hp: 150,
-  endurance: 50,
-  frostRes: 10
-  },
-  {
-  name: "Disolver",
-  type: "ring",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][959]Disolver.png",
-  reqLvl: 100,
-  frostRes: 45,
-  curseRes: 45,
-  otherProperties: ["Odporność na zamrożenie: 20% (+2% co poziom)"]
-  },
-  {
-  name: "Allakaja Many",
-  type: "ring",
-  set: "Światła Tellabagu",
-  rarity: "Set",
-  image: "[www.taernopedia.pl][788]Allakaja20Many.png",
-  reqLvl: 35,
-  mana: 80,
-  endurance: 80,
-  energyRes: 15
-  },
-  {
-  name: "Allakaja Kondycji",
-  type: "ring",
-  set: "Światła Tellabagu",
-  rarity: "Set",
-  image: "[www.taernopedia.pl][150]Allakaja20Kondycji.png",
-  reqLvl: 35,
-  hp: 140,
-  fireRes: 15
-  },
-  {
-  name: "Gwiazda Tellabagu",
-  type: "neck",
-  set: "Światła Tellabagu",
-  rarity: "Set",
-  image: "[www.taernopedia.pl][84]Gwiazda20Tellabagu.png",
-  reqLvl: 35,
-  agility: 10,
-  knowledge: 10,
-  curseRes: 15
-  },
-  {
-  name: "Zagłada Ludów",
-  type: "ring",
-  image: "[www.taernopedia.pl][474]ZagC582ada20LudC3B3w.png",
-  reqLvl: 110,
-  reqStr: 100,
-  strength: 30,
-  agility: 30,
-  hp: 100,
-  mana: 20,
-  endurance: 30
-  },
-  {
-  name: "Nit",
-  type: "ring",
-  image: "[www.taernopedia.pl][63]Nit.png",
-  reqLvl: 50,
-  strength: 12,
-  agility: 15,
-  hp: 30
-  },
-  {
-  name: "Karlder",
-  type: "ring",
-  image: "[www.taernopedia.pl][928]Karlder.png",
-  reqLvl: 38,
-  reqStr: 50,
-  strength: 10,
-  agility: 10,
-  hp: 60
-  },
-  {
-  name: "Fiskorl II",
-  type: "ring",
-  image: "[www.taernopedia.pl][159]Fiskorl20II.png",
-  reqLvl: 27,
-  reqStr: 40,
-  strength: 9,
-  agility: 9,
-  frostRes: 20,
-  cutRes: 20
-  },
-  {
-  name: "Navigon",
-  type: "ring",
-  image: "[www.taernopedia.pl][660]Navigon.png",
-  reqLvl: 50,
-  power: 12,
-  knowledge: 15,
-  hp: 30
-  },
-  {
-  name: "Fulgur II",
-  type: "ring",
-  image: "[www.taernopedia.pl][293]Fulgur20II.png",
-  reqLvl: 36,
-  reqPow: 50,
-  power: 4,
-  knowledge: 8,
-  hp: 100,
-  frostRes: 30
-  },
-  {
-  name: "Basileus",
-  type: "ring",
-  image: "[www.taernopedia.pl][290]Basileus.png",
-  reqLvl: 28,
-  reqPow: 40,
-  power: 9,
-  knowledge: 9,
-  frostRes: 20,
-  curseRes: 20
-  },
-  {
-  name: "Uguns",
-  type: "ring",
-  image: "[www.taernopedia.pl][546]Uguns.png",
-  reqLvl: 32,
-  hp: 140,
-  mana: 60,
-  endurance: 60,
-  fireRes: 20
-  },
-  {
-  name: "Arcanscape II",
-  type: "ring",
-  image: "[www.taernopedia.pl][902]Arcanscape20II.png",
-  reqLvl: 20,
-  hp: 80,
-  mana: 30,
-  endurance: 30,
-  curseRes: 40
-  },
-  {
-  name: "Griv",
-  type: "ring",
-  image: "[www.taernopedia.pl][460]Griv.png",
-  reqLvl: 75,
-  hp: 400,
-  mana: 50,
-  endurance: 50
-  },
-  {
-  name: "Balast",
-  type: "ring",
-  image: "[www.taernopedia.pl][959]Balast.png",
-  reqLvl: 50,
-  hp: 240,
-  mana: 30,
-  endurance: 30,
-  energyRes: 20
-  },
-  {
-  name: "Mauremys",
-  type: "ring",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][128]Mauremys.png",
-  reqLvl: 85,
-  reqPow: 90,
-  power: 20,
-  knowledge: 20,
-  hp: 100,
-  otherProperties: ["Zużycie many: -5% (-2% co poziom)"]
-  },
-  {
-  name: "Skogan",
-  type: "ring",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][393]Skogan.png",
-  reqLvl: 85,
-  reqStr: 90,
-  strength: 20,
-  agility: 20,
-  hp: 80,
-  mana: 20,
-  otherProperties: ["Zużycie kondycji: -5% (-2% co poziom)"]
-  },
-  {
-  name: "Przysięga Draugula",
-  type: "ring",
-  image: "[www.taernopedia.pl][409]PrzysiC499ga20Draugula.png",
-  reqLvl: 110,
-  reqPow: 100,
-  power: 30,
-  knowledge: 30,
-  hp: 100,
-  mana: 30,
-  endurance: 20
-  },
-  {
-  name: "Ortasis",
-  type: "neck",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][392]Ortasis.png",
-  reqLvl: 130,
-  power: 20,
-  knowledge: 20,
-  hp: 100,
-  mana: 70,
-  endurance: 30,
-  fireRes: 10,
-  energyRes: 30,
-  otherProperties: ["Modyfikator obrażeń magicznych: 3% (+1% co poziom)", "Szansa na odczarowanie: 3% (+1% co poziom)", "Redukcja otrzymanych obrażeń biernych: 6% (+2% co poziom)"]
-  },
-  {
-  name: "Vogurun",
-  type: "neck",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][567]Vogurun.png",
-  reqLvl: 75,
-  reqKno: 70,
-  power: 10,
-  knowledge: 10,
-  otherProperties: ["Modyfikator obrażeń magicznych: 10% (+1% co poziom)"]
-  },
-  {
-  name: "Ostolbin",
-  type: "neck",
-  image: "[www.taernopedia.pl][853]Ostolbin.png",
-  reqLvl: 34,
-  reqPow: 40,
-  power: 6,
-  knowledge: 6,
-  hp: 60,
-  mana: 100
-  },
-  {
-  name: "Ibura",
-  type: "neck",
-  image: "[www.taernopedia.pl][945]Ibura.png",
-  power: 1,
-  knowledge: 2,
-  hp: 30,
-  fireRes: 10,
-  curseRes: 10
-  },
-  {
-  name: "Hadras",
-  type: "neck",
-  image: "[www.taernopedia.pl][312]Hadras.png",
-  strength: 1,
-  agility: 2,
-  hp: 30,
-  fireRes: 10,
-  curseRes: 10
-  },
-  {
-  name: "Maiarot",
-  type: "neck",
-  image: "[www.taernopedia.pl][184]Maiarot.png",
-  reqLvl: 15,
-  hp: 100
-  },
-  {
-  name: "Markahn",
-  type: "neck",
-  image: "[www.taernopedia.pl][823]Markahn.png",
-  reqLvl: 32,
-  agility: 3,
-  knowledge: 3,
-  hp: 100,
-  fireRes: 38,
-  curseRes: 38
-  },
-  {
-  name: "Sphaera",
-  type: "neck",
-  image: "[www.taernopedia.pl][653]Sphaera.png",
-  reqLvl: 36,
-  reqStr: 40,
-  strength: 8,
-  agility: 8,
-  endurance: 80
-  },
-  {
-  name: "Zemsta Ivravula",
-  type: "neck",
-  image: "[www.taernopedia.pl][626]Zemsta20Ivravula.png",
-  reqLvl: 70,
-  hp: 400,
-  fireRes: 10,
-  frostRes: 10,
-  energyRes: 10,
-  curseRes: 10
-  },
-  {
-  name: "Caratris",
-  type: "neck",
-  image: "[www.taernopedia.pl][479]Caratris.png",
-  reqLvl: 45,
-  hp: 40,
-  fireRes: 40,
-  frostRes: 40,
-  energyRes: 40,
-  curseRes: 40
-  },
-  {
-  name: "Obroża Władcy",
-  type: "neck",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][819]ObroC5BCa20WC582adcy.png",
-  reqLvl: 35,
-  reqKno: 45,
-  power: 7,
-  hp: 80,
-  otherProperties: ["Regeneracja many: 10% (+2% co poziom)", "Modyfikator obrażeń magicznych: 3% (+1% co poziom)"]
-  },
-  {
-  name: "Valazan",
-  type: "neck",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][78]Valazan.png",
-  reqLvl: 50,
-  power: 9,
-  knowledge: 9,
-  hp: 50,
-  mana: 40,
-  otherProperties: ["Zużycie many: -2% (-2% co poziom)"]
-  },
-  {
-  name: "Danthum",
-  type: "neck",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][980]Danthum.png",
-  reqLvl: 50,
-  strength: 9,
-  agility: 9,
-  hp: 50,
-  endurance: 40,
-  otherProperties: ["Zużycie kondycji: -2% (-2% co poziom)"]
-  },
-  {
-  name: "Yurugu",
-  type: "neck",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][602]Yurugu.png",
-  reqLvl: 75,
-  reqStr: 80,
-  strength: 10,
-  agility: 10,
-  otherProperties: ["Modyfikator obrażeń fizycznych: 10% (+1% co poziom)"]
-  },
-  {
-  name: "Dorbis",
-  type: "neck",
-  rarity: "Psychorare",
-  image: "Dorbis.png",
-  reqLvl: 130,
-  strength: 20,
-  agility: 20,
-  hp: 100,
-  mana: 30,
-  endurance: 70,
-  fireRes: 10,
-  energyRes: 30,
-  otherProperties: ["Modyfikator obrażeń fizycznych: 3% (+1% co poziom)", "Szansa na odczarowanie: 3% (+1% co poziom)", "Redukcja otrzymanych obrażeń biernych: 6% (+2% co poziom)"]
-  },
-  {
-  name: "Serce Seleny",
-  type: "neck",
-  image: "[www.taernopedia.pl][369]Serce20Seleny.png",
-  reqLvl: 115,
-  hp: 200,
-  mana: 50,
-  endurance: 50,
-  curseRes: 50,
-  fireRes: 50,
-  energyRes: 50,
-  frostRes: 50
-  },
-  {
-  name: "Aeterus Passio",
-  type: "gloves",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][750]Aeterus20Passio.png",
-  reqLvl: 115,
-  reqStr: 110,
-  reqAgi: 125,
-  strength: 30,
-  agility: 30,
-  hp: 250,
-  endurance: 50,
-  otherProperties: ["Obrona wręcz: 1% (+2% co poziom)", "Obrona dystansowa: 3% (+2% co poziom)", "Obrona przeciw urokom: 5% (+2% co poziom)"]
-  },
-  {
-  name: "Biltabandury",
-  type: "gloves",
-  image: "[www.taernopedia.pl][982]Biltabandury.png",
-  reqLvl: 63,
-  reqStr: 80,
-  strength: 2,
-  agility: 12,
-  hp: 100,
-  endurance: 100
-  },
-  {
-  name: "Zadry",
-  type: "gloves",
-  image: "[www.taernopedia.pl][843]Zadry.png",
-  reqLvl: 75,
-  reqStr: 70,
-  strength: 15,
-  agility: 18,
-  hp: 180,
-  endurance: 40
-  },
-  {
-  name: "Gest Władcy",
-  type: "gloves",
-  image: "[www.taernopedia.pl][368]Gest20WC582adcy.png",
-  reqLvl: 32,
-  reqStr: 40,
-  strength: 12,
-  agility: 5,
-  hp: 40,
-  endurance: 20
-  },
-  {
-  name: "Brassary II",
-  type: "gloves",
-  image: "[www.taernopedia.pl][856]Brassary20II.png",
-  reqLvl: 32,
-  power: 10,
-  knowledge: 5,
-  mana: 60,
-  fireRes: 20,
-  frostRes: 20
-  },
-  {
-  name: "Vaekany",
-  type: "gloves",
-  image: "[www.taernopedia.pl][547]Vaekany.png",
-  reqLvl: 65,
-  reqKno: 90,
-  power: 10,
-  knowledge: 7,
-  hp: 20,
-  mana: 180
-  },
-  {
-  name: "Pazury",
-  type: "gloves",
-  image: "[www.taernopedia.pl][16]Pazury.png",
-  reqLvl: 90,
-  reqKno: 95,
-  power: 15,
-  knowledge: 10,
-  hp: 120,
-  mana: 180
-  },
-  {
-  name: "Fraxy",
-  type: "gloves",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][552]Fraxy.png",
-  reqLvl: 30,
-  reqPow: 45,
-  power: 3,
-  knowledge: 2,
-  hp: 40,
-  mana: 10,
-  otherProperties: ["Modyfikator trafień magicznych: 10% (+2% co poziom)"]
-  },
-  {
-  name: "Skry Utoru",
-  type: "gloves",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][45]Skry20Utoru.png",
-  reqLvl: 115,
-  reqPow: 100,
-  power: 23,
-  knowledge: 27,
-  hp: 190,
-  mana: 160,
-  otherProperties: ["Modyfikator trafień dystansowych: +10% (+2% co poziom)", "Szansa na odczarowanie: +7% (+1% co poziom)"]
-  },
-  {
-  name: "Szpony Seimhi",
-  type: "gloves",
-  rarity: "Psychorare",
-  image: "[www.taernopedia.pl][348]Szpony20Seimhi.png",
-  reqLvl: 115,
-  reqPow: 100,
-  power: 23,
-  knowledge: 27,
-  hp: 190,
-  mana: 160,
-  otherProperties: ["Modyfikator trafień magicznych: +10% (+2% co poziom)", "Szansa na odczarowanie: +7% (+1% co poziom)"]
+    name: "Szarfa Nieistnienia",
+    type: "belt",
+    rarity: "Set",
+    set: "Okowy Snu",
+    image: "[www.taernopedia.pl][142]Szarfa20Nieistnienia.png",
+    reqLvl: 22,
+    hp: 60,
+    mana: 60,
+    fireRes: 15
+  },
+  {
+    name: "Obdartusy",
+    type: "pants",
+    image: "[www.taernopedia.pl][937]Obdartusy.png",
+    reqLvl: 57,
+    reqStr: 70,
+    strength: 14,
+    agility: 10,
+    hp: 110,
+    cutRes: 36,
+    bluntRes: 32,
+    pierceRes: 37
+  },
+  {
+    name: "Wzorek",
+    type: "pants",
+    image: "[www.taernopedia.pl][526]Wzorek.png",
+    reqLvl: 55,
+    reqKno: 70,
+    power: 12,
+    knowledge: 12,
+    hp: 80,
+    mana: 20,
+    cutRes: 30,
+    bluntRes: 30,
+    pierceRes: 30
+  },
+  {
+    name: "Tirhel II",
+    type: "pants",
+    image: "[www.taernopedia.pl][614]Tirhel20II.png",
+    reqLvl: 55,
+    reqPow: 80,
+    power: 6,
+    knowledge: 10,
+    hp: 110,
+    cutRes: 36,
+    bluntRes: 32,
+    pierceRes: 34,
+    fireRes: 10,
+    curseRes: 10
+  },
+  {
+    name: "Skiilfy",
+    type: "pants",
+    image: "[www.taernopedia.pl][325]Skiilfy.png",
+    reqLvl: 85,
+    reqPow: 90,
+    reqKno: 90,
+    power: 15,
+    knowledge: 20,
+    hp: 150,
+    mana: 50,
+    cutRes: 35,
+    bluntRes: 35,
+    pierceRes: 35
+  },
+  {
+    name: "Aquariusy II",
+    type: "pants",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][995]Aquariusy20II.png",
+    reqLvl: 85,
+    reqStr: 90,
+    reqAgi: 90,
+    strength: 10,
+    agility: 18,
+    endurance: 60,
+    cutRes: 40,
+    bluntRes: 40,
+    pierceRes: 40,
+    otherProperties: ["Odporność na trafienie krytyczne: 0% (+1% co poziom)", "Modyfikator trafień fizycznych LUB dystansowych: 4% (+2% na poziom)"]
+  },
+  {
+    name: "Ziraki",
+    type: "pants",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][91]Ziraki.png",
+    reqLvl: 130,
+    reqStr: 130,
+    strength: 27,
+    agility: 23,
+    hp: 180,
+    endurance: 80,
+    mana: 40,
+    cutRes: 30,
+    bluntRes: 30,
+    pierceRes: 30,
+    otherProperties: ["Podwójne losowanie trafienia: 4% (+1% co poziom)", "Redukcja otrzymanych obrażeń krytycznych: 7% (+4% na poziom)", "Zużycie kondycji: -2% (-2% co poziom)"]
+  },
+  {
+    name: "Temary II",
+    type: "pants",
+    rarity: "Psychorare",
+    image: "Temary.png",
+    reqLvl: 125,
+    reqPow: 50,
+    reqKno: 50,
+    knowledge: 25,
+    hp: 750,
+    cutRes: 45,
+    bluntRes: 45,
+    pierceRes: 45,
+    curseRes: 20,
+    fireRes: 20,
+    energyRes: 20,
+    frostRes: 20,
+    otherProperties: ["Redukcja otrzymanych obrażeń biernych: 1% (+2% co poziom)", "Szansa na odczarowanie: 1% (+1% na poziom)"]
+  },
+  {
+    name: "Udręki",
+    type: "pants",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][131]UdrC499ki.png",
+    reqLvl: 110,
+    reqPow: 100,
+    power: 10,
+    knowledge: 30,
+    hp: 250,
+    mana: 110,
+    cutRes: 39,
+    bluntRes: 39,
+    pierceRes: 39,
+    otherProperties: ["Modyfikator obrażeń magicznych: 4% (+1% co poziom)", "Przełamanie odporności na urok: 4% (+1% na poziom)"]
+  },
+  {
+    name: "Arhauty II",
+    type: "boots",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][361]Arhauty20II.png",
+    reqLvl: 125,
+    reqStr: 50,
+    reqAgi: 50,
+    agility: 25,
+    hp: 750,
+    cutRes: 50,
+    bluntRes: 50,
+    pierceRes: 50,
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15,
+    otherProperties: ["Redukcja otrzymanych obrażeń biernych: 1% (+2% co poziom)", "Szansa na odczarowanie: 1% (+1% na poziom)"]
+  },
+  {
+    name: "Moczary",
+    type: "boots",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][415]Moczary.png",
+    reqLvl: 30,
+    reqStr: 45,
+    strength: 5,
+    agility: 4,
+    hp: 30,
+    cutRes: 23,
+    bluntRes: 22,
+    pierceRes: 25,
+    otherProperties: ["Modyfikator trafień fizycznych: 10% (+2% co poziom)"]
+  },
+  {
+    name: "Virveny",
+    type: "boots",
+    image: "[www.taernopedia.pl][403]Virveny.png",
+    reqLvl: 75,
+    reqStr: 90,
+    reqAgi: 90,
+    strength: 10,
+    agility: 8,
+    hp: 150,
+    mana: 50,
+    endurance: 150,
+    cutRes: 33,
+    bluntRes: 34,
+    pierceRes: 32,
+    fireRes: 15
+  },
+  {
+    name: "Jeroszki",
+    type: "boots",
+    image: "[www.taernopedia.pl][260]Jeroszki.png",
+    reqLvl: 34,
+    reqStr: 40,
+    strength: 4,
+    hp: 120,
+    endurance: 120,
+    cutRes: 29,
+    bluntRes: 30,
+    pierceRes: 30,
+    fireRes: 10
+  },
+  {
+    name: "Tangnary",
+    type: "boots",
+    image: "[www.taernopedia.pl][91]Tangnary.png",
+    reqLvl: 50,
+    reqAgi: 70,
+    strength: 11,
+    agility: 11,
+    hp: 50,
+    endurance: 30,
+    cutRes: 33,
+    bluntRes: 27,
+    pierceRes: 33,
+    energyRes: 15
+  },
+  {
+    name: "Lysmary",
+    type: "boots",
+    image: "[www.taernopedia.pl][59]Lysmary.png",
+    reqLvl: 34,
+    reqKno: 40,
+    power: 8,
+    knowledge: 2,
+    hp: 80,
+    mana: 60,
+    cutRes: 30,
+    bluntRes: 29,
+    pierceRes: 31
+  },
+  {
+    name: "Czengsvesy",
+    type: "boots",
+    image: "[www.taernopedia.pl][692]Czengsvesy.png",
+    reqLvl: 27,
+    power: 6,
+    knowledge: 9,
+    mana: 50,
+    cutRes: 17,
+    bluntRes: 20,
+    pierceRes: 20
+  },
+  {
+    name: "Alendry",
+    type: "boots",
+    image: "[www.taernopedia.pl][511]Alendry.png",
+    reqLvl: 110,
+    reqPow: 100,
+    power: 20,
+    knowledge: 44,
+    hp: 140,
+    mana: 70,
+    cutRes: 37,
+    bluntRes: 37,
+    pierceRes: 37,
+    frostRes: 10
+  },
+  {
+    name: "Thorimmy",
+    type: "boots",
+    image: "[www.taernopedia.pl][837]Thorimmy.png",
+    reqLvl: 72,
+    reqKno: 90,
+    power: 10,
+    knowledge: 10,
+    hp: 160,
+    mana: 20,
+    cutRes: 35,
+    bluntRes: 35,
+    pierceRes: 30,
+    frostRes: 15
+  },
+  {
+    name: "Aqueniry",
+    type: "boots",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][856]Aqueniry.png",
+    reqLvl: 85,
+    reqPow: 85,
+    reqKno: 85,
+    power: 19,
+    knowledge: 16,
+    hp: 150,
+    mana: 20,
+    cutRes: 34,
+    bluntRes: 37,
+    pierceRes: 37,
+    otherProperties: ["Zużycie many: +26% (-2% co poziom)", "Szansa na podwójny atak: +4% (+1% na poziom)"]
+  },
+  {
+    name: "Envile",
+    type: "boots",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][637]Envile.png",
+    reqLvl: 120,
+    reqPow: 100,
+    power: 25,
+    knowledge: 28,
+    hp: 160,
+    mana: 110,
+    cutRes: 30,
+    bluntRes: 30,
+    pierceRes: 30,
+    otherProperties: ["Szansa na podwójny atak: +2% (+1% co poziom)", "Modyfikator obrażeń magicznych: 2% (+1% na poziom)"]
+  },
+  {
+    name: "Cierpiętniki",
+    type: "boots",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][134]CierpiC499tniki.png",
+    reqLvl: 110,
+    reqStr: 100,
+    reqAgi: 50,
+    strength: 22,
+    agility: 28,
+    hp: 240,
+    endurance: 110,
+    cutRes: 40,
+    bluntRes: 40,
+    pierceRes: 40,
+    otherProperties: ["Modyfikator obrażeń fizycznych: 4% (+1% co poziom)", "Modyfikator trafień fizycznych: 10% (+2% na poziom)"]
+  },
+  {
+    name: "Objęcia Morany",
+    type: "belt",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][202]ObjC499cia20Morany.png",
+    reqLvl: 115,
+    reqPow: 100,
+    reqKno: 125,
+    power: 22,
+    knowledge: 29,
+    hp: 230,
+    mana: 160,
+    otherProperties: ["Obrona wręcz: 5% (+2% co poziom)", "Obrona dystansowa: 3% (+2% na poziom)", "Obrona przeciw urokom: 1% (+2% co poziom)"]
+  },
+  {
+    name: "Exuvium",
+    type: "belt",
+    image: "[www.taernopedia.pl][199]Exuvium.png",
+    reqLvl: 90,
+    reqKno: 90,
+    power: 5,
+    knowledge: 35,
+    hp: 100,
+    mana: 50
+  },
+  {
+    name: "Radius Electricum",
+    type: "belt",
+    image: "[www.taernopedia.pl][206]Radius20Electricum.png",
+    reqLvl: 36,
+    reqPow: 40,
+    power: 10,
+    knowledge: 6,
+    mana: 70
+  },
+  {
+    name: "Sentrion",
+    type: "belt",
+    image: "[www.taernopedia.pl][740]Sentrion.png",
+    reqLvl: 64,
+    reqPow: 90,
+    power: -5,
+    knowledge: 30,
+    hp: 50,
+    mana: 50
+  },
+  {
+    name: "Anabolik",
+    type: "belt",
+    image: "[www.taernopedia.pl][309]Anabolik.png",
+    reqLvl: 19,
+    reqStr: 25,
+    strength: 8,
+    hp: 110
+  },
+  {
+    name: "Dagorilm",
+    type: "belt",
+    image: "[www.taernopedia.pl][526]Dagorilm.png",
+    reqLvl: 71,
+    reqStr: 90,
+    strength: 5,
+    agility: 10,
+    knowledge: 6,
+    hp: 150,
+    endurance: 40
+  },
+  {
+    name: "Koriatula",
+    type: "belt",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][773]Koriatula.png",
+    reqLvl: 35,
+    reqKno: 45,
+    power: 5,
+    knowledge: 3,
+    hp: 60,
+    otherProperties: ["Modyfikator trafień dystansowych: 10% (+2% co poziom)"]
+  },
+  {
+    name: "Promuris",
+    type: "belt",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][873]Promuris.png",
+    reqLvl: 35,
+    reqAgi: 45,
+    strength: 4,
+    agility: 5,
+    hp: 50,
+    otherProperties: ["Odporność na korzenie: 10% (+2% co poziom)", "Modyfikator obrażeń fizycznych: 3% (+1% na poziom)"]
+  },
+  {
+    name: "Nurt",
+    type: "belt",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][135]Nurt.png",
+    reqLvl: 85,
+    reqStr: 85,
+    reqAgi: 85,
+    strength: 17,
+    agility: 15,
+    hp: 160,
+    endurance: 40,
+    otherProperties: ["Zużycie kondycji: +26% (-2% co poziom)", "Szansa na podwójny atak: +4% (+1% na poziom)"]
+  },
+  {
+    name: "Nienawiść Draugula",
+    type: "belt",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][67]NienawiC59BC48720Draugula.png",
+    reqLvl: 120,
+    reqStr: 100,
+    strength: 21,
+    agility: 32,
+    hp: 170,
+    mana: 50,
+    endurance: 50,
+    otherProperties: ["Szansa na podwójny atak: +2% (+1% co poziom)", "Modyfikator obrażeń fizycznych: 2% (+1% na poziom)"]
+  },
+  {
+    name: "Groza Seleny",
+    type: "belt",
+    image: "[www.taernopedia.pl][281]Groza20Seleny.png",
+    reqLvl: 110,
+    reqStr: 100,
+    strength: 20,
+    agility: 45,
+    hp: 150,
+    endurance: 50,
+    frostRes: 10
+  },
+  {
+    name: "Disolver",
+    type: "ring",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][959]Disolver.png",
+    reqLvl: 100,
+    frostRes: 45,
+    curseRes: 45,
+    otherProperties: ["Odporność na zamrożenie: 20% (+2% co poziom)"]
+  },
+  {
+    name: "Allakaja Many",
+    type: "ring",
+    set: "Światła Tellabagu",
+    rarity: "Set",
+    image: "[www.taernopedia.pl][788]Allakaja20Many.png",
+    reqLvl: 35,
+    mana: 80,
+    endurance: 80,
+    energyRes: 15
+  },
+  {
+    name: "Allakaja Kondycji",
+    type: "ring",
+    set: "Światła Tellabagu",
+    rarity: "Set",
+    image: "[www.taernopedia.pl][150]Allakaja20Kondycji.png",
+    reqLvl: 35,
+    hp: 140,
+    fireRes: 15
+  },
+  {
+    name: "Gwiazda Tellabagu",
+    type: "neck",
+    set: "Światła Tellabagu",
+    rarity: "Set",
+    image: "[www.taernopedia.pl][84]Gwiazda20Tellabagu.png",
+    reqLvl: 35,
+    agility: 10,
+    knowledge: 10,
+    curseRes: 15
+  },
+  {
+    name: "Zagłada Ludów",
+    type: "ring",
+    image: "[www.taernopedia.pl][474]ZagC582ada20LudC3B3w.png",
+    reqLvl: 110,
+    reqStr: 100,
+    strength: 30,
+    agility: 30,
+    hp: 100,
+    mana: 20,
+    endurance: 30
+  },
+  {
+    name: "Nit",
+    type: "ring",
+    image: "[www.taernopedia.pl][63]Nit.png",
+    reqLvl: 50,
+    strength: 12,
+    agility: 15,
+    hp: 30
+  },
+  {
+    name: "Karlder",
+    type: "ring",
+    image: "[www.taernopedia.pl][928]Karlder.png",
+    reqLvl: 38,
+    reqStr: 50,
+    strength: 10,
+    agility: 10,
+    hp: 60
+  },
+  {
+    name: "Fiskorl II",
+    type: "ring",
+    image: "[www.taernopedia.pl][159]Fiskorl20II.png",
+    reqLvl: 27,
+    reqStr: 40,
+    strength: 9,
+    agility: 9,
+    frostRes: 20,
+    cutRes: 20
+  },
+  {
+    name: "Navigon",
+    type: "ring",
+    image: "[www.taernopedia.pl][660]Navigon.png",
+    reqLvl: 50,
+    power: 12,
+    knowledge: 15,
+    hp: 30
+  },
+  {
+    name: "Fulgur II",
+    type: "ring",
+    image: "[www.taernopedia.pl][293]Fulgur20II.png",
+    reqLvl: 36,
+    reqPow: 50,
+    power: 4,
+    knowledge: 8,
+    hp: 100,
+    frostRes: 30
+  },
+  {
+    name: "Basileus",
+    type: "ring",
+    image: "[www.taernopedia.pl][290]Basileus.png",
+    reqLvl: 28,
+    reqPow: 40,
+    power: 9,
+    knowledge: 9,
+    frostRes: 20,
+    curseRes: 20
+  },
+  {
+    name: "Uguns",
+    type: "ring",
+    image: "[www.taernopedia.pl][546]Uguns.png",
+    reqLvl: 32,
+    hp: 140,
+    mana: 60,
+    endurance: 60,
+    fireRes: 20
+  },
+  {
+    name: "Arcanscape II",
+    type: "ring",
+    image: "[www.taernopedia.pl][902]Arcanscape20II.png",
+    reqLvl: 20,
+    hp: 80,
+    mana: 30,
+    endurance: 30,
+    curseRes: 40
+  },
+  {
+    name: "Griv",
+    type: "ring",
+    image: "[www.taernopedia.pl][460]Griv.png",
+    reqLvl: 75,
+    hp: 400,
+    mana: 50,
+    endurance: 50
+  },
+  {
+    name: "Balast",
+    type: "ring",
+    image: "[www.taernopedia.pl][959]Balast.png",
+    reqLvl: 50,
+    hp: 240,
+    mana: 30,
+    endurance: 30,
+    energyRes: 20
+  },
+  {
+    name: "Mauremys",
+    type: "ring",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][128]Mauremys.png",
+    reqLvl: 85,
+    reqPow: 90,
+    power: 20,
+    knowledge: 20,
+    hp: 100,
+    otherProperties: ["Zużycie many: -5% (-2% co poziom)"]
+  },
+  {
+    name: "Skogan",
+    type: "ring",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][393]Skogan.png",
+    reqLvl: 85,
+    reqStr: 90,
+    strength: 20,
+    agility: 20,
+    hp: 80,
+    mana: 20,
+    otherProperties: ["Zużycie kondycji: -5% (-2% co poziom)"]
+  },
+  {
+    name: "Przysięga Draugula",
+    type: "ring",
+    image: "[www.taernopedia.pl][409]PrzysiC499ga20Draugula.png",
+    reqLvl: 110,
+    reqPow: 100,
+    power: 30,
+    knowledge: 30,
+    hp: 100,
+    mana: 30,
+    endurance: 20
+  },
+  {
+    name: "Ortasis",
+    type: "neck",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][392]Ortasis.png",
+    reqLvl: 130,
+    power: 20,
+    knowledge: 20,
+    hp: 100,
+    mana: 70,
+    endurance: 30,
+    fireRes: 10,
+    energyRes: 30,
+    otherProperties: ["Modyfikator obrażeń magicznych: 3% (+1% co poziom)", "Szansa na odczarowanie: 3% (+1% co poziom)", "Redukcja otrzymanych obrażeń biernych: 6% (+2% co poziom)"]
+  },
+  {
+    name: "Vogurun",
+    type: "neck",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][567]Vogurun.png",
+    reqLvl: 75,
+    reqKno: 70,
+    power: 10,
+    knowledge: 10,
+    otherProperties: ["Modyfikator obrażeń magicznych: 10% (+1% co poziom)"]
+  },
+  {
+    name: "Ostolbin",
+    type: "neck",
+    image: "[www.taernopedia.pl][853]Ostolbin.png",
+    reqLvl: 34,
+    reqPow: 40,
+    power: 6,
+    knowledge: 6,
+    hp: 60,
+    mana: 100
+  },
+  {
+    name: "Ibura",
+    type: "neck",
+    image: "[www.taernopedia.pl][945]Ibura.png",
+    power: 1,
+    knowledge: 2,
+    hp: 30,
+    fireRes: 10,
+    curseRes: 10
+  },
+  {
+    name: "Hadras",
+    type: "neck",
+    image: "[www.taernopedia.pl][312]Hadras.png",
+    strength: 1,
+    agility: 2,
+    hp: 30,
+    fireRes: 10,
+    curseRes: 10
+  },
+  {
+    name: "Maiarot",
+    type: "neck",
+    image: "[www.taernopedia.pl][184]Maiarot.png",
+    reqLvl: 15,
+    hp: 100
+  },
+  {
+    name: "Markahn",
+    type: "neck",
+    image: "[www.taernopedia.pl][823]Markahn.png",
+    reqLvl: 32,
+    agility: 3,
+    knowledge: 3,
+    hp: 100,
+    fireRes: 38,
+    curseRes: 38
+  },
+  {
+    name: "Sphaera",
+    type: "neck",
+    image: "[www.taernopedia.pl][653]Sphaera.png",
+    reqLvl: 36,
+    reqStr: 40,
+    strength: 8,
+    agility: 8,
+    endurance: 80
+  },
+  {
+    name: "Zemsta Ivravula",
+    type: "neck",
+    image: "[www.taernopedia.pl][626]Zemsta20Ivravula.png",
+    reqLvl: 70,
+    hp: 400,
+    fireRes: 10,
+    frostRes: 10,
+    energyRes: 10,
+    curseRes: 10
+  },
+  {
+    name: "Caratris",
+    type: "neck",
+    image: "[www.taernopedia.pl][479]Caratris.png",
+    reqLvl: 45,
+    hp: 40,
+    fireRes: 40,
+    frostRes: 40,
+    energyRes: 40,
+    curseRes: 40
+  },
+  {
+    name: "Obroża Władcy",
+    type: "neck",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][819]ObroC5BCa20WC582adcy.png",
+    reqLvl: 35,
+    reqKno: 45,
+    power: 7,
+    hp: 80,
+    otherProperties: ["Regeneracja many: 10% (+2% co poziom)", "Modyfikator obrażeń magicznych: 3% (+1% co poziom)"]
+  },
+  {
+    name: "Valazan",
+    type: "neck",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][78]Valazan.png",
+    reqLvl: 50,
+    power: 9,
+    knowledge: 9,
+    hp: 50,
+    mana: 40,
+    otherProperties: ["Zużycie many: -2% (-2% co poziom)"]
+  },
+  {
+    name: "Danthum",
+    type: "neck",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][980]Danthum.png",
+    reqLvl: 50,
+    strength: 9,
+    agility: 9,
+    hp: 50,
+    endurance: 40,
+    otherProperties: ["Zużycie kondycji: -2% (-2% co poziom)"]
+  },
+  {
+    name: "Yurugu",
+    type: "neck",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][602]Yurugu.png",
+    reqLvl: 75,
+    reqStr: 80,
+    strength: 10,
+    agility: 10,
+    otherProperties: ["Modyfikator obrażeń fizycznych: 10% (+1% co poziom)"]
+  },
+  {
+    name: "Dorbis",
+    type: "neck",
+    rarity: "Psychorare",
+    image: "Dorbis.png",
+    reqLvl: 130,
+    strength: 20,
+    agility: 20,
+    hp: 100,
+    mana: 30,
+    endurance: 70,
+    fireRes: 10,
+    energyRes: 30,
+    otherProperties: ["Modyfikator obrażeń fizycznych: 3% (+1% co poziom)", "Szansa na odczarowanie: 3% (+1% co poziom)", "Redukcja otrzymanych obrażeń biernych: 6% (+2% co poziom)"]
+  },
+  {
+    name: "Serce Seleny",
+    type: "neck",
+    image: "[www.taernopedia.pl][369]Serce20Seleny.png",
+    reqLvl: 115,
+    hp: 200,
+    mana: 50,
+    endurance: 50,
+    curseRes: 50,
+    fireRes: 50,
+    energyRes: 50,
+    frostRes: 50
+  },
+  {
+    name: "Aeterus Passio",
+    type: "gloves",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][750]Aeterus20Passio.png",
+    reqLvl: 115,
+    reqStr: 110,
+    reqAgi: 125,
+    strength: 30,
+    agility: 30,
+    hp: 250,
+    endurance: 50,
+    otherProperties: ["Obrona wręcz: 1% (+2% co poziom)", "Obrona dystansowa: 3% (+2% co poziom)", "Obrona przeciw urokom: 5% (+2% co poziom)"]
+  },
+  {
+    name: "Biltabandury",
+    type: "gloves",
+    image: "[www.taernopedia.pl][982]Biltabandury.png",
+    reqLvl: 63,
+    reqStr: 80,
+    strength: 2,
+    agility: 12,
+    hp: 100,
+    endurance: 100
+  },
+  {
+    name: "Zadry",
+    type: "gloves",
+    image: "[www.taernopedia.pl][843]Zadry.png",
+    reqLvl: 75,
+    reqStr: 70,
+    strength: 15,
+    agility: 18,
+    hp: 180,
+    endurance: 40
+  },
+  {
+    name: "Gest Władcy",
+    type: "gloves",
+    image: "[www.taernopedia.pl][368]Gest20WC582adcy.png",
+    reqLvl: 32,
+    reqStr: 40,
+    strength: 12,
+    agility: 5,
+    hp: 40,
+    endurance: 20
+  },
+  {
+    name: "Brassary II",
+    type: "gloves",
+    image: "[www.taernopedia.pl][856]Brassary20II.png",
+    reqLvl: 32,
+    power: 10,
+    knowledge: 5,
+    mana: 60,
+    fireRes: 20,
+    frostRes: 20
+  },
+  {
+    name: "Vaekany",
+    type: "gloves",
+    image: "[www.taernopedia.pl][547]Vaekany.png",
+    reqLvl: 65,
+    reqKno: 90,
+    power: 10,
+    knowledge: 7,
+    hp: 20,
+    mana: 180
+  },
+  {
+    name: "Pazury",
+    type: "gloves",
+    image: "[www.taernopedia.pl][16]Pazury.png",
+    reqLvl: 90,
+    reqKno: 95,
+    power: 15,
+    knowledge: 10,
+    hp: 120,
+    mana: 180
+  },
+  {
+    name: "Fraxy",
+    type: "gloves",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][552]Fraxy.png",
+    reqLvl: 30,
+    reqPow: 45,
+    power: 3,
+    knowledge: 2,
+    hp: 40,
+    mana: 10,
+    otherProperties: ["Modyfikator trafień magicznych: 10% (+2% co poziom)"]
+  },
+  {
+    name: "Skry Utoru",
+    type: "gloves",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][45]Skry20Utoru.png",
+    reqLvl: 115,
+    reqPow: 100,
+    power: 23,
+    knowledge: 27,
+    hp: 190,
+    mana: 160,
+    otherProperties: ["Modyfikator trafień dystansowych: +10% (+2% co poziom)", "Szansa na odczarowanie: +7% (+1% co poziom)"]
+  },
+  {
+    name: "Szpony Seimhi",
+    type: "gloves",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][348]Szpony20Seimhi.png",
+    reqLvl: 115,
+    reqPow: 100,
+    power: 23,
+    knowledge: 27,
+    hp: 190,
+    mana: 160,
+    otherProperties: ["Modyfikator trafień magicznych: +10% (+2% co poziom)", "Szansa na odczarowanie: +7% (+1% co poziom)"]
   }
 ]
 
@@ -5171,7 +5353,9 @@ const taernDatabase = {
   items: sortedItems
 }
 
-export {Item}
+export {
+  Item
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

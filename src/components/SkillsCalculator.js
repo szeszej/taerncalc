@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class SkillsCalculator extends React.Component {
   constructor(props) {
@@ -14,29 +14,30 @@ class SkillsCalculator extends React.Component {
   componentDidMount() {
     if (this.props.initialSkills) {
       this.setState({
-        skillPts: this.props.initialSkills.skillPts,
-       });
+        skillPts: this.props.initialSkills.skillPts
+      });
     } else {
       this.setState({
-        skillPts: this.calculateSkillPoints(this.props.level),
-       });
+        skillPts: this.calculateSkillPoints(this.props.level)
+      });
     }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.level !== this.props.level) {
       this.setState(() => {
         let updatedPoints = {};
-        updatedPoints.skillPts = this.state.skillPts + ((this.props.level - prevProps.level) * 2);
+        updatedPoints.skillPts =
+          this.state.skillPts + (this.props.level - prevProps.level) * 2;
         return updatedPoints;
-      })
+      });
     }
     let stateForExport = {
-        skillPts: this.state.skillPts,
-      }
+      skillPts: this.state.skillPts
+    };
     for (let i = 1; i < 18; i++) {
-      stateForExport["skill" + i] = this.state.skillSet["skill" + i].level
+      stateForExport["skill" + i] = this.state.skillSet["skill" + i].level;
     }
-    this.props.getStateForExport(stateForExport, "skills")
+    this.props.getStateForExport(stateForExport, "skills");
   }
   reset() {
     this.setState(() => {
@@ -84,18 +85,23 @@ class SkillsCalculator extends React.Component {
       });
     }
   }
-  checkIfSkillCanIncrease (prevLvl, newLvl, number) {
+  checkIfSkillCanIncrease(prevLvl, newLvl, number) {
     let skillPointsNeeded = [0, 1, 3, 6, 10, 15, 21, 28];
-    if (skillPointsNeeded[newLvl] - skillPointsNeeded[prevLvl] >
-        this.state.skillPts) {
-      return false
+    if (
+      skillPointsNeeded[newLvl] - skillPointsNeeded[prevLvl] >
+      this.state.skillPts
+    ) {
+      return false;
     } else {
-      return true
+      return true;
     }
   }
   render() {
     return (
-      <div className="skillCalculator" style={this.props.active === "skills" ? null : {display: "none"}}>
+      <div
+        className="skillCalculator"
+        style={this.props.active === "skills" ? null : { display: "none" }}
+      >
         <div className="statPts">
           <p>
             Punkty umiejętności: {this.state.skillPts}{" "}
@@ -212,10 +218,10 @@ class SkillsCalculator extends React.Component {
               spendSkillPoints={this.spendSkillPoints}
               number={5}
             />
-                        <SkillLine
-                          level={this.props.level}
+            <SkillLine
+              level={this.props.level}
               skill={this.state.skillSet.skill7}
-                          checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}
+              checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}
               spendSkillPoints={this.spendSkillPoints}
               number={7}
             />
@@ -266,17 +272,27 @@ class SkillLine extends React.Component {
         <div className="skillValue">
           <p>{this.props.skill.level}</p>
         </div>
-        {this.props.skill.level === this.props.skill.maxLvl ? <div className="reqLvl"><p>Maks. poziom osiągnięty</p></div> :
-        <div className="reqLvl" style={this.props.skill.requiredCharLevel > this.props.level ? notMeetingRequirements : null}>
-          <div className="reqLvlText">
-            <p>Wym. poziom postaci:</p>
+        {this.props.skill.level === this.props.skill.maxLvl ? (
+          <div className="reqLvl">
+            <p>Maks. poziom osiągnięty</p>
           </div>
-          <div className="reqLvlNumber">
-            <p>
-              {this.props.skill.requiredCharLevel}
-            </p>
+        ) : (
+          <div
+            className="reqLvl"
+            style={
+              this.props.skill.requiredCharLevel > this.props.level
+                ? notMeetingRequirements
+                : null
+            }
+          >
+            <div className="reqLvlText">
+              <p>Wym. poziom postaci:</p>
+            </div>
+            <div className="reqLvlNumber">
+              <p>{this.props.skill.requiredCharLevel}</p>
+            </div>
           </div>
-        </div>}
+        )}
         <div className="skillButtons">
           <div className="minusButton">
             {this.props.skill.level === this.props.skill.minLvl ? (
@@ -298,7 +314,13 @@ class SkillLine extends React.Component {
             )}
           </div>
           <div className="plusButton">
-            {((this.props.skill.level === this.props.skill.maxLvl) || (this.props.skill.requiredCharLevel > this.props.level) || (this.props.checkIfSkillCanIncrease(this.props.skill.level, this.props.skill.level + 1, 1) === false)) ? (
+            {this.props.skill.level === this.props.skill.maxLvl ||
+            this.props.skill.requiredCharLevel > this.props.level ||
+            this.props.checkIfSkillCanIncrease(
+              this.props.skill.level,
+              this.props.skill.level + 1,
+              1
+            ) === false ? (
               <SkillIncrementButton
                 spendSkillPoints={this.props.spendSkillPoints}
                 skillLevel={this.props.skill.level}
@@ -368,4 +390,4 @@ class SkillDecrementButton extends React.Component {
   }
 }
 
-export  {SkillsCalculator};
+export { SkillsCalculator };

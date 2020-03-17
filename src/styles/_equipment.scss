@@ -30,6 +30,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
     &:hover {
       border: 2px solid #AE3B48;
     }
@@ -159,19 +160,22 @@
     .itemName {
       font-size: 1.5em;
     }
+
     .damage {
       color: #d7d50e;
     }
+
     hr {
-        border: 0;
-        height: 1px;
-        background-image: linear-gradient(to right, rgba(44, 130, 201, 0), rgba(44, 130, 201, 0.75), rgba(44, 130, 201, 0));
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(44, 130, 201, 0), rgba(44, 130, 201, 0.75), rgba(44, 130, 201, 0));
     }
   }
 
   .armor {
     grid-area: armor;
     background-image: url("/images/armor.svg");
+
     .itemsList {
       margin-top: 4em;
       margin-left: 3em;
@@ -181,6 +185,7 @@
   .helmet {
     grid-area: helmet;
     background-image: url("/images/helmet.svg");
+
     .itemsList {
       margin-top: 4em;
       margin-left: 3em;
@@ -190,6 +195,7 @@
   .neck {
     grid-area: neck;
     background-image: url("/images/necklace.svg");
+
     .itemsList {
       margin-top: 4em;
     }
@@ -198,6 +204,7 @@
   .gloves {
     grid-area: gloves;
     background-image: url("/images/gloves.svg");
+
     .itemsList {
       right: 0;
       margin-top: 4em;
@@ -209,6 +216,7 @@
   .cape {
     grid-area: cape;
     background-image: url("/images/cloak.svg");
+
     .itemsList {
       margin-left: 3em;
     }
@@ -228,16 +236,19 @@
   .special {
     grid-area: special;
     background-image: url("/images/star.svg");
+
     .itemsList {
       display: flex;
       flex-direction: column;
       color: white;
       margin-left: 3em;
+
       .title {
         font-size: 1.25em;
         align-self: center;
         color: #d7d50e;
       }
+
       form {
         display: flex;
         flex-direction: column;
@@ -250,21 +261,25 @@
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
-          p, input {
+
+          input,
+          p {
             height: 1.25em;
             font-size: 1em;
           }
+
           p {
-            margin: 0;
-            margin-top: -0.3em;
+            margin: -0.3em 0 0;
           }
+
           input:not(.textInput) {
-            width: 40%
+            width: 40%;
           }
         }
 
         .submit {
           margin-top: 1.5em;
+
           input {
             border-radius: 8px;
             font-size: 1.5em;
@@ -273,18 +288,14 @@
             cursor: pointer;
             background-color: black;
             border: 2px solid #EC8C42;
+
             &:hover {
               background-color: #322F3E;
             }
           }
-
         }
-
       }
-
     }
-
-
   }
 
   .shield {
@@ -303,6 +314,7 @@
   .pants {
     grid-area: pants;
     background-image: url("/images/pants.svg");
+
     .itemsList {
       margin-left: 3em;
     }
@@ -311,6 +323,7 @@
   .belt {
     grid-area: belt;
     background-image: url("/images/belt.svg");
+
     .itemsList {
       right: 0;
       margin-right: -5em;
@@ -321,6 +334,7 @@
   .ring1 {
     grid-area: ring1;
     background-image: url("/images/ring1.svg");
+
     .itemsList {
       margin-left: 3em;
     }
@@ -329,6 +343,7 @@
   .ring2 {
     grid-area: ring2;
     background-image: url("/images/ring2.svg");
+
     .itemsList {
       margin-left: 3em;
     }

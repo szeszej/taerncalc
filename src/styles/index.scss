@@ -33,11 +33,10 @@ body {
 
   select {
     appearance: none;
-    background-image: url("https://i.imgur.com/fgRuxQq.png"),
-	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+    background-image: url("https://i.imgur.com/fgRuxQq.png"), linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
     background-repeat: no-repeat, repeat;
-    background-position: right .7em top 50%, 0 0;
-    background-size: .65em auto, 100%;
+    background-position: right 0.7em top 50%, 0 0;
+    background-size: 0.65em auto, 100%;
   }
 
   #charLvl {
@@ -55,7 +54,8 @@ body {
   }
 
   button:focus,
-  select:focus, input:focus {
+  input:focus,
+  select:focus {
     outline-style: none;
   }
 
@@ -110,6 +110,7 @@ body {
     width: 80%;
     margin: 0 auto;
     text-align: justify;
+
     img {
       display: inline;
       max-height: 1.5em;
@@ -217,6 +218,7 @@ body {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
+
       .changeLevel {
         display: flex;
         width: 80%;
@@ -232,17 +234,28 @@ body {
           margin-left: 1em;
           margin-right: 1em;
         }
+
         button {
           font-size: 1.25em;
           width: 2em;
           height: 2em;
         }
       }
+
+      .exportButton {
+        margin-top: 1.5em;
+        margin-bottom: 1em;
+        text-transform: uppercase;
+        font-size: 1.5em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
       @media only screen and (max-width: 1030px) {
         .changeLevel {
-          font-size: 1.2em
+          font-size: 1.2em;
         }
       }
+
       .tabs {
         width: 100%;
         display: flex;
@@ -256,16 +269,16 @@ body {
         }
         @media only screen and (max-width: 1030px) {
           button {
-            font-size: 1.5em
+            font-size: 1.5em;
           }
         }
       }
-
     }
     @media only screen and (max-width: 1525px) {
       #classLvlWrapper {
         margin-top: 2.5em;
       }
+
       .calculators {
         flex-direction: column;
         align-items: center;
@@ -282,7 +295,6 @@ body {
     }
   }
 }
-
 @media only screen and (max-width: 770px) {
   .wrapper {
     font-size: 12px;
@@ -306,17 +318,19 @@ body {
           align-items: center;
           margin-bottom: 1em;
           justify-content: space-around;
+
           .submit {
             width: auto;
             margin-left: 0;
-
           }
+
           select {
             width: 62%;
             margin-right: 0;
             text-align-last: center;
             padding-left: 0;
           }
+
           #charLvl {
             width: 60%;
             text-align: center;
@@ -327,13 +341,11 @@ body {
     }
   }
 }
-
 @media only screen and (max-width: 520px) {
   .wrapper .header .title .header h1 {
     font-size: 20px;
   }
 }
-
 @media only screen and (max-width: 450px) {
   .wrapper .header .title .header h1 {
     font-size: 16px;
