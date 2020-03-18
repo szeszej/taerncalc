@@ -111,7 +111,7 @@ class Calculator extends React.Component {
     );
     let stringsForUrl = flatArrayOfProperties.map(x => x[0] + "=" + x[1]);
     let urlString = stringsForUrl.join("&");
-    let url = "http://localhost:3000/?" + urlString;
+    let url = "https://kalkulatortaern.github.io/?" + urlString;
     let encodedUrl = encodeURI(url);
     ReactGA.event({
       category: 'Export',
