@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from 'react-ga';
 import { SkillsCalculator } from "./components/SkillsCalculator.js";
 import { StatsCalculator } from "./components/StatsCalculator.js";
 
@@ -104,7 +105,6 @@ class Calculator extends React.Component {
     }
     arrayOfProperties[2] = Object.entries(arrayOfProperties[2][1]);
     let flatArrayOfProperties = arrayOfProperties.flat();
-    console.log(flatArrayOfProperties);
     flatArrayOfProperties.push(
       ["level", this.state.level],
       ["className", this.props.className]
@@ -113,6 +113,11 @@ class Calculator extends React.Component {
     let urlString = stringsForUrl.join("&");
     let url = "http://localhost:3000/?" + urlString;
     let encodedUrl = encodeURI(url);
+    ReactGA.event({
+      category: 'Export',
+      action: 'Click',
+      label: encodedUrl
+    });
     return this.copyToClipboard(encodedUrl);
   }
   copyToClipboard(string) {

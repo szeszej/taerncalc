@@ -4,6 +4,7 @@
 //upload własnego obrazka
 
 import React from "react";
+import ReactGA from 'react-ga';
 import { ItemsList, ItemTooltip } from "./Items.js";
 import { Item } from "../index.js";
 
@@ -164,6 +165,11 @@ class Equipment extends React.Component {
     return true;
   }
   showItemsList(type) {
+    ReactGA.event({
+      category: 'Items',
+      action: 'Show List',
+      label: type
+    });
     this.setState({
       listToDisplay: type
     });
@@ -174,6 +180,11 @@ class Equipment extends React.Component {
     });
   }
   equipItem(item, type) {
+    ReactGA.event({
+      category: 'Items',
+      action: 'Item Choice',
+      label: item.name
+    });
     if (type === "weapon" && item.weaponType === "Dwuręczna") {
       this.setState(prevState => {
         let newState = prevState;

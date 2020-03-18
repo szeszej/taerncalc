@@ -1,8 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactGA from 'react-ga';
 import "./styles/index.scss";
 import { Calculator } from "./App.js";
 import * as serviceWorker from "./serviceWorker";
+
+ReactGA.initialize('UA-142836926-3');
 
 const calculator = document.getElementById("calc");
 
@@ -18,6 +21,11 @@ document.getElementById("classLvl").addEventListener(
 function showCalc(charClass, charLvl, database) {
   ReactDOM.unmountComponentAtNode(calculator);
   let skillSet = new SkillSet(charClass, database.skills);
+  ReactGA.event({
+    category: 'Form',
+    action: 'Submit',
+    label: (charClass + " " + charLvl)
+  });
   ReactDOM.render(
     <Calculator
       level={parseInt(charLvl)}
@@ -32,6 +40,11 @@ function showCalc(charClass, charLvl, database) {
 window.onload = function() {
   let initialProperties = getUrlVars();
   if (Object.keys(initialProperties).length !== 0) {
+    ReactGA.event({
+      category: 'Form',
+      action: 'Import',
+      label: (initialProperties.className + " " + initialProperties.level)
+    });
     let initialStats = {};
     initialStats.statPts = parseInt(initialProperties.statPts);
     initialStats.strength = parseInt(initialProperties.strength);
@@ -3197,7 +3210,7 @@ const itemDatabase = [{
     type: "cape",
     rarity: "Set",
     set: "Przebranie Ludobójcy",
-    image: "[www.taernopedia.pl][780]Oblicze20Sprawcy.png",
+    image: "[www.taernopedia.pl][239]CaC582un20LudzkoC59Bci.png",
     reqLvl: 40,
     power: 7,
     knowledge: 8,
@@ -3895,7 +3908,7 @@ const itemDatabase = [{
   },
   {
     name: "Korona Jastrzębia",
-    type: "pants",
+    type: "helmet",
     rarity: "Set",
     class: "archer",
     set: "Oko Bogów",
@@ -4070,7 +4083,7 @@ const itemDatabase = [{
     rarity: "Set",
     class: "firemage",
     set: "Szaty Płynnego Ognia",
-    image: "Rękawice_Wulkanów.jpg",
+    image: "Pas_Ognia.jpg",
     reqLvl: 50,
     reqPow: 40,
     power: 10,
