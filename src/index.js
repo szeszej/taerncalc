@@ -209,7 +209,7 @@ window.onload = function() {
     initialSkills.skillPts = parseInt(initialProperties.skillPts);
     ReactDOM.render(
       <Calculator
-        level={initialProperties.level}
+        level={parseInt(initialProperties.level)}
         class={skillSet}
         className={initialProperties.className}
         items={taernDatabase.items}

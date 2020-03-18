@@ -42,6 +42,10 @@ class Calculator extends React.Component {
       });
     }
   }
+  componentDidMount() {
+    let charClass = document.getElementById("charClass");
+    charClass.value = this.props.className;
+  }
   componentDidUpdate(prevProps, prevState) {
     let charLvl = document.getElementById("charLvl");
     charLvl.value = this.state.level;
