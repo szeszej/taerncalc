@@ -219,23 +219,25 @@ class Equipment extends React.Component {
     });
   }
   unequipItems() {
-    this.setState({
-      equipment: {
-        armor: null,
-        helmet: null,
-        neck: null,
-        gloves: null,
-        cape: null,
-        weapon: null,
-        special: null,
-        shield: null,
-        pants: null,
-        belt: null,
-        ring1: null,
-        ring2: null,
-        boots: null
-      }
-    });
+    if (window.confirm("Czy na pewno chcesz zdjąć wszystkie przedmioty?")) {
+      this.setState({
+        equipment: {
+          armor: null,
+          helmet: null,
+          neck: null,
+          gloves: null,
+          cape: null,
+          weapon: null,
+          special: null,
+          shield: null,
+          pants: null,
+          belt: null,
+          ring1: null,
+          ring2: null,
+          boots: null
+        }
+      });
+    }
   }
   render() {
     let classBackground = {
