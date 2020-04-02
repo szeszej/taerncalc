@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactGA from 'react-ga';
 import "./styles/index.scss";
-import { Calculator } from "./App.js";
+import {
+  Calculator
+} from "./App.js";
 import * as serviceWorker from "./serviceWorker";
 
 ReactGA.initialize('UA-142836926-3');
@@ -18,22 +20,6 @@ document.getElementById("classLvl").addEventListener(
   false
 );
 
-(function() {
-	if (!localStorage.getItem('cookieconsent')) {
-		document.body.innerHTML += `
-		<div class="cookieconsent" style="position:fixed;padding:20px;left:0;bottom:0;background-color:#000;color:#FFF;text-align:center;width:100%;z-index:99999;">
-			Ta strona używa cookies. Kontynuując używanie jej, zgadzasz się na ich użycie w celach analitycznych.
-			<a href="#" style="color:#CCCCCC;">Rozumiem</a>
-		</div>
-		`;
-		document.querySelector('.cookieconsent a').onclick = function(e) {
-			e.preventDefault();
-			document.querySelector('.cookieconsent').style.display = 'none';
-			localStorage.setItem('cookieconsent', true);
-		};
-	}
-})();
-
 function showCalc(charClass, charLvl, database) {
   ReactDOM.unmountComponentAtNode(calculator);
   let skillSet = new SkillSet(charClass, database.skills);
@@ -42,18 +28,39 @@ function showCalc(charClass, charLvl, database) {
     action: 'Submit',
     label: (charClass + " " + charLvl)
   });
-  ReactDOM.render(
-    <Calculator
-      level={parseInt(charLvl)}
-      class={skillSet}
-      className={charClass}
-      items={database.items}
+  ReactDOM.render( <
+    Calculator level = {
+      parseInt(charLvl)
+    }
+    class = {
+      skillSet
+    }
+    className = {
+      charClass
+    }
+    items = {
+      database.items
+    }
     />,
     calculator
   );
 }
 
 window.onload = function() {
+
+  if (!localStorage.getItem('cookieconsent')) {
+    document.getElementById('cookieButton').addEventListener(
+      "click",
+      function(event) {
+        document.getElementById('cookieconsent').style.display = 'none';
+        localStorage.setItem('cookieconsent', true);
+      },
+      false
+    );
+  } else {
+    document.getElementById('cookieconsent').style.display = 'none';
+  }
+
   let initialProperties = getUrlVars();
   if (Object.keys(initialProperties).length !== 0) {
     ReactGA.event({
@@ -158,58 +165,58 @@ window.onload = function() {
     if (Object.keys(initialProperties).some(x => /^special+/.test(x))) {
       console.log(initialProperties);
       let special = {};
-      initialProperties.hasOwnProperty("specialname")
-        ? (special.name = initialProperties.specialname)
-        : (special.name = "");
-      initialProperties.hasOwnProperty("specialimage")
-        ? (special.image = initialProperties.specialimage)
-        : (special.image = "");
+      initialProperties.hasOwnProperty("specialname") ?
+        (special.name = initialProperties.specialname) :
+        (special.name = "");
+      initialProperties.hasOwnProperty("specialimage") ?
+        (special.image = initialProperties.specialimage) :
+        (special.image = "");
       special.type = "special";
-      initialProperties.hasOwnProperty("specialstrength")
-        ? (special.strength = parseInt(initialProperties.specialstrength))
-        : (special.strength = 0);
-      initialProperties.hasOwnProperty("specialagility")
-        ? (special.agility = parseInt(initialProperties.specialagility))
-        : (special.agility = 0);
-      initialProperties.hasOwnProperty("specialknowledge")
-        ? (special.knowledge = parseInt(initialProperties.specialknowledge))
-        : (special.knowledge = 0);
-      initialProperties.hasOwnProperty("specialpower")
-        ? (special.power = parseInt(initialProperties.specialpower))
-        : (special.power = 0);
-      initialProperties.hasOwnProperty("specialhp")
-        ? (special.hp = parseInt(initialProperties.specialhp))
-        : (special.hp = 0);
-      initialProperties.hasOwnProperty("specialmana")
-        ? (special.mana = parseInt(initialProperties.specialmana))
-        : (special.mana = 0);
-      initialProperties.hasOwnProperty("specialmana")
-        ? (special.endurance = parseInt(initialProperties.specialendurance))
-        : (special.endurance = 0);
-      initialProperties.hasOwnProperty("specialcutRes")
-        ? (special.cutRes = parseInt(initialProperties.specialcutRes))
-        : (special.cutRes = 0);
-      initialProperties.hasOwnProperty("specialbluntRes")
-        ? (special.bluntRes = parseInt(initialProperties.specialbluntRes))
-        : (special.bluntRes = 0);
-      initialProperties.hasOwnProperty("specialpierceRes")
-        ? (special.pierceRes = parseInt(initialProperties.specialpierceRes))
-        : (special.pierceRes = 0);
-      initialProperties.hasOwnProperty("specialdamage")
-        ? (special.damage = parseInt(initialProperties.specialdamage))
-        : (special.damage = 0);
-      initialProperties.hasOwnProperty("specialfireRes")
-        ? (special.fireRes = parseInt(initialProperties.specialfireRes))
-        : (special.fireRes = 0);
-      initialProperties.hasOwnProperty("specialfrostRes")
-        ? (special.frostRes = parseInt(initialProperties.specialfrostRes))
-        : (special.frostRes = 0);
-      initialProperties.hasOwnProperty("specialenergyRes")
-        ? (special.energyRes = parseInt(initialProperties.specialenergyRes))
-        : (special.energyRes = 0);
-      initialProperties.hasOwnProperty("specialcurseRes")
-        ? (special.curseRes = parseInt(initialProperties.specialcurseRes))
-        : (special.curseRes = 0);
+      initialProperties.hasOwnProperty("specialstrength") ?
+        (special.strength = parseInt(initialProperties.specialstrength)) :
+        (special.strength = 0);
+      initialProperties.hasOwnProperty("specialagility") ?
+        (special.agility = parseInt(initialProperties.specialagility)) :
+        (special.agility = 0);
+      initialProperties.hasOwnProperty("specialknowledge") ?
+        (special.knowledge = parseInt(initialProperties.specialknowledge)) :
+        (special.knowledge = 0);
+      initialProperties.hasOwnProperty("specialpower") ?
+        (special.power = parseInt(initialProperties.specialpower)) :
+        (special.power = 0);
+      initialProperties.hasOwnProperty("specialhp") ?
+        (special.hp = parseInt(initialProperties.specialhp)) :
+        (special.hp = 0);
+      initialProperties.hasOwnProperty("specialmana") ?
+        (special.mana = parseInt(initialProperties.specialmana)) :
+        (special.mana = 0);
+      initialProperties.hasOwnProperty("specialmana") ?
+        (special.endurance = parseInt(initialProperties.specialendurance)) :
+        (special.endurance = 0);
+      initialProperties.hasOwnProperty("specialcutRes") ?
+        (special.cutRes = parseInt(initialProperties.specialcutRes)) :
+        (special.cutRes = 0);
+      initialProperties.hasOwnProperty("specialbluntRes") ?
+        (special.bluntRes = parseInt(initialProperties.specialbluntRes)) :
+        (special.bluntRes = 0);
+      initialProperties.hasOwnProperty("specialpierceRes") ?
+        (special.pierceRes = parseInt(initialProperties.specialpierceRes)) :
+        (special.pierceRes = 0);
+      initialProperties.hasOwnProperty("specialdamage") ?
+        (special.damage = parseInt(initialProperties.specialdamage)) :
+        (special.damage = 0);
+      initialProperties.hasOwnProperty("specialfireRes") ?
+        (special.fireRes = parseInt(initialProperties.specialfireRes)) :
+        (special.fireRes = 0);
+      initialProperties.hasOwnProperty("specialfrostRes") ?
+        (special.frostRes = parseInt(initialProperties.specialfrostRes)) :
+        (special.frostRes = 0);
+      initialProperties.hasOwnProperty("specialenergyRes") ?
+        (special.energyRes = parseInt(initialProperties.specialenergyRes)) :
+        (special.energyRes = 0);
+      initialProperties.hasOwnProperty("specialcurseRes") ?
+        (special.curseRes = parseInt(initialProperties.specialcurseRes)) :
+        (special.curseRes = 0);
       initialEquipment.special = new Item(special);
     } else {
       initialEquipment.special = null;
@@ -223,15 +230,28 @@ window.onload = function() {
     }
     let initialSkills = {};
     initialSkills.skillPts = parseInt(initialProperties.skillPts);
-    ReactDOM.render(
-      <Calculator
-        level={parseInt(initialProperties.level)}
-        class={skillSet}
-        className={initialProperties.className}
-        items={taernDatabase.items}
-        initialStats={initialStats}
-        initialEquipment={initialEquipment}
-        initialSkills={initialSkills}
+    ReactDOM.render( <
+      Calculator level = {
+        parseInt(initialProperties.level)
+      }
+      class = {
+        skillSet
+      }
+      className = {
+        initialProperties.className
+      }
+      items = {
+        taernDatabase.items
+      }
+      initialStats = {
+        initialStats
+      }
+      initialEquipment = {
+        initialEquipment
+      }
+      initialSkills = {
+        initialSkills
+      }
       />,
       calculator
     );
@@ -263,8 +283,8 @@ const skillDatabase = {
         Podstawa rycerskiego rzemiosła.Cios ćwiczony przez Rycerzy na każdym dworze Taernu.Celny i błyskawiczny atak bronią, zaskakujący przeciwnika.Silniejszy i celniejszy niż podstawowy Cios bronią. <
         /p> <
         p > Dostępne od 2 poziomu doświadczenia < /p> <
-        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
-        /div>
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -276,59 +296,59 @@ const skillDatabase = {
         td > Poziom Um < /td> <
         td > Obrażenia < /td> <
         td > Szansa trafienia < /td> <
-        td > Kondycja < /td> <
-        /tr> <
+        td > Kondycja < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 110 % < /td> <
         td > 120 % < /td> <
-        td > 12 < /td> <
-        /tr> <
+        td > 12 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 120 % < /td> <
         td > 125 % < /td> <
-        td > 14 < /td> <
-        /tr> <
+        td > 14 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 130 % < /td> <
         td > 130 % < /td> <
-        td > 16 < /td> <
-        /tr> <
+        td > 16 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 140 % < /td> <
         td > 135 % < /td> <
-        td > 18 < /td> <
-        /tr> <
+        td > 18 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 150 % < /td> <
         td > 140 % < /td> <
-        td > 19 < /td> <
-        /tr> <
+        td > 19 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 160 % < /td> <
         td > 145 % < /td> <
-        td > 21 < /td> <
-        /tr> <
+        td > 21 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 170 % < /td> <
         td > 155 % < /td> <
-        td > 23 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 23 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Szybkie_Cięcie.jpg"
     },
@@ -341,8 +361,8 @@ const skillDatabase = {
         Wieloletnie treningi sztuk walki i dbanie o kondycję fizyczną sprawiły, że większość Rycerzy zaniedbała swoją wiedzę(nie mylić z ich stroną duchową), przez co stali się bardziej podatni na uroki.Opracowany przeciwko magom, czarownikom i łucznikom Mierzony cios jest techniką mającą odwrócić tę tendencję.Skutecznie przeprowadzony oszałamia ofiarę obniżając efektywność jej ataków dystansowych i uroków.Dodatkowo podnosi obrażenia Potężnego uderzenia o 15 % . <
         /p> <
         p > Dostępne od 5 poziomu doświadczenia < /p> <
-        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
-        /div>
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -356,8 +376,8 @@ const skillDatabase = {
         td > Szansa trafienia < /td> <
         td > Kondycja < /td> <
         td > Atak magiczny i dystansowy(szansa trafienia) < /td> <
-        td > Czas < /td> <
-        /tr> <
+        td > Czas < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
@@ -365,8 +385,8 @@ const skillDatabase = {
         td > 100 % < /td> <
         td > 20 < /td> <
         td > -25 % < /td> <
-        td > 3 < /td> <
-        /tr> <
+        td > 3 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
@@ -374,8 +394,8 @@ const skillDatabase = {
         td > 103 % < /td> <
         td > 23 < /td> <
         td > -28 % < /td> <
-        td > 3 < /td> <
-        /tr> <
+        td > 3 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
@@ -383,8 +403,8 @@ const skillDatabase = {
         td > 107 % < /td> <
         td > 26 < /td> <
         td > -31 % < /td> <
-        td > 4 < /td> <
-        /tr> <
+        td > 4 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
@@ -392,8 +412,8 @@ const skillDatabase = {
         td > 110 % < /td> <
         td > 29 < /td> <
         td > -34 % < /td> <
-        td > 4 < /td> <
-        /tr> <
+        td > 4 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
@@ -401,8 +421,8 @@ const skillDatabase = {
         td > 112 % < /td> <
         td > 32 < /td> <
         td > -37 % < /td> <
-        td > 5 < /td> <
-        /tr> <
+        td > 5 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
@@ -410,8 +430,8 @@ const skillDatabase = {
         td > 115 % < /td> <
         td > 35 < /td> <
         td > -41 % < /td> <
-        td > 5 < /td> <
-        /tr> <
+        td > 5 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
@@ -419,10 +439,10 @@ const skillDatabase = {
         td > 118 % < /td> <
         td > 38 < /td> <
         td > -45 % < /td> <
-        td > 5 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 5 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Mierzony_Cios.jpg"
     },
@@ -435,8 +455,8 @@ const skillDatabase = {
         Tarcza to nie płot, za którym można się schować, tarczą trzeba umieć się posługiwać.Do tego służy umiejętność Blok Tarczą.Dzięki morderczemu treningowi Rycerz wie, kiedy i jak należy postawić blok,
         aby udany atak nawet kilku przeciwników zadał minimalne obrażenia.Każdy udany blok jest o 3 % słabszy od poprzedniego i nie wpływa na redukcję obrażeń od żywiołów zaklętą w broniach.Użyta równocześnie Ochrona osłabia o kolejne 3 % skuteczność bloku.Taka zasłona obniża też szansę na trafienie przeciwnika w zwarciu o 22 % . <
         /p> <
-        p > Dostępne od 8 poziomu doświadczenia < /p> <
-        /div>
+        p > Dostępne od 8 poziomu doświadczenia < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -449,66 +469,66 @@ const skillDatabase = {
         td > Ilość bloków < /td> <
         td > Skuteczność bloku < /td> <
         td > Kondycja < /td> <
-        td > Trudność < /td> <
-        /tr> <
+        td > Trudność < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 2 < /td> <
         td > 45 % < /td> <
         td > 20 < /td> <
-        td > 90 < /td> <
-        /tr> <
+        td > 90 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 3 < /td> <
         td > 50 % < /td> <
         td > 23 < /td> <
-        td > 85 < /td> <
-        /tr> <
+        td > 85 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 3 < /td> <
         td > 55 % < /td> <
         td > 26 < /td> <
-        td > 80 < /td> <
-        /tr> <
+        td > 80 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 4 < /td> <
         td > 60 % < /td> <
         td > 29 < /td> <
-        td > 75 < /td> <
-        /tr> <
+        td > 75 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 4 < /td> <
         td > 65 % < /td> <
         td > 32 < /td> <
-        td > 70 < /td> <
-        /tr> <
+        td > 70 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 5 < /td> <
         td > 70 % < /td> <
         td > 35 < /td> <
-        td > 65 < /td> <
-        /tr> <
+        td > 65 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 5 < /td> <
         td > 75 % < /td> <
         td > 38 < /td> <
-        td > 60 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 60 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Blok_Tarczą.jpg"
     },
@@ -522,8 +542,8 @@ const skillDatabase = {
           poprawiania jego warunków fizycznych i zdolności bojowych.Rycerstwo
         to również stan ducha.Obowiązkowe medytacje i mistyczne praktyki umożliwiły członkom rycerskiego stanu wchodzenie w Trans.Nadnaturalne skupienie i niebywała koncentracja sprawiły, że Rycerz w stopniu doskonałym panuje nad swoimi ruchami, dzięki czemu jego trafienia są pewniejsze, a rany zadawane wrogom - głębsze. <
         /p> <
-        p > Dostępne od 12 poziomu doświadczenia < /p> <
-        /div>
+        p > Dostępne od 12 poziomu doświadczenia < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -537,8 +557,8 @@ const skillDatabase = {
         td > Atak fizyczny(szansa trafienia) < /td> <
         td > Czas < /td> <
         td > Mana < /td> <
-        td > Trudność < /td> <
-        /tr> <
+        td > Trudność < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
@@ -546,8 +566,8 @@ const skillDatabase = {
         td > +20 % < /td> <
         td > 3 < /td> <
         td > 20 < /td> <
-        td > 85 < /td> <
-        /tr> <
+        td > 85 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
@@ -555,8 +575,8 @@ const skillDatabase = {
         td > +23 % < /td> <
         td > 3 < /td> <
         td > 23 < /td> <
-        td > 80 < /td> <
-        /tr> <
+        td > 80 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
@@ -564,8 +584,8 @@ const skillDatabase = {
         td > +26 % < /td> <
         td > 4 < /td> <
         td > 26 < /td> <
-        td > 75 < /td> <
-        /tr> <
+        td > 75 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
@@ -573,8 +593,8 @@ const skillDatabase = {
         td > +29 % < /td> <
         td > 4 < /td> <
         td > 29 < /td> <
-        td > 70 < /td> <
-        /tr> <
+        td > 70 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
@@ -582,8 +602,8 @@ const skillDatabase = {
         td > +32 % < /td> <
         td > 5 < /td> <
         td > 32 < /td> <
-        td > 65 < /td> <
-        /tr> <
+        td > 65 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
@@ -591,8 +611,8 @@ const skillDatabase = {
         td > +35 % < /td> <
         td > 5 < /td> <
         td > 35 < /td> <
-        td > 60 < /td> <
-        /tr> <
+        td > 60 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
@@ -600,10 +620,10 @@ const skillDatabase = {
         td > +38 % < /td> <
         td > 5 < /td> <
         td > 38 < /td> <
-        td > 55 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 55 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Trans.jpg"
     },
@@ -615,8 +635,8 @@ const skillDatabase = {
         p >
         Rycerz to przede wszystkim przewodnik i obrońca.Etos, który definiuje tę klasę społeczną, nakazuje mu wręcz rzucenie się na ratunek, gdy zagrożone jest życie towarzysza.Umiejętność Ochrony daje szansę, że ataki przeciwników wymierzone w bronioną przez rycerza postać zostaną przekierowane na rycerza.Działa na ataki wręcz oraz dystansowe, z wyłączeniem ataków obszarowych.Użyta ochrona osłabia o 3 % skuteczność Bloku Tarczą. <
         /p> <
-        p > Dostępne od 15 poziomu doświadczenia < /p> <
-        /div>
+        p > Dostępne od 15 poziomu doświadczenia < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -628,59 +648,59 @@ const skillDatabase = {
         td > Poziom Um < /td> <
         td > Skuteczność Ochrony < /td> <
         td > Kondycja < /td> <
-        td > Trudność < /td> <
-        /tr> <
+        td > Trudność < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 70 % < /td> <
         td > 40 < /td> <
-        td > 85 < /td> <
-        /tr> <
+        td > 85 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 74 % < /td> <
         td > 46 < /td> <
-        td > 80 < /td> <
-        /tr> <
+        td > 80 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 78 % < /td> <
         td > 52 < /td> <
-        td > 75 < /td> <
-        /tr> <
+        td > 75 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 82 % < /td> <
         td > 58 < /td> <
-        td > 70 < /td> <
-        /tr> <
+        td > 70 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 86 % < /td> <
         td > 64 < /td> <
-        td > 65 < /td> <
-        /tr> <
+        td > 65 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 90 % < /td> <
         td > 70 < /td> <
-        td > 60 < /td> <
-        /tr> <
+        td > 60 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 95 % < /td> <
         td > 76 < /td> <
-        td > 55 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 55 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Ochrona.jpg"
     },
@@ -693,8 +713,8 @@ const skillDatabase = {
         Nawet tak opanowany i skoncentrowany Taernijczyk jak Rycerz czasami wpada w furię.Poskramiając zło i niesprawiedliwość nie zawsze zachowuje właściwe proporcje i czasami po prostu pragnie pierdolnąć najmocniej jak potrafi.Do tego właśnie służy Potężne uderzenie.Bardzo energochłonny atak zadaje ogromną ilość ran i dziesiątkuję przeciwników.Zawczasu oszołomione postacie otrzymują znacznie więcej obrażeń. <
         /p> <
         p > Dostępne od 18 poziomu doświadczenia < /p> <
-        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
-        /div>
+        p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -706,59 +726,59 @@ const skillDatabase = {
         td > Poziom Um < /td> <
         td > Obrażenia < /td> <
         td > Szansa trafienia < /td> <
-        td > Kondycja < /td> <
-        /tr> <
+        td > Kondycja < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 160 % < /td> <
         td > 100 % < /td> <
-        td > 20 < /td> <
-        /tr> <
+        td > 20 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 175 % < /td> <
         td > 103 % < /td> <
-        td > 23 < /td> <
-        /tr> <
+        td > 23 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 190 % < /td> <
         td > 107 % < /td> <
-        td > 26 < /td> <
-        /tr> <
+        td > 26 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 205 % < /td> <
         td > 110 % < /td> <
-        td > 29 < /td> <
-        /tr> <
+        td > 29 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 220 % < /td> <
         td > 112 % < /td> <
-        td > 32 < /td> <
-        /tr> <
+        td > 32 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 235 % < /td> <
         td > 114 % < /td> <
-        td > 35 < /td> <
-        /tr> <
+        td > 35 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 255 % < /td> <
         td > 117 % < /td> <
-        td > 38 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 38 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Potężne_Uderzenie.jpg"
     },
@@ -770,8 +790,8 @@ const skillDatabase = {
         p >
         Rycerz to prawy i sprawiedliwy człowiek walczący z podłością i niegodziwością.Wyrazem tego jest umiejętność wywołania wokół siebie aury, która daje mu duchową odporność na uroki oraz zmniejsza jego podatność na czary przeciwników.Aura może służyć tak Rycerzowi jak i wybranej przez niego sojuszniczej postaci. <
         /p> <
-        p > Dostępne od 22 poziomu doświadczenia < /p> <
-        /div>
+        p > Dostępne od 22 poziomu doświadczenia < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -785,8 +805,8 @@ const skillDatabase = {
         td > Odporność na obrażenia od magii < /td> <
         td > Czas < /td> <
         td > Mana < /td> <
-        td > Trudność < /td> <
-        /tr> <
+        td > Trudność < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
@@ -794,8 +814,8 @@ const skillDatabase = {
         td > +15 % < /td> <
         td > 3 < /td> <
         td > 30 < /td> <
-        td > 85 < /td> <
-        /tr> <
+        td > 85 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
@@ -803,8 +823,8 @@ const skillDatabase = {
         td > +18 % < /td> <
         td > 3 < /td> <
         td > 35 < /td> <
-        td > 80 < /td> <
-        /tr> <
+        td > 80 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
@@ -812,8 +832,8 @@ const skillDatabase = {
         td > +21 % < /td> <
         td > 4 < /td> <
         td > 39 < /td> <
-        td > 75 < /td> <
-        /tr> <
+        td > 75 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
@@ -821,8 +841,8 @@ const skillDatabase = {
         td > +24 % < /td> <
         td > 4 < /td> <
         td > 44 < /td> <
-        td > 70 < /td> <
-        /tr> <
+        td > 70 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
@@ -830,8 +850,8 @@ const skillDatabase = {
         td > +27 % < /td> <
         td > 5 < /td> <
         td > 48 < /td> <
-        td > 65 < /td> <
-        /tr> <
+        td > 65 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
@@ -839,8 +859,8 @@ const skillDatabase = {
         td > +30 % < /td> <
         td > 5 < /td> <
         td > 53 < /td> <
-        td > 60 < /td> <
-        /tr> <
+        td > 60 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
@@ -848,10 +868,10 @@ const skillDatabase = {
         td > +34 % < /td> <
         td > 5 < /td> <
         td > 57 < /td> <
-        td > 55 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 55 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Aura_Czystości.jpg"
     },
@@ -863,8 +883,8 @@ const skillDatabase = {
         p >
         Ofiarność i chęć czynienia dobra jest priorytetem Rycerza, dlatego w momencie zagrożenia wartości nadrzędnych Rycerz, rzuca na siebie urok pozytywny, który obniża jego obronę, wzmacnia za to ataki.Odsłaniając się i odnosząc większe obrażenia, dziesiątkuje wrogów broniąc zasad, za które gotów jest oddać życie. <
         /p> <
-        p > Dostępne od 26 poziomu doświadczenia < /p> <
-        /div>
+        p > Dostępne od 26 poziomu doświadczenia < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -878,8 +898,8 @@ const skillDatabase = {
         td > Obrona fizyczna < /td> <
         td > Czas < /td> <
         td > Mana < /td> <
-        td > Trudność < /td> <
-        /tr> <
+        td > Trudność < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
@@ -887,8 +907,8 @@ const skillDatabase = {
         td > -15 % < /td> <
         td > 5 < /td> <
         td > 30 < /td> <
-        td > 90 < /td> <
-        /tr> <
+        td > 90 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
@@ -896,8 +916,8 @@ const skillDatabase = {
         td > -16 % < /td> <
         td > 5 < /td> <
         td > 35 < /td> <
-        td > 85 < /td> <
-        /tr> <
+        td > 85 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
@@ -905,8 +925,8 @@ const skillDatabase = {
         td > -17 % < /td> <
         td > 6 < /td> <
         td > 39 < /td> <
-        td > 80 < /td> <
-        /tr> <
+        td > 80 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
@@ -914,8 +934,8 @@ const skillDatabase = {
         td > -18 % < /td> <
         td > 6 < /td> <
         td > 44 < /td> <
-        td > 75 < /td> <
-        /tr> <
+        td > 75 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
@@ -923,8 +943,8 @@ const skillDatabase = {
         td > -19 % < /td> <
         td > 7 < /td> <
         td > 48 < /td> <
-        td > 70 < /td> <
-        /tr> <
+        td > 70 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
@@ -932,8 +952,8 @@ const skillDatabase = {
         td > -20 % < /td> <
         td > 7 < /td> <
         td > 52 < /td> <
-        td > 65 < /td> <
-        /tr> <
+        td > 65 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
@@ -941,10 +961,10 @@ const skillDatabase = {
         td > -20 % < /td> <
         td > 7 < /td> <
         td > 57 < /td> <
-        td > 60 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 60 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Poświęcenie.jpg"
     },
@@ -957,8 +977,8 @@ const skillDatabase = {
         Rycerz, wykorzystując swoje naturalne zdolności przywódcze i charyzmę, skupia wokół siebie całą drużynę.Dzięki zapalczywym mowom i okrzykom wznoszonym na polu walki, wśród walczących po swojej stronie wywołuje poczucie jedności, które zwiększa ich zapał i siłę.Postacie pod wpływem siły jedności zadają większe obrażenia oraz są skuteczniejsze. <
         /p> <
         p > Dostępne od 30 poziomu doświadczenia < /p> <
-        p > Zwiększa obrażenia oraz celność całej drużyny < /p> <
-        /div>
+        p > Zwiększa obrażenia oraz celność całej drużyny < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -973,8 +993,8 @@ const skillDatabase = {
         td > Czas < /td> <
         td > Kondycja < /td> <
         td > Mana < /td> <
-        td > Trudność < /td> <
-        /tr> <
+        td > Trudność < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
@@ -983,8 +1003,8 @@ const skillDatabase = {
         td > 3 < /td> <
         td > 15 < /td> <
         td > 40 < /td> <
-        td > 85 < /td> <
-        /tr> <
+        td > 85 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
@@ -993,8 +1013,8 @@ const skillDatabase = {
         td > 3 < /td> <
         td > 18 < /td> <
         td > 46 < /td> <
-        td > 80 < /td> <
-        /tr> <
+        td > 80 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
@@ -1003,8 +1023,8 @@ const skillDatabase = {
         td > 4 < /td> <
         td > 20 < /td> <
         td > 52 < /td> <
-        td > 75 < /td> <
-        /tr> <
+        td > 75 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
@@ -1013,8 +1033,8 @@ const skillDatabase = {
         td > 4 < /td> <
         td > 22 < /td> <
         td > 58 < /td> <
-        td > 70 < /td> <
-        /tr> <
+        td > 70 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
@@ -1023,8 +1043,8 @@ const skillDatabase = {
         td > 5 < /td> <
         td > 24 < /td> <
         td > 64 < /td> <
-        td > 65 < /td> <
-        /tr> <
+        td > 65 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
@@ -1033,8 +1053,8 @@ const skillDatabase = {
         td > 5 < /td> <
         td > 27 < /td> <
         td > 70 < /td> <
-        td > 60 < /td> <
-        /tr> <
+        td > 60 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
@@ -1043,10 +1063,10 @@ const skillDatabase = {
         td > 5 < /td> <
         td > 28 < /td> <
         td > 76 < /td> <
-        td > 55 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 55 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Siła_jedności.jpg"
     }
@@ -1299,8 +1319,8 @@ class SkillSet {
         /p> <
         p > Dostępne od 1 poziomu doświadczenia < /p> <
         p > Atak fizyczny < /p> <
-        p > OBR: 0.7 * Siła + 0.5 * Zręczność + (70 % lub broń) < /p> <
-        /div>
+        p > OBR: 0.7 * Siła + 0.5 * Zręczność + (70 % lub broń) < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -1312,59 +1332,59 @@ class SkillSet {
         td > Poziom Um < /td> <
         td > Obrażenia < /td> <
         td > Szansa trafienia < /td> <
-        td > Kondycja < /td> <
-        /tr> <
+        td > Kondycja < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 80 % < /td> <
         td > +20 % < /td> <
-        td > 8 < /td> <
-        /tr> <
+        td > 8 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 85 % < /td> <
         td > +25 % < /td> <
-        td > 9 < /td> <
-        /tr> <
+        td > 9 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 90 % < /td> <
         td > +30 % < /td> <
-        td > 10 < /td> <
-        /tr> <
+        td > 10 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 95 % < /td> <
         td > +35 % < /td> <
-        td > 12 < /td> <
-        /tr> <
+        td > 12 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 100 % < /td> <
         td > +40 % < /td> <
-        td > 13 < /td> <
-        /tr> <
+        td > 13 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 110 % < /td> <
         td > +45 % < /td> <
-        td > 14 < /td> <
-        /tr> <
+        td > 14 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 120 % < /td> <
         td > +50 % < /td> <
-        td > 15 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 15 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Cios_pięścią.jpg"
     };
@@ -1385,8 +1405,8 @@ class SkillSet {
         /p> <
         p > Dostępne od 1 poziomu doświadczenia < /p> <
         p > Atak psychiczny < /p> <
-        p > Efekt: Strach < /p> <
-        /div>
+        p > Efekt: Strach < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -1398,59 +1418,59 @@ class SkillSet {
         td > Poziom Um < /td> <
         td > Czas trwania < /td> <
         td > Szansa trafienia wszelkich ataków < /td> <
-        td > Mana < /td> <
-        /tr> <
+        td > Mana < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 5 < /td> <
         td > -15 % < /td> <
-        td > 30 < /td> <
-        /tr> <
+        td > 30 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 5 < /td> <
         td > -20 % < /td> <
-        td > 34 < /td> <
-        /tr> <
+        td > 34 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 6 < /td> <
         td > -25 % < /td> <
-        td > 39 < /td> <
-        /tr> <
+        td > 39 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 6 < /td> <
         td > -30 % < /td> <
-        td > 44 < /td> <
-        /tr> <
+        td > 44 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 6 < /td> <
         td > -35 % < /td> <
-        td > 48 < /td> <
-        /tr> <
+        td > 48 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 6 < /td> <
         td > -40 % < /td> <
-        td > 53 < /td> <
-        /tr> <
+        td > 53 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 6 < /td> <
         td > -45 % < /td> <
-        td > 57 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 57 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Okrzyk_bojowy.jpg"
     };
@@ -1470,8 +1490,8 @@ class SkillSet {
         /p> <
         p > Dostępne od 1 poziomu doświadczenia < /p> <
         p > Atak dystansowy < /p> <
-        p > OBR: (0.7 * Siła + 0.3 * Zręczność) * 1.8 < /p> <
-        /div>
+        p > OBR: (0.7 * Siła + 0.3 * Zręczność) * 1.8 < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -1483,59 +1503,59 @@ class SkillSet {
         td > Poziom Um < /td> <
         td > Obrażenia < /td> <
         td > Szansa trafienia < /td> <
-        td > Kondycja < /td> <
-        /tr> <
+        td > Kondycja < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 80 % < /td> <
         td > +20 % < /td> <
-        td > 8 < /td> <
-        /tr> <
+        td > 8 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 85 % < /td> <
         td > +25 % < /td> <
-        td > 9 < /td> <
-        /tr> <
+        td > 9 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 90 % < /td> <
         td > +30 % < /td> <
-        td > 10 < /td> <
-        /tr> <
+        td > 10 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 95 % < /td> <
         td > +35 % < /td> <
-        td > 12 < /td> <
-        /tr> <
+        td > 12 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 100 % < /td> <
         td > +40 % < /td> <
-        td > 13 < /td> <
-        /tr> <
+        td > 13 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 110 % < /td> <
         td > +45 % < /td> <
-        td > 14 < /td> <
-        /tr> <
+        td > 14 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 120 % < /td> <
         td > +50 % < /td> <
-        td > 15 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 15 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Rzut_kamieniem.jpg"
     };
@@ -1556,8 +1576,8 @@ class SkillSet {
         p > Dostępne od 1 poziomu doświadczenia < /p> <
         p > Atak dystansowy < /p> <
         p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
-        p > Wymagania: założona broń dystansowa < /p> <
-        /div>
+        p > Wymagania: założona broń dystansowa < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -1569,59 +1589,59 @@ class SkillSet {
         td > Poziom Um < /td> <
         td > Obrażenia < /td> <
         td > Szansa trafienia < /td> <
-        td > Kondycja < /td> <
-        /tr> <
+        td > Kondycja < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 100 % < /td> <
         td > +0 % < /td> <
-        td > 10 < /td> <
-        /tr> <
+        td > 10 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 110 % < /td> <
         td > +3 % < /td> <
-        td > 11 < /td> <
-        /tr> <
+        td > 11 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 120 % < /td> <
         td > +7 % < /td> <
-        td > 13 < /td> <
-        /tr> <
+        td > 13 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 130 % < /td> <
         td > +10 % < /td> <
-        td > 14 < /td> <
-        /tr> <
+        td > 14 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 140 % < /td> <
         td > +12 % < /td> <
-        td > 16 < /td> <
-        /tr> <
+        td > 16 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 150 % < /td> <
         td > +15 % < /td> <
-        td > 17 < /td> <
-        /tr> <
+        td > 17 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 160 % < /td> <
         td > +20 % < /td> <
-        td > 19 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 19 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Strzał.jpg"
     };
@@ -1642,8 +1662,8 @@ class SkillSet {
         p > Dostępne od 1 poziomu doświadczenia < /p> <
         p > Atak fizyczny < /p> <
         p > OBR: 0.7 * Siła + 0.3 * Zręczność + broń < /p> <
-        p > Wymagania: założona broń biała < /p> <
-        /div>
+        p > Wymagania: założona broń biała < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -1655,59 +1675,59 @@ class SkillSet {
         td > Poziom Um < /td> <
         td > Obrażenia < /td> <
         td > Szansa trafienia < /td> <
-        td > Kondycja < /td> <
-        /tr> <
+        td > Kondycja < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 100 % < /td> <
         td > +0 % < /td> <
-        td > 10 < /td> <
-        /tr> <
+        td > 10 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 110 % < /td> <
         td > +3 % < /td> <
-        td > 12 < /td> <
-        /tr> <
+        td > 12 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 120 % < /td> <
         td > +7 % < /td> <
-        td > 13 < /td> <
-        /tr> <
+        td > 13 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 130 % < /td> <
         td > +10 % < /td> <
-        td > 15 < /td> <
-        /tr> <
+        td > 15 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 140 % < /td> <
         td > +12 % < /td> <
-        td > 16 < /td> <
-        /tr> <
+        td > 16 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 150 % < /td> <
         td > +15 % < /td> <
-        td > 18 < /td> <
-        /tr> <
+        td > 18 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 160 % < /td> <
         td > +20 % < /td> <
-        td > 19 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 19 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Zwykły_atak.jpg"
     };
@@ -1729,8 +1749,8 @@ class SkillSet {
         /p> <
         p > Dostępne od 1 poziomu doświadczenia < /p> <
         p > Ostatnia czynność w walce < /p> <
-        p > Nie można awansować na wyższy poziom < /p> <
-        /div>
+        p > Nie można awansować na wyższy poziom < /p> < /
+        div >
       ),
       image: "images/Ucieczka.jpg"
     };
@@ -1749,8 +1769,8 @@ class SkillSet {
         Umiejętność wykształcona przez wojowników samotników.Przemierzając rozległe krainy, udręczeni walką o przetrwanie i samotnością wykształcili w sobie unikalny system porozumiewania się ze zwierzakami.Dzięki niemu potrafią współpracować z więcej niż jednym zwierzem w drużynie. <
         /p> <
         p > Dostępne od 35 poziomu doświadczenia < /p> <
-        p > Awansować można o jeden poziom co 10 lvl postaci < /p> <
-        /div>
+        p > Awansować można o jeden poziom co 10 lvl postaci < /p> < /
+        div >
       ),
       table: ( <
         table >
@@ -1761,52 +1781,52 @@ class SkillSet {
         <
         td > Poziom Um < /td> <
         td > Suma Rang < /td> <
-        td > Maksymalna ilość petów w drużynie < /td> <
-        /tr> <
+        td > Maksymalna ilość petów w drużynie < /td> < /
+        tr > <
         tr >
         <
         td > I < /td> <
         td > 3 < /td> <
-        td > 2 < /td> <
-        /tr> <
+        td > 2 < /td> < /
+        tr > <
         tr >
         <
         td > II < /td> <
         td > 4 < /td> <
-        td > 2 < /td> <
-        /tr> <
+        td > 2 < /td> < /
+        tr > <
         tr >
         <
         td > III < /td> <
         td > 5 < /td> <
-        td > 2 < /td> <
-        /tr> <
+        td > 2 < /td> < /
+        tr > <
         tr >
         <
         td > IV < /td> <
         td > 6 < /td> <
-        td > 2 < /td> <
-        /tr> <
+        td > 2 < /td> < /
+        tr > <
         tr >
         <
         td > V < /td> <
         td > 8 < /td> <
-        td > 2 < /td> <
-        /tr> <
+        td > 2 < /td> < /
+        tr > <
         tr >
         <
         td > VI < /td> <
         td > 12 < /td> <
-        td > 3 < /td> <
-        /tr> <
+        td > 3 < /td> < /
+        tr > <
         tr >
         <
         td > VII < /td> <
         td > 19 < /td> <
-        td > 3 < /td> <
-        /tr> <
-        /tbody> <
-        /table>
+        td > 3 < /td> < /
+        tr > <
+        /tbody> < /
+        table >
       ),
       image: "images/Wataha.jpg"
     };
@@ -1826,8 +1846,8 @@ class SkillSet {
         /p> <
         p > Dostępne od 1 poziomu doświadczenia < /p> <
         p > Pobiera 30 kondycji. < /p> <
-        p > Nie można awansować na wyższy poziom < /p> <
-        /div>
+        p > Nie można awansować na wyższy poziom < /p> < /
+        div >
       ),
       image: "images/Rootbreaker.jpg"
     };

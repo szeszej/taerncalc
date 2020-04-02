@@ -142,6 +142,20 @@ body {
     grid-area: rightsidebar;
   }
 
+  #cookieconsent {
+    position:fixed;
+    padding:20px;
+    left:0;
+    bottom:0;
+    background-color:#000;
+    color:#FFF;
+    text-align:center;
+    width:100%;
+    z-index:99999;
+    #cookieButton {
+      margin-left: 1em;
+    }
+  }
   .calculator {
     padding-top: 2.5em;
     padding-bottom: 4em;
