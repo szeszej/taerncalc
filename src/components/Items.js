@@ -217,7 +217,7 @@ class ItemTooltip extends React.Component {
             Zestaw: {this.props.item.set}
           </p>
         ) : null}
-        {this.props.name ? <hr /> : null}
+        {this.props.item.name ? <hr /> : null}
         {this.props.item.class ? (
           <p
             style={

@@ -18,6 +18,22 @@ document.getElementById("classLvl").addEventListener(
   false
 );
 
+(function() {
+	if (!localStorage.getItem('cookieconsent')) {
+		document.body.innerHTML += `
+		<div class="cookieconsent" style="position:fixed;padding:20px;left:0;bottom:0;background-color:#000;color:#FFF;text-align:center;width:100%;z-index:99999;">
+			Ta strona używa cookies. Kontynuując używanie jej, zgadzasz się na ich użycie w celach analitycznych.
+			<a href="#" style="color:#CCCCCC;">Rozumiem</a>
+		</div>
+		`;
+		document.querySelector('.cookieconsent a').onclick = function(e) {
+			e.preventDefault();
+			document.querySelector('.cookieconsent').style.display = 'none';
+			localStorage.setItem('cookieconsent', true);
+		};
+	}
+})();
+
 function showCalc(charClass, charLvl, database) {
   ReactDOM.unmountComponentAtNode(calculator);
   let skillSet = new SkillSet(charClass, database.skills);
