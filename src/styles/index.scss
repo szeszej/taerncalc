@@ -24,6 +24,24 @@ body {
   margin: 0;
   background: black;
 
+  .exportLink {
+    display: flex;
+    align-items: center;
+
+    #exportOutput {
+      resize: none;
+      height: 1.5em;
+      width: 15em;
+      line-height: 1.5em;
+      margin-left: 1em;
+      margin-right: 1em;
+      text-align: center;
+    }
+    button {
+      font-size: 0.9em;
+    }
+  }
+
   button,
   input,
   select {
