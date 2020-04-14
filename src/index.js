@@ -1229,8 +1229,8 @@ const skillDatabase = {
       image: "images/Precyzyjny_strzał.jpg"
     },
     skill2: {
-      name: "Twoja stara",
-      image: "images/Twoja_stara.jpg"
+      name: "Krótkie spięcie",
+      image: "images/Krótkie_spięcie.jpeg"
     },
     skill3: {
       name: "Zatruta strzała",
