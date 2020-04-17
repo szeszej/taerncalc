@@ -282,6 +282,7 @@ class Equipment extends React.Component {
           unequipItem={this.unequipItem}
           showItemsList={this.showItemsList}
           hideItemsList={this.hideItemsList}
+          isEquivalent={this.isEquivalent}
         />
       </div>
     );
@@ -425,6 +426,31 @@ class SpecialSlot extends React.Component {
     this.hideTooltip = this.hideTooltip.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.inSlot !== null && !this.props.isEquivalent(prevProps, this.props) ) {
+      this.setState(
+        {
+          name: this.props.inSlot.name,
+          image: this.props.inSlot.image,
+          strength: this.props.inSlot.strength,
+          agility: this.props.inSlot.agility,
+          power: this.props.inSlot.power,
+          knowledge: this.props.inSlot.knowledge,
+          hp: this.props.inSlot.hp,
+          endurance: this.props.inSlot.endurance,
+          mana: this.props.inSlot.mana,
+          damage: this.props.inSlot.damage,
+          fireRes: this.props.inSlot.fireRes,
+          frostRes: this.props.inSlot.frostRes,
+          energyRes: this.props.inSlot.energyRes,
+          curseRes: this.props.inSlot.curseRes,
+          pierceRes: this.props.inSlot.pierceRes,
+          cutRes: this.props.inSlot.cutRes,
+          bluntRes: this.props.inSlot.bluntRes
+        }
+      )
+    }
+  }
   createItem(properties) {
     let specialItem = new Item(properties);
     return this.props.equipItem(specialItem, "special");
@@ -467,7 +493,12 @@ class SpecialSlot extends React.Component {
     this.createItem(this.state);
   }
   handleChangeNumeric(event, property) {
-    this.setState({ [property]: parseInt(event.target.value) });
+    console.log(event.target.value);
+    if (Number.isInteger(parseInt(event.target.value))) {
+      this.setState({ [property]: parseInt(event.target.value) });
+    } else {
+      this.setState({ [property]: 0 });
+    }
   }
   handleChangeString(event, property) {
     this.setState({ [property]: event.target.value });
@@ -556,6 +587,7 @@ class SpecialSlot extends React.Component {
           min={-999}
           max={999}
           placeholder={this.translateProperty(x)}
+          value={this.state[x] === 0 ? "" : this.state[x]}
           onChange={event => this.handleChangeNumeric(event, x)}
         ></input>
       </div>
@@ -587,8 +619,6 @@ class SpecialSlot extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <div
                 className="property"
-                onChange={event => this.handleChangeString(event, "name")}
-                value={this.state.name}
               >
                 <p>Nazwa: </p>
                 <input
@@ -596,18 +626,21 @@ class SpecialSlot extends React.Component {
                   type="text"
                   maxLength={30}
                   placeholder="Wpisz nazwę"
+                  value={this.state.name}
+                  onChange={event => this.handleChangeString(event, "name")}
                 ></input>
               </div>
               <div
                 className="property"
-                onChange={event => this.handleChangeString(event, "image")}
-                value={this.state.image}
+
               >
                 <p>Obrazek: </p>
                 <input
                   className="textInput"
                   type="text"
                   placeholder="Wklej adres obrazka"
+                  value={this.state.image}
+                  onChange={event => this.handleChangeString(event, "image")}
                 ></input>
               </div>
               {propertyInputs}

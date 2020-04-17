@@ -366,3 +366,75 @@
     background-position: center;
   }
 }
+
+@media only screen and (max-width: 520px) {
+  .equipment {
+    .armor,
+    .belt,
+    .boots,
+    .cape,
+    .empty,
+    .gloves,
+    .helmet,
+    .neck,
+    .pants,
+    .ring1,
+    .ring2,
+    .shield,
+    .special,
+    .weapon {
+      width: 5em;
+      height: 5em;
+      background-size: auto 4em;
+      img {
+        max-width: 4em;
+        max-height: 4em;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 450px) {
+
+  .equipment {
+    .armor,
+    .belt,
+    .boots,
+    .cape,
+    .empty,
+    .gloves,
+    .helmet,
+    .neck,
+    .pants,
+    .ring1,
+    .ring2,
+    .shield,
+    .special,
+    .weapon {
+      width: 4em;
+      height: 4em;
+      background-size: auto 3em;
+      position: relative;
+      img {
+        max-width: 3em;
+        max-height: 3em;
+      }
+      .itemsList {
+        margin: 0;
+        margin-left: 2em;
+        right: auto;
+        left: 0;
+        position: fixed;
+        .itemOnList {
+          width: 4em;
+          height: 4em;
+        }
+      }
+      .itemTooltip {
+        left: -3.5em;
+        bottom: 100%;
+        font-size: 0.75em;
+        padding: 3px;
+    }
+    }
+  }
+}

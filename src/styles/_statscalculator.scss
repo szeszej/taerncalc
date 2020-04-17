@@ -100,4 +100,10 @@
   .statsCalculator .stats .linesAndEq .statsAndRes .statLines {
     width: 70%;
   }
+@media only screen and (max-width: 450px) {
+  .statsCalculator .stats .linesAndEq .statsAndRes .resLines,
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines {
+    width: 90%;
+  }
+}
 }

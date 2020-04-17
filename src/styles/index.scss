@@ -327,7 +327,7 @@ body {
     }
   }
 }
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 1025px) {
   .wrapper {
     font-size: 12px;
     grid-template-columns: 100%;
@@ -357,14 +357,14 @@ body {
           }
 
           select {
-            width: 62%;
+            width: 40%;
             margin-right: 0;
             text-align-last: center;
             padding-left: 0;
           }
 
           #charLvl {
-            width: 60%;
+            width: 40%;
             text-align: center;
             padding-left: 0;
           }
@@ -376,6 +376,9 @@ body {
 @media only screen and (max-width: 520px) {
   .wrapper .header .title .header h1 {
     font-size: 20px;
+  }
+  .wrapper {
+    font-size: 10px;
   }
 }
 @media only screen and (max-width: 450px) {

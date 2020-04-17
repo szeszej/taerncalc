@@ -163,7 +163,6 @@ window.onload = function() {
       initialEquipment.boots = null;
     }
     if (Object.keys(initialProperties).some(x => /^special+/.test(x))) {
-      console.log(initialProperties);
       let special = {};
       initialProperties.hasOwnProperty("specialname") ?
         (special.name = initialProperties.specialname) :
@@ -190,7 +189,7 @@ window.onload = function() {
       initialProperties.hasOwnProperty("specialmana") ?
         (special.mana = parseInt(initialProperties.specialmana)) :
         (special.mana = 0);
-      initialProperties.hasOwnProperty("specialmana") ?
+      initialProperties.hasOwnProperty("specialendurance") ?
         (special.endurance = parseInt(initialProperties.specialendurance)) :
         (special.endurance = 0);
       initialProperties.hasOwnProperty("specialcutRes") ?
@@ -2726,9 +2725,9 @@ const itemDatabase = [{
     hp: 180,
     mana: 50,
     endurance: 100,
-    cutRes: 31,
-    bluntRes: 31,
-    pierceRes: 31
+    cutRes: 35,
+    bluntRes: 35,
+    pierceRes: 35
   },
   {
     name: "Pamięć Morany",
