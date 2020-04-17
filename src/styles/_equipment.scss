@@ -423,6 +423,7 @@
         margin-left: 2em;
         right: auto;
         left: 0;
+        top: 30vh;
         position: fixed;
         .itemOnList {
           width: 4em;
@@ -435,6 +436,11 @@
         font-size: 0.75em;
         padding: 3px;
     }
+    }
+    .special {
+      .itemsList {
+        font-size: 0.75em;
+      }
     }
   }
 }
