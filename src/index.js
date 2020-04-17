@@ -1996,6 +1996,18 @@ const itemDatabase = [{
     mana: 40
   },
   {
+    name: "Isverd",
+    type: "weapon",
+    image: "Isverd.png",
+    reqLvl: 34,
+    damageType: "Sieczne",
+    weaponType: "Jednoręczna",
+    damage: 91,
+    strength: 10,
+    hp: 100,
+    endurance: 30
+  },
+  {
     name: "Rolrak",
     type: "weapon",
     image: "[www.taernopedia.pl][28]Rolrak.png",

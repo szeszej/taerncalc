@@ -323,7 +323,7 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.strength > 0 ? null : negativeStats}
           >
-            Siła: +{this.props.item.strength}
+            Siła: {this.props.item.strength > 0 ? "+" : null}{this.props.item.strength}
           </p>
         ) : null}
         {this.props.item.agility ? (
@@ -331,7 +331,7 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.agility > 0 ? null : negativeStats}
           >
-            Zręczność: +{this.props.item.agility}
+            Zręczność: {this.props.item.agility > 0 ? "+" : null}{this.props.item.agility}
           </p>
         ) : null}
         {this.props.item.power ? (
@@ -339,7 +339,7 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.power > 0 ? null : negativeStats}
           >
-            Moc: +{this.props.item.power}
+            Moc: {this.props.item.power > 0 ? "+" : null}{this.props.item.power}
           </p>
         ) : null}
         {this.props.item.knowledge ? (
@@ -365,7 +365,7 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.endurance > 0 ? null : negativeStats}
           >
-            Kondycja: +{this.props.item.endurance}
+            Kondycja: {this.props.item.endurance > 0 ? "+" : null}{this.props.item.endurance}
           </p>
         ) : null}
         {this.props.item.mana ? (
@@ -373,7 +373,7 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.mana > 0 ? null : negativeStats}
           >
-            Mana: +{this.props.item.mana}
+            Mana: {this.props.item.mana > 0 ? "+" : null}{this.props.item.mana}
           </p>
         ) : null}
         {this.props.item.cutRes ? (

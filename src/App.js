@@ -146,47 +146,47 @@ class Calculator extends React.Component {
     }
     createShortenedUrl(string) {
 
-      let request = require("request");
-      let linkRequest = {
-        destination: string,
-        domain: {
-          fullName: "rebrand.ly"
-        }
-      }
-
-      let requestHeaders = {
-        "Content-Type": "application/json",
-        "apikey": "3fcba06720454d55a46ef326ca136872",
-        "workspace": "0c11b727f3dd431aa88953e7b3b07edb"
-      }
-
-      this.setState(
-        {export: {
-        showExport: true,
-        exportLink: "Eksportowanie w toku..."
-      }})
-
-      request({
-          uri: "https://api.rebrandly.com/v1/links",
-          method: "POST",
-          body: JSON.stringify(linkRequest),
-          headers: requestHeaders
-        }, (err, response, body) => {
-          if (err) {
-            alert("Wystąpił błąd, spróbuj ponownie później!");
-          } else {
-            let link = JSON.parse(body);
-            if (link.shortUrl) {
+      // let request = require("request");
+      // let linkRequest = {
+      //   destination: string,
+      //   domain: {
+      //     fullName: "rebrand.ly"
+      //   }
+      // }
+      //
+      // let requestHeaders = {
+      //   "Content-Type": "application/json",
+      //   "apikey": "3fcba06720454d55a46ef326ca136872",
+      //   "workspace": "0c11b727f3dd431aa88953e7b3b07edb"
+      // }
+      //
+      // this.setState(
+      //   {export: {
+      //   showExport: true,
+      //   exportLink: "Eksportowanie w toku..."
+      // }})
+      //
+      // request({
+      //     uri: "https://api.rebrandly.com/v1/links",
+      //     method: "POST",
+      //     body: JSON.stringify(linkRequest),
+      //     headers: requestHeaders
+      //   }, (err, response, body) => {
+      //     if (err) {
+      //       alert("Wystąpił błąd, spróbuj ponownie później!");
+      //     } else {
+      //       let link = JSON.parse(body);
+      //       if (link.shortUrl) {
               this.setState(
                 {export: {
                 showExport: true,
-                exportLink: link.shortUrl
-              }})
-            } else {
-              alert("Wystąpił błąd, spróbuj ponownie później!");
-            }
-          }
-        })
+                exportLink: string
+              }});
+      //       } else {
+      //         alert("Wystąpił błąd, spróbuj ponownie później!");
+      //       }
+      //     }
+      //   })
       }
       copyToClipboard() {
         const el = document.getElementById("exportOutput"); // Create a <textarea> element
