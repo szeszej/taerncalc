@@ -265,7 +265,7 @@ function getUrlVars() {
     key,
     value
   ) {
-    vars[key] = value;
+    vars[key] = value.replace("+", " ");
   });
   return vars;
 }

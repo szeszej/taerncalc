@@ -145,14 +145,10 @@ class StatsCalculator extends React.Component {
               getStateForExport={this.props.getStateForExport}
               class={this.props.class}
               level={this.props.level}
-              strength={
-                this.state.strength + this.state.statsFromItems.strength
-              }
-              agility={this.state.agility + this.state.statsFromItems.agility}
-              power={this.state.power + this.state.statsFromItems.power}
-              knowledge={
-                this.state.knowledge + this.state.statsFromItems.knowledge
-              }
+              strength={this.state.strength}
+              agility={this.state.agility}
+              power={this.state.power}
+              knowledge={this.state.knowledge}
               initialEquipment={this.props.initialEquipment}
             />
             <div className="statsAndRes">
