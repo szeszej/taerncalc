@@ -4772,7 +4772,6 @@ const itemDatabase = [{
     image: "[www.taernopedia.pl][134]CierpiC499tniki.png",
     reqLvl: 110,
     reqStr: 100,
-    reqAgi: 50,
     strength: 22,
     agility: 28,
     hp: 240,

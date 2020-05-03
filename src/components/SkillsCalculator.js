@@ -286,7 +286,7 @@ class SkillLine extends React.Component {
             }
           >
             <div className="reqLvlText">
-              <p>Wym. poziom postaci:</p>
+              <p>Poz. wym. do awansu:</p>
             </div>
             <div className="reqLvlNumber">
               <p>{this.props.skill.requiredCharLevel}</p>
