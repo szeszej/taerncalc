@@ -3,20 +3,18 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142836926-2"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142836926-3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-142836926-2');
+    gtag('config', 'UA-142836926-3');
   </script>
 
+
   <!--  Meta  -->
-  <title>Pride of Taern - kalkulator statystyk i umiejętności</title>
+  <title>Kalkulator buildów Pride of Taern</title>
   <meta name="description" content="Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +28,7 @@
       <div class="logo"><img src="images/logo.png" alt="Pride of Taern"></div>
       <div class="title">
         <div class="header">
-          <h1>Kalkulator umiejętności i statystyk</h1>
+          <h1>Kalkulator buildów Pride of Taern</h1>
         </div>
       </div>
     </div>
@@ -49,16 +47,17 @@
             <option value="voodoo">VooDoo</option>
           </select>
           <input type="number" min="1" max="140" placeholder="Poziom postaci" id="charLvl" required></input>
-          <input class="submit" type="submit" value="Zatwierdź"></input>
-          <!-- onclick="gtag('event', 'click', {'event_category': 'Form', 'event_label': 'Click Form'});" -->
+          <input class="submit" type="submit" value="Zatwierdź" ></input>
         </form>
       </div>
       <div id="calc">
         <div class=intro>
-          <h2>Po co mi kalkulator umiejętności i statystyk Pride of Taern?</h2>
-          <p>Chcesz wiedzieć, czy po resecie starczy ci punktów, żeby wykupić odpowiednie umiejętności i nie chcesz zmarnować platyny? Grasz rycerzem i zastanawiasz się, czy po wyzerowaniu statystyk uda ci się osiągnąć upragnione 160 wiedzy? Na takie
+          <h2>Po co mi kalkulator buildów Pride of Taern?</h2>
+          <p>Nie masz pojęcia, jakie są najlepszy itemy na twój level? Chcesz wiedzieć, czy po resecie starczy ci punktów, żeby wykupić odpowiednie umiejętności i nie chcesz zmarnować platyny? Grasz rycerzem i zastanawiasz się, czy po wyzerowaniu statystyk uda ci się osiągnąć upragnione 160 wiedzy? Na takie
             właśnie pytania odpowiada niniejszy kalkulator. Nieprzemyślane resety mogą was kosztować cenną platynę, którą przecież lepiej wydać inaczej. Zamiast ją marnować, lepiej użyć kalkulatora i sprawdzić, czy z obecnym poziomem uda ci się
             osiągnąć odpowiednio wysokie poziomy umiejętności i parametrów.</p>
+          <h2>Czy mogę jakoś podzielić się swoim buildem z innymi graczami Pride of Taern?</h2>
+          <p>Jak najbardziej! Wystarczy, że klikniesz na przycisk "Eksportuj build" na samym dole ekranu, a następnie gotowy link do twojego buildu skopiujesz do schowka. Możesz potem wklejać go innym graczom na czacie w grze, na forum i gdziekolwiek zechcesz.</p>
           <h2>Jak używać kalkulatora umiejętności i statystyk Pride of Taern?</h2>
           <p>Używanie kalkulatora jest bardzo proste - w formularzu powyżej wpisz:</p>
           <ol>
@@ -67,10 +66,12 @@
             <li>Kliknij "Zatwierdź"</li>
           </ol>
           <p>
-            Po przejściu powyższych korków wyświetlą się dwie tabelki kalkulatora - jedna z listą statystyk, a druga z
+            Po przejściu powyższych korków wyświetlą się dwie tabelki kalkulatora - jedna z listą statystyk i ekwipunkiem, a druga z
             listą umiejętności (oddzielnie umiejętności klasowe i te dla każdej klasy). Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności.
-            Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset".
+            Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset". Żeby wyekwipować przedmiot, kliknij na odpowiedni slot w ekwipunku.
           </p>
+          <h2>Bonusy setowe nie są zaprogramowane/Przedmiot nie jest wprowadzony/Przedmiot ma złe statystyki?</h2>
+          <p>W ekwipunku znajduje się ikonka kowadła (<img src="images/star.svg" alt="kowadło">), dzięki której możecie sami stworzyć przedmiot. Możecie np. nadać mu brakujące statystyki setowe albo odrobinę zmniejszyć/zwiększyć jakiś parametr. Dodatkowo funkcja ta umożliwia personalizację buildu i przedmiotu - możecie mu nadawać własną nazwę i obrazek!</p>
           <h2>Czym jest The Pride of Taern?</h2>
           <p>The Pride of Taern jest polską grą MMORPG w rzucie izometrycznym i turową walką. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki
             potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.</p>
@@ -80,10 +81,15 @@
     <div class="rightSidebar"></div>
     <div class="footer">
       <div class="authors">
-        <p class="created">Stworzone przez szeszej</p>
+        <p class="created">Stworzone przez <a href="https://github.com/szeszej/" target="_blank">szeszej</a></p>
+        <p class="created">Propozycje i błędy można zgłaszać przez <a href="https://forum.taern.pl/viewtopic.php?f=279&t=56507" target="_blank">forum Taernu</a></p>
         <p class="created">Gra Taern, a także wszystkie grafiki i logo, są własnością Whitemoon System
         </p>
       </div>
+    </div>
+    <div id="cookieconsent">
+      Ta strona używa cookies. Kontynuując używanie jej, zgadzasz się na ich użycie w celach analitycznych.
+      <button id="cookieButton">Rozumiem</button>
     </div>
   </div>
 </body>

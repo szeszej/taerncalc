@@ -1,0 +1,447 @@
+.equipment {
+  display: grid;
+  grid-template-areas: "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots empty";
+  box-sizing: border-box;
+
+  .armor,
+  .belt,
+  .boots,
+  .cape,
+  .empty,
+  .gloves,
+  .helmet,
+  .neck,
+  .pants,
+  .ring1,
+  .ring2,
+  .shield,
+  .special,
+  .weapon {
+    position: relative;
+    box-sizing: border-box;
+    width: 7em;
+    height: 7em;
+    border: 2px solid #bd996f;
+    margin: 1px;
+    background-size: auto 6em;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      border: 2px solid #AE3B48;
+    }
+
+    img {
+      max-width: 6em;
+      max-height: 6em;
+    }
+
+    .unequipButton {
+      border: 0;
+      font-size: 0.75em;
+      border-bottom: 1px solid #bd996f;
+      border-left: 1px solid #bd996f;
+      width: 2em;
+      height: 2em;
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-weight: bold;
+      border-radius: 0;
+      margin: 0;
+    }
+  }
+
+  .itemsList {
+    cursor: default;
+    position: absolute;
+    max-width: 80vw;
+    min-width: 27em;
+    background-color: black;
+    margin-top: -2em;
+    left: 0;
+    margin-left: -5em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0.5em;
+    z-index: 2;
+    opacity: 0.9;
+    animation: fadein 1s;
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 0.9;
+      }
+    }
+
+    .equippableItems {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .unequippableItems {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .itemOnList {
+      position: relative;
+      width: 4em;
+      height: 4em;
+      border: 2px solid #0161E7;
+      margin: 2px;
+      background-size: auto 80%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .unequippableItems .itemOnList {
+      cursor: not-allowed;
+    }
+
+    .equippableItems .itemOnList {
+      cursor: pointer;
+    }
+
+    .closeList {
+      position: absolute;
+      right: -0.5em;
+      top: -0.75em;
+      font-weight: bold;
+      border-radius: 0;
+    }
+  }
+
+  .itemTooltip {
+    position: absolute;
+    left: 90%;
+    bottom: 90%;
+    font-size: 0.75em;
+    background-color: black;
+    color: white;
+    z-index: 3;
+    width: max-content;
+    border: 1px solid;
+    border-color: inherit;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0.9;
+    cursor: default;
+    animation: fadein 1s;
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 0.9;
+      }
+    }
+
+    p {
+      margin-top: -0.25em;
+      margin-bottom: -0.5em;
+    }
+
+    .itemName {
+      font-size: 1.5em;
+    }
+
+    .damage {
+      color: #d7d50e;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(44, 130, 201, 0), rgba(44, 130, 201, 0.75), rgba(44, 130, 201, 0));
+    }
+  }
+
+  .armor {
+    grid-area: armor;
+    background-image: url("/images/armor.svg");
+
+    .itemsList {
+      margin-top: 4em;
+      margin-left: 3em;
+    }
+  }
+
+  .helmet {
+    grid-area: helmet;
+    background-image: url("/images/helmet.svg");
+
+    .itemsList {
+      margin-top: 4em;
+      margin-left: 3em;
+    }
+  }
+
+  .neck {
+    grid-area: neck;
+    background-image: url("/images/necklace.svg");
+
+    .itemsList {
+      margin-top: 4em;
+    }
+  }
+
+  .gloves {
+    grid-area: gloves;
+    background-image: url("/images/gloves.svg");
+
+    .itemsList {
+      right: 0;
+      margin-top: 4em;
+      margin-right: -5em;
+      left: auto;
+    }
+  }
+
+  .cape {
+    grid-area: cape;
+    background-image: url("/images/cloak.svg");
+
+    .itemsList {
+      margin-left: 3em;
+    }
+  }
+
+  .weapon {
+    grid-area: weapon;
+    background-image: url("/images/axe-sword.svg");
+
+    .itemsList {
+      right: 0;
+      margin-right: -5em;
+      left: auto;
+    }
+  }
+
+  .special {
+    grid-area: special;
+    background-image: url("/images/star.svg");
+
+    .itemsList {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      margin-left: 3em;
+
+      .title {
+        font-size: 1.25em;
+        align-self: center;
+        color: #d7d50e;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .property {
+          width: 80%;
+          margin: 2px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+
+          input,
+          p {
+            height: 1.25em;
+            font-size: 1em;
+          }
+
+          p {
+            margin: -0.3em 0 0;
+          }
+
+          input:not(.textInput) {
+            width: 40%;
+          }
+        }
+
+        .submit {
+          margin-top: 1.5em;
+
+          input {
+            border-radius: 8px;
+            font-size: 1.5em;
+            color: #d7d50e;
+            box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+            cursor: pointer;
+            background-color: black;
+            border: 2px solid #EC8C42;
+
+            &:hover {
+              background-color: #322F3E;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .shield {
+    grid-area: shield;
+    background-image: url("/images/shield.svg");
+
+    .itemsList {
+      right: 0;
+      margin-right: -5em;
+      left: auto;
+      min-width: 9em;
+      max-width: 14em;
+    }
+  }
+
+  .pants {
+    grid-area: pants;
+    background-image: url("/images/pants.svg");
+
+    .itemsList {
+      margin-left: 3em;
+    }
+  }
+
+  .belt {
+    grid-area: belt;
+    background-image: url("/images/belt.svg");
+
+    .itemsList {
+      right: 0;
+      margin-right: -5em;
+      left: auto;
+    }
+  }
+
+  .ring1 {
+    grid-area: ring1;
+    background-image: url("/images/ring1.svg");
+
+    .itemsList {
+      margin-left: 3em;
+    }
+  }
+
+  .ring2 {
+    grid-area: ring2;
+    background-image: url("/images/ring2.svg");
+
+    .itemsList {
+      margin-left: 3em;
+    }
+  }
+
+  .boots {
+    grid-area: boots;
+    background-image: url("/images/boots.svg");
+  }
+
+  .empty {
+    grid-area: empty;
+    background-image: url("/images/empty.svg");
+  }
+
+  .middle {
+    grid-area: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .equipment {
+    .armor,
+    .belt,
+    .boots,
+    .cape,
+    .empty,
+    .gloves,
+    .helmet,
+    .neck,
+    .pants,
+    .ring1,
+    .ring2,
+    .shield,
+    .special,
+    .weapon {
+      width: 5em;
+      height: 5em;
+      background-size: auto 4em;
+      img {
+        max-width: 4em;
+        max-height: 4em;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 450px) {
+
+  .equipment {
+    .armor,
+    .belt,
+    .boots,
+    .cape,
+    .empty,
+    .gloves,
+    .helmet,
+    .neck,
+    .pants,
+    .ring1,
+    .ring2,
+    .shield,
+    .special,
+    .weapon {
+      width: 4em;
+      height: 4em;
+      background-size: auto 3em;
+      position: relative;
+      img {
+        max-width: 3em;
+        max-height: 3em;
+      }
+      .itemsList {
+        margin: 0;
+        margin-left: 2em;
+        right: auto;
+        left: 0;
+        top: 30vh;
+        position: fixed;
+        .itemOnList {
+          width: 4em;
+          height: 4em;
+        }
+      }
+      .itemTooltip {
+        left: -3.5em;
+        bottom: 100%;
+        font-size: 0.75em;
+        padding: 3px;
+        max-width: 12em;
+    }
+    }
+    .special {
+      .itemsList {
+        font-size: 0.75em;
+      }
+    }
+  }
+}

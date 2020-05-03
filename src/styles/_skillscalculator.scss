@@ -24,19 +24,18 @@ $border-color: #d6c1a9;
       align-items: center;
 
       .skillLine {
-        border: 2px solid $border-color;
-        background-color: #d4d6a9;
+        // border: 2px solid $border-color;
+        // background-color: #d4d6a9;
         position: relative;
         font-size: 0.75em;
         width: 80%;
         margin: 1em;
         display: grid;
         grid-template-areas: "image name skillvalue buttons" "image reqlvl skillvalue buttons";
-        grid-template-columns: 7em 4fr 1fr 1fr;
+        grid-template-columns: 7em 5fr 2fr 2fr;
         grid-template-rows: 2.5em auto;
         padding: 1em;
-        border-radius: 8px;
-
+        // border-radius: 8px;
         .image {
           display: flex;
           grid-area: image;
@@ -62,14 +61,14 @@ $border-color: #d6c1a9;
         }
 
         .skillValue {
-          border: 2px solid $border-color;
+          border: 2px solid #b9bd6f;
           grid-area: skillvalue;
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 4em;
           line-height: 0;
-          background-color: #b9bd6f;
+          // background-color: #b9bd6f;
           border-radius: 5px;
 
           p {
@@ -134,13 +133,11 @@ $border-color: #d6c1a9;
     }
   }
 }
-
 @media only screen and (max-width: 1525px) {
   .skillCalculator {
     width: 90%;
   }
 }
-
 @media only screen and (max-width: 1030px) {
   .skillCalculator {
     width: 90%;
@@ -149,7 +146,7 @@ $border-color: #d6c1a9;
       width: 100%;
 
       .classSkills {
-        width: 80%;
+        width: 100%;
       }
     }
   }
