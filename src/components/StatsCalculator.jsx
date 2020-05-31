@@ -1,5 +1,5 @@
 import React from "react";
-import { Equipment } from "./Equipment.js";
+import { Equipment } from "./Equipment.jsx";
 
 class StatsCalculator extends React.Component {
   constructor(props) {

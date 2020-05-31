@@ -1,12 +1,7 @@
-//wsparcie dla setów
-//wsparcie dla ładowania psychorarów
-//eksport i import buildówar
-//upload własnego obrazka
-
 import React from "react";
 import ReactGA from 'react-ga';
-import { ItemsList, ItemTooltip } from "./Items.js";
-import { Item } from "../index.js";
+import { ItemsList, ItemTooltip } from "./Items.jsx";
+import { Item } from "../data/models/item.model.js";
 
 class Equipment extends React.Component {
   constructor(props) {
