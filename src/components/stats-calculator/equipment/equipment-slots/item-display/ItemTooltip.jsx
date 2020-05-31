@@ -1,151 +1,6 @@
 import React from "react";
 
-class ItemsList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  handleClick(event, functionToRun) {
-    event.stopPropagation();
-    functionToRun();
-  }
-  render() {
-    let closeButton = (
-      <button
-        className="closeList"
-        onClick={event => this.handleClick(event, this.props.hideItemsList)}
-      >
-        ×
-      </button>
-    );
-    let equippableItems = this.props.items.filter(
-      x =>
-        this.props.level >= x.reqLvl &&
-        this.props.strength >= x.reqStr &&
-        this.props.agility >= x.reqAgi &&
-        this.props.knowledge >= x.reqKno &&
-        this.props.power >= x.reqPow &&
-        (x.class === null || x.class === this.props.class)
-    );
-    let unequippableItems = this.props.items.filter(
-      x =>
-        this.props.level < x.reqLvl ||
-        this.props.strength < x.reqStr ||
-        this.props.agility < x.reqAgi ||
-        this.props.knowledge < x.reqKno ||
-        this.props.power < x.reqPow ||
-        (x.class !== null && x.class !== this.props.class)
-    );
-    let equippableItemsComponents = (
-      <div className={"equippableItems"}>
-        {equippableItems.map(x => (
-          <ItemComponent
-            key={x.name}
-            class={this.props.class}
-            type={this.props.type}
-            item={x}
-            level={this.props.level}
-            equipItem={this.props.equipItem}
-            hideItemsList={this.props.hideItemsList}
-          />
-        ))}
-      </div>
-    );
-    let unequippableItemsComponents = (
-      <div className={"unequippableItems"}>
-        {unequippableItems.map(x => (
-          <ItemComponent
-            key={x.name}
-            item={x}
-            class={this.props.class}
-            level={this.props.level}
-            strength={this.props.strength}
-            agility={this.props.agility}
-            power={this.props.power}
-            knowledge={this.props.knowledge}
-          />
-        ))}
-      </div>
-    );
-    return (
-      <div className={"itemsList"}>
-        {equippableItemsComponents}
-        {unequippableItemsComponents}
-        {closeButton}
-      </div>
-    );
-  }
-}
-
-class ItemComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayTooltip: false
-    };
-  }
-  equipItemAndHideList(event, item, type) {
-    event.stopPropagation();
-    this.props.equipItem(item, type);
-    this.props.hideItemsList();
-  }
-  showTooltip() {
-    this.setState({
-      displayTooltip: true
-    });
-  }
-  hideTooltip() {
-    this.setState({
-      displayTooltip: false
-    });
-  }
-  render() {
-    let itemStyle = {
-      backgroundImage: `url("images/items/` + this.props.item.image + `")`,
-      borderColor: "#0161E7"
-    };
-
-    if (this.props.item.rarity === "Psychorare") {
-      itemStyle.borderColor = "#35CBEF";
-    } else if (this.props.item.rarity === "Set") {
-      itemStyle.borderColor = "#3DEF01";
-    } else if (this.props.item.rarity === "Epik") {
-      itemStyle.borderColor = "#E7CC00";
-    }
-    if (!this.props.hasOwnProperty("equipItem")) {
-      itemStyle.borderColor = "red";
-    }
-    return (
-      <div
-        className="itemOnList"
-        style={itemStyle}
-        onMouseEnter={() => this.showTooltip()}
-        onMouseLeave={() => this.hideTooltip()}
-        onClick={event =>
-          this.props.hasOwnProperty("equipItem")
-            ? this.equipItemAndHideList(event, this.props.item, this.props.type)
-            : null
-        }
-      >
-        {this.state.displayTooltip ? (
-          <ItemTooltip
-            item={this.props.item}
-            class={this.props.class}
-            level={this.props.level}
-            strength={this.props.strength}
-            agility={this.props.agility}
-            power={this.props.power}
-            knowledge={this.props.knowledge}
-          />
-        ) : null}
-      </div>
-    );
-  }
-}
-
-class ItemTooltip extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export class ItemTooltip extends React.Component {
   nameColor(rarity) {
     let color = {
       color: "#0161E7"
@@ -196,7 +51,7 @@ class ItemTooltip extends React.Component {
     return totalDamage;
   }
   render() {
-    let otherProperties = this.props.item.otherProperties.map(x => (
+    let otherProperties = this.props.item.otherProperties.map((x) => (
       <p className="otherProperties" key={x}>
         {x}
       </p>
@@ -323,7 +178,8 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.strength > 0 ? null : negativeStats}
           >
-            Siła: {this.props.item.strength > 0 ? "+" : null}{this.props.item.strength}
+            Siła: {this.props.item.strength > 0 ? "+" : null}
+            {this.props.item.strength}
           </p>
         ) : null}
         {this.props.item.agility ? (
@@ -331,7 +187,8 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.agility > 0 ? null : negativeStats}
           >
-            Zręczność: {this.props.item.agility > 0 ? "+" : null}{this.props.item.agility}
+            Zręczność: {this.props.item.agility > 0 ? "+" : null}
+            {this.props.item.agility}
           </p>
         ) : null}
         {this.props.item.power ? (
@@ -339,7 +196,8 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.power > 0 ? null : negativeStats}
           >
-            Moc: {this.props.item.power > 0 ? "+" : null}{this.props.item.power}
+            Moc: {this.props.item.power > 0 ? "+" : null}
+            {this.props.item.power}
           </p>
         ) : null}
         {this.props.item.knowledge ? (
@@ -365,7 +223,8 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.endurance > 0 ? null : negativeStats}
           >
-            Kondycja: {this.props.item.endurance > 0 ? "+" : null}{this.props.item.endurance}
+            Kondycja: {this.props.item.endurance > 0 ? "+" : null}
+            {this.props.item.endurance}
           </p>
         ) : null}
         {this.props.item.mana ? (
@@ -373,7 +232,8 @@ class ItemTooltip extends React.Component {
             className="itemProperty"
             style={this.props.item.mana > 0 ? null : negativeStats}
           >
-            Mana: {this.props.item.mana > 0 ? "+" : null}{this.props.item.mana}
+            Mana: {this.props.item.mana > 0 ? "+" : null}
+            {this.props.item.mana}
           </p>
         ) : null}
         {this.props.item.cutRes ? (
@@ -416,5 +276,3 @@ class ItemTooltip extends React.Component {
     );
   }
 }
-
-export { ItemsList, ItemTooltip };

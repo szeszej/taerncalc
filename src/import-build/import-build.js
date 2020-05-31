@@ -186,6 +186,7 @@ function importBuild(database) {
 function getUrlVars() {
   let vars = {};
   let decodedUrl = decodeURI(window.location.href);
+  // eslint-disable-next-line
   let parts = decodedUrl.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
     m,
     key,

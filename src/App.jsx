@@ -1,9 +1,11 @@
 import React from "react";
 import ReactGA from "react-ga";
-import { SkillsCalculator } from "./components/SkillsCalculator.jsx";
-import { StatsCalculator } from "./components/StatsCalculator.jsx";
+import { SkillsCalculator } from "./components/skills-calculator/SkillsCalculator.jsx";
+import { StatsCalculator } from "./components/stats-calculator/StatsCalculator.jsx";
+import { LevelIncrementButton } from "./components/level-buttons/LevelIncrementButton.jsx";
+import { LevelDecrementButton } from "./components/level-buttons/LevelDecrementButton.jsx";
 
-class Calculator extends React.Component {
+export class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.changeLevel = this.changeLevel.bind(this);
@@ -115,7 +117,7 @@ class Calculator extends React.Component {
         );
         let filteredSpecialProperties = arrayOfProperties[1][12][1].filter(
           (x) =>
-            x[1] != false && x[1] !== null && x[0] != "type" && x[0] != "rarity"
+            x[1] != false && x[1] !== null && x[0] !== "type" && x[0] !== "rarity"
         );
         filteredSpecialProperties.forEach((x) => (x[0] = "special" + x[0]));
         arrayOfProperties[1][12] = filteredSpecialProperties;
@@ -298,41 +300,3 @@ class Calculator extends React.Component {
     );
   }
 }
-
-class LevelIncrementButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <button
-        disabled={this.props.level + this.props.value > 140 ? true : false}
-        onClick={() => {
-          this.props.changeLevel(this.props.value);
-        }}
-      >
-        +{this.props.value}{" "}
-      </button>
-    );
-  }
-}
-
-class LevelDecrementButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <button
-        disabled={this.props.level + this.props.value < 1 ? true : false}
-        onClick={() => {
-          this.props.changeLevel(this.props.value);
-        }}
-      >
-        {this.props.value}{" "}
-      </button>
-    );
-  }
-}
-
-export { Calculator };
