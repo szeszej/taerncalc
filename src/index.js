@@ -53,7 +53,7 @@ function renderApp(charClass, charLvl, database) {
   );
 }
 
-window.onload = function () {
+(function () {
   if (!localStorage.getItem("cookieconsent")) {
     document.getElementById("cookieButton").addEventListener(
       "click",
@@ -82,7 +82,7 @@ window.onload = function () {
       calculator
     );
   }
-};
+})();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
