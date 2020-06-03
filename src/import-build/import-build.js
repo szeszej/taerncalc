@@ -168,6 +168,7 @@ function importBuild(database) {
     );
     for (let i = 1; i < 18; i++) {
       skillSet["skill" + i].level = parseInt(initialProperties["skill" + i]);
+      skillSet["skill" + i].requiredCharLevel += (skillSet["skill" + i].level - skillSet["skill" + i].minLvl) * skillSet["skill" + i].requiredCharLevelInc
     }
     let initialSkills = {};
     initialSkills.skillPts = parseInt(initialProperties.skillPts);
