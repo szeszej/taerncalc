@@ -9,6 +9,8 @@ body {
   margin: 0;
 }
 
+
+
 .wrapper {
   font-size: 16px;
   top: 0;
@@ -161,15 +163,16 @@ body {
   }
 
   #cookieconsent {
-    position:fixed;
-    padding:20px;
-    left:0;
-    bottom:0;
-    background-color:#000;
-    color:#FFF;
-    text-align:center;
-    width:100%;
-    z-index:99999;
+    display: none;
+    position: fixed;
+    padding: 20px;
+    left: 0;
+    bottom: 0;
+    background-color: #000;
+    color: #FFF;
+    text-align: center;
+    width: 100%;
+    z-index: 99999;
     #cookieButton {
       margin-left: 1em;
     }

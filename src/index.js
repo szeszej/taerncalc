@@ -55,6 +55,7 @@ function renderApp(charClass, charLvl, database) {
 
 (function () {
   if (!localStorage.getItem("cookieconsent")) {
+    document.getElementById("cookieconsent").style.display = "block";
     document.getElementById("cookieButton").addEventListener(
       "click",
       function (event) {
@@ -63,8 +64,6 @@ function renderApp(charClass, charLvl, database) {
       },
       false
     );
-  } else {
-    document.getElementById("cookieconsent").style.display = "none";
   }
 
   let initialProperties = importBuild(taernDatabase);
