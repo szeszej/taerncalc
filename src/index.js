@@ -69,6 +69,7 @@ function renderApp(charClass, charLvl, database) {
 
   let initialProperties = importBuild(taernDatabase);
   if (initialProperties) {
+    calculator.classList.add("enabled");
     ReactDOM.render(
       <Calculator
         level={initialProperties.level}
