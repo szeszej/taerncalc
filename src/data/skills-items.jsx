@@ -3663,7 +3663,7 @@ const itemDatabase = [{
     image: "[www.taernopedia.pl][131]UdrC499ki.png",
     reqLvl: 110,
     reqPow: 100,
-    power: 10,
+    power: 19,
     knowledge: 30,
     hp: 250,
     mana: 110,
@@ -4070,7 +4070,7 @@ const itemDatabase = [{
     strength: 9,
     agility: 9,
     frostRes: 20,
-    cutRes: 20
+    curseRes: 20
   },
   {
     name: "Navigon",
