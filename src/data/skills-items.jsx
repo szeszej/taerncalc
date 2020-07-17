@@ -1222,11 +1222,11 @@ const itemDatabase = [{
     damageType: "Obuchowe",
     weaponType: "Dwuręczna",
     damage: 112,
-    power: 8,
-    knowledge: 4,
-    hp: 40,
-    mana: 70,
-    otherProperties: ["Modyfikator obrażeń magicznych: 4% (+1% co poziom)"]
+    power: 20,
+    knowledge: 8,
+    hp: 20,
+    mana: 50,
+    otherProperties: ["Modyfikator obrażeń magicznych: 6% (+1% co poziom)"]
   },
   {
     name: "Egzekutor",
@@ -1238,10 +1238,10 @@ const itemDatabase = [{
     damageType: "Obuchowe",
     weaponType: "Dwuręczna",
     damage: 112,
-    power: 8,
-    knowledge: 4,
-    hp: 40,
-    mana: 70,
+    power: 18,
+    knowledge: 11,
+    hp: 30,
+    mana: 30,
     otherProperties: ["Szansa na trafienie krytyczne: 4% (+1% co poziom)"]
   },
   {
@@ -1255,10 +1255,10 @@ const itemDatabase = [{
     weaponType: "Dwuręczna",
     damage: 112,
     power: 8,
-    knowledge: 4,
-    hp: 40,
-    mana: 70,
-    otherProperties: ["Szansa na podwójny atak: +4% (+1% co poziom)"]
+    knowledge: 20,
+    hp: 50,
+    mana: 20,
+    otherProperties: ["Szansa na podwójny atak: +6% (+1% co poziom)"]
   },
   {
     name: "Virral",
@@ -1505,7 +1505,7 @@ const itemDatabase = [{
     knowledge: 20,
     hp: 50,
     mana: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Modyfikator obrażeń magicznych: 12% (+1% na poziom)"]
+    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Modyfikator obrażeń magicznych: 20% (+1% na poziom)"]
   },
   {
     name: "Żmij",
@@ -1568,7 +1568,7 @@ const itemDatabase = [{
     agility: 10,
     hp: 150,
     endurance: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Modyfikator obrażeń fizycznych: 12% (+1% na poziom)"]
+    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Modyfikator obrażeń fizycznych: 20% (+1% na poziom)"]
   },
   {
     name: "Gorthdar",
