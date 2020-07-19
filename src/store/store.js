@@ -1,17 +1,21 @@
 import { createStore } from "redux";
-import { rootReducer } from "./reducers/reducers.js"
+import { combineReducers } from "redux";
 
-import { addStat } from "./actions/actions.js"
+import characterReducer from "./character-reducer/character-reducer.js"
+import statsReducer from "./stats-reducer/stats-reducer.js"
+import skillsReducer from "./skills-reducer/skills-reducer.js"
+import equipmentReducer from "./equipment-reducer/equipment-reducer.js"
 
-const store = createStore(rootReducer)
+export const rootReducer = combineReducers(
+  {
+    character: characterReducer,
+    stats: statsReducer,
+    skills: skillsReducer,
+    equipment: equipmentReducer
+  }
+)
+
+const store = createStore(rootReducer);
+
 
 export default store;
-
-console.log(store.getState())
-
-store.dispatch(addStat({
-  stat: "strength",
-  number: 5
-}))
-
-console.log(store.getState())

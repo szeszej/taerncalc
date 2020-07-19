@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Equipment } from "./equipment/Equipment.jsx";
-import { StatLine } from "./stat-line/StatLine.jsx"
-import { ResLine } from "./resist-line/ResLine.jsx"
+import { StatLine } from "./stat-line/StatLine.jsx";
+import { ResLine } from "./resist-line/ResLine.jsx";
 
 export class StatsCalculator extends React.Component {
   constructor(props) {
@@ -34,8 +34,8 @@ export class StatsCalculator extends React.Component {
         curseRes: 0,
         pierceRes: 0,
         cutRes: 0,
-        bluntRes: 0
-      }
+        bluntRes: 0,
+      },
     };
   }
   componentDidMount() {
@@ -45,7 +45,7 @@ export class StatsCalculator extends React.Component {
         strength: 1000,
         agility: 1000,
         power: 1000,
-        knowledge: 1000
+        knowledge: 1000,
       });
       setTimeout(() => {
         this.setState({
@@ -56,7 +56,7 @@ export class StatsCalculator extends React.Component {
           knowledge: this.props.initialStats.knowledge,
           hp: this.props.initialStats.hp,
           endurance: this.props.initialStats.endurance,
-          mana: this.props.initialStats.mana
+          mana: this.props.initialStats.mana,
         });
       }, 1);
     } else {
@@ -80,7 +80,7 @@ export class StatsCalculator extends React.Component {
       knowledge: this.state.knowledge,
       hp: this.state.hp,
       endurance: this.state.endurance,
-      mana: this.state.mana
+      mana: this.state.mana,
     };
     this.props.getStateForExport(stateForExport, "stats");
   }
@@ -91,20 +91,20 @@ export class StatsCalculator extends React.Component {
     if (["strength", "agility", "power", "knowledge"].includes(stat)) {
       if (this.state[stat] + number < 10) {
       } else {
-        this.setState(prevState => {
+        this.setState((prevState) => {
           return {
             statPts: (prevState.statPts -= number),
-            [stat]: (prevState[stat] += number)
+            [stat]: (prevState[stat] += number),
           };
         });
       }
     } else {
       if (this.state[stat] + number * 10 < 200) {
       } else {
-        this.setState(prevState => {
+        this.setState((prevState) => {
           return {
             statPts: (prevState.statPts -= number),
-            [stat]: (prevState[stat] += number * 10)
+            [stat]: (prevState[stat] += number * 10),
           };
         });
       }
@@ -112,7 +112,7 @@ export class StatsCalculator extends React.Component {
   }
   addStatsFromEquipment(stats) {
     this.setState({
-      statsFromItems: stats
+      statsFromItems: stats,
     });
   }
   reset() {
@@ -124,7 +124,7 @@ export class StatsCalculator extends React.Component {
       knowledge: 10,
       hp: 200,
       endurance: 200,
-      mana: 200
+      mana: 200,
     });
   }
   render() {
