@@ -6,13 +6,22 @@ import "./styles/index.scss";
 import * as serviceWorker from "./serviceWorker";
 
 import { Calculator } from "./App.jsx";
-import { SkillSet } from "./data/models/skill-set.model.js";
-import { taernDatabase } from "./data/skills-items.jsx";
+import { SkillSet } from "./data/models/skill-set.model.jsx";
+import itemsDatabase from "./data/items.js";
+import skillsDatabase from "./data/skills.jsx";
 import { importBuild } from "./import-build/import-build.js";
+
+import store from "./store/store.js"
 
 ReactGA.initialize("UA-142836926-3");
 
+
+
 const calculator = document.getElementById("calc");
+const taernDatabase = {
+  items: itemsDatabase,
+  skills: skillsDatabase
+}
 
 document.getElementById("classLvl").addEventListener(
   "submit",

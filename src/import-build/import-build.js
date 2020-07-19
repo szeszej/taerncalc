@@ -1,5 +1,5 @@
 import ReactGA from 'react-ga';
-import { SkillSet } from "../data/models/skill-set.model.js"
+import { SkillSet } from "../data/models/skill-set.model.jsx"
 import { Item } from "../data/models/item.model.js"
 
 function importBuild(database) {
