@@ -5,7 +5,7 @@ import { StatsCalculator } from "./components/stats-calculator/StatsCalculator.j
 import { LevelIncrementButton } from "./components/level-buttons/LevelIncrementButton.jsx";
 import { LevelDecrementButton } from "./components/level-buttons/LevelDecrementButton.jsx";
 
-export class Calculator extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.changeLevel = this.changeLevel.bind(this);

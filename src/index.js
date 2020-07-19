@@ -5,7 +5,7 @@ import "./styles/index.scss";
 
 import * as serviceWorker from "./serviceWorker";
 
-import { Calculator } from "./App.jsx";
+import { App } from "./App.jsx";
 import { SkillSet } from "./data/models/skill-set.model.jsx";
 import itemsDatabase from "./data/items.js";
 import skillsDatabase from "./data/skills.jsx";
@@ -14,8 +14,6 @@ import { importBuild } from "./import-build/import-build.js";
 import store from "./store/store.js"
 
 ReactGA.initialize("UA-142836926-3");
-
-
 
 const calculator = document.getElementById("calc");
 const taernDatabase = {
@@ -52,7 +50,7 @@ function renderApp(charClass, charLvl, database) {
     label: charClass + " " + charLvl
   });
   ReactDOM.render(
-    <Calculator
+    <App
       level={parseInt(charLvl)}
       class={skillSet}
       className={charClass}
@@ -79,7 +77,7 @@ function renderApp(charClass, charLvl, database) {
   if (initialProperties) {
     calculator.classList.add("enabled");
     ReactDOM.render(
-      <Calculator
+      <App
         level={initialProperties.level}
         class={initialProperties.skillSet}
         className={initialProperties.className}
