@@ -1,11 +1,17 @@
+//React
 import React from "react";
 import ReactGA from "react-ga";
+
+//Redux
+import { connect } from "react-redux";
+
+//Components
 import { SkillsCalculator } from "./components/skills-calculator/SkillsCalculator.jsx";
 import { StatsCalculator } from "./components/stats-calculator/StatsCalculator.jsx";
 import { LevelIncrementButton } from "./components/level-buttons/LevelIncrementButton.jsx";
 import { LevelDecrementButton } from "./components/level-buttons/LevelDecrementButton.jsx";
 
-export class App extends React.Component {
+class ConnectedApp extends React.Component {
   constructor(props) {
     super(props);
     this.changeLevel = this.changeLevel.bind(this);
@@ -16,12 +22,12 @@ export class App extends React.Component {
       stateForExport: {
         stats: {},
         equipment: {},
-        skills: {}
+        skills: {},
       },
       export: {
         showExport: false,
-        exportLink: ""
-      }
+        exportLink: "",
+      },
     };
   }
   getStateForExport(state, type) {
@@ -44,7 +50,7 @@ export class App extends React.Component {
         }
 
         return {
-          stateForExport: stateForExport
+          stateForExport: stateForExport,
         };
       });
       this.hideExport();
@@ -62,8 +68,8 @@ export class App extends React.Component {
     this.setState({
       export: {
         exportLink: "",
-        showExport: false
-      }
+        showExport: false,
+      },
     });
   }
   isEquivalent(a, b) {
@@ -92,7 +98,7 @@ export class App extends React.Component {
   }
   changeTabs(tab) {
     this.setState({
-      active: tab
+      active: tab,
     });
   }
   changeLevel(value) {
@@ -117,7 +123,10 @@ export class App extends React.Component {
         );
         let filteredSpecialProperties = arrayOfProperties[1][12][1].filter(
           (x) =>
-            x[1] != false && x[1] !== null && x[0] !== "type" && x[0] !== "rarity"
+            x[1] != false &&
+            x[1] !== null &&
+            x[0] !== "type" &&
+            x[0] !== "rarity"
         );
         filteredSpecialProperties.forEach((x) => (x[0] = "special" + x[0]));
         arrayOfProperties[1][12] = filteredSpecialProperties;
@@ -138,7 +147,7 @@ export class App extends React.Component {
     ReactGA.event({
       category: "Export",
       action: "Click",
-      label: encodedUrl
+      label: encodedUrl,
     });
     return this.createShortenedUrl(encodedUrl);
   }
@@ -177,8 +186,8 @@ export class App extends React.Component {
     this.setState({
       export: {
         showExport: true,
-        exportLink: string
-      }
+        exportLink: string,
+      },
     });
     //       } else {
     //         alert("Wystąpił błąd, spróbuj ponownie później!");
@@ -212,10 +221,10 @@ export class App extends React.Component {
   }
   render() {
     let inactive = {
-      opacity: 0.45
+      opacity: 0.45,
     };
     let active = {
-      borderBottom: "10px solid #bd996f"
+      borderBottom: "10px solid #bd996f",
     };
     return (
       <div className="calculators">
@@ -307,3 +316,12 @@ export class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    level: state.character.level,
+    className: state.character.className
+   };
+};
+
+export const App = connect(mapStateToProps)(ConnectedApp);

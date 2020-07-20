@@ -1,26 +1,37 @@
+//React
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactGA from "react-ga";
+
+//Redux
+import { Provider } from "react-redux";
+import store from "./store/store.js";
+import { initializeCharacter } from "./store/character-reducer/character-reducer.js"
+
+//Styles
 import "./styles/index.scss";
 
+//Other
 import * as serviceWorker from "./serviceWorker";
 
+//App-related
 import { App } from "./App.jsx";
 import { SkillSet } from "./data/models/skill-set.model.jsx";
 import itemsDatabase from "./data/items.js";
 import skillsDatabase from "./data/skills.jsx";
 import { importBuild } from "./import-build/import-build.js";
 
-import store from "./store/store.js"
-
+//Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
+//selecting calculator node
 const calculator = document.getElementById("calc");
 const taernDatabase = {
   items: itemsDatabase,
-  skills: skillsDatabase
-}
+  skills: skillsDatabase,
+};
 
+//Adding event listener for the character form
 document.getElementById("classLvl").addEventListener(
   "submit",
   function (event) {
@@ -30,16 +41,22 @@ document.getElementById("classLvl").addEventListener(
   false
 );
 
+//Checking if the calculator is already loaded and showing confirmation message
 function checkCalc(charClass, charLvl, database) {
   if (calculator.classList.contains("enabled")) {
-    if (window.confirm("Czy na pewno chcesz stworzyć nowy build? Obecny zostanie usunięty!")) {
-      renderApp(charClass, charLvl, database)
+    if (
+      window.confirm(
+        "Czy na pewno chcesz stworzyć nowy build? Obecny zostanie usunięty!"
+      )
+    ) {
+      renderApp(charClass, charLvl, database);
     }
   } else {
-    renderApp(charClass, charLvl, database)
+    renderApp(charClass, charLvl, database);
   }
 }
 
+//Rendering the app
 function renderApp(charClass, charLvl, database) {
   ReactDOM.unmountComponentAtNode(calculator);
   calculator.classList.add("enabled");
@@ -47,19 +64,26 @@ function renderApp(charClass, charLvl, database) {
   ReactGA.event({
     category: "Form",
     action: "Submit",
-    label: charClass + " " + charLvl
+    label: charClass + " " + charLvl,
   });
+  store.dispatch(initializeCharacter({
+    className: charClass,
+    level: +charLvl
+  }))
   ReactDOM.render(
-    <App
-      level={parseInt(charLvl)}
-      class={skillSet}
-      className={charClass}
-      items={database.items}
-    />,
+    <Provider store={store}>
+      <App
+
+        class={skillSet}
+
+        items={database.items}
+      />
+    </Provider>,
     calculator
   );
 }
 
+//Rendering the app if URL parameters are present (importing build)
 (function () {
   if (!localStorage.getItem("cookieconsent")) {
     document.getElementById("cookieconsent").style.display = "block";

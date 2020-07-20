@@ -5,13 +5,15 @@ import characterReducer from "./character-reducer/character-reducer.js"
 import statsReducer from "./stats-reducer/stats-reducer.js"
 import skillsReducer from "./skills-reducer/skills-reducer.js"
 import equipmentReducer from "./equipment-reducer/equipment-reducer.js"
+import itemsReducer from "./items-reducer/items-reducer.js"
 
 export const rootReducer = combineReducers(
   {
     character: characterReducer,
     stats: statsReducer,
     skills: skillsReducer,
-    equipment: equipmentReducer
+    equipment: equipmentReducer,
+    items: itemsReducer
   }
 )
 
