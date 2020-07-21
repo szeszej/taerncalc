@@ -6,7 +6,7 @@ import ReactGA from "react-ga";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import { initializeCharacter } from "./store/character-reducer/character-reducer.js"
+import { initializeCharacter } from "./store/character-reducer/character-reducer.ts"
 
 //Styles
 import "./styles/index.scss";
@@ -40,6 +40,9 @@ document.getElementById("classLvl").addEventListener(
   },
   false
 );
+
+store.dispatch(initializeCharacter({className: 123, level: "lalala"}))
+console.log(store.getState())
 
 //Checking if the calculator is already loaded and showing confirmation message
 function checkCalc(charClass, charLvl, database) {
