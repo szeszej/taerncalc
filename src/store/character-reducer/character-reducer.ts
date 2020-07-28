@@ -1,5 +1,5 @@
 import store from "../store.js"
-import { changeStat } from "../stats-reducer/stats-reducer.js"
+import { changePoints } from "../stats-reducer/stats-reducer"
 
 //action types
 const CHANGE_LEVEL = "CHANGE_LEVEL"
@@ -7,7 +7,7 @@ const INITIALIZE_CHARACTER = "INITIATLIZE_CHARACTER"
 
 //reducer
 const initialCharacter = {
-  className: null,
+  className: "",
   level: 0
 }
 
@@ -25,8 +25,8 @@ export default function characterReducer (state = initialCharacter, action: {typ
 }
 
 //action creators
-export const changeLevel = (payload: {number: number}) => {
-  store.dispatch(changeStat(payload.number * 4))
+export const changeLevel = (payload: ChangeLevelAction) => {
+  store.dispatch(changePoints({number: payload.level * 4}))
   return {
     type: CHANGE_LEVEL,
     payload

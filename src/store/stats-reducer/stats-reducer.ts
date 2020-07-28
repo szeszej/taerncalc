@@ -15,7 +15,7 @@ const initialStats = {
   mana: 200,
 };
 
-export default function statsReducer(state = initialStats, action) {
+export default function statsReducer(state = initialStats, action: StatsActions) {
   let newState = { ...state };
   switch (action.type) {
     case CHANGE_STAT:
@@ -34,23 +34,62 @@ export default function statsReducer(state = initialStats, action) {
 }
 
 //action creators
-export const changeStat = (payload) => {
+export const changeStat = (payload: ChangeStatPayload) => {
   return {
     type: CHANGE_STAT,
-    payload,
+    payload: payload,
   };
 };
 
-export const initializeStats = (payload) => {
+export const initializeStats = (payload: InitializePayload) => {
   return {
     type: INITIATLIZE_STATS,
     payload,
   };
 };
 
-export const changePoints = (payload) => {
+export const changePoints = (payload: ChangePointsPayload)  => {
   return {
     type: CHANGE_POINTS,
     payload,
   };
 };
+
+//types
+interface InitializePayload {
+  statPts: number,
+  strength: number,
+  agility: number,
+  power: number,
+  knowledge: number,
+  hp: number,
+  endurance: number,
+  mana: number,
+}
+
+interface ChangeStatPayload {
+  stat: keyof typeof initialStats,
+  number: number
+}
+
+interface ChangePointsPayload {
+  number: number
+}
+
+interface InitializeAction {
+  type: typeof INITIATLIZE_STATS,
+  payload: InitializePayload
+}
+
+interface ChangeStatAction {
+  type: typeof CHANGE_STAT,
+  payload: ChangeStatPayload
+}
+
+interface ChangePointsAction {
+  type: typeof CHANGE_POINTS,
+  payload: ChangePointsPayload
+}
+
+
+type StatsActions = ChangeStatAction | InitializeAction | ChangePointsAction

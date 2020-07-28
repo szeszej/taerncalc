@@ -11,6 +11,9 @@ import { StatsCalculator } from "./components/stats-calculator/StatsCalculator.j
 import { LevelIncrementButton } from "./components/level-buttons/LevelIncrementButton.jsx";
 import { LevelDecrementButton } from "./components/level-buttons/LevelDecrementButton.jsx";
 
+//Actions
+import { changeLevel } from "./store/character-reducer/character-reducer"
+
 class ConnectedApp extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +21,6 @@ class ConnectedApp extends React.Component {
     this.getStateForExport = this.getStateForExport.bind(this);
     this.state = {
       active: "stats",
-      level: this.props.level,
       stateForExport: {
         stats: {},
         equipment: {},
@@ -62,7 +64,7 @@ class ConnectedApp extends React.Component {
   }
   componentDidUpdate(prevProps, prevState) {
     let charLvl = document.getElementById("charLvl");
-    charLvl.value = this.state.level;
+    charLvl.value = this.props.level;
   }
   hideExport() {
     this.setState({
@@ -102,11 +104,7 @@ class ConnectedApp extends React.Component {
     });
   }
   changeLevel(value) {
-    this.setState((prevState) => {
-      let level = {};
-      level.level = prevState.level += value;
-      return level;
-    });
+    this.props.changeLevel({level: value})
   }
   createUrlForExport() {
     let propertiesForUrl = this.state.stateForExport;
@@ -137,7 +135,7 @@ class ConnectedApp extends React.Component {
     arrayOfProperties[2] = Object.entries(arrayOfProperties[2][1]);
     let flatArrayOfProperties = arrayOfProperties.flat();
     flatArrayOfProperties.push(
-      ["level", this.state.level],
+      ["level", this.props.level],
       ["className", this.props.className]
     );
     let stringsForUrl = flatArrayOfProperties.map((x) => x[0] + "=" + x[1]);
@@ -232,25 +230,25 @@ class ConnectedApp extends React.Component {
           <div className="levelButtons">
             <LevelDecrementButton
               changeLevel={this.changeLevel}
-              level={this.state.level}
+              level={this.props.level}
               value={-5}
             />{" "}
             <LevelDecrementButton
               changeLevel={this.changeLevel}
-              level={this.state.level}
+              level={this.props.level}
               value={-1}
             />{" "}
           </div>{" "}
-          <div className="level"> Poziom: {this.state.level} </div>{" "}
+          <div className="level"> Poziom: {this.props.level} </div>{" "}
           <div className="levelButtons">
             <LevelIncrementButton
               changeLevel={this.changeLevel}
-              level={this.state.level}
+              level={this.props.level}
               value={1}
             />{" "}
             <LevelIncrementButton
               changeLevel={this.changeLevel}
-              level={this.state.level}
+              level={this.props.level}
               value={5}
             />{" "}
           </div>{" "}
@@ -271,14 +269,14 @@ class ConnectedApp extends React.Component {
         </div>{" "}
         <SkillsCalculator
           class={this.props.class}
-          level={this.state.level}
+          level={this.props.level}
           active={this.state.active}
           getStateForExport={this.getStateForExport}
           initialSkills={this.props.initialSkills}
         />{" "}
         <StatsCalculator
           class={this.props.className}
-          level={this.state.level}
+          level={this.props.level}
           active={this.state.active}
           items={this.props.items}
           getStateForExport={this.getStateForExport}
@@ -324,4 +322,11 @@ const mapStateToProps = state => {
    };
 };
 
-export const App = connect(mapStateToProps)(ConnectedApp);
+const mapDispatchToProps = dispatch => {
+  return {
+    changeLevel: number => dispatch(changeLevel(number))
+  }
+}
+
+
+export const App = connect(mapStateToProps, mapDispatchToProps)(ConnectedApp);

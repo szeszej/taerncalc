@@ -2,7 +2,7 @@ import { createStore } from "redux";
 import { combineReducers } from "redux";
 
 import characterReducer from "./character-reducer/character-reducer.ts"
-import statsReducer from "./stats-reducer/stats-reducer.js"
+import statsReducer from "./stats-reducer/stats-reducer"
 import skillsReducer from "./skills-reducer/skills-reducer.js"
 import equipmentReducer from "./equipment-reducer/equipment-reducer.js"
 import itemsReducer from "./items-reducer/items-reducer.js"

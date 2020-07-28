@@ -41,9 +41,6 @@ document.getElementById("classLvl").addEventListener(
   false
 );
 
-store.dispatch(initializeCharacter({className: 123, level: "lalala"}))
-console.log(store.getState())
-
 //Checking if the calculator is already loaded and showing confirmation message
 function checkCalc(charClass, charLvl, database) {
   if (calculator.classList.contains("enabled")) {
