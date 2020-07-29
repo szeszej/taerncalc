@@ -268,8 +268,6 @@ class ConnectedApp extends React.Component {
           </button>{" "}
         </div>{" "}
         <SkillsCalculator
-          class={this.props.class}
-          level={this.props.level}
           active={this.state.active}
           getStateForExport={this.getStateForExport}
           initialSkills={this.props.initialSkills}

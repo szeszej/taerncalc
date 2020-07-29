@@ -11,7 +11,7 @@ import { ResLine } from "./resist-line/ResLine.jsx";
 
 //Actions
 import { changeStat } from "../../store/stats-reducer/stats-reducer";
-import { resetPoints } from "../../store/stats-reducer/stats-reducer";
+import { resetStatPoints } from "../../store/stats-reducer/stats-reducer";
 
 class ConnectedStatsCalculator extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class ConnectedStatsCalculator extends React.Component {
     });
   }
   reset() {
-    this.props.resetPoints()
+    this.props.resetStatPoints()
   }
   render() {
     return (
@@ -197,7 +197,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changeStat: (stat, value) => dispatch(changeStat({stat: stat, value: value})),
-    resetPoints: () => dispatch(resetPoints())
+    resetStatPoints: () => dispatch(resetStatPoints())
   }
 }
 

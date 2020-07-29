@@ -78,7 +78,7 @@ export const changeStatPoints = (payload: ChangePointsPayload): ChangePointsActi
   };
 };
 
-export const resetPoints = (): ResetPointsAction => {
+export const resetStatPoints = (): ResetPointsAction => {
   let resetStats = {...initialStats}
   resetStats.statPts += store.getState().character.level * 4
   return {
@@ -87,7 +87,7 @@ export const resetPoints = (): ResetPointsAction => {
   }
 }
 
-export const setPoints = (payload: ChangePointsPayload): SetPointsAction => {
+export const setStatPoints = (payload: ChangePointsPayload): SetPointsAction => {
   return {
     type: SET_STAT_POINTS,
     payload

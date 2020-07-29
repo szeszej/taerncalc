@@ -1,4 +1,5 @@
 import { SkillSet } from "../../data/models/skill-set.model.jsx"
+import database from "../../data/skills.jsx"
 import store from "../store";
 
 //action types
@@ -15,7 +16,12 @@ interface SkillsState {
     skillSet: SkillSet
 }
 
-export default function skillsReducer(state: SkillsState, action: SkillActions): SkillsState {
+let initialSkills: SkillsState = {
+  skillPts: -2,
+  skillSet: new SkillSet("knight", database)
+}
+
+export default function skillsReducer(state = initialSkills, action: SkillActions): SkillsState {
   let newState = { ...state };
   switch (action.type) {
     case CHANGE_SKILL:
@@ -42,7 +48,8 @@ export default function skillsReducer(state: SkillsState, action: SkillActions):
     case RESET_SKILL_POINTS:
       newState.skillPts = action.payload.value
       for (let key in newState.skillSet) {
-        newState.skillSet[key].level = newState.skillSet[key].minLvl
+        newState.skillSet[key as keyof SkillSet].level = newState.skillSet[key as keyof SkillSet].minLvl
+        newState.skillSet[key as keyof SkillSet].requiredCharLevel = newState.skillSet[key as keyof SkillSet].initReqLvl
       }
       return newState
     default:

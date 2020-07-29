@@ -3,12 +3,15 @@ import store from "../store"
 
 //Action creators
 import { changeStatPoints } from "../stats-reducer/stats-reducer"
-import { setPoints } from "../stats-reducer/stats-reducer"
+import { setStatPoints } from "../stats-reducer/stats-reducer"
 import { initializeSkills } from "../skills-reducer/skills-reducer"
 import { changeSkillPoints } from "../skills-reducer/skills-reducer"
 
 //Model
 import { SkillSet } from "../../data/models/skill-set.model.jsx"
+
+//Data
+import database from "../../data/skills.jsx"
 
 //action types
 const CHANGE_LEVEL = "CHANGE_LEVEL"
@@ -50,8 +53,8 @@ export const changeLevel = (payload: ChangeLevelActionPayload): ChangeLevelActio
 }
 
 export const initializeCharacter = (payload: InitializeActionPayload): InitializeAction => {
-  store.dispatch(setPoints({value: payload.level * 4 + 1}))
-  store.dispatch(initializeSkills({skillPts: payload.level * 2 - 2, skillSet: new SkillSet(payload.className)}))
+  store.dispatch(setStatPoints({value: payload.level * 4 + 1}))
+  store.dispatch(initializeSkills({skillPts: payload.level * 2 - 2, skillSet: new SkillSet(payload.className, database)}))
   return {
     type: INITIALIZE_CHARACTER,
     payload
