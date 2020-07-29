@@ -5,7 +5,7 @@ import ReactGA from "react-ga";
 
 //Redux
 import { Provider } from "react-redux";
-import store from "./store/store.js";
+import store from "./store/store";
 import { initializeCharacter } from "./store/character-reducer/character-reducer.ts"
 
 //Styles
@@ -73,9 +73,7 @@ function renderApp(charClass, charLvl, database) {
   ReactDOM.render(
     <Provider store={store}>
       <App
-
         class={skillSet}
-
         items={database.items}
       />
     </Provider>,

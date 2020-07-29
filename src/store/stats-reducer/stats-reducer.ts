@@ -1,10 +1,26 @@
+import store from "../store";
+
 //action types
 const CHANGE_STAT = "CHANGE_STAT";
-const CHANGE_POINTS = "CHANGE_POINTS";
+const CHANGE_STAT_POINTS = "CHANGE_STAT_POINTS";
 const INITIATLIZE_STATS = "INITIATLIZE_STATS";
+const RESET_STAT_POINTS = "RESET_STAT_POINTS"
+const SET_STAT_POINTS = "SET_STAT_POINTS"
 
 //reducer
-const initialStats = {
+
+interface StatsState {
+  statPts: number,
+  strength: number,
+  agility: number,
+  power: number,
+  knowledge: number,
+  hp: number,
+  endurance: number,
+  mana: number
+}
+
+const initialStats: StatsState = {
   statPts: 1,
   strength: 10,
   agility: 10,
@@ -15,45 +31,68 @@ const initialStats = {
   mana: 200,
 };
 
-export default function statsReducer(state = initialStats, action: StatsActions) {
+export default function statsReducer(state = initialStats, action: StatsActions): StatsState {
   let newState = { ...state };
   switch (action.type) {
     case CHANGE_STAT:
       ["hp", "endurance", "mana"].includes(action.payload.stat)
-        ? (newState[action.payload.stat] += action.payload.number * 10)
-        : (newState[action.payload.stat] += action.payload.number);
-      newState.statPts -= action.payload.number;
+        ? (newState[action.payload.stat] += action.payload.value * 10)
+        : (newState[action.payload.stat] += action.payload.value);
+      newState.statPts -= action.payload.value;
+      console.log(newState);
       return newState;
-    case CHANGE_POINTS:
-      return newState.statPts += action.payload.number;
+    case CHANGE_STAT_POINTS:
+      newState.statPts += action.payload.value
+      return newState;
+    case SET_STAT_POINTS:
+      newState.statPts = action.payload.value
+      return newState;
     case INITIATLIZE_STATS:
       return action.payload;
+    case RESET_STAT_POINTS:
+      return action.payload
     default:
       return state;
   }
 }
 
 //action creators
-export const changeStat = (payload: ChangeStatPayload) => {
+export const changeStat = (payload: ChangeStatPayload): ChangeStatAction => {
   return {
     type: CHANGE_STAT,
-    payload: payload,
+    payload: payload
   };
 };
 
-export const initializeStats = (payload: InitializePayload) => {
+export const initializeStats = (payload: InitializePayload): InitializeAction => {
   return {
     type: INITIATLIZE_STATS,
-    payload,
+    payload
   };
 };
 
-export const changePoints = (payload: ChangePointsPayload)  => {
+export const changeStatPoints = (payload: ChangePointsPayload): ChangePointsAction  => {
   return {
-    type: CHANGE_POINTS,
-    payload,
+    type: CHANGE_STAT_POINTS,
+    payload
   };
 };
+
+export const resetPoints = (): ResetPointsAction => {
+  let resetStats = {...initialStats}
+  resetStats.statPts += store.getState().character.level * 4
+  return {
+    type: RESET_STAT_POINTS,
+    payload: resetStats
+  }
+}
+
+export const setPoints = (payload: ChangePointsPayload): SetPointsAction => {
+  return {
+    type: SET_STAT_POINTS,
+    payload
+  }
+}
 
 //types
 interface InitializePayload {
@@ -64,16 +103,16 @@ interface InitializePayload {
   knowledge: number,
   hp: number,
   endurance: number,
-  mana: number,
+  mana: number
 }
 
 interface ChangeStatPayload {
   stat: keyof typeof initialStats,
-  number: number
+  value: number
 }
 
 interface ChangePointsPayload {
-  number: number
+  value: number
 }
 
 interface InitializeAction {
@@ -87,9 +126,19 @@ interface ChangeStatAction {
 }
 
 interface ChangePointsAction {
-  type: typeof CHANGE_POINTS,
+  type: typeof CHANGE_STAT_POINTS,
   payload: ChangePointsPayload
 }
 
+interface SetPointsAction {
+  type: typeof SET_STAT_POINTS,
+  payload: ChangePointsPayload
+}
 
-type StatsActions = ChangeStatAction | InitializeAction | ChangePointsAction
+interface ResetPointsAction {
+  type: typeof RESET_STAT_POINTS,
+  payload: InitializePayload
+}
+
+
+type StatsActions = ChangeStatAction | InitializeAction | ChangePointsAction | ResetPointsAction | SetPointsAction

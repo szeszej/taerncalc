@@ -104,7 +104,7 @@ class ConnectedApp extends React.Component {
     });
   }
   changeLevel(value) {
-    this.props.changeLevel({level: value})
+    this.props.changeLevel(value)
   }
   createUrlForExport() {
     let propertiesForUrl = this.state.stateForExport;
@@ -276,7 +276,6 @@ class ConnectedApp extends React.Component {
         />{" "}
         <StatsCalculator
           class={this.props.className}
-          level={this.props.level}
           active={this.state.active}
           items={this.props.items}
           getStateForExport={this.getStateForExport}
@@ -324,7 +323,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeLevel: number => dispatch(changeLevel(number))
+    changeLevel: value => dispatch(changeLevel({level: value}))
   }
 }
 

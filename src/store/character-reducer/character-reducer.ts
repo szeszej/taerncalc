@@ -1,17 +1,32 @@
-import store from "../store.js"
-import { changePoints } from "../stats-reducer/stats-reducer"
+//Redux
+import store from "../store"
+
+//Action creators
+import { changeStatPoints } from "../stats-reducer/stats-reducer"
+import { setPoints } from "../stats-reducer/stats-reducer"
+import { initializeSkills } from "../skills-reducer/skills-reducer"
+import { changeSkillPoints } from "../skills-reducer/skills-reducer"
+
+//Model
+import { SkillSet } from "../../data/models/skill-set.model.jsx"
 
 //action types
 const CHANGE_LEVEL = "CHANGE_LEVEL"
-const INITIALIZE_CHARACTER = "INITIATLIZE_CHARACTER"
+const INITIALIZE_CHARACTER = "INITIALIZE_CHARACTER"
 
 //reducer
-const initialCharacter = {
+
+interface CharacterState {
+  className: string,
+  level: number
+}
+
+const initialCharacter: CharacterState = {
   className: "",
   level: 0
 }
 
-export default function characterReducer (state = initialCharacter, action: {type: string, payload: InitializeAction | ChangeLevelAction}) {
+export default function characterReducer (state = initialCharacter, action: CharacterActions): CharacterState {
   let newState = {...state};
   switch (action.type) {
     case CHANGE_LEVEL:
@@ -25,15 +40,18 @@ export default function characterReducer (state = initialCharacter, action: {typ
 }
 
 //action creators
-export const changeLevel = (payload: ChangeLevelAction) => {
-  store.dispatch(changePoints({number: payload.level * 4}))
+export const changeLevel = (payload: ChangeLevelActionPayload): ChangeLevelAction => {
+  store.dispatch(changeStatPoints({value: payload.level * 4}))
+  store.dispatch(changeSkillPoints({value: payload.level * 2}))
   return {
     type: CHANGE_LEVEL,
     payload
   }
 }
 
-export const initializeCharacter = (payload: InitializeAction) => {
+export const initializeCharacter = (payload: InitializeActionPayload): InitializeAction => {
+  store.dispatch(setPoints({value: payload.level * 4 + 1}))
+  store.dispatch(initializeSkills({skillPts: payload.level * 2 - 2, skillSet: new SkillSet(payload.className)}))
   return {
     type: INITIALIZE_CHARACTER,
     payload
@@ -42,10 +60,22 @@ export const initializeCharacter = (payload: InitializeAction) => {
 
 //types
 interface InitializeAction {
+  type: typeof INITIALIZE_CHARACTER,
+  payload: InitializeActionPayload
+}
+
+interface ChangeLevelAction {
+  type: typeof CHANGE_LEVEL,
+  payload: ChangeLevelActionPayload
+}
+
+interface InitializeActionPayload {
     className: string,
     level: number
 }
 
-interface ChangeLevelAction {
+interface ChangeLevelActionPayload {
     level: number
 }
+
+type CharacterActions = InitializeAction | ChangeLevelAction
