@@ -1,4 +1,4 @@
-type ObjectToCheck = { [key: string]: { prop: number } };
+type ObjectToCheck = { [key: string]: any };
 
 export default function isEquivalent(a: ObjectToCheck, b: ObjectToCheck) {
   // Create arrays of property names

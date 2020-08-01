@@ -18,22 +18,6 @@ export class ConnectedSkillsCalculator extends React.Component {
     this.checkIfSkillCanIncrease = this.checkIfSkillCanIncrease.bind(this);
     this.reset = this.reset.bind(this);
   }
-  componentDidMount() {
-    if (this.props.initialSkills) {
-      this.setState({
-        skillPts: this.props.initialSkills.skillPts
-      });
-    }
-  }
-  componentDidUpdate(prevProps) {
-    let stateForExport = {
-      skillPts: this.props.skillPts
-    };
-    for (let i = 1; i < 18; i++) {
-      stateForExport["skill" + i] = this.props.skillSet["skill" + i].level;
-    }
-    this.props.getStateForExport(stateForExport, "skills");
-  }
   reset() {
     this.props.resetSkillPoints()
   }

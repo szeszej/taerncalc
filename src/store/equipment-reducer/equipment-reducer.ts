@@ -1,11 +1,11 @@
 //Model
-import { Item } from "../../data/models/item.model.js"
+import { Item } from "../../data/models/item.model.js";
 
 //actions types
-const INITIALIZE_EQUIPMENT = "INITIALIZE_EQUIPMENT"
-const EQUIP_ITEM = "EQUIP_ITEM"
-const UNEQUIP_ITEM = "UNEQUIP_ITEM"
-const UNEQUIP_ALL_ITEMS = "UNEQUIP_ALL_ITEMS"
+const INITIALIZE_EQUIPMENT = "INITIALIZE_EQUIPMENT";
+const EQUIP_ITEM = "EQUIP_ITEM";
+const UNEQUIP_ITEM = "UNEQUIP_ITEM";
+const UNEQUIP_ALL_ITEMS = "UNEQUIP_ALL_ITEMS";
 
 //reducer
 const initialEquipment: Equipment = {
@@ -21,99 +21,108 @@ const initialEquipment: Equipment = {
   ring1: null,
   ring2: null,
   boots: null,
-  special: null
-}
+  special: null,
+};
 
 interface Equipment {
-  armor: Item | null,
-  helmet: Item | null,
-  neck: Item | null,
-  gloves: Item | null,
-  cape: Item | null,
-  weapon: Item | null,
-  shield: Item | null,
-  pants: Item | null,
-  belt: Item | null,
-  ring1: Item | null,
-  ring2: Item | null,
-  boots: Item | null,
-  special: Item | null
+  armor: Item | null;
+  helmet: Item | null;
+  neck: Item | null;
+  gloves: Item | null;
+  cape: Item | null;
+  weapon: Item | null;
+  shield: Item | null;
+  pants: Item | null;
+  belt: Item | null;
+  ring1: Item | null;
+  ring2: Item | null;
+  boots: Item | null;
+  special: Item | null;
 }
 
-export default function equipmentReducer (state = initialEquipment, action: EquipmentActions): Equipment {
+export default function equipmentReducer(
+  state = initialEquipment,
+  action: EquipmentActions
+): Equipment {
   let newState = { ...state };
   switch (action.type) {
     case EQUIP_ITEM:
-      newState[action.payload.slot] = action.payload.item
-      return newState
+      newState[action.payload.slot] = action.payload.item;
+      return newState;
     case UNEQUIP_ITEM:
-      newState[action.payload.slot] = null
-      return newState
+      newState[action.payload.slot] = null;
+      return newState;
     case UNEQUIP_ALL_ITEMS:
-      newState = initialEquipment
-      return newState
+      newState = initialEquipment;
+      return newState;
     case INITIALIZE_EQUIPMENT:
-      return action.payload
+      return action.payload;
     default:
-      return state
+      return state;
   }
 }
 
 //action creators
-export const initializeEquipment = (payload: Equipment): InitializeEquipmentAction => {
+export const initializeEquipment = (
+  payload: Equipment
+): InitializeEquipmentAction => {
   return {
     type: INITIALIZE_EQUIPMENT,
-    payload
-  }
-}
+    payload,
+  };
+};
 
 export const equipItem = (payload: EquipItemPayload): EquipItemAction => {
   return {
     type: EQUIP_ITEM,
-    payload
-  }
-}
+    payload,
+  };
+};
 
 export const unequipItem = (payload: EquipItemPayload): UnequipItemAction => {
   return {
     type: UNEQUIP_ITEM,
-    payload
-  }
-}
+    payload,
+  };
+};
 
 export const unequipAllItems = (): UnequipAllItemsAction => {
   return {
-    type: UNEQUIP_ALL_ITEMS
-  }
-}
+    type: UNEQUIP_ALL_ITEMS,
+  };
+};
 
 //types
 interface InitializeEquipmentAction {
-  type: typeof INITIALIZE_EQUIPMENT,
-  payload: Equipment
+  type: typeof INITIALIZE_EQUIPMENT;
+  payload: Equipment;
 }
 
 interface EquipItemPayload {
-  slot: keyof Equipment,
-  item: Item
+  slot: keyof Equipment;
+  item: Item;
 }
 
 interface UnequipItemPayload {
-  slot: keyof Equipment
+  slot: keyof Equipment;
 }
 
 interface EquipItemAction {
-  type: typeof EQUIP_ITEM,
-  payload: EquipItemPayload
+  type: typeof EQUIP_ITEM;
+  payload: EquipItemPayload;
 }
 
 interface UnequipItemAction {
-  type: typeof UNEQUIP_ITEM,
-  payload: UnequipItemPayload
+  type: typeof UNEQUIP_ITEM;
+  payload: UnequipItemPayload;
 }
 
 interface UnequipAllItemsAction {
-  type: typeof UNEQUIP_ALL_ITEMS
+  type: typeof UNEQUIP_ALL_ITEMS;
 }
 
-type EquipmentActions = InitializeEquipmentAction | EquipItemAction | UnequipItemAction | UnequipAllItemsAction
+type EquipmentActions =
+  | InitializeEquipmentAction
+  | EquipItemAction
+  | UnequipItemAction
+  | UnequipAllItemsAction;

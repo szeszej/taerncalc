@@ -1,7 +1,7 @@
 import React from "react";
 
-import { SkillIncrementButton } from "./skill-buttons/SkillIncrementButton.jsx"
-import { SkillDecrementButton } from "./skill-buttons/SkillDecrementButton.jsx"
+import { SkillIncrementButton } from "./skill-buttons/SkillIncrementButton.jsx";
+import { SkillDecrementButton } from "./skill-buttons/SkillDecrementButton.jsx";
 
 export class SkillLine extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -13,7 +13,7 @@ export class SkillLine extends React.Component {
   }
   render() {
     let notMeetingRequirements = {
-      color: "red"
+      color: "red",
     };
     return (
       <div className="skillLine">
@@ -72,8 +72,7 @@ export class SkillLine extends React.Component {
             this.props.skill.requiredCharLevel > this.props.level ||
             this.props.checkIfSkillCanIncrease(
               this.props.skill.level,
-              this.props.skill.level + 1,
-              1
+              this.props.skill.level + 1
             ) === false ? (
               <SkillIncrementButton
                 spendSkillPoints={this.props.spendSkillPoints}
