@@ -273,9 +273,7 @@ class ConnectedApp extends React.Component {
           initialSkills={this.props.initialSkills}
         />{" "}
         <StatsCalculator
-          class={this.props.className}
           active={this.state.active}
-          items={this.props.items}
           getStateForExport={this.getStateForExport}
           initialStats={this.props.initialStats}
           initialEquipment={this.props.initialEquipment}

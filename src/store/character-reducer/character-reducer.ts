@@ -18,7 +18,6 @@ const CHANGE_LEVEL = "CHANGE_LEVEL"
 const INITIALIZE_CHARACTER = "INITIALIZE_CHARACTER"
 
 //reducer
-
 interface CharacterState {
   className: string,
   level: number

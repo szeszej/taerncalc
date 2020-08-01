@@ -1,3 +1,4 @@
+//Redux
 import store from "../store";
 
 //action types

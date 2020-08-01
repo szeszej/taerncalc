@@ -1,6 +1,11 @@
-import { SkillSet } from "../../data/models/skill-set.model.jsx"
-import database from "../../data/skills.jsx"
+//Redux
 import store from "../store";
+
+//Model
+import { SkillSet } from "../../data/models/skill-set.model.jsx"
+
+//Data
+import database from "../../data/skills.jsx"
 
 //action types
 const CHANGE_SKILL = "CHANGE_SKILL";
@@ -8,7 +13,6 @@ const CHANGE_SKILL_POINTS = "CHANGE_SKILL_POINTS";
 const INITIATLIZE_SKILLS = "INITIATLIZE_SKILLS";
 const RESET_SKILL_POINTS = "RESET_SKILL_POINTS"
 const SET_SKILL_POINTS = "SET_SKILL_POINTS"
-
 
 //reducer
 interface SkillsState {
@@ -36,6 +40,7 @@ export default function skillsReducer(state = initialSkills, action: SkillAction
       }
       newState.skillPts = (newState.skillPts -=
         skillPointsNeeded[action.payload.newLvl] - skillPointsNeeded[action.payload.prevLvl]);
+      // newState.skillPts = (newState.skillPts -= ((action.payload.newLvl + action.payload.prevLvl) / 2) * (action.payload.newLvl - action.payload.prevLvl + 1));
       return newState;
     case CHANGE_SKILL_POINTS:
       newState.skillPts += action.payload.value

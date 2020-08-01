@@ -1,7 +1,12 @@
+//React
 import React from "react";
 
+//Components
 import { ItemTooltip } from "./item-display/ItemTooltip.jsx"
 import { ItemsList } from "./item-display/ItemsList.jsx"
+
+//Shared functionality
+import isEquivalent from "../../../../shared/object-equivalency-check"
 
 export class ItemSlot extends React.Component {
   constructor(props) {
@@ -13,7 +18,7 @@ export class ItemSlot extends React.Component {
     };
   }
   componentDidUpdate(prevProps) {
-    if (this.props.inSlot && !this.props.isEquivalent(prevProps, this.props)) {
+    if (this.props.inSlot && !isEquivalent(prevProps, this.props)) {
       if (
         this.props.level < this.props.inSlot.reqLvl ||
         this.props.strength < this.props.inSlot.reqStr ||

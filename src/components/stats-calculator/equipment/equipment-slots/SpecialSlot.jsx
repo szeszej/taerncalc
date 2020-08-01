@@ -1,7 +1,12 @@
+//React
 import React from "react";
 
+//Components
 import { Item } from "../../../../data/models/item.model.js";
 import { ItemTooltip } from "./item-display/ItemTooltip.jsx"
+
+//Shared functionality
+import isEquivalent from "../../../../shared/object-equivalency-check"
 
 export class SpecialSlot extends React.Component {
   constructor(props) {
@@ -31,7 +36,7 @@ export class SpecialSlot extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (this.props.inSlot !== null && !this.props.isEquivalent(prevProps, this.props) ) {
+    if (this.props.inSlot !== null && !isEquivalent(prevProps, this.props) ) {
       this.setState(
         {
           name: this.props.inSlot.name,

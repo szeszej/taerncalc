@@ -16,51 +16,54 @@ import * as serviceWorker from "./serviceWorker";
 
 //App-related
 import { App } from "./App.jsx";
-import { SkillSet } from "./data/models/skill-set.model.jsx";
+import { importBuild } from "./import-build/import-build.js";
+
+//Import-related
 import itemsDatabase from "./data/items.js";
 import skillsDatabase from "./data/skills.jsx";
-import { importBuild } from "./import-build/import-build.js";
+
+const taernDatabase = {
+  items: itemsDatabase,
+  skills: skillsDatabase,
+};
+
 
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
 //selecting calculator node
 const calculator = document.getElementById("calc");
-const taernDatabase = {
-  items: itemsDatabase,
-  skills: skillsDatabase,
-};
+
 
 //Adding event listener for the character form
 document.getElementById("classLvl").addEventListener(
   "submit",
   function (event) {
     event.preventDefault();
-    checkCalc(event.target[0].value, event.target[1].value, taernDatabase);
+    checkCalc(event.target[0].value, event.target[1].value);
   },
   false
 );
 
 //Checking if the calculator is already loaded and showing confirmation message
-function checkCalc(charClass, charLvl, database) {
+function checkCalc(charClass, charLvl) {
   if (calculator.classList.contains("enabled")) {
     if (
       window.confirm(
         "Czy na pewno chcesz stworzyć nowy build? Obecny zostanie usunięty!"
       )
     ) {
-      renderApp(charClass, charLvl, database);
+      renderApp(charClass, charLvl);
     }
   } else {
-    renderApp(charClass, charLvl, database);
+    renderApp(charClass, charLvl);
   }
 }
 
 //Rendering the app
-function renderApp(charClass, charLvl, database) {
+function renderApp(charClass, charLvl) {
   ReactDOM.unmountComponentAtNode(calculator);
   calculator.classList.add("enabled");
-  let skillSet = new SkillSet(charClass, database.skills);
   ReactGA.event({
     category: "Form",
     action: "Submit",
@@ -72,10 +75,7 @@ function renderApp(charClass, charLvl, database) {
   }))
   ReactDOM.render(
     <Provider store={store}>
-      <App
-        class={skillSet}
-        items={database.items}
-      />
+      <App />
     </Provider>,
     calculator
   );
