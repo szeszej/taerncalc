@@ -10,7 +10,7 @@ const SET_STAT_POINTS = "SET_STAT_POINTS"
 
 //reducer
 
-interface StatsState {
+export interface StatsState {
   statPts: number,
   strength: number,
   agility: number,
@@ -40,7 +40,6 @@ export default function statsReducer(state = initialStats, action: StatsActions)
         ? (newState[action.payload.stat] += action.payload.value * 10)
         : (newState[action.payload.stat] += action.payload.value);
       newState.statPts -= action.payload.value;
-      console.log(newState);
       return newState;
     case CHANGE_STAT_POINTS:
       newState.statPts += action.payload.value

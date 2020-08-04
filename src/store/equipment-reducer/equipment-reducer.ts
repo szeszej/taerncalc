@@ -24,7 +24,7 @@ const initialEquipment: Equipment = {
   special: null,
 };
 
-interface Equipment {
+export interface Equipment {
   armor: Item | null;
   helmet: Item | null;
   neck: Item | null;

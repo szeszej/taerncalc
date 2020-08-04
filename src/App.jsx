@@ -1,6 +1,5 @@
 //React
 import React from "react";
-import ReactGA from "react-ga";
 
 //Redux
 import { connect } from "react-redux";

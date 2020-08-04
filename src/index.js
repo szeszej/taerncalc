@@ -7,6 +7,7 @@ import ReactGA from "react-ga";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { initializeCharacter } from "./store/character-reducer/character-reducer.ts"
+import { importCharacter } from "./store/character-reducer/character-reducer.ts"
 
 //Styles
 import "./styles/index.scss";
@@ -16,7 +17,7 @@ import * as serviceWorker from "./serviceWorker";
 
 //App-related
 import { App } from "./App.jsx";
-import { importBuild } from "./import-build/import-build.js";
+import { importBuild } from "./import-build/import-build";
 
 //Import-related
 import itemsDatabase from "./data/items.js";
@@ -81,8 +82,9 @@ function renderApp(charClass, charLvl) {
   );
 }
 
-//Rendering the app if URL parameters are present (importing build)
+
 (function () {
+  //Checking for cookie consent
   if (!localStorage.getItem("cookieconsent")) {
     document.getElementById("cookieconsent").style.display = "block";
     document.getElementById("cookieButton").addEventListener(
@@ -94,20 +96,15 @@ function renderApp(charClass, charLvl) {
       false
     );
   }
-
+  //Rendering the app if URL parameters are present (importing build)
   let initialProperties = importBuild(taernDatabase);
   if (initialProperties) {
     calculator.classList.add("enabled");
+    store.dispatch(importCharacter(initialProperties))
     ReactDOM.render(
-      <App
-        level={initialProperties.level}
-        class={initialProperties.skillSet}
-        className={initialProperties.className}
-        items={taernDatabase.items}
-        initialStats={initialProperties.initialStats}
-        initialEquipment={initialProperties.initialEquipment}
-        initialSkills={initialProperties.initialSkills}
-      />,
+      <Provider store={store}>
+        <App />
+      </Provider>,
       calculator
     );
   }

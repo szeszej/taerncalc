@@ -25,45 +25,6 @@ export class ConnectedEquipment extends React.Component {
       listToDisplay: "",
     };
   }
-  componentDidMount() {
-    if (this.props.initialEquipment) {
-      this.setState({
-        equipment: {
-          armor: this.props.initialEquipment.armor,
-          helmet: this.props.initialEquipment.helmet,
-          neck: this.props.initialEquipment.neck,
-          gloves: this.props.initialEquipment.gloves,
-          cape: this.props.initialEquipment.cape,
-          weapon: this.props.initialEquipment.weapon,
-          shield: this.props.initialEquipment.shield,
-          pants: this.props.initialEquipment.pants,
-          belt: this.props.initialEquipment.belt,
-          ring1: this.props.initialEquipment.ring1,
-          ring2: this.props.initialEquipment.ring2,
-          boots: this.props.initialEquipment.boots,
-          special: this.props.initialEquipment.special
-        }
-      });
-    }
-  }
-  componentDidUpdate(prevProps, prevState) {
-    let equipmentTypes = Object.keys(this.props.equipment);
-    let stateForExport = {};
-    // eslint-disable-next-line
-    equipmentTypes.map(x => {
-      if (x === "special") {
-        if (this.props.equipment.special !== null) {
-          stateForExport[x] = this.props.equipment.special;
-        }
-      } else {
-        this.props.equipment[x] !== null
-          ? (stateForExport[x] = this.props.equipment[x].name)
-          : (stateForExport[x] = null);
-      }
-    });
-
-    this.props.getStateForExport(stateForExport, "equipment");
-  }
   showItemsList(type) {
     ReactGA.event({
       category: 'Items',

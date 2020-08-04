@@ -15,7 +15,7 @@ const RESET_SKILL_POINTS = "RESET_SKILL_POINTS";
 const SET_SKILL_POINTS = "SET_SKILL_POINTS";
 
 //reducer
-interface SkillsState {
+export interface SkillsState {
   skillPts: number;
   skillSet: SkillSet;
 }

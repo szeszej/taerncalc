@@ -102,7 +102,6 @@ export class SpecialSlot extends React.Component {
     this.createItem(this.state);
   }
   handleChangeNumeric(event, property) {
-    console.log(event.target.value);
     if (Number.isInteger(parseInt(event.target.value))) {
       this.setState({ [property]: parseInt(event.target.value) });
     } else {

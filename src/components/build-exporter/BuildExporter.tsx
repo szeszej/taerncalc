@@ -4,10 +4,16 @@ import ReactGA from "react-ga";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
-import { RootState } from "../../store/store"
+import { RootState } from "../../store/store";
 
 //Shared functionality
-import isEquivalent from "../../shared/object-equivalency-check"
+import isEquivalent from "../../shared/object-equivalency-check";
+
+//Types
+import { SkillSet } from "../../data/models/skill-set.model";
+import { Item } from "../../data/models/item.model";
+import { StatsState } from "../../store/stats-reducer/stats-reducer";
+import { Equipment } from "../../store/equipment-reducer/equipment-reducer";
 
 class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -17,65 +23,102 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       exportLink: "",
     };
   }
-  componentDidUpdate (prevProps: PropTypes) {
+  componentDidUpdate(prevProps: PropTypes) {
     if (!isEquivalent(prevProps, this.props)) {
-      this.hideExport()
+      this.hideExport();
     }
   }
   hideExport() {
     this.setState({
-        showExport: false,
-        exportLink: ""
+      showExport: false,
+      exportLink: "",
     });
   }
   createUrlForExport() {
-    //Exporting skills
-    let skillsForExport = {
-      skillPts: this.props.skills.skillPts
-    };
-    for (let i = 1; i < 18; i++) {
-      skillsForExport.skills["skill" + i] = this.props.skills["skill" + i].level;
+    //Array for storing properties to later turn into URL
+    let propertiesForUrl: [string, number | string][] = [];
+    //Transforming skills
+    if (this.props.skills.skillPts !== this.props.level * 2 - 2) {
+      propertiesForUrl.push(["skillPts", this.props.skills.skillPts]);
     }
-    //Final data for export
-    let propertiesForUrl = {
-      stats: this.props.stats,
-      equipment: this.props.equipment,
-      skills: skillsForExport
-    };
-    //Transforming properties
-    let arrayOfProperties = Object.entries(propertiesForUrl);
-    arrayOfProperties[0] = Object.entries(arrayOfProperties[0][1]);
-    arrayOfProperties[1] = Object.entries(arrayOfProperties[1][1]);
-    if (
-      arrayOfProperties[1].length > 12 &&
-      arrayOfProperties[1][12][0] === "special"
-    ) {
-      if (arrayOfProperties[1][12][1] !== null) {
-        arrayOfProperties[1][12][1] = Object.entries(
-          arrayOfProperties[1][12][1]
-        );
-        let filteredSpecialProperties = arrayOfProperties[1][12][1].filter(
-          (x) =>
-            x[1] != false &&
-            x[1] !== null &&
-            x[0] !== "type" &&
-            x[0] !== "rarity"
-        );
-        filteredSpecialProperties.forEach((x) => (x[0] = "special" + x[0]));
-        arrayOfProperties[1][12] = filteredSpecialProperties;
-        arrayOfProperties[1][12].map((x) => arrayOfProperties[1].push(x));
-        arrayOfProperties[1].splice(12, 1);
+    for (let i = 1; i < 18; i++) {
+      if (
+        this.props.skills.skillSet[("skill" + i) as keyof SkillSet].level !==
+        this.props.skills.skillSet[("skill" + i) as keyof SkillSet].minLvl
+      ) {
+        propertiesForUrl.push([
+          "skill" + i,
+          this.props.skills.skillSet[("skill" + i) as keyof SkillSet].level,
+        ]);
       }
     }
-    arrayOfProperties[2] = Object.entries(arrayOfProperties[2][1]);
-    let flatArrayOfProperties = arrayOfProperties.flat();
-    flatArrayOfProperties.push(
+    //Transforming stats
+    for (let key in this.props.stats) {
+      if (this.props.stats.hasOwnProperty(key)) {
+        if (key === "statPts") {
+          if (this.props.stats.statPts !== this.props.level * 4 + 1) {
+            propertiesForUrl.push([
+              key,
+              this.props.stats.statPts]);
+          }
+        }
+        if (
+          (["hp", "endurance", "mana"].includes(key) &&
+            this.props.stats[key as keyof StatsState] !== 200) ||
+          (["strength", "agility", "power", "knowledge"].includes(key) &&
+            this.props.stats[key as keyof StatsState] !== 10)
+        ) {
+          propertiesForUrl.push([
+            key,
+            this.props.stats[key as keyof StatsState],
+          ]);
+        }
+      }
+    }
+    //Transforming equipment
+    for (const key in this.props.equipment) {
+      if (this.props.equipment.hasOwnProperty(key)) {
+        if (this.props.equipment[key as keyof Equipment] !== null) {
+          if (key === "special") {
+            //Special slot requires special treatment
+            for (const itemProperty in this.props.equipment.special) {
+              if (
+                this.props.equipment.special.hasOwnProperty(itemProperty) &&
+                itemProperty !== "type" &&
+                itemProperty !== "rarity" &&
+                itemProperty !== "otherProperties"
+              ) {
+                let itemPropertyValue = this.props.equipment.special[
+                  itemProperty as keyof Item
+                ];
+                if (!!itemPropertyValue) {
+                  propertiesForUrl.push([
+                    "special" + itemProperty,
+                    itemPropertyValue,
+                  ]);
+                }
+              }
+            }
+          } else {
+            //Normal slot
+            propertiesForUrl.push(
+              this.props.equipment[key as keyof Equipment]!.name
+            );
+          }
+        }
+      }
+    }
+    //Transforming character
+    propertiesForUrl.push(
       ["level", this.props.level],
       ["className", this.props.className]
     );
-    let stringsForUrl = flatArrayOfProperties.map((x) => x[0] + "=" + x[1]);
-    let urlString = stringsForUrl.join("&");
-    let url = "https://kalkulatortaern.github.io/?" + urlString;
+    //Creating proper URL
+    let stringsForUrl: string[] = propertiesForUrl.map(
+      (x) => x[0] + "=" + x[1]
+    );
+    let urlProperties = stringsForUrl.join("&");
+    let url = "https://kalkulatortaern.github.io/?" + urlProperties;
     let encodedUrl = encodeURI(url);
     ReactGA.event({
       category: "Export",
@@ -117,8 +160,8 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     //       let link = JSON.parse(body);
     //       if (link.shortUrl) {
     this.setState({
-        showExport: true,
-        exportLink: string,
+      showExport: true,
+      exportLink: string,
     });
     //       } else {
     //         alert("Wystąpił błąd, spróbuj ponownie później!");
@@ -127,24 +170,25 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     //   })
   }
   copyToClipboard() {
-    const el = document.getElementById("exportOutput"); // Create a <textarea> element
+    //Copying the URL and making sure current selection is preserved
+    const el: HTMLInputElement = document.getElementById(
+      "exportOutput"
+    ) as HTMLInputElement;
     const selected =
-      document.getSelection().rangeCount > 0 // Check if there is any content selected previously
-        ? document.getSelection().getRangeAt(0) // Store selection if found
-        : null; // Mark as false to know no selection existed before
-    el.select(); // Select the <textarea> content
-    document.execCommand("copy"); // Copy - only works as a result of a user action (e.g. click events)
+      document.getSelection()!.rangeCount > 0
+        ? document.getSelection()!.getRangeAt(0)
+        : null;
+    el.select();
+    document.execCommand("copy");
     if (selected) {
-      // If a selection existed before copying
-      document.getSelection().removeAllRanges(); // Unselect everything on the HTML document
-      document.getSelection().addRange(selected); // Restore the original selection
+      document.getSelection()!.removeAllRanges();
+      document.getSelection()!.addRange(selected);
     }
     alert(
       "Adres buildu skopiowany do schowka! Użyj Ctrl+V, aby wkleić go gdzie chcesz!"
     );
   }
   render() {
-    console.log(typeof this.props)
     return (
       <div>
         <button
@@ -155,7 +199,9 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
         </button>
         <div
           className="exportLink"
-          style={this.state.showExport ? null : { display: "none" }}
+          style={
+            this.state.showExport ? { display: "flex" } : { display: "none" }
+          }
         >
           <label htmlFor="exportOutput">Link do twojego buildu:</label>
           <textarea
@@ -166,9 +212,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
           <button
             onClick={() => this.copyToClipboard()}
             disabled={
-              this.state.exportLink === "Eksportowanie w toku..."
-                ? true
-                : false
+              this.state.exportLink === "Eksportowanie w toku..." ? true : false
             }
           >
             Skopiuj do schowka
@@ -180,12 +224,14 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
 }
 
 //Types
-type PropTypes = ConnectedProps<typeof connector>
+type PropTypes = ConnectedProps<typeof connector>;
 
 type StateTypes = {
-  showExport: boolean,
-  exportLink: string
-}
+  showExport: boolean;
+  exportLink: string;
+};
+
+//Redux
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -193,10 +239,10 @@ const mapStateToProps = (state: RootState) => {
     className: state.character.className,
     stats: state.stats,
     equipment: state.equipment,
-    skills: state.skills
+    skills: state.skills,
   };
 };
 
-const connector = connect(mapStateToProps)
+const connector = connect(mapStateToProps);
 
 export const BuildExporter = connector(ConnectedBuildExporter);
