@@ -21,7 +21,7 @@ export interface StatsState {
   mana: number
 }
 
-const initialStats: StatsState = {
+export const initialStats: StatsState = {
   statPts: 1,
   strength: 10,
   agility: 10,

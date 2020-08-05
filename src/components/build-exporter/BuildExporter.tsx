@@ -102,7 +102,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
           } else {
             //Normal slot
             propertiesForUrl.push(
-              this.props.equipment[key as keyof Equipment]!.name
+              [key, this.props.equipment[key as keyof Equipment]!.name]
             );
           }
         }

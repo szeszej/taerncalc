@@ -4,9 +4,11 @@ import store from "../store";
 //Action creators
 import { changeStatPoints } from "../stats-reducer/stats-reducer";
 import { setStatPoints } from "../stats-reducer/stats-reducer";
+import { initialStats } from "../stats-reducer/stats-reducer";
 import { initializeSkills } from "../skills-reducer/skills-reducer";
 import { changeSkillPoints } from "../skills-reducer/skills-reducer";
 import { initializeStats } from "../stats-reducer/stats-reducer";
+import { initialEquipment } from "../equipment-reducer/equipment-reducer"
 import { initializeEquipment } from "../equipment-reducer/equipment-reducer"
 
 //Types
@@ -64,13 +66,16 @@ export const changeLevel = (
 export const initializeCharacter = (
   payload: InitializeActionPayload
 ): InitializeAction => {
-  store.dispatch(setStatPoints({ value: payload.level * 4 + 1 }));
+  let statsForInitialization = {...initialStats}
+  statsForInitialization.statPts = payload.level * 4 + 1
+  store.dispatch(initializeStats(statsForInitialization))
   store.dispatch(
     initializeSkills({
       skillPts: payload.level * 2 - 2,
       skillSet: new SkillSet(payload.className, database),
     })
   );
+  store.dispatch(initializeEquipment(initialEquipment))
   return {
     type: INITIALIZE_CHARACTER,
     payload,

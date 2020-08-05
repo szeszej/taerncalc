@@ -71,7 +71,6 @@ export class SkillLine extends React.Component {
             {this.props.skill.level === this.props.skill.maxLvl ||
             this.props.skill.requiredCharLevel > this.props.level ||
             this.props.checkIfSkillCanIncrease(
-              this.props.skill.level,
               this.props.skill.level + 1
             ) === false ? (
               <SkillIncrementButton

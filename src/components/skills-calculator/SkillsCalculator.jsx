@@ -24,11 +24,9 @@ export class ConnectedSkillsCalculator extends React.Component {
   spendSkillPoints(prevLvl, newLvl, number) {
     this.props.changeSkill(prevLvl, newLvl, number)
   }
-  checkIfSkillCanIncrease(prevLvl, newLvl, number) {
-    let skillPointsNeeded = [0, 1, 3, 6, 10, 15, 21, 28];
+  checkIfSkillCanIncrease(newLvl) {
     if (
-      skillPointsNeeded[newLvl] - skillPointsNeeded[prevLvl] >
-      this.props.skillPts
+      newLvl > this.props.skillPts
     ) {
       return false;
     } else {

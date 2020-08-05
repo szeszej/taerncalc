@@ -40,10 +40,7 @@ class ConnectedStatsCalculator extends React.Component {
           </p>
 
           <div className="linesAndEq">
-            <Equipment
-              getStateForExport={this.props.getStateForExport}
-              initialEquipment={this.props.initialEquipment}
-            />
+            <Equipment />
             <div className="statsAndRes">
               <div className="statLines">
                 <StatLine

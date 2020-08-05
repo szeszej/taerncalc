@@ -8,7 +8,7 @@ const UNEQUIP_ITEM = "UNEQUIP_ITEM";
 const UNEQUIP_ALL_ITEMS = "UNEQUIP_ALL_ITEMS";
 
 //reducer
-const initialEquipment: Equipment = {
+export const initialEquipment: Equipment = {
   armor: null,
   helmet: null,
   neck: null,

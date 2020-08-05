@@ -25,6 +25,8 @@ class ConnectedApp extends React.Component {
   componentDidMount() {
     let charClass = document.getElementById("charClass");
     charClass.value = this.props.className;
+    let charLvl = document.getElementById("charLvl");
+    charLvl.value = this.props.level;
   }
   componentDidUpdate(prevProps, prevState) {
     let charLvl = document.getElementById("charLvl");

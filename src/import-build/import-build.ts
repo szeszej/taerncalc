@@ -1,223 +1,192 @@
 //Google Analytics
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 //Types
-import { SkillSet } from "../data/models/skill-set.model.jsx"
-import { Item } from "../data/models/item.model.js"
-import skillsDatabase from "../data/skills.jsx"
-import { ImportCharacterActionPayload } from "../store/character-reducer/character-reducer"
-import { StatsState } from "../store/stats-reducer/stats-reducer"
+import { SkillSet } from "../data/models/skill-set.model.jsx";
+import { Item } from "../data/models/item.model.js";
+import skillsDatabase from "../data/skills.jsx";
+import { ImportCharacterActionPayload } from "../store/character-reducer/character-reducer";
+import { StatsState } from "../store/stats-reducer/stats-reducer";
+import { initialStats } from "../store/stats-reducer/stats-reducer";
+import { Equipment } from "../store/equipment-reducer/equipment-reducer";
+import { initialEquipment } from "../store/equipment-reducer/equipment-reducer";
+import { SkillsState } from "../store/skills-reducer/skills-reducer";
 
-interface TaernDatabase {
-  items: Item[],
-  skills: typeof skillsDatabase
-}
-
-function importBuild(database: TaernDatabase): ImportCharacterActionPayload | void {
+export function importBuild(
+  database: TaernDatabase
+): ImportCharacterActionPayload | void {
+  //Getting properties from URL parameters
   let propertiesFromUrl = getUrlVars(window.location.href);
+  //Letting GA know that a build has been imported
   if (Object.keys(propertiesFromUrl).length > 1) {
     ReactGA.event({
-      category: 'Form',
-      action: 'Import',
-      label: (propertiesFromUrl.className + " " + propertiesFromUrl.level)
+      category: "Form",
+      action: "Import",
+      label: propertiesFromUrl.className + " " + propertiesFromUrl.level,
     });
+    //Importing basic character data
     let characterProperties: ImportCharacterActionPayload = {
       level: parseInt(propertiesFromUrl.level),
       className: propertiesFromUrl.className,
-    }
+    };
+    //Importing stats
+    let temporaryStats = { ...initialStats };
+    let areNewStatsNeeded: boolean = false;
     for (const key in propertiesFromUrl) {
       if (propertiesFromUrl.hasOwnProperty(key)) {
-        if (["hp", "endurance", "mana", "strength", "agility", "power", "knowledge", "statPts"]) {
-          characterProperties.stats![key as keyof StatsState] = +propertiesFromUrl[key]
+        if (
+          Object.keys(initialStats).includes(key)
+        ) {
+          temporaryStats[key as keyof StatsState] = +propertiesFromUrl[key];
+          areNewStatsNeeded = true;
         }
-
       }
     }
-    // let initialStats = {};
-    // initialStats.statPts = parseInt(initialProperties.statPts);
-    // initialStats.strength = parseInt(initialProperties.strength);
-    // initialStats.agility = parseInt(initialProperties.agility);
-    // initialStats.power = parseInt(initialProperties.power);
-    // initialStats.knowledge = parseInt(initialProperties.knowledge);
-    // initialStats.hp = parseInt(initialProperties.hp);
-    // initialStats.endurance = parseInt(initialProperties.endurance);
-    // initialStats.mana = parseInt(initialProperties.mana);
-    // let initialEquipment = {};
-    // if (initialProperties.armor !== "null") {
-    //   initialEquipment.armor = database.items.filter(
-    //     x => x.name === initialProperties.armor
-    //   )[0];
-    // } else {
-    //   initialEquipment.armor = null;
-    // }
-    // if (initialProperties.helmet !== "null") {
-    //   initialEquipment.helmet = database.items.filter(
-    //     x => x.name === initialProperties.helmet
-    //   )[0];
-    // } else {
-    //   initialEquipment.helmet = null;
-    // }
-    // if (initialProperties.neck !== "null") {
-    //   initialEquipment.neck = database.items.filter(
-    //     x => x.name === initialProperties.neck
-    //   )[0];
-    // } else {
-    //   initialEquipment.neck = null;
-    // }
-    // if (initialProperties.gloves !== "null") {
-    //   initialEquipment.gloves = database.items.filter(
-    //     x => x.name === initialProperties.gloves
-    //   )[0];
-    // } else {
-    //   initialEquipment.gloves = null;
-    // }
-    // if (initialProperties.cape !== "null") {
-    //   initialEquipment.cape = database.items.filter(
-    //     x => x.name === initialProperties.cape
-    //   )[0];
-    // } else {
-    //   initialEquipment.cape = null;
-    // }
-    // if (initialProperties.weapon !== "null") {
-    //   initialEquipment.weapon = database.items.filter(
-    //     x => x.name === initialProperties.weapon
-    //   )[0];
-    // } else {
-    //   initialEquipment.weapon = null;
-    // }
-    // if (initialProperties.shield !== "null") {
-    //   initialEquipment.shield = database.items.filter(
-    //     x => x.name === initialProperties.shield
-    //   )[0];
-    // } else {
-    //   initialEquipment.shield = null;
-    // }
-    // if (initialProperties.pants !== "null") {
-    //   initialEquipment.pants = database.items.filter(
-    //     x => x.name === initialProperties.pants
-    //   )[0];
-    // } else {
-    //   initialEquipment.pants = null;
-    // }
-    // if (initialProperties.belt !== "null") {
-    //   initialEquipment.belt = database.items.filter(
-    //     x => x.name === initialProperties.belt
-    //   )[0];
-    // } else {
-    //   initialEquipment.belt = null;
-    // }
-    // if (initialProperties.ring1 !== "null") {
-    //   initialEquipment.ring1 = database.items.filter(
-    //     x => x.name === initialProperties.ring1
-    //   )[0];
-    // } else {
-    //   initialEquipment.ring1 = null;
-    // }
-    // if (initialProperties.ring2 !== "null") {
-    //   initialEquipment.ring2 = database.items.filter(
-    //     x => x.name === initialProperties.ring2
-    //   )[0];
-    // } else {
-    //   initialEquipment.ring2 = null;
-    // }
-    // if (initialProperties.boots !== "null") {
-    //   initialEquipment.boots = database.items.filter(
-    //     x => x.name === initialProperties.boots
-    //   )[0];
-    // } else {
-    //   initialEquipment.boots = null;
-    // }
-    // if (Object.keys(initialProperties).some(x => /^special+/.test(x))) {
-    //   let special = {};
-    //   initialProperties.hasOwnProperty("specialname") ?
-    //     (special.name = initialProperties.specialname) :
-    //     (special.name = "");
-    //   initialProperties.hasOwnProperty("specialimage") ?
-    //     (special.image = initialProperties.specialimage) :
-    //     (special.image = "");
-    //   special.type = "special";
-    //   initialProperties.hasOwnProperty("specialstrength") ?
-    //     (special.strength = parseInt(initialProperties.specialstrength)) :
-    //     (special.strength = 0);
-    //   initialProperties.hasOwnProperty("specialagility") ?
-    //     (special.agility = parseInt(initialProperties.specialagility)) :
-    //     (special.agility = 0);
-    //   initialProperties.hasOwnProperty("specialknowledge") ?
-    //     (special.knowledge = parseInt(initialProperties.specialknowledge)) :
-    //     (special.knowledge = 0);
-    //   initialProperties.hasOwnProperty("specialpower") ?
-    //     (special.power = parseInt(initialProperties.specialpower)) :
-    //     (special.power = 0);
-    //   initialProperties.hasOwnProperty("specialhp") ?
-    //     (special.hp = parseInt(initialProperties.specialhp)) :
-    //     (special.hp = 0);
-    //   initialProperties.hasOwnProperty("specialmana") ?
-    //     (special.mana = parseInt(initialProperties.specialmana)) :
-    //     (special.mana = 0);
-    //   initialProperties.hasOwnProperty("specialendurance") ?
-    //     (special.endurance = parseInt(initialProperties.specialendurance)) :
-    //     (special.endurance = 0);
-    //   initialProperties.hasOwnProperty("specialcutRes") ?
-    //     (special.cutRes = parseInt(initialProperties.specialcutRes)) :
-    //     (special.cutRes = 0);
-    //   initialProperties.hasOwnProperty("specialbluntRes") ?
-    //     (special.bluntRes = parseInt(initialProperties.specialbluntRes)) :
-    //     (special.bluntRes = 0);
-    //   initialProperties.hasOwnProperty("specialpierceRes") ?
-    //     (special.pierceRes = parseInt(initialProperties.specialpierceRes)) :
-    //     (special.pierceRes = 0);
-    //   initialProperties.hasOwnProperty("specialdamage") ?
-    //     (special.damage = parseInt(initialProperties.specialdamage)) :
-    //     (special.damage = 0);
-    //   initialProperties.hasOwnProperty("specialfireRes") ?
-    //     (special.fireRes = parseInt(initialProperties.specialfireRes)) :
-    //     (special.fireRes = 0);
-    //   initialProperties.hasOwnProperty("specialfrostRes") ?
-    //     (special.frostRes = parseInt(initialProperties.specialfrostRes)) :
-    //     (special.frostRes = 0);
-    //   initialProperties.hasOwnProperty("specialenergyRes") ?
-    //     (special.energyRes = parseInt(initialProperties.specialenergyRes)) :
-    //     (special.energyRes = 0);
-    //   initialProperties.hasOwnProperty("specialcurseRes") ?
-    //     (special.curseRes = parseInt(initialProperties.specialcurseRes)) :
-    //     (special.curseRes = 0);
-    //   initialEquipment.special = new Item(special);
-    // } else {
-    //   initialEquipment.special = null;
-    // }
-    // let skillSet = new SkillSet(
-    //   initialProperties.className,
-    //   database.skills
-    // );
-    // for (let i = 1; i < 18; i++) {
-    //   skillSet["skill" + i].level = parseInt(initialProperties["skill" + i]);
-    //   skillSet["skill" + i].requiredCharLevel += (skillSet["skill" + i].level - skillSet["skill" + i].minLvl) * skillSet["skill" + i].requiredCharLevelInc
-    // }
-    // let initialSkills = {};
-    // initialSkills.skillPts = parseInt(initialProperties.skillPts);
-    // let characterProperties = {
-    //   level: parseInt(initialProperties.level),
-    //   skillSet: skillSet,
-    //   className: initialProperties.className,
-    //   initialStats: initialStats,
-    //   initialEquipment: initialEquipment,
-    //   initialSkills: initialSkills
-    // }
-    return characterProperties
+    if (areNewStatsNeeded) {
+      characterProperties.stats! = temporaryStats;
+    }
+    //Importing skills
+    let temporarySkills: SkillsState = {
+      skillPts: -2,
+      skillSet: new SkillSet(characterProperties.className, database.skills),
+    };
+    let isNewSkillSetNeeded: boolean = false;
+    for (const key in propertiesFromUrl) {
+      if (propertiesFromUrl.hasOwnProperty(key)) {
+        if (/skill1?[1-9]/gm.test(key)) {
+          temporarySkills.skillSet[
+            key as keyof SkillSet
+          ].level = +propertiesFromUrl[key];
+          temporarySkills.skillSet[key as keyof SkillSet].requiredCharLevel +=
+            (temporarySkills.skillSet[key as keyof SkillSet].level -
+              temporarySkills.skillSet[key as keyof SkillSet].minLvl) *
+            temporarySkills.skillSet[key as keyof SkillSet]
+              .requiredCharLevelInc;
+          isNewSkillSetNeeded = true;
+        } else if (key === "skillPts") {
+          temporarySkills.skillPts = +propertiesFromUrl[key];
+        }
+      }
+    }
+    if (isNewSkillSetNeeded) {
+      characterProperties.skills! = temporarySkills;
+    }
+    //Importing equipment
+    let temporaryEquipment = { ...initialEquipment };
+    let isNewEquipmentNeeded: boolean = false;
+    let isThereSpecialItem: boolean = false;
+    for (const key in propertiesFromUrl) {
+      if (propertiesFromUrl.hasOwnProperty(key)) {
+        //Normal items
+        if (Object.keys(initialEquipment).includes(key)) {
+          temporaryEquipment[key as keyof Equipment] = database.items.filter(
+            (x) => x.name === propertiesFromUrl[key]
+          )[0];
+          isNewEquipmentNeeded = true;
+        }
+        //Special slot requires special treatment
+        if (Object.keys(propertiesFromUrl).some((x) => /^special+/.test(x)) && !isThereSpecialItem) {
+          let special: Special = {type: "special"};
+          propertiesFromUrl.hasOwnProperty("specialname")
+            ? (special.name = propertiesFromUrl.specialname)
+            : (special.name = "");
+          propertiesFromUrl.hasOwnProperty("specialimage")
+            ? (special.image = propertiesFromUrl.specialimage)
+            : (special.image = "");
+          propertiesFromUrl.hasOwnProperty("specialstrength")
+            ? (special.strength = parseInt(propertiesFromUrl.specialstrength))
+            : (special.strength = 0);
+          propertiesFromUrl.hasOwnProperty("specialagility")
+            ? (special.agility = parseInt(propertiesFromUrl.specialagility))
+            : (special.agility = 0);
+          propertiesFromUrl.hasOwnProperty("specialknowledge")
+            ? (special.knowledge = parseInt(propertiesFromUrl.specialknowledge))
+            : (special.knowledge = 0);
+          propertiesFromUrl.hasOwnProperty("specialpower")
+            ? (special.power = parseInt(propertiesFromUrl.specialpower))
+            : (special.power = 0);
+          propertiesFromUrl.hasOwnProperty("specialhp")
+            ? (special.hp = parseInt(propertiesFromUrl.specialhp))
+            : (special.hp = 0);
+          propertiesFromUrl.hasOwnProperty("specialmana")
+            ? (special.mana = parseInt(propertiesFromUrl.specialmana))
+            : (special.mana = 0);
+          propertiesFromUrl.hasOwnProperty("specialendurance")
+            ? (special.endurance = parseInt(propertiesFromUrl.specialendurance))
+            : (special.endurance = 0);
+          propertiesFromUrl.hasOwnProperty("specialcutRes")
+            ? (special.cutRes = parseInt(propertiesFromUrl.specialcutRes))
+            : (special.cutRes = 0);
+          propertiesFromUrl.hasOwnProperty("specialbluntRes")
+            ? (special.bluntRes = parseInt(propertiesFromUrl.specialbluntRes))
+            : (special.bluntRes = 0);
+          propertiesFromUrl.hasOwnProperty("specialpierceRes")
+            ? (special.pierceRes = parseInt(propertiesFromUrl.specialpierceRes))
+            : (special.pierceRes = 0);
+          propertiesFromUrl.hasOwnProperty("specialdamage")
+            ? (special.damage = parseInt(propertiesFromUrl.specialdamage))
+            : (special.damage = 0);
+          propertiesFromUrl.hasOwnProperty("specialfireRes")
+            ? (special.fireRes = parseInt(propertiesFromUrl.specialfireRes))
+            : (special.fireRes = 0);
+          propertiesFromUrl.hasOwnProperty("specialfrostRes")
+            ? (special.frostRes = parseInt(propertiesFromUrl.specialfrostRes))
+            : (special.frostRes = 0);
+          propertiesFromUrl.hasOwnProperty("specialenergyRes")
+            ? (special.energyRes = parseInt(propertiesFromUrl.specialenergyRes))
+            : (special.energyRes = 0);
+          propertiesFromUrl.hasOwnProperty("specialcurseRes")
+            ? (special.curseRes = parseInt(propertiesFromUrl.specialcurseRes))
+            : (special.curseRes = 0);
+          isThereSpecialItem = true
+          temporaryEquipment.special = new Item(special);
+        }
+      }
+    }
+    if (isNewEquipmentNeeded) {
+      characterProperties.equipment! = temporaryEquipment;
+    }
+    return characterProperties;
   }
-};
+}
 
+//Function that converts URL parameters into an object
 function getUrlVars(url: string): { [key: string]: string } {
-  	var params: { [key: string]: string } = {};
-  	var parser = document.createElement('a');
-  	parser.href = url;
-  	var query = parser.search.substring(1);
-  	var vars = query.split('&');
-  	for (var i = 0; i < vars.length; i++) {
-  		var pair = vars[i].split('=');
-  		params[pair[0]] = decodeURIComponent(pair[1]);
-  	}
-  	return params;
-  };
+  var params: { [key: string]: string } = {};
+  var parser = document.createElement("a");
+  parser.href = url;
+  var query = parser.search.substring(1);
+  var vars = query.split("&");
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    params[pair[0]] = decodeURIComponent(pair[1]);
+  }
+  return params;
+}
 
-export { importBuild }
+//types
+interface TaernDatabase {
+  items: Item[];
+  skills: typeof skillsDatabase;
+}
+
+interface Special {
+  name?: string
+  image?: string
+  type: "special"
+  damage?: number
+  strength?: number
+  agility?: number
+  knowledge?: number
+  power?: number
+  hp?: number
+  mana?: number
+  endurance?: number
+  cutRes?: number
+  bluntRes?: number
+  pierceRes?: number
+  fireRes?: number
+  frostRes?: number
+  energyRes?: number
+  curseRes?: number
+}
