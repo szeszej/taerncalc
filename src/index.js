@@ -1,60 +1,92 @@
+//React
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactGA from "react-ga";
+
+//Redux
+import { Provider } from "react-redux";
+import store from "./store/store";
+import { initializeCharacter } from "./store/character-reducer/character-reducer.ts"
+import { importCharacter } from "./store/character-reducer/character-reducer.ts"
+
+//Styles
 import "./styles/index.scss";
 
+//Other
 import * as serviceWorker from "./serviceWorker";
 
-import { Calculator } from "./App.jsx";
-import { SkillSet } from "./data/models/skill-set.model.js";
-import { taernDatabase } from "./data/skills-items.jsx";
-import { importBuild } from "./import-build/import-build.js";
+//App-related
+import { App } from "./App.jsx";
+import { importBuild } from "./import-build/import-build";
 
+//Import-related
+import itemsDatabase from "./data/items.js";
+import skillsDatabase from "./data/skills.jsx";
+
+const taernDatabase = {
+  items: itemsDatabase,
+  skills: skillsDatabase,
+};
+
+
+//Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
+//selecting calculator node
 const calculator = document.getElementById("calc");
 
+
+//Adding event listener for the character form
 document.getElementById("classLvl").addEventListener(
   "submit",
   function (event) {
     event.preventDefault();
-    checkCalc(event.target[0].value, event.target[1].value, taernDatabase);
+    checkCalc(event.target[0].value, event.target[1].value);
   },
   false
 );
 
-function checkCalc(charClass, charLvl, database) {
+//Checking if the calculator is already loaded and showing confirmation message
+function checkCalc(charClass, charLvl) {
   if (calculator.classList.contains("enabled")) {
-    if (window.confirm("Czy na pewno chcesz stworzyć nowy build? Obecny zostanie usunięty!")) {
-      renderApp(charClass, charLvl, database)
+    if (
+      window.confirm(
+        "Czy na pewno chcesz stworzyć nowy build? Obecny zostanie usunięty!"
+      )
+    ) {
+      renderApp(charClass, charLvl);
     }
   } else {
-    renderApp(charClass, charLvl, database)
+    renderApp(charClass, charLvl);
   }
 }
 
-function renderApp(charClass, charLvl, database) {
+//Rendering the app
+function renderApp(charClass, charLvl) {
   ReactDOM.unmountComponentAtNode(calculator);
   calculator.classList.add("enabled");
-  let skillSet = new SkillSet(charClass, database.skills);
   ReactGA.event({
     category: "Form",
     action: "Submit",
-    label: charClass + " " + charLvl
+    label: charClass + " " + charLvl,
   });
+  store.dispatch(initializeCharacter({
+    className: charClass,
+    level: +charLvl
+  }))
   ReactDOM.render(
-    <Calculator
-      level={parseInt(charLvl)}
-      class={skillSet}
-      className={charClass}
-      items={database.items}
-    />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     calculator
   );
 }
 
-window.onload = function () {
+
+(function () {
+  //Checking for cookie consent
   if (!localStorage.getItem("cookieconsent")) {
+    document.getElementById("cookieconsent").style.display = "block";
     document.getElementById("cookieButton").addEventListener(
       "click",
       function (event) {
@@ -63,26 +95,20 @@ window.onload = function () {
       },
       false
     );
-  } else {
-    document.getElementById("cookieconsent").style.display = "none";
   }
-
+  //Rendering the app if URL parameters are present (importing build)
   let initialProperties = importBuild(taernDatabase);
   if (initialProperties) {
+    calculator.classList.add("enabled");
+    store.dispatch(importCharacter(initialProperties))
     ReactDOM.render(
-      <Calculator
-        level={initialProperties.level}
-        class={initialProperties.skillSet}
-        className={initialProperties.className}
-        items={taernDatabase.items}
-        initialStats={initialProperties.initialStats}
-        initialEquipment={initialProperties.initialEquipment}
-        initialSkills={initialProperties.initialSkills}
-      />,
+      <Provider store={store}>
+        <App />
+      </Provider>,
       calculator
     );
   }
-};
+})();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

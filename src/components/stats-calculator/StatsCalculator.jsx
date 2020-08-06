@@ -1,131 +1,29 @@
+//React
 import React from "react";
 
-import { Equipment } from "./equipment/Equipment.jsx";
-import { StatLine } from "./stat-line/StatLine.jsx"
-import { ResLine } from "./resist-line/ResLine.jsx"
+//Redux
+import { connect } from "react-redux";
 
-export class StatsCalculator extends React.Component {
+//Components
+import { Equipment } from "./equipment/Equipment.jsx";
+import { StatLine } from "./stat-line/StatLine.jsx";
+import { ResLine } from "./resist-line/ResLine.jsx";
+
+//Actions
+import { changeStat } from "../../store/stats-reducer/stats-reducer";
+import { resetStatPoints } from "../../store/stats-reducer/stats-reducer";
+
+class ConnectedStatsCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.spendStatPoints = this.spendStatPoints.bind(this);
     this.reset = this.reset.bind(this);
-    this.addStatsFromEquipment = this.addStatsFromEquipment.bind(this);
-    this.state = {
-      statPts: 0,
-      strength: 10,
-      agility: 10,
-      power: 10,
-      knowledge: 10,
-      hp: 200,
-      endurance: 200,
-      mana: 200,
-      statsFromItems: {
-        strength: 0,
-        agility: 0,
-        power: 0,
-        knowledge: 0,
-        hp: 0,
-        endurance: 0,
-        mana: 0,
-        damage: 0,
-        fireRes: 0,
-        frostRes: 0,
-        energyRes: 0,
-        curseRes: 0,
-        pierceRes: 0,
-        cutRes: 0,
-        bluntRes: 0
-      }
-    };
-  }
-  componentDidMount() {
-    if (this.props.initialStats) {
-      this.setState({
-        statPts: 1000,
-        strength: 1000,
-        agility: 1000,
-        power: 1000,
-        knowledge: 1000
-      });
-      setTimeout(() => {
-        this.setState({
-          statPts: this.props.initialStats.statPts,
-          strength: this.props.initialStats.strength,
-          agility: this.props.initialStats.agility,
-          power: this.props.initialStats.power,
-          knowledge: this.props.initialStats.knowledge,
-          hp: this.props.initialStats.hp,
-          endurance: this.props.initialStats.endurance,
-          mana: this.props.initialStats.mana
-        });
-      }, 1);
-    } else {
-      this.setState({ statPts: this.calculateStatPoints(this.props.level) });
-    }
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.level !== this.props.level) {
-      this.setState(() => {
-        let updatedPoints = {};
-        updatedPoints.statPts =
-          this.state.statPts + (this.props.level - prevProps.level) * 4;
-        return updatedPoints;
-      });
-    }
-    let stateForExport = {
-      statPts: this.state.statPts,
-      strength: this.state.strength,
-      agility: this.state.agility,
-      power: this.state.power,
-      knowledge: this.state.knowledge,
-      hp: this.state.hp,
-      endurance: this.state.endurance,
-      mana: this.state.mana
-    };
-    this.props.getStateForExport(stateForExport, "stats");
-  }
-  calculateStatPoints(level) {
-    return level * 4 + 1;
   }
   spendStatPoints(stat, number) {
-    if (["strength", "agility", "power", "knowledge"].includes(stat)) {
-      if (this.state[stat] + number < 10) {
-      } else {
-        this.setState(prevState => {
-          return {
-            statPts: (prevState.statPts -= number),
-            [stat]: (prevState[stat] += number)
-          };
-        });
-      }
-    } else {
-      if (this.state[stat] + number * 10 < 200) {
-      } else {
-        this.setState(prevState => {
-          return {
-            statPts: (prevState.statPts -= number),
-            [stat]: (prevState[stat] += number * 10)
-          };
-        });
-      }
-    }
-  }
-  addStatsFromEquipment(stats) {
-    this.setState({
-      statsFromItems: stats
-    });
+    this.props.changeStat(stat, number);
   }
   reset() {
-    this.setState({
-      statPts: this.calculateStatPoints(this.props.level),
-      agility: 10,
-      strength: 10,
-      power: 10,
-      knowledge: 10,
-      hp: 200,
-      endurance: 200,
-      mana: 200
-    });
+    this.props.resetStatPoints();
   }
   render() {
     return (
@@ -135,119 +33,108 @@ export class StatsCalculator extends React.Component {
       >
         <div className="stats">
           <p className="points">
-            Punkty statystyk: {this.state.statPts}{" "}
+            Punkty statystyk: {this.props.statPts}{" "}
             <button className={"inlineButton"} onClick={() => this.reset()}>
               Reset
             </button>
           </p>
 
           <div className="linesAndEq">
-            <Equipment
-              items={this.props.items}
-              addStatsFromEquipment={this.addStatsFromEquipment}
-              getStateForExport={this.props.getStateForExport}
-              class={this.props.class}
-              level={this.props.level}
-              strength={this.state.strength}
-              agility={this.state.agility}
-              power={this.state.power}
-              knowledge={this.state.knowledge}
-              initialEquipment={this.props.initialEquipment}
-            />
+            <Equipment />
             <div className="statsAndRes">
               <div className="statLines">
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="strength"
                   statName={"Siła"}
-                  value={this.state.strength}
-                  pointsLeft={this.state.statPts}
-                  fromItems={this.state.statsFromItems.strength}
+                  value={this.props.strength}
+                  pointsLeft={this.props.statPts}
+                  fromItems={this.props.statsFromItems.strength}
                 />
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="agility"
                   statName={"Zręczność"}
-                  value={this.state.agility}
-                  pointsLeft={this.state.statPts}
-                  fromItems={this.state.statsFromItems.agility}
+                  value={this.props.agility}
+                  pointsLeft={this.props.statPts}
+                  fromItems={this.props.statsFromItems.agility}
                 />
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="knowledge"
                   statName={"Wiedza"}
-                  value={this.state.knowledge}
-                  pointsLeft={this.state.statPts}
-                  fromItems={this.state.statsFromItems.knowledge}
+                  value={this.props.knowledge}
+                  pointsLeft={this.props.statPts}
+                  fromItems={this.props.statsFromItems.knowledge}
                 />
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="power"
                   statName={"Moc"}
-                  value={this.state.power}
-                  pointsLeft={this.state.statPts}
-                  fromItems={this.state.statsFromItems.power}
+                  value={this.props.power}
+                  pointsLeft={this.props.statPts}
+                  fromItems={this.props.statsFromItems.power}
                 />
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="hp"
                   statName={"Punkty życia"}
-                  value={this.state.hp}
-                  pointsLeft={this.state.statPts}
-                  fromItems={this.state.statsFromItems.hp}
+                  value={this.props.hp}
+                  pointsLeft={this.props.statPts}
+                  fromItems={this.props.statsFromItems.hp}
                 />
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="endurance"
                   statName={"Kondycja"}
-                  value={this.state.endurance}
-                  pointsLeft={this.state.statPts}
-                  fromItems={this.state.statsFromItems.endurance}
+                  value={this.props.endurance}
+                  pointsLeft={this.props.statPts}
+                  fromItems={this.props.statsFromItems.endurance}
                 />
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="mana"
                   statName={"Mana"}
-                  value={this.state.mana}
-                  pointsLeft={this.state.statPts}
-                  fromItems={this.state.statsFromItems.mana}
+                  value={this.props.mana}
+                  pointsLeft={this.props.statPts}
+                  fromItems={this.props.statsFromItems.mana}
                 />
               </div>
               <div className="resLines">
                 <ResLine
                   stat={"cutRes"}
                   statName={"Odp. na sieczne"}
-                  value={this.state.statsFromItems.cutRes}
+                  value={this.props.statsFromItems.cutRes}
                 />
                 <ResLine
                   stat={"bluntRes"}
                   statName={"Odp. na obuchowe"}
-                  value={this.state.statsFromItems.bluntRes}
+                  value={this.props.statsFromItems.bluntRes}
                 />
                 <ResLine
                   stat={"pierceRes"}
                   statName={"Odp. na kłute"}
-                  value={this.state.statsFromItems.pierceRes}
+                  value={this.props.statsFromItems.pierceRes}
                 />
                 <ResLine
                   stat={"fireRes"}
                   statName={"Odp. na ogień"}
-                  value={this.state.statsFromItems.fireRes}
+                  value={this.props.statsFromItems.fireRes}
                 />
                 <ResLine
                   stat={"energyRes"}
                   statName={"Odp. na energię"}
-                  value={this.state.statsFromItems.energyRes}
+                  value={this.props.statsFromItems.energyRes}
                 />
                 <ResLine
                   stat={"frostRes"}
                   statName={"Odp. na zimno"}
-                  value={this.state.statsFromItems.frostRes}
+                  value={this.props.statsFromItems.frostRes}
                 />
                 <ResLine
                   stat={"curseRes"}
                   statName={"Odp. na uroki"}
-                  value={this.state.statsFromItems.curseRes}
+                  value={this.props.statsFromItems.curseRes}
                 />
               </div>
             </div>
@@ -257,3 +144,98 @@ export class StatsCalculator extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    statPts: state.stats.statPts,
+    strength: state.stats.strength,
+    agility: state.stats.agility,
+    power: state.stats.power,
+    knowledge: state.stats.knowledge,
+    hp: state.stats.hp,
+    endurance: state.stats.endurance,
+    mana: state.stats.mana,
+    statsFromItems: calculateStatsFromItem(state.equipment),
+  };
+};
+
+function calculateStatsFromItem(equipment) {
+  let equipmentTypes = Object.keys(equipment);
+  let equippedItems = equipmentTypes.map((x) => equipment[x]);
+  let equipmentStats = {
+    strength: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.strength) : (total += 0)),
+      0
+    ),
+    agility: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.agility) : (total += 0)),
+      0
+    ),
+    power: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.power) : (total += 0)),
+      0
+    ),
+    knowledge: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.knowledge) : (total += 0)),
+      0
+    ),
+    hp: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.hp) : (total += 0)),
+      0
+    ),
+    endurance: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.endurance) : (total += 0)),
+      0
+    ),
+    mana: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.mana) : (total += 0)),
+      0
+    ),
+    damage: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.damage) : (total += 0)),
+      0
+    ),
+    fireRes: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.fireRes) : (total += 0)),
+      0
+    ),
+    frostRes: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.frostRes) : (total += 0)),
+      0
+    ),
+    energyRes: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.energyRes) : (total += 0)),
+      0
+    ),
+    curseRes: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.curseRes) : (total += 0)),
+      0
+    ),
+    pierceRes: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.pierceRes) : (total += 0)),
+      0
+    ),
+    cutRes: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.cutRes) : (total += 0)),
+      0
+    ),
+    bluntRes: equippedItems.reduce(
+      (total, x) => (x != null ? (total += x.bluntRes) : (total += 0)),
+      0
+    ),
+  };
+  return equipmentStats;
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeStat: (stat, value) =>
+      dispatch(changeStat({ stat: stat, value: value })),
+    resetStatPoints: () => dispatch(resetStatPoints()),
+  };
+};
+
+export const StatsCalculator = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ConnectedStatsCalculator);

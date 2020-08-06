@@ -39,5 +39,6 @@ export class Item {
         this[itemProperty] = 0
       };
     });
+    this.isCustom = item.hasOwnProperty("isCustom") ? true : false;
   }
 }

@@ -1,7 +1,12 @@
+//React
 import React from "react";
 
+//Components
 import { Item } from "../../../../data/models/item.model.js";
 import { ItemTooltip } from "./item-display/ItemTooltip.jsx"
+
+//Shared functionality
+import isEquivalent from "../../../../shared/object-equivalency-check"
 
 export class SpecialSlot extends React.Component {
   constructor(props) {
@@ -31,7 +36,7 @@ export class SpecialSlot extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (this.props.inSlot !== null && !this.props.isEquivalent(prevProps, this.props) ) {
+    if (this.props.inSlot !== null && !isEquivalent(prevProps, this.props) ) {
       this.setState(
         {
           name: this.props.inSlot.name,
@@ -97,7 +102,6 @@ export class SpecialSlot extends React.Component {
     this.createItem(this.state);
   }
   handleChangeNumeric(event, property) {
-    console.log(event.target.value);
     if (Number.isInteger(parseInt(event.target.value))) {
       this.setState({ [property]: parseInt(event.target.value) });
     } else {
@@ -165,7 +169,28 @@ export class SpecialSlot extends React.Component {
     let unequipButton = (
       <button
         className={"unequipButton"}
-        onClick={event => this.handleChildClick(event, this.props.unequipItem)}
+        onClick={event => {
+          this.setState({
+            name: "",
+            image: "",
+            type: "special",
+            strength: 0,
+            agility: 0,
+            power: 0,
+            knowledge: 0,
+            hp: 0,
+            endurance: 0,
+            mana: 0,
+            damage: 0,
+            fireRes: 0,
+            frostRes: 0,
+            energyRes: 0,
+            curseRes: 0,
+            pierceRes: 0,
+            cutRes: 0,
+            bluntRes: 0
+          })
+          this.handleChildClick(event, this.props.unequipItem)}}
       >
         ×
       </button>
@@ -238,7 +263,7 @@ export class SpecialSlot extends React.Component {
                 className="property"
 
               >
-                <p>Obrazek: </p>
+                <p>Obrazek (URL): </p>
                 <input
                   className="textInput"
                   type="text"
