@@ -24,11 +24,13 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     };
   }
   componentDidUpdate(prevProps: PropTypes) {
+    //If properties change, hides the export field
     if (!isEquivalent(prevProps, this.props)) {
       this.hideExport();
     }
   }
   hideExport() {
+    //Hides the export field
     this.setState({
       showExport: false,
       exportLink: "",
@@ -101,6 +103,9 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
             }
           } else {
             //Normal slot
+            console.log(key);
+            console.log(this.props.equipment[key as keyof Equipment]!.name);
+
             propertiesForUrl.push(
               [key, this.props.equipment[key as keyof Equipment]!.name]
             );
@@ -120,6 +125,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     let urlProperties = stringsForUrl.join("&");
     let url = "https://kalkulatortaern.github.io/?" + urlProperties;
     let encodedUrl = encodeURI(url);
+    //Letting GA know a build was exported
     ReactGA.event({
       category: "Export",
       action: "Click",
@@ -128,6 +134,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     return this.createShortenedUrl(encodedUrl);
   }
   createShortenedUrl(string: string) {
+    //API reached its limit too soon :(
     // let request = require("request");
     // let linkRequest = {
     //   destination: string,
@@ -190,7 +197,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     return (
-      <div>
+      <div className={"exportBuild"}>
         <button
           className={"exportButton"}
           onClick={() => this.createUrlForExport()}

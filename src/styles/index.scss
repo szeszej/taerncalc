@@ -25,22 +25,26 @@ body {
   grid-template-areas: "header header header" "leftsidebar content rightsidebar" "footer footer footer";
   margin: 0;
   background: black;
-
-  .exportLink {
+  .exportBuild {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    .exportLink {
+      display: flex;
+      align-items: center;
 
-    #exportOutput {
-      resize: none;
-      height: 1.5em;
-      width: 15em;
-      line-height: 1.5em;
-      margin-left: 1em;
-      margin-right: 1em;
-      text-align: center;
-    }
-    button {
-      font-size: 0.9em;
+      #exportOutput {
+        resize: none;
+        height: 1.5em;
+        width: 15em;
+        line-height: 1.5em;
+        margin-left: 1em;
+        margin-right: 1em;
+        text-align: center;
+      }
+      button {
+        font-size: 0.9em;
+      }
     }
   }
 

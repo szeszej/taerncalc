@@ -169,7 +169,28 @@ export class SpecialSlot extends React.Component {
     let unequipButton = (
       <button
         className={"unequipButton"}
-        onClick={event => this.handleChildClick(event, this.props.unequipItem)}
+        onClick={event => {
+          this.setState({
+            name: "",
+            image: "",
+            type: "special",
+            strength: 0,
+            agility: 0,
+            power: 0,
+            knowledge: 0,
+            hp: 0,
+            endurance: 0,
+            mana: 0,
+            damage: 0,
+            fireRes: 0,
+            frostRes: 0,
+            energyRes: 0,
+            curseRes: 0,
+            pierceRes: 0,
+            cutRes: 0,
+            bluntRes: 0
+          })
+          this.handleChildClick(event, this.props.unequipItem)}}
       >
         ×
       </button>
@@ -242,7 +263,7 @@ export class SpecialSlot extends React.Component {
                 className="property"
 
               >
-                <p>Obrazek: </p>
+                <p>Obrazek (URL): </p>
                 <input
                   className="textInput"
                   type="text"

@@ -78,9 +78,9 @@ export function importBuild(
     for (const key in propertiesFromUrl) {
       if (propertiesFromUrl.hasOwnProperty(key)) {
         //Normal items
-        if (Object.keys(initialEquipment).includes(key)) {
+        if (Object.keys(initialEquipment).includes(key) && propertiesFromUrl[key] !== "null") {
           temporaryEquipment[key as keyof Equipment] = database.items.filter(
-            (x) => x.name === propertiesFromUrl[key]
+            (x) => x.name === propertiesFromUrl[key].replace("+", " ")
           )[0];
           isNewEquipmentNeeded = true;
         }
