@@ -1,9 +1,19 @@
+//React
 import React from "react";
 
-export class ItemTooltip extends React.Component {
+//Redux
+import { connect } from "react-redux";
+
+//Data
+import { itemSets } from "../../../../../data/item-sets";
+
+//Shared functionality
+import { checkWhichSetsAreEquipped } from "../../../../../shared/check-what-sets-are-equipped";
+
+class ConnectedItemTooltip extends React.Component {
   nameColor(rarity) {
     let color = {
-      color: "#0161E7"
+      color: "#0161E7",
     };
     if (rarity === "Psychorare") {
       color.color = "#35CBEF";
@@ -44,6 +54,7 @@ export class ItemTooltip extends React.Component {
     }
     return translatedClass;
   }
+  //For epics with scaling damage
   calculateDamage(damage, level) {
     let totalDamage = 0;
     totalDamage += parseInt(damage);
@@ -57,11 +68,31 @@ export class ItemTooltip extends React.Component {
       </p>
     ));
     let notMeetingRequirements = {
-      color: "red"
+      color: "red",
     };
     let negativeStats = {
-      color: "#961291"
+      color: "#961291",
     };
+    //If it's a set item
+    let setColor = {
+      color: "#3DEF01",
+    };
+    let equippedSet = this.props.item.set
+      ? itemSets.filter((x) => x.name === this.props.item.set)[0]
+      : null;
+    let setProperties = equippedSet
+      ? equippedSet.getValuesDependingOnPieces(
+          this.props.setsEquipped[this.props.item.set]
+        )
+      : null;
+    let otherSetProperties =
+      setProperties && setProperties.otherProperties
+        ? setProperties.otherProperties.map((x) => (
+            <p key={x} style={setColor}>
+              {x}
+            </p>
+          ))
+        : null;
     return (
       <div className="itemTooltip">
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>
@@ -272,7 +303,52 @@ export class ItemTooltip extends React.Component {
           </p>
         ) : null}
         {otherProperties}
+        {/* If it's a set item */}
+        {equippedSet && equippedSet.strength ? (
+          <p className="itemProperty" style={setColor}>
+            Siła: +{setProperties.strength} ({equippedSet.strength})
+          </p>
+        ) : null}
+        {equippedSet && equippedSet.agility ? (
+          <p className="itemProperty" style={setColor}>
+            Zręczność: +{setProperties.agility} ({equippedSet.agility})
+          </p>
+        ) : null}
+        {equippedSet && equippedSet.power ? (
+          <p className="itemProperty" style={setColor}>
+            Moc: +{setProperties.power} ({equippedSet.power})
+          </p>
+        ) : null}
+        {equippedSet && equippedSet.knowledge ? (
+          <p className="itemProperty" style={setColor}>
+            Wiedza: +{setProperties.knowledge} ({equippedSet.knowledge})
+          </p>
+        ) : null}
+        {equippedSet && equippedSet.hp ? (
+          <p className="itemProperty" style={setColor}>
+            Punkty życia: +{setProperties.hp} ({equippedSet.hp})
+          </p>
+        ) : null}
+        {equippedSet && equippedSet.endurance ? (
+          <p className="itemProperty" style={setColor}>
+            Kondycja: +{setProperties.endurance} ({equippedSet.endurance})
+          </p>
+        ) : null}
+        {equippedSet && equippedSet.mana ? (
+          <p className="itemProperty" style={setColor}>
+            Mana: +{setProperties.mana} ({equippedSet.mana})
+          </p>
+        ) : null}
+        {equippedSet && equippedSet.otherProperties ? otherSetProperties : null}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    setsEquipped: checkWhichSetsAreEquipped(state.equipment),
+  };
+};
+
+export const ItemTooltip = connect(mapStateToProps)(ConnectedItemTooltip);
