@@ -43,7 +43,8 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     if (this.props.skills.skillPts !== this.props.level * 2 - 2) {
       propertiesForUrl.push(["skillPts", this.props.skills.skillPts]);
     }
-    for (let i = 1; i < 18; i++) {
+    const numberOfSkills: number = 18;
+    for (let i = 1; i < numberOfSkills; i++) {
       if (
         this.props.skills.skillSet[("skill" + i) as keyof SkillSet].level !==
         this.props.skills.skillSet[("skill" + i) as keyof SkillSet].minLvl
@@ -103,9 +104,6 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
             }
           } else {
             //Normal slot
-            console.log(key);
-            console.log(this.props.equipment[key as keyof Equipment]!.name);
-
             propertiesForUrl.push(
               [key, this.props.equipment[key as keyof Equipment]!.name]
             );

@@ -78,7 +78,7 @@ class ConnectedItemTooltip extends React.Component {
       color: "#3DEF01",
     };
     let equippedSet = this.props.item.set
-      ? itemSets.filter((x) => x.name === this.props.item.set)[0]
+      ? itemSets.find((x) => x.name === this.props.item.set)
       : null;
     let setProperties = equippedSet
       ? equippedSet.getValuesDependingOnPieces(

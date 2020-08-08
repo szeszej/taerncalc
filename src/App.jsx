@@ -7,9 +7,8 @@ import { connect } from "react-redux";
 //Components
 import { SkillsCalculator } from "./components/skills-calculator/SkillsCalculator.jsx";
 import { StatsCalculator } from "./components/stats-calculator/StatsCalculator.jsx";
-import { LevelIncrementButton } from "./components/level-buttons/LevelIncrementButton.jsx";
-import { LevelDecrementButton } from "./components/level-buttons/LevelDecrementButton.jsx";
-import { BuildExporter } from "./components/build-exporter/BuildExporter"
+import { LevelChanger } from "./components/level-changer/LevelChanger";
+import { BuildExporter } from "./components/build-exporter/BuildExporter";
 
 //Actions
 import { changeLevel } from "./store/character-reducer/character-reducer";
@@ -19,7 +18,7 @@ class ConnectedApp extends React.Component {
     super(props);
     this.changeLevel = this.changeLevel.bind(this);
     this.state = {
-      active: "stats",
+      active: "stats"
     };
   }
   componentDidMount() {
@@ -49,54 +48,24 @@ class ConnectedApp extends React.Component {
     };
     return (
       <div className="calculators">
-        <div className="changeLevel">
-          <div className="levelButtons">
-            <LevelDecrementButton
-              changeLevel={this.changeLevel}
-              level={this.props.level}
-              value={-5}
-            />{" "}
-            <LevelDecrementButton
-              changeLevel={this.changeLevel}
-              level={this.props.level}
-              value={-1}
-            />{" "}
-          </div>{" "}
-          <div className="level"> Poziom: {this.props.level} </div>{" "}
-          <div className="levelButtons">
-            <LevelIncrementButton
-              changeLevel={this.changeLevel}
-              level={this.props.level}
-              value={1}
-            />{" "}
-            <LevelIncrementButton
-              changeLevel={this.changeLevel}
-              level={this.props.level}
-              value={5}
-            />{" "}
-          </div>{" "}
-        </div>{" "}
         <div className="tabs">
           <button
             style={this.state.active === "stats" ? active : inactive}
             onClick={() => this.changeTabs("stats")}
           >
-            Statystyki i przedmioty{" "}
-          </button>{" "}
+            Statystyki i przedmioty
+          </button>
+          <div className="separator"></div>
           <button
             style={this.state.active === "skills" ? active : inactive}
             onClick={() => this.changeTabs("skills")}
           >
-            Umiejętności{" "}
-          </button>{" "}
-        </div>{" "}
-        <SkillsCalculator
-          active={this.state.active}
-        />{" "}
-        <StatsCalculator
-          active={this.state.active}
-        />{" "}
-        <BuildExporter />
+            Umiejętności
+          </button>
+        </div>
+        <LevelChanger level={this.props.level} changeLevel={this.changeLevel} />
+        <SkillsCalculator active={this.state.active} />
+        <StatsCalculator active={this.state.active} /> <BuildExporter />
       </div>
     );
   }

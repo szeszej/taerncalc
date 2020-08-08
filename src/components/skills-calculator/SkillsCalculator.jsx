@@ -5,7 +5,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 //Components
-import { SkillLine } from "./skill-line/SkillLine.jsx"
+import { SkillLine } from "./skill-line/SkillLine.jsx";
 
 //Actions
 import { changeSkill } from "../../store/skills-reducer/skills-reducer";
@@ -19,21 +19,22 @@ export class ConnectedSkillsCalculator extends React.Component {
     this.reset = this.reset.bind(this);
   }
   reset() {
-    this.props.resetSkillPoints()
+    this.props.resetSkillPoints();
   }
   spendSkillPoints(prevLvl, newLvl, number) {
-    this.props.changeSkill(prevLvl, newLvl, number)
+    this.props.changeSkill(prevLvl, newLvl, number);
   }
   checkIfSkillCanIncrease(newLvl) {
-    if (
-      newLvl > this.props.skillPts
-    ) {
+    if (newLvl > this.props.skillPts) {
       return false;
     } else {
       return true;
     }
   }
   render() {
+    let negativePoints = {
+      color: "red",
+    };
     return (
       <div
         className="skillCalculator"
@@ -41,7 +42,9 @@ export class ConnectedSkillsCalculator extends React.Component {
       >
         <div className="statPts">
           <p>
-            Punkty umiejętności: {this.props.skillPts}{" "}
+            <span style={this.props.skillPts < 0 ? negativePoints : null}>
+              Punkty umiejętności: {this.props.skillPts}
+            </span>{" "}
             <button className={"inlineButton"} onClick={() => this.reset()}>
               Reset
             </button>
@@ -183,20 +186,29 @@ export class ConnectedSkillsCalculator extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     skillPts: state.skills.skillPts,
     skillSet: state.skills.skillSet,
-    level: state.character.level
-   };
+    level: state.character.level,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    changeSkill: (prevLvl, newLvl, skill) => dispatch(changeSkill({prevLvl: prevLvl, newLvl: newLvl, skill: "skill" + skill})),
-    resetSkillPoints: () => dispatch(resetSkillPoints())
-  }
-}
+    changeSkill: (prevLvl, newLvl, skill) =>
+      dispatch(
+        changeSkill({
+          prevLvl: prevLvl,
+          newLvl: newLvl,
+          skill: "skill" + skill,
+        })
+      ),
+    resetSkillPoints: () => dispatch(resetSkillPoints()),
+  };
+};
 
-
-export const SkillsCalculator = connect(mapStateToProps, mapDispatchToProps)(ConnectedSkillsCalculator);
+export const SkillsCalculator = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ConnectedSkillsCalculator);

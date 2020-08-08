@@ -32,6 +32,9 @@ class ConnectedStatsCalculator extends React.Component {
     this.props.resetStatPoints();
   }
   render() {
+    let negativePoints = {
+      color: "red",
+    };
     return (
       <div
         className="statsCalculator"
@@ -39,7 +42,7 @@ class ConnectedStatsCalculator extends React.Component {
       >
         <div className="stats">
           <p className="points">
-            Punkty statystyk: {this.props.statPts}{" "}
+            <span style={this.props.statPts < 0 ? negativePoints : null}>Punkty statystyk: {this.props.statPts}</span>{" "}
             <button className={"inlineButton"} onClick={() => this.reset()}>
               Reset
             </button>
@@ -258,7 +261,7 @@ function calculateStateFromSets(equipment) {
   if (Object.keys(setsEquipped).length > 0) {
     for (let key in setsEquipped) {
       if (setsEquipped.hasOwnProperty(key)) {
-        let equippedSet = itemSets.filter((x) => x.name === key)[0];
+        let equippedSet = itemSets.find((x) => x.name === key);
         let eqippedSetProperties = equippedSet.getValuesDependingOnPieces(
           setsEquipped[key]
         );

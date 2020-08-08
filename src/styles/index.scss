@@ -184,8 +184,7 @@ body {
     }
   }
   .calculator {
-    padding-top: 2.5em;
-    padding-bottom: 4em;
+    padding-bottom: 2em;
     grid-area: content;
     display: grid;
     grid-template-rows: 8em auto;
@@ -265,7 +264,7 @@ body {
         width: 80%;
         align-items: center;
         justify-content: center;
-        font-size: 1.5em;
+        font-size: 1em;
         margin-bottom: 1em;
         // padding-bottom: 0.5em;
         // border-bottom: 8px solid #BD996F;
@@ -300,13 +299,24 @@ body {
       .tabs {
         width: 100%;
         display: flex;
-        justify-content: space-around;
-
+        justify-content: center;
+        margin-bottom: 2em;
+        .separator {
+          background-image: url("/images/vertical-banner.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          width: 15%;
+        }
         button {
+          width: 12em;
           font-size: 2em;
           border: none;
           background-color: #d6cca9;
           cursor: pointer;
+        }
+        button:hover {
+          border-bottom: 10px solid #bd996f
         }
         @media only screen and (max-width: 1030px) {
           button {

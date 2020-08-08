@@ -79,9 +79,10 @@ export function importBuild(
       if (propertiesFromUrl.hasOwnProperty(key)) {
         //Normal items
         if (Object.keys(initialEquipment).includes(key) && propertiesFromUrl[key] !== "null") {
-          temporaryEquipment[key as keyof Equipment] = database.items.filter(
+          let itemFound: Item | undefined = database.items.find(
             (x) => x.name === propertiesFromUrl[key].replace("+", " ")
-          )[0];
+          );
+          temporaryEquipment[key as keyof Equipment] = itemFound ? itemFound : null;
           isNewEquipmentNeeded = true;
         }
         //Special slot requires special treatment
