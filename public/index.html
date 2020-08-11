@@ -27,29 +27,27 @@
     <div class="header">
       <div class="logo"><img src="images/logo.png" alt="Pride of Taern"></div>
       <div class="title">
-        <div>
           <h1>Kalkulator buildów Pride of Taern</h1>
-        </div>
       </div>
+    </div>
+    <div id="classLvlWrapper">
+      <form id="classLvl">
+        <select id="charClass" required>
+          <option selected disabled value="" class="placeholder">Wybierz klasę</option>
+          <option value="barbarian">Barbarzyńca</option>
+          <option value="knight">Rycerz</option>
+          <option value="sheed">Sheed</option>
+          <option value="druid">Druid</option>
+          <option value="firemage">Mag Ognia</option>
+          <option value="archer">Łucznik</option>
+          <option value="voodoo">VooDoo</option>
+        </select>
+        <input type="number" min="1" max="140" placeholder="Poziom postaci" id="charLvl" required></input>
+        <input class="submit" type="submit" value="Zatwierdź" ></input>
+      </form>
     </div>
     <div class="leftSidebar"></div>
     <div class="calculator">
-      <div id="classLvlWrapper">
-        <form id="classLvl">
-          <select id="charClass" required>
-            <option selected disabled value="" class="placeholder">Wybierz klasę</option>
-            <option value="barbarian">Barbarzyńca</option>
-            <option value="knight">Rycerz</option>
-            <option value="sheed">Sheed</option>
-            <option value="druid">Druid</option>
-            <option value="firemage">Mag Ognia</option>
-            <option value="archer">Łucznik</option>
-            <option value="voodoo">VooDoo</option>
-          </select>
-          <input type="number" min="1" max="140" placeholder="Poziom postaci" id="charLvl" required></input>
-          <input class="submit" type="submit" value="Zatwierdź" ></input>
-        </form>
-      </div>
       <div id="calc">
         <div class=intro>
           <h2>Po co mi kalkulator buildów Pride of Taern?</h2>

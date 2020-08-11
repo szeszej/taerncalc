@@ -304,6 +304,11 @@ class ConnectedItemTooltip extends React.Component {
         ) : null}
         {otherProperties}
         {/* If it's a set item */}
+        {equippedSet ? (
+          <p className="itemProperty" style={setColor}>
+            Efekty zestawu:
+          </p>
+        ) : null}
         {equippedSet && equippedSet.strength ? (
           <p className="itemProperty" style={setColor}>
             Siła: +{setProperties.strength} ({equippedSet.strength})

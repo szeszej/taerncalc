@@ -84,12 +84,13 @@ export class ItemSet {
   private getOtherPropertiesValuesDependingOnPieces(valueModifier: number): string[] {
     let propertyValues = this.otherProperties.map((x) => {
       let valueDependingOnPieces: number = 0;
-      valueDependingOnPieces = Math.floor(x[1] * valueModifier * 10) / 10;
       if (x[1] !== 1) {
+        valueDependingOnPieces = Math.floor(x[1] * valueModifier * 10) / 10;
         return (
           x[0] + " +" + valueDependingOnPieces + "% (" + x[1] + "%)"
         );
       } else {
+        valueDependingOnPieces = valueModifier === 1 ? 1 : 0;
         return x[0] + " +" + valueDependingOnPieces + " (" + x[1] + ")";
       }
     });

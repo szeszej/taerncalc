@@ -2,8 +2,11 @@
 @import "skillscalculator";
 @import "statscalculator";
 @import "equipment";
+
 $main-font: "Eczar", serif;
+
 $border-color: #d6c1a9;
+$button-background: #bdac6f;
 
 body {
   margin: 0;
@@ -21,8 +24,8 @@ body {
   font-family: $main-font;
   display: grid;
   grid-template-columns: 10% auto 10%;
-  grid-template-rows: 15em auto auto;
-  grid-template-areas: "header header header" "leftsidebar content rightsidebar" "footer footer footer";
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas: "header header header" "form form form" "leftsidebar content rightsidebar" "footer footer footer";
   margin: 0;
   background: black;
   .exportBuild {
@@ -69,7 +72,7 @@ body {
 
   button {
     border-radius: 8px;
-    background-color: #bdac6f;
+    background-color: $button-background;
     border: 2px solid $border-color;
   }
 
@@ -86,7 +89,7 @@ body {
   button:disabled {
     opacity: 0.65;
     cursor: not-allowed;
-    background-color: #bdac6f;
+    background-color: $button-background;
   }
 
   img {
@@ -98,28 +101,27 @@ body {
   .header {
     grid-area: header;
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 2px solid $border-color;
+    border-bottom: 2px solid $button-background;
 
     .logo {
-      margin-top: 2.5em;
 
       img {
-        max-height: 4em;
+        max-height: 5em;
+        margin: 2em;
       }
     }
 
     .title {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
         h1 {
+          margin: 0;
+          margin-top: 0.3em;
           text-align: center;
           text-transform: uppercase;
+          font-size: 3.5em;
+          letter-spacing: 0.05em;
           // background: linear-gradient(to bottom, #cb93bd 9%,#be1414 50%,#f78b8b 92%);
           background: linear-gradient(to bottom, #8e057e 26%, #981010 50%, #f43f3f 91%);
           // background: linear-gradient(to bottom, #cb93bd 9%,#870e0e 50%,#f78b8b 92%);
@@ -145,7 +147,7 @@ body {
     grid-area: footer;
     color: white;
     padding-bottom: 1em;
-    border-top: 2px solid $border-color;
+    border-top: 2px solid $button-background;
 
     .authors {
       width: 50%;
@@ -183,12 +185,67 @@ body {
       margin-left: 1em;
     }
   }
+
+  #classLvlWrapper {
+    border-bottom: 2px solid $button-background;
+    grid-area: form;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c7b65f;
+
+    form {
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
+      display: flex;
+      width: 80%;
+      justify-content: center;
+      font-size: 1.5em;
+
+      select {
+        box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+        width: 30%;
+        border-radius: 8px;
+        font-size: 0.8em;
+        color: #444;
+        border: 1px solid $border-color;
+        box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+        padding-left: 0.5em;
+        margin-right: 0.5em;
+      }
+
+      #charLvl {
+        width: 30%;
+        border-radius: 8px;
+        font-size: 0.8em;
+        border: 1px solid $border-color;
+        padding-left: 0.5em;
+      }
+
+      .submit {
+        border-radius: 8px;
+        font-size: 0.8em;
+        color: #444;
+        border: 2px solid #aaa;
+        box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+        cursor: pointer;
+        margin-left: 0.5em;
+        text-transform: uppercase;
+        background-color: #ada475;
+        border: 2px solid $button-background;
+        padding: 0.3em 0.75em;
+      }
+
+      .submit:hover {
+        background-color: #bd996f;
+      }
+    }
+  }
+
   .calculator {
+    padding-top: 2em;
     padding-bottom: 2em;
     grid-area: content;
-    display: grid;
-    grid-template-rows: 8em auto;
-    grid-template-areas: "classLevel" "calculators";
     background-color: #d6cca9;
     // clip-path: polygon(3% 0, 7% 1%, 11% 0%, 16% 2%, 20% 0, 23% 2%, 28% 2%, 32% 1%, 35% 1%, 39% 3%, 41% 1%, 45% 0%, 47% 2%, 50% 2%, 53% 0, 58% 2%, 60% 2%, 63% 1%, 65% 0%, 67% 2%, 69% 2%, 73% 1%, 76% 1%, 79% 0, 82% 1%, 85% 0, 87% 1%, 89% 0, 92% 1%, 96% 0, 98% 3%, 99% 3%, 99% 6%, 100% 11%, 98% 15%, 100% 21%, 99% 28%, 100% 32%, 99% 35%, 99% 40%, 100% 43%, 99% 48%, 100% 53%, 100% 57%, 99% 60%, 100% 64%, 100% 68%, 99% 72%, 100% 75%, 100% 79%, 99% 83%, 100% 86%, 100% 90%, 99% 94%, 99% 98%, 95% 99%, 92% 99%, 89% 100%, 86% 99%, 83% 100%, 77% 99%, 72% 100%, 66% 98%, 62% 100%, 59% 99%, 54% 99%, 49% 100%, 46% 98%, 43% 100%, 40% 98%, 38% 100%, 35% 99%, 31% 100%, 28% 99%, 25% 99%, 22% 100%, 19% 99%, 16% 100%, 13% 99%, 10% 99%, 7% 100%, 4% 99%, 2% 97%, 1% 97%, 0% 94%, 1% 89%, 0% 84%, 1% 81%, 0 76%, 0 71%, 1% 66%, 0% 64%, 0% 61%, 0% 59%, 1% 54%, 0% 49%, 1% 45%, 0% 40%, 1% 37%, 0% 34%, 1% 29%, 0% 23%, 2% 20%, 1% 17%, 1% 13%, 0 10%, 1% 6%, 1% 3%);
 
@@ -196,62 +253,7 @@ body {
       display: none;
     }
 
-    #classLvlWrapper {
-      grid-area: classLevel;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1.5em;
-      margin-bottom: 1.5em;
-
-      form {
-        display: flex;
-        width: 80%;
-        justify-content: center;
-        font-size: 1.5em;
-
-        select {
-          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-          width: 30%;
-          border-radius: 8px;
-          font-size: 0.8em;
-          color: #444;
-          border: 1px solid $border-color;
-          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-          padding-left: 0.5em;
-          margin-right: 0.5em;
-        }
-
-        #charLvl {
-          width: 30%;
-          border-radius: 8px;
-          font-size: 0.8em;
-          border: 1px solid $border-color;
-          padding-left: 0.5em;
-        }
-
-        .submit {
-          border-radius: 8px;
-          font-size: 0.8em;
-          color: #444;
-          border: 2px solid #aaa;
-          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-          cursor: pointer;
-          margin-left: 0.5em;
-          text-transform: uppercase;
-          background-color: #bdac6f;
-          border: 2px solid $border-color;
-          padding: 0.3em 0.75em;
-        }
-
-        .submit:hover {
-          background-color: #bd996f;
-        }
-      }
-    }
-
     .calculators {
-      grid-area: calculators;
       width: 100%;
       display: flex;
       flex-direction: column;
