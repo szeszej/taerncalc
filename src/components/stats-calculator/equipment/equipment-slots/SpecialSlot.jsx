@@ -3,10 +3,11 @@ import React from "react";
 
 //Components
 import { Item } from "../../../../data/models/item.model.js";
-import { ItemTooltip } from "./item-display/ItemTooltip.jsx"
+import { ItemTooltip } from "./shared/ItemTooltip.jsx"
 
 //Shared functionality
 import isEquivalent from "../../../../shared/object-equivalency-check"
+import translateProperty from "../../../../shared/translate-property"
 
 export class SpecialSlot extends React.Component {
   constructor(props) {
@@ -65,7 +66,6 @@ export class SpecialSlot extends React.Component {
       properties.image = "anvilcolor.svg"
     }
     let specialItem = new Item(properties);
-    console.log(specialItem);
     return this.props.equipItem(specialItem, "special");
   }
   hideTooltipWithListUp(hideTip, showList, type) {
@@ -115,60 +115,6 @@ export class SpecialSlot extends React.Component {
   handleChangeString(event, property) {
     this.setState({ [property]: event.target.value });
   }
-  translateProperty(property) {
-    let inPolish = "";
-    switch (property) {
-      case "strength":
-        inPolish = "Siła";
-        break;
-      case "agility":
-        inPolish = "Zręczność";
-        break;
-      case "knowledge":
-        inPolish = "Wiedza";
-        break;
-      case "power":
-        inPolish = "Moc";
-        break;
-      case "hp":
-        inPolish = "Punkty życia";
-        break;
-      case "mana":
-        inPolish = "Mana";
-        break;
-      case "endurance":
-        inPolish = "Kondycja";
-        break;
-      case "damage":
-        inPolish = "Obrażenia";
-        break;
-      case "cutRes":
-        inPolish = "Odp. na sieczne";
-        break;
-      case "bluntRes":
-        inPolish = "Odp. na obuchowe";
-        break;
-      case "pierceRes":
-        inPolish = "Odp. na kłute";
-        break;
-      case "fireRes":
-        inPolish = "Odp. na ogień";
-        break;
-      case "frostRes":
-        inPolish = "Odp. na zimno";
-        break;
-      case "curseRes":
-        inPolish = "Odp. na uroki";
-        break;
-      case "energyRes":
-        inPolish = "Odp. na energię";
-        break;
-      default:
-        inPolish = "błąd";
-        break;
-    }
-    return inPolish;
-  }
   render() {
     let unequipButton = (
       <button
@@ -214,12 +160,12 @@ export class SpecialSlot extends React.Component {
     );
     let propertyInputs = filteredProperties.map(x => (
       <div key={x} className="property">
-        <p>{this.translateProperty(x)}:</p>
+        <p>{translateProperty(x)}:</p>
         <input
           type="number"
           min={-999}
           max={999}
-          placeholder={this.translateProperty(x)}
+          placeholder={translateProperty(x)}
           value={this.state[x] === 0 ? "" : this.state[x]}
           onChange={event => this.handleChangeNumeric(event, x)}
         ></input>
@@ -279,7 +225,6 @@ export class SpecialSlot extends React.Component {
               {propertyInputs}
               <div className="submit">
                 <input
-                  onSubmit={this.handleSubmit}
                   type="submit"
                   value="Zatwierdź"
                 ></input>

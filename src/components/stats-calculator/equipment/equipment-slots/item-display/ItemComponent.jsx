@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ItemTooltip } from "./ItemTooltip.jsx"
+import { ItemTooltip } from "../shared/ItemTooltip.jsx"
 
 export class ItemComponent extends React.Component {
   constructor(props) {

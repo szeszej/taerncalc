@@ -2,7 +2,7 @@
 import React from "react";
 
 //Components
-import { ItemTooltip } from "./item-display/ItemTooltip.jsx"
+import { ItemTooltip } from "./shared/ItemTooltip.jsx"
 import { ItemsList } from "./item-display/ItemsList.jsx"
 
 //Shared functionality
