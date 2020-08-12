@@ -61,7 +61,11 @@ export class SpecialSlot extends React.Component {
     }
   }
   createItem(properties) {
+    if (properties.image === "") {
+      properties.image = "anvilcolor.svg"
+    }
     let specialItem = new Item(properties);
+    console.log(specialItem);
     return this.props.equipItem(specialItem, "special");
   }
   hideTooltipWithListUp(hideTip, showList, type) {
@@ -268,7 +272,7 @@ export class SpecialSlot extends React.Component {
                   className="textInput"
                   type="text"
                   placeholder="Wklej adres obrazka"
-                  value={this.state.image}
+                  value={this.state.image === "anvilcolor.svg" ? "" : this.state.image}
                   onChange={event => this.handleChangeString(event, "image")}
                 ></input>
               </div>
@@ -289,7 +293,7 @@ export class SpecialSlot extends React.Component {
           <ItemTooltip item={this.props.inSlot} />
         ) : null}
         {this.props.inSlot && this.props.inSlot.image ? (
-          <img src={this.props.inSlot.image} alt={this.props.inSlot.name} />
+          <img src={this.props.inSlot.image === "anvilcolor.svg" ? `images/items/` + this.props.inSlot.image : this.props.inSlot.image} alt={this.props.inSlot.name} />
         ) : null}
         {this.props.inSlot ? unequipButton : null}
       </div>
