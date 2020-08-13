@@ -30,9 +30,9 @@ export class ItemCreatorForm extends React.Component<PropTypes, StateTypes> {
     };
   }
   createItem() {
-    let specialItem = new Item(this.state);
+    let customItem = new Item(this.state);
   }
-  handleClick(event, functionToRun) {
+  handleClick(event: React.FormEvent, functionToRun: () => void) {
     event.stopPropagation();
     functionToRun();
   }
@@ -64,11 +64,11 @@ export class ItemCreatorForm extends React.Component<PropTypes, StateTypes> {
       </div>
     ));
     return (
-      <div className={"itemsList"}>
+      <form onSubmit={this.createItem} className={"itemsList"}>
         <div className={"title"}>
           <p>Tutaj możesz stworzyć własny przedmiot</p>
         </div>
-        <form onSubmit={this.createItem}>
+        <div className={"propertyList"}>
           <div
             className="property"
           >
@@ -102,9 +102,9 @@ export class ItemCreatorForm extends React.Component<PropTypes, StateTypes> {
               value="Zatwierdź"
             ></input>
           </div>
-        </form>
+        </div>
         {closeButton}
-      </div>
+      </form>
     )
   }
 }
