@@ -3,7 +3,7 @@ import React from "react";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
-import store from "../../../../../store/store";
+import { Dispatch } from "redux"
 
 //Action creators
 import { addItem } from "../../../../../store/items-reducer/items-reducer";
@@ -18,40 +18,71 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
     this.state = {
-      name: "",
+      properties: [{
+        property: "placeholder",
+        value: 0
+      }],
+      propertiesUsed: []
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.addNewSelect = this.addNewSelect.bind(this);
+    this.createItem = this.createItem.bind(this)
+  }
+  //Creating a new item to add to the database
+  createItem(): void {
+    let itemProperties: CustomItem = {
+      name: this.props.name,
+      image: this.props.image,
+      type: this.props.type,
       strength: 0,
       agility: 0,
       power: 0,
       knowledge: 0,
       hp: 0,
-      endurance: 0,
       mana: 0,
-      damage: 0,
-      fireRes: 0,
-      frostRes: 0,
-      energyRes: 0,
-      curseRes: 0,
-      pierceRes: 0,
-      cutRes: 0,
-      bluntRes: 0,
-    };
+      endurance: 0,
+      isCustom: true
+    }
+    //Fix the line below?
+    this.state.properties.forEach(x => (itemProperties[x.property as keyof CustomItem] as any) = x.value)
+    let customItem = new Item(itemProperties);
+    this.props.addItem(customItem);
+    this.props.closeForm()
   }
-  createItem() {
-    let customItem = new Item({...this.state, image: this.props.image, type: this.props.type});
-  }
-  handleClick(event: React.FormEvent, functionToRun: () => void) {
+  //Needed to prevent bubbling
+  handleClick(event: React.FormEvent, functionToRun: () => void): void {
     event.stopPropagation();
+    event.preventDefault()
     functionToRun();
   }
-  handleChangeString(event: React.FormEvent<HTMLInputElement>, property: keyof StateTypes) {
-    this.setState((currentState) => ({...currentState, [property]: event.currentTarget.value }));
+  //Handling numeric inputs
+  handleChange(value: number, index: number): void {
+    this.setState((currentState) => {
+      let newState = {...currentState}
+      newState.properties[index].value = value
+      return newState
+    })
   }
-  handleChangeNumeric(event: React.SyntheticEvent<HTMLInputElement>, property: keyof StateTypes): void {
-    if (Number.isInteger(parseInt(event.currentTarget.value))) {
-      this.setState((currentState) => ({...currentState, [property]: parseInt(event.currentTarget.value)}));
-    } else {
-      this.setState((currentState) => ({...currentState, [property]: 0 }));
-    }
+  //Handling selects
+  handleSelect(value: string, index: number): void {
+    this.setState((currentState) => {
+      let newState = {...currentState}
+      newState.properties[index].property = value
+      newState.propertiesUsed.push(value)
+      return newState
+    })
+  }
+  //Adding a new line to the form
+  addNewSelect(): void {
+    this.setState((currentState) => {
+      let newState = {...currentState}
+      newState.properties.push({
+        property: "placeholder",
+        value: 0
+      })
+      return newState
+    })
   }
   render() {
     let closeButton = (
@@ -62,49 +93,27 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
         ×
       </button>
     );
-    let properties = Object.keys(this.state);
-    let filteredProperties = properties.filter(
-      x =>
-        x !== "name"
-    );
-    let propertyInputs = filteredProperties.map(x => (
-      <div key={x} className="property">
-        <p>{translateProperty(x)}:</p>
-        <input
-          type="number"
-          min={-999}
-          max={999}
-          placeholder={translateProperty(x)}
-          value={this.state[x as keyof StateTypes] === 0 ? "" : this.state[x as keyof StateTypes]}
-          onChange={event => this.handleChangeNumeric(event, x as keyof StateTypes)}
-        ></input>
+    let properties = ["strength", "agility", "power", "knowledge"]
+    let options = [<option key="placeholder" disabled value="placeholder" className="placeholder">Wybierz parametr</option>]
+    properties.forEach(x => options.push(<option key={x} value={x} disabled={this.state.propertiesUsed.includes(x)}>{translateProperty(x)}</option>))
+    let propertySelects = this.state.properties.map((x, index) =>
+      <div className="property" key={index}>
+      <select required value={x.property} onChange={(event) => (this.handleSelect(event.currentTarget.value, index))} >{options}</select>
+      <input value={x.value} onChange={(event) => (this.handleChange(+event.currentTarget.value, index))}></input>
+      <button onClick={(event) => this.handleClick(event, this.addNewSelect)}>+</button>
       </div>
-    ));
+    )
     return (
-      <form onSubmit={this.createItem} className={"itemsList"}>
+      <form onSubmit={(event) => this.handleClick(event, this.createItem)} className={"itemsList"}>
         <div className={"title"}>
           <p>Tutaj możesz stworzyć własny przedmiot</p>
         </div>
         <div className={"propertyList"}>
-          <div
-            className="property"
-          >
-            <p>Nazwa: </p>
-            <input
-              className="textInput"
-              type="text"
-              maxLength={30}
-              placeholder="Wpisz nazwę"
-              value={this.state.name}
-              onChange={event => this.handleChangeString(event, "name")}
-            ></input>
-          </div>
-          {propertyInputs}
+          {propertySelects}
           <div className="submit">
-            <input
+            <button
               type="submit"
-              value="Zatwierdź"
-            ></input>
+            >Zatwierdź</button>
           </div>
         </div>
         {closeButton}
@@ -117,37 +126,38 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
 type PropTypes = ConnectedProps<typeof connector>  & OwnProps;
 
 interface OwnProps {
+  name: string
   type: string
   image: string
   closeForm(): void
 }
 
 interface StateTypes {
-  name: string;
-  strength: number;
-  agility: number;
-  power: number;
-  knowledge: number;
-  hp: number;
-  endurance: number;
-  mana: number;
-  damage: number;
-  fireRes: number;
-  frostRes: number;
-  energyRes: number;
-  curseRes: number;
-  pierceRes: number;
-  cutRes: number;
-  bluntRes: number
+  properties: {property: string, value: number}[]
+  propertiesUsed: string[]
+}
+
+interface CustomItem {
+  name: string
+  type: string
+  image: string
+  strength: number
+  agility: number
+  power: number
+  knowledge: number
+  hp: number
+  mana: number
+  endurance: number
+  isCustom: true
 }
 
 //Redux
-const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addItem: (item: Item) => dispatch(addItem({item: item})),
   }
 }
 
-const connector = connect(mapDispatchToProps);
+const connector = connect(null, mapDispatchToProps);
 
 export const ItemCreatorForm = connector(ConnectedItemCreatorForm);

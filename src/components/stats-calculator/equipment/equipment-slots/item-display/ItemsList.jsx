@@ -1,11 +1,32 @@
+//React
 import React from "react";
 
+//Components
 import { ItemComponent } from "./ItemComponent.jsx"
+import { ItemCreatorForm } from "../shared/ItemCreatorForm"
 
 export class ItemsList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      displayAddItemForm: false
+    }
+    this.showAddItemForm = this.showAddItemForm.bind(this)
+    this.hideAddItemForm = this.hideAddItemForm.bind(this)
+  }
   handleClick(event, functionToRun) {
     event.stopPropagation();
     functionToRun();
+  }
+  showAddItemForm() {
+    this.setState({
+      displayAddItemForm: true
+    })
+  }
+  hideAddItemForm() {
+    this.setState({
+      displayAddItemForm: false
+    })
   }
   render() {
     let closeButton = (
@@ -47,6 +68,7 @@ export class ItemsList extends React.Component {
             hideItemsList={this.props.hideItemsList}
           />
         ))}
+        <div className="itemOnList" onClick={this.showAddItemForm}>+</div>
       </div>
     );
     let unequippableItemsComponents = (
@@ -66,7 +88,8 @@ export class ItemsList extends React.Component {
       </div>
     );
     return (
-      <div className={"itemsList"}>
+      <div className="itemsList">
+        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={""} type={this.props.type} image={""} /> : null}
         {equippableItemsComponents}
         {unequippableItemsComponents}
         {closeButton}

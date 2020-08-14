@@ -195,7 +195,7 @@ export class SpecialSlot extends React.Component {
             <div className={"title"}>
               <p>Tutaj możesz stworzyć własny przedmiot</p>
             </div>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="propertyList">
               <div
                 className="property"
               >

@@ -11,10 +11,10 @@ const ADD_ITEM = "ADD_ITEM"
 const initialItems: Item[] = [...itemsDatabase]
 
 export default function itemsReducer (state = initialItems, action: any): Item[] {
-  let newState = {...state}
+  let newState = [...state]
   switch (action.type) {
     case ADD_ITEM:
-      newState.push(action.payload)
+      newState.push(action.payload.item)
       return newState
     default:
       return state
