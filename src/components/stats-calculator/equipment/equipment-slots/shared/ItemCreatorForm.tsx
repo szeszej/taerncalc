@@ -7,6 +7,7 @@ import { Dispatch } from "redux"
 
 //Action creators
 import { addItem } from "../../../../../store/items-reducer/items-reducer";
+import { equipItem, Equipment } from "../../../../../store/equipment-reducer/equipment-reducer";
 
 //Models
 import { Item } from "../../../../../data/models/item.model.js"
@@ -33,7 +34,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
   createItem(): void {
     let itemProperties: CustomItem = {
       name: this.props.name,
-      image: this.props.image,
+      image: this.props.type + "color.svg",
       type: this.props.type,
       strength: 0,
       agility: 0,
@@ -45,10 +46,15 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
       isCustom: true
     }
     //Fix the line below?
-    this.state.properties.forEach(x => (itemProperties[x.property as keyof CustomItem] as any) = x.value)
+    this.state.properties.forEach(x => {
+      if (itemProperties[x.property as keyof CustomItem] !== "placeholder") {
+        (itemProperties[x.property as keyof CustomItem] as any) =  x.value
+      }
+    })
     let customItem = new Item(itemProperties);
     this.props.addItem(customItem);
-    this.props.closeForm()
+    this.props.equipItem((this.props.type as keyof Equipment), customItem)
+    this.props.closeList()
   }
   //Needed to prevent bubbling
   handleClick(event: React.FormEvent, functionToRun: () => void): void {
@@ -128,8 +134,8 @@ type PropTypes = ConnectedProps<typeof connector>  & OwnProps;
 interface OwnProps {
   name: string
   type: string
-  image: string
   closeForm(): void
+  closeList(): void
 }
 
 interface StateTypes {
@@ -155,6 +161,7 @@ interface CustomItem {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addItem: (item: Item) => dispatch(addItem({item: item})),
+    equipItem: (slot: keyof Equipment, item: Item) => dispatch(equipItem({slot: slot, item: item}))
   }
 }
 

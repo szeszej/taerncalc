@@ -68,7 +68,7 @@ export class ItemsList extends React.Component {
             hideItemsList={this.props.hideItemsList}
           />
         ))}
-        <div className="itemOnList" onClick={this.showAddItemForm}>+</div>
+        <div className="itemOnList addItem" onClick={this.showAddItemForm}></div>
       </div>
     );
     let unequippableItemsComponents = (
@@ -89,7 +89,7 @@ export class ItemsList extends React.Component {
     );
     return (
       <div className="itemsList">
-        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={""} type={this.props.type} image={""} /> : null}
+        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={""} type={this.props.type} image={""} closeList={this.props.hideItemsList} /> : null}
         {equippableItemsComponents}
         {unequippableItemsComponents}
         {closeButton}

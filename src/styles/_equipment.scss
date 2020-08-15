@@ -109,6 +109,11 @@
       background-position: center;
     }
 
+    .addItem {
+      background-image: url("/images/plus.svg");
+    }
+
+
     .unequippableItems .itemOnList {
       cursor: not-allowed;
     }
@@ -123,6 +128,66 @@
       top: -0.75em;
       font-weight: bold;
       border-radius: 0;
+    }
+
+    .title {
+      font-size: 1.25em;
+      align-self: center;
+      color: #d7d50e;
+    }
+
+    .propertyList {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .property {
+        width: 80%;
+        margin: 2px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        input {
+          height: 1.5em;
+          font-size: 1em;
+          width: 30%;
+        }
+
+        select {
+          font-size: 1em;
+          width: 50%;
+          background-position: right 0.4em top 50%, 0 0;
+          padding-left: 0.5em
+        }
+        button {
+          width: 2em;
+          height: 2em;
+          border-radius: 2px;
+          font-size: 0.9em;
+          font-weight: bolder;
+        }
+
+      }
+
+      .submit {
+        margin-top: 1.5em;
+
+        input {
+          border-radius: 8px;
+          font-size: 1.5em;
+          color: #d7d50e;
+          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+          cursor: pointer;
+          background-color: black;
+          border: 2px solid #EC8C42;
+
+          &:hover {
+            background-color: #322F3E;
+          }
+        }
+      }
     }
   }
 
