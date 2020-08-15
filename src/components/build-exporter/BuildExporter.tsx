@@ -60,9 +60,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       if (this.props.stats.hasOwnProperty(key)) {
         if (key === "statPts") {
           if (this.props.stats.statPts !== this.props.level * 4 + 1) {
-            propertiesForUrl.push([
-              key,
-              this.props.stats.statPts]);
+            propertiesForUrl.push([key, this.props.stats.statPts]);
           }
         }
         if (
@@ -104,9 +102,10 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
             }
           } else {
             //Normal slot
-            propertiesForUrl.push(
-              [key, this.props.equipment[key as keyof Equipment]!.name]
-            );
+            propertiesForUrl.push([
+              key,
+              this.props.equipment[key as keyof Equipment]!.name,
+            ]);
           }
         }
       }
@@ -132,47 +131,33 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     return this.createShortenedUrl(encodedUrl);
   }
   createShortenedUrl(string: string) {
-    //API reached its limit too soon :(
-    // let request = require("request");
-    // let linkRequest = {
-    //   destination: string,
-    //   domain: {
-    //     fullName: "rebrand.ly"
-    //   }
-    // }
-    //
-    // let requestHeaders = {
-    //   "Content-Type": "application/json",
-    //   "apikey": "3fcba06720454d55a46ef326ca136872",
-    //   "workspace": "0c11b727f3dd431aa88953e7b3b07edb"
-    // }
-    //
-    // this.setState(
-    //   {export: {
-    //   showExport: true,
-    //   exportLink: "Eksportowanie w toku..."
-    // }})
-    //
-    // request({
-    //     uri: "https://api.rebrandly.com/v1/links",
-    //     method: "POST",
-    //     body: JSON.stringify(linkRequest),
-    //     headers: requestHeaders
-    //   }, (err, response, body) => {
-    //     if (err) {
-    //       alert("Wystąpił błąd, spróbuj ponownie później!");
-    //     } else {
-    //       let link = JSON.parse(body);
-    //       if (link.shortUrl) {
+    let request = require("request");
     this.setState({
       showExport: true,
-      exportLink: string,
+      exportLink: "Eksportowanie w toku...",
     });
-    //       } else {
-    //         alert("Wystąpił błąd, spróbuj ponownie później!");
-    //       }
-    //     }
-    //   })
+
+    request(
+      {
+        uri: "https://taencalc.firebaseio.com/builds.json",
+        method: "POST",
+        body: JSON.stringify(string),
+      },
+      (err: any, response: any, body: any) => {
+        if (err) {
+          console.log(err);
+          alert("Wystąpił błąd, spróbuj ponownie później!");
+        } else {
+          console.log(body);
+          let buildId = JSON.parse(body).name.substring(1)
+          let link = "http://localhost:3000/?id=" + buildId;
+          this.setState({
+            showExport: true,
+            exportLink: link,
+          });
+        }
+      }
+    );
   }
   copyToClipboard() {
     //Copying the URL and making sure current selection is preserved

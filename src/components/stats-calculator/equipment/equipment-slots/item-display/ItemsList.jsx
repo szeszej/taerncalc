@@ -28,6 +28,51 @@ export class ItemsList extends React.Component {
       displayAddItemForm: false
     })
   }
+  translateSlot(slotName) {
+    let inPolish = "";
+    switch (slotName) {
+      case "armor":
+        inPolish = "Własny pancerz";
+        break;
+      case "helmet":
+        inPolish = "Własny hełm";
+        break;
+      case "neck":
+        inPolish = "Własny naszyjnik";
+        break;
+      case "gloves":
+        inPolish = "Własne rękawice";
+        break;
+      case "weapon":
+        inPolish = "Własna broń";
+        break;
+      case "shield":
+        inPolish = "Własna tarcza";
+        break;
+      case "belt":
+        inPolish = "Własny pas";
+        break;
+      case "boots":
+        inPolish = "Własne buty";
+        break;
+      case "ring1":
+        inPolish = "Własny pierścień";
+        break;
+      case "ring2":
+        inPolish = "Własny pierścień";
+        break;
+      case "pants":
+        inPolish = "Własne spodnie";
+        break;
+      case "cape":
+        inPolish = "Własny płaszcz";
+        break;
+      default:
+        inPolish = "błąd";
+        break;
+    }
+    return inPolish;
+  }
   render() {
     let closeButton = (
       <button
@@ -89,7 +134,7 @@ export class ItemsList extends React.Component {
     );
     return (
       <div className="itemsList">
-        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={""} type={this.props.type} image={""} closeList={this.props.hideItemsList} /> : null}
+        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={this.translateSlot(this.props.type) + " " + (this.props.items.filter(x => x.isCustom).length + 1)} type={this.props.type} closeList={this.props.hideItemsList} /> : null}
         {equippableItemsComponents}
         {unequippableItemsComponents}
         {closeButton}

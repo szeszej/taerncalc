@@ -54,6 +54,22 @@
       border-radius: 0;
       margin: 0;
     }
+
+    .enhanceButton {
+      border: 0;
+      font-size: 0.75em;
+      border-bottom: 1px solid #bd996f;
+      border-right: 1px solid #bd996f;
+      width: 2em;
+      height: 2em;
+      line-height: 0.5em;
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      border-radius: 0;
+      margin: 0;
+    }
   }
 
   .itemsList {
@@ -135,7 +151,10 @@
       align-self: center;
       color: #d7d50e;
     }
-
+    .addItemForm {
+      min-width: 25em;
+      margin-left: 1em;
+    }
     .propertyList {
       display: flex;
       flex-direction: column;
@@ -241,7 +260,7 @@
     grid-area: armor;
     background-image: url("/images/armor.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       margin-top: 4em;
       margin-left: 3em;
     }
@@ -251,7 +270,7 @@
     grid-area: helmet;
     background-image: url("/images/helmet.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       margin-top: 4em;
       margin-left: 3em;
     }
@@ -261,7 +280,7 @@
     grid-area: neck;
     background-image: url("/images/necklace.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       margin-top: 4em;
     }
   }
@@ -270,7 +289,7 @@
     grid-area: gloves;
     background-image: url("/images/gloves.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       right: 0;
       margin-top: 4em;
       margin-right: -5em;
@@ -282,7 +301,7 @@
     grid-area: cape;
     background-image: url("/images/cloak.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       margin-left: 3em;
     }
   }
@@ -291,7 +310,7 @@
     grid-area: weapon;
     background-image: url("/images/axe-sword.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       right: 0;
       margin-right: -5em;
       left: auto;
@@ -331,6 +350,7 @@
           p {
             height: 1.25em;
             font-size: 1em;
+            width: 60%;
           }
 
           p {
@@ -367,7 +387,7 @@
     grid-area: shield;
     background-image: url("/images/shield.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       right: 0;
       margin-right: -5em;
       left: auto;
@@ -380,7 +400,7 @@
     grid-area: pants;
     background-image: url("/images/pants.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       margin-left: 3em;
     }
   }
@@ -389,7 +409,7 @@
     grid-area: belt;
     background-image: url("/images/belt.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       right: 0;
       margin-right: -5em;
       left: auto;
@@ -400,7 +420,7 @@
     grid-area: ring1;
     background-image: url("/images/ring1.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       margin-left: 3em;
     }
   }
@@ -409,7 +429,7 @@
     grid-area: ring2;
     background-image: url("/images/ring2.svg");
 
-    .itemsList {
+    .itemsList:not(.addItemForm) {
       margin-left: 3em;
     }
   }

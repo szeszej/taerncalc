@@ -66,6 +66,7 @@ export class ItemSlot extends React.Component {
         ×
       </button>
     );
+    let enhanceButton = (<button className="enhanceButton">★</button>)
     return (
       <div
         className={this.props.type}
@@ -113,6 +114,7 @@ export class ItemSlot extends React.Component {
           />
         ) : null}
         {this.props.inSlot ? unequipButton : null}
+        {this.props.inSlot ? enhanceButton : null}
       </div>
     );
   }
