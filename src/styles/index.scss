@@ -2,6 +2,7 @@
 @import "skillscalculator";
 @import "statscalculator";
 @import "equipment";
+@import "alert-box";
 $main-font: "Eczar", serif;
 $border-color: #d6c1a9;
 $button-background: #bdac6f;
@@ -28,14 +29,16 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: 90%;
     .exportLink {
       display: flex;
       align-items: center;
-
+      justify-content: center;
+      width: 100%;
       #exportOutput {
         resize: none;
         height: 1.5em;
-        width: 15em;
+        width: 40%;
         line-height: 1.5em;
         margin-left: 1em;
         margin-right: 1em;

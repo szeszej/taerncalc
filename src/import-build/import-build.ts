@@ -4,21 +4,22 @@ import ReactGA from "react-ga";
 //Types
 import { SkillSet } from "../data/models/skill-set.model.jsx";
 import { Item } from "../data/models/item.model.js";
-import skillsDatabase from "../data/skills.jsx";
 import { ImportCharacterActionPayload } from "../store/character-reducer/character-reducer";
 import { StatsState } from "../store/stats-reducer/stats-reducer";
-import { initialStats } from "../store/stats-reducer/stats-reducer";
 import { Equipment } from "../store/equipment-reducer/equipment-reducer";
-import { initialEquipment } from "../store/equipment-reducer/equipment-reducer";
 import { SkillsState } from "../store/skills-reducer/skills-reducer";
+import { BuildForExport, StatsForExport, SkillsForExport, EquipmentForExport } from "../components/build-exporter/BuildExporter";
 
-export function importBuild(
+//Data
+import skillsDatabase from "../data/skills.jsx";
+import { initialStats } from "../store/stats-reducer/stats-reducer";
+import { initialEquipment } from "../store/equipment-reducer/equipment-reducer";
+
+//Importing build using URL parameters
+export function importBuildWithUrlParameters(propertiesFromUrl: {[key: string]: string},
   database: TaernDatabase
 ): ImportCharacterActionPayload | void {
-  //Getting properties from URL parameters
-  let propertiesFromUrl = getUrlVars(window.location.href);
   //Letting GA know that a build has been imported
-  if (Object.keys(propertiesFromUrl).length > 1) {
     ReactGA.event({
       category: "Form",
       action: "Import",
@@ -148,11 +149,80 @@ export function importBuild(
       characterProperties.equipment! = temporaryEquipment;
     }
     return characterProperties;
-  }
+}
+
+//Importing build from external TaernDatabase
+export function importBuildFromDatabase(data: BuildForExport, database: TaernDatabase): ImportCharacterActionPayload {
+  //Letting GA know that a build has been imported
+    ReactGA.event({
+      category: "Form",
+      action: "Import",
+      label: data.class + " " + data.level,
+    });
+    //Importing basic character data
+    let characterProperties: ImportCharacterActionPayload = {
+      level: data.level,
+      className: data.class,
+    };
+    //Importing stats
+    let temporaryStats = { ...initialStats };
+    let areNewStatsNeeded: boolean = false;
+    for (const key in data.stats) {
+      if (data.stats && data.stats.hasOwnProperty(key)) {
+        if (
+          Object.keys(initialStats).includes(key)
+        ) {
+          temporaryStats[key as keyof StatsState] = data.stats[key as keyof StatsForExport]!;
+          areNewStatsNeeded = true;
+        }
+      }
+    }
+    if (areNewStatsNeeded) {
+      characterProperties.stats! = temporaryStats;
+    }
+    //Importing skills
+    let temporarySkills: SkillsState = {
+      skillPts: -2,
+      skillSet: new SkillSet(data.class, database.skills),
+    };
+    let isNewSkillSetNeeded: boolean = false;
+    for (const key in data.skills) {
+      if (data.skills && data.skills.hasOwnProperty(key)) {
+        if (/skill1?[1-9]/gm.test(key)) {
+          temporarySkills.skillSet[
+            key as keyof SkillSet
+          ].level = data.skills[key as keyof SkillsForExport]!;
+          temporarySkills.skillSet[key as keyof SkillSet].requiredCharLevel +=
+            (temporarySkills.skillSet[key as keyof SkillSet].level -
+              temporarySkills.skillSet[key as keyof SkillSet].minLvl) *
+            temporarySkills.skillSet[key as keyof SkillSet]
+              .requiredCharLevelInc;
+          isNewSkillSetNeeded = true;
+        } else if (key === "skillPts") {
+          temporarySkills.skillPts = data.skills[key]!;
+        }
+      }
+    }
+    if (isNewSkillSetNeeded) {
+      characterProperties.skills! = temporarySkills;
+    }
+    //Importing equipment
+    let temporaryEquipment = { ...initialEquipment };
+    let isNewEquipmentNeeded: boolean = false;
+    for (const key in data.equipment) {
+      if (data.equipment && data.equipment.hasOwnProperty(key)) {
+          temporaryEquipment[key as keyof Equipment] = new Item(data.equipment[key as keyof EquipmentForExport]);
+          isNewEquipmentNeeded = true;
+      }
+    }
+    if (isNewEquipmentNeeded) {
+      characterProperties.equipment! = temporaryEquipment;
+    }
+    return characterProperties
 }
 
 //Function that converts URL parameters into an object
-function getUrlVars(url: string): { [key: string]: string } {
+export function getUrlVars(url: string): { [key: string]: string } {
   var params: { [key: string]: string } = {};
   var parser = document.createElement("a");
   parser.href = url;

@@ -40,5 +40,6 @@ export class Item {
       };
     });
     this.isCustom = item.hasOwnProperty("isCustom") ? true : false;
+    this.enhancements = item.hasOwnProperty("enhancements") ? item.enhancements : {}
   }
 }

@@ -6,8 +6,8 @@ import ReactGA from "react-ga";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store/store";
-import { initializeCharacter } from "./store/character-reducer/character-reducer.ts"
-import { importCharacter } from "./store/character-reducer/character-reducer.ts"
+import { initializeCharacter } from "./store/character-reducer/character-reducer.ts";
+import { importCharacter } from "./store/character-reducer/character-reducer.ts";
 
 //Styles
 import "./styles/index.scss";
@@ -15,11 +15,16 @@ import "./styles/index.scss";
 //Other
 import * as serviceWorker from "./serviceWorker";
 
-//App-related
+//Components
 import { App } from "./App.jsx";
-import { importBuild } from "./import-build/import-build";
+import { Alert } from "./components/shared/Alert";
 
-//Import-related
+//Build import related
+import {
+  importBuildWithUrlParameters,
+  importBuildFromDatabase,
+  getUrlVars,
+} from "./import-build/import-build";
 import itemsDatabase from "./data/items.js";
 import skillsDatabase from "./data/skills.jsx";
 
@@ -28,13 +33,11 @@ const taernDatabase = {
   skills: skillsDatabase,
 };
 
-
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
 //selecting calculator node
 const calculator = document.getElementById("calc");
-
 
 //Adding event listener for the character form
 document.getElementById("classLvl").addEventListener(
@@ -70,10 +73,12 @@ function renderApp(charClass, charLvl) {
     action: "Submit",
     label: charClass + " " + charLvl,
   });
-  store.dispatch(initializeCharacter({
-    className: charClass,
-    level: +charLvl
-  }))
+  store.dispatch(
+    initializeCharacter({
+      className: charClass,
+      level: +charLvl,
+    })
+  );
   ReactDOM.render(
     <Provider store={store}>
       <App />
@@ -81,7 +86,6 @@ function renderApp(charClass, charLvl) {
     calculator
   );
 }
-
 
 (function () {
   //Checking for cookie consent
@@ -97,16 +101,71 @@ function renderApp(charClass, charLvl) {
     );
   }
   //Rendering the app if URL parameters are present (importing build)
-  let initialProperties = importBuild(taernDatabase);
-  if (initialProperties) {
+  let urlVars = getUrlVars(window.location.href);
+  if (urlVars.hasOwnProperty("className") && urlVars.hasOwnProperty("level")) {
+    let initialProperties = importBuildWithUrlParameters(
+      urlVars,
+      taernDatabase
+    );
     calculator.classList.add("enabled");
-    store.dispatch(importCharacter(initialProperties))
+    store.dispatch(importCharacter(initialProperties));
     ReactDOM.render(
       <Provider store={store}>
         <App />
       </Provider>,
       calculator
     );
+  } else if (urlVars.hasOwnProperty("id")) {
+    const alert = document.getElementById("alert");
+    ReactDOM.render(
+      <Alert message="Importowanie buildu..." spinner={true} />,
+      alert
+    );
+    let loadBuildFromDatabase = new Promise((resolve, reject) => {
+      let request = require("request");
+      request(
+        {
+          uri:
+            "https://taencalc.firebaseio.com/builds/-" + urlVars.id + ".json",
+          method: "GET",
+        },
+        (err, response, body) => {
+          console.log(err, JSON.parse(body));
+          if (JSON.parse(body) === null) {
+            reject();
+          } else {
+            //Letting GA know a build was imported
+            resolve(JSON.parse(body));
+          }
+        }
+      );
+    });
+    loadBuildFromDatabase
+      .then((response) => {
+        let initialProperties = importBuildFromDatabase(
+          response,
+          taernDatabase
+        );
+        ReactDOM.unmountComponentAtNode(alert);
+        calculator.classList.add("enabled");
+        store.dispatch(importCharacter(initialProperties));
+        ReactDOM.render(
+          <Provider store={store}>
+            <App />
+          </Provider>,
+          calculator
+        );
+      })
+      .catch((error) => {
+        ReactDOM.unmountComponentAtNode(alert);
+        ReactDOM.render(
+          <Alert
+            message="Importowanie nie powiodło się. Spróbuj ponownie później"
+            spinner={false}
+          />,
+          alert
+        );
+      });
   }
 })();
 

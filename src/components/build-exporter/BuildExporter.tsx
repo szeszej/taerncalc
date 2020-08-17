@@ -38,10 +38,16 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
   }
   createUrlForExport() {
     //Array for storing properties to later turn into URL
-    let propertiesForUrl: [string, number | string][] = [];
+    let buildForExport: BuildForExport = {
+      class: this.props.className,
+      level: this.props.level,
+      stats: {},
+      skills: {},
+      equipment: {}
+    };
     //Transforming skills
     if (this.props.skills.skillPts !== this.props.level * 2 - 2) {
-      propertiesForUrl.push(["skillPts", this.props.skills.skillPts]);
+      buildForExport.skills.skillPts = this.props.skills.skillPts;
     }
     const numberOfSkills: number = 18;
     for (let i = 1; i < numberOfSkills; i++) {
@@ -49,10 +55,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
         this.props.skills.skillSet[("skill" + i) as keyof SkillSet].level !==
         this.props.skills.skillSet[("skill" + i) as keyof SkillSet].minLvl
       ) {
-        propertiesForUrl.push([
-          "skill" + i,
-          this.props.skills.skillSet[("skill" + i) as keyof SkillSet].level,
-        ]);
+        buildForExport.skills![("skill" + i) as keyof SkillsForExport] = this.props.skills.skillSet[("skill" + i) as keyof SkillSet].level
       }
     }
     //Transforming stats
@@ -60,7 +63,8 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       if (this.props.stats.hasOwnProperty(key)) {
         if (key === "statPts") {
           if (this.props.stats.statPts !== this.props.level * 4 + 1) {
-            propertiesForUrl.push([key, this.props.stats.statPts]);
+            buildForExport.stats = {}
+            buildForExport.stats.statPts = this.props.stats.statPts
           }
         }
         if (
@@ -69,10 +73,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
           (["strength", "agility", "power", "knowledge"].includes(key) &&
             this.props.stats[key as keyof StatsState] !== 10)
         ) {
-          propertiesForUrl.push([
-            key,
-            this.props.stats[key as keyof StatsState],
-          ]);
+          buildForExport.stats[key as keyof StatsForExport] = this.props.stats[key as keyof StatsState]
         }
       }
     }
@@ -80,80 +81,41 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     for (const key in this.props.equipment) {
       if (this.props.equipment.hasOwnProperty(key)) {
         if (this.props.equipment[key as keyof Equipment] !== null) {
-          if (key === "special") {
-            //Special slot requires special treatment
-            for (const itemProperty in this.props.equipment.special) {
-              if (
-                this.props.equipment.special.hasOwnProperty(itemProperty) &&
-                itemProperty !== "type" &&
-                itemProperty !== "rarity" &&
-                itemProperty !== "otherProperties"
-              ) {
-                let itemPropertyValue = this.props.equipment.special[
-                  itemProperty as keyof Item
-                ];
-                if (!!itemPropertyValue) {
-                  propertiesForUrl.push([
-                    "special" + itemProperty,
-                    itemPropertyValue,
-                  ]);
-                }
-              }
-            }
-          } else {
-            //Normal slot
-            propertiesForUrl.push([
-              key,
-              this.props.equipment[key as keyof Equipment]!.name,
-            ]);
-          }
+            buildForExport.equipment![key as keyof EquipmentForExport] = this.props.equipment[key as keyof Equipment]!
         }
       }
     }
-    //Transforming character
-    propertiesForUrl.push(
-      ["level", this.props.level],
-      ["className", this.props.className]
-    );
     //Creating proper URL
-    let stringsForUrl: string[] = propertiesForUrl.map(
-      (x) => x[0] + "=" + x[1]
-    );
-    let urlProperties = stringsForUrl.join("&");
-    let url = "https://kalkulatortaern.github.io/?" + urlProperties;
-    let encodedUrl = encodeURI(url);
-    //Letting GA know a build was exported
-    ReactGA.event({
-      category: "Export",
-      action: "Click",
-      label: encodedUrl,
-    });
-    return this.createShortenedUrl(encodedUrl);
+    return this.createShortenedUrl(buildForExport);
   }
-  createShortenedUrl(string: string) {
+  createShortenedUrl(build: BuildForExport) {
     let request = require("request");
     this.setState({
       showExport: true,
       exportLink: "Eksportowanie w toku...",
     });
-
     request(
       {
         uri: "https://taencalc.firebaseio.com/builds.json",
         method: "POST",
-        body: JSON.stringify(string),
+        body: JSON.stringify(build),
       },
-      (err: any, response: any, body: any) => {
-        if (err) {
-          console.log(err);
+      (err: string, response: string, body: string) => {
+        if (err || JSON.parse(body).error) {
           alert("Wystąpił błąd, spróbuj ponownie później!");
         } else {
           console.log(body);
           let buildId = JSON.parse(body).name.substring(1)
-          let link = "http://localhost:3000/?id=" + buildId;
+          let link = "https://kalkulatortaern.github.io/?id=" + buildId;
           this.setState({
             showExport: true,
             exportLink: link,
+          });
+          //Letting GA know a build was exported
+          ReactGA.event({
+            category: "Export",
+            action: "Click",
+            label: link,
           });
         }
       }
@@ -220,6 +182,63 @@ type StateTypes = {
   showExport: boolean;
   exportLink: string;
 };
+
+export interface BuildForExport {
+  class: string
+  level: number
+  skills: SkillsForExport
+  equipment: EquipmentForExport
+  stats: StatsForExport
+}
+
+export interface SkillsForExport {
+  skillPts?: number
+  skill1?: number
+  skill2?: number
+  skill3?: number
+  skill4?: number
+  skill5?: number
+  skill6?: number
+  skill7?: number
+  skill8?: number
+  skill9?: number
+  skill10?: number
+  skill11?: number
+  skill12?: number
+  skill13?: number
+  skill14?: number
+  skill15?: number
+  skill16?: number
+  skill17?: number
+  skill18?: number
+}
+
+export interface EquipmentForExport {
+  armor?: Item;
+  helmet?: Item;
+  neck?: Item;
+  gloves?: Item;
+  cape?: Item;
+  weapon?: Item;
+  shield?: Item;
+  pants?: Item;
+  belt?: Item;
+  ring1?: Item;
+  ring2?: Item;
+  boots?: Item;
+  special?: Item;
+}
+
+export interface StatsForExport {
+  statPts?: number
+  strength?: number
+  agility?: number
+  power?: number
+  knowledge?: number
+  hp?: number
+  endurance?: number
+  mana?: number
+}
 
 //Redux
 
