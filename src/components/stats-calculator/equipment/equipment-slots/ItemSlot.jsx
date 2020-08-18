@@ -119,7 +119,7 @@ export class ItemSlot extends React.Component {
         ) : null}
         {this.props.inSlot ? unequipButton : null}
         {this.props.inSlot ? enhanceButton : null}
-        {this.state.displayEnhancementForm ? <ItemEnhancementForm type={this.props.type} closeForm={this.hideForm} /> : null}
+        {this.state.displayEnhancementForm ? <ItemEnhancementForm type={this.props.type} enhancements={this.props.inSlot.enhancements} closeForm={this.hideForm} /> : null}
       </div>
     );
   }

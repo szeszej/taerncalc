@@ -31,6 +31,29 @@ class ConnectedItemEnhancementForm extends React.Component<PropTypes, StateTypes
     this.addNewSelect = this.addNewSelect.bind(this);
     this.enhanceItem = this.enhanceItem.bind(this);
   }
+  //If item enhancements already exist
+  componentDidMount() {
+    let areEnhancementsPresent: boolean = false
+    for (const key in this.props.enhancements) {
+      if (this.props.enhancements.hasOwnProperty(key)) {
+        if (this.props.enhancements[key as keyof Enhancements] !== 0) {
+          areEnhancementsPresent = true
+          this.setState((prevState) => {
+            let newState = {...prevState}
+            newState.properties.push({property: key, value: this.props.enhancements[key as keyof Enhancements]})
+            return newState
+          })
+        }
+      }
+    }
+    if (areEnhancementsPresent) {
+      this.setState((prevState) => {
+        let newState = {...prevState}
+        newState.properties.shift()
+        return newState
+      })
+    }
+  }
   //Creating a new item to add to the database
   enhanceItem(): void {
     let enhancements: Enhancements = {
@@ -193,6 +216,7 @@ type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
   type: keyof Equipment;
+  enhancements: Enhancements
   closeForm(): void;
 }
 

@@ -177,41 +177,41 @@ function calculateStatsFromItems(equipment) {
   let equipmentStats = {
     strength:
       equippedItems.reduce(
-        (total, x) => (x != null ? (total += x.strength) : (total += 0)),
+        (total, x) => (x != null ? (total += x.calculateTotalStat("strength")) : (total += 0)),
         0
       ) + statsFromSets.strength,
     agility:
       equippedItems.reduce(
-        (total, x) => (x != null ? (total += x.agility) : (total += 0)),
+        (total, x) => (x != null ? (total += x.calculateTotalStat("agility")) : (total += 0)),
         0
       ) + statsFromSets.agility,
     power:
       equippedItems.reduce(
-        (total, x) => (x != null ? (total += x.power) : (total += 0)),
+        (total, x) => (x != null ? (total += x.calculateTotalStat("power")) : (total += 0)),
         0
       ) + statsFromSets.power,
     knowledge:
       equippedItems.reduce(
-        (total, x) => (x != null ? (total += x.knowledge) : (total += 0)),
+        (total, x) => (x != null ? (total += x.calculateTotalStat("knowledge")) : (total += 0)),
         0
       ) + statsFromSets.knowledge,
     hp:
       equippedItems.reduce(
-        (total, x) => (x != null ? (total += x.hp) : (total += 0)),
+        (total, x) => (x != null ? (total += x.calculateTotalStat("hp")) : (total += 0)),
         0
       ) + statsFromSets.hp,
     endurance:
       equippedItems.reduce(
-        (total, x) => (x != null ? (total += x.endurance) : (total += 0)),
+        (total, x) => (x != null ? (total += x.calculateTotalStat("endurance")) : (total += 0)),
         0
       ) + statsFromSets.endurance,
     mana:
       equippedItems.reduce(
-        (total, x) => (x != null ? (total += x.mana) : (total += 0)),
+        (total, x) => (x != null ? (total += x.calculateTotalStat("mana")) : (total += 0)),
         0
       ) + statsFromSets.mana,
     damage: equippedItems.reduce(
-      (total, x) => (x != null ? (total += x.damage) : (total += 0)),
+      (total, x) => (x != null ? (total += x.calculateTotalStat("damage")) : (total += 0)),
       0
     ),
     fireRes: equippedItems.reduce(
