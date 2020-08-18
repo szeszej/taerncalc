@@ -7,23 +7,23 @@ export class Item {
     if (item.hasOwnProperty("otherProperties")) {
       this.otherProperties = item.otherProperties;
     } else {
-      this.otherProperties = []
-    };
+      this.otherProperties = [];
+    }
     if (item.hasOwnProperty("rarity")) {
-      this.rarity = item.rarity
+      this.rarity = item.rarity;
     } else {
-      this.rarity = "Rzadki"
-    };
+      this.rarity = "Rzadki";
+    }
     if (item.hasOwnProperty("class")) {
-      this.class = item.class
+      this.class = item.class;
     } else {
-      this.class = null
-    };
+      this.class = null;
+    }
     if (item.hasOwnProperty("set")) {
-      this.set = item.set
+      this.set = item.set;
     } else {
-      this.set = null
-    };
+      this.set = null;
+    }
     if (item.type === "weapon") {
       this.damageType = item.damageType;
       this.weaponType = item.weaponType;
@@ -31,15 +31,51 @@ export class Item {
       this.damageType = null;
       this.weaponType = null;
     }
-    let properties = ["reqLvl", "reqStr", "reqAgi", "reqPow", "reqKno", "strength", "agility", "power", "knowledge", "hp", "mana", "endurance", "cutRes", "bluntRes", "pierceRes", "fireRes", "energyRes", "frostRes", "curseRes", "damage"];
+    let properties = [
+      "reqLvl",
+      "reqStr",
+      "reqAgi",
+      "reqPow",
+      "reqKno",
+      "strength",
+      "agility",
+      "power",
+      "knowledge",
+      "hp",
+      "mana",
+      "endurance",
+      "cutRes",
+      "bluntRes",
+      "pierceRes",
+      "fireRes",
+      "energyRes",
+      "frostRes",
+      "curseRes",
+      "damage",
+    ];
     properties.forEach((itemProperty) => {
       if (item.hasOwnProperty(itemProperty)) {
-        this[itemProperty] = item[itemProperty]
+        this[itemProperty] = item[itemProperty];
       } else {
-        this[itemProperty] = 0
-      };
+        this[itemProperty] = 0;
+      }
     });
     this.isCustom = item.hasOwnProperty("isCustom") ? true : false;
-    this.enhancements = item.hasOwnProperty("enhancements") ? item.enhancements : {}
+    this.enhancements = item.hasOwnProperty("enhancements")
+      ? item.enhancements
+      : {
+          strength: 0,
+          agility: 0,
+          power: 0,
+          knowledge: 0,
+          hp: 0,
+          mana: 0,
+          endurance: 0,
+          damage: 0,
+        };
+    this.calculateTotalStat = this.calculateTotalStat.bind(this)
+  }
+  calculateTotalStat(stat) {
+    return this[stat] + this.enhancements[stat]
   }
 }

@@ -4,6 +4,7 @@ import { Item } from "../../data/models/item.model.js";
 //actions types
 const INITIALIZE_EQUIPMENT = "INITIALIZE_EQUIPMENT";
 const EQUIP_ITEM = "EQUIP_ITEM";
+const ENHANCE_ITEM = "ENHANCE_ITEM";
 const UNEQUIP_ITEM = "UNEQUIP_ITEM";
 const UNEQUIP_ALL_ITEMS = "UNEQUIP_ALL_ITEMS";
 
@@ -49,6 +50,11 @@ export default function equipmentReducer(
     case EQUIP_ITEM:
       newState[action.payload.slot] = action.payload.item;
       return newState;
+    case ENHANCE_ITEM:
+      if (newState[action.payload.slot]) {
+        newState[action.payload.slot]!.enhancements = action.payload.enhancements
+      }
+      return newState;
     case UNEQUIP_ITEM:
       newState[action.payload.slot] = null;
       return newState;
@@ -79,6 +85,13 @@ export const equipItem = (payload: EquipItemPayload): EquipItemAction => {
   };
 };
 
+export const enhanceItem = (payload: EnhanceItemPayload): EnhanceItemAction => {
+  return {
+    type: ENHANCE_ITEM,
+    payload,
+  };
+};
+
 export const unequipItem = (payload: EquipItemPayload): UnequipItemAction => {
   return {
     type: UNEQUIP_ITEM,
@@ -103,6 +116,20 @@ interface EquipItemPayload {
   item: Item;
 }
 
+interface EnhanceItemPayload {
+  slot: keyof Equipment;
+  enhancements: {
+    strength: number;
+    agility: number;
+    power: number;
+    knowledge: number;
+    hp: number;
+    mana: number;
+    endurance: number;
+    damage: number;
+  };
+}
+
 interface UnequipItemPayload {
   slot: keyof Equipment;
 }
@@ -110,6 +137,11 @@ interface UnequipItemPayload {
 interface EquipItemAction {
   type: typeof EQUIP_ITEM;
   payload: EquipItemPayload;
+}
+
+interface EnhanceItemAction {
+  type: typeof ENHANCE_ITEM;
+  payload: EnhanceItemPayload;
 }
 
 interface UnequipItemAction {
@@ -124,5 +156,6 @@ interface UnequipAllItemsAction {
 type EquipmentActions =
   | InitializeEquipmentAction
   | EquipItemAction
+  | EnhanceItemAction
   | UnequipItemAction
   | UnequipAllItemsAction;

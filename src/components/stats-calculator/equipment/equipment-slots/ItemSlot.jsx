@@ -3,6 +3,7 @@ import React from "react";
 
 //Components
 import { ItemTooltip } from "./shared/ItemTooltip.jsx"
+import { ItemEnhancementForm } from "./shared/ItemEnhancementForm"
 import { ItemsList } from "./item-display/ItemsList.jsx"
 
 //Shared functionality
@@ -13,8 +14,11 @@ export class ItemSlot extends React.Component {
     super(props);
     this.showTooltip = this.showTooltip.bind(this);
     this.hideTooltip = this.hideTooltip.bind(this);
+    this.showForm = this.showForm.bind(this);
+    this.hideForm = this.hideForm.bind(this);
     this.state = {
-      displayTooltip: false
+      displayTooltip: false,
+      displayEnhancementForm: false
     };
   }
   componentDidUpdate(prevProps) {
@@ -35,20 +39,26 @@ export class ItemSlot extends React.Component {
     showList(type);
   }
   showTooltip() {
-    this.setState({
-      displayTooltip: true
-    });
+    if (!this.state.displayEnhancementForm) {
+      this.setState({
+        displayTooltip: true
+      });
+    }
   }
   hideTooltip() {
     this.setState({
       displayTooltip: false
     });
   }
-  clearBackground() {
-    let itemBackground = {
-      backgroundImage: "none"
-    };
-    return itemBackground;
+  showForm() {
+    this.setState({
+      displayEnhancementForm: true
+    });
+  }
+  hideForm() {
+    this.setState({
+      displayEnhancementForm: false
+    });
   }
   handleChildClick(event, functionToRun) {
     event.stopPropagation();
@@ -66,10 +76,10 @@ export class ItemSlot extends React.Component {
         ×
       </button>
     );
-    let enhanceButton = (<button className="enhanceButton">★</button>)
+    let enhanceButton = (<button className="enhanceButton" onClick={event => this.handleChildClick(event, this.showForm)}>★</button>)
     return (
       <div
-        className={this.props.type}
+        className={this.props.inSlot ? this.props.type + " inSlot" : this.props.type}
         onClick={() =>
           this.hideTooltipWithListUp(
             this.hideTooltip,
@@ -79,7 +89,7 @@ export class ItemSlot extends React.Component {
         }
         onMouseEnter={this.props.inSlot ? () => this.showTooltip() : null}
         onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null}
-        style={this.props.inSlot ? this.clearBackground() : null}
+        style={this.props.inSlot ? {backgroundImage: `url("/images/items/` + this.props.inSlot.image + '")'} : null}
       >
         {this.props.listToDisplay === this.props.type ? (
           <ItemsList
@@ -107,14 +117,9 @@ export class ItemSlot extends React.Component {
             knowledge={this.props.knowledge}
           />
         ) : null}
-        {this.props.inSlot ? (
-          <img
-            src={`images/items/` + this.props.inSlot.image}
-            alt={this.props.inSlot.name}
-          />
-        ) : null}
         {this.props.inSlot ? unequipButton : null}
         {this.props.inSlot ? enhanceButton : null}
+        {this.state.displayEnhancementForm ? <ItemEnhancementForm type={this.props.type} closeForm={this.hideForm} /> : null}
       </div>
     );
   }

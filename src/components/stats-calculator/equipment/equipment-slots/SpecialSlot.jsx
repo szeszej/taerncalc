@@ -193,7 +193,7 @@ export class SpecialSlot extends React.Component {
         {this.props.listToDisplay === this.props.type ? (
           <div className={"itemsList"}>
             <div className={"title"}>
-              <p>Tutaj możesz stworzyć własny przedmiot</p>
+              <p>Stwórz własny przedmiot</p>
             </div>
             <form onSubmit={this.handleSubmit} className="propertyList">
               <div

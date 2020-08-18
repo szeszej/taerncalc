@@ -72,6 +72,10 @@
     }
   }
 
+  .inSlot {
+    background-size: auto;
+  }
+
   .itemsList {
     cursor: default;
     position: absolute;
@@ -150,6 +154,14 @@
       font-size: 1.25em;
       align-self: center;
       color: #d7d50e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1em;
+      .subtitle {
+        font-size: 0.8em;
+        margin-top: -0.5em;
+      }
     }
     .addItemForm {
       min-width: 25em;

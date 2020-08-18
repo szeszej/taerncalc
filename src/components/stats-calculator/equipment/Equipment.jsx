@@ -1,6 +1,6 @@
 //React
 import React from "react";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 //Components
 import { ItemSlot } from "./equipment-slots/ItemSlot.jsx";
@@ -10,9 +10,12 @@ import { SpecialSlot } from "./equipment-slots/SpecialSlot.jsx";
 import { connect } from "react-redux";
 
 //Actions
-import { equipItem } from "../../../store/equipment-reducer/equipment-reducer"
-import { unequipItem } from "../../../store/equipment-reducer/equipment-reducer"
-import { unequipAllItems } from "../../../store/equipment-reducer/equipment-reducer"
+import {
+  equipItem,
+  unequipItem,
+  unequipAllItems,
+  enhanceItem,
+} from "../../../store/equipment-reducer/equipment-reducer";
 
 export class ConnectedEquipment extends React.Component {
   constructor(props) {
@@ -27,61 +30,71 @@ export class ConnectedEquipment extends React.Component {
   }
   showItemsList(type) {
     ReactGA.event({
-      category: 'Items',
-      action: 'Show List',
-      label: type
+      category: "Items",
+      action: "Show List",
+      label: type,
     });
     this.setState({
-      listToDisplay: type
+      listToDisplay: type,
     });
   }
   hideItemsList() {
     this.setState({
-      listToDisplay: ""
+      listToDisplay: "",
     });
   }
   equipItem(item, type) {
     ReactGA.event({
-      category: 'Items',
-      action: 'Item Choice',
-      label: item.name
+      category: "Items",
+      action: "Item Choice",
+      label: item.name,
     });
     if (type === "weapon" && item.weaponType === "Dwuręczna") {
-      this.props.equipItem(type, item)
-      this.props.unequipItem("shield")
+      this.props.equipItem(type, item);
+      this.props.unequipItem("shield");
     } else if (
       type === "shield" &&
       this.props.equipment.weapon !== null &&
       this.props.equipment.weapon.weaponType === "Dwuręczna"
     ) {
       this.props.unequipItem("weapon");
-      this.props.equipItem(type, item)
+      this.props.equipItem(type, item);
     } else {
-      this.props.equipItem(type, item)
+      this.props.equipItem(type, item);
     }
   }
   unequipItem(slot) {
-    this.props.unequipItem(slot)
+    this.props.enhanceItem(slot, {
+      strength: 0,
+      agility: 0,
+      power: 0,
+      knowledge: 0,
+      hp: 0,
+      mana: 0,
+      endurance: 0,
+      damage: 0,
+    });
+    this.props.unequipItem(slot);
   }
   unequipItems() {
     if (window.confirm("Czy na pewno chcesz zdjąć wszystkie przedmioty?")) {
-      this.props.unequipAllItems()
+      this.props.unequipAllItems();
     }
   }
   render() {
     let classBackground = {
-      backgroundImage: `url("images/` + this.props.class + `.svg")`
+      backgroundImage: `url("images/` + this.props.class + `.svg")`,
     };
     let equipment = Object.keys(this.props.equipment);
-    let equipmentSlots = equipment.filter(x => x !== "special");
-    let equipmentSlotComponents = equipmentSlots.map(x => (
+    let equipmentSlots = equipment.filter((x) => x !== "special");
+    let equipmentSlotComponents = equipmentSlots.map((x) => (
       <ItemSlot
         key={x}
         type={x}
         items={
           x === "ring1" || x === "ring2"
-            ? this.props.items.filter(y => y.type === "ring")
-            : this.props.items.filter(y => y.type === x)
+            ? this.props.items.filter((y) => y.type === "ring")
+            : this.props.items.filter((y) => y.type === x)
         }
         inSlot={this.props.equipment[x]}
         class={this.props.class}
@@ -116,7 +129,7 @@ export class ConnectedEquipment extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     equipment: state.equipment,
     class: state.character.className,
@@ -125,17 +138,21 @@ const mapStateToProps = state => {
     agility: state.stats.agility,
     power: state.stats.power,
     knowledge: state.stats.knowledge,
-    items: state.items
-   };
+    items: state.items,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    equipItem: (slot, item) => dispatch(equipItem({slot: slot, item: item})),
-    unequipItem: (slot) => dispatch(unequipItem({slot: slot})),
+    equipItem: (slot, item) => dispatch(equipItem({ slot: slot, item: item })),
+    unequipItem: (slot) => dispatch(unequipItem({ slot: slot })),
     unequipAllItems: () => dispatch(unequipAllItems()),
-  }
-}
+    enhanceItem: (slot, enhancements) =>
+      dispatch(enhanceItem({ slot: slot, enhancements: enhancements })),
+  };
+};
 
-
-export const Equipment = connect(mapStateToProps, mapDispatchToProps)(ConnectedEquipment);
+export const Equipment = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ConnectedEquipment);

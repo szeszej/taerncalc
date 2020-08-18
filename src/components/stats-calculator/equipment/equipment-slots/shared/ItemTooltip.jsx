@@ -58,6 +58,7 @@ class ConnectedItemTooltip extends React.Component {
   calculateDamage(damage, level) {
     let totalDamage = 0;
     totalDamage += parseInt(damage);
+    totalDamage += this.props.item.enhancements.damage;
     totalDamage += level;
     return totalDamage;
   }
@@ -201,70 +202,126 @@ class ConnectedItemTooltip extends React.Component {
                 " (" +
                 this.calculateDamage(this.props.item.damage, this.props.level) +
                 ")"
-              : this.props.item.damage}
+              : this.props.item.damage + this.props.item.enhancements.damage}
+            {this.props.item.enhancements.damage ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.damage > 0 ? "+" : null}
+                {this.props.item.enhancements.damage})
+              </span>
+            ) : null}
           </p>
         ) : null}
-        {this.props.item.strength ? (
+        {this.props.item.calculateTotalStat("strength") || this.props.item.strength ? (
           <p
             className="itemProperty"
-            style={this.props.item.strength > 0 ? null : negativeStats}
+            style={this.props.item.calculateTotalStat("strength")  >= 0 ? null : negativeStats}
           >
-            Siła: {this.props.item.strength > 0 ? "+" : null}
-            {this.props.item.strength}
+            Siła: {this.props.item.calculateTotalStat("strength")  >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("strength") }
+            {this.props.item.enhancements.strength ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.strength > 0 ? "+" : null}
+                {this.props.item.enhancements.strength})
+              </span>
+            ) : null}
           </p>
         ) : null}
-        {this.props.item.agility ? (
+        {this.props.item.calculateTotalStat("agility") || this.props.item.agility ? (
           <p
             className="itemProperty"
-            style={this.props.item.agility > 0 ? null : negativeStats}
+            style={this.props.item.calculateTotalStat("agility") >= 0 ? null : negativeStats}
           >
-            Zręczność: {this.props.item.agility > 0 ? "+" : null}
-            {this.props.item.agility}
+            Zręczność: {this.props.item.calculateTotalStat("agility") >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("agility")}
+            {this.props.item.enhancements.agility ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.agility > 0 ? "+" : null}
+                {this.props.item.enhancements.agility})
+              </span>
+            ) : null}
           </p>
         ) : null}
-        {this.props.item.power ? (
+        {this.props.item.calculateTotalStat("power") || this.props.item.power ? (
           <p
             className="itemProperty"
-            style={this.props.item.power > 0 ? null : negativeStats}
+            style={this.props.item.calculateTotalStat("power") >= 0 ? null : negativeStats}
           >
-            Moc: {this.props.item.power > 0 ? "+" : null}
-            {this.props.item.power}
+            Moc: {this.props.item.calculateTotalStat("power") >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("power")}
+            {this.props.item.enhancements.power ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.power > 0 ? "+" : null}
+                {this.props.item.enhancements.power})
+              </span>
+            ) : null}
           </p>
         ) : null}
-        {this.props.item.knowledge ? (
+        {this.props.item.calculateTotalStat("knowledge") || this.props.item.knowledge ? (
           <p
             className="itemProperty"
-            style={this.props.item.knowledge > 0 ? null : negativeStats}
+            style={this.props.item.calculateTotalStat("knowledge") >= 0 ? null : negativeStats}
           >
-            Wiedza: {this.props.item.knowledge > 0 ? "+" : null}
-            {this.props.item.knowledge}
+            Wiedza: {this.props.item.calculateTotalStat("knowledge") >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("knowledge")}
+            {this.props.item.enhancements.knowledge ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.knowledge > 0 ? "+" : null}
+                {this.props.item.enhancements.knowledge})
+              </span>
+            ) : null}
           </p>
         ) : null}
-        {this.props.item.hp ? (
+        {this.props.item.calculateTotalStat("hp") || this.props.item.hp ? (
           <p
             className="itemProperty"
-            style={this.props.item.hp > 0 ? null : negativeStats}
+            style={this.props.item.calculateTotalStat("hp") >= 0 ? null : negativeStats}
           >
-            Punkty życia: {this.props.item.hp > 0 ? "+" : null}
-            {this.props.item.hp}
+            Punkty życia: {this.props.item.calculateTotalStat("hp") >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("hp")}
+            {this.props.item.enhancements.hp ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.hp > 0 ? "+" : null}
+                {this.props.item.enhancements.hp})
+              </span>
+            ) : null}
           </p>
         ) : null}
-        {this.props.item.endurance ? (
+        {this.props.item.calculateTotalStat("endurance") || this.props.item.endurance ? (
           <p
             className="itemProperty"
-            style={this.props.item.endurance > 0 ? null : negativeStats}
+            style={this.props.item.calculateTotalStat("endurance") >= 0 ? null : negativeStats}
           >
-            Kondycja: {this.props.item.endurance > 0 ? "+" : null}
-            {this.props.item.endurance}
+            Kondycja: {this.props.item.calculateTotalStat("endurance") >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("endurance")}
+            {this.props.item.enhancements.endurance ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.endurance > 0 ? "+" : null}
+                {this.props.item.enhancements.endurance})
+              </span>
+            ) : null}
           </p>
         ) : null}
-        {this.props.item.mana ? (
+        {this.props.item.calculateTotalStat("mana") || this.props.item.mana ? (
           <p
             className="itemProperty"
-            style={this.props.item.mana > 0 ? null : negativeStats}
+            style={this.props.item.calculateTotalStat("mana") >= 0 ? null : negativeStats}
           >
-            Mana: {this.props.item.mana > 0 ? "+" : null}
-            {this.props.item.mana}
+            Mana: {this.props.item.calculateTotalStat("mana") >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("mana")}
+            {this.props.item.enhancements.mana ? (
+              <span style={{ color: "orange" }}>
+                {" "}
+                ({this.props.item.enhancements.mana > 0 ? "+" : null}
+                {this.props.item.enhancements.mana})
+              </span>
+            ) : null}
           </p>
         ) : null}
         {this.props.item.cutRes ? (
