@@ -357,6 +357,9 @@ body {
       font-size: 0.75rem;
     }
   }
+  .wrapper .exportBuild .exportLink #exportOutput {
+    width: 60%;
+  }
 }
 @media only screen and (max-width: 1050px) {
   .wrapper {

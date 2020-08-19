@@ -48,7 +48,7 @@ export default function equipmentReducer(
   let newState = { ...state };
   switch (action.type) {
     case EQUIP_ITEM:
-      newState[action.payload.slot] = action.payload.item;
+      newState[action.payload.slot] = new Item(action.payload.item);
       return newState;
     case ENHANCE_ITEM:
       if (newState[action.payload.slot]) {

@@ -13,8 +13,7 @@ import { connect } from "react-redux";
 import {
   equipItem,
   unequipItem,
-  unequipAllItems,
-  enhanceItem,
+  unequipAllItems
 } from "../../../store/equipment-reducer/equipment-reducer";
 
 export class ConnectedEquipment extends React.Component {
@@ -64,16 +63,6 @@ export class ConnectedEquipment extends React.Component {
     }
   }
   unequipItem(slot) {
-    this.props.enhanceItem(slot, {
-      strength: 0,
-      agility: 0,
-      power: 0,
-      knowledge: 0,
-      hp: 0,
-      mana: 0,
-      endurance: 0,
-      damage: 0,
-    });
     this.props.unequipItem(slot);
   }
   unequipItems() {
@@ -146,9 +135,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     equipItem: (slot, item) => dispatch(equipItem({ slot: slot, item: item })),
     unequipItem: (slot) => dispatch(unequipItem({ slot: slot })),
-    unequipAllItems: () => dispatch(unequipAllItems()),
-    enhanceItem: (slot, enhancements) =>
-      dispatch(enhanceItem({ slot: slot, enhancements: enhancements })),
+    unequipAllItems: () => dispatch(unequipAllItems())
   };
 };
 
