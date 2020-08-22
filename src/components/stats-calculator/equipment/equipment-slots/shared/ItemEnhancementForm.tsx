@@ -75,7 +75,7 @@ class ConnectedItemEnhancementForm extends React.Component<
     if (!this.state.properties.every((x) => x.property === "placeholder")) {
       //Fix the line below?
       this.state.properties.forEach((x) => {
-        if (x.property !== "placeholder") {
+        if (x.property !== "placeholder" && x.value !== null) {
           enhancements[x.property as keyof Enhancements] = x.value;
         }
       });
@@ -114,7 +114,7 @@ class ConnectedItemEnhancementForm extends React.Component<
       let newState = { ...currentState };
       newState.properties.push({
         property: "placeholder",
-        value: 0,
+        value: null,
       });
       return newState;
     });
@@ -182,10 +182,11 @@ class ConnectedItemEnhancementForm extends React.Component<
           {options}
         </select>
         <input
-          value={x.value}
+          value={x.value ? x.value : undefined}
           onChange={(event) =>
             this.handleChange(+event.currentTarget.value, index)
           }
+          placeholder="Wartość"
           type="number"
           min={-999}
           max={999}
@@ -208,7 +209,7 @@ class ConnectedItemEnhancementForm extends React.Component<
         }}
       >
         <div className={"title"}>
-          <p>Dodaj statystyki do przedmiotu</p>
+          <p>Dodaj lub odejmij statystyki przedmiotu</p>
           <p className="subtitle">
             (w ramach ulepszania bądź losowych statysyk)
           </p>
@@ -235,7 +236,7 @@ interface OwnProps {
 }
 
 interface StateTypes {
-  properties: { property: string; value: number }[];
+  properties: { property: string; value: number | null }[];
   propertiesUsed: string[];
 }
 

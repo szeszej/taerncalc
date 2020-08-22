@@ -25,7 +25,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
       properties: [
         {
           property: "placeholder",
-          value: 0,
+          value: null,
         },
       ],
       propertiesUsed: [],
@@ -63,7 +63,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
     ) {
       //Fix the line below?
       this.state.properties.forEach((x) => {
-        if (x.property !== "placeholder") {
+        if (x.property !== "placeholder" && x.value !== null) {
           (itemProperties[x.property as keyof CustomItem] as any) = x.value;
         }
       });
@@ -104,7 +104,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
       let newState = { ...currentState };
       newState.properties.push({
         property: "placeholder",
-        value: 0,
+        value: null,
       });
       return newState;
     });
@@ -167,10 +167,11 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           {options}
         </select>
         <input
-          value={x.value}
+          value={x.value ? x.value : undefined}
           onChange={(event) =>
             this.handleChange(+event.currentTarget.value, index)
           }
+          placeholder="Wartość"
           type="number"
           min={1}
           max={999}
@@ -212,7 +213,7 @@ interface OwnProps {
 }
 
 interface StateTypes {
-  properties: { property: string; value: number }[];
+  properties: { property: string; value: number | null }[];
   propertiesUsed: string[];
 }
 

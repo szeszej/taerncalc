@@ -218,7 +218,7 @@
       .submit {
         margin-top: 1.5em;
 
-        input {
+        input, button {
           border-radius: 8px;
           font-size: 1.5em;
           color: #d7d50e;
@@ -518,7 +518,7 @@
     .weapon {
       width: 20vw;
       height: 20vw;
-      background-size: auto 18vw;
+      background-size: auto auto;
       .itemsList:not(.addItemForm) {
         margin: 0;
         left: 0;
