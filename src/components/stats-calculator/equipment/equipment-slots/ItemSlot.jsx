@@ -2,12 +2,12 @@
 import React from "react";
 
 //Components
-import { ItemTooltip } from "./shared/ItemTooltip.jsx"
-import { ItemEnhancementForm } from "./shared/ItemEnhancementForm"
-import { ItemsList } from "./item-display/ItemsList.jsx"
+import { ItemTooltip } from "./shared/ItemTooltip.jsx";
+import { ItemEnhancementForm } from "./shared/ItemEnhancementForm";
+import { ItemsList } from "./item-display/ItemsList.jsx";
 
 //Shared functionality
-import isEquivalent from "../../../../shared/object-equivalency-check"
+import isEquivalent from "../../../../shared/object-equivalency-check";
 
 export class ItemSlot extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export class ItemSlot extends React.Component {
     this.hideForm = this.hideForm.bind(this);
     this.state = {
       displayTooltip: false,
-      displayEnhancementForm: false
+      displayEnhancementForm: false,
     };
   }
   componentDidUpdate(prevProps) {
@@ -41,29 +41,29 @@ export class ItemSlot extends React.Component {
   showTooltip() {
     if (!this.state.displayEnhancementForm) {
       this.setState({
-        displayTooltip: true
+        displayTooltip: true,
       });
     }
   }
   hideTooltip() {
     this.setState({
-      displayTooltip: false
+      displayTooltip: false,
     });
   }
   showForm() {
     this.setState({
-      displayEnhancementForm: true
+      displayEnhancementForm: true,
     });
   }
   hideForm() {
     this.setState({
-      displayEnhancementForm: false
+      displayEnhancementForm: false,
     });
   }
   handleChildClick(event, functionToRun) {
     event.stopPropagation();
     this.setState({
-      displayTooltip: false
+      displayTooltip: false,
     });
     functionToRun(this.props.type);
   }
@@ -71,15 +71,22 @@ export class ItemSlot extends React.Component {
     let unequipButton = (
       <button
         className={"unequipButton"}
-        onClick={event => this.handleChildClick(event, this.props.unequipItem)}
-      >
-        ×
-      </button>
+        onClick={(event) =>
+          this.handleChildClick(event, this.props.unequipItem)
+        }
+      ></button>
     );
-    let enhanceButton = (<button className="enhanceButton" onClick={event => this.handleChildClick(event, this.showForm)}>★</button>)
+    let enhanceButton = (
+      <button
+        className="enhanceButton"
+        onClick={(event) => this.handleChildClick(event, this.showForm)}
+      ></button>
+    );
     return (
       <div
-        className={this.props.inSlot ? this.props.type + " inSlot" : this.props.type}
+        className={
+          this.props.inSlot ? this.props.type + " inSlot" : this.props.type
+        }
         onClick={() =>
           this.hideTooltipWithListUp(
             this.hideTooltip,
@@ -91,7 +98,14 @@ export class ItemSlot extends React.Component {
         onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null}
         onTouchStart={this.props.inSlot ? () => this.showTooltip() : null}
         onTouchEnd={this.props.inSlot ? () => this.hideTooltip() : null}
-        style={this.props.inSlot ? {backgroundImage: `url("/images/items/` + this.props.inSlot.image + '")'} : null}
+        style={
+          this.props.inSlot
+            ? {
+                backgroundImage:
+                  `url("/images/items/` + this.props.inSlot.image + '")',
+              }
+            : null
+        }
       >
         {this.props.listToDisplay === this.props.type ? (
           <ItemsList
@@ -121,7 +135,13 @@ export class ItemSlot extends React.Component {
         ) : null}
         {this.props.inSlot ? unequipButton : null}
         {this.props.inSlot ? enhanceButton : null}
-        {this.state.displayEnhancementForm ? <ItemEnhancementForm type={this.props.type} enhancements={this.props.inSlot.enhancements} closeForm={this.hideForm} /> : null}
+        {this.state.displayEnhancementForm ? (
+          <ItemEnhancementForm
+            type={this.props.type}
+            enhancements={this.props.inSlot.enhancements}
+            closeForm={this.hideForm}
+          />
+        ) : null}
       </div>
     );
   }

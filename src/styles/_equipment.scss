@@ -53,6 +53,10 @@
       font-weight: bold;
       border-radius: 0;
       margin: 0;
+      background-image: url("/images/cross-icon.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 80%;
     }
 
     .enhanceButton {
@@ -66,9 +70,12 @@
       position: absolute;
       left: 0;
       top: 0;
-
       border-radius: 0;
       margin: 0;
+      background-image: url("/images/upgrade.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 80%;
     }
   }
 
@@ -503,59 +510,46 @@
     .shield,
     .special,
     .weapon {
-      width: 5em;
-      height: 5em;
-      background-size: auto 4em;
-      img {
-        max-width: 4em;
-        max-height: 4em;
-      }
-    }
-  }
-}
-@media only screen and (max-width: 450px) {
-
-  .equipment {
-    .armor,
-    .belt,
-    .boots,
-    .cape,
-    .empty,
-    .gloves,
-    .helmet,
-    .neck,
-    .pants,
-    .ring1,
-    .ring2,
-    .shield,
-    .special,
-    .weapon {
-      width: 4em;
-      height: 4em;
-      background-size: auto 3em;
-      position: relative;
-      img {
-        max-width: 3em;
-        max-height: 3em;
-      }
-      .itemsList {
+      width: 20vw;
+      height: 20vw;
+      background-size: auto 18vw;
+      .itemsList:not(.addItemForm) {
         margin: 0;
-        margin-left: 2em;
-        right: auto;
         left: 0;
-        top: 30vh;
+        bottom: 0;
+        right: 0;
         position: fixed;
+        width: 100vw;
+        min-width: 0;
+        max-width: 100vw;
+        .addItemForm {
+          top: -8em;
+          .closeList {
+            right: -0.5em;
+          }
+        }
         .itemOnList {
           width: 4em;
           height: 4em;
         }
+        .closeList {
+          right: 3em;
+        }
+      }
+      .equippableItems, .unequippableItems {
+        width: 80%;
       }
       .itemTooltip {
-        left: -3.5em;
+        right: 4em;
+        left: 0;
         bottom: 100%;
         font-size: 0.75em;
         padding: 3px;
-        max-width: 12em;
+        max-width: 14em;
+    }
+    .unequipButton, .enhanceButton {
+      width: 2.5em;
+      height: 2.5em;
     }
     }
     .special {
@@ -564,4 +558,8 @@
       }
     }
   }
+}
+
+@media only screen and (max-width: 450px) {
+
 }

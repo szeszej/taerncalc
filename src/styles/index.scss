@@ -349,7 +349,7 @@ body {
     .header {
       .title {
         h1 {
-          font-size: 3em;
+          font-size: 2.5em;
         }
       }
     }
@@ -369,7 +369,7 @@ body {
     .header {
       .title {
         h1 {
-          font-size: 2.5em;
+          font-size: 2.2em;
         }
       }
     }
@@ -395,17 +395,25 @@ body {
           }
 
           select {
-            width: 40%;
+            width: 50%;
             margin-right: 0;
             text-align-last: center;
-            padding-left: 0;
+            padding-left: 0.5em;
           }
 
           #charLvl {
-            width: 40%;
+            width: 50%;
             text-align: center;
             padding-left: 0;
           }
+        }
+      }
+      .calculators {
+        .statsCalculator {
+          width: 100%
+        }
+        .skillsCalculator {
+          width: 100%
         }
       }
     }
@@ -413,7 +421,7 @@ body {
 }
 @media only screen and (max-width: 780px) {
   .wrapper .header .title h1 {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .wrapper .header .logo img {
     max-height: 3em;
@@ -421,16 +429,42 @@ body {
 }
 @media only screen and (max-width: 660px) {
   .wrapper .header .title h1 {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 }
 @media only screen and (max-width: 520px) {
   .wrapper {
     font-size: 10px;
-  }
-}
-@media only screen and (max-width: 420px) {
-  .wrapper .header .title h1 {
-    font-size: 1.24em;
+    .calculator {
+      #classLvlWrapper {
+        form {
+          select {
+            width: 80%;
+          }
+          #charLvl {
+            width: 80%;
+          }
+        }
+      }
+      .calculators {
+        .tabs {
+          button {
+            font-size: 1.2em;
+            width: 40%;
+          }
+        }
+      }
+    }
+    .exportLink {
+      #exportOutput {
+        font-size: 8px;
+        height: 3em;
+      }
+    }
+    .footer {
+      .authors {
+        width: 100%;
+      }
+    }
   }
 }
