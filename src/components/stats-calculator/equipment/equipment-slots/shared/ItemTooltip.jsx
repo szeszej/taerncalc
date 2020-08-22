@@ -101,7 +101,7 @@ class ConnectedItemTooltip extends React.Component {
         </p>
         {this.props.item.set ? (
           <p className="itemSet" style={{ color: "#3DEF01" }}>
-            Zestaw: {this.props.item.set}
+            Zestaw: {this.props.item.set} ({this.props.setsEquipped[equippedSet.name] ? this.props.setsEquipped[equippedSet.name] : 0}/{equippedSet.totalPieces})
           </p>
         ) : null}
         {this.props.item.name ? <hr /> : null}

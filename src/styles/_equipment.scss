@@ -464,6 +464,29 @@
   }
 }
 
+@media only screen and (max-width: 1050px) {
+  .equipment {
+    .armor,
+    .belt,
+    .boots,
+    .cape,
+    .empty,
+    .gloves,
+    .helmet,
+    .neck,
+    .pants,
+    .ring1,
+    .ring2,
+    .shield,
+    .special,
+    .weapon {
+      button {
+        user-select: none;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 520px) {
   .equipment {
     .armor,

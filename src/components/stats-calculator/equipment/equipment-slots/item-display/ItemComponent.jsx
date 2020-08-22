@@ -46,6 +46,8 @@ export class ItemComponent extends React.Component {
         style={itemStyle}
         onMouseEnter={() => this.showTooltip()}
         onMouseLeave={() => this.hideTooltip()}
+        onTouchStart={() => this.showTooltip()}
+        onTouchEnd={() => this.hideTooltip()}
         onClick={event =>
           this.props.hasOwnProperty("equipItem")
             ? this.equipItemAndHideList(event, this.props.item, this.props.type)

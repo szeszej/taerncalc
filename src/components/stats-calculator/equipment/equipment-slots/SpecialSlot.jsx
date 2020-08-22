@@ -184,6 +184,8 @@ export class SpecialSlot extends React.Component {
         }
         onMouseEnter={this.props.inSlot ? () => this.showTooltip() : null}
         onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null}
+        onTouchStart={this.props.inSlot ? () => this.showTooltip() : null}
+        onTouchEnd={this.props.inSlot ? () => this.hideTooltip() : null}
         style={
           this.props.inSlot && this.props.inSlot.image
             ? this.clearBackground()
