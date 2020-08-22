@@ -545,7 +545,8 @@
         bottom: 100%;
         font-size: 0.75em;
         padding: 3px;
-        max-width: 14em;
+        max-width: 13em;
+        user-select: none;
     }
     .unequipButton, .enhanceButton {
       width: 2.5em;
