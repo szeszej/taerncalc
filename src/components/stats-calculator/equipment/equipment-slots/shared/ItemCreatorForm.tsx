@@ -175,9 +175,10 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           min={1}
           max={999}
         ></input>
-        <button onClick={(event) => this.handleClick(event, this.addNewSelect)}>
-          +
-        </button>
+        <button
+          onClick={(event) => this.handleClick(event, this.addNewSelect)}
+          className="addProperty"
+        ></button>
       </div>
     ));
     return (

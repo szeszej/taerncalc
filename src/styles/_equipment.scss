@@ -140,6 +140,12 @@
       background-image: url("/images/plus.svg");
     }
 
+    .addProperty {
+      background-image: url("/images/add.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 80%;
+    }
 
     .unequippableItems .itemOnList {
       cursor: not-allowed;
@@ -551,6 +557,19 @@
     .unequipButton, .enhanceButton {
       width: 2.5em;
       height: 2.5em;
+    }
+    .enhanceForm {
+      margin: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: fixed;
+      width: 100vw;
+      min-width: 0;
+      max-width: 100vw;
+      .closeList {
+        right: 3em;
+      }
     }
     }
     .special {

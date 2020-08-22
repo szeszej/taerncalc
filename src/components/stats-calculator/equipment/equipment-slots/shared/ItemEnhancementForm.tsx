@@ -14,7 +14,10 @@ import {
 //Shared functionality
 import translateProperty from "../../../../../shared/translate-property";
 
-class ConnectedItemEnhancementForm extends React.Component<PropTypes, StateTypes> {
+class ConnectedItemEnhancementForm extends React.Component<
+  PropTypes,
+  StateTypes
+> {
   constructor(props: PropTypes) {
     super(props);
     this.state = {
@@ -33,25 +36,28 @@ class ConnectedItemEnhancementForm extends React.Component<PropTypes, StateTypes
   }
   //If item enhancements already exist
   componentDidMount() {
-    let areEnhancementsPresent: boolean = false
+    let areEnhancementsPresent: boolean = false;
     for (const key in this.props.enhancements) {
       if (this.props.enhancements.hasOwnProperty(key)) {
         if (this.props.enhancements[key as keyof Enhancements] !== 0) {
-          areEnhancementsPresent = true
+          areEnhancementsPresent = true;
           this.setState((prevState) => {
-            let newState = {...prevState}
-            newState.properties.push({property: key, value: this.props.enhancements[key as keyof Enhancements]})
-            return newState
-          })
+            let newState = { ...prevState };
+            newState.properties.push({
+              property: key,
+              value: this.props.enhancements[key as keyof Enhancements],
+            });
+            return newState;
+          });
         }
       }
     }
     if (areEnhancementsPresent) {
       this.setState((prevState) => {
-        let newState = {...prevState}
-        newState.properties.shift()
-        return newState
-      })
+        let newState = { ...prevState };
+        newState.properties.shift();
+        return newState;
+      });
     }
   }
   //Creating a new item to add to the database
@@ -64,11 +70,9 @@ class ConnectedItemEnhancementForm extends React.Component<PropTypes, StateTypes
       hp: 0,
       mana: 0,
       endurance: 0,
-      damage: 0
+      damage: 0,
     };
-    if (
-      !this.state.properties.every((x) => x.property === "placeholder")
-    ) {
+    if (!this.state.properties.every((x) => x.property === "placeholder")) {
       //Fix the line below?
       this.state.properties.forEach((x) => {
         if (x.property !== "placeholder") {
@@ -124,24 +128,27 @@ class ConnectedItemEnhancementForm extends React.Component<PropTypes, StateTypes
         ×
       </button>
     );
-    let properties = this.props.type === "weapon" ? [
-      "strength",
-      "agility",
-      "power",
-      "knowledge",
-      "hp",
-      "mana",
-      "endurance",
-      "damage"
-    ] : [
-      "strength",
-      "agility",
-      "power",
-      "knowledge",
-      "hp",
-      "mana",
-      "endurance"
-    ];
+    let properties =
+      this.props.type === "weapon"
+        ? [
+            "strength",
+            "agility",
+            "power",
+            "knowledge",
+            "hp",
+            "mana",
+            "endurance",
+            "damage",
+          ]
+        : [
+            "strength",
+            "agility",
+            "power",
+            "knowledge",
+            "hp",
+            "mana",
+            "endurance",
+          ];
     let options = [
       <option
         key="placeholder"
@@ -183,21 +190,28 @@ class ConnectedItemEnhancementForm extends React.Component<PropTypes, StateTypes
           min={-999}
           max={999}
         ></input>
-        <button onClick={(event) => this.handleClick(event, this.addNewSelect)}>
-          +
-        </button>
+        <button
+          onClick={(event) => this.handleClick(event, this.addNewSelect)}
+          className="addProperty"
+        ></button>
       </div>
     ));
     return (
       <form
         onSubmit={(event) => this.handleClick(event, this.enhanceItem)}
-        className={"itemsList addItemForm"}
-        onClick={(event) => {event.stopPropagation()}}
-        onMouseEnter={(event) => {event.stopPropagation()}}
+        className="itemsList addItemForm enhanceForm"
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+        onMouseEnter={(event) => {
+          event.stopPropagation();
+        }}
       >
         <div className={"title"}>
           <p>Dodaj statystyki do przedmiotu</p>
-          <p className="subtitle">(w ramach ulepszania bądź losowych statysyk)</p>
+          <p className="subtitle">
+            (w ramach ulepszania bądź losowych statysyk)
+          </p>
         </div>
         <div className={"propertyList"}>
           {propertySelects}
@@ -216,7 +230,7 @@ type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
   type: keyof Equipment;
-  enhancements: Enhancements
+  enhancements: Enhancements;
   closeForm(): void;
 }
 
