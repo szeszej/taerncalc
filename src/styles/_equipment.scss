@@ -518,7 +518,7 @@
     .weapon {
       width: 20vw;
       height: 20vw;
-      background-size: auto auto;
+      background-size: contain;
       .itemsList:not(.addItemForm) {
         margin: 0;
         left: 0;
@@ -578,8 +578,4 @@
       }
     }
   }
-}
-
-@media only screen and (max-width: 450px) {
-
 }

@@ -63,11 +63,11 @@ class ConnectedItemTooltip extends React.Component {
     return totalDamage;
   }
   render() {
-    let otherProperties = this.props.item.otherProperties.map((x) => (
+    let otherProperties = this.props.item ? this.props.item.otherProperties.map((x) => (
       <p className="otherProperties" key={x}>
         {x}
       </p>
-    ));
+    )) : null;
     let notMeetingRequirements = {
       color: "red",
     };
