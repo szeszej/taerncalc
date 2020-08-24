@@ -79,6 +79,7 @@ export class ItemSlot extends React.Component {
     let enhanceButton = (
       <button
         className="enhanceButton"
+        style={this.props.inSlot && (this.props.inSlot.enhancements.strength || this.props.inSlot.enhancements.agility || this.props.inSlot.enhancements.power || this.props.inSlot.enhancements.knowledge || this.props.inSlot.enhancements.hp || this.props.inSlot.enhancements.mana || this.props.inSlot.enhancements.endurance) ? {backgroundImage: `url("/images/upgrade2.png")`} : null}
         onClick={(event) => this.handleChildClick(event, this.showForm)}
       ></button>
     );

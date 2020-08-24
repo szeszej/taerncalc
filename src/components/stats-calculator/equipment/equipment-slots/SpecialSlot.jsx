@@ -163,8 +163,6 @@ export class SpecialSlot extends React.Component {
         <p>{translateProperty(x)}:</p>
         <input
           type="number"
-          min={-999}
-          max={999}
           placeholder={translateProperty(x)}
           value={this.state[x] === 0 ? "" : this.state[x]}
           onChange={event => this.handleChangeNumeric(event, x)}
@@ -187,8 +185,12 @@ export class SpecialSlot extends React.Component {
         onTouchStart={this.props.inSlot ? () => this.showTooltip() : null}
         onTouchEnd={this.props.inSlot ? () => this.hideTooltip() : null}
         style={
-          this.props.inSlot && this.props.inSlot.image
-            ? this.clearBackground()
+          this.props.inSlot
+            ?
+            {
+                backgroundImage:
+                  this.props.inSlot.image === "anvilcolor.svg" ? `url("/images/items/` + this.props.inSlot.image + `")` : `url("` + this.props.inSlot.image + `")`,
+              }
             : null
         }
       >
@@ -238,9 +240,6 @@ export class SpecialSlot extends React.Component {
         {this.state.displayTooltip &&
         !(this.props.listToDisplay === this.props.type) ? (
           <ItemTooltip item={this.props.inSlot} />
-        ) : null}
-        {this.props.inSlot && this.props.inSlot.image ? (
-          <img src={this.props.inSlot.image === "anvilcolor.svg" ? `images/items/` + this.props.inSlot.image : this.props.inSlot.image} alt={this.props.inSlot.name} />
         ) : null}
         {this.props.inSlot ? unequipButton : null}
       </div>
