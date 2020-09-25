@@ -77,6 +77,44 @@
       background-repeat: no-repeat;
       background-size: 80%;
     }
+
+    .addPsychoLvlButton {
+      border: 0;
+      font-size: 0.75em;
+      border-top: 1px solid #bd996f;
+      border-right: 1px solid #bd996f;
+      width: 2em;
+      height: 2em;
+      line-height: 0.5em;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      border-radius: 0;
+      margin: 0;
+      background-image: url("/images/plus-icon.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 80%;
+    }
+
+    .substractPsychoLvlButton {
+      border: 0;
+      font-size: 0.75em;
+      border-top: 1px solid #bd996f;
+      border-left: 1px solid #bd996f;
+      width: 2em;
+      height: 2em;
+      line-height: 0.5em;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      border-radius: 0;
+      margin: 0;
+      background-image: url("/images/minus-icon.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 70% 110%;
+    }
   }
 
   .inSlot {

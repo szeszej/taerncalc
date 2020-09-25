@@ -57,17 +57,40 @@ class ConnectedItemTooltip extends React.Component {
   //For epics with scaling damage
   calculateDamage(damage, level) {
     let totalDamage = 0;
-    totalDamage += parseInt(damage);
+    totalDamage += damage;
     totalDamage += this.props.item.enhancements.damage;
     totalDamage += level;
     return totalDamage;
   }
   render() {
-    let otherProperties = this.props.item ? this.props.item.otherProperties.map((x) => (
-      <p className="otherProperties" key={x}>
-        {x}
-      </p>
-    )) : null;
+    let otherProperties = this.props.item
+      ? this.props.item.otherProperties.map((x) => {
+          if (x[0] === "Dodatkowe PA") {
+            return (
+              <p
+                className="otherProperties"
+                style={this.nameColor("Psychorare")}
+                key={x}
+              >
+                {x[0]}: {x[1]}
+              </p>
+            );
+          } else {
+            return (
+              <p
+                className="otherProperties"
+                style={this.nameColor("Psychorare")}
+                key={x}
+              >
+                {x[0]}: {x[1] > 0 ? "+" : null}
+                {x[1] + x[2] * (this.props.item.psychoLvl - 1)}% (
+                {x[2] > 0 ? "+" : null}
+                {x[2]}% co poziom)
+              </p>
+            );
+          }
+        })
+      : null;
     let notMeetingRequirements = {
       color: "red",
     };
@@ -101,7 +124,11 @@ class ConnectedItemTooltip extends React.Component {
         </p>
         {this.props.item.set ? (
           <p className="itemSet" style={{ color: "#3DEF01" }}>
-            Zestaw: {this.props.item.set} ({this.props.setsEquipped[equippedSet.name] ? this.props.setsEquipped[equippedSet.name] : 0}/{equippedSet.totalPieces})
+            Zestaw: {this.props.item.set} (
+            {this.props.setsEquipped[equippedSet.name]
+              ? this.props.setsEquipped[equippedSet.name]
+              : 0}
+            /{equippedSet.totalPieces})
           </p>
         ) : null}
         {this.props.item.name ? <hr /> : null}
@@ -184,6 +211,11 @@ class ConnectedItemTooltip extends React.Component {
         this.props.item.reqKno > 0 ? (
           <hr />
         ) : null}
+        {this.props.item.psychoLvl ? (
+          <p className="itemProperty" style={this.nameColor("Psychorare")}>
+            Poziom przedmiotu: {this.props.item.psychoLvl}
+          </p>
+        ) : null}
         {this.props.item.weaponType ? (
           <p className="itemProperty">
             Typ broni: {this.props.item.weaponType}
@@ -197,9 +229,9 @@ class ConnectedItemTooltip extends React.Component {
         {this.props.item.damage ? (
           <p className="damage">
             Obrażenia:{" "}
-            {typeof this.props.item.damage === "string"
+            {this.props.item.rarity === "Epik"
               ? this.props.item.damage +
-                " (" +
+                " + poziom postaci (" +
                 this.calculateDamage(this.props.item.damage, this.props.level) +
                 ")"
               : this.props.item.damage + this.props.item.enhancements.damage}
@@ -212,13 +244,19 @@ class ConnectedItemTooltip extends React.Component {
             ) : null}
           </p>
         ) : null}
-        {this.props.item.calculateTotalStat("strength") || this.props.item.strength ? (
+        {this.props.item.calculateTotalStat("strength") ||
+        this.props.item.strength ? (
           <p
             className="itemProperty"
-            style={this.props.item.calculateTotalStat("strength")  >= 0 ? null : negativeStats}
+            style={
+              this.props.item.calculateTotalStat("strength") >= 0
+                ? null
+                : negativeStats
+            }
           >
-            Siła: {this.props.item.calculateTotalStat("strength")  >= 0 ? "+" : null}
-            {this.props.item.calculateTotalStat("strength") }
+            Siła:{" "}
+            {this.props.item.calculateTotalStat("strength") >= 0 ? "+" : null}
+            {this.props.item.calculateTotalStat("strength")}
             {this.props.item.enhancements.strength ? (
               <span style={{ color: "orange" }}>
                 {" "}
@@ -228,12 +266,18 @@ class ConnectedItemTooltip extends React.Component {
             ) : null}
           </p>
         ) : null}
-        {this.props.item.calculateTotalStat("agility") || this.props.item.agility ? (
+        {this.props.item.calculateTotalStat("agility") ||
+        this.props.item.agility ? (
           <p
             className="itemProperty"
-            style={this.props.item.calculateTotalStat("agility") >= 0 ? null : negativeStats}
+            style={
+              this.props.item.calculateTotalStat("agility") >= 0
+                ? null
+                : negativeStats
+            }
           >
-            Zręczność: {this.props.item.calculateTotalStat("agility") >= 0 ? "+" : null}
+            Zręczność:{" "}
+            {this.props.item.calculateTotalStat("agility") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("agility")}
             {this.props.item.enhancements.agility ? (
               <span style={{ color: "orange" }}>
@@ -244,10 +288,15 @@ class ConnectedItemTooltip extends React.Component {
             ) : null}
           </p>
         ) : null}
-        {this.props.item.calculateTotalStat("power") || this.props.item.power ? (
+        {this.props.item.calculateTotalStat("power") ||
+        this.props.item.power ? (
           <p
             className="itemProperty"
-            style={this.props.item.calculateTotalStat("power") >= 0 ? null : negativeStats}
+            style={
+              this.props.item.calculateTotalStat("power") >= 0
+                ? null
+                : negativeStats
+            }
           >
             Moc: {this.props.item.calculateTotalStat("power") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("power")}
@@ -260,12 +309,18 @@ class ConnectedItemTooltip extends React.Component {
             ) : null}
           </p>
         ) : null}
-        {this.props.item.calculateTotalStat("knowledge") || this.props.item.knowledge ? (
+        {this.props.item.calculateTotalStat("knowledge") ||
+        this.props.item.knowledge ? (
           <p
             className="itemProperty"
-            style={this.props.item.calculateTotalStat("knowledge") >= 0 ? null : negativeStats}
+            style={
+              this.props.item.calculateTotalStat("knowledge") >= 0
+                ? null
+                : negativeStats
+            }
           >
-            Wiedza: {this.props.item.calculateTotalStat("knowledge") >= 0 ? "+" : null}
+            Wiedza:{" "}
+            {this.props.item.calculateTotalStat("knowledge") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("knowledge")}
             {this.props.item.enhancements.knowledge ? (
               <span style={{ color: "orange" }}>
@@ -279,9 +334,14 @@ class ConnectedItemTooltip extends React.Component {
         {this.props.item.calculateTotalStat("hp") || this.props.item.hp ? (
           <p
             className="itemProperty"
-            style={this.props.item.calculateTotalStat("hp") >= 0 ? null : negativeStats}
+            style={
+              this.props.item.calculateTotalStat("hp") >= 0
+                ? null
+                : negativeStats
+            }
           >
-            Punkty życia: {this.props.item.calculateTotalStat("hp") >= 0 ? "+" : null}
+            Punkty życia:{" "}
+            {this.props.item.calculateTotalStat("hp") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("hp")}
             {this.props.item.enhancements.hp ? (
               <span style={{ color: "orange" }}>
@@ -292,12 +352,18 @@ class ConnectedItemTooltip extends React.Component {
             ) : null}
           </p>
         ) : null}
-        {this.props.item.calculateTotalStat("endurance") || this.props.item.endurance ? (
+        {this.props.item.calculateTotalStat("endurance") ||
+        this.props.item.endurance ? (
           <p
             className="itemProperty"
-            style={this.props.item.calculateTotalStat("endurance") >= 0 ? null : negativeStats}
+            style={
+              this.props.item.calculateTotalStat("endurance") >= 0
+                ? null
+                : negativeStats
+            }
           >
-            Kondycja: {this.props.item.calculateTotalStat("endurance") >= 0 ? "+" : null}
+            Kondycja:{" "}
+            {this.props.item.calculateTotalStat("endurance") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("endurance")}
             {this.props.item.enhancements.endurance ? (
               <span style={{ color: "orange" }}>
@@ -311,7 +377,11 @@ class ConnectedItemTooltip extends React.Component {
         {this.props.item.calculateTotalStat("mana") || this.props.item.mana ? (
           <p
             className="itemProperty"
-            style={this.props.item.calculateTotalStat("mana") >= 0 ? null : negativeStats}
+            style={
+              this.props.item.calculateTotalStat("mana") >= 0
+                ? null
+                : negativeStats
+            }
           >
             Mana: {this.props.item.calculateTotalStat("mana") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("mana")}

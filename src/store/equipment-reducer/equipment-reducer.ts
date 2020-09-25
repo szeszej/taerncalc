@@ -1,5 +1,5 @@
 //Model
-import { Item } from "../../data/models/item.model.js";
+import { Item, RawItem } from "../../data/models/item.model";
 
 //actions types
 const INITIALIZE_EQUIPMENT = "INITIALIZE_EQUIPMENT";
@@ -7,6 +7,7 @@ const EQUIP_ITEM = "EQUIP_ITEM";
 const ENHANCE_ITEM = "ENHANCE_ITEM";
 const UNEQUIP_ITEM = "UNEQUIP_ITEM";
 const UNEQUIP_ALL_ITEMS = "UNEQUIP_ALL_ITEMS";
+const CHANGE_PSYCHO_LVL = "CHANGE_PSYCHO_LVL";
 
 //reducer
 export const initialEquipment: Equipment = {
@@ -52,7 +53,8 @@ export default function equipmentReducer(
       return newState;
     case ENHANCE_ITEM:
       if (newState[action.payload.slot]) {
-        newState[action.payload.slot]!.enhancements = action.payload.enhancements
+        newState[action.payload.slot]!.enhancements =
+          action.payload.enhancements;
       }
       return newState;
     case UNEQUIP_ITEM:
@@ -63,6 +65,11 @@ export default function equipmentReducer(
       return newState;
     case INITIALIZE_EQUIPMENT:
       return action.payload;
+    case CHANGE_PSYCHO_LVL:
+      if (newState[action.payload.slot]) {
+        newState[action.payload.slot]!.psychoLvl += action.payload.value
+      }
+      return newState;
     default:
       return state;
   }
@@ -105,6 +112,15 @@ export const unequipAllItems = (): UnequipAllItemsAction => {
   };
 };
 
+export const changePsychoLvl = (
+  payload: PsychoLvlChangePayload
+): ChangePsychoLvlAction => {
+  return {
+    type: CHANGE_PSYCHO_LVL,
+    payload,
+  };
+};
+
 //types
 interface InitializeEquipmentAction {
   type: typeof INITIALIZE_EQUIPMENT;
@@ -113,7 +129,7 @@ interface InitializeEquipmentAction {
 
 interface EquipItemPayload {
   slot: keyof Equipment;
-  item: Item;
+  item: RawItem;
 }
 
 interface EnhanceItemPayload {
@@ -132,6 +148,11 @@ interface EnhanceItemPayload {
 
 interface UnequipItemPayload {
   slot: keyof Equipment;
+}
+
+interface PsychoLvlChangePayload {
+  slot: keyof Equipment;
+  value: number;
 }
 
 interface EquipItemAction {
@@ -153,9 +174,15 @@ interface UnequipAllItemsAction {
   type: typeof UNEQUIP_ALL_ITEMS;
 }
 
+interface ChangePsychoLvlAction {
+  type: typeof CHANGE_PSYCHO_LVL;
+  payload: PsychoLvlChangePayload;
+}
+
 type EquipmentActions =
   | InitializeEquipmentAction
   | EquipItemAction
   | EnhanceItemAction
   | UnequipItemAction
-  | UnequipAllItemsAction;
+  | UnequipAllItemsAction
+  | ChangePsychoLvlAction;

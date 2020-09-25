@@ -2,7 +2,7 @@
 import React from "react";
 
 //Components
-import { Item } from "../../../../data/models/item.model.js";
+import { Item } from "../../../../data/models/item.model";
 import { ItemTooltip } from "./shared/ItemTooltip.jsx"
 
 //Shared functionality

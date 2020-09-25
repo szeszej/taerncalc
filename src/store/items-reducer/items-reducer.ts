@@ -1,8 +1,8 @@
 //Data
-import itemsDatabase from "../../data/items.js"
+import itemsDatabase from "../../data/items"
 
 //Model
-import { Item } from "../../data/models/item.model.js"
+import { Item } from "../../data/models/item.model"
 
 //actions types
 const ADD_ITEM = "ADD_ITEM"

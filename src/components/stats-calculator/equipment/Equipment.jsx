@@ -13,7 +13,8 @@ import { connect } from "react-redux";
 import {
   equipItem,
   unequipItem,
-  unequipAllItems
+  unequipAllItems,
+  changePsychoLvl,
 } from "../../../store/equipment-reducer/equipment-reducer";
 
 export class ConnectedEquipment extends React.Component {
@@ -23,6 +24,7 @@ export class ConnectedEquipment extends React.Component {
     this.unequipItem = this.unequipItem.bind(this);
     this.showItemsList = this.showItemsList.bind(this);
     this.hideItemsList = this.hideItemsList.bind(this);
+    this.changePsychoLvl = this.changePsychoLvl.bind(this);
     this.state = {
       listToDisplay: "",
     };
@@ -65,6 +67,9 @@ export class ConnectedEquipment extends React.Component {
   unequipItem(slot) {
     this.props.unequipItem(slot);
   }
+  changePsychoLvl(slot , value) {
+    this.props.changePsychoLvl(slot, value)
+  }
   unequipItems() {
     if (window.confirm("Czy na pewno chcesz zdjąć wszystkie przedmioty?")) {
       this.props.unequipAllItems();
@@ -97,6 +102,7 @@ export class ConnectedEquipment extends React.Component {
         unequipItem={this.unequipItem}
         showItemsList={this.showItemsList}
         hideItemsList={this.hideItemsList}
+        changePsychoLvl={this.changePsychoLvl}
       />
     ));
     return (
@@ -112,6 +118,7 @@ export class ConnectedEquipment extends React.Component {
           unequipItem={this.unequipItem}
           showItemsList={this.showItemsList}
           hideItemsList={this.hideItemsList}
+          changePsychoLvl={this.changePsychoLvl}
         />
       </div>
     );
@@ -135,7 +142,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     equipItem: (slot, item) => dispatch(equipItem({ slot: slot, item: item })),
     unequipItem: (slot) => dispatch(unequipItem({ slot: slot })),
-    unequipAllItems: () => dispatch(unequipAllItems())
+    unequipAllItems: () => dispatch(unequipAllItems()),
+    changePsychoLvl: (slot, value) =>
+      dispatch(changePsychoLvl({ slot: slot, value: value })),
   };
 };
 

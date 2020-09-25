@@ -13,7 +13,7 @@ import {
 } from "../../../../../store/equipment-reducer/equipment-reducer";
 
 //Models
-import { Item } from "../../../../../data/models/item.model.js";
+import { Item, RawItem } from "../../../../../data/models/item.model";
 
 //Shared functionality
 import translateProperty from "../../../../../shared/translate-property";
@@ -40,7 +40,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
     let itemProperties: CustomItem = {
       name: this.props.name,
       image: this.props.type + "color.svg",
-      type: this.props.type,
+      type: this.props.type === "ring1" || this.props.type === "ring2" ? "ring" : this.props.type,
       strength: 0,
       agility: 0,
       power: 0,
@@ -67,9 +67,8 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           (itemProperties[x.property as keyof CustomItem] as any) = x.value;
         }
       });
-      let customItem = new Item(itemProperties);
-      this.props.addItem(customItem);
-      this.props.equipItem(this.props.type as keyof Equipment, customItem);
+      this.props.addItem(new Item(itemProperties));
+      this.props.equipItem(this.props.type as keyof Equipment, itemProperties);
       this.props.closeList();
     } else {
       window.alert("Nie określono żadnych parametrów!");
@@ -217,9 +216,9 @@ interface StateTypes {
   propertiesUsed: string[];
 }
 
-interface CustomItem {
+interface CustomItem extends RawItem {
   name: string;
-  type: keyof Equipment;
+  type: keyof Equipment | "ring";
   image: string;
   strength: number;
   agility: number;
@@ -242,7 +241,7 @@ interface CustomItem {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addItem: (item: Item) => dispatch(addItem({ item: item })),
-    equipItem: (slot: keyof Equipment, item: Item) =>
+    equipItem: (slot: keyof Equipment, item: RawItem) =>
       dispatch(equipItem({ slot: slot, item: item })),
   };
 };

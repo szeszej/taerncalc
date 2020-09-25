@@ -3,12 +3,11 @@ import ReactGA from "react-ga";
 
 //Types
 import { SkillSet } from "../data/models/skill-set.model.jsx";
-import { Item } from "../data/models/item.model.js";
+import { Item, RawItem } from "../data/models/item.model";
 import { ImportCharacterActionPayload } from "../store/character-reducer/character-reducer";
 import { StatsState } from "../store/stats-reducer/stats-reducer";
 import { Equipment } from "../store/equipment-reducer/equipment-reducer";
 import { SkillsState } from "../store/skills-reducer/skills-reducer";
-import { BuildForExport, StatsForExport, SkillsForExport, EquipmentForExport } from "../components/build-exporter/BuildExporter";
 
 //Data
 import skillsDatabase from "../data/skills.jsx";
@@ -88,7 +87,7 @@ export function importBuildWithUrlParameters(propertiesFromUrl: {[key: string]: 
         }
         //Special slot requires special treatment
         if (Object.keys(propertiesFromUrl).some((x) => /^special+/.test(x)) && !isThereSpecialItem) {
-          let special: Special = {type: "special"};
+          let special: Special = {name: "", type: "special", image: ""};
           propertiesFromUrl.hasOwnProperty("specialname")
             ? (special.name = propertiesFromUrl.specialname)
             : (special.name = "");
@@ -152,7 +151,7 @@ export function importBuildWithUrlParameters(propertiesFromUrl: {[key: string]: 
 }
 
 //Importing build from external TaernDatabase
-export function importBuildFromDatabase(data: BuildForExport, database: TaernDatabase): ImportCharacterActionPayload {
+export function importBuildFromDatabase(data: ImportedBuild, database: TaernDatabase): ImportCharacterActionPayload {
   //Letting GA know that a build has been imported
     ReactGA.event({
       category: "Form",
@@ -172,7 +171,7 @@ export function importBuildFromDatabase(data: BuildForExport, database: TaernDat
         if (
           Object.keys(initialStats).includes(key)
         ) {
-          temporaryStats[key as keyof StatsState] = data.stats[key as keyof StatsForExport]!;
+          temporaryStats[key as keyof StatsState] = data.stats[key as keyof ImportedStats]!;
           areNewStatsNeeded = true;
         }
       }
@@ -191,7 +190,7 @@ export function importBuildFromDatabase(data: BuildForExport, database: TaernDat
         if (/skill1?[1-9]/gm.test(key)) {
           temporarySkills.skillSet[
             key as keyof SkillSet
-          ].level = data.skills[key as keyof SkillsForExport]!;
+          ].level = data.skills[key as keyof ImportedSkills]!;
           temporarySkills.skillSet[key as keyof SkillSet].requiredCharLevel +=
             (temporarySkills.skillSet[key as keyof SkillSet].level -
               temporarySkills.skillSet[key as keyof SkillSet].minLvl) *
@@ -211,7 +210,7 @@ export function importBuildFromDatabase(data: BuildForExport, database: TaernDat
     let isNewEquipmentNeeded: boolean = false;
     for (const key in data.equipment) {
       if (data.equipment && data.equipment.hasOwnProperty(key)) {
-          temporaryEquipment[key as keyof Equipment] = new Item(data.equipment[key as keyof EquipmentForExport]);
+          temporaryEquipment[key as keyof Equipment] = new Item(data.equipment[key as keyof ImportedEquipment]!);
           isNewEquipmentNeeded = true;
       }
     }
@@ -242,8 +241,8 @@ interface TaernDatabase {
 }
 
 interface Special {
-  name?: string
-  image?: string
+  name: string
+  image: string
   type: "special"
   damage?: number
   strength?: number
@@ -260,4 +259,61 @@ interface Special {
   frostRes?: number
   energyRes?: number
   curseRes?: number
+}
+
+interface ImportedBuild {
+  class: string
+  level: number
+  skills: ImportedSkills
+  equipment: ImportedEquipment
+  stats: ImportedStats
+}
+
+export interface ImportedSkills {
+  skillPts?: number
+  skill1?: number
+  skill2?: number
+  skill3?: number
+  skill4?: number
+  skill5?: number
+  skill6?: number
+  skill7?: number
+  skill8?: number
+  skill9?: number
+  skill10?: number
+  skill11?: number
+  skill12?: number
+  skill13?: number
+  skill14?: number
+  skill15?: number
+  skill16?: number
+  skill17?: number
+  skill18?: number
+}
+
+export interface ImportedEquipment {
+  armor?: RawItem;
+  helmet?: RawItem;
+  neck?: RawItem;
+  gloves?: RawItem;
+  cape?: RawItem;
+  weapon?: RawItem;
+  shield?: RawItem;
+  pants?: RawItem;
+  belt?: RawItem;
+  ring1?: RawItem;
+  ring2?: RawItem;
+  boots?: RawItem;
+  special?: RawItem;
+}
+
+export interface ImportedStats {
+  statPts?: number
+  strength?: number
+  agility?: number
+  power?: number
+  knowledge?: number
+  hp?: number
+  endurance?: number
+  mana?: number
 }

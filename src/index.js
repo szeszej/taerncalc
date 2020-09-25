@@ -25,7 +25,7 @@ import {
   importBuildFromDatabase,
   getUrlVars,
 } from "./import-build/import-build";
-import itemsDatabase from "./data/items.js";
+import itemsDatabase from "./data/items";
 import skillsDatabase from "./data/skills.jsx";
 
 const taernDatabase = {

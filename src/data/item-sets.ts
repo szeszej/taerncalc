@@ -6,9 +6,9 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 3,
   strength: 8,
   otherProperties: [
-    ["Regeneracja Many:", 12],
-    ["Regeneracja Kondycji:", 12],
-    ["Rozproszenie Holma:", 10]
+    ["Regeneracja Many", 12],
+    ["Regeneracja Kondycji", 12],
+    ["Rozproszenie Holma", 10]
   ]
 },
 {
@@ -16,7 +16,7 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 3,
   hp: 50,
   otherProperties: [
-    ["Szansa na trafienie krytyczne:", 8]
+    ["Szansa na trafienie krytyczne", 8]
   ]
 },
 {
@@ -24,16 +24,16 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 3,
   hp: 100,
   otherProperties: [
-    ["Modyfikator obrażeń fizycznych:", 10],
-    ["Modyfikator obrażeń magicznych:", 10]
+    ["Modyfikator obrażeń fizycznych", 10],
+    ["Modyfikator obrażeń magicznych", 10]
   ]
 },
 {
   name: "Przebranie Ludobójcy",
   pieces: 4,
   otherProperties: [
-    ["Skok Farida:", 10],
-    ["Szansa na podwójny atak:", 6]
+    ["Skok Farida", 10],
+    ["Szansa na podwójny atak", 6]
   ]
 },
 {
@@ -41,8 +41,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 3,
   hp: 40,
   otherProperties: [
-    ["Odporność na korzenie:", 35],
-    ["Szansa na podwójny atak:", 8]
+    ["Odporność na korzenie", 35],
+    ["Szansa na podwójny atak", 8]
   ]
 },
 {
@@ -50,8 +50,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   mana: 160,
   otherProperties: [
-    ["Modyfikator obrażeń fizycznych:", 15],
-    ["Modyfikator obrażeń magicznych:", 15]
+    ["Modyfikator obrażeń fizycznych", 15],
+    ["Modyfikator obrażeń magicznych", 15]
   ]
 },
 {
@@ -59,9 +59,9 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   agility: 16,
   otherProperties: [
-    ["Regeneracja many:", 12],
-    ["Regeneracja kondycji:", 12],
-    ["Szansa na trafienie krytyczne:", 8]
+    ["Regeneracja many", 12],
+    ["Regeneracja kondycji", 12],
+    ["Szansa na trafienie krytyczne", 8]
   ]
 },
 {
@@ -69,8 +69,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   agility: 16,
   otherProperties: [
-    ["Modyfikator obrażeń fizycznych:", 10],
-    ["Szansa na trafienie krytyczne:", 10]
+    ["Modyfikator obrażeń fizycznych", 10],
+    ["Szansa na trafienie krytyczne", 10]
   ]
 },
 {
@@ -78,8 +78,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   hp: 160,
   otherProperties: [
-    ["Zużycie kondycji:", -8],
-    ["Szansa na trafienie krytyczne:", 10]
+    ["Zużycie kondycji", -8],
+    ["Szansa na trafienie krytyczne", 10]
   ]
 },
 {
@@ -87,8 +87,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   hp: 160,
   otherProperties: [
-    ["Regeneracja many:", 12],
-    ["Szansa na podwójny atak:", 10]
+    ["Regeneracja many", 12],
+    ["Szansa na podwójny atak", 10]
   ]
 },
 {
@@ -96,8 +96,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   hp: 190,
   otherProperties: [
-    ["Zużycie Many:", -10],
-    ["Szansa na podwójny atak:", 8]
+    ["Zużycie Many", -10],
+    ["Szansa na podwójny atak", 8]
   ]
 },
 {
@@ -105,8 +105,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   mana: 160,
   otherProperties: [
-    ["Modyfikator obrażeń magicznych:", 10],
-    ["Szansa na podwójny atak:", 5]
+    ["Modyfikator obrażeń magicznych", 10],
+    ["Szansa na podwójny atak", 5]
   ]
 },
 {
@@ -114,11 +114,11 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   hp: 250,
   otherProperties: [
-    ["Rozproszenie Holma:", 9],
-    ["Obrona wręcz:", 10],
-    ["Odporność na trafienie krytyczne:", 9],
-    ["Dodatkowe PA:", 1],
-    ["Oszukać przeznaczenie:", 1]
+    ["Rozproszenie Holma", 9],
+    ["Obrona wręcz", 10],
+    ["Odporność na trafienie krytyczne", 9],
+    ["Dodatkowe PA", 1],
+    ["Oszukać przeznaczenie", 1]
   ]
 },
 {
@@ -126,11 +126,11 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   hp: 250,
   otherProperties: [
-    ["Rozproszenie Holma:", 9],
-    ["Modyfikator trafień fizycznych:", 15],
-    ["Szansa na podwójny atak:", 5],
-    ["Dodatkowe PA:", 1],
-    ["Oszukać przeznaczenie:", 1]
+    ["Rozproszenie Holma", 9],
+    ["Modyfikator trafień fizycznych", 15],
+    ["Szansa na podwójny atak", 5],
+    ["Dodatkowe PA", 1],
+    ["Oszukać przeznaczenie", 1]
   ]
 },
 {
@@ -138,11 +138,11 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   hp: 250,
   otherProperties: [
-    ["Rozproszenie Holma:", 9],
-    ["Modyfikator trafień fizycznych:", 15],
-    ["Modyfikator trafień dystansowych:", 15],
-    ["Dodatkowe PA:", 1],
-    ["Oszukać przeznaczenie:", 1]
+    ["Rozproszenie Holma", 9],
+    ["Modyfikator trafień fizycznych", 15],
+    ["Modyfikator trafień dystansowych", 15],
+    ["Dodatkowe PA", 1],
+    ["Oszukać przeznaczenie", 1]
   ]
 },
 {
@@ -150,11 +150,11 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   hp: 250,
   otherProperties: [
-    ["Rozproszenie Holma:", 9],
-    ["Modyfikator obrażeń fizycznych:", 15],
-    ["Modyfikator trafień fizycznych:", 15],
-    ["Dodatkowe PA:", 1],
-    ["Oszukać przeznaczenie:", 1]
+    ["Rozproszenie Holma", 9],
+    ["Modyfikator obrażeń fizycznych", 15],
+    ["Modyfikator trafień fizycznych", 15],
+    ["Dodatkowe PA", 1],
+    ["Oszukać przeznaczenie", 1]
   ]
 },
 {
@@ -162,11 +162,11 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   hp: 250,
   otherProperties: [
-    ["Skok Farida:", 7],
-    ["Przełamanie dymków:", 9],
-    ["Modyfikator obrażeń magicznych:", 15],
-    ["Dodatkowe PA:", 1],
-    ["Oszukać przeznaczenie:", 1]
+    ["Skok Farida", 7],
+    ["Przełamanie dymków", 9],
+    ["Modyfikator obrażeń magicznych", 15],
+    ["Dodatkowe PA", 1],
+    ["Oszukać przeznaczenie", 1]
   ]
 },
 {
@@ -174,11 +174,11 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   hp: 250,
   otherProperties: [
-    ["Skok Farida:", 7],
-    ["Modyfikator obrażeń fizycznych:", 15],
+    ["Skok Farida", 7],
+    ["Modyfikator obrażeń fizycznych", 15],
     ["Modyfikator obrażeń magicznych", 15],
-    ["Dodatkowe PA:", 1],
-    ["Oszukać przeznaczenie:", 1]
+    ["Dodatkowe PA", 1],
+    ["Oszukać przeznaczenie", 1]
   ]
 },
 {
@@ -186,11 +186,11 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 5,
   hp: 250,
   otherProperties: [
-    ["Skok Farida:", 7],
-    ["Modyfikator trafień magicznych:", 15],
-    ["Przełamanie dymków:", 9],
-    ["Dodatkowe PA:", 1],
-    ["Oszukać przeznaczenie:", 1]
+    ["Skok Farida", 7],
+    ["Modyfikator trafień magicznych", 15],
+    ["Przełamanie dymków", 9],
+    ["Dodatkowe PA", 1],
+    ["Oszukać przeznaczenie", 1]
   ]
 }]
 

@@ -1,6 +1,6 @@
-import { Item } from "./models/item.model.js"
+import { Item, RawItem } from "./models/item.model"
 
-const itemsData = [{
+const itemsData: RawItem[] = [{
     name: "Derengil",
     type: "weapon",
     image: "[www.taernopedia.pl][649]Derengil.png",
@@ -195,7 +195,7 @@ const itemsData = [{
     knowledge: 8,
     hp: 20,
     mana: 50,
-    otherProperties: ["Modyfikator obrażeń magicznych: 6% (+1% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń magicznych", 6, 1]]
   },
   {
     name: "Egzekutor",
@@ -211,7 +211,7 @@ const itemsData = [{
     knowledge: 11,
     hp: 30,
     mana: 30,
-    otherProperties: ["Szansa na trafienie krytyczne: 4% (+1% co poziom)"]
+    otherProperties: [["Szansa na trafienie krytyczne", 4, 1]]
   },
   {
     name: "Gniew Zapomnianych",
@@ -227,7 +227,7 @@ const itemsData = [{
     knowledge: 20,
     hp: 50,
     mana: 20,
-    otherProperties: ["Szansa na podwójny atak: +6% (+1% co poziom)"]
+    otherProperties: [["Szansa na podwójny atak", 6, 1]]
   },
   {
     name: "Virral",
@@ -312,7 +312,7 @@ const itemsData = [{
     agility: 12,
     hp: 60,
     mana: 60,
-    otherProperties: ["Szansa na trafienie krytyczne: 7% (+1% co poziom)"]
+    otherProperties: [["Szansa na trafienie krytyczne", 7, 1]]
   },
   {
     name: "Otwieracz",
@@ -328,7 +328,7 @@ const itemsData = [{
     agility: 7,
     hp: 50,
     endurance: 30,
-    otherProperties: ["Szansa na trafienie krytyczne: 4% (+1% co poziom)"]
+    otherProperties: [["Szansa na trafienie krytyczne", 4, 1]]
   },
   {
     name: "Gjolmar",
@@ -343,7 +343,7 @@ const itemsData = [{
     strength: 10,
     agility: 30,
     hp: 100,
-    otherProperties: ["Modyfikator obrażeń fizycznych: 7% (+1% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń fizycznych", 7, 1]]
   },
   {
     name: "Batagur",
@@ -358,7 +358,7 @@ const itemsData = [{
     strength: 25,
     hp: 50,
     endurance: 200,
-    otherProperties: ["Dodatkowe obrażenia od zimna: 7% (+1% co poziom)"]
+    otherProperties: [["Dodatkowe obrażenia od zimna", 7, 1]]
   },
   {
     name: "Mallus Selenorum",
@@ -374,7 +374,7 @@ const itemsData = [{
     agility: 13,
     hp: 230,
     endurance: 70,
-    otherProperties: ["Szansa na podwójny atak: 2% (+1% co poziom)", "Dodatkowe obrażenia od energii: 2% (+1% co poziom)"]
+    otherProperties: [["Szansa na podwójny atak", 2, 1], ["Dodatkowe obrażenia od energii", 2, 1]]
   },
   {
     name: "Taehal",
@@ -391,7 +391,7 @@ const itemsData = [{
     hp: 160,
     mana: 10,
     endurance: 80,
-    otherProperties: ["Szansa na podwójny atak: 2% (+1% co poziom)", "Szansa na trafienie krytyczne: 2% (+1% co poziom)"]
+    otherProperties: [["Szansa na podwójny atak", 2, 1], ["Szansa na trafienie krytyczne", 2, 1]]
   },
   {
     name: "Szpony",
@@ -408,7 +408,7 @@ const itemsData = [{
     hp: 100,
     mana: 20,
     endurance: 70,
-    otherProperties: ["Szansa na podwójny atak: 2% (+1% co poziom)", "Dodatkowe obrażenia od zimna: 2% (+1% co poziom)"]
+    otherProperties: [["Szansa na podwójny atak", 2, 1], ["Dodatkowe obrażenia od zimna", 2, 1]]
   },
   {
     name: "Trójząb Admiralski",
@@ -424,7 +424,7 @@ const itemsData = [{
     knowledge: 32,
     hp: 170,
     mana: 50,
-    otherProperties: ["Szansa na trafienie krytyczne 4% (+1% co poziom)", "Modyfikator obrażeń magicznych 4% (+1% na poziom)"]
+    otherProperties: [["Szansa na trafienie krytyczne", 4, 1], ["Modyfikator obrażeń magicznych", 4, 1]]
   },
   {
     name: "Ból",
@@ -442,7 +442,7 @@ const itemsData = [{
     hp: 80,
     mana: 80,
     endurance: 50,
-    otherProperties: ["Szansa na trafienie krytyczne 2% (+1% co poziom)", "Szansa na podwójny atak 2% (+1% na poziom)"]
+    otherProperties: [["Szansa na trafienie krytyczne", 2, 1], ["Szansa na podwójny atak", 2, 1]]
   },
   {
     name: "Cierń",
@@ -458,7 +458,7 @@ const itemsData = [{
     agility: 21,
     hp: 170,
     endurance: 70,
-    otherProperties: ["Szansa na trafienie krytyczne 4% (+1% co poziom)", "Dodatkowe obrażenia od energii: 5% (+1% na poziom)"]
+    otherProperties: [["Szansa na trafienie krytyczne", 4, 1], ["Dodatkowe obrażenia od energii", 5, 1]]
   },
   {
     name: "Attawa",
@@ -469,12 +469,12 @@ const itemsData = [{
     reqLvl: 60,
     damageType: "Obuchowe",
     weaponType: "Dwuręczna",
-    damage: "100 + poziom",
+    damage: 100,
     power: 10,
     knowledge: 20,
     hp: 50,
     mana: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Modyfikator obrażeń magicznych: 20% (+1% na poziom)"]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Modyfikator obrażeń magicznych", 20, 1]]
   },
   {
     name: "Żmij",
@@ -485,11 +485,11 @@ const itemsData = [{
     reqLvl: 60,
     damageType: "Obuchowe",
     weaponType: "Dwuręczna",
-    damage: "100 + poziom",
+    damage: 100,
     power: 20,
     knowledge: 10,
     hp: 100,
-    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Szansa na podwójny atak: 10% (+1% na poziom)"]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Szansa na podwójny atak", 10, 1]]
   },
   {
     name: "Latarnia Życia",
@@ -500,12 +500,12 @@ const itemsData = [{
     reqLvl: 60,
     damageType: "Obuchowe",
     weaponType: "Dwuręczna",
-    damage: "100 + poziom",
+    damage: 100,
     power: 10,
     knowledge: 20,
     hp: 50,
     mana: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Wyssanie many: 8% (+1% na poziom)", "Szansa na trafienie krytyczne: 9% (+1% na poziom)"]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Wyssanie many", 8, 1], ["Szansa na trafienie krytyczne", 9, 1]]
   },
   {
     name: "Imisindo",
@@ -516,12 +516,12 @@ const itemsData = [{
     reqLvl: 60,
     damageType: "Kłute",
     weaponType: "Dwuręczna",
-    damage: "85 + poziom",
+    damage: 85,
     strength: 10,
     agility: 10,
     hp: 150,
     endurance: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Modyfikator trafień dystansowych: 20% (+2% na poziom)"]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Modyfikator trafień dystansowych", 20, 2]]
   },
   {
     name: "Washi",
@@ -532,12 +532,12 @@ const itemsData = [{
     reqLvl: 60,
     damageType: "Kłute",
     weaponType: "Dwuręczna",
-    damage: "95 + poziom",
+    damage: 95,
     strength: 10,
     agility: 10,
     hp: 150,
     endurance: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Szansa na trafienie krytyczne: 9% (+1% na poziom)", "Modyfikator obrażeń fizycznych: 20% (+1% na poziom)"]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Modyfikator obrażeń fizycznych", 20, 1]]
   },
   {
     name: "Gorthdar",
@@ -548,12 +548,12 @@ const itemsData = [{
     reqLvl: 60,
     damageType: "Sieczne",
     weaponType: "Dwuręczna",
-    damage: "110 + poziom",
+    damage: 110,
     strength: 15,
     agility: 10,
     hp: 100,
     endurance: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Dodatkowe obrażenia od ognia: 12% (+1% na poziom)", "Szansa na trafienie krytyczne: 9% (+1% na poziom)"]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Dodatkowe obrażenia od ognia", 12, 1], ["Szansa na trafienie krytyczne", 9, 1]]
   },
   {
     name: "Allenor",
@@ -564,13 +564,13 @@ const itemsData = [{
     reqLvl: 60,
     damageType: "Sieczne",
     weaponType: "Jednoręczna",
-    damage: "80 + poziom",
+    damage: 80,
     strength: 10,
     agility: 10,
     knowledge: 5,
     hp: 100,
     endurance: 50,
-    otherProperties: ["Dodatkowe PA: 1", "Modyfikator obrażeń fizycznych: 12% (+1% na poziom)", "Szansa na trafienie krytyczne: 9% (+1% na poziom)"]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Modyfikator obrażeń fizycznych", 12, 1], ["Szansa na trafienie krytyczne", 9, 1]]
   },
   {
     name: "Isthrimm II",
@@ -794,7 +794,7 @@ const itemsData = [{
     fireRes: 15,
     energyRes: 15,
     frostRes: 15,
-    otherProperties: ["Modyfikator obrażeń fizycznych: 7% (+1% co poziom)", "Obrona przeciw urokom: 3% (+2% na poziom)", "Odporność na zamrożenie: 10% (+2% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń fizycznych", 7, 1], ["Obrona przeciw urokom", 3, 2], ["Odporność na zamrożenie", 10, 2]]
   },
   {
     name: "Miłość Morany",
@@ -815,7 +815,7 @@ const itemsData = [{
     fireRes: 15,
     energyRes: 15,
     frostRes: 15,
-    otherProperties: ["Modyfikator obrażeń magicznych: 7% (+1% co poziom)", "Obrona wręcz: 3% (+2% na poziom)", "Odporność na zamrożenie: 10% (+2% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń magicznych", 7 ,1], ["Obrona wręcz", 3, 2], ["Odporność na zamrożenie", 10, 2]]
   },
   {
     name: "Htagan",
@@ -958,7 +958,7 @@ const itemsData = [{
     bluntRes: 35,
     pierceRes: 35,
     frostRes: 15,
-    otherProperties: ["Skok Farida: 4% (+1% co poziom)"]
+    otherProperties: [["Skok Farida", 4, 1]]
   },
   {
     name: "Zalla",
@@ -980,7 +980,7 @@ const itemsData = [{
     fireRes: 20,
     energyRes: 20,
     frostRes: 20,
-    otherProperties: ["Podwójne losowanie obrony: 2% (+2% co poziom)", "Redukcja otrzymanych obrażeń: 2% (+1% na poziom)", "Obrona wręcz: 2% (+2% co poziom)"]
+    otherProperties: [["Podwójne losowanie obrony", 2, 2], ["Redukcja otrzymanych obrażeń", 2, 1], ["Obrona wręcz", 2, 2]]
   },
   {
     name: "Salmurn",
@@ -1002,7 +1002,7 @@ const itemsData = [{
     fireRes: 15,
     energyRes: 15,
     frostRes: 15,
-    otherProperties: ["Podwójne losowanie obrony: 2% (+2% co poziom)", "Redukcja otrzymanych obrażeń: 2% (+1% na poziom)", "Obrona przeciw urokom: 2% (+2% co poziom)"]
+    otherProperties: [["Podwójne losowanie obrony", 2, 2], ["Redukcja otrzymanych obrażeń", 2, 1], ["Obrona przeciw urokom", 2, 2]]
   },
   {
     name: "Dmorlung",
@@ -1100,7 +1100,7 @@ const itemsData = [{
     frostRes: 15
   },
   {
-    name: "Tsunami II",
+    name: "Tsunami II v1",
     type: "cape",
     rarity: "Psychorare",
     image: "[www.taernopedia.pl][61]Tsunami20II.png",
@@ -1110,7 +1110,20 @@ const itemsData = [{
     power: 8,
     knowledge: 16,
     hp: 100,
-    otherProperties: ["Odporność na trafienie krytyczne: 0% (+1% co poziom)", "Modyfikator trafień magicznych LUB dystansowych: 4% (+2% na poziom)"]
+    otherProperties: [["Odporność na trafienie krytyczne", 0, 1], ["Modyfikator trafień magicznych", 4, 2]]
+  },
+  {
+    name: "Tsunami II v2",
+    type: "cape",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][61]Tsunami20II.png",
+    reqLvl: 85,
+    reqPow: 90,
+    reqKno: 90,
+    power: 8,
+    knowledge: 16,
+    hp: 100,
+    otherProperties: [["Odporność na trafienie krytyczne", 0, 1], ["Modyfikator trafień dystansowych", 4, 2]]
   },
   {
     name: "Cień Tarula",
@@ -1120,11 +1133,11 @@ const itemsData = [{
     reqLvl: 130,
     reqPow: 130,
     power: 26,
-    knowledge: 24,
-    hp: 200,
+    knowledge: 34,
+    hp: 300,
     mana: 80,
     endurance: 20,
-    otherProperties: ["Podwójne losowanie trafienia: 4% (+1% co poziom)", "Redukcja otrzymanych obrażeń krytycznych: 7% (+4% na poziom)", "Zużycie many: -2% (-2% co poziom)"]
+    otherProperties: [["Podwójne losowanie trafienia", 4, 1], ["Redukcja otrzymanych obrażeń krytycznych", 7, 4], ["Zużycie many", -6, -2]]
   },
   {
     name: "Admiralski gronostaj",
@@ -1138,7 +1151,7 @@ const itemsData = [{
     hp: 170,
     mana: 80,
     endurance: 130,
-    otherProperties: ["Podwójne losowanie trafienia: +2% (+1% co poziom)", "Szansa na odczarowanie: +7% (+1% na poziom)"]
+    otherProperties: [["Podwójne losowanie trafienia", 2, 1], ["Szansa na odczarowanie", 7, 1]]
   },
   {
     name: "Hańba Seleny",
@@ -2574,7 +2587,7 @@ const itemsData = [{
     pierceRes: 35
   },
   {
-    name: "Aquariusy II",
+    name: "Aquariusy II v1",
     type: "pants",
     rarity: "Psychorare",
     image: "[www.taernopedia.pl][995]Aquariusy20II.png",
@@ -2587,7 +2600,23 @@ const itemsData = [{
     cutRes: 40,
     bluntRes: 40,
     pierceRes: 40,
-    otherProperties: ["Odporność na trafienie krytyczne: 0% (+1% co poziom)", "Modyfikator trafień fizycznych LUB dystansowych: 4% (+2% na poziom)"]
+    otherProperties: [["Odporność na trafienie krytyczne", 0, 1], ["Modyfikator trafień fizycznych", 4, 2]]
+  },
+  {
+    name: "Aquariusy II v2",
+    type: "pants",
+    rarity: "Psychorare",
+    image: "[www.taernopedia.pl][995]Aquariusy20II.png",
+    reqLvl: 85,
+    reqStr: 90,
+    reqAgi: 90,
+    strength: 10,
+    agility: 18,
+    endurance: 60,
+    cutRes: 40,
+    bluntRes: 40,
+    pierceRes: 40,
+    otherProperties: [["Odporność na trafienie krytyczne", 0, 1], ["Modyfikator trafień dystansowych", 4, 2]]
   },
   {
     name: "Ziraki",
@@ -2597,14 +2626,14 @@ const itemsData = [{
     reqLvl: 130,
     reqStr: 130,
     strength: 27,
-    agility: 23,
-    hp: 180,
+    agility: 33,
+    hp: 280,
     endurance: 80,
     mana: 40,
-    cutRes: 30,
-    bluntRes: 30,
-    pierceRes: 30,
-    otherProperties: ["Podwójne losowanie trafienia: 4% (+1% co poziom)", "Redukcja otrzymanych obrażeń krytycznych: 7% (+4% na poziom)", "Zużycie kondycji: -2% (-2% co poziom)"]
+    cutRes: 35,
+    bluntRes: 35,
+    pierceRes: 35,
+    otherProperties: [["Podwójne losowanie trafienia", 4, 1], ["Redukcja otrzymanych obrażeń krytycznych", 7, 4], ["Zużycie kondycji", -6, -2]]
   },
   {
     name: "Temary II",
@@ -2623,7 +2652,7 @@ const itemsData = [{
     fireRes: 20,
     energyRes: 20,
     frostRes: 20,
-    otherProperties: ["Redukcja otrzymanych obrażeń biernych: 1% (+2% co poziom)", "Szansa na odczarowanie: 1% (+1% na poziom)"]
+    otherProperties: [["Redukcja otrzymanych obrażeń biernych", 1, 2], ["Szansa na odczarowanie", 1, 1]]
   },
   {
     name: "Udręki",
@@ -2639,7 +2668,7 @@ const itemsData = [{
     cutRes: 39,
     bluntRes: 39,
     pierceRes: 39,
-    otherProperties: ["Modyfikator obrażeń magicznych: 4% (+1% co poziom)", "Przełamanie odporności na urok: 4% (+1% na poziom)"]
+    otherProperties: [["Modyfikator obrażeń magicznych", 4, 1], ["Przełamanie odporności na urok", 4, 1]]
   },
   {
     name: "Arhauty II",
@@ -2658,7 +2687,7 @@ const itemsData = [{
     fireRes: 15,
     energyRes: 15,
     frostRes: 15,
-    otherProperties: ["Redukcja otrzymanych obrażeń biernych: 1% (+2% co poziom)", "Szansa na odczarowanie: 1% (+1% na poziom)"]
+    otherProperties: [["Redukcja otrzymanych obrażeń biernych", 1, 2], ["Szansa na odczarowanie", 1, 1]]
   },
   {
     name: "Moczary",
@@ -2673,7 +2702,7 @@ const itemsData = [{
     cutRes: 23,
     bluntRes: 22,
     pierceRes: 25,
-    otherProperties: ["Modyfikator trafień fizycznych: 10% (+2% co poziom)"]
+    otherProperties: [["Modyfikator trafień fizycznych", 10, 2]]
   },
   {
     name: "Virveny",
@@ -2753,14 +2782,17 @@ const itemsData = [{
     image: "[www.taernopedia.pl][511]Alendry.png",
     reqLvl: 110,
     reqPow: 100,
-    power: 20,
-    knowledge: 44,
-    hp: 140,
-    mana: 70,
+    power: 16,
+    knowledge: 55,
+    hp: 200,
+    mana: 40,
     cutRes: 37,
     bluntRes: 37,
     pierceRes: 37,
-    frostRes: 10
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15
   },
   {
     name: "Thorimmy",
@@ -2792,7 +2824,7 @@ const itemsData = [{
     cutRes: 34,
     bluntRes: 37,
     pierceRes: 37,
-    otherProperties: ["Zużycie many: +26% (-2% co poziom)", "Szansa na podwójny atak: +4% (+1% na poziom)"]
+    otherProperties: [["Zużycie many", 26, 2], ["Szansa na podwójny atak", 4, 1]]
   },
   {
     name: "Envile",
@@ -2808,7 +2840,7 @@ const itemsData = [{
     cutRes: 30,
     bluntRes: 30,
     pierceRes: 30,
-    otherProperties: ["Szansa na podwójny atak: +2% (+1% co poziom)", "Modyfikator obrażeń magicznych: 2% (+1% na poziom)"]
+    otherProperties: [["Szansa na podwójny atak", 2, 1], ["Modyfikator obrażeń magicznych", 2, 1]]
   },
   {
     name: "Cierpiętniki",
@@ -2824,7 +2856,7 @@ const itemsData = [{
     cutRes: 40,
     bluntRes: 40,
     pierceRes: 40,
-    otherProperties: ["Modyfikator obrażeń fizycznych: 4% (+1% co poziom)", "Modyfikator trafień fizycznych: 10% (+2% na poziom)"]
+    otherProperties: [["Modyfikator obrażeń fizycznych", 4, 1], ["Modyfikator trafień fizycznych", 10, 2]]
   },
   {
     name: "Objęcia Morany",
@@ -2838,7 +2870,7 @@ const itemsData = [{
     knowledge: 29,
     hp: 230,
     mana: 160,
-    otherProperties: ["Obrona wręcz: 5% (+2% co poziom)", "Obrona dystansowa: 3% (+2% na poziom)", "Obrona przeciw urokom: 1% (+2% co poziom)"]
+    otherProperties: [["Obrona wręcz", 5, 2], ["Obrona dystansowa", 3, 2], ["Obrona przeciw urokom", 1, 2]]
   },
   {
     name: "Exuvium",
@@ -2903,7 +2935,7 @@ const itemsData = [{
     power: 5,
     knowledge: 3,
     hp: 60,
-    otherProperties: ["Modyfikator trafień dystansowych: 10% (+2% co poziom)"]
+    otherProperties: [["Modyfikator trafień dystansowych", 10, 2]]
   },
   {
     name: "Promuris",
@@ -2915,7 +2947,7 @@ const itemsData = [{
     strength: 4,
     agility: 5,
     hp: 50,
-    otherProperties: ["Odporność na korzenie: 10% (+2% co poziom)", "Modyfikator obrażeń fizycznych: 3% (+1% na poziom)"]
+    otherProperties: [["Odporność na korzenie", 10, 2], ["Modyfikator obrażeń fizycznych", 3, 1]]
   },
   {
     name: "Nurt",
@@ -2929,7 +2961,7 @@ const itemsData = [{
     agility: 15,
     hp: 160,
     endurance: 40,
-    otherProperties: ["Zużycie kondycji: +26% (-2% co poziom)", "Szansa na podwójny atak: +4% (+1% na poziom)"]
+    otherProperties: [["Zużycie kondycji", 26, -2], ["Szansa na podwójny atak", 4, 1]]
   },
   {
     name: "Nienawiść Draugula",
@@ -2943,7 +2975,7 @@ const itemsData = [{
     hp: 170,
     mana: 50,
     endurance: 50,
-    otherProperties: ["Szansa na podwójny atak: +2% (+1% co poziom)", "Modyfikator obrażeń fizycznych: 2% (+1% na poziom)"]
+    otherProperties: [["Szansa na podwójny atak", 2, 1], ["Modyfikator obrażeń fizycznych", 2, 1]]
   },
   {
     name: "Groza Seleny",
@@ -2951,11 +2983,14 @@ const itemsData = [{
     image: "[www.taernopedia.pl][281]Groza20Seleny.png",
     reqLvl: 110,
     reqStr: 100,
-    strength: 20,
-    agility: 45,
-    hp: 150,
-    endurance: 50,
-    frostRes: 10
+    strength: 16,
+    agility: 55,
+    hp: 200,
+    endurance: 40,
+    curseRes: 15,
+    fireRes: 15,
+    energyRes: 15,
+    frostRes: 15
   },
   {
     name: "Disolver",
@@ -2965,7 +3000,7 @@ const itemsData = [{
     reqLvl: 100,
     frostRes: 45,
     curseRes: 45,
-    otherProperties: ["Odporność na zamrożenie: 20% (+2% co poziom)"]
+    otherProperties: [["Odporność na zamrożenie", 20, 2]]
   },
   {
     name: "Allakaja Many",
@@ -3121,7 +3156,7 @@ const itemsData = [{
     power: 20,
     knowledge: 20,
     hp: 100,
-    otherProperties: ["Zużycie many: -5% (-2% co poziom)"]
+    otherProperties: [["Zużycie many", -5, -2]]
   },
   {
     name: "Skogan",
@@ -3134,7 +3169,7 @@ const itemsData = [{
     agility: 20,
     hp: 80,
     mana: 20,
-    otherProperties: ["Zużycie kondycji: -5% (-2% co poziom)"]
+    otherProperties: [["Zużycie kondycji", -5, -2]]
   },
   {
     name: "Przysięga Draugula",
@@ -3161,7 +3196,7 @@ const itemsData = [{
     endurance: 30,
     fireRes: 10,
     energyRes: 30,
-    otherProperties: ["Modyfikator obrażeń magicznych: 3% (+1% co poziom)", "Szansa na odczarowanie: 3% (+1% co poziom)", "Redukcja otrzymanych obrażeń biernych: 6% (+2% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń magicznych", 3, 1], ["Szansa na odczarowanie", 3, 1], ["Redukcja otrzymanych obrażeń biernych", 6, 2]]
   },
   {
     name: "Vogurun",
@@ -3172,7 +3207,7 @@ const itemsData = [{
     reqKno: 70,
     power: 10,
     knowledge: 10,
-    otherProperties: ["Modyfikator obrażeń magicznych: 10% (+1% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń magicznych", 10, 1]]
   },
   {
     name: "Ostolbin",
@@ -3264,7 +3299,7 @@ const itemsData = [{
     reqKno: 45,
     power: 7,
     hp: 80,
-    otherProperties: ["Regeneracja many: 10% (+2% co poziom)", "Modyfikator obrażeń magicznych: 3% (+1% co poziom)"]
+    otherProperties: [["Regeneracja many", 10, 2], ["Modyfikator obrażeń magicznych", 3, 1]]
   },
   {
     name: "Valazan",
@@ -3276,7 +3311,7 @@ const itemsData = [{
     knowledge: 9,
     hp: 50,
     mana: 40,
-    otherProperties: ["Zużycie many: -2% (-2% co poziom)"]
+    otherProperties: [["Zużycie many", -2, -2]]
   },
   {
     name: "Danthum",
@@ -3288,7 +3323,7 @@ const itemsData = [{
     agility: 9,
     hp: 50,
     endurance: 40,
-    otherProperties: ["Zużycie kondycji: -2% (-2% co poziom)"]
+    otherProperties: [["Zużycie kondycji", -2, -2]]
   },
   {
     name: "Yurugu",
@@ -3299,7 +3334,7 @@ const itemsData = [{
     reqStr: 80,
     strength: 10,
     agility: 10,
-    otherProperties: ["Modyfikator obrażeń fizycznych: 10% (+1% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń fizycznych", 10, 1]]
   },
   {
     name: "Dorbis",
@@ -3314,7 +3349,7 @@ const itemsData = [{
     endurance: 70,
     fireRes: 10,
     energyRes: 30,
-    otherProperties: ["Modyfikator obrażeń fizycznych: 3% (+1% co poziom)", "Szansa na odczarowanie: 3% (+1% co poziom)", "Redukcja otrzymanych obrażeń biernych: 6% (+2% co poziom)"]
+    otherProperties: [["Modyfikator obrażeń fizycznych", 3, 1], ["Szansa na odczarowanie", 3, 1], ["Redukcja otrzymanych obrażeń biernych", 6, 2]]
   },
   {
     name: "Serce Seleny",
@@ -3341,7 +3376,7 @@ const itemsData = [{
     agility: 30,
     hp: 250,
     endurance: 50,
-    otherProperties: ["Obrona wręcz: 1% (+2% co poziom)", "Obrona dystansowa: 3% (+2% co poziom)", "Obrona przeciw urokom: 5% (+2% co poziom)"]
+    otherProperties: [["Obrona wręcz", 1, 2], ["Obrona dystansowa", 3, 2], ["Obrona przeciw urokom", 5, 2]]
   },
   {
     name: "Biltabandury",
@@ -3392,7 +3427,7 @@ const itemsData = [{
     type: "gloves",
     image: "[www.taernopedia.pl][547]Vaekany.png",
     reqLvl: 65,
-    reqKno: 90,
+    reqPow: 90,
     power: 10,
     knowledge: 7,
     hp: 20,
@@ -3420,7 +3455,7 @@ const itemsData = [{
     knowledge: 2,
     hp: 40,
     mana: 10,
-    otherProperties: ["Modyfikator trafień magicznych: 10% (+2% co poziom)"]
+    otherProperties: [["Modyfikator trafień magicznych", 10, 2]]
   },
   {
     name: "Skry Utoru",
@@ -3433,7 +3468,7 @@ const itemsData = [{
     knowledge: 27,
     hp: 190,
     mana: 160,
-    otherProperties: ["Modyfikator trafień dystansowych: +10% (+2% co poziom)", "Szansa na odczarowanie: +7% (+1% co poziom)"]
+    otherProperties: [["Modyfikator trafień dystansowych", 10, 2], ["Szansa na odczarowanie", 7, 1]]
   },
   {
     name: "Szpony Seimhi",
@@ -3446,11 +3481,11 @@ const itemsData = [{
     knowledge: 27,
     hp: 190,
     mana: 160,
-    otherProperties: ["Modyfikator trafień magicznych: +10% (+2% co poziom)", "Szansa na odczarowanie: +7% (+1% co poziom)"]
+    otherProperties: [["Modyfikator trafień magicznych", 10, 2], ["Szansa na odczarowanie", 7, 1]]
   }
 ]
 
-const items = itemsData.map(item => new Item(item));
+const items: Item[] = itemsData.map((item) => new Item(item));
 const itemsDatabase = items.sort((x, y) => x.reqLvl - y.reqLvl);
 
 export default itemsDatabase

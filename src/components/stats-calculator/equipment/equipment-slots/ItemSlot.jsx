@@ -67,6 +67,10 @@ export class ItemSlot extends React.Component {
     });
     functionToRun(this.props.type);
   }
+  handlePsychoLvlChange(event, functionToRun, value) {
+    event.stopPropagation();
+    functionToRun(this.props.type, value);
+  }
   render() {
     let unequipButton = (
       <button
@@ -83,6 +87,24 @@ export class ItemSlot extends React.Component {
         onClick={(event) => this.handleChildClick(event, this.showForm)}
       ></button>
     );
+    let addPsychoLvlButton = (
+      <button
+        className={"addPsychoLvlButton"}
+        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 8}
+        onClick={(event) =>
+          this.handlePsychoLvlChange(event, this.props.changePsychoLvl, 1)
+        }
+      ></button>
+    )
+    let substractPsychoLvlButton = (
+      <button
+        className={"substractPsychoLvlButton"}
+        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 1}
+        onClick={(event) =>
+          this.handlePsychoLvlChange(event, this.props.changePsychoLvl, -1)
+        }
+      ></button>
+    )
     return (
       <div
         className={
@@ -136,6 +158,8 @@ export class ItemSlot extends React.Component {
         ) : null}
         {this.props.inSlot ? unequipButton : null}
         {this.props.inSlot ? enhanceButton : null}
+        {this.props.inSlot && this.props.inSlot.psychoLvl ? addPsychoLvlButton : null}
+        {this.props.inSlot && this.props.inSlot.psychoLvl ? substractPsychoLvlButton : null}
         {this.state.displayEnhancementForm ? (
           <ItemEnhancementForm
             type={this.props.type}
