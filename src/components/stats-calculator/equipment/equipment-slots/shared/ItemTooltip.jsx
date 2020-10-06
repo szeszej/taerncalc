@@ -68,7 +68,6 @@ class ConnectedItemTooltip extends React.Component {
           if (x[0] === "Dodatkowe PA") {
             return (
               <p
-                className="otherProperties"
                 style={this.nameColor("Psychorare")}
                 key={x}
               >
@@ -78,7 +77,6 @@ class ConnectedItemTooltip extends React.Component {
           } else {
             return (
               <p
-                className="otherProperties"
                 style={this.nameColor("Psychorare")}
                 key={x}
               >

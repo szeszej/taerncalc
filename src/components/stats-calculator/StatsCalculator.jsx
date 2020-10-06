@@ -49,9 +49,9 @@ class ConnectedStatsCalculator extends React.Component {
           </p>
           <div className="linesAndEq">
             <Equipment />
+            <div className="statLine">Obrażenia: {this.props.damage}</div>
             <div className="statsAndRes">
               <div className="statLines">
-                <div className="statLine">Obrażenia: {this.props.damage}</div>
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="strength"
