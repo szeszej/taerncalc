@@ -6,8 +6,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 3,
   strength: 8,
   otherProperties: [
-    ["Regeneracja Many", 12],
-    ["Regeneracja Kondycji", 12],
+    ["Regeneracja many", 12],
+    ["Regeneracja kondycji", 12],
     ["Rozproszenie Holma", 10]
   ]
 },
@@ -96,7 +96,7 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   hp: 190,
   otherProperties: [
-    ["Zużycie Many", -10],
+    ["Zużycie many", -10],
     ["Szansa na podwójny atak", 8]
   ]
 },

@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { itemSets } from "../../../../../data/item-sets";
 
 //Shared functionality
-import { checkWhichSetsAreEquipped } from "../../../../../shared/check-what-sets-are-equipped";
+import { checkWhichSetsAreEquipped } from "../../../../../shared/check-which-sets-are-equipped";
 
 class ConnectedItemTooltip extends React.Component {
   nameColor(rarity) {

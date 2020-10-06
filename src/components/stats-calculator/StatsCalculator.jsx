@@ -17,7 +17,7 @@ import { changeStat } from "../../store/stats-reducer/stats-reducer";
 import { resetStatPoints } from "../../store/stats-reducer/stats-reducer";
 
 //Shared functionality
-import { checkWhichSetsAreEquipped } from "../../shared/check-what-sets-are-equipped"
+import { checkWhichSetsAreEquipped } from "../../shared/check-which-sets-are-equipped"
 
 class ConnectedStatsCalculator extends React.Component {
   constructor(props) {
@@ -47,11 +47,11 @@ class ConnectedStatsCalculator extends React.Component {
               Reset
             </button>
           </p>
-
           <div className="linesAndEq">
             <Equipment />
             <div className="statsAndRes">
               <div className="statLines">
+                <div className="statLine">Obrażenia: {this.props.damage}</div>
                 <StatLine
                   spendStatPoints={this.spendStatPoints}
                   stat="strength"
@@ -165,8 +165,20 @@ const mapStateToProps = (state) => {
     endurance: state.stats.endurance,
     mana: state.stats.mana,
     statsFromItems: calculateStatsFromItems(state.equipment),
+    damage: calculateTotalDamage(state.equipment.weapon, state.equipment.special)
   };
 };
+//calculating total damage of the character
+function calculateTotalDamage(weapon, special) {
+  let totalDamage = 0
+  if (weapon) {
+    totalDamage += weapon.calculateTotalStat("damage")
+  }
+  if (special) {
+    totalDamage += special.damage
+  }
+  return totalDamage
+}
 
 //calculating how much total of each stat equipment provides
 function calculateStatsFromItems(equipment) {

@@ -1019,7 +1019,8 @@ const itemsData: RawItem[] = [{
     cutRes: 40,
     bluntRes: 40,
     pierceRes: 40,
-    frostRes: 15
+    frostRes: 15,
+    otherProperties: [["Rozproszenie Holma", 6, 1]]
   },
   {
     name: "Angwallion",

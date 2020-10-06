@@ -1,13 +1,13 @@
 .equipment {
   display: grid;
-  grid-template-areas: "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots empty";
+  grid-template-areas: "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots otherProperties";
   box-sizing: border-box;
 
   .armor,
   .belt,
   .boots,
   .cape,
-  .empty,
+  .otherProperties,
   .gloves,
   .helmet,
   .neck,
@@ -502,9 +502,19 @@
     background-image: url("/images/boots.svg");
   }
 
-  .empty {
-    grid-area: empty;
-    background-image: url("/images/empty.svg");
+  .otherProperties {
+    grid-area: otherProperties;
+    background-image: url("/images/other-properties.svg");
+    .itemTooltip {
+      padding: 0.5em;
+      font-size: 1em;
+      .propertiesHeader {
+        margin-bottom: 0.5em;
+      }
+      p {
+        color: #35CBEF;
+      }
+    }
   }
 
   .middle {
@@ -512,6 +522,19 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    position: relative;
+    .empty {
+      position: absolute;
+      right: 0;
+      top: 0;
+      border-radius: 0;
+      height: 3.5em;
+      width: 3.5em;
+      background-image: url("/images/empty.svg");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 }
 
@@ -521,7 +544,7 @@
     .belt,
     .boots,
     .cape,
-    .empty,
+    .otherProperties,
     .gloves,
     .helmet,
     .neck,
@@ -544,7 +567,7 @@
     .belt,
     .boots,
     .cape,
-    .empty,
+    .otherProperties,
     .gloves,
     .helmet,
     .neck,
@@ -608,6 +631,10 @@
       .closeList {
         right: 3em;
       }
+    }
+    .empty {
+      height: 10vh;
+      width: 10vw;
     }
     }
     .special {
