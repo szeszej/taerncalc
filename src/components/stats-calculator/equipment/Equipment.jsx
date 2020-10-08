@@ -5,6 +5,7 @@ import ReactGA from "react-ga";
 //Components
 import { ItemSlot } from "./equipment-slots/ItemSlot.jsx";
 import { SpecialSlot } from "./equipment-slots/SpecialSlot.jsx";
+import { PsychoSlot } from "./equipment-slots/PsychoSlot";
 
 //Redux
 import { connect } from "react-redux";
@@ -16,15 +17,6 @@ import {
   unequipAllItems,
   changePsychoLvl,
 } from "../../../store/equipment-reducer/equipment-reducer";
-
-//Shared functionality
-import {
-  checkWhichSetsAreEquipped
-} from "../../../shared/check-which-sets-are-equipped";
-
-//Data
-//Data
-import { itemSets } from "../../../data/item-sets";
 
 export class ConnectedEquipment extends React.Component {
   constructor(props) {
@@ -85,76 +77,19 @@ export class ConnectedEquipment extends React.Component {
       this.props.unequipAllItems();
     }
   }
-  calculateOtherProperties(equipment) {
-    let setsEquipped = checkWhichSetsAreEquipped(equipment)
-    let propertiesOfSets = this.checkPropertiesOfSets(setsEquipped)
-    let propertiesOfEquippedItems = this.checkOtherPropertiesOfItems(equipment)
-    for (let property in propertiesOfSets) {
-      if (propertiesOfSets.hasOwnProperty(property) && propertiesOfSets[property] !== 0) {
-        if (propertiesOfEquippedItems.hasOwnProperty(property)) {
-          propertiesOfEquippedItems[property] += propertiesOfSets[property]
-        } else {
-          propertiesOfEquippedItems[property] = propertiesOfSets[property]
-        }
-      }
-    }
-    let propertyTypes = Object.keys(propertiesOfEquippedItems);
-    let propertyParagraphs = propertyTypes.map(property => (
-      <p key={property}>{property}: {propertiesOfEquippedItems[property]}%</p>
-    ))
-    return propertyParagraphs
-  }
-  checkOtherPropertiesOfItems(equipment) {
-    let equipmentTypes = Object.keys(equipment);
-    let equippedItems = equipmentTypes.map((x) => equipment[x]);
-    let otherPropertiesOfEquippedItems = equippedItems.reduce((total, item) => {
-      if (item !== null && (item.rarity === "Psychorare" || item.rarity === "Epik")) {
-        item.otherProperties.forEach((property) => {
-          if (total.hasOwnProperty(property[0])) {
-            total[property[0]] += property[1] + property[2] * (item.psychoLvl - 1)
-          } else {
-            total[property[0]] = property[1] + property[2] * (item.psychoLvl - 1)
-          }
-        })
-        return total
-      } else {
-        return total;
-      }
-    }, {});
-    return otherPropertiesOfEquippedItems
-  }
-  checkPropertiesOfSets(equippedSets) {
-    let setsProperties = {}
-    if (equippedSets) {
-      for (let setName in equippedSets) {
-        if (equippedSets.hasOwnProperty(setName)) {
-          let set = itemSets.find(x => x.name === setName)
-          let setProperties = set.getOtherPropertiesValuesDependingOnPiecesAsArray(equippedSets[setName])
-          setProperties.forEach(property => {
-            if (setsProperties.hasOwnProperty(property[0])) {
-              setsProperties[property[0]] += property[1]
-            } else {
-              setsProperties[property[0]] = property[1]
-            }
-          })
-        }
-      }
-    }
-    return setsProperties;
-  }
   calculateTotalDamage(weapon, special) {
-      let totalDamage = 0
-      if (weapon) {
-        if (weapon.rarity === "Epik") {
-          totalDamage += weapon.calculateTotalStat("damage") + this.props.level
-        } else {
-          totalDamage += weapon.calculateTotalStat("damage")
-        }
+    let totalDamage = 0;
+    if (weapon) {
+      if (weapon.rarity === "Epik") {
+        totalDamage += weapon.calculateTotalStat("damage") + this.props.level;
+      } else {
+        totalDamage += weapon.calculateTotalStat("damage");
       }
-      if (special) {
-        totalDamage += special.damage
-      }
-      return totalDamage
+    }
+    if (special) {
+      totalDamage += special.damage;
+    }
+    return totalDamage;
   }
   render() {
     let classBackground = {
@@ -186,32 +121,28 @@ export class ConnectedEquipment extends React.Component {
         changePsychoLvl={this.changePsychoLvl}
       />
     ));
-    let otherPropertiesTags = this.calculateOtherProperties(this.props.equipment)
-    let otherPropertiesList = (
-      <div className="itemTooltip">
-        <p className="propertiesHeader">Dodatkowe właściwości:</p>
-        {otherPropertiesTags}
-      </div>
-    );
     return (
       <div className="equipment">
         {equipmentSlotComponents}
-        <div
-          className="otherProperties"
-          onMouseEnter={() => this.setState({ showOtherProperties: true })}
-          onTouchStart={() => this.setState({ showOtherProperties: true })}
-          onMouseLeave={() => this.setState({ showOtherProperties: false })}
-          onTouchEnd={() => this.setState({ showOtherProperties: false })}
-          style={otherPropertiesTags.length !== 0 ? {backgroundImage: "url(/images/other-properties-active.svg)"} : null}
-        >
-          {this.state.showOtherProperties && otherPropertiesTags.length !== 0 ? otherPropertiesList : this.state.showOtherProperties ? <div className="itemTooltip"><p>Podsumowanie właściwości psycho.</p></div> : null}
-        </div>
+        <PsychoSlot equipment={this.props.equipment}/>
         <div className="middle" style={classBackground}>
           <button
             className="empty"
             onClick={() => this.unequipItems()}
           ></button>
-        {this.props.equipment.weapon || (this.props.equipment.special && this.props.equipment.special.damage) ? <div className="damage"><p>Obrażenia</p><p className="totalDamage">{this.calculateTotalDamage(this.props.equipment.weapon, this.props.equipment.special)}</p></div> : null}
+          {this.props.equipment.weapon ||
+          (this.props.equipment.special &&
+            this.props.equipment.special.damage) ? (
+            <button className="damage">
+              <p>Obrażenia</p>
+              <p className="totalDamage">
+                {this.calculateTotalDamage(
+                  this.props.equipment.weapon,
+                  this.props.equipment.special
+                )}
+              </p>
+            </button>
+          ) : null}
         </div>
         <SpecialSlot
           type={"special"}
