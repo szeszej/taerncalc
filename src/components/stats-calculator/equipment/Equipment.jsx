@@ -142,6 +142,20 @@ export class ConnectedEquipment extends React.Component {
     }
     return setsProperties;
   }
+  calculateTotalDamage(weapon, special) {
+      let totalDamage = 0
+      if (weapon) {
+        if (weapon.rarity === "Epik") {
+          totalDamage += weapon.calculateTotalStat("damage") + this.props.level
+        } else {
+          totalDamage += weapon.calculateTotalStat("damage")
+        }
+      }
+      if (special) {
+        totalDamage += special.damage
+      }
+      return totalDamage
+  }
   render() {
     let classBackground = {
       backgroundImage: `url("images/` + this.props.class + `.svg")`,
@@ -179,7 +193,6 @@ export class ConnectedEquipment extends React.Component {
         {otherPropertiesTags}
       </div>
     );
-    console.log(this.calculateOtherProperties(this.props.equipment));
     return (
       <div className="equipment">
         {equipmentSlotComponents}
@@ -191,13 +204,14 @@ export class ConnectedEquipment extends React.Component {
           onTouchEnd={() => this.setState({ showOtherProperties: false })}
           style={otherPropertiesTags.length !== 0 ? {backgroundImage: "url(/images/other-properties-active.svg)"} : null}
         >
-          {this.state.showOtherProperties && otherPropertiesTags.length !== 0 ? otherPropertiesList : null}
+          {this.state.showOtherProperties && otherPropertiesTags.length !== 0 ? otherPropertiesList : this.state.showOtherProperties ? <div className="itemTooltip"><p>Podsumowanie właściwości psycho.</p></div> : null}
         </div>
         <div className="middle" style={classBackground}>
           <button
             className="empty"
             onClick={() => this.unequipItems()}
           ></button>
+        {this.props.equipment.weapon || (this.props.equipment.special && this.props.equipment.special.damage) ? <div className="damage"><p>Obrażenia</p><p className="totalDamage">{this.calculateTotalDamage(this.props.equipment.weapon, this.props.equipment.special)}</p></div> : null}
         </div>
         <SpecialSlot
           type={"special"}
