@@ -2,41 +2,43 @@
 import React from "react";
 
 //Redux
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "./store/store";
+import { Dispatch } from "redux";
 
 //Components
 import { SkillsCalculator } from "./components/skills-calculator/SkillsCalculator.jsx";
-import { StatsCalculator } from "./components/stats-calculator/StatsCalculator.jsx";
+import { StatsCalculator } from "./components/stats-calculator/StatsCalculator";
 import { LevelChanger } from "./components/level-changer/LevelChanger";
 import { BuildExporter } from "./components/build-exporter/BuildExporter";
 
 //Actions
 import { changeLevel } from "./store/character-reducer/character-reducer";
 
-class ConnectedApp extends React.Component {
-  constructor(props) {
+class ConnectedApp extends React.Component<PropTypes, StateTypes> {
+  constructor(props: PropTypes) {
     super(props);
     this.changeLevel = this.changeLevel.bind(this);
     this.state = {
-      active: "stats"
+      active: "stats",
     };
   }
   componentDidMount() {
-    let charClass = document.getElementById("charClass");
-    charClass.value = this.props.className;
-    let charLvl = document.getElementById("charLvl");
-    charLvl.value = this.props.level;
+    let charClass = document.getElementById("charClass") as HTMLInputElement;
+    charClass!.value = this.props.className;
+    let charLvl = document.getElementById("charLvl") as HTMLInputElement;
+    charLvl!.value = this.props.level.toString();
   }
-  componentDidUpdate(prevProps, prevState) {
-    let charLvl = document.getElementById("charLvl");
-    charLvl.value = this.props.level;
+  componentDidUpdate() {
+    let charLvl = document.getElementById("charLvl") as HTMLInputElement;
+    charLvl!.value = this.props.level.toString();
   }
-  changeTabs(tab) {
+  changeTabs(tab: "stats" | "skills") {
     this.setState({
       active: tab,
     });
   }
-  changeLevel(value) {
+  changeLevel(value: number) {
     this.props.changeLevel(value);
   }
   render() {
@@ -71,17 +73,26 @@ class ConnectedApp extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     level: state.character.level,
     className: state.character.className,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    changeLevel: (value) => dispatch(changeLevel({ level: value })),
+    changeLevel: (value: number) => dispatch(changeLevel({ level: value })),
   };
 };
 
-export const App = connect(mapStateToProps, mapDispatchToProps)(ConnectedApp);
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export const App = connector(ConnectedApp);
+
+//Types
+type PropTypes = ConnectedProps<typeof connector>;
+
+interface StateTypes {
+  active: "stats" | "skills";
+}

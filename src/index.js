@@ -16,7 +16,7 @@ import "./styles/index.scss";
 import * as serviceWorker from "./serviceWorker";
 
 //Components
-import { App } from "./App.jsx";
+import { App } from "./App";
 import { Alert } from "./components/shared/Alert";
 
 //Build import related

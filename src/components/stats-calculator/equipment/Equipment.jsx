@@ -18,7 +18,7 @@ import {
   changePsychoLvl,
 } from "../../../store/equipment-reducer/equipment-reducer";
 
-export class ConnectedEquipment extends React.Component {
+class ConnectedEquipment extends React.Component {
   constructor(props) {
     super(props);
     this.equipItem = this.equipItem.bind(this);
@@ -134,7 +134,6 @@ export class ConnectedEquipment extends React.Component {
           (this.props.equipment.special &&
             this.props.equipment.special.damage) ? (
             <button className="damage">
-              <p>Obrażenia</p>
               <p className="totalDamage">
                 {this.calculateTotalDamage(
                   this.props.equipment.weapon,
@@ -182,7 +181,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const Equipment = connect(
+export const EquipmentComponent = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ConnectedEquipment);
