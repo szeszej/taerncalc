@@ -2,12 +2,13 @@
 import React from "react";
 
 //Components
-import { Item } from "../../../../data/models/item.model";
 import { ItemTooltip } from "./shared/ItemTooltip.jsx"
 
 //Shared functionality
-import isEquivalent from "../../../../shared/object-equivalency-check"
 import translateProperty from "../../../../shared/translate-property"
+
+//Types
+import { Item } from "../../../../data/models/item.model";
 
 export class SpecialSlot extends React.Component {
   constructor(props) {
@@ -35,31 +36,6 @@ export class SpecialSlot extends React.Component {
     };
     this.hideTooltip = this.hideTooltip.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.inSlot !== null && !isEquivalent(prevProps, this.props) ) {
-      this.setState(
-        {
-          name: this.props.inSlot.name,
-          image: this.props.inSlot.image,
-          strength: this.props.inSlot.strength,
-          agility: this.props.inSlot.agility,
-          power: this.props.inSlot.power,
-          knowledge: this.props.inSlot.knowledge,
-          hp: this.props.inSlot.hp,
-          endurance: this.props.inSlot.endurance,
-          mana: this.props.inSlot.mana,
-          damage: this.props.inSlot.damage,
-          fireRes: this.props.inSlot.fireRes,
-          frostRes: this.props.inSlot.frostRes,
-          energyRes: this.props.inSlot.energyRes,
-          curseRes: this.props.inSlot.curseRes,
-          pierceRes: this.props.inSlot.pierceRes,
-          cutRes: this.props.inSlot.cutRes,
-          bluntRes: this.props.inSlot.bluntRes
-        }
-      )
-    }
   }
   createItem(properties) {
     if (properties.image === "") {
@@ -92,12 +68,6 @@ export class SpecialSlot extends React.Component {
       displayTooltip: false
     });
     functionToRun(this.props.type);
-  }
-  clearBackground() {
-    let itemBackground = {
-      backgroundImage: "none"
-    };
-    return itemBackground;
   }
   handleSubmit(event) {
     event.stopPropagation();

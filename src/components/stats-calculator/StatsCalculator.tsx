@@ -7,7 +7,7 @@ import { RootState } from "../../store/store";
 import { Dispatch } from "redux";
 
 //Components
-import { EquipmentComponent } from "./equipment/Equipment.jsx";
+import { EquipmentComponent } from "./equipment/Equipment";
 import { StatLine } from "./stat-line/StatLine";
 import { ResLine } from "./resist-line/ResLine";
 
@@ -66,11 +66,13 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
       value={this.props[statName as keyof Stats]}
       pointsLeft={this.props.statPts}
       fromItems={this.props.statsFromItems[statName as keyof Stats]}
+      key={statName}
     />))
     let resistComponents = resistNames.map(statName => (<ResLine
       stat={statName}
       statName={translateProperty(statName)}
       value={this.props.statsFromItems[statName as keyof Resists]}
+      key={statName}
     />))
     return (
       <div

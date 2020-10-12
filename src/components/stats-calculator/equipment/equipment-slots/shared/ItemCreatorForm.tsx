@@ -67,8 +67,9 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           (itemProperties[x.property as keyof CustomItem] as any) = x.value;
         }
       });
-      this.props.addItem(new Item(itemProperties));
-      this.props.equipItem(this.props.type as keyof Equipment, itemProperties);
+      let createdItem = new Item(itemProperties)
+      this.props.addItem(createdItem);
+      this.props.equipItem(this.props.type as keyof Equipment, createdItem);
       this.props.closeList();
     } else {
       window.alert("Nie określono żadnych parametrów!");
@@ -241,7 +242,7 @@ interface CustomItem extends RawItem {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addItem: (item: Item) => dispatch(addItem({ item: item })),
-    equipItem: (slot: keyof Equipment, item: RawItem) =>
+    equipItem: (slot: keyof Equipment, item: Item) =>
       dispatch(equipItem({ slot: slot, item: item })),
   };
 };

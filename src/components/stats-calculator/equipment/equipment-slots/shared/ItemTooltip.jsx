@@ -129,6 +129,7 @@ class ConnectedItemTooltip extends React.Component {
             /{equippedSet.totalPieces})
           </p>
         ) : null}
+        {this.props.item.randomStats ? <p className="starItem">Przedmiot gwiazdkowy</p> : null}
         {this.props.item.name ? <hr /> : null}
         {this.props.item.class ? (
           <p

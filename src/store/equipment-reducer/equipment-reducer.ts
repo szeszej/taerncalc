@@ -1,5 +1,5 @@
 //Model
-import { Item, RawItem } from "../../data/models/item.model";
+import { Item } from "../../data/models/item.model";
 
 //actions types
 const INITIALIZE_EQUIPMENT = "INITIALIZE_EQUIPMENT";
@@ -49,7 +49,7 @@ export default function equipmentReducer(
   let newState = { ...state };
   switch (action.type) {
     case EQUIP_ITEM:
-      newState[action.payload.slot] = new Item(action.payload.item);
+      newState[action.payload.slot] = action.payload.item;
       return newState;
     case ENHANCE_ITEM:
       if (newState[action.payload.slot]) {
@@ -99,7 +99,7 @@ export const enhanceItem = (payload: EnhanceItemPayload): EnhanceItemAction => {
   };
 };
 
-export const unequipItem = (payload: EquipItemPayload): UnequipItemAction => {
+export const unequipItem = (payload: UnequipItemPayload): UnequipItemAction => {
   return {
     type: UNEQUIP_ITEM,
     payload,
@@ -129,7 +129,7 @@ interface InitializeEquipmentAction {
 
 interface EquipItemPayload {
   slot: keyof Equipment;
-  item: RawItem;
+  item: Item;
 }
 
 interface EnhanceItemPayload {

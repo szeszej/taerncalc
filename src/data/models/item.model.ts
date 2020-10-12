@@ -36,6 +36,7 @@ export class Item {
       this[itemProperty] = item[itemProperty] ? item[itemProperty]! : 0;
     });
     this.isCustom = item.hasOwnProperty("isCustom") ? true : false;
+    this.randomStats = item.hasOwnProperty("randomStats") || (item.set && item.reqLvl === 100) ? true : false;
     this.enhancements = item.enhancements
       ? item.enhancements
       : {
@@ -66,6 +67,7 @@ export interface Item extends NumericItemValues {
   weaponType: string | null
   psychoLvl: number
   isCustom: boolean
+  randomStats: boolean
   enhancements: Enhancements
   calculateTotalStat(stat: keyof Enhancements): number
   otherProperties: [string, number, number][]
@@ -136,6 +138,7 @@ export interface RawItem {
     curseRes?: number
     damage?: number
     isCustom?: boolean
+    randomStats?: boolean
     enhancements?: Enhancements
     otherProperties?: [string, number, number][]
 }

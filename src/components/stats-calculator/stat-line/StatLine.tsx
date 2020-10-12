@@ -12,6 +12,7 @@ export function StatLine(props: Props) {
         stat={props.stat}
         statValue={props.value}
         value={buttonValue}
+        key={props.stat + "Dec" + buttonValue}
       />
     ) : (
       <StatIncrementButton
@@ -20,6 +21,7 @@ export function StatLine(props: Props) {
         statValue={props.value}
         value={buttonValue}
         pointsLeft={props.pointsLeft}
+        key={props.stat + "Inc" + buttonValue}
       />
     )
   );

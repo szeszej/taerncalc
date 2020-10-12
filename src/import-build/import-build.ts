@@ -13,6 +13,7 @@ import { SkillsState } from "../store/skills-reducer/skills-reducer";
 import skillsDatabase from "../data/skills.jsx";
 import { initialStats } from "../store/stats-reducer/stats-reducer";
 import { initialEquipment } from "../store/equipment-reducer/equipment-reducer";
+import itemsDatabase from "../data/items"
 
 //Importing build using URL parameters
 export function importBuildWithUrlParameters(propertiesFromUrl: {[key: string]: string},
@@ -210,7 +211,18 @@ export function importBuildFromDatabase(data: ImportedBuild, database: TaernData
     let isNewEquipmentNeeded: boolean = false;
     for (const key in data.equipment) {
       if (data.equipment && data.equipment.hasOwnProperty(key)) {
-          temporaryEquipment[key as keyof Equipment] = new Item(data.equipment[key as keyof ImportedEquipment]!);
+          let isItemInDatabase = itemsDatabase.find(item => item.name === data.equipment[key as keyof ImportedEquipment]!.name)
+          if (isItemInDatabase && !data.equipment[key as keyof ImportedEquipment]!.psychoLvl) {
+            temporaryEquipment[key as keyof Equipment] = isItemInDatabase
+          } else {
+            if (data.equipment[key as keyof ImportedEquipment]!.name === "Aquariusy II") {
+                temporaryEquipment[key as keyof Equipment] = itemsDatabase.find(item => item.name === "Aquariusy II v1")!
+            } else if (data.equipment[key as keyof ImportedEquipment]!.name === "Tsunami II") {
+               temporaryEquipment[key as keyof Equipment] = itemsDatabase.find(item => item.name === "Tsunami II v1")!
+            } else {
+              temporaryEquipment[key as keyof Equipment] = new Item(data.equipment[key as keyof ImportedEquipment]!);
+            }
+          }
           isNewEquipmentNeeded = true;
       }
     }

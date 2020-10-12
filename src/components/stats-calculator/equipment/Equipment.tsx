@@ -8,7 +8,9 @@ import { SpecialSlot } from "./equipment-slots/SpecialSlot.jsx";
 import { PsychoSlot } from "./equipment-slots/PsychoSlot";
 
 //Redux
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../../../store/store";
+import { Dispatch } from "redux";
 
 //Actions
 import {
@@ -18,20 +20,28 @@ import {
   changePsychoLvl,
 } from "../../../store/equipment-reducer/equipment-reducer";
 
-class ConnectedEquipment extends React.Component {
-  constructor(props) {
+//Shared functionality
+import { confirmAlert } from "react-confirm-alert";
+
+//Types
+import { Equipment } from "../../../store/equipment-reducer/equipment-reducer"
+import { Item } from "../../../data/models/item.model"
+
+class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
+  constructor(props: PropTypes) {
     super(props);
     this.equipItem = this.equipItem.bind(this);
     this.unequipItem = this.unequipItem.bind(this);
     this.showItemsList = this.showItemsList.bind(this);
     this.hideItemsList = this.hideItemsList.bind(this);
     this.changePsychoLvl = this.changePsychoLvl.bind(this);
+    this.checkIfAnyItemIsEquipped = this.checkIfAnyItemIsEquipped.bind(this);
     this.state = {
       listToDisplay: "",
       showOtherProperties: false,
     };
   }
-  showItemsList(type) {
+  showItemsList(type: keyof Equipment) {
     ReactGA.event({
       category: "Items",
       action: "Show List",
@@ -46,7 +56,7 @@ class ConnectedEquipment extends React.Component {
       listToDisplay: "",
     });
   }
-  equipItem(item, type) {
+  equipItem(item: Item, type: keyof Equipment) {
     ReactGA.event({
       category: "Items",
       action: "Item Choice",
@@ -66,18 +76,54 @@ class ConnectedEquipment extends React.Component {
       this.props.equipItem(type, item);
     }
   }
-  unequipItem(slot) {
+  unequipItem(slot: keyof Equipment) {
     this.props.unequipItem(slot);
   }
-  changePsychoLvl(slot, value) {
+  changePsychoLvl(slot: keyof Equipment, value: number) {
     this.props.changePsychoLvl(slot, value);
   }
   unequipItems() {
-    if (window.confirm("Czy na pewno chcesz zdjąć wszystkie przedmioty?")) {
-      this.props.unequipAllItems();
-    }
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="backdrop">
+            <div className="alert-box">
+              <p className="alert-text">
+                Czy na pewno chcesz zdjąć wszystkie przedmioty?
+              </p>
+              <div className="alert-box-actions">
+                <button
+                  className="alert-box-action"
+                  onClick={() => {
+                    this.props.unequipAllItems();
+                    onClose();
+                  }}
+                >
+                  Tak
+                </button>
+                <button className="alert-box-action" onClick={onClose}>
+                  Nie
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      },
+    });
   }
-  calculateTotalDamage(weapon, special) {
+  checkIfAnyItemIsEquipped() {
+    let isAnyItemEquipped = false;
+    for (let item in this.props.equipment) {
+      if (this.props.equipment.hasOwnProperty(item)) {
+        isAnyItemEquipped = this.props.equipment[item as keyof Equipment] ? true : false;
+        if (isAnyItemEquipped) {
+          break;
+        }
+      }
+    }
+    return isAnyItemEquipped
+  }
+  calculateTotalDamage(weapon: Item | null, special: Item | null) {
     let totalDamage = 0;
     if (weapon) {
       if (weapon.rarity === "Epik") {
@@ -106,7 +152,7 @@ class ConnectedEquipment extends React.Component {
             ? this.props.items.filter((y) => y.type === "ring")
             : this.props.items.filter((y) => y.type === x)
         }
-        inSlot={this.props.equipment[x]}
+        inSlot={this.props.equipment[x as keyof Equipment]}
         class={this.props.class}
         level={this.props.level}
         strength={this.props.strength}
@@ -121,15 +167,19 @@ class ConnectedEquipment extends React.Component {
         changePsychoLvl={this.changePsychoLvl}
       />
     ));
+    let areAnyItemsEquipped = this.checkIfAnyItemIsEquipped()
     return (
       <div className="equipment">
         {equipmentSlotComponents}
-        <PsychoSlot equipment={this.props.equipment}/>
+        <PsychoSlot equipment={this.props.equipment} />
         <div className="middle" style={classBackground}>
-          <button
-            className="empty"
-            onClick={() => this.unequipItems()}
-          ></button>
+          {areAnyItemsEquipped ?
+            <button
+              className="empty"
+              onClick={() => this.unequipItems()}
+            ></button>
+          : null
+          }
           {this.props.equipment.weapon ||
           (this.props.equipment.special &&
             this.props.equipment.special.damage) ? (
@@ -158,7 +208,7 @@ class ConnectedEquipment extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     equipment: state.equipment,
     class: state.character.className,
@@ -171,17 +221,27 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    equipItem: (slot, item) => dispatch(equipItem({ slot: slot, item: item })),
-    unequipItem: (slot) => dispatch(unequipItem({ slot: slot })),
+    equipItem: (slot: keyof Equipment, item: Item) => dispatch(equipItem({ slot: slot, item: item })),
+    unequipItem: (slot: keyof Equipment) => dispatch(unequipItem({ slot: slot })),
     unequipAllItems: () => dispatch(unequipAllItems()),
-    changePsychoLvl: (slot, value) =>
+    changePsychoLvl: (slot: keyof Equipment, value: number) =>
       dispatch(changePsychoLvl({ slot: slot, value: value })),
   };
 };
 
-export const EquipmentComponent = connect(
+const connector = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ConnectedEquipment);
+)
+
+export const EquipmentComponent = connector(ConnectedEquipment);
+
+//Types
+type PropTypes = ConnectedProps<typeof connector>
+
+interface StateTypes {
+  listToDisplay: keyof Equipment | "",
+  showOtherProperties: boolean
+}

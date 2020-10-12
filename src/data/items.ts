@@ -254,7 +254,8 @@ const itemsData: RawItem[] = [{
     power: 7,
     knowledge: 5,
     hp: 180,
-    mana: 50
+    mana: 50,
+    randomStats: true
   },
   {
     name: "Buoriany",
@@ -328,7 +329,8 @@ const itemsData: RawItem[] = [{
     agility: 7,
     hp: 50,
     endurance: 30,
-    otherProperties: [["Szansa na trafienie krytyczne", 4, 1]]
+    otherProperties: [["Szansa na trafienie krytyczne", 4, 1]],
+    randomStats: true
   },
   {
     name: "Gjolmar",
@@ -644,7 +646,8 @@ const itemsData: RawItem[] = [{
     mana: 50,
     cutRes: 32,
     bluntRes: 30,
-    pierceRes: 33
+    pierceRes: 33,
+    randomStats: true
   },
   {
     name: "Martumal",
@@ -757,7 +760,8 @@ const itemsData: RawItem[] = [{
     cutRes: 31,
     bluntRes: 31,
     pierceRes: 31,
-    energyRes: 25
+    energyRes: 25,
+    randomStats: true
   },
   {
     name: "Pysk",
@@ -927,7 +931,8 @@ const itemsData: RawItem[] = [{
     mana: 60,
     cutRes: 32,
     bluntRes: 35,
-    pierceRes: 32
+    pierceRes: 32,
+    randomStats: true
   },
   {
     name: "Harttraum",
@@ -941,7 +946,8 @@ const itemsData: RawItem[] = [{
     endurance: 30,
     cutRes: 35,
     bluntRes: 35,
-    pierceRes: 35
+    pierceRes: 35,
+    randomStats: true
   },
   {
     name: "Vorleah",
@@ -1098,7 +1104,8 @@ const itemsData: RawItem[] = [{
     hp: 50,
     mana: 20,
     fireRes: 15,
-    frostRes: 15
+    frostRes: 15,
+    randomStats: true
   },
   {
     name: "Tsunami II v1",
@@ -1168,7 +1175,8 @@ const itemsData: RawItem[] = [{
     curseRes: 15,
     fireRes: 15,
     energyRes: 15,
-    frostRes: 15
+    frostRes: 15,
+    randomStats: true
   },
   {
     name: "Erbaile",
@@ -1186,7 +1194,8 @@ const itemsData: RawItem[] = [{
     curseRes: 15,
     fireRes: 15,
     energyRes: 15,
-    frostRes: 15
+    frostRes: 15,
+    randomStats: true
   },
   {
     name: "Varrvy",
@@ -2749,7 +2758,8 @@ const itemsData: RawItem[] = [{
     cutRes: 33,
     bluntRes: 27,
     pierceRes: 33,
-    energyRes: 15
+    energyRes: 15,
+    randomStats: true
   },
   {
     name: "Lysmary",
@@ -2793,7 +2803,8 @@ const itemsData: RawItem[] = [{
     curseRes: 15,
     fireRes: 15,
     energyRes: 15,
-    frostRes: 15
+    frostRes: 15,
+    randomStats: true
   },
   {
     name: "Thorimmy",
@@ -2991,7 +3002,8 @@ const itemsData: RawItem[] = [{
     curseRes: 15,
     fireRes: 15,
     energyRes: 15,
-    frostRes: 15
+    frostRes: 15,
+    randomStats: true
   },
   {
     name: "Disolver",
@@ -3045,7 +3057,8 @@ const itemsData: RawItem[] = [{
     agility: 30,
     hp: 100,
     mana: 20,
-    endurance: 30
+    endurance: 30,
+    randomStats: true
   },
   {
     name: "Nit",
@@ -3182,7 +3195,8 @@ const itemsData: RawItem[] = [{
     knowledge: 30,
     hp: 100,
     mana: 30,
-    endurance: 20
+    endurance: 20,
+    randomStats: true
   },
   {
     name: "Ortasis",
@@ -3278,7 +3292,8 @@ const itemsData: RawItem[] = [{
     fireRes: 10,
     frostRes: 10,
     energyRes: 10,
-    curseRes: 10
+    curseRes: 10,
+    randomStats: true
   },
   {
     name: "Caratris",
@@ -3312,7 +3327,8 @@ const itemsData: RawItem[] = [{
     knowledge: 9,
     hp: 50,
     mana: 40,
-    otherProperties: [["Zużycie many", -2, -2]]
+    otherProperties: [["Zużycie many", -2, -2]],
+    randomStats: true
   },
   {
     name: "Danthum",
@@ -3324,7 +3340,8 @@ const itemsData: RawItem[] = [{
     agility: 9,
     hp: 50,
     endurance: 40,
-    otherProperties: [["Zużycie kondycji", -2, -2]]
+    otherProperties: [["Zużycie kondycji", -2, -2]],
+    randomStats: true
   },
   {
     name: "Yurugu",
@@ -3363,7 +3380,8 @@ const itemsData: RawItem[] = [{
     curseRes: 50,
     fireRes: 50,
     energyRes: 50,
-    frostRes: 50
+    frostRes: 50,
+    randomStats: true
   },
   {
     name: "Aeterus Passio",
