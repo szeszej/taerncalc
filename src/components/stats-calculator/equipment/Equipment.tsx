@@ -4,7 +4,7 @@ import ReactGA from "react-ga";
 
 //Components
 import { ItemSlot } from "./equipment-slots/ItemSlot.jsx";
-import { SpecialSlot } from "./equipment-slots/SpecialSlot.jsx";
+import { SpecialSlot } from "./equipment-slots/SpecialSlot";
 import { PsychoSlot } from "./equipment-slots/PsychoSlot";
 
 //Redux
@@ -201,7 +201,6 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           unequipItem={this.unequipItem}
           showItemsList={this.showItemsList}
           hideItemsList={this.hideItemsList}
-          changePsychoLvl={this.changePsychoLvl}
         />
       </div>
     );

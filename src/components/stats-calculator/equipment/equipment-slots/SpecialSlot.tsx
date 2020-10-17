@@ -2,16 +2,16 @@
 import React from "react";
 
 //Components
-import { ItemTooltip } from "./shared/ItemTooltip.jsx"
+import { ItemTooltip } from "./shared/ItemTooltip.jsx";
 
 //Shared functionality
-import translateProperty from "../../../../shared/translate-property"
+import translateProperty from "../../../../shared/translate-property";
 
 //Types
 import { Item } from "../../../../data/models/item.model";
 
-export class SpecialSlot extends React.Component {
-  constructor(props) {
+export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
+  constructor(props: PropTypes) {
     super(props);
     this.state = {
       name: "",
@@ -32,64 +32,72 @@ export class SpecialSlot extends React.Component {
       pierceRes: 0,
       cutRes: 0,
       bluntRes: 0,
-      displayTooltip: false
+      displayTooltip: false,
     };
     this.hideTooltip = this.hideTooltip.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  createItem(properties) {
+  createItem(properties: SpecialItemProperties) {
     if (properties.image === "") {
-      properties.image = "anvilcolor.svg"
+      properties.image = "anvilcolor.svg";
     }
     let specialItem = new Item(properties);
     return this.props.equipItem(specialItem, "special");
   }
-  hideTooltipWithListUp(hideTip, showList, type) {
+  hideTooltipWithListUp(
+    hideTip: () => void,
+    showList: (type: "special") => void,
+    type: "special"
+  ) {
     hideTip();
     showList(type);
   }
   showTooltip() {
     this.setState({
-      displayTooltip: true
+      displayTooltip: true,
     });
   }
   hideTooltip() {
     this.setState({
-      displayTooltip: false
+      displayTooltip: false,
     });
   }
-  handleClick(event, functionToRun) {
+  handleClick(event: React.FormEvent, functionToRun: () => void) {
     event.stopPropagation();
     functionToRun();
   }
-  handleChildClick(event, functionToRun) {
+  handleChildClick(
+    event: React.FormEvent,
+    functionToRun: (type: "special") => void
+  ) {
     event.stopPropagation();
     this.setState({
-      displayTooltip: false
+      displayTooltip: false,
     });
     functionToRun(this.props.type);
   }
-  handleSubmit(event) {
+  handleSubmit(event: React.FormEvent) {
     event.stopPropagation();
     event.preventDefault();
     this.props.hideItemsList();
     this.createItem(this.state);
   }
-  handleChangeNumeric(event, property) {
-    if (Number.isInteger(parseInt(event.target.value))) {
-      this.setState({ [property]: parseInt(event.target.value) });
-    } else {
-      this.setState({ [property]: 0 });
-    }
-  }
-  handleChangeString(event, property) {
-    this.setState({ [property]: event.target.value });
+  handleChange(
+    value: string | number,
+    property: keyof SpecialItemProperties
+  ) {
+    this.setState((prevState) => {
+      let newState = {...prevState};
+      //Fix the line below?
+      (newState[property as keyof SpecialItemProperties] as any) = value;
+      return newState
+    })
   }
   render() {
     let unequipButton = (
       <button
         className={"unequipButton"}
-        onClick={event => {
+        onClick={(event: React.FormEvent) => {
           this.setState({
             name: "",
             image: "",
@@ -108,9 +116,10 @@ export class SpecialSlot extends React.Component {
             curseRes: 0,
             pierceRes: 0,
             cutRes: 0,
-            bluntRes: 0
-          })
-          this.handleChildClick(event, this.props.unequipItem)}}
+            bluntRes: 0,
+          });
+          this.handleChildClick(event, this.props.unequipItem);
+        }}
       >
         ×
       </button>
@@ -118,24 +127,28 @@ export class SpecialSlot extends React.Component {
     let closeButton = (
       <button
         className="closeList"
-        onClick={event => this.handleClick(event, this.props.hideItemsList)}
+        onClick={(event) => this.handleClick(event, this.props.hideItemsList)}
       >
         ×
       </button>
     );
     let properties = Object.keys(this.state);
     let filteredProperties = properties.filter(
-      x =>
+      (x) =>
         x !== "displayTooltip" && x !== "name" && x !== "image" && x !== "type"
     );
-    let propertyInputs = filteredProperties.map(x => (
+    let propertyInputs = filteredProperties.map((x) => (
       <div key={x} className="property">
         <p>{translateProperty(x)}:</p>
         <input
           type="number"
           placeholder={translateProperty(x)}
-          value={this.state[x] === 0 ? "" : this.state[x]}
-          onChange={event => this.handleChangeNumeric(event, x)}
+          value={
+            this.state[x as keyof SpecialItemProperties] === 0
+              ? ""
+              : this.state[x as keyof SpecialItemProperties]
+          }
+          onChange={(event) => this.handleChange(parseInt(event.target.value), (x as keyof SpecialItemProperties))}
         ></input>
       </div>
     ));
@@ -150,18 +163,19 @@ export class SpecialSlot extends React.Component {
             this.props.type
           )
         }
-        onMouseEnter={this.props.inSlot ? () => this.showTooltip() : null}
-        onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null}
-        onTouchStart={this.props.inSlot ? () => this.showTooltip() : null}
-        onTouchEnd={this.props.inSlot ? () => this.hideTooltip() : null}
+        onMouseEnter={this.props.inSlot ? () => this.showTooltip() : undefined}
+        onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : undefined}
+        onTouchStart={this.props.inSlot ? () => this.showTooltip() : undefined}
+        onTouchEnd={this.props.inSlot ? () => this.hideTooltip() : undefined}
         style={
           this.props.inSlot
-            ?
-            {
+            ? {
                 backgroundImage:
-                  this.props.inSlot.image === "anvilcolor.svg" ? `url("/images/items/` + this.props.inSlot.image + `")` : `url("` + this.props.inSlot.image + `")`,
+                  this.props.inSlot.image === "anvilcolor.svg"
+                    ? `url("/images/items/` + this.props.inSlot.image + `")`
+                    : `url("` + this.props.inSlot.image + `")`,
               }
-            : null
+            : undefined
         }
       >
         {this.props.listToDisplay === this.props.type ? (
@@ -170,9 +184,7 @@ export class SpecialSlot extends React.Component {
               <p>Stwórz własny przedmiot</p>
             </div>
             <form onSubmit={this.handleSubmit} className="propertyList">
-              <div
-                className="property"
-              >
+              <div className="property">
                 <p>Nazwa: </p>
                 <input
                   className="textInput"
@@ -180,28 +192,26 @@ export class SpecialSlot extends React.Component {
                   maxLength={30}
                   placeholder="Wpisz nazwę"
                   value={this.state.name}
-                  onChange={event => this.handleChangeString(event, "name")}
+                  onChange={(event) => this.handleChange(event.target.value, "name")}
                 ></input>
               </div>
-              <div
-                className="property"
-
-              >
+              <div className="property">
                 <p>Obrazek (URL): </p>
                 <input
                   className="textInput"
                   type="text"
                   placeholder="Wklej adres obrazka"
-                  value={this.state.image === "anvilcolor.svg" ? "" : this.state.image}
-                  onChange={event => this.handleChangeString(event, "image")}
+                  value={
+                    this.state.image === "anvilcolor.svg"
+                      ? ""
+                      : this.state.image
+                  }
+                  onChange={(event) => this.handleChange(event.target.value, "image")}
                 ></input>
               </div>
               {propertyInputs}
               <div className="submit">
-                <input
-                  type="submit"
-                  value="Zatwierdź"
-                ></input>
+                <input type="submit" value="Zatwierdź"></input>
               </div>
             </form>
             {closeButton}
@@ -215,4 +225,39 @@ export class SpecialSlot extends React.Component {
       </div>
     );
   }
+}
+
+interface PropTypes {
+  type: "special";
+  inSlot: Item | null;
+  listToDisplay: string;
+  equipItem(item: Item, slot: "special"): void;
+  unequipItem(slot: "special"): void;
+  showItemsList(type: "special"): void;
+  hideItemsList(): void;
+}
+
+interface StateTypes extends SpecialItemProperties {
+  displayTooltip: boolean;
+}
+
+interface SpecialItemProperties {
+  name: string;
+  image: string;
+  type: "special";
+  strength: number;
+  agility: number;
+  power: number;
+  knowledge: number;
+  hp: number;
+  endurance: number;
+  mana: number;
+  damage: number;
+  fireRes: number;
+  frostRes: number;
+  energyRes: number;
+  curseRes: number;
+  pierceRes: number;
+  cutRes: number;
+  bluntRes: number;
 }
