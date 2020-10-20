@@ -36,6 +36,7 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
     };
     this.hideTooltip = this.hideTooltip.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.hideTooltipWithListUp = this.hideTooltipWithListUp.bind(this);
   }
   createItem(properties: SpecialItemProperties) {
     if (properties.image === "") {
@@ -46,11 +47,10 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
   }
   hideTooltipWithListUp(
     hideTip: () => void,
-    showList: (type: "special") => void,
-    type: "special"
+    showList: (type: "special") => void
   ) {
     hideTip();
-    showList(type);
+    showList(this.props.type);
   }
   showTooltip() {
     this.setState({
@@ -62,36 +62,19 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
       displayTooltip: false,
     });
   }
-  handleClick(event: React.FormEvent, functionToRun: () => void) {
-    event.stopPropagation();
-    functionToRun();
-  }
-  handleChildClick(
-    event: React.FormEvent,
-    functionToRun: (type: "special") => void
-  ) {
-    event.stopPropagation();
-    this.setState({
-      displayTooltip: false,
-    });
-    functionToRun(this.props.type);
-  }
   handleSubmit(event: React.FormEvent) {
     event.stopPropagation();
     event.preventDefault();
     this.props.hideItemsList();
     this.createItem(this.state);
   }
-  handleChange(
-    value: string | number,
-    property: keyof SpecialItemProperties
-  ) {
+  handleChange(value: string | number, property: keyof SpecialItemProperties) {
     this.setState((prevState) => {
-      let newState = {...prevState};
+      let newState = { ...prevState };
       //Fix the line below?
       (newState[property as keyof SpecialItemProperties] as any) = value;
-      return newState
-    })
+      return newState;
+    });
   }
   render() {
     let unequipButton = (
@@ -117,8 +100,10 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
             pierceRes: 0,
             cutRes: 0,
             bluntRes: 0,
+            displayTooltip: false,
           });
-          this.handleChildClick(event, this.props.unequipItem);
+          event.stopPropagation();
+          this.props.unequipItem(this.props.type);
         }}
       >
         ×
@@ -127,7 +112,10 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
     let closeButton = (
       <button
         className="closeList"
-        onClick={(event) => this.handleClick(event, this.props.hideItemsList)}
+        onClick={(event) => {
+          event.stopPropagation();
+          this.props.hideItemsList();
+        }}
       >
         ×
       </button>
@@ -148,7 +136,12 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
               ? ""
               : this.state[x as keyof SpecialItemProperties]
           }
-          onChange={(event) => this.handleChange(parseInt(event.target.value), (x as keyof SpecialItemProperties))}
+          onChange={(event) =>
+            this.handleChange(
+              parseInt(event.target.value),
+              x as keyof SpecialItemProperties
+            )
+          }
         ></input>
       </div>
     ));
@@ -159,8 +152,7 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
         onClick={() =>
           this.hideTooltipWithListUp(
             this.hideTooltip,
-            this.props.showItemsList,
-            this.props.type
+            this.props.showItemsList
           )
         }
         onMouseEnter={this.props.inSlot ? () => this.showTooltip() : undefined}
@@ -192,7 +184,9 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
                   maxLength={30}
                   placeholder="Wpisz nazwę"
                   value={this.state.name}
-                  onChange={(event) => this.handleChange(event.target.value, "name")}
+                  onChange={(event) =>
+                    this.handleChange(event.target.value, "name")
+                  }
                 ></input>
               </div>
               <div className="property">
@@ -206,7 +200,9 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
                       ? ""
                       : this.state.image
                   }
-                  onChange={(event) => this.handleChange(event.target.value, "image")}
+                  onChange={(event) =>
+                    this.handleChange(event.target.value, "image")
+                  }
                 ></input>
               </div>
               {propertyInputs}
@@ -228,36 +224,36 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
 }
 
 interface PropTypes {
-  type: "special";
-  inSlot: Item | null;
-  listToDisplay: string;
-  equipItem(item: Item, slot: "special"): void;
-  unequipItem(slot: "special"): void;
-  showItemsList(type: "special"): void;
-  hideItemsList(): void;
+  type: "special"
+  inSlot: Item | null
+  listToDisplay: string
+  equipItem(item: Item, slot: "special"): void
+  unequipItem(slot: "special"): void
+  showItemsList(type: "special"): void
+  hideItemsList(): void
 }
 
 interface StateTypes extends SpecialItemProperties {
-  displayTooltip: boolean;
+  displayTooltip: boolean
 }
 
 interface SpecialItemProperties {
-  name: string;
-  image: string;
-  type: "special";
-  strength: number;
-  agility: number;
-  power: number;
-  knowledge: number;
-  hp: number;
-  endurance: number;
-  mana: number;
-  damage: number;
-  fireRes: number;
-  frostRes: number;
-  energyRes: number;
-  curseRes: number;
-  pierceRes: number;
-  cutRes: number;
-  bluntRes: number;
+  name: string
+  image: string
+  type: "special"
+  strength: number
+  agility: number
+  power: number
+  knowledge: number
+  hp: number
+  endurance: number
+  mana: number
+  damage: number
+  fireRes: number
+  frostRes: number
+  energyRes: number
+  curseRes: number
+  pierceRes: number
+  cutRes: number
+  bluntRes: number
 }

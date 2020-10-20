@@ -37,27 +37,29 @@ class ConnectedItemEnhancementForm extends React.Component<
   //If item enhancements already exist
   componentDidMount() {
     let areEnhancementsPresent: boolean = false;
-    for (const key in this.props.enhancements) {
-      if (this.props.enhancements.hasOwnProperty(key)) {
-        if (this.props.enhancements[key as keyof Enhancements] !== 0) {
-          areEnhancementsPresent = true;
-          this.setState((prevState) => {
-            let newState = { ...prevState };
-            newState.properties.push({
-              property: key,
-              value: this.props.enhancements[key as keyof Enhancements],
+    if (this.props.enhancements) {
+      for (const key in this.props.enhancements) {
+        if (this.props.enhancements.hasOwnProperty(key)) {
+          if (this.props.enhancements && this.props.enhancements[key as keyof Enhancements] !== 0) {
+            areEnhancementsPresent = true;
+            this.setState((prevState) => {
+              let newState = { ...prevState };
+              newState.properties.push({
+                property: key,
+                value: this.props.enhancements![key as keyof Enhancements],
+              });
+              return newState;
             });
-            return newState;
-          });
+          }
         }
       }
-    }
-    if (areEnhancementsPresent) {
-      this.setState((prevState) => {
-        let newState = { ...prevState };
-        newState.properties.shift();
-        return newState;
-      });
+      if (areEnhancementsPresent) {
+        this.setState((prevState) => {
+          let newState = { ...prevState };
+          newState.properties.shift();
+          return newState;
+        });
+      }
     }
   }
   //Creating a new item to add to the database
@@ -231,7 +233,7 @@ type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
   type: keyof Equipment;
-  enhancements: Enhancements;
+  enhancements: Enhancements | null;
   closeForm(): void;
 }
 

@@ -26,6 +26,23 @@
     text-align: center;
     font-size: 1.5em;
   }
+
+  .close-button {
+    position: absolute;
+    right: -0.5em;
+    top: -0.75em;
+    font-weight: bold;
+    border-radius: 0;
+    border: 2px solid #aaa;
+    cursor: pointer;
+    background-color: #bdac6f;
+    border: 2px solid $border-color;
+    length: 2.5em;
+    height: 2em;
+  }
+  .close-button:hover {
+    background-color: #bd996f;
+  }
 }
 
 .alert-box-action {
@@ -64,4 +81,18 @@
   100% {
     transform: rotate(360deg);
   }
+
+}
+
+@media only screen and (max-width: 520px) {
+    .alert-box {
+      .alert-text {
+        font-size: 1.2em;
+      }
+      left: 5vw;
+      width: 80vw;
+    }
+    .alert-box-action {
+      font-size: 1em;
+    }
 }

@@ -6,11 +6,15 @@ import { ItemTooltip } from "./shared/ItemTooltip.jsx";
 import { ItemEnhancementForm } from "./shared/ItemEnhancementForm";
 import { ItemsList } from "./item-display/ItemsList.jsx";
 
+//Types
+import { Item } from "../../../../data/models/item.model"
+import { Equipment } from "../../../../store/equipment-reducer/equipment-reducer"
+
 //Shared functionality
 import isEquivalent from "../../../../shared/object-equivalency-check";
 
-export class ItemSlot extends React.Component {
-  constructor(props) {
+export class ItemSlot extends React.Component<PropTypes, StateTypes> {
+  constructor(props: PropTypes) {
     super(props);
     this.showTooltip = this.showTooltip.bind(this);
     this.hideTooltip = this.hideTooltip.bind(this);
@@ -21,7 +25,7 @@ export class ItemSlot extends React.Component {
       displayEnhancementForm: false,
     };
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: PropTypes) {
     if (this.props.inSlot && !isEquivalent(prevProps, this.props)) {
       if (
         this.props.level < this.props.inSlot.reqLvl ||
@@ -34,9 +38,12 @@ export class ItemSlot extends React.Component {
       }
     }
   }
-  hideTooltipWithListUp(hideTip, showList, type) {
+  hideTooltipWithListUp(
+    hideTip: () => void,
+    showList: (type: keyof Equipment) => void
+  ) {
     hideTip();
-    showList(type);
+    showList(this.props.type);
   }
   showTooltip() {
     if (!this.state.displayEnhancementForm) {
@@ -52,6 +59,7 @@ export class ItemSlot extends React.Component {
   }
   showForm() {
     this.setState({
+      displayTooltip: false,
       displayEnhancementForm: true,
     });
   }
@@ -60,49 +68,49 @@ export class ItemSlot extends React.Component {
       displayEnhancementForm: false,
     });
   }
-  handleChildClick(event, functionToRun) {
-    event.stopPropagation();
-    this.setState({
-      displayTooltip: false,
-    });
-    functionToRun(this.props.type);
-  }
-  handlePsychoLvlChange(event, functionToRun, value) {
-    event.stopPropagation();
-    functionToRun(this.props.type, value);
-  }
   render() {
     let unequipButton = (
       <button
         className={"unequipButton"}
-        onClick={(event) =>
-          this.handleChildClick(event, this.props.unequipItem)
+        onClick={(event) => {
+          event.stopPropagation()
+          this.setState({
+            displayTooltip: false,
+            displayEnhancementForm: false
+          })
+          this.props.unequipItem(this.props.type)
+        }
         }
       ></button>
     );
     let enhanceButton = (
       <button
         className="enhanceButton"
-        style={this.props.inSlot && (this.props.inSlot.enhancements.strength || this.props.inSlot.enhancements.agility || this.props.inSlot.enhancements.power || this.props.inSlot.enhancements.knowledge || this.props.inSlot.enhancements.hp || this.props.inSlot.enhancements.mana || this.props.inSlot.enhancements.endurance) ? {backgroundImage: `url("/images/upgrade2.png")`} : null}
-        onClick={(event) => this.handleChildClick(event, this.showForm)}
+        style={this.props.inSlot && (this.props.inSlot.enhancements.strength || this.props.inSlot.enhancements.agility || this.props.inSlot.enhancements.power || this.props.inSlot.enhancements.knowledge || this.props.inSlot.enhancements.hp || this.props.inSlot.enhancements.mana || this.props.inSlot.enhancements.endurance) ? {backgroundImage: `url("/images/upgrade2.png")`} : undefined}
+        onClick={(event) => {
+          event.stopPropagation()
+          this.showForm()
+        }}
       ></button>
     );
     let addPsychoLvlButton = (
       <button
         className={"addPsychoLvlButton"}
-        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 8}
-        onClick={(event) =>
-          this.handlePsychoLvlChange(event, this.props.changePsychoLvl, 1)
-        }
+        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 8 ? true : false}
+        onClick={(event) => {
+          event.stopPropagation();
+          this.props.changePsychoLvl(this.props.type, 1)
+        }}
       ></button>
     )
     let substractPsychoLvlButton = (
       <button
         className={"substractPsychoLvlButton"}
-        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 1}
-        onClick={(event) =>
-          this.handlePsychoLvlChange(event, this.props.changePsychoLvl, -1)
-        }
+        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 1 ? true : false}
+        onClick={(event) => {
+          event.stopPropagation();
+          this.props.changePsychoLvl(this.props.type, -1)
+        }}
       ></button>
     )
     return (
@@ -113,21 +121,20 @@ export class ItemSlot extends React.Component {
         onClick={() =>
           this.hideTooltipWithListUp(
             this.hideTooltip,
-            this.props.showItemsList,
-            this.props.type
+            this.props.showItemsList
           )
         }
-        onMouseEnter={this.props.inSlot ? () => this.showTooltip() : null}
-        onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : null}
-        onTouchStart={this.props.inSlot ? () => this.showTooltip() : null}
-        onTouchEnd={this.props.inSlot ? () => this.hideTooltip() : null}
+        onMouseEnter={this.props.inSlot ? () => this.showTooltip() : undefined}
+        onMouseLeave={this.props.inSlot ? () => this.hideTooltip() : undefined}
+        onTouchStart={this.props.inSlot ? () => this.showTooltip() : undefined}
+        onTouchEnd={this.props.inSlot ? () => this.hideTooltip() : undefined}
         style={
           this.props.inSlot
             ? {
                 backgroundImage:
                   `url("/images/items/` + this.props.inSlot.image + '")',
               }
-            : null
+            : undefined
         }
       >
         {this.props.listToDisplay === this.props.type ? (
@@ -163,11 +170,35 @@ export class ItemSlot extends React.Component {
         {this.state.displayEnhancementForm ? (
           <ItemEnhancementForm
             type={this.props.type}
-            enhancements={this.props.inSlot.enhancements}
+            enhancements={this.props.inSlot ? this.props.inSlot.enhancements : null}
             closeForm={this.hideForm}
           />
         ) : null}
       </div>
     );
   }
+}
+
+//Types
+interface PropTypes {
+  type: keyof Equipment
+  items: Item[]
+  inSlot: Item | null
+  class: string
+  level: number
+  strength: number
+  agility: number
+  power: number
+  knowledge: number
+  listToDisplay: string
+  equipItem(item: Item, slot: keyof Equipment): void
+  unequipItem(slot: keyof Equipment): void
+  showItemsList(type: keyof Equipment): void
+  hideItemsList(): void
+  changePsychoLvl(slot: keyof Equipment, value: number): void
+}
+
+interface StateTypes {
+  displayTooltip: boolean
+  displayEnhancementForm: boolean
 }

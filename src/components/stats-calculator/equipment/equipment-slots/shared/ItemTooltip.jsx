@@ -99,7 +99,7 @@ class ConnectedItemTooltip extends React.Component {
     let setColor = {
       color: "#3DEF01",
     };
-    let equippedSet = this.props.item.set
+    let equippedSet = this.props.item && this.props.item.set
       ? itemSets.find((x) => x.name === this.props.item.set)
       : null;
     let setProperties = equippedSet
@@ -116,7 +116,7 @@ class ConnectedItemTooltip extends React.Component {
           ))
         : null;
     return (
-      <div className="itemTooltip">
+      <div className="itemTooltip" onClick={event => event.stopPropagation()} >
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>
           {this.props.item.name}
         </p>

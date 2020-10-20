@@ -56,7 +56,7 @@
       background-image: url("/images/cross-icon.png");
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 80%;
+      background-size: 70%;
     }
 
     .enhanceButton {
@@ -645,9 +645,9 @@
         max-width: 13em;
         user-select: none;
     }
-    .unequipButton, .enhanceButton {
-      width: 2.5em;
-      height: 2.5em;
+    .unequipButton, .enhanceButton, .addPsychoLvlButton, .substractPsychoLvlButton {
+      width: 3em;
+      height: 3em;
     }
     .enhanceForm {
       margin: 0;

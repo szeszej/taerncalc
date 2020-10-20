@@ -3,7 +3,7 @@ import React from "react";
 import ReactGA from "react-ga";
 
 //Components
-import { ItemSlot } from "./equipment-slots/ItemSlot.jsx";
+import { ItemSlot } from "./equipment-slots/ItemSlot";
 import { SpecialSlot } from "./equipment-slots/SpecialSlot";
 import { PsychoSlot } from "./equipment-slots/PsychoSlot";
 
@@ -105,6 +105,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                   Nie
                 </button>
               </div>
+              <button className="close-button" onClick={onClose}>×</button>
             </div>
           </div>
         );
@@ -146,7 +147,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     let equipmentSlotComponents = equipmentSlots.map((x) => (
       <ItemSlot
         key={x}
-        type={x}
+        type={x as keyof Equipment}
         items={
           x === "ring1" || x === "ring2"
             ? this.props.items.filter((y) => y.type === "ring")

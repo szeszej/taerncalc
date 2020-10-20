@@ -28,6 +28,9 @@ import {
 import itemsDatabase from "./data/items";
 import skillsDatabase from "./data/skills.jsx";
 
+//Shared functionality
+import { confirmNewBuildCreation } from "./shared/new-build-confirmation"
+
 const taernDatabase = {
   items: itemsDatabase,
   skills: skillsDatabase,
@@ -52,13 +55,11 @@ document.getElementById("classLvl").addEventListener(
 //Checking if the calculator is already loaded and showing confirmation message
 function checkCalc(charClass, charLvl) {
   if (calculator.classList.contains("enabled")) {
-    if (
-      window.confirm(
-        "Czy na pewno chcesz stworzyć nowy build? Obecny zostanie usunięty!"
-      )
-    ) {
-      renderApp(charClass, charLvl);
-    }
+    confirmNewBuildCreation({
+      renderApp: renderApp,
+      charClass: charClass,
+      charLvl: charLvl
+    })
   } else {
     renderApp(charClass, charLvl);
   }
