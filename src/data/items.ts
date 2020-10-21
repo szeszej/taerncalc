@@ -635,7 +635,6 @@ const itemsData: RawItem[] = [{
   {
     name: "Smuga",
     type: "shield",
-    rarity: "Psychorare",
     image: "[www.taernopedia.pl][736]Smuga.png",
     reqLvl: 75,
     reqStr: 50,
