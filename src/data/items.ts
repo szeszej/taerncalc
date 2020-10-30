@@ -2606,9 +2606,9 @@ const itemsData: RawItem[] = [{
     strength: 10,
     agility: 18,
     endurance: 60,
-    cutRes: 40,
-    bluntRes: 40,
-    pierceRes: 40,
+    cutRes: 36,
+    bluntRes: 36,
+    pierceRes: 36,
     otherProperties: [["Odporność na trafienie krytyczne", 0, 1], ["Modyfikator trafień fizycznych", 4, 2]]
   },
   {
@@ -2622,9 +2622,9 @@ const itemsData: RawItem[] = [{
     strength: 10,
     agility: 18,
     endurance: 60,
-    cutRes: 40,
-    bluntRes: 40,
-    pierceRes: 40,
+    cutRes: 36,
+    bluntRes: 36,
+    pierceRes: 36,
     otherProperties: [["Odporność na trafienie krytyczne", 0, 1], ["Modyfikator trafień dystansowych", 4, 2]]
   },
   {
@@ -2639,9 +2639,9 @@ const itemsData: RawItem[] = [{
     hp: 280,
     endurance: 80,
     mana: 40,
-    cutRes: 35,
-    bluntRes: 35,
-    pierceRes: 35,
+    cutRes: 38,
+    bluntRes: 38,
+    pierceRes: 38,
     otherProperties: [["Podwójne losowanie trafienia", 4, 1], ["Redukcja otrzymanych obrażeń krytycznych", 7, 4], ["Zużycie kondycji", -6, -2]]
   },
   {
@@ -2725,9 +2725,9 @@ const itemsData: RawItem[] = [{
     hp: 150,
     mana: 50,
     endurance: 150,
-    cutRes: 33,
-    bluntRes: 34,
-    pierceRes: 32,
+    cutRes: 37,
+    bluntRes: 38,
+    pierceRes: 36,
     fireRes: 15
   },
   {
@@ -3314,7 +3314,7 @@ const itemsData: RawItem[] = [{
     reqKno: 45,
     power: 7,
     hp: 80,
-    otherProperties: [["Regeneracja many", 10, 2], ["Modyfikator obrażeń magicznych", 3, 1]]
+    otherProperties: [["Regeneracja many", 0.5, 0.3], ["Modyfikator obrażeń magicznych", 3, 1]]
   },
   {
     name: "Valazan",

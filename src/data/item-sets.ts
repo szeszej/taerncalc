@@ -6,8 +6,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 3,
   strength: 8,
   otherProperties: [
-    ["Regeneracja many", 12],
-    ["Regeneracja kondycji", 12],
+    ["Regeneracja many", 2],
+    ["Regeneracja kondycji", 2],
     ["Rozproszenie Holma", 10]
   ]
 },
@@ -50,7 +50,7 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   mana: 160,
   otherProperties: [
-    ["Modyfikator obrażeń fizycznych", 15],
+    ["Regeneracja many", 2],
     ["Modyfikator obrażeń magicznych", 15]
   ]
 },
@@ -59,8 +59,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   agility: 16,
   otherProperties: [
-    ["Regeneracja many", 12],
-    ["Regeneracja kondycji", 12],
+    ["Regeneracja many", 2],
+    ["Regeneracja kondycji", 2],
     ["Szansa na trafienie krytyczne", 8]
   ]
 },
@@ -87,7 +87,8 @@ const itemSetData: ItemSetProperties[] = [{
   pieces: 4,
   hp: 160,
   otherProperties: [
-    ["Regeneracja many", 12],
+    ["Regeneracja many", 2],
+    ["Regeneracja kondycji", 2],
     ["Szansa na podwójny atak", 10]
   ]
 },
@@ -139,7 +140,7 @@ const itemSetData: ItemSetProperties[] = [{
   hp: 250,
   otherProperties: [
     ["Rozproszenie Holma", 9],
-    ["Modyfikator trafień fizycznych", 15],
+    ["Szansa na podwójny atak", 5],
     ["Modyfikator trafień dystansowych", 15],
     ["Dodatkowe PA", 1],
     ["Oszukać przeznaczenie", 1]
@@ -163,7 +164,7 @@ const itemSetData: ItemSetProperties[] = [{
   hp: 250,
   otherProperties: [
     ["Skok Farida", 7],
-    ["Przełamanie dymków", 9],
+    ["Regeneracja many", 2],
     ["Modyfikator obrażeń magicznych", 15],
     ["Dodatkowe PA", 1],
     ["Oszukać przeznaczenie", 1]
@@ -175,7 +176,7 @@ const itemSetData: ItemSetProperties[] = [{
   hp: 250,
   otherProperties: [
     ["Skok Farida", 7],
-    ["Modyfikator obrażeń fizycznych", 15],
+    ["Modyfikator trafień dystansowych", 15],
     ["Modyfikator obrażeń magicznych", 15],
     ["Dodatkowe PA", 1],
     ["Oszukać przeznaczenie", 1]
@@ -188,7 +189,7 @@ const itemSetData: ItemSetProperties[] = [{
   otherProperties: [
     ["Skok Farida", 7],
     ["Modyfikator trafień magicznych", 15],
-    ["Przełamanie dymków", 9],
+    ["Szansa na podwójny atak", 5],
     ["Dodatkowe PA", 1],
     ["Oszukać przeznaczenie", 1]
   ]
