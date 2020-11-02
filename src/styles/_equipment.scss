@@ -302,6 +302,8 @@
 
     .itemName {
       font-size: 1.5em;
+      margin-top: 0.4em;
+      margin-bottom: 0.5em;
     }
 
     .damage {
@@ -315,6 +317,9 @@
     }
     .starItem {
       color: #CCFF33;
+    }
+    p:last-child {
+      margin-bottom: 0em;
     }
   }
 
@@ -633,8 +638,8 @@
         width: 80%;
       }
       .itemTooltip {
-        right: 4.2em;
-        left: 0;
+        right: auto;
+        left: -10%;
         bottom: 100%;
         font-size: 0.9em;
         line-height: 1.4em;
@@ -667,6 +672,12 @@
       height: 10vh;
       width: 10vw;
     }
+    }
+    .middle {
+      .damage, .empty {
+        width: 10vw;
+        height: 10vw;
+      }
     }
     .inSlot {
       background-size: auto;

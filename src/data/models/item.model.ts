@@ -1,5 +1,5 @@
 export class Item {
-  constructor(item: RawItem) {
+  constructor(item: RawItem | Item) {
     this.name = item.name;
     this.type = item.type;
     this.image = item.image;
