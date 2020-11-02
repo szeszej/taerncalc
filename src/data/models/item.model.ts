@@ -36,7 +36,7 @@ export class Item {
       this[itemProperty] = item[itemProperty] ? item[itemProperty]! : 0;
     });
     this.isCustom = item.hasOwnProperty("isCustom") ? true : false;
-    this.randomStats = item.hasOwnProperty("randomStats") || (item.set && item.reqLvl === 100) ? true : false;
+    this.randomStats = (item.hasOwnProperty("randomStats") && item.randomStats === true) || (item.set && item.reqLvl === 100) ? true : false;
     this.enhancements = item.enhancements
       ? item.enhancements
       : {
@@ -53,6 +53,21 @@ export class Item {
   }
   calculateTotalStat(stat: keyof Enhancements) {
     return this[stat as keyof Enhancements] + this.enhancements[stat as keyof Enhancements]
+  }
+  calculateTotalDamage(charLevel: number): number {
+    let damage = 0
+    if (this.rarity === "Epik" && this.weaponType === "Dwuręczna") {
+      damage = this.damage + charLevel + this.enhancements.damage + (this.psychoLvl - 1) * 3
+    } else if (this.rarity === "Epik" && this.weaponType === "Jednoręczna") {
+      damage = this.damage + charLevel + this.enhancements.damage + (this.psychoLvl - 1) * 2
+    } else if (this.rarity === "Psychorare" && this.weaponType === "Dwuręczna") {
+      damage = this.damage + this.enhancements.damage + (this.psychoLvl - 1) * 3
+    } else if (this.rarity === "Psychorare" && this.weaponType === "Jednoręczna") {
+      damage = this.damage + this.enhancements.damage + (this.psychoLvl - 1) * 2
+    } else {
+      damage = this.damage + this.enhancements.damage
+    }
+    return damage
   }
 }
 

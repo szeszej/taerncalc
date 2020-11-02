@@ -44,8 +44,8 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
     let statNames = [
       "strength",
       "agility",
-      "knowledge",
       "power",
+      "knowledge",
       "hp",
       "mana",
       "endurance",

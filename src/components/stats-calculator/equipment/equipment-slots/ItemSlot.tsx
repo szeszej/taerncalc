@@ -86,7 +86,7 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
     let enhanceButton = (
       <button
         className="enhanceButton"
-        style={this.props.inSlot && (this.props.inSlot.enhancements.strength || this.props.inSlot.enhancements.agility || this.props.inSlot.enhancements.power || this.props.inSlot.enhancements.knowledge || this.props.inSlot.enhancements.hp || this.props.inSlot.enhancements.mana || this.props.inSlot.enhancements.endurance) ? {backgroundImage: `url("/images/upgrade2.png")`} : undefined}
+        style={this.props.inSlot && (this.props.inSlot.enhancements.strength || this.props.inSlot.enhancements.agility || this.props.inSlot.enhancements.power || this.props.inSlot.enhancements.knowledge || this.props.inSlot.enhancements.hp || this.props.inSlot.enhancements.mana || this.props.inSlot.enhancements.endurance || this.props.inSlot.enhancements.damage) ? {backgroundImage: `url("/images/upgrade2.png")`} : undefined}
         onClick={(event) => {
           event.stopPropagation()
           this.showForm()

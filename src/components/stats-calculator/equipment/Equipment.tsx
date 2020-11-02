@@ -127,11 +127,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
   calculateTotalDamage(weapon: Item | null, special: Item | null) {
     let totalDamage = 0;
     if (weapon) {
-      if (weapon.rarity === "Epik") {
-        totalDamage += weapon.calculateTotalStat("damage") + this.props.level;
-      } else {
-        totalDamage += weapon.calculateTotalStat("damage");
-      }
+      totalDamage += weapon.calculateTotalDamage(this.props.level)
     }
     if (special) {
       totalDamage += special.damage;

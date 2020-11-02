@@ -228,12 +228,7 @@ class ConnectedItemTooltip extends React.Component {
         {this.props.item.damage ? (
           <p className="damage">
             Obrażenia:{" "}
-            {this.props.item.rarity === "Epik"
-              ? this.props.item.damage +
-                " + poziom postaci (" +
-                this.calculateDamage(this.props.item.damage, this.props.level) +
-                ")"
-              : this.props.item.damage + this.props.item.enhancements.damage}
+            {this.props.item.calculateTotalDamage(this.props.level)}
             {this.props.item.enhancements.damage ? (
               <span style={{ color: "orange" }}>
                 {" "}
