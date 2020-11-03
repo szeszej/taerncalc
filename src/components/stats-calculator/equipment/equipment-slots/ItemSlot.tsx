@@ -2,9 +2,9 @@
 import React from "react";
 
 //Components
-import { ItemTooltip } from "./shared/ItemTooltip.jsx";
+import { ItemTooltip } from "./shared/ItemTooltip";
 import { ItemEnhancementForm } from "./shared/ItemEnhancementForm";
-import { ItemsList } from "./item-display/ItemsList.jsx";
+import { ItemsList } from "./item-display/ItemsList";
 
 //Types
 import { Item } from "../../../../data/models/item.model"
@@ -152,7 +152,7 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
           />
         ) : null}
         {this.state.displayTooltip &&
-        !(this.props.listToDisplay === this.props.type) ? (
+        !(this.props.listToDisplay === this.props.type) && this.props.inSlot ? (
           <ItemTooltip
             item={this.props.inSlot}
             class={this.props.class}

@@ -2,21 +2,22 @@
 import React from "react";
 
 //Components
-import { ItemComponent } from "./ItemComponent.jsx"
+import { ItemComponent } from "./ItemComponent"
 import { ItemCreatorForm } from "../shared/ItemCreatorForm"
 
-export class ItemsList extends React.Component {
-  constructor(props) {
+//Types
+import { Item } from "../../../../../data/models/item.model"
+import { Equipment } from "../../../../../store/equipment-reducer/equipment-reducer"
+
+
+export class ItemsList extends React.Component<PropTypes, StateTypes> {
+  constructor(props: PropTypes) {
     super(props)
     this.state = {
       displayAddItemForm: false
     }
     this.showAddItemForm = this.showAddItemForm.bind(this)
     this.hideAddItemForm = this.hideAddItemForm.bind(this)
-  }
-  handleClick(event, functionToRun) {
-    event.stopPropagation();
-    functionToRun();
   }
   showAddItemForm() {
     this.setState({
@@ -28,7 +29,7 @@ export class ItemsList extends React.Component {
       displayAddItemForm: false
     })
   }
-  translateSlot(slotName) {
+  translateSlot(slotName: string): string {
     let inPolish = "";
     switch (slotName) {
       case "armor":
@@ -77,7 +78,10 @@ export class ItemsList extends React.Component {
     let closeButton = (
       <button
         className="closeList"
-        onClick={event => this.handleClick(event, this.props.hideItemsList)}
+        onClick={event => {
+          event.stopPropagation();
+          this.props.hideItemsList()
+        }}
       >
         ×
       </button>
@@ -141,4 +145,22 @@ export class ItemsList extends React.Component {
       </div>
     );
   }
+}
+
+//Types
+interface PropTypes {
+  items: Item[]
+  type: keyof Equipment
+  class: string
+  level: number
+  strength: number
+  agility: number
+  power: number
+  knowledge: number
+  hideItemsList(): void
+  equipItem(item: Item, slot: keyof Equipment): void
+}
+
+interface StateTypes {
+  displayAddItemForm: boolean
 }

@@ -1,18 +1,19 @@
+//React
 import React from "react";
 
-import { ItemTooltip } from "../shared/ItemTooltip.jsx"
+//Components
+import { ItemTooltip } from "../shared/ItemTooltip"
 
-export class ItemComponent extends React.Component {
-  constructor(props) {
+//Types
+import { Item } from "../../../../../data/models/item.model"
+import { Equipment } from "../../../../../store/equipment-reducer/equipment-reducer"
+
+export class ItemComponent extends React.Component<PropTypes, StateTypes> {
+  constructor(props: PropTypes) {
     super(props);
     this.state = {
       displayTooltip: false
     };
-  }
-  equipItemAndHideList(event, item, type) {
-    event.stopPropagation();
-    this.props.equipItem(item, type);
-    this.props.hideItemsList();
   }
   showTooltip() {
     this.setState({
@@ -48,10 +49,13 @@ export class ItemComponent extends React.Component {
         onMouseLeave={() => this.hideTooltip()}
         onTouchStart={() => this.showTooltip()}
         onTouchEnd={() => this.hideTooltip()}
-        onClick={event =>
-          this.props.hasOwnProperty("equipItem")
-            ? this.equipItemAndHideList(event, this.props.item, this.props.type)
-            : null
+        onClick={event => {
+          event.stopPropagation()
+          if (this.props.equipItem && this.props.hideItemsList && this.props.type) {
+            this.props.equipItem(this.props.item, this.props.type);
+            this.props.hideItemsList();
+          }
+        }
         }
       >
         {this.state.displayTooltip ? (
@@ -68,4 +72,22 @@ export class ItemComponent extends React.Component {
       </div>
     );
   }
+}
+
+//Types
+interface PropTypes {
+  item: Item
+  type?: keyof Equipment
+  class: string
+  level: number
+  hideItemsList?(): void
+  equipItem?(item: Item, slot: keyof Equipment): void
+  strength?: number
+  agility?: number
+  power?: number
+  knowledge?: number
+}
+
+interface StateTypes {
+  displayTooltip: boolean
 }

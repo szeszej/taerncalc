@@ -2,7 +2,7 @@
 import React from "react";
 
 //Components
-import { ItemTooltip } from "./shared/ItemTooltip.jsx";
+import { ItemTooltip } from "./shared/ItemTooltip";
 
 //Shared functionality
 import translateProperty from "../../../../shared/translate-property";
@@ -214,7 +214,7 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
           </div>
         ) : null}
         {this.state.displayTooltip &&
-        !(this.props.listToDisplay === this.props.type) ? (
+        !(this.props.listToDisplay === this.props.type) && this.props.inSlot ? (
           <ItemTooltip item={this.props.inSlot} />
         ) : null}
         {this.props.inSlot ? unequipButton : null}
