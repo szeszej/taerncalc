@@ -2835,7 +2835,7 @@ const itemsData: RawItem[] = [{
     cutRes: 34,
     bluntRes: 37,
     pierceRes: 37,
-    otherProperties: [["Zużycie many", 26, 2], ["Szansa na podwójny atak", 4, 1]]
+    otherProperties: [["Zużycie many", 26, -2], ["Szansa na podwójny atak", 4, 1]]
   },
   {
     name: "Envile",
