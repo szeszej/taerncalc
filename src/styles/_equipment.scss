@@ -512,10 +512,11 @@
     grid-area: otherProperties;
     background-image: url("/images/other-properties.svg");
     .itemTooltip {
-      padding: 0.5em;
+      padding: 0.7em 0.4em 0.5em 0.4em;
       font-size: 1em;
-      .propertiesHeader {
-        margin-bottom: 0.5em;
+      .propertiesHeader, .noProperties {
+        font-size: 1.2em;
+        margin: 0;
       }
       p {
         color: #35CBEF;

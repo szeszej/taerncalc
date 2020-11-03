@@ -128,7 +128,7 @@ export class PsychoSlot extends React.Component<Props, State> {
           otherPropertiesList
         ) : this.state.showOtherProperties ? (
           <div className="itemTooltip">
-            <p className="propertiesHeader">Podsumowanie właściwości psycho</p>
+            <p className="noProperties">Podsumowanie właściwości psycho</p>
           </div>
         ) : null}
       </div>
