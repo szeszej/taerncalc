@@ -2,7 +2,7 @@
 import ReactGA from "react-ga";
 
 //Types
-import { SkillSet } from "../data/models/skill-set.model.jsx";
+import { SkillSet } from "../data/models/skill-set.model";
 import { Item, RawItem } from "../data/models/item.model";
 import { ImportCharacterActionPayload } from "../store/character-reducer/character-reducer";
 import { StatsState } from "../store/stats-reducer/stats-reducer";
@@ -10,15 +10,13 @@ import { Equipment } from "../store/equipment-reducer/equipment-reducer";
 import { SkillsState } from "../store/skills-reducer/skills-reducer";
 
 //Data
-import skillsDatabase from "../data/skills.jsx";
 import { initialStats } from "../store/stats-reducer/stats-reducer";
 import { initialEquipment } from "../store/equipment-reducer/equipment-reducer";
 import itemsDatabase from "../data/items";
 
 //Importing build using URL parameters
 export function importBuildWithUrlParameters(
-  propertiesFromUrl: { [key: string]: string },
-  database: TaernDatabase
+  propertiesFromUrl: { [key: string]: string }
 ): ImportCharacterActionPayload | void {
   //Letting GA know that a build has been imported
   ReactGA.event({
@@ -48,7 +46,7 @@ export function importBuildWithUrlParameters(
   //Importing skills
   let temporarySkills: SkillsState = {
     skillPts: -2,
-    skillSet: new SkillSet(characterProperties.className, database.skills),
+    skillSet: new SkillSet(characterProperties.className),
   };
   let isNewSkillSetNeeded: boolean = false;
   for (const key in propertiesFromUrl) {
@@ -81,7 +79,7 @@ export function importBuildWithUrlParameters(
         Object.keys(initialEquipment).includes(key) &&
         propertiesFromUrl[key] !== "null"
       ) {
-        let itemFound: Item | undefined = database.items.find(
+        let itemFound: Item | undefined = itemsDatabase.find(
           (x) => x.name === propertiesFromUrl[key].replace("+", " ")
         );
         temporaryEquipment[key as keyof Equipment] = itemFound
@@ -159,8 +157,7 @@ export function importBuildWithUrlParameters(
 
 //Importing build from external TaernDatabase
 export function importBuildFromDatabase(
-  data: ImportedBuild,
-  database: TaernDatabase
+  data: ImportedBuild
 ): ImportCharacterActionPayload {
   //Letting GA know that a build has been imported
   ReactGA.event({
@@ -192,7 +189,7 @@ export function importBuildFromDatabase(
   //Importing skills
   let temporarySkills: SkillsState = {
     skillPts: -2,
-    skillSet: new SkillSet(data.class, database.skills),
+    skillSet: new SkillSet(data.class),
   };
   let isNewSkillSetNeeded: boolean = false;
   for (const key in data.skills) {
@@ -286,10 +283,6 @@ export function getUrlVars(url: string): { [key: string]: string } {
 }
 
 //types
-interface TaernDatabase {
-  items: Item[];
-  skills: typeof skillsDatabase;
-}
 
 interface Special {
   name: string;

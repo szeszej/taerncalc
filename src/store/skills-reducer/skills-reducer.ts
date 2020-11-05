@@ -2,10 +2,7 @@
 import store from "../store";
 
 //Model
-import { SkillSet } from "../../data/models/skill-set.model.jsx";
-
-//Data
-import database from "../../data/skills.jsx";
+import { SkillSet } from "../../data/models/skill-set.model";
 
 //action types
 const CHANGE_SKILL = "CHANGE_SKILL";
@@ -22,7 +19,7 @@ export interface SkillsState {
 
 let initialSkills: SkillsState = {
   skillPts: -2,
-  skillSet: new SkillSet("knight", database),
+  skillSet: new SkillSet("knight"),
 };
 
 export default function skillsReducer(

@@ -160,14 +160,14 @@ export class ConnectedSkillsCalculator extends React.Component {
             />
             <SkillLine
               level={this.props.level}
-              skill={this.props.skillSet.skill7}
+              skill={this.props.skillSet.skill6}
               checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}
               spendSkillPoints={this.spendSkillPoints}
               number={7}
             />
             <SkillLine
               level={this.props.level}
-              skill={this.props.skillSet.skill6}
+              skill={this.props.skillSet.skill7}
               checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}
               spendSkillPoints={this.spendSkillPoints}
               number={6}

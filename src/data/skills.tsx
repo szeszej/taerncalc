@@ -1,6 +1,6 @@
 import React from "react";
 
-const skillsDatabase = {
+const skillsDatabase: SkillsOfAllClasses = {
   knight: {
     skill1: {
       name: "Szybkie Cięcie",
@@ -720,5 +720,37 @@ const skillsDatabase = {
     },
   },
 };
+
+export interface SkillsOfAllClasses {
+  knight: ClassSkills
+  barbarian: ClassSkills
+  sheed: ClassSkills
+  druid: ClassSkills
+  firemage: ClassSkills
+  archer: ClassSkills
+  voodoo: ClassSkills
+  [index:string] : ClassSkills
+}
+
+export interface ClassSkills {
+  skill1: ClassSkill
+  skill2: ClassSkill
+  skill3: ClassSkill
+  skill4: ClassSkill
+  skill5: ClassSkill
+  skill6: ClassSkill
+  skill7: ClassSkill
+  skill8: ClassSkill
+  skill9: ClassSkill
+  [index:string] : ClassSkill
+}
+
+export interface ClassSkill {
+  name: string
+  image: string
+  description?: JSX.Element
+  table?: JSX.Element
+}
+
 
 export default skillsDatabase;

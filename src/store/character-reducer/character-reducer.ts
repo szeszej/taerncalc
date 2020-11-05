@@ -12,13 +12,10 @@ import { initialEquipment } from "../equipment-reducer/equipment-reducer"
 import { initializeEquipment } from "../equipment-reducer/equipment-reducer"
 
 //Types
-import { SkillSet } from "../../data/models/skill-set.model.jsx";
+import { SkillSet } from "../../data/models/skill-set.model";
 import { StatsState } from "../stats-reducer/stats-reducer"
 import { SkillsState } from "../skills-reducer/skills-reducer"
 import { Equipment } from "../equipment-reducer/equipment-reducer"
-
-//Data
-import database from "../../data/skills.jsx";
 
 //action types
 const CHANGE_LEVEL = "CHANGE_LEVEL";
@@ -72,7 +69,7 @@ export const initializeCharacter = (
   store.dispatch(
     initializeSkills({
       skillPts: payload.level * 2 - 2,
-      skillSet: new SkillSet(payload.className, database),
+      skillSet: new SkillSet(payload.className),
     })
   );
   store.dispatch(initializeEquipment(initialEquipment))
@@ -104,7 +101,7 @@ export const importCharacter = (
     store.dispatch(
       initializeSkills({
         skillPts: payload.level * 2 - 2,
-        skillSet: new SkillSet(payload.className, database),
+        skillSet: new SkillSet(payload.className),
       })
     );
   }

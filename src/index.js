@@ -26,7 +26,7 @@ import {
   getUrlVars,
 } from "./import-build/import-build";
 import itemsDatabase from "./data/items";
-import skillsDatabase from "./data/skills.jsx";
+import skillsDatabase from "./data/skills";
 
 //Shared functionality
 import { confirmNewBuildCreation } from "./shared/new-build-confirmation"

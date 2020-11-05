@@ -1,5 +1,8 @@
+//Database
+import database from "../skills"
+
 export class Skill {
-  constructor(charClass, number, database) {
+  constructor(charClass: string, number: number) {
     this.name = database[charClass]["skill" + number].name;
     this.description = database[charClass]["skill" + number].description;
     this.table = database[charClass]["skill" + number].table;
@@ -51,4 +54,17 @@ export class Skill {
         break;
     }
   }
+}
+
+export interface Skill {
+  name: string
+  description?: JSX.Element
+  table?: JSX.Element
+  image: string
+  minLvl: number
+  maxLvl: number
+  level: number
+  requiredCharLevelInc: number
+  requiredCharLevel: number
+  initReqLvl: number
 }
