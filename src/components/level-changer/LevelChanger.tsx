@@ -2,8 +2,8 @@
 import React from "react";
 
 //Components
-import { LevelIncrementButton } from "./level-buttons/LevelIncrementButton.jsx";
-import { LevelDecrementButton } from "./level-buttons/LevelDecrementButton.jsx";
+import { LevelIncrementButton } from "./level-buttons/LevelIncrementButton";
+import { LevelDecrementButton } from "./level-buttons/LevelDecrementButton";
 
 export class LevelChanger extends React.Component<PropTypes> {
   render() {

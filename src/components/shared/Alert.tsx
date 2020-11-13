@@ -1,10 +1,11 @@
 //React
 import React from "react";
+import ReactDOM from "react-dom";
 
 export function Alert(props: PropTypes) {
   function closeAlert ():void {
-      let alertBox = document.getElementById("alert")
-      alertBox!.innerHTML = ""
+      let alertBox = document.getElementById("alert")!
+      ReactDOM.unmountComponentAtNode(alertBox)
   }
   return (
     <div>

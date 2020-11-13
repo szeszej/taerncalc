@@ -10,69 +10,9 @@ import { Item } from "../../../../../data/models/item.model"
 import { Equipment } from "../../../../../store/equipment-reducer/equipment-reducer"
 
 
-export class ItemsList extends React.Component<PropTypes, StateTypes> {
+export class ItemsSearchList extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props)
-    this.state = {
-      displayAddItemForm: false
-    }
-    this.showAddItemForm = this.showAddItemForm.bind(this)
-    this.hideAddItemForm = this.hideAddItemForm.bind(this)
-  }
-  showAddItemForm() {
-    this.setState({
-      displayAddItemForm: true
-    })
-  }
-  hideAddItemForm() {
-    this.setState({
-      displayAddItemForm: false
-    })
-  }
-  translateSlot(slotName: string): string {
-    let inPolish = "";
-    switch (slotName) {
-      case "armor":
-        inPolish = "Własny pancerz";
-        break;
-      case "helmet":
-        inPolish = "Własny hełm";
-        break;
-      case "neck":
-        inPolish = "Własny naszyjnik";
-        break;
-      case "gloves":
-        inPolish = "Własne rękawice";
-        break;
-      case "weapon":
-        inPolish = "Własna broń";
-        break;
-      case "shield":
-        inPolish = "Własna tarcza";
-        break;
-      case "belt":
-        inPolish = "Własny pas";
-        break;
-      case "boots":
-        inPolish = "Własne buty";
-        break;
-      case "ring1":
-        inPolish = "Własny pierścień";
-        break;
-      case "ring2":
-        inPolish = "Własny pierścień";
-        break;
-      case "pants":
-        inPolish = "Własne spodnie";
-        break;
-      case "cape":
-        inPolish = "Własny płaszcz";
-        break;
-      default:
-        inPolish = "błąd";
-        break;
-    }
-    return inPolish;
   }
   render() {
     let closeButton = (
@@ -92,7 +32,8 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
         this.props.strength >= x.reqStr &&
         this.props.agility >= x.reqAgi &&
         this.props.knowledge >= x.reqKno &&
-        this.props.power >= x.reqPow
+        this.props.power >= x.reqPow &&
+        (x.class === null || x.class === this.props.class)
     );
     let unequippableItems = this.props.items.filter(
       x =>
@@ -100,7 +41,8 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
         this.props.strength < x.reqStr ||
         this.props.agility < x.reqAgi ||
         this.props.knowledge < x.reqKno ||
-        this.props.power < x.reqPow
+        this.props.power < x.reqPow ||
+        (x.class !== null && x.class !== this.props.class)
     );
     let equippableItemsComponents = (
       <div className={"equippableItems"}>
@@ -108,14 +50,13 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
           <ItemComponent
             key={x.name}
             class={this.props.class}
-            type={this.props.type}
+            type={x.type === "ring" ? this.props.isRing1Equipped ? "ring2" : "ring1" : x.type}
             item={x}
             level={this.props.level}
             equipItem={this.props.equipItem}
             hideItemsList={this.props.hideItemsList}
           />
         ))}
-        <div className="itemOnList addItem" onClick={this.showAddItemForm}></div>
       </div>
     );
     let unequippableItemsComponents = (
@@ -136,7 +77,6 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
     );
     return (
       <div className="itemsList">
-        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={this.translateSlot(this.props.type) + " " + (this.props.items.filter(x => x.isCustom).length + 1)} type={this.props.type} closeList={this.props.hideItemsList} /> : null}
         {equippableItemsComponents}
         {unequippableItemsComponents}
         {closeButton}
@@ -148,13 +88,13 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
 //Types
 interface PropTypes {
   items: Item[]
-  type: keyof Equipment
   class: string
   level: number
   strength: number
   agility: number
   power: number
   knowledge: number
+  isRing1Equipped: boolean
   hideItemsList(): void
   equipItem(item: Item, slot: keyof Equipment): void
 }

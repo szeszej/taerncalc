@@ -73,7 +73,7 @@ export class Item {
 
 export interface Item extends NumericItemValues {
   name: string
-  type: string
+  type: ItemTypes
   image: string
   rarity: string
   class: string | null
@@ -124,7 +124,7 @@ export interface NumericItemValues {
 
 export interface RawItem {
     name: string
-    type: string
+    type: ItemTypes
     image: string
     rarity?: string
     class?: string
@@ -157,3 +157,5 @@ export interface RawItem {
     enhancements?: Enhancements
     otherProperties?: [string, number, number][]
 }
+
+export type ItemTypes = "armor" |  "helmet"  | "neck" | "gloves" |  "cape" | "weapon" | "shield" | "pants" | "belt" | "ring" | "boots" | "special"

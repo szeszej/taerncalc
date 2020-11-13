@@ -1,7 +1,28 @@
 .equipment {
   display: grid;
-  grid-template-areas: "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots otherProperties";
+  grid-template-areas: "filters filters filters filters" "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots otherProperties";
   box-sizing: border-box;
+
+  .filters {
+    grid-area: filters;
+    width: 28em;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    img {
+      height: 2em;
+      width: 2em;
+      display: inline;
+      margin-right: 1em;
+    }
+    .search {
+      display: flex;
+      align-items: center;
+      input {
+        width: 40%;
+      }
+    }
+  }
 
   .armor,
   .belt,

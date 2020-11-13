@@ -13,7 +13,7 @@ import {
 } from "../../../../../store/equipment-reducer/equipment-reducer";
 
 //Models
-import { Item, RawItem } from "../../../../../data/models/item.model";
+import { Item, RawItem, ItemTypes } from "../../../../../data/models/item.model";
 
 //Shared functionality
 import translateProperty from "../../../../../shared/translate-property";
@@ -219,7 +219,7 @@ interface StateTypes {
 
 interface CustomItem extends RawItem {
   name: string;
-  type: keyof Equipment | "ring";
+  type: ItemTypes;
   image: string;
   strength: number;
   agility: number;

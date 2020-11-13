@@ -1,5 +1,6 @@
 //React
 import React from "react";
+import ReactDOM from "react-dom";
 import ReactGA from "react-ga";
 
 //Redux
@@ -14,6 +15,9 @@ import { SkillSet } from "../../data/models/skill-set.model";
 import { Item } from "../../data/models/item.model";
 import { StatsState } from "../../store/stats-reducer/stats-reducer";
 import { Equipment } from "../../store/equipment-reducer/equipment-reducer";
+
+//Components
+import { Alert } from "../shared/Alert"
 
 class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -102,9 +106,8 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       },
       (err: string, response: string, body: string) => {
         if (err || JSON.parse(body).error) {
-          alert("Wystąpił błąd, spróbuj ponownie później!");
+          ReactDOM.render(<Alert message={"Wystąpił błąd, spróbuj ponownie później!"} spinner={false} />, document.getElementById("alert")!)
         } else {
-          console.log(body);
           let buildId = JSON.parse(body).name.substring(1)
           let link = "https://kalkulatortaern.github.io/?id=" + buildId;
           this.setState({
@@ -136,9 +139,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       document.getSelection()!.removeAllRanges();
       document.getSelection()!.addRange(selected);
     }
-    alert(
-      "Adres buildu skopiowany do schowka! Użyj Ctrl+V, aby wkleić go gdzie chcesz!"
-    );
+    ReactDOM.render(<Alert message={"Adres buildu skopiowany do schowka! Użyj Ctrl+V, aby wkleić go gdzie chcesz!"} spinner={false} />, document.getElementById("alert")!)
   }
   render() {
     return (

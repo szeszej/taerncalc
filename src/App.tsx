@@ -7,7 +7,7 @@ import { RootState } from "./store/store";
 import { Dispatch } from "redux";
 
 //Components
-import { SkillsCalculator } from "./components/skills-calculator/SkillsCalculator.jsx";
+import { SkillsCalculator } from "./components/skills-calculator/SkillsCalculator";
 import { StatsCalculator } from "./components/stats-calculator/StatsCalculator";
 import { LevelChanger } from "./components/level-changer/LevelChanger";
 import { BuildExporter } from "./components/build-exporter/BuildExporter";
