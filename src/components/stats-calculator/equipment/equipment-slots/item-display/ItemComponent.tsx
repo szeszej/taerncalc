@@ -2,35 +2,34 @@
 import React from "react";
 
 //Components
-import { ItemTooltip } from "../shared/ItemTooltip"
+import { ItemTooltip } from "../shared/ItemTooltip";
 
 //Types
-import { Item } from "../../../../../data/models/item.model"
-import { Equipment } from "../../../../../store/equipment-reducer/equipment-reducer"
+import { Item } from "../../../../../data/models/item.model";
+import { Equipment } from "../../../../../store/equipment-reducer/equipment-reducer";
 
 export class ItemComponent extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
     this.state = {
-      displayTooltip: false
+      displayTooltip: false,
     };
   }
   showTooltip() {
     this.setState({
-      displayTooltip: true
+      displayTooltip: true,
     });
   }
   hideTooltip() {
     this.setState({
-      displayTooltip: false
+      displayTooltip: false,
     });
   }
   render() {
     let itemStyle = {
-      backgroundImage: `url("images/items/` + this.props.item.image + `")`,
-      borderColor: "#0161E7"
+      borderColor: "#0161E7",
     };
-
+    let itemBackground = {backgroundImage: `url("images/items/` + this.props.item.image + `")`}
     if (this.props.item.rarity === "Psychorare") {
       itemStyle.borderColor = "#35CBEF";
     } else if (this.props.item.rarity === "Set") {
@@ -49,14 +48,22 @@ export class ItemComponent extends React.Component<PropTypes, StateTypes> {
         onMouseLeave={() => this.hideTooltip()}
         onTouchStart={() => this.showTooltip()}
         onTouchEnd={() => this.hideTooltip()}
-        onClick={event => {
-          event.stopPropagation()
-          if (this.props.equipItem && this.props.hideItemsList && this.props.type) {
-            this.props.equipItem(this.props.item, this.props.type);
+        onClick={(event) => {
+          event.stopPropagation();
+          if (
+            this.props.equipItem &&
+            this.props.hideItemsList &&
+            this.props.type
+          ) {
+            if (this.props.search) {
+              this.props.equipItem(this.props.item, this.props.type, true);
+            } else {
+              this.props.equipItem(this.props.item, this.props.type);
+            }
+
             this.props.hideItemsList();
           }
-        }
-        }
+        }}
       >
         {this.state.displayTooltip ? (
           <ItemTooltip
@@ -69,6 +76,7 @@ export class ItemComponent extends React.Component<PropTypes, StateTypes> {
             knowledge={this.props.knowledge}
           />
         ) : null}
+        <div className="itemImage" style={itemBackground}></div>
       </div>
     );
   }
@@ -76,18 +84,19 @@ export class ItemComponent extends React.Component<PropTypes, StateTypes> {
 
 //Types
 interface PropTypes {
-  item: Item
-  type?: keyof Equipment
-  class: string
-  level: number
-  hideItemsList?(): void
-  equipItem?(item: Item, slot: keyof Equipment): void
-  strength?: number
-  agility?: number
-  power?: number
-  knowledge?: number
+  item: Item;
+  type?: keyof Equipment;
+  class: string;
+  level: number;
+  hideItemsList?(): void;
+  equipItem?(item: Item, slot: keyof Equipment, search?: boolean): void;
+  strength?: number;
+  agility?: number;
+  power?: number;
+  knowledge?: number;
+  search?: boolean;
 }
 
 interface StateTypes {
-  displayTooltip: boolean
+  displayTooltip: boolean;
 }

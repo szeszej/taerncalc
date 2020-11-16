@@ -41,6 +41,7 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
     let classSkills = [9, 10, 11, 12, 13, 14, 15, 16, 17];
     let basicSkillsComponents = basicSkills.map((x) => (
       <SkillLine
+      key={x}
         level={this.props.level}
         skill={this.props.skillSet["skill" + x]}
         checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}
@@ -50,6 +51,7 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
     ));
     let classSkillsComponents = classSkills.map((x) => (
       <SkillLine
+        key={x}
         level={this.props.level}
         skill={this.props.skillSet["skill" + x]}
         checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}

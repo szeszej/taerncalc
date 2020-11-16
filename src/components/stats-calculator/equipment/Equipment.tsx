@@ -6,7 +6,7 @@ import ReactGA from "react-ga";
 import { ItemSlot } from "./equipment-slots/ItemSlot";
 import { SpecialSlot } from "./equipment-slots/SpecialSlot";
 import { PsychoSlot } from "./equipment-slots/PsychoSlot";
-import { ItemsSearchList } from "./equipment-slots/item-display/ItemSearchList"
+import { ItemsSearchList } from "./equipment-slots/item-display/ItemSearchList";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
@@ -40,7 +40,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     this.state = {
       listToDisplay: "",
       showOtherProperties: false,
-      searchString: ""
+      searchString: "",
     };
   }
   showItemsList(type: keyof Equipment) {
@@ -58,12 +58,21 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
       listToDisplay: "",
     });
   }
-  equipItem(item: Item, type: keyof Equipment) {
-    ReactGA.event({
-      category: "Items",
-      action: "Item Choice",
-      label: item.name,
-    });
+  equipItem(item: Item, type: keyof Equipment, search?: boolean) {
+    if (search) {
+      ReactGA.event({
+        category: "Items",
+        action: "Item Search",
+        label: item.name,
+      });
+      this.setState({ searchString: "" });
+    } else {
+      ReactGA.event({
+        category: "Items",
+        action: "Item Choice",
+        label: item.name,
+      });
+    }
     if (type === "weapon" && item.weaponType === "Dwuręczna") {
       this.props.equipItem(type, item);
       this.props.unequipItem("shield");
@@ -152,8 +161,16 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         type={x as keyof Equipment}
         items={
           x === "ring1" || x === "ring2"
-            ? this.props.items.filter((y) => y.type === "ring" && (y.class === null || y.class === this.props.class ))
-            : this.props.items.filter((y) => y.type === x && (y.class === null || y.class === this.props.class ))
+            ? this.props.items.filter(
+                (y) =>
+                  y.type === "ring" &&
+                  (y.class === null || y.class === this.props.class)
+              )
+            : this.props.items.filter(
+                (y) =>
+                  y.type === x &&
+                  (y.class === null || y.class === this.props.class)
+              )
         }
         inSlot={this.props.equipment[x as keyof Equipment]}
         class={this.props.class}
@@ -175,11 +192,38 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
       <div className="equipment">
         <div className="filters">
           <div className="search">
-            <img src="./images/magnifying-glass.svg" alt="search"/>
-            <input onChange={(event) => this.setState({searchString: event.currentTarget.value})} value={this.state.searchString} />
-
+            <img src="./images/magnifying-glass.svg" alt="search" />
+            <input
+              onChange={(event) =>
+                this.setState({
+                  searchString: event.currentTarget.value,
+                  listToDisplay: "search",
+                })
+              }
+              value={this.state.searchString}
+              onClick={() => this.setState({listToDisplay: "search"})}
+            />
+            {this.state.searchString && this.state.listToDisplay === "search" ? (
+              <ItemsSearchList
+                items={this.props.items.filter((x) =>
+                  x.name.toLowerCase().includes(this.state.searchString.toLowerCase()) &&
+                  (x.class === null || x.class === this.props.class)
+                )}
+                class={this.props.class}
+                level={this.props.level}
+                strength={this.props.strength}
+                agility={this.props.agility}
+                power={this.props.power}
+                knowledge={this.props.knowledge}
+                isRing1Equipped={!!this.props.equipment.ring1}
+                equipItem={this.equipItem}
+                hideItemsList={this.hideItemsList}
+              />
+            ) : null}
           </div>
-          <div className="filter"><img src="./images/funnel.svg" alt="filter"/></div>
+          <div className="filter">
+            <img src="./images/funnel.svg" alt="filter" />
+          </div>
         </div>
         {equipmentSlotComponents}
         <PsychoSlot equipment={this.props.equipment} />
@@ -250,7 +294,7 @@ export const EquipmentComponent = connector(ConnectedEquipment);
 type PropTypes = ConnectedProps<typeof connector>;
 
 interface StateTypes {
-  listToDisplay: keyof Equipment | ""
-  showOtherProperties: boolean
-  searchString: string
+  listToDisplay: keyof Equipment | "" | "search";
+  showOtherProperties: boolean;
+  searchString: string;
 }

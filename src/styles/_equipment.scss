@@ -18,8 +18,33 @@
     .search {
       display: flex;
       align-items: center;
+      position: relative;
       input {
         width: 40%;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+        background-image: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+      }
+      .itemsList {
+        margin: 0;
+        top: 100%;
+        .notFound {
+          margin: 0 auto;
+          color: white;
+          font-size: 1.1em;
+        }
+        .moreItems {
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-color: black;
+          cursor: default;
+          p {
+            margin: 0;
+            padding-top: 3px;
+            font-size: 2em;
+          }
+        }
       }
     }
   }
@@ -190,9 +215,16 @@
       height: 4em;
       border: 2px solid #0161E7;
       margin: 2px;
-      background-size: auto 80%;
-      background-repeat: no-repeat;
-      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .itemImage {
+        width: 90%;
+        height: 90%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
     }
 
     .addItem {
@@ -562,6 +594,7 @@
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
+      cursor: pointer;
     }
     .damage {
       position: absolute;
