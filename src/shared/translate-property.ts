@@ -47,6 +47,18 @@ export default function translateProperty(property: string): string {
     case "energyRes":
       inPolish = "Odp. na energię";
       break;
+    case "class":
+      inPolish = "Klasa";
+      break;
+    case "rare":
+      inPolish = "Rzadkie";
+      break;
+    case "psychoRare":
+      inPolish = "Psychorar";
+      break;
+    case "set":
+      inPolish = "Zestaw";
+      break;
     default:
       inPolish = "błąd";
       break;

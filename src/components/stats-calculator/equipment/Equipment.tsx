@@ -23,6 +23,7 @@ import {
 
 //Shared functionality
 import { confirmAlert } from "react-confirm-alert";
+import translateProperty from "../../../shared/translate-property";
 
 //Types
 import { Equipment } from "../../../store/equipment-reducer/equipment-reducer";
@@ -41,6 +42,23 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
       listToDisplay: "",
       showOtherProperties: false,
       searchString: "",
+      filters: {
+        class: false,
+        rare: false,
+        psychoRare: false,
+        set: false,
+        strength: false,
+        agility: false,
+        power: false,
+        knowledge: false,
+        hp: false,
+        mana: false,
+        endurance: false,
+        fireRes: false,
+        energyRes: false,
+        frostRes: false,
+        curseRes: false,
+      },
     };
   }
   showItemsList(type: keyof Equipment) {
@@ -149,6 +167,30 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     }
     return totalDamage;
   }
+  applyItemFilters(items: Item[]): Item[] {
+    let itemsToFilter = [...items];
+    let filterTypes = Object.keys(this.state.filters);
+    filterTypes.forEach((filterType) => {
+      if (filterType === "class") {
+        itemsToFilter = this.state.filters[filterType]
+          ? itemsToFilter.filter((item) => item.class === this.props.class)
+          : itemsToFilter;
+      } else if (filterType === "rare" || filterType === "psychoRare") {
+        itemsToFilter = this.state.filters[filterType]
+          ? itemsToFilter.filter((item) => item.rarity === filterType)
+          : itemsToFilter;
+      } else if (filterType === "set") {
+        itemsToFilter = this.state.filters[filterType]
+          ? itemsToFilter.filter((item) => item.set)
+          : itemsToFilter;
+      } else {
+        itemsToFilter = this.state.filters[filterType]
+          ? itemsToFilter.filter((item) => item[filterType as keyof Item]! > 0)
+          : itemsToFilter;
+      }
+    });
+    return itemsToFilter;
+  }
   render() {
     let classBackground = {
       backgroundImage: `url("images/` + this.props.class + `.svg")`,
@@ -161,12 +203,12 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         type={x as keyof Equipment}
         items={
           x === "ring1" || x === "ring2"
-            ? this.props.items.filter(
+            ? this.applyItemFilters(this.props.items).filter(
                 (y) =>
                   y.type === "ring" &&
                   (y.class === null || y.class === this.props.class)
               )
-            : this.props.items.filter(
+            : this.applyItemFilters(this.props.items).filter(
                 (y) =>
                   y.type === x &&
                   (y.class === null || y.class === this.props.class)
@@ -188,6 +230,95 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
       />
     ));
     let areAnyItemsEquipped = this.checkIfAnyItemIsEquipped();
+    let filterTypes = Object.keys(this.state.filters);
+    let checkBoxes = filterTypes.map((filterType) => (
+      <div key={filterType} className="filterLine">
+        <input
+          type="checkbox"
+          className="filterInput"
+          name={filterType}
+          value={filterType}
+          onChange={() =>
+            this.state.filters[filterType]
+              ? this.setState((prevState) => {
+                  let newState = { ...prevState };
+                  newState.filters[filterType] = false;
+                  return newState;
+                })
+              : this.setState((prevState) => {
+                  let newState = { ...prevState };
+                  newState.filters[filterType] = true;
+                  return newState;
+                })
+          }
+          checked={this.state.filters[filterType]}
+        />
+        <label
+          htmlFor={filterType}
+          onClick={() =>
+            this.state.filters[filterType]
+              ? this.setState((prevState) => {
+                  let newState = { ...prevState };
+                  newState.filters[filterType] = false;
+                  return newState;
+                })
+              : this.setState((prevState) => {
+                  let newState = { ...prevState };
+                  newState.filters[filterType] = true;
+                  return newState;
+                })
+          }
+        >
+          {translateProperty(filterType)}
+        </label>
+      </div>
+    ));
+    let activeFilters = filterTypes.filter(
+      (filterType) => this.state.filters[filterType]
+    );
+    let chosenFilters = activeFilters.map((filterType) => {
+      if (this.state.filters[filterType]) {
+        return (
+          <div className="chosenFilter">{translateProperty(filterType)}</div>
+        );
+      }
+    });
+    let filtersCloseButton = (
+      <button
+        className="closeList"
+        onClick={() => this.setState({ listToDisplay: "" })}
+      >
+        ×
+      </button>
+    );
+    let filtersResetButton = (
+      <button
+        className="resetFilters"
+        onClick={() =>
+          this.setState({
+            filters: {
+              class: false,
+              rare: false,
+              psychoRare: false,
+              set: false,
+              strength: false,
+              agility: false,
+              power: false,
+              knowledge: false,
+              hp: false,
+              mana: false,
+              endurance: false,
+              fireRes: false,
+              energyRes: false,
+              frostRes: false,
+              curseRes: false,
+            },
+          })
+        }
+      >
+        ×
+      </button>
+    );
     return (
       <div className="equipment">
         <div className="filters">
@@ -201,13 +332,17 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                 })
               }
               value={this.state.searchString}
-              onClick={() => this.setState({listToDisplay: "search"})}
+              onClick={() => this.setState({ listToDisplay: "search" })}
             />
-            {this.state.searchString && this.state.listToDisplay === "search" ? (
+            {this.state.searchString &&
+            this.state.listToDisplay === "search" ? (
               <ItemsSearchList
-                items={this.props.items.filter((x) =>
-                  x.name.toLowerCase().includes(this.state.searchString.toLowerCase()) &&
-                  (x.class === null || x.class === this.props.class)
+                items={this.props.items.filter(
+                  (x) =>
+                    x.name
+                      .toLowerCase()
+                      .includes(this.state.searchString.toLowerCase()) &&
+                    (x.class === null || x.class === this.props.class)
                 )}
                 class={this.props.class}
                 level={this.props.level}
@@ -223,6 +358,42 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           </div>
           <div className="filter">
             <img src="./images/funnel.svg" alt="filter" />
+            <div className="filtersList">
+              <div className="chosenFilters">
+                {chosenFilters.length > 2
+                  ? chosenFilters.slice(0, 2)
+                  : chosenFilters}
+                {chosenFilters.length > 2 ? (
+                  <div className="chosenFilter manyFilters">
+                    {chosenFilters.length - 2}+
+                  </div>
+                ) : null}
+              </div>
+              <button
+                className="addFilter"
+                onClick={() =>
+                  this.state.listToDisplay === "filters"
+                    ? this.setState({ listToDisplay: "" })
+                    : this.setState({ listToDisplay: "filters" })
+                }
+              ></button>
+              {this.state.listToDisplay === "filters" ? (
+                <div className="itemsList filtersForm">
+                  <div className="title">
+                    <p>Dodaj filtry do list przedmiotów</p>
+                  </div>
+                  <div className="filterLines">{checkBoxes}</div>
+                  <div className="submit">
+                    <button
+                      onClick={() => this.setState({ listToDisplay: "" })}
+                    >
+                      Zatwierdź
+                    </button>
+                    {filtersCloseButton}
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
         {equipmentSlotComponents}
@@ -294,7 +465,25 @@ export const EquipmentComponent = connector(ConnectedEquipment);
 type PropTypes = ConnectedProps<typeof connector>;
 
 interface StateTypes {
-  listToDisplay: keyof Equipment | "" | "search";
+  listToDisplay: keyof Equipment | "" | "search" | "filters";
   showOtherProperties: boolean;
   searchString: string;
+  filters: {
+    strength: boolean;
+    agility: boolean;
+    power: boolean;
+    knowledge: boolean;
+    hp: boolean;
+    mana: boolean;
+    endurance: boolean;
+    class: boolean;
+    rare: boolean;
+    psychoRare: boolean;
+    set: boolean;
+    fireRes: boolean;
+    energyRes: boolean;
+    frostRes: boolean;
+    curseRes: boolean;
+    [index: string]: boolean;
+  };
 }

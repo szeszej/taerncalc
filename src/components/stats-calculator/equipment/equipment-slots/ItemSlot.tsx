@@ -113,6 +113,7 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
         }}
       ></button>
     )
+    let noItemsWarning = (<div className="noItemsWarning">!</div>)
     return (
       <div
         className={
@@ -167,6 +168,7 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
         {this.props.inSlot ? enhanceButton : null}
         {this.props.inSlot && this.props.inSlot.psychoLvl ? addPsychoLvlButton : null}
         {this.props.inSlot && this.props.inSlot.psychoLvl ? substractPsychoLvlButton : null}
+        {this.props.items.length ? null : noItemsWarning}
         {this.state.displayEnhancementForm ? (
           <ItemEnhancementForm
             type={this.props.type}

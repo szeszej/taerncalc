@@ -137,8 +137,16 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
     return (
       <div className="itemsList">
         {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={this.translateSlot(this.props.type) + " " + (this.props.items.filter(x => x.isCustom).length + 1)} type={this.props.type} closeList={this.props.hideItemsList} /> : null}
-        {equippableItemsComponents}
-        {unequippableItemsComponents}
+        {this.props.items.length ? (
+          equippableItemsComponents
+        ) : (
+          <div className="notFound">
+            <p className="notFoundMessage">
+              Brak przedmiotów po zastosowaniu filtrów.
+            </p>
+          </div>
+        )}
+        {this.props.items.length ? unequippableItemsComponents : null}
         {closeButton}
       </div>
     );

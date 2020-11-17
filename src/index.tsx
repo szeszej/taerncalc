@@ -42,7 +42,6 @@ document.getElementById("classLvl")!.addEventListener(
   "submit",
   function (event) {
     event.preventDefault();
-    console.log(event);
     checkCalc((document.getElementById("charClass") as HTMLSelectElement)!.value, +(document.getElementById("charLvl") as HTMLInputElement)!.value);
   },
   false
