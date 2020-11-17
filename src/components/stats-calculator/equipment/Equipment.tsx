@@ -331,6 +331,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                   listToDisplay: "search",
                 })
               }
+              placeholder="Wpisz nazwę"
               value={this.state.searchString}
               onClick={() => this.setState({ listToDisplay: "search" })}
             />
@@ -359,7 +360,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           <div className="filter">
             <img src="./images/funnel.svg" alt="filter" />
             <div className="filtersList">
-              <div className="chosenFilters">
+              <div className="chosenFilters" data-placeholder="Lista aktywnych filtrów">
                 {chosenFilters.length > 2
                   ? chosenFilters.slice(0, 2)
                   : chosenFilters}
