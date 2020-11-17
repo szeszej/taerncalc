@@ -316,7 +316,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           })
         }
       >
-        ×
+        Resetuj filtry
       </button>
     );
     return (
@@ -389,6 +389,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                     >
                       Zatwierdź
                     </button>
+                    {filtersResetButton}
                     {filtersCloseButton}
                   </div>
                 </div>
