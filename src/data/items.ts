@@ -3313,7 +3313,6 @@ const itemsData: RawItem[] = [{
     reqLvl: 35,
     reqKno: 45,
     power: 7,
-    knowledge: 10,
     hp: 80,
     otherProperties: [["Regeneracja many", 0.5, 0.3], ["Modyfikator obrażeń magicznych", 3, 1]]
   },

@@ -86,9 +86,9 @@
           }
         }
         .chosenFilters:empty:before {
-  content:attr(data-placeholder);
-  color:gray
-}
+          content: attr(data-placeholder);
+          color: gray;
+        }
         .addFilter {
           align-self: flex-end;
           height: 1.5em;
@@ -130,17 +130,18 @@
             justify-content: space-around;
             margin-top: 1em;
 
-            input, button:not(.closeList) {
+            input,
+            button:not(.closeList) {
               border-radius: 8px;
               font-size: 1.3em;
               color: #d7d50e;
-              box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+              box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
               cursor: pointer;
               background-color: black;
-              border: 2px solid #EC8C42;
+              border: 2px solid #ec8c42;
 
               &:hover {
-                background-color: #322F3E;
+                background-color: #322f3e;
               }
             }
           }
@@ -178,7 +179,7 @@
     cursor: pointer;
 
     &:hover {
-      border: 2px solid #AE3B48;
+      border: 2px solid #ae3b48;
     }
 
     img {
@@ -321,7 +322,7 @@
       position: relative;
       width: 4em;
       height: 4em;
-      border: 2px solid #0161E7;
+      border: 2px solid #0161e7;
       margin: 2px;
       display: flex;
       justify-content: center;
@@ -402,7 +403,7 @@
           font-size: 1em;
           width: 50%;
           background-position: right 0.4em top 50%, 0 0;
-          padding-left: 0.5em
+          padding-left: 0.5em;
         }
         button {
           width: 2em;
@@ -411,23 +412,23 @@
           font-size: 0.9em;
           font-weight: bolder;
         }
-
       }
 
       .submit {
         margin-top: 1.5em;
 
-        input, button {
+        input,
+        button {
           border-radius: 8px;
           font-size: 1.5em;
           color: #d7d50e;
-          box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+          box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
           cursor: pointer;
           background-color: black;
-          border: 2px solid #EC8C42;
+          border: 2px solid #ec8c42;
 
           &:hover {
-            background-color: #322F3E;
+            background-color: #322f3e;
           }
         }
       }
@@ -481,10 +482,15 @@
     hr {
       border: 0;
       height: 1px;
-      background-image: linear-gradient(to right, rgba(44, 130, 201, 0), rgba(44, 130, 201, 0.75), rgba(44, 130, 201, 0));
+      background-image: linear-gradient(
+        to right,
+        rgba(44, 130, 201, 0),
+        rgba(44, 130, 201, 0.75),
+        rgba(44, 130, 201, 0)
+      );
     }
     .starItem {
-      color: #CCFF33;
+      color: #ccff33;
     }
     p:last-child {
       margin-bottom: 0em;
@@ -604,13 +610,13 @@
             border-radius: 8px;
             font-size: 1.5em;
             color: #d7d50e;
-            box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+            box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
             cursor: pointer;
             background-color: black;
-            border: 2px solid #EC8C42;
+            border: 2px solid #ec8c42;
 
             &:hover {
-              background-color: #322F3E;
+              background-color: #322f3e;
             }
           }
         }
@@ -680,12 +686,13 @@
     .itemTooltip {
       padding: 0.7em 0.4em 0.5em 0.4em;
       font-size: 1em;
-      .propertiesHeader, .noProperties {
+      .propertiesHeader,
+      .noProperties {
         font-size: 1.2em;
         margin: 0;
       }
       p {
-        color: #35CBEF;
+        color: #35cbef;
       }
     }
   }
@@ -808,7 +815,8 @@
           right: 3em;
         }
       }
-      .equippableItems, .unequippableItems {
+      .equippableItems,
+      .unequippableItems {
         width: 80%;
       }
       .itemTooltip {
@@ -824,31 +832,35 @@
           margin-top: 0.3em;
           margin-bottom: 0.3em;
         }
-    }
-    .unequipButton, .enhanceButton, .addPsychoLvlButton, .substractPsychoLvlButton {
-      width: 3em;
-      height: 3em;
-    }
-    .enhanceForm {
-      margin: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      position: fixed;
-      width: 100vw;
-      min-width: 0;
-      max-width: 100vw;
-      .closeList {
-        right: 3em;
+      }
+      .unequipButton,
+      .enhanceButton,
+      .addPsychoLvlButton,
+      .substractPsychoLvlButton {
+        width: 3em;
+        height: 3em;
+      }
+      .enhanceForm {
+        margin: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: fixed;
+        width: 100vw;
+        min-width: 0;
+        max-width: 100vw;
+        .closeList {
+          right: 3em;
+        }
+      }
+      .empty {
+        height: 10vh;
+        width: 10vw;
       }
     }
-    .empty {
-      height: 10vh;
-      width: 10vw;
-    }
-    }
     .middle {
-      .damage, .empty {
+      .damage,
+      .empty {
         width: 10vw;
         height: 10vw;
       }
