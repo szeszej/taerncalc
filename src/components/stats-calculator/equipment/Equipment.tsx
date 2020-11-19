@@ -247,6 +247,11 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                 })
               : this.setState((prevState) => {
                   let newState = { ...prevState };
+                  ReactGA.event({
+                    category: "Filters",
+                    action: "Activate Filter",
+                    label: filterType,
+                  });
                   newState.filters[filterType] = true;
                   return newState;
                 })
@@ -264,6 +269,11 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                 })
               : this.setState((prevState) => {
                   let newState = { ...prevState };
+                  ReactGA.event({
+                    category: "Filters",
+                    action: "Activate Filter",
+                    label: filterType,
+                  });
                   newState.filters[filterType] = true;
                   return newState;
                 })
