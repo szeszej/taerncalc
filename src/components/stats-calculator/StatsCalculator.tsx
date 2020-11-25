@@ -74,7 +74,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
         ) * 1.5
       ) +
       Math.round(
-        Math.round(
+        (Math.round(
           this.calculateResistances(this.props.statsFromItems.cutRes)
         ) +
           Math.round(
@@ -82,7 +82,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
           ) +
           Math.round(
             this.calculateResistances(this.props.statsFromItems.bluntRes)
-          ) /
+          )) /
             2
       );
     return power;
