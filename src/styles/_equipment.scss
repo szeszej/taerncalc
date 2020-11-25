@@ -2,7 +2,7 @@
   display: grid;
   grid-template-areas: "filters filters filters filters" "armor helmet neck gloves" "cape middle middle weapon" "special middle middle shield" "pants middle middle belt" "ring1 ring2 boots otherProperties";
   box-sizing: border-box;
-  max-width: 28.5em;
+  max-width: 32.5em;
 
   .filters {
     grid-area: filters;
@@ -55,30 +55,51 @@
       display: flex;
       width: 60%;
       max-width: 60%;
+      min-height: 2.3em;
       .filtersList {
         box-sizing: border-box;
         position: relative;
-        height: 2.3em;
-        width: 80%;
-        max-width: 80%;
+        width: 90%;
+        max-width: 90%;
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
         box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
         background-image: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
         border: 1px solid #d6c1a9;
         padding: 2px;
         .chosenFilters {
-          align-self: flex-start;
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
           .chosenFilter {
             font-size: 0.7em;
             margin: 1px;
             padding: 1px;
             border: 1px dashed black;
+            background: lightgray;
+            display: flex;
+            align-items: center;
+            button {
+              height: 1em;
+              width: 1em;
+              padding: 0;
+              margin: 0;
+              margin-left: 2px;
+              border: 1px solid black;
+              border-radius: 0;
+              background-color: inherit;
+              background-image: url("/images/cross-icon.png");
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 70%;
+            }
+            button:hover {
+              background-color: #e3e1e1;
+            }
+            p {
+              margin: 0;
+            }
           }
           .manyFilters {
             padding-left: 3px;
@@ -90,8 +111,8 @@
           color: gray;
         }
         .addFilter {
-          align-self: flex-end;
           height: 1.5em;
+          margin-right: 3px;
           width: 1.5em;
           border: 1px solid #bd996f;
           box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
@@ -106,7 +127,6 @@
           min-width: 0;
           margin: 0;
           top: 100%;
-
           color: white;
           display: flex;
           flex-direction: column;
@@ -166,8 +186,8 @@
   .weapon {
     position: relative;
     box-sizing: border-box;
-    width: 7em;
-    height: 7em;
+    width: 8em;
+    height: 8em;
     border: 2px solid #bd996f;
     margin: 1px;
     background-size: auto 6em;
@@ -715,33 +735,6 @@
       background-position: center;
       background-repeat: no-repeat;
       cursor: pointer;
-    }
-    .damage {
-      position: absolute;
-      left: 0;
-      top: 0;
-      border-radius: 0;
-      height: 3.5rem;
-      width: 3.5rem;
-      background-image: url("/images/damage.svg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      p {
-        margin-block-start: 0;
-        margin-block-end: 0;
-        color: white;
-      }
-      .totalDamage {
-        margin-top: 8px;
-        font-size: 1.4rem;
-      }
-    }
-    .damage:hover {
-      background-color: #bdac6f;
     }
   }
 }

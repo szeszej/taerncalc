@@ -15,7 +15,7 @@ import { itemSets } from "../../../../../data/item-sets";
 import { checkWhichSetsAreEquipped } from "../../../../../shared/check-which-sets-are-equipped";
 
 class ConnectedItemTooltip extends React.Component<PropTypes> {
-  nameColor(rarity: string): {color: string} {
+  nameColor(rarity: string): { color: string } {
     let color = {
       color: "#0161E7",
     };
@@ -64,7 +64,11 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
           if (x[0] === "Dodatkowe PA") {
             return (
               <p
-                style={this.nameColor("Psychorare")}
+                style={
+                  this.props.item.psychoLvl
+                    ? this.nameColor("Psychorare")
+                    : { color: "gray" }
+                }
                 key={x[0]}
               >
                 {x[0]}: {x[1]}
@@ -73,7 +77,11 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
           } else {
             return (
               <p
-                style={this.nameColor("Psychorare")}
+                style={
+                  this.props.item.psychoLvl
+                    ? this.nameColor("Psychorare")
+                    : { color: "gray" }
+                }
                 key={x[0]}
               >
                 {x[0]}: {x[1] > 0 ? "+" : null}
@@ -95,14 +103,16 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
     let setColor = {
       color: "#3DEF01",
     };
-    let equippedSet = this.props.item && this.props.item.set
-      ? itemSets.find((x) => x.name === this.props.item.set)
-      : null;
-    let setProperties = equippedSet && this.props.item.set
-      ? equippedSet.getValuesDependingOnPieces(
-          this.props.setsEquipped[this.props.item.set]
-        )
-      : null;
+    let equippedSet =
+      this.props.item && this.props.item.set
+        ? itemSets.find((x) => x.name === this.props.item.set)
+        : null;
+    let setProperties =
+      equippedSet && this.props.item.set
+        ? equippedSet.getValuesDependingOnPieces(
+            this.props.setsEquipped[this.props.item.set]
+          )
+        : null;
     let otherSetProperties =
       setProperties && setProperties.otherProperties
         ? setProperties.otherProperties.map((x) => (
@@ -112,7 +122,7 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
           ))
         : null;
     return (
-      <div className="itemTooltip" onClick={event => event.stopPropagation()} >
+      <div className="itemTooltip" onClick={(event) => event.stopPropagation()}>
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>
           {this.props.item.name}
         </p>
@@ -125,7 +135,9 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
             /{equippedSet.totalPieces})
           </p>
         ) : null}
-        {this.props.item.randomStats ? <p className="starItem">Przedmiot gwiazdkowy</p> : null}
+        {this.props.item.randomStats ? (
+          <p className="starItem">Przedmiot gwiazdkowy</p>
+        ) : null}
         {this.props.item.name ? <hr /> : null}
         {this.props.item.class ? (
           <p
@@ -206,10 +218,17 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         this.props.item.reqKno > 0 ? (
           <hr />
         ) : null}
-        {this.props.item.psychoLvl ? (
-          <p className="itemProperty" style={this.nameColor("Psychorare")}>
-            Poziom przedmiotu: {this.props.item.psychoLvl}
-          </p>
+        {this.props.item.rarity === "Psychorare" ||
+        this.props.item.rarity === "Epik" ? (
+          this.props.item.psychoLvl ? (
+            <p className="itemProperty" style={this.nameColor("Psychorare")}>
+              Poziom przedmiotu: {this.props.item.psychoLvl}
+            </p>
+          ) : (
+            <p className="itemProperty" style={{ color: "red" }}>
+              Rozładowany
+            </p>
+          )
         ) : null}
         {this.props.item.weaponType ? (
           <p className="itemProperty">
@@ -224,7 +243,9 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         {this.props.item.damage ? (
           <p className="damage">
             Obrażenia:{" "}
-            {this.props.level ? this.props.item.calculateTotalDamage(this.props.level) : this.props.item.calculateTotalDamage(0)}
+            {this.props.level
+              ? this.props.item.calculateTotalDamage(this.props.level)
+              : this.props.item.calculateTotalDamage(0)}
             {this.props.item.enhancements.damage ? (
               <span style={{ color: "orange" }}>
                 {" "}
@@ -482,11 +503,11 @@ export const ItemTooltip = connector(ConnectedItemTooltip);
 type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
-  item: Item
-  class?: string
-  level?: number
-  strength?: number
-  agility?: number
-  power?: number
-  knowledge?: number
+  item: Item;
+  class?: string;
+  level?: number;
+  strength?: number;
+  agility?: number;
+  power?: number;
+  knowledge?: number;
 }

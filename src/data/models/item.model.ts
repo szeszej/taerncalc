@@ -57,7 +57,7 @@ export class Item {
   calculateTotalDamage(charLevel: number): number {
     let damage = 0
     if (this.rarity === "Epik" && this.weaponType === "Dwuręczna") {
-      damage = this.damage + charLevel + this.enhancements.damage + (this.psychoLvl - 1) * 3
+      damage = this.psychoLvl ? this.damage + charLevel + this.enhancements.damage + (this.psychoLvl - 1) * 3 : this.damage + charLevel + this.enhancements.damage
     } else if (this.rarity === "Epik" && this.weaponType === "Jednoręczna") {
       damage = this.damage + charLevel + this.enhancements.damage + (this.psychoLvl - 1) * 2
     } else if (this.rarity === "Psychorare" && this.weaponType === "Dwuręczna") {

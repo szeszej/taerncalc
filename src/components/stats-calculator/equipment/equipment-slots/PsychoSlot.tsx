@@ -60,7 +60,7 @@ export class PsychoSlot extends React.Component<Props, State> {
       (total: { [key: string]: number }, item) => {
         if (
           item !== null &&
-          (item.rarity === "Psychorare" || item.rarity === "Epik")
+          (item.rarity === "Psychorare" || item.rarity === "Epik") && item.psychoLvl
         ) {
           item.otherProperties.forEach((property) => {
             if (total.hasOwnProperty(property[0])) {

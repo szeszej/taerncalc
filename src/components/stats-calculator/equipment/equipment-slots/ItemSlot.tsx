@@ -106,7 +106,7 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
     let substractPsychoLvlButton = (
       <button
         className={"substractPsychoLvlButton"}
-        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 1 ? true : false}
+        disabled={this.props.inSlot && this.props.inSlot.psychoLvl === 0 ? true : false}
         onClick={(event) => {
           event.stopPropagation();
           this.props.changePsychoLvl(this.props.type, -1)
@@ -166,8 +166,8 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
         ) : null}
         {this.props.inSlot ? unequipButton : null}
         {this.props.inSlot ? enhanceButton : null}
-        {this.props.inSlot && this.props.inSlot.psychoLvl ? addPsychoLvlButton : null}
-        {this.props.inSlot && this.props.inSlot.psychoLvl ? substractPsychoLvlButton : null}
+        {this.props.inSlot && (this.props.inSlot.rarity === "Psychorare" || this.props.inSlot.rarity === "Epik") ? addPsychoLvlButton : null}
+        {this.props.inSlot && (this.props.inSlot.rarity === "Psychorare" || this.props.inSlot.rarity === "Epik") ? substractPsychoLvlButton : null}
         {this.props.items.length ? null : noItemsWarning}
         {this.state.displayEnhancementForm ? (
           <ItemEnhancementForm

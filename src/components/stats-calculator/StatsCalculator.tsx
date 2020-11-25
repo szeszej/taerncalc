@@ -10,9 +10,11 @@ import { Dispatch } from "redux";
 import { EquipmentComponent } from "./equipment/Equipment";
 import { StatLine } from "./stat-line/StatLine";
 import { ResLine } from "./resist-line/ResLine";
+import { OtherLine } from "./other-line/OtherLine";
 
 //Data
 import { itemSets } from "../../data/item-sets";
+import resTable from "../../data/resistance-table";
 
 //Actions
 import { changeStat } from "../../store/stats-reducer/stats-reducer";
@@ -24,6 +26,7 @@ import translateProperty from "../../shared/translate-property";
 
 //Types
 import { Equipment } from "../../store/equipment-reducer/equipment-reducer";
+import { Item } from "../../data/models/item.model";
 
 class ConnectedStatsCalculator extends React.Component<PropTypes> {
   constructor(props: PropTypes) {
@@ -36,6 +39,20 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
   }
   reset() {
     this.props.resetStatPoints();
+  }
+  calculateResistances(res: number): number {
+    let resPercentage: number = 0;
+    if (res <= 1000) {
+      resPercentage = resTable[res];
+    } else {
+      resPercentage = 100;
+    }
+    return resPercentage;
+  }
+  calculateTotalPower(): number {
+    let power: number = 0
+    power += this.props.statsFromItems.strength + this.props.statsFromItems.agility + this.props.statsFromItems.power + this.props.statsFromItems.knowledge + Math.round(this.props.statsFromItems.hp / 10) + Math.round(this.props.statsFromItems.mana / 10) + Math.round(this.props.statsFromItems.endurance / 10) + Math.round(this.calculateResistances(this.props.statsFromItems.fireRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.frostRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.energyRes)) + Math.round(Math.round(this.calculateResistances(this.props.statsFromItems.curseRes)) * 1.5) + Math.round(Math.round(this.calculateResistances(this.props.statsFromItems.cutRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.pierceRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.bluntRes)) / 2)
+    return power
   }
   render() {
     let negativePoints = {
@@ -72,6 +89,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
       stat={statName}
       statName={translateProperty(statName)}
       value={this.props.statsFromItems[statName as keyof Resists]}
+      percentageValue={this.calculateResistances(this.props.statsFromItems[statName as keyof Resists])}
       key={statName}
     />))
     return (
@@ -92,9 +110,11 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
             <EquipmentComponent />
             <div className="statsAndRes">
               <div className="statLines">
+                <OtherLine stat="damage" statName="Obrażenia" value={this.props.statsFromItems.damage} />
                 {statComponents}
               </div>
               <div className="resLines">
+                <OtherLine stat="characterPower" statName="Power" value={this.calculateTotalPower()} />
                 {resistComponents}
               </div>
             </div>
@@ -115,12 +135,12 @@ const mapStateToProps = (state: RootState) => {
     hp: state.stats.hp,
     endurance: state.stats.endurance,
     mana: state.stats.mana,
-    statsFromItems: calculateStatsFromItems(state.equipment),
+    statsFromItems: calculateStatsFromItems(state.equipment, state.character.level),
   };
 };
 
 //calculating how much total of each stat equipment provides
-function calculateStatsFromItems(equipment: Equipment): StatsFromItems {
+function calculateStatsFromItems(equipment: Equipment, level: number): StatsFromItems {
   let equipmentTypes = Object.keys(equipment);
   let equippedItems = equipmentTypes.map(
     (x) => equipment[x as keyof Equipment]
@@ -176,11 +196,7 @@ function calculateStatsFromItems(equipment: Equipment): StatsFromItems {
           x != null ? (total += x.calculateTotalStat("mana")) : (total += 0),
         0
       ) + statsFromSets.mana,
-    damage: equippedItems.reduce(
-      (total, x) =>
-        x != null ? (total += x.calculateTotalStat("damage")) : (total += 0),
-      0
-    ),
+    damage: calculateTotalDamage(equipment.weapon, equipment.special, level),
     fireRes: equippedItems.reduce(
       (total, x) => (x != null ? (total += x.fireRes) : (total += 0)),
       0
@@ -243,6 +259,17 @@ function calculateStateFromSets(equipment: Equipment): Stats {
     }
   }
   return statsFromSets;
+}
+
+function calculateTotalDamage(weapon: Item | null, special: Item | null, level: number) {
+  let totalDamage = 0;
+  if (weapon) {
+    totalDamage += weapon.calculateTotalDamage(level);
+  }
+  if (special) {
+    totalDamage += special.damage;
+  }
+  return totalDamage;
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

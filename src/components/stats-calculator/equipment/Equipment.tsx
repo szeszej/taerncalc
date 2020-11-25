@@ -157,16 +157,6 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     }
     return isAnyItemEquipped;
   }
-  calculateTotalDamage(weapon: Item | null, special: Item | null) {
-    let totalDamage = 0;
-    if (weapon) {
-      totalDamage += weapon.calculateTotalDamage(this.props.level);
-    }
-    if (special) {
-      totalDamage += special.damage;
-    }
-    return totalDamage;
-  }
   applyItemFilters(items: Item[]): Item[] {
     let itemsToFilter = [...items];
     let filterTypes = Object.keys(this.state.filters);
@@ -289,7 +279,18 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     let chosenFilters = activeFilters.map((filterType) => {
       if (this.state.filters[filterType]) {
         return (
-          <div className="chosenFilter">{translateProperty(filterType)}</div>
+          <div className="chosenFilter">
+            <p>{translateProperty(filterType)}</p>
+            <button
+              onClick={() =>
+                this.setState((prevState) => {
+                  let newState = { ...prevState };
+                  newState.filters[filterType] = false;
+                  return newState;
+                })
+              }
+            ></button>
+          </div>
         );
       }
     });
@@ -370,13 +371,16 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           <div className="filter">
             <img src="./images/funnel.svg" alt="filter" />
             <div className="filtersList">
-              <div className="chosenFilters" data-placeholder="Lista aktywnych filtrów">
-                {chosenFilters.length > 2
-                  ? chosenFilters.slice(0, 2)
+              <div
+                className="chosenFilters"
+                data-placeholder="Lista aktywnych filtrów"
+              >
+                {chosenFilters.length > 4
+                  ? chosenFilters.slice(0, 4)
                   : chosenFilters}
-                {chosenFilters.length > 2 ? (
+                {chosenFilters.length > 4 ? (
                   <div className="chosenFilter manyFilters">
-                    {chosenFilters.length - 2}+
+                    {chosenFilters.length - 4}+
                   </div>
                 ) : null}
               </div>
@@ -416,18 +420,6 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
               className="empty"
               onClick={() => this.unequipItems()}
             ></button>
-          ) : null}
-          {this.props.equipment.weapon ||
-          (this.props.equipment.special &&
-            this.props.equipment.special.damage) ? (
-            <button className="damage">
-              <p className="totalDamage">
-                {this.calculateTotalDamage(
-                  this.props.equipment.weapon,
-                  this.props.equipment.special
-                )}
-              </p>
-            </button>
           ) : null}
         </div>
         <SpecialSlot

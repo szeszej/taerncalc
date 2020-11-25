@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ResLine(props: Props) {
+export function OtherLine(props: Props) {
   return (
     <div className={"statLine"}>
       <img
@@ -10,7 +10,7 @@ export function ResLine(props: Props) {
       />
       <div className="statNameButtons">
         <div className="statName">
-          {props.statName} {props.value} ({props.percentageValue}%)
+          {props.statName} {props.value}
         </div>
       </div>
     </div>
@@ -21,5 +21,4 @@ interface Props {
   stat: string;
   statName: string;
   value: number;
-  percentageValue: number
 }

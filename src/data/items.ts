@@ -476,7 +476,7 @@ const itemsData: RawItem[] = [{
     knowledge: 20,
     hp: 50,
     mana: 50,
-    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Modyfikator obrażeń magicznych", 20, 1]]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Modyfikator trafień magicznych", 20, 2]]
   },
   {
     name: "Żmij",
@@ -539,7 +539,7 @@ const itemsData: RawItem[] = [{
     agility: 10,
     hp: 150,
     endurance: 50,
-    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Modyfikator obrażeń fizycznych", 20, 1]]
+    otherProperties: [["Dodatkowe PA", 1, 0], ["Szansa na trafienie krytyczne", 9, 1], ["Modyfikator trafień fizycznych", 20, 2]]
   },
   {
     name: "Gorthdar",
