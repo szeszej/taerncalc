@@ -50,9 +50,42 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
     return resPercentage;
   }
   calculateTotalPower(): number {
-    let power: number = 0
-    power += this.props.statsFromItems.strength + this.props.statsFromItems.agility + this.props.statsFromItems.power + this.props.statsFromItems.knowledge + Math.round(this.props.statsFromItems.hp / 10) + Math.round(this.props.statsFromItems.mana / 10) + Math.round(this.props.statsFromItems.endurance / 10) + Math.round(this.calculateResistances(this.props.statsFromItems.fireRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.frostRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.energyRes)) + Math.round(Math.round(this.calculateResistances(this.props.statsFromItems.curseRes)) * 1.5) + Math.round(Math.round(this.calculateResistances(this.props.statsFromItems.cutRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.pierceRes)) + Math.round(this.calculateResistances(this.props.statsFromItems.bluntRes)) / 2)
-    return power
+    let power: number = 0;
+    power +=
+      this.props.statsFromItems.strength +
+      this.props.statsFromItems.agility +
+      this.props.statsFromItems.power +
+      this.props.statsFromItems.knowledge +
+      Math.round(
+        this.props.statsFromItems.hp / 10 +
+          this.props.statsFromItems.mana / 10 +
+          this.props.statsFromItems.endurance / 10
+      ) +
+      Math.round(this.calculateResistances(this.props.statsFromItems.fireRes)) +
+      Math.round(
+        this.calculateResistances(this.props.statsFromItems.frostRes)
+      ) +
+      Math.round(
+        this.calculateResistances(this.props.statsFromItems.energyRes)
+      ) +
+      Math.round(
+        Math.round(
+          this.calculateResistances(this.props.statsFromItems.curseRes)
+        ) * 1.5
+      ) +
+      Math.round(
+        Math.round(
+          this.calculateResistances(this.props.statsFromItems.cutRes)
+        ) +
+          Math.round(
+            this.calculateResistances(this.props.statsFromItems.pierceRes)
+          ) +
+          Math.round(
+            this.calculateResistances(this.props.statsFromItems.bluntRes)
+          ) /
+            2
+      );
+    return power;
   }
   render() {
     let negativePoints = {
@@ -76,22 +109,28 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
       "curseRes",
       "frostRes",
     ];
-    let statComponents = statNames.map(statName => (<StatLine
-      spendStatPoints={this.spendStatPoints}
-      stat={statName}
-      statName={translateProperty(statName)}
-      value={this.props[statName as keyof Stats]}
-      pointsLeft={this.props.statPts}
-      fromItems={this.props.statsFromItems[statName as keyof Stats]}
-      key={statName}
-    />))
-    let resistComponents = resistNames.map(statName => (<ResLine
-      stat={statName}
-      statName={translateProperty(statName)}
-      value={this.props.statsFromItems[statName as keyof Resists]}
-      percentageValue={this.calculateResistances(this.props.statsFromItems[statName as keyof Resists])}
-      key={statName}
-    />))
+    let statComponents = statNames.map((statName) => (
+      <StatLine
+        spendStatPoints={this.spendStatPoints}
+        stat={statName}
+        statName={translateProperty(statName)}
+        value={this.props[statName as keyof Stats]}
+        pointsLeft={this.props.statPts}
+        fromItems={this.props.statsFromItems[statName as keyof Stats]}
+        key={statName}
+      />
+    ));
+    let resistComponents = resistNames.map((statName) => (
+      <ResLine
+        stat={statName}
+        statName={translateProperty(statName)}
+        value={this.props.statsFromItems[statName as keyof Resists]}
+        percentageValue={this.calculateResistances(
+          this.props.statsFromItems[statName as keyof Resists]
+        )}
+        key={statName}
+      />
+    ));
     return (
       <div
         className="statsCalculator"
@@ -110,11 +149,19 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
             <EquipmentComponent />
             <div className="statsAndRes">
               <div className="statLines">
-                <OtherLine stat="damage" statName="Obrażenia" value={this.props.statsFromItems.damage} />
+                <OtherLine
+                  stat="damage"
+                  statName="Obrażenia"
+                  value={this.props.statsFromItems.damage}
+                />
                 {statComponents}
               </div>
               <div className="resLines">
-                <OtherLine stat="characterPower" statName="Power" value={this.calculateTotalPower()} />
+                <OtherLine
+                  stat="characterPower"
+                  statName="Power"
+                  value={this.calculateTotalPower()}
+                />
                 {resistComponents}
               </div>
             </div>
@@ -135,12 +182,18 @@ const mapStateToProps = (state: RootState) => {
     hp: state.stats.hp,
     endurance: state.stats.endurance,
     mana: state.stats.mana,
-    statsFromItems: calculateStatsFromItems(state.equipment, state.character.level),
+    statsFromItems: calculateStatsFromItems(
+      state.equipment,
+      state.character.level
+    ),
   };
 };
 
 //calculating how much total of each stat equipment provides
-function calculateStatsFromItems(equipment: Equipment, level: number): StatsFromItems {
+function calculateStatsFromItems(
+  equipment: Equipment,
+  level: number
+): StatsFromItems {
   let equipmentTypes = Object.keys(equipment);
   let equippedItems = equipmentTypes.map(
     (x) => equipment[x as keyof Equipment]
@@ -261,7 +314,11 @@ function calculateStateFromSets(equipment: Equipment): Stats {
   return statsFromSets;
 }
 
-function calculateTotalDamage(weapon: Item | null, special: Item | null, level: number) {
+function calculateTotalDamage(
+  weapon: Item | null,
+  special: Item | null,
+  level: number
+) {
   let totalDamage = 0;
   if (weapon) {
     totalDamage += weapon.calculateTotalDamage(level);

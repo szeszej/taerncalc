@@ -113,12 +113,11 @@ function renderApp(charClass: string, charLvl: number) {
           method: "GET",
         },
         (err: string, response: string, body: string) => {
-          console.log(err, JSON.parse(body));
+          console.log(JSON.parse(body));
           let importedBuild: ImportedBuild = JSON.parse(body)
           if (importedBuild === null) {
             reject();
           } else {
-            //Letting GA know a build was imported
             resolve(importedBuild);
           }
         }
@@ -126,6 +125,23 @@ function renderApp(charClass: string, charLvl: number) {
     });
     loadBuildFromDatabase
       .then((response) => {
+        //Letting GA know a build was imported
+        ReactGA.event({
+          category: "Import",
+          action: "Build Imported",
+          label: window.location.href,
+        });
+        let request = require("request");
+        let urlVars = getUrlVars(window.location.href);
+        request(
+          {
+            uri: "https://taencalc.firebaseio.com/builds/-" + urlVars.id + "/lastAccess.json",
+            method: "PUT",
+            body: JSON.stringify(new Date())
+          },
+          (err: string, response: string, body: string) => {
+            console.log(err, JSON.parse(body));
+          })
         let initialProperties = importBuildFromDatabase(
           response
         );

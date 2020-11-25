@@ -47,7 +47,8 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       level: this.props.level,
       stats: {},
       skills: {},
-      equipment: {}
+      equipment: {},
+      lastAccess: new Date()
     };
     //Transforming skills
     if (this.props.skills.skillPts !== this.props.level * 2 - 2) {
@@ -190,6 +191,7 @@ export interface BuildForExport {
   skills: SkillsForExport
   equipment: EquipmentForExport
   stats: StatsForExport
+  lastAccess: Date
 }
 
 export interface SkillsForExport {

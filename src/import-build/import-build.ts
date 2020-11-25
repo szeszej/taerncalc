@@ -148,6 +148,7 @@ export interface ImportedBuild {
   skills: ImportedSkills;
   equipment: ImportedEquipment;
   stats: ImportedStats;
+  lastAccess: Date
 }
 
 export interface ImportedSkills {
