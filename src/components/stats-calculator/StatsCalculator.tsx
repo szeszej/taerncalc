@@ -52,14 +52,14 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
   calculateTotalPower(): number {
     let power: number = 0;
     power +=
-      this.props.statsFromItems.strength +
-      this.props.statsFromItems.agility +
-      this.props.statsFromItems.power +
-      this.props.statsFromItems.knowledge +
+      this.props.statsFromItems.strength + this.props.strength +
+      this.props.statsFromItems.agility + this.props.agility +
+      this.props.statsFromItems.power + this.props.power +
+      this.props.statsFromItems.knowledge + this.props.knowledge +
       Math.round(
-        this.props.statsFromItems.hp / 10 +
-          this.props.statsFromItems.mana / 10 +
-          this.props.statsFromItems.endurance / 10
+        Math.round((this.props.statsFromItems.hp + this.props.hp) / 10) +
+          Math.round((this.props.statsFromItems.mana + this.props.mana) / 10) +
+          Math.round((this.props.statsFromItems.endurance + this.props.endurance) / 10)
       ) +
       Math.round(this.calculateResistances(this.props.statsFromItems.fireRes)) +
       Math.round(
@@ -83,7 +83,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
           Math.round(
             this.calculateResistances(this.props.statsFromItems.bluntRes)
           )) /
-            2
+          2
       );
     return power;
   }
