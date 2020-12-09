@@ -4,7 +4,7 @@ import { StatIncrementButton } from "./stat-buttons/StatIncrementButton";
 import { StatDecrementButton } from "./stat-buttons/StatDecrementButton";
 
 export function StatLine(props: Props) {
-  let buttonValues = [-5, -1, 1, 5];
+  let buttonValues = [-10, -1, 1, 10];
   let buttonElements = buttonValues.map((buttonValue) =>
     buttonValue < 0 ? (
       <StatDecrementButton
