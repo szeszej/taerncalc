@@ -13,7 +13,7 @@ export class LevelChanger extends React.Component<PropTypes> {
           <LevelDecrementButton
             changeLevel={this.props.changeLevel}
             level={this.props.level}
-            value={-5}
+            value={-10}
           />{" "}
           <LevelDecrementButton
             changeLevel={this.props.changeLevel}
@@ -31,7 +31,7 @@ export class LevelChanger extends React.Component<PropTypes> {
           <LevelIncrementButton
             changeLevel={this.props.changeLevel}
             level={this.props.level}
-            value={5}
+            value={10}
           />{" "}
         </div>{" "}
       </div>

@@ -60,6 +60,9 @@
 
               .statButtons {
                 text-align: center;
+                button {
+                  min-width: 3em;
+                }
               }
             }
           }
