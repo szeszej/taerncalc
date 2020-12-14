@@ -141,9 +141,10 @@ body {
   }
 
   .intro {
+    text-align: justify;
+    background-color: #d6cca9;
     width: 80%;
     margin: 0 auto;
-    text-align: justify;
 
     img {
       display: inline;
@@ -194,9 +195,14 @@ body {
       margin-left: 1em;
     }
   }
+
+  #calculator {
+    grid-area: content;
+    background-color: #d6cca9;
+  }
+
   .calculator {
     padding-bottom: 2em;
-    grid-area: content;
     display: grid;
     grid-template-rows: 8em auto;
     grid-template-areas: "classLevel" "calculators";

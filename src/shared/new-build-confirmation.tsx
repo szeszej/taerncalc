@@ -4,7 +4,7 @@ import React from "react";
 //Shared functionality
 import { confirmAlert } from "react-confirm-alert";
 
-export function confirmNewBuildCreation(buildProperties: BuildProperties): void {
+export function confirmNewBuildCreation(generateCalculator: () => void): void {
   confirmAlert({
     customUI: ({ onClose }) => {
       return (
@@ -18,7 +18,7 @@ export function confirmNewBuildCreation(buildProperties: BuildProperties): void 
                 className="alert-box-action"
                 onClick={() => {
                   onClose();
-                  buildProperties.renderApp(buildProperties.charClass, buildProperties.charLvl)
+                  generateCalculator()
                 }}
               >
                 Tak
@@ -33,10 +33,4 @@ export function confirmNewBuildCreation(buildProperties: BuildProperties): void 
       );
     },
   });
-}
-
-interface BuildProperties {
-  renderApp: (charClass: string, charLvl: number) => void
-  charClass: string
-  charLvl: number
 }

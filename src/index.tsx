@@ -6,7 +6,6 @@ import ReactGA from "react-ga";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store/store";
-import { initializeCharacter } from "./store/character-reducer/character-reducer";
 import { importCharacter } from "./store/character-reducer/character-reducer";
 
 //Styles
@@ -21,6 +20,7 @@ import * as serviceWorker from "./serviceWorker";
 //Components
 import { App } from "./App";
 import { Alert } from "./components/shared/Alert";
+import { Intro } from "./components/Intro"
 
 //Build import related
 import {
@@ -28,60 +28,11 @@ import {
   getUrlVars,
 } from "./import-build/import-build";
 
-//Shared functionality
-import { confirmNewBuildCreation } from "./shared/new-build-confirmation"
-
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
 //selecting calculator node
-const calculator = document.getElementById("calc")!;
-
-//Adding event listener for the character form
-document.getElementById("classLvl")!.addEventListener(
-  "submit",
-  function (event) {
-    event.preventDefault();
-    checkCalc((document.getElementById("charClass") as HTMLSelectElement)!.value, +(document.getElementById("charLvl") as HTMLInputElement)!.value);
-  },
-  false
-);
-
-//Checking if the calculator is already loaded and showing confirmation message
-function checkCalc(charClass: string, charLvl: number) {
-  if (calculator.classList.contains("enabled")) {
-    confirmNewBuildCreation({
-      renderApp: renderApp,
-      charClass: charClass,
-      charLvl: charLvl
-    })
-  } else {
-    renderApp(charClass, charLvl);
-  }
-}
-
-//Rendering the app
-function renderApp(charClass: string, charLvl: number) {
-  ReactDOM.unmountComponentAtNode(calculator);
-  calculator.classList.add("enabled");
-  ReactGA.event({
-    category: "Form",
-    action: "Submit",
-    label: charClass + " " + charLvl,
-  });
-  store.dispatch(
-    initializeCharacter({
-      className: charClass,
-      level: charLvl,
-    })
-  );
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    calculator
-  );
-}
+const calculator = document.getElementById("calculator")!;
 
 (function () {
   //Checking for cookie consent
@@ -100,6 +51,10 @@ function renderApp(charClass: string, charLvl: number) {
   let urlVars = getUrlVars(window.location.href);
   if (urlVars.hasOwnProperty("id")) {
     const alert = document.getElementById("alert")!;
+    ReactDOM.render(
+      <Intro />,
+      calculator
+    );
     ReactDOM.render(
       <Alert message="Importowanie buildu..." spinner={true} />,
       alert
@@ -150,7 +105,7 @@ function renderApp(charClass: string, charLvl: number) {
         store.dispatch(importCharacter(initialProperties));
         ReactDOM.render(
           <Provider store={store}>
-            <App />
+            <App isBuildImported={true}/>
           </Provider>,
           calculator
         );
@@ -165,10 +120,14 @@ function renderApp(charClass: string, charLvl: number) {
           alert
         );
       });
+  } else {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App isBuildImported={false}/>
+      </Provider>,
+      calculator
+    );
   }
 })();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

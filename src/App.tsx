@@ -1,98 +1,120 @@
 //React
 import React from "react";
+import ReactGA from "react-ga";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
-import { RootState } from "./store/store";
 import { Dispatch } from "redux";
 
 //Components
-import { SkillsCalculator } from "./components/skills-calculator/SkillsCalculator";
-import { StatsCalculator } from "./components/stats-calculator/StatsCalculator";
-import { LevelChanger } from "./components/level-changer/LevelChanger";
-import { BuildExporter } from "./components/build-exporter/BuildExporter";
+import { Intro } from "./components/Intro";
+import { Calculator } from "./components/Calculator";
+
+//Shared functionality
+import { confirmNewBuildCreation } from "./shared/new-build-confirmation";
 
 //Actions
-import { changeLevel } from "./store/character-reducer/character-reducer";
+import { initializeCharacter } from "./store/character-reducer/character-reducer";
 
-class ConnectedApp extends React.Component<PropTypes, StateTypes> {
+export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
-    this.changeLevel = this.changeLevel.bind(this);
     this.state = {
-      active: "stats",
+      charClass: "",
+      charLevel: "",
+      isCalculatorGenerated: false,
     };
+    this.generateCalculator = this.generateCalculator.bind(this);
   }
   componentDidMount() {
-    let charClass = document.getElementById("charClass") as HTMLInputElement;
-    charClass!.value = this.props.className;
-    let charLvl = document.getElementById("charLvl") as HTMLInputElement;
-    charLvl!.value = this.props.level.toString();
+    if (this.props.isBuildImported) {
+      this.setState({ isCalculatorGenerated: true });
+    }
   }
-  componentDidUpdate() {
-    let charLvl = document.getElementById("charLvl") as HTMLInputElement;
-    charLvl!.value = this.props.level.toString();
-  }
-  changeTabs(tab: "stats" | "skills") {
-    this.setState({
-      active: tab,
+  generateCalculator(): void {
+    ReactGA.event({
+      category: "Form",
+      action: "Submit",
+      label: this.state.charClass + " " + this.state.charLevel,
     });
-  }
-  changeLevel(value: number) {
-    this.props.changeLevel(value);
+    this.props.initializeCharacter(this.state.charClass, +this.state.charLevel);
+    this.setState({isCalculatorGenerated: true})
   }
   render() {
-    let inactive = {
-      opacity: 0.45,
-    };
-    let active = {
-      borderBottom: "10px solid #bd996f",
-    };
     return (
-      <div className="calculators">
-        <div className="tabs">
-          <button
-            style={this.state.active === "stats" ? active : inactive}
-            onClick={() => this.changeTabs("stats")}
+      <div className="calculator">
+        <div id="classLvlWrapper">
+          <form
+            id="classLvl"
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (this.state.isCalculatorGenerated) {
+                confirmNewBuildCreation(this.generateCalculator);
+              } else {
+                this.generateCalculator();
+              }
+            }}
           >
-            Statystyki i przedmioty
-          </button>
-          <div className="separator"></div>
-          <button
-            style={this.state.active === "skills" ? active : inactive}
-            onClick={() => this.changeTabs("skills")}
-          >
-            Umiejętności
-          </button>
+            <select
+              id="charClass"
+              required
+              onChange={(event) =>
+                this.setState({ charClass: event.currentTarget.value })
+              }
+            >
+              <option disabled defaultValue="" className="placeholder">
+                Wybierz klasę
+              </option>
+              <option value="barbarian">Barbarzyńca</option>
+              <option value="knight">Rycerz</option>
+              <option value="sheed">Sheed</option>
+              <option value="druid">Druid</option>
+              <option value="firemage">Mag Ognia</option>
+              <option value="archer">Łucznik</option>
+              <option value="voodoo">VooDoo</option>
+            </select>
+            <input
+              type="number"
+              min="1"
+              max="140"
+              placeholder="Poziom postaci"
+              id="charLvl"
+              required
+              onChange={(event) =>
+                this.setState({ charLevel: event.currentTarget.value })
+              }
+            />
+            <input className="submit" type="submit" value="Zatwierdź" />
+          </form>
         </div>
-        <LevelChanger level={this.props.level} changeLevel={this.changeLevel} />
-        <SkillsCalculator active={this.state.active} />
-        <StatsCalculator active={this.state.active} /> <BuildExporter />
+        <div id="calc">
+          {this.state.isCalculatorGenerated ? <Calculator /> : <Intro />}
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    level: state.character.level,
-    className: state.character.className,
-  };
-};
-
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    changeLevel: (value: number) => dispatch(changeLevel({ level: value })),
+    initializeCharacter: (className: string, level: number) =>
+      dispatch(initializeCharacter({ className: className, level: level })),
   };
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(null, mapDispatchToProps);
 
 export const App = connector(ConnectedApp);
 
 //Types
-type PropTypes = ConnectedProps<typeof connector>;
+type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface StateTypes {
-  active: "stats" | "skills";
+  charClass: string;
+  charLevel: string;
+  isCalculatorGenerated: boolean;
+}
+
+interface OwnProps {
+  isBuildImported: boolean;
 }
