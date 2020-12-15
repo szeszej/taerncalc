@@ -13,6 +13,9 @@ import { SkillLine } from "./skill-line/SkillLine";
 import { changeSkill } from "../../store/skills-reducer/skills-reducer";
 import { resetSkillPoints } from "../../store/skills-reducer/skills-reducer";
 
+//i18l
+import { withTranslation } from "react-i18next";
+
 export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
   constructor(props: PropTypes) {
     super(props);
@@ -34,6 +37,7 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
     }
   }
   render() {
+    const { t } = this.props;
     let negativePoints = {
       color: "red",
     };
@@ -47,6 +51,7 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
         checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}
         spendSkillPoints={this.spendSkillPoints}
         number={x}
+        t={t}
       />
     ));
     let classSkillsComponents = classSkills.map((x) => (
@@ -57,6 +62,7 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
         checkIfSkillCanIncrease={this.checkIfSkillCanIncrease}
         spendSkillPoints={this.spendSkillPoints}
         number={x}
+        t={t}
       />
     ));
     return (
@@ -67,23 +73,23 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
         <div className="statPts">
           <p>
             <span style={this.props.skillPts < 0 ? negativePoints : undefined}>
-              Punkty umiejętności: {this.props.skillPts}
+              {t("Punkty umiejętności")}: {this.props.skillPts}
             </span>{" "}
             <button className={"inlineButton"} onClick={() => this.reset()}>
-              Reset
+              {t("Reset")}
             </button>
           </p>
         </div>
         <div className="skills">
           <div className="classSkills">
             <div>
-              <p>Umiejętności klasowe</p>
+              <p>{t("Umiejętności klasowe")}</p>
             </div>
             {classSkillsComponents}
           </div>
           <div className="classSkills">
             <div>
-              <p>Umiejętności podstawowe</p>
+              <p>{t("Umiejętności podstawowe")}</p>
             </div>
             {basicSkillsComponents}
           </div>
@@ -119,8 +125,9 @@ type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
   active: string;
+  t(string: string): string;
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const SkillsCalculator = connector(ConnectedSkillsCalculator);
+export const SkillsCalculator = withTranslation()(connector(ConnectedSkillsCalculator));
