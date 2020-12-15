@@ -28,6 +28,13 @@ import {
   getUrlVars,
 } from "./import-build/import-build";
 
+//i18n
+import "./i18n/i18n";
+import i18n from "i18next";
+
+//Router
+import { BrowserRouter as Router} from "react-router-dom";
+
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
@@ -86,6 +93,11 @@ const calculator = document.getElementById("calculator")!;
           action: "Build Imported",
           label: window.location.href,
         });
+        ReactGA.event({
+          category: "Language",
+          action: "Page Load",
+          label: i18n.language,
+        })
         let request = require("request");
         let urlVars = getUrlVars(window.location.href);
         request(
@@ -105,13 +117,20 @@ const calculator = document.getElementById("calculator")!;
         store.dispatch(importCharacter(initialProperties));
         ReactDOM.render(
           <Provider store={store}>
+          <Router>
             <App isBuildImported={true}/>
+          </Router>
           </Provider>,
           calculator
         );
       })
       .catch(() => {
         ReactDOM.unmountComponentAtNode(alert);
+        ReactGA.event({
+          category: "Language",
+          action: "Page Load",
+          label: i18n.language,
+        })
         ReactDOM.render(
           <Alert
             message="Importowanie nie powiodło się. Spróbuj ponownie później"
@@ -119,11 +138,27 @@ const calculator = document.getElementById("calculator")!;
           />,
           alert
         );
+        ReactDOM.render(
+
+          <Provider store={store}>
+          <Router>
+            <App isBuildImported={false}/>
+            </Router>
+          </Provider>,
+          calculator
+        );
       });
   } else {
+    ReactGA.event({
+      category: "Language",
+      action: "Page Load",
+      label: i18n.language,
+    })
     ReactDOM.render(
       <Provider store={store}>
+      <Router>
         <App isBuildImported={false}/>
+        </Router>
       </Provider>,
       calculator
     );
