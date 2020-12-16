@@ -15,8 +15,8 @@ import {
 //Models
 import { Item, RawItem, ItemTypes } from "../../../../../data/models/item.model";
 
-//Shared functionality
-import translateProperty from "../../../../../shared/translate-property";
+//i18l
+import { withTranslation } from "react-i18next";
 
 class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -72,7 +72,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
       this.props.equipItem(this.props.type as keyof Equipment, createdItem);
       this.props.closeList();
     } else {
-      window.alert("Nie określono żadnych parametrów!");
+      window.alert(this.props.t("Nie określono żadnych parametrów!"));
     }
   }
   //Needed to prevent bubbling
@@ -110,6 +110,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
     });
   }
   render() {
+    const { t } = this.props
     let closeButton = (
       <button
         className="closeList"
@@ -141,8 +142,8 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
         value="placeholder"
         className="placeholder"
       >
-        Wybierz parametr
-      </option>,
+        {t("Wybierz parametr")}
+      </option>
     ];
     properties.forEach((x) =>
       options.push(
@@ -151,7 +152,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           value={x}
           disabled={this.state.propertiesUsed.includes(x)}
         >
-          {translateProperty(x)}
+          {t(x)}
         </option>
       )
     );
@@ -171,7 +172,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           onChange={(event) =>
             this.handleChange(+event.currentTarget.value, index)
           }
-          placeholder="Wartość"
+          placeholder={t("Wartość")}
           type="number"
           min={1}
           max={999}
@@ -188,12 +189,12 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
         className={"itemsList addItemForm"}
       >
         <div className={"title"}>
-          <p>Stwórz własny przedmiot</p>
+          <p>{t("Stwórz własny przedmiot")}</p>
         </div>
         <div className={"propertyList"}>
           {propertySelects}
           <div className="submit">
-            <button type="submit">Zatwierdź</button>
+            <button type="submit">{t("Zatwierdź")}</button>
           </div>
         </div>
         {closeButton}
@@ -210,6 +211,7 @@ interface OwnProps {
   type: keyof Equipment;
   closeForm(): void;
   closeList(): void;
+  t(string: string): string;
 }
 
 interface StateTypes {
@@ -249,4 +251,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(null, mapDispatchToProps);
 
-export const ItemCreatorForm = connector(ConnectedItemCreatorForm);
+export const ItemCreatorForm = withTranslation()(connector(ConnectedItemCreatorForm));

@@ -22,11 +22,13 @@ import { resetStatPoints } from "../../store/stats-reducer/stats-reducer";
 
 //Shared functionality
 import { checkWhichSetsAreEquipped } from "../../shared/check-which-sets-are-equipped";
-import translateProperty from "../../shared/translate-property";
 
 //Types
 import { Equipment } from "../../store/equipment-reducer/equipment-reducer";
 import { Item } from "../../data/models/item.model";
+
+//i18l
+import { withTranslation } from "react-i18next";
 
 class ConnectedStatsCalculator extends React.Component<PropTypes> {
   constructor(props: PropTypes) {
@@ -88,6 +90,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
     return power;
   }
   render() {
+    const { t } = this.props
     let negativePoints = {
       color: "red",
     };
@@ -101,19 +104,19 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
       "endurance",
     ];
     let resistNames = [
-      "bluntRes",
       "cutRes",
+      "bluntRes",
       "pierceRes",
       "fireRes",
       "energyRes",
-      "curseRes",
       "frostRes",
+      "curseRes",
     ];
     let statComponents = statNames.map((statName) => (
       <StatLine
         spendStatPoints={this.spendStatPoints}
         stat={statName}
-        statName={translateProperty(statName)}
+        statName={t(statName)}
         value={this.props[statName as keyof Stats]}
         pointsLeft={this.props.statPts}
         fromItems={this.props.statsFromItems[statName as keyof Stats]}
@@ -123,7 +126,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
     let resistComponents = resistNames.map((statName) => (
       <ResLine
         stat={statName}
-        statName={translateProperty(statName)}
+        statName={t(statName)}
         value={this.props.statsFromItems[statName as keyof Resists]}
         percentageValue={this.calculateResistances(
           this.props.statsFromItems[statName as keyof Resists]
@@ -139,10 +142,10 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
         <div className="stats">
           <p className="points">
             <span style={this.props.statPts < 0 ? negativePoints : undefined}>
-              Punkty statystyk: {this.props.statPts}
+              {t("Punkty statystyk")}: {this.props.statPts}
             </span>{" "}
             <button className={"inlineButton"} onClick={() => this.reset()}>
-              Reset
+              {t("Reset")}
             </button>
           </p>
           <div className="linesAndEq">
@@ -151,7 +154,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
               <div className="statLines">
                 <OtherLine
                   stat="damage"
-                  statName="Obrażenia"
+                  statName={t("Obrażenia")}
                   value={this.props.statsFromItems.damage}
                 />
                 {statComponents}
@@ -159,7 +162,7 @@ class ConnectedStatsCalculator extends React.Component<PropTypes> {
               <div className="resLines">
                 <OtherLine
                   stat="characterPower"
-                  statName="Power"
+                  statName={t("char-power")}
                   value={this.calculateTotalPower()}
                 />
                 {resistComponents}
@@ -339,13 +342,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const StatsCalculator = connector(ConnectedStatsCalculator);
+export const StatsCalculator = withTranslation()(connector(ConnectedStatsCalculator));
 
 //Types
 type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
   active: string;
+  t(string: string): string;
 }
 
 interface StatsFromItems extends Resists, Stats {

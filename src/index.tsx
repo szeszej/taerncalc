@@ -42,18 +42,6 @@ ReactGA.initialize("UA-142836926-3");
 const calculator = document.getElementById("calculator")!;
 
 (function () {
-  //Checking for cookie consent
-  if (!localStorage.getItem("cookieconsent")) {
-    document.getElementById("cookieconsent")!.style.display = "block";
-    document.getElementById("cookieButton")!.addEventListener(
-      "click",
-      function () {
-        document.getElementById("cookieconsent")!.style.display = "none";
-        localStorage.setItem("cookieconsent", "true");
-      },
-      false
-    );
-  }
   //Rendering the app if URL parameters are present (importing build)
   let urlVars = getUrlVars(window.location.href);
   if (urlVars.hasOwnProperty("id")) {
@@ -63,7 +51,7 @@ const calculator = document.getElementById("calculator")!;
       calculator
     );
     ReactDOM.render(
-      <Alert message="Importowanie buildu..." spinner={true} />,
+      <Alert message={i18n.t("importing-build")} spinner={true} />,
       alert
     );
     let loadBuildFromDatabase = new Promise<ImportedBuild>((resolve, reject) => {
@@ -113,7 +101,6 @@ const calculator = document.getElementById("calculator")!;
           response
         );
         ReactDOM.unmountComponentAtNode(alert);
-        calculator.classList.add("enabled");
         store.dispatch(importCharacter(initialProperties));
         ReactDOM.render(
           <Provider store={store}>
@@ -133,7 +120,7 @@ const calculator = document.getElementById("calculator")!;
         })
         ReactDOM.render(
           <Alert
-            message="Importowanie nie powiodło się. Spróbuj ponownie później"
+            message={i18n.t("import-failed")}
             spinner={false}
           />,
           alert

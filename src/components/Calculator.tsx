@@ -15,6 +15,9 @@ import { BuildExporter } from "./build-exporter/BuildExporter";
 //Actions
 import { changeLevel } from "../store/character-reducer/character-reducer";
 
+//i18l
+import { withTranslation } from "react-i18next";
+
 class ConnectedCalculator extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
@@ -22,16 +25,6 @@ class ConnectedCalculator extends React.Component<PropTypes, StateTypes> {
     this.state = {
       active: "stats",
     };
-  }
-  componentDidMount() {
-    let charClass = document.getElementById("charClass") as HTMLInputElement;
-    charClass!.value = this.props.className;
-    let charLvl = document.getElementById("charLvl") as HTMLInputElement;
-    charLvl!.value = this.props.level.toString();
-  }
-  componentDidUpdate() {
-    let charLvl = document.getElementById("charLvl") as HTMLInputElement;
-    charLvl!.value = this.props.level.toString();
   }
   changeTabs(tab: "stats" | "skills") {
     this.setState({
@@ -42,6 +35,7 @@ class ConnectedCalculator extends React.Component<PropTypes, StateTypes> {
     this.props.changeLevel(value);
   }
   render() {
+    const { t } = this.props;
     let inactive = {
       opacity: 0.45,
     };
@@ -55,17 +49,17 @@ class ConnectedCalculator extends React.Component<PropTypes, StateTypes> {
             style={this.state.active === "stats" ? active : inactive}
             onClick={() => this.changeTabs("stats")}
           >
-            Statystyki i przedmioty
+            {t("Statystyki i przedmioty")}
           </button>
           <div className="separator"></div>
           <button
             style={this.state.active === "skills" ? active : inactive}
             onClick={() => this.changeTabs("skills")}
           >
-            Umiejętności
+            {t("Umiejętności")}
           </button>
         </div>
-        <LevelChanger level={this.props.level} changeLevel={this.changeLevel} />
+        <LevelChanger level={this.props.level} changeLevel={this.changeLevel} t={this.props.t} />
         <SkillsCalculator active={this.state.active} />
         <StatsCalculator active={this.state.active} /> <BuildExporter />
       </div>
@@ -88,11 +82,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const Calculator = connector(ConnectedCalculator);
+export const Calculator = withTranslation()(connector(ConnectedCalculator));
 
 //Types
-type PropTypes = ConnectedProps<typeof connector>;
+type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface StateTypes {
   active: "stats" | "skills";
+}
+
+interface OwnProps {
+  t(string: string): string;
 }

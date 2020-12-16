@@ -11,8 +11,8 @@ import {
   Equipment,
 } from "../../../../../store/equipment-reducer/equipment-reducer";
 
-//Shared functionality
-import translateProperty from "../../../../../shared/translate-property";
+//i18l
+import { withTranslation } from "react-i18next";
 
 class ConnectedItemEnhancementForm extends React.Component<
   PropTypes,
@@ -122,6 +122,7 @@ class ConnectedItemEnhancementForm extends React.Component<
     });
   }
   render() {
+    const { t } = this.props
     let closeButton = (
       <button
         className="closeList"
@@ -158,7 +159,7 @@ class ConnectedItemEnhancementForm extends React.Component<
         value="placeholder"
         className="placeholder"
       >
-        Wybierz parametr
+        {t("Wybierz parametr")}
       </option>,
     ];
     properties.forEach((x) =>
@@ -168,7 +169,7 @@ class ConnectedItemEnhancementForm extends React.Component<
           value={x}
           disabled={this.state.propertiesUsed.includes(x)}
         >
-          {translateProperty(x)}
+          {t(x)}
         </option>
       )
     );
@@ -188,7 +189,7 @@ class ConnectedItemEnhancementForm extends React.Component<
           onChange={(event) =>
             this.handleChange(+event.currentTarget.value, index)
           }
-          placeholder="Wartość"
+          placeholder={t("Wartość")}
           type="number"
           min={-999}
           max={999}
@@ -211,15 +212,15 @@ class ConnectedItemEnhancementForm extends React.Component<
         }}
       >
         <div className={"title"}>
-          <p>Dodaj lub odejmij statystyki przedmiotu</p>
+          <p>{t("change-stats-1")}</p>
           <p className="subtitle">
-            (w ramach ulepszania bądź losowych statysyk)
+            {t("(w ramach ulepszania bądź losowych statysyk)")}
           </p>
         </div>
         <div className={"propertyList"}>
           {propertySelects}
           <div className="submit">
-            <button type="submit">Zatwierdź</button>
+            <button type="submit">{t("Zatwierdź")}</button>
           </div>
         </div>
         {closeButton}
@@ -235,6 +236,7 @@ interface OwnProps {
   type: keyof Equipment;
   enhancements: Enhancements | null;
   closeForm(): void;
+  t(string: string): string;
 }
 
 interface StateTypes {
@@ -263,4 +265,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(null, mapDispatchToProps);
 
-export const ItemEnhancementForm = connector(ConnectedItemEnhancementForm);
+export const ItemEnhancementForm = withTranslation()(connector(ConnectedItemEnhancementForm));

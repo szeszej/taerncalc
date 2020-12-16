@@ -14,14 +14,14 @@ export class LevelChanger extends React.Component<PropTypes> {
             changeLevel={this.props.changeLevel}
             level={this.props.level}
             value={-10}
-          />{" "}
+          />
           <LevelDecrementButton
             changeLevel={this.props.changeLevel}
             level={this.props.level}
             value={-1}
-          />{" "}
-        </div>{" "}
-        <div className="level"> Poziom: {this.props.level} </div>{" "}
+          />
+        </div>
+        <div className="level"> {this.props.t("Poziom")}: {this.props.level} </div>
         <div className="levelButtons">
           <LevelIncrementButton
             changeLevel={this.props.changeLevel}
@@ -32,8 +32,8 @@ export class LevelChanger extends React.Component<PropTypes> {
             changeLevel={this.props.changeLevel}
             level={this.props.level}
             value={10}
-          />{" "}
-        </div>{" "}
+          />
+        </div>
       </div>
     )
   }
@@ -42,4 +42,5 @@ export class LevelChanger extends React.Component<PropTypes> {
 interface PropTypes {
   level: number
   changeLevel: (value: number) => void
+  t(string: string): string;
 }

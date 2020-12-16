@@ -5,6 +5,7 @@ import ReactGA from "react-ga";
 //Redux
 import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
+import { RootState } from "./store/store";
 
 //Components
 import { Intro } from "./components/Intro";
@@ -42,7 +43,18 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   }
   componentDidMount() {
     if (this.props.isBuildImported) {
-      this.setState({ isCalculatorGenerated: true });
+      this.setState({
+        charClass: this.props.className,
+        charLevel: this.props.level.toString(),
+        isCalculatorGenerated: true
+       });
+    }
+  }
+  componentDidUpdate(prevProps: PropTypes) {
+    if (prevProps.level !== this.props.level) {
+      this.setState({
+        charLevel: this.props.level.toString(),
+       });
     }
   }
   generateCalculator(): void {
@@ -58,6 +70,14 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
     const { t } = this.props;
     let urlParams = getUrlVars(window.location.href).hasOwnProperty("id") ? "/?id=" + getUrlVars(window.location.href).id : ""
     return (
+      <div>
+      <div className="header">
+        <div className="logo"><img src="images/logo.png" alt="Pride of Taern" /></div>
+        <div className="title">
+            <h1>Kalkulator buildów Pride of Taern 2.0</h1>
+        </div>
+      </div>
+      <div className="leftSidebar"></div>
       <div className="calculator">
         <Helmet>
           <title>{t("page-title")}</title>
@@ -132,7 +152,7 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
               }
               defaultValue=""
             >
-              <option disabled value="" className="placeholder">
+              <option disabled value={this.state.charClass} className="placeholder">
                 {t("Wybierz klasę")}
               </option>
               <option value="barbarian">{t("Barbarzyńca")}</option>
@@ -149,6 +169,7 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
               max="140"
               placeholder={t("Poziom postaci")}
               id="charLvl"
+              value={this.state.charLevel}
               required
               onChange={(event) =>
                 this.setState({ charLevel: event.currentTarget.value })
@@ -161,9 +182,31 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
           {this.state.isCalculatorGenerated ? <Calculator /> : <Intro />}
         </div>
       </div>
+      <div className="rightSidebar"></div>
+      <div className="footer">
+        <div className="authors">
+          <p className="created">Stworzone przez <a href="https://github.com/szeszej/" target="_blank">szeszej</a>.</p>
+          <p className="created">Propozycje i błędy można zgłaszać przez <a href="https://forum.taern.pl/viewtopic.php?f=279&t=56507" target="_blank">forum Taernu</a>.</p>
+          <p className="created">Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.
+          </p>
+          <p>Pozostałe grafiki pochodzą z <a href="https://game-icons.net/">Game-icons.net</a>.</p>
+        </div>
+      </div>
+      {!localStorage.getItem("cookieconsent") ? <div id="cookieconsent">
+        Ta strona używa cookies. Kontynuując używanie jej, zgadzasz się na ich użycie w celach analitycznych.
+        <button id="cookieButton" onClick={() => localStorage.setItem("cookieconsent", "true")}>Rozumiem</button>
+      </div>: null}
+      </div>
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    level: state.character.level,
+    className: state.character.className,
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
@@ -172,7 +215,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export const App = withTranslation()(connector(withRouter(ConnectedApp)));
 
