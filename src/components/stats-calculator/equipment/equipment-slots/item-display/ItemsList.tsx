@@ -115,7 +115,7 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
             hideItemsList={this.props.hideItemsList}
           />
         ))}
-        <div className="itemOnList addItem" onClick={this.showAddItemForm}></div>
+        <div className="itemOnList addItem" title="Stwórz własny przedmiot w tym slocie" onClick={this.showAddItemForm}></div>
       </div>
     );
     let unequippableItemsComponents = (

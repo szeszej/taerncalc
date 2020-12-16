@@ -276,6 +276,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     let activeFilters = filterTypes.filter(
       (filterType) => this.state.filters[filterType]
     );
+    // eslint-disable-next-line
     let chosenFilters = activeFilters.map((filterType) => {
       if (this.state.filters[filterType]) {
         return (

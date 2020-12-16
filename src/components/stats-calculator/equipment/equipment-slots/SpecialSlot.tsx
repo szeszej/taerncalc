@@ -149,6 +149,7 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
     return (
       <div
         className="special"
+        title="Stwórz własny przedmiot"
         onClick={() =>
           this.hideTooltipWithListUp(
             this.hideTooltip,
