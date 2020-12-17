@@ -13,7 +13,10 @@ import { Equipment } from "../../../../store/equipment-reducer/equipment-reducer
 //Shared functionality
 import isEquivalent from "../../../../shared/object-equivalency-check";
 
-export class ItemSlot extends React.Component<PropTypes, StateTypes> {
+//i18l
+import { withTranslation } from "react-i18next";
+
+class ConnectedItemSlot extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
     this.showTooltip = this.showTooltip.bind(this);
@@ -86,7 +89,7 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
     let enhanceButton = (
       <button
         className="enhanceButton"
-        title="Ulepsz przedmiot"
+        title={this.props.t("Ulepsz przedmiot")}
         style={this.props.inSlot && (this.props.inSlot.enhancements.strength || this.props.inSlot.enhancements.agility || this.props.inSlot.enhancements.power || this.props.inSlot.enhancements.knowledge || this.props.inSlot.enhancements.hp || this.props.inSlot.enhancements.mana || this.props.inSlot.enhancements.endurance || this.props.inSlot.enhancements.damage) ? {backgroundImage: `url("/images/upgrade2.png")`} : undefined}
         onClick={(event) => {
           event.stopPropagation()
@@ -182,6 +185,8 @@ export class ItemSlot extends React.Component<PropTypes, StateTypes> {
   }
 }
 
+export const ItemSlot = withTranslation()(ConnectedItemSlot)
+
 //Types
 interface PropTypes {
   type: keyof Equipment
@@ -199,6 +204,7 @@ interface PropTypes {
   showItemsList(type: keyof Equipment): void
   hideItemsList(): void
   changePsychoLvl(slot: keyof Equipment, value: number): void
+  t(string: string): string;
 }
 
 interface StateTypes {

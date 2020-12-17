@@ -114,13 +114,14 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     this.props.changePsychoLvl(slot, value);
   }
   unequipItems() {
+    const { t } = this.props
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
           <div className="backdrop">
             <div className="alert-box">
               <p className="alert-text">
-                Czy na pewno chcesz zdjąć wszystkie przedmioty?
+                {t("unequip-all")}
               </p>
               <div className="alert-box-actions">
                 <button
@@ -130,10 +131,10 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                     onClose();
                   }}
                 >
-                  Tak
+                  {t("Tak")}
                 </button>
                 <button className="alert-box-action" onClick={onClose}>
-                  Nie
+                  {t("Nie")}
                 </button>
               </div>
               <button className="close-button" onClick={onClose}>
@@ -331,7 +332,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           })
         }
       >
-        Resetuj filtry
+        {t("Resetuj filtry")}
       </button>
     );
     return (
@@ -346,7 +347,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                   listToDisplay: "search",
                 })
               }
-              placeholder="Wpisz nazwę"
+              placeholder={t("Wpisz nazwę")}
               value={this.state.searchString}
               onClick={() => this.setState({ listToDisplay: "search" })}
             />
@@ -377,7 +378,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
             <div className="filtersList">
               <div
                 className="chosenFilters"
-                data-placeholder="Lista aktywnych filtrów"
+                data-placeholder={t("active-filters")}
               >
                 {chosenFilters.length > 4
                   ? chosenFilters.slice(0, 4)
@@ -399,14 +400,14 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
               {this.state.listToDisplay === "filters" ? (
                 <div className="itemsList filtersForm">
                   <div className="title">
-                    <p>Dodaj filtry do list przedmiotów</p>
+                    <p>{t("add-filters")}</p>
                   </div>
                   <div className="filterLines">{checkBoxes}</div>
                   <div className="submit">
                     <button
                       onClick={() => this.setState({ listToDisplay: "" })}
                     >
-                      Zatwierdź
+                      {t("Zatwierdź")}
                     </button>
                     {filtersResetButton}
                     {filtersCloseButton}

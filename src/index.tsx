@@ -31,8 +31,8 @@ import {
 import "./i18n/i18n";
 import i18n from "i18next";
 
-//Router
-import { BrowserRouter as Router} from "react-router-dom";
+// //Router
+// import { BrowserRouter as Router} from "react-router-dom";
 
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
@@ -45,9 +45,9 @@ ReactGA.initialize("UA-142836926-3");
     const root = document.getElementById("root");
     ReactDOM.render(
       <Provider store={store}>
-      <Router>
+      {/* <Router> */}
         <App isBuildImported={true}/>
-      </Router>
+      {/* </Router> */}
       </Provider>,
       root
     );
@@ -105,9 +105,9 @@ ReactGA.initialize("UA-142836926-3");
         store.dispatch(importCharacter(initialProperties));
         ReactDOM.render(
           <Provider store={store}>
-          <Router>
+          {/* <Router> */}
             <App isBuildImported={true}/>
-          </Router>
+          {/* </Router> */}
           </Provider>,
           root
         );
@@ -129,9 +129,9 @@ ReactGA.initialize("UA-142836926-3");
         ReactDOM.render(
 
           <Provider store={store}>
-          <Router>
+          {/* <Router> */}
             <App isBuildImported={false}/>
-            </Router>
+            {/* </Router> */}
           </Provider>,
           root
         );
@@ -144,9 +144,9 @@ ReactGA.initialize("UA-142836926-3");
     })
     ReactDOM.render(
       <Provider store={store}>
-      <Router>
+      {/* <Router> */}
         <App isBuildImported={false}/>
-        </Router>
+        {/* </Router> */}
       </Provider>,
       document.getElementById("root")
     );

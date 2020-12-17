@@ -1,4 +1,5 @@
-//zmienić wyświetlanie eoików w tooltipie - niech dmg bedzie po prostu liczba, a jesli rarity = epic, to tooltip wyswietla z dodatkiem poziomu
+//i18l
+import i18n from "i18next";
 
 export class ItemSet {
   readonly name: string;
@@ -94,11 +95,11 @@ export class ItemSet {
       let valueDependingOnPieces: number = 0;
       if (x[1] !== 1) {
         valueDependingOnPieces = Math.floor(x[1] * valueModifier * 10) / 10;
-        let otherPropertyAsString = x[1] < 0 ? x[0] + ": -" + Math.abs(valueDependingOnPieces) + "% (" + x[1] + "%)" : x[0] + ": +" + valueDependingOnPieces + "% (" + x[1] + "%)"
+        let otherPropertyAsString = x[1] < 0 ? i18n.t(x[0]) + ": -" + Math.abs(valueDependingOnPieces) + "% (" + x[1] + "%)" : x[0] + ": +" + valueDependingOnPieces + "% (" + x[1] + "%)"
         return otherPropertyAsString;
       } else {
         valueDependingOnPieces = valueModifier === 1 ? 1 : 0;
-        return x[0] + ": +" + valueDependingOnPieces + " (" + x[1] + ")";
+        return i18n.t(x[0]) + ": +" + valueDependingOnPieces + " (" + x[1] + ")";
       }
     });
     return propertyValues;

@@ -21,15 +21,15 @@ import { initializeCharacter } from "./store/character-reducer/character-reducer
 import { withTranslation } from "react-i18next";
 import i18n from "i18next";
 
-//Router
-import { Redirect, Link, withRouter } from "react-router-dom";
-import { RouteComponentProps } from "react-router";
+// //Router
+// import { Redirect, Link, withRouter } from "react-router-dom";
+// import { RouteComponentProps } from "react-router";
 
 //Helmet
 import { Helmet } from "react-helmet";
 
-//URL params
-import { getUrlVars } from "./import-build/import-build";
+// //URL params
+// import { getUrlVars } from "./import-build/import-build";
 
 export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -69,9 +69,9 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     const { t } = this.props;
-    let urlParams = getUrlVars(window.location.href).hasOwnProperty("id")
-      ? "/?id=" + getUrlVars(window.location.href).id
-      : "";
+    // let urlParams = getUrlVars(window.location.href).hasOwnProperty("id")
+    //   ? "/?id=" + getUrlVars(window.location.href).id
+    //   : "";
     return (
       <div className="wrapper">
         <div className="header">
@@ -89,7 +89,7 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
             <meta name="description" content={t("meta-description")} />
           </Helmet>
           <div className="languages">
-            <Link to={"" + urlParams}>
+            {/* <Link to={"" + urlParams}> */}
               <button
                 id="pl"
                 onClick={() => {
@@ -101,8 +101,8 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
                   });
                 }}
               ></button>
-            </Link>
-            <Link to={"/en" + urlParams}>
+            {/* </Link> */}
+            {/* <Link to={"/en" + urlParams}> */}
               <button
                 id="en"
                 onClick={() => {
@@ -114,14 +114,14 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
                   });
                 }}
               ></button>
-            </Link>
-            {i18n.language === "en" &&
+            {/* </Link> */}
+            {/* {i18n.language === "en" &&
             this.props.location.pathname !== "/en" ? (
               <Redirect to={"/en" + urlParams} />
             ) : i18n.language === "pl" &&
               this.props.location.pathname !== "/pl" ? (
               <Redirect to={"/pl" + urlParams} />
-            ) : null}
+            ) : null} */}
           </div>
           <div id="classLvlWrapper">
             <form
@@ -251,12 +251,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const App = withTranslation()(connector(withRouter(ConnectedApp)));
+export const App = withTranslation()(connector(ConnectedApp));
 
 //Types
 type PropTypes = ConnectedProps<typeof connector> &
-  OwnProps &
-  RouteComponentProps;
+  OwnProps;
 
 interface StateTypes {
   charClass: string;
