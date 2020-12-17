@@ -206,7 +206,7 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         ) : null}
         {this.props.item.weaponType ? (
           <p className="itemProperty">
-            {t("Typ broni")}: {this.props.item.weaponType}
+            {t("Typ broni")}: {t(this.props.item.weaponType)}
           </p>
         ) : null}
         {this.props.item.damageType ? (

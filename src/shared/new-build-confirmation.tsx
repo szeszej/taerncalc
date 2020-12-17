@@ -4,6 +4,9 @@ import React from "react";
 //Shared functionality
 import { confirmAlert } from "react-confirm-alert";
 
+//i18l
+import i18n from "i18next";
+
 export function confirmNewBuildCreation(generateCalculator: () => void): void {
   confirmAlert({
     customUI: ({ onClose }) => {
@@ -11,7 +14,7 @@ export function confirmNewBuildCreation(generateCalculator: () => void): void {
         <div className="backdrop">
           <div className="alert-box">
             <p className="alert-text">
-              Czy na pewno chcesz stworzyć nowy build? Obecny zostanie usunięty!
+              {i18n.t("new-build-confirm")}
             </p>
             <div className="alert-box-actions">
               <button
@@ -21,10 +24,10 @@ export function confirmNewBuildCreation(generateCalculator: () => void): void {
                   generateCalculator()
                 }}
               >
-                Tak
+                {i18n.t("Tak")}
               </button>
               <button className="alert-box-action" onClick={onClose}>
-                Nie
+                {i18n.t("Nie")}
               </button>
             </div>
             <button className="close-button" onClick={onClose}>×</button>
