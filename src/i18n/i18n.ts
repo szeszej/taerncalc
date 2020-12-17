@@ -11,14 +11,20 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "en",
-
+    whitelist: ['en', 'pl'],
+    fallbackLng: {
+      "en-us": ["en"],
+      "en-uk": ["en"],
+      "pl-pl": ["pl"],
+      "default": ["en"]
+    },
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
     detection: {
-      order: ["localStorage", "path", "navigator"],
-      caches: ["localStorage"]
+      order: ["path", "localStorage", "navigator"],
+      caches: ["localStorage"],
+      checkWhitelist: true
     },
   });
 

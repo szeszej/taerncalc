@@ -5,6 +5,15 @@ export const resources = {
       "page-title": "Kalkulator buildów Pride of Taern",
       "meta-description":
         "Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!",
+      //home
+      h1: "Kalkulator buildów Pride of Taern",
+      created: "Stworzone przez",
+      suggestions: "Propozycje i błędy można zgłaszać przez",
+      "suggestions-target": "forum Taernu",
+      disclaimer: "Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.",
+      "disclaimer-2": "Pozostałe grafiki pochodzą z",
+      cookies: "Ta strona używa cookies. Kontynuując używanie jej, zgadzasz się na ich użycie w celach analitycznych.",
+      "cookies-confirm": "Rozumiem",
       //classes
       Barbarzyńca: "Barbarzyńca",
       Rycerz: "Rycerz",
@@ -18,7 +27,8 @@ export const resources = {
       Zatwierdź: "Zatwierdź",
       //importing
       "importing-build": "Importowanie buildu...",
-      "import-failed": "Importowanie nie powiodło się. Sprawdź czy link jest prawidłowy lub spróbuj ponownie później.",
+      "import-failed":
+        "Importowanie nie powiodło się. Sprawdź czy link jest prawidłowy lub spróbuj ponownie później.",
       //items
       "Admiralski gronostaj": "Admiralski gronostaj",
       "Aeterus Passio": "Aeterus Passio",
@@ -334,79 +344,118 @@ export const resources = {
       "Wyrwanie z korzeni": "Wyrwanie z korzeni",
       //skills calculator
       "Punkty umiejętności": "Punkty umiejętności",
-      "Reset": "Reset",
+      Reset: "Reset",
       "Umiejętności klasowe": "Umiejętności klasowe",
       "Umiejętności podstawowe": "Umiejętności podstawowe",
       "max-skill-lvl-reached": "Maks. poziom osiągnięty",
       "req-lvl-upgrade-skill": "Poz. wym. do awansu",
       //intro
       "intro-header-1": "Po co mi kalkulator buildów Pride of Taern?",
-      "intro-desc-1": "Nie masz pojęcia, jakie są najlepszy itemy na twój level? Chcesz wiedzieć, czy po resecie starczy ci punktów, żeby wykupić odpowiednie umiejętności i nie chcesz zmarnować platyny? Na takie właśnie pytania odpowiada niniejszy kalkulator. Nieprzemyślane resety mogą was kosztować cenną platynę, którą przecież lepiej wydać inaczej. Zamiast ją marnować, lepiej użyć kalkulatora i sprawdzić, czy z obecnym poziomem uda ci się osiągnąć odpowiednio wysokie poziomy umiejętności i parametrów.",
-      "intro-header-2": "Czy mogę jakoś podzielić się swoim buildem z innymi graczami Pride of Taern?",
+      "intro-desc-1":
+        "Nie masz pojęcia, jakie są najlepszy itemy na twój level? Chcesz wiedzieć, czy po resecie starczy ci punktów, żeby wykupić odpowiednie umiejętności i nie chcesz zmarnować platyny? Na takie właśnie pytania odpowiada niniejszy kalkulator. Nieprzemyślane resety mogą was kosztować cenną platynę, którą przecież lepiej wydać inaczej. Zamiast ją marnować, lepiej użyć kalkulatora i sprawdzić, czy z obecnym poziomem uda ci się osiągnąć odpowiednio wysokie poziomy umiejętności i parametrów.",
+      "intro-header-2":
+        "Czy mogę jakoś podzielić się swoim buildem z innymi graczami Pride of Taern?",
       "intro-desc-2": `Jak najbardziej! Wystarczy, że klikniesz na przycisk "Eksportuj build" na samym dole ekranu, a następnie gotowy link do twojego buildu skopiujesz do schowka. Możesz potem wklejać go innym graczom na czacie w grze, na forum lub gdziekolwiek zechcesz.`,
-      "intro-header-3": "Jak używać kalkulatora umiejętności i statystyk Pride of Taern?",
-      "intro-desc-3-1": "Używanie kalkulatora jest bardzo proste - w formularzu powyżej wpisz:",
+      "intro-header-3":
+        "Jak używać kalkulatora umiejętności i statystyk Pride of Taern?",
+      "intro-desc-3-1":
+        "Używanie kalkulatora jest bardzo proste - w formularzu powyżej wpisz:",
       "intro-desc-3-bullet-1": `Dla jakiej klasy chcesz wyliczyć statystyki i umiejętności (pole "Wybierz klasę").`,
       "intro-desc-3-bullet-2": `Dla jakiego poziomu postaci chcesz dokonać obliczeń (pole "Poziom postaci")`,
       "intro-desc-3-bullet-3": `Kliknij "Zatwierdź"`,
       "intro-desc-3-2": `Po przejściu powyższych korków wyświetli się kalkulator. Na początku będzie widoczna zakładka z listą statystyk i ekwipunkiem, ale możesz również przejść do drugiej zakładki z listą umiejętności (oddzielnie umiejętności klasowe i te dla każdej klasy). Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności. Kliknij na sloty w ekwipunku, aby wyekwipować przedmioty. Możesz również tworzyć własne przedmioty lub przedmioty sklepowe po kliknięciu na ikonkę młota i kowadła na liście przedmiotów.
       Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset".`,
-      "intro-header-4": "Niektóre przedmioty mają losowe statystyki, a niektóre z moich przedmiotów są ulepszone - jak mogę odzwierciedlić to w kalkulatorze?",
-      "intro-desc-4-1": "Po wyekwipowaniu przedmioty, kliknij przycisk ulepszenia",
-      "intro-desc-4-2": "Otworzy się menu, w którym będziesz mógł dowolnie modyfikować podstawowe parametry przedmiotu.",
+      "intro-header-4":
+        "Niektóre przedmioty mają losowe statystyki, a niektóre z moich przedmiotów są ulepszone - jak mogę odzwierciedlić to w kalkulatorze?",
+      "intro-desc-4-1":
+        "Po wyekwipowaniu przedmioty, kliknij przycisk ulepszenia",
+      "intro-desc-4-2":
+        "Otworzy się menu, w którym będziesz mógł dowolnie modyfikować podstawowe parametry przedmiotu.",
       "intro-header-5": "Do czego służy ikonka kowadła",
-      "intro-desc-5": "Po kliknięciu w tę ikonkę możecie sami stworzyć przedmiot! Dodatkowo funkcja ta umożliwia personalizację buildu i przedmiotu - możecie mu nadawać własną nazwę i obrazek!",
+      "intro-desc-5":
+        "Po kliknięciu w tę ikonkę możecie sami stworzyć przedmiot! Dodatkowo funkcja ta umożliwia personalizację buildu i przedmiotu - możecie mu nadawać własną nazwę i obrazek!",
       "intro-header-6": "Czym jest The Pride of Taern?",
-      "intro-desc-6": "The Pride of Taern jest polską grą MMORPG w rzucie izometrycznym i turową walką. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.",
+      "intro-desc-6":
+        "The Pride of Taern jest polską grą MMORPG w rzucie izometrycznym i turową walką. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.",
       //calculator
       "Statystyki i przedmioty": "Statystyki i przedmioty",
-      "Umiejętności": "Umiejętności",
+      Umiejętności: "Umiejętności",
       //build exporter
       "Eksportuj build": "Eksportuj build",
       "Link do twojego buildu": "Link do twojego buildu",
       "Skopiuj do schowka": "Skopiuj do schowka",
       "export-in-progress": "Eksportowanie w toku...",
       "export-error": "Wystąpił błąd, spróbuj ponownie później!",
-      "build-copied": "Adres buildu skopiowany do schowka! Użyj Ctrl+V, aby wkleić go gdzie chcesz!",
+      "build-copied":
+        "Adres buildu skopiowany do schowka! Użyj Ctrl+V, aby wkleić go gdzie chcesz!",
       //level changer
-      "Poziom": "Poziom",
+      Poziom: "Poziom",
       //alert
-      "Zamknij": "Zamknij",
+      Zamknij: "Zamknij",
       //stats calculator
-      "strength": "Siła",
-      "agility": "Zręczność",
-      "power": "Moc",
-      "knowledge": "Wiedza",
-      "hp": "Punkty życia",
-      "mana": "Mana",
-      "endurance": "Kondycja",
-      "bluntRes": "Odp. na obuchowe",
-      "cutRes": "Odp. na sieczne",
-      "pierceRes": "Odp. na kłute",
-      "fireRes": "Odp. na ogień",
-      "energyRes": "Odp. na energię",
-      "curseRes": "Odp. na uroki",
-      "frostRes": "Odp. na zimno",
+      strength: "Siła",
+      agility: "Zręczność",
+      power: "Moc",
+      knowledge: "Wiedza",
+      hp: "Punkty życia",
+      mana: "Mana",
+      endurance: "Kondycja",
+      bluntRes: "Odp. na obuchowe",
+      cutRes: "Odp. na sieczne",
+      pierceRes: "Odp. na kłute",
+      fireRes: "Odp. na ogień",
+      energyRes: "Odp. na energię",
+      curseRes: "Odp. na uroki",
+      frostRes: "Odp. na zimno",
       "Punkty statystyk": "Punkty statystyk",
-      "Obrażenia": "Obrażenia",
+      Obrażenia: "Obrażenia",
       "char-power": "Power",
       //item creator
-      "Wartość": "Wartość",
+      Wartość: "Wartość",
       "Stwórz własny przedmiot": "Stwórz własny przedmiot",
       "Wybierz parametr": "Wybierz parametr",
       "no-parameters-chosen": "Nie określono żadnych parametrów!",
+      armor: "Własny pancerz",
+      helmet: "Własny hełm",
+      neck: "Własny naszyjnik",
+      gloves: "Własne rękawice",
+      weapon: "Własna broń",
+      shield: "Własna tarcza",
+      belt: "Własny pas",
+      boots: "Własne buty",
+      ring1: "Własny pierścień",
+      ring2: "Własny pierścień",
+      pants: "Własne spodnie",
+      cape: "Własny płaszcz",
       //item enhancement
       "change-stats-1": "Dodaj lub odejmij statystyki przedmiotu",
       "change-stats-2": "w ramach ulepszania bądź losowych statysyk",
       //special slot
-      "Nazwa": "Nazwa",
+      Nazwa: "Nazwa",
       "Wpisz nazwę": "Wpisz nazwę",
       "image-url": "Obrazek (URL)",
       "Wklej adres obrazka": "Wklej adres obrazka",
+      //items list
+      "create-item": "Stwórz własny przedmiot w tym slocie",
+      "no-items": "Brak przedmiotów po zastosowaniu filtrów.",
+      //equipment
+      class: "Klasowy",
+      rare: "Rzadkie",
+      psychoRare: "Psycho",
+      set: "Zestawy",
     },
   },
   en: {
     translation: {
+      //home
+      h1: "Pride of Taern Build Calculator",
+      created: "Create by",
+      suggestions: "Please post all suggestions and feedback on",
+      "suggestions-target": "the Taern forum",
+      disclaimer: "Pride of Taern, all item images and the logo are a property of Whitemoon System.",
+      "disclaimer-2": "All other images are from",
+      cookies: "This website uses cookies. By continuing to use it, you consent to cookie usage for analytical purposes.",
+      "cookies-confirm": "I understand",
       //meta tags
       "page-title": "Pride of Taern Build Calculator",
       "meta-description":
@@ -424,7 +473,8 @@ export const resources = {
       Zatwierdź: "Submit",
       //importing
       "importing-build": "Importing in progress...",
-      "import-failed": "Importing failed. Please check if your link is correct or try again later.",
+      "import-failed":
+        "Importing failed. Please check if your link is correct or try again later.",
       //items
       "Admiralski gronostaj": "Admiral's Ermine Robe",
       "Aeterus Passio": "Aeterus Passio",
@@ -740,74 +790,103 @@ export const resources = {
       "Wyrwanie z korzeni": "Root Rip",
       //skills calculator
       "Punkty umiejętności": "Skill Points",
-      "Reset": "Reset",
+      Reset: "Reset",
       "Umiejętności klasowe": "Class Skills",
       "Umiejętności podstawowe": "Basic Skills",
       "max-skill-lvl-reached": "Max level reached",
       "req-lvl-upgrade-skill": "Lvl. req. to upgrade",
       //intro
       "intro-header-1": "Why do I need the Pride of Taern Build Calculator?",
-      "intro-desc-1": "Don't know what the best items for you level are? Would you like to know if you're going to have enough skill and attribute points after a reset because you don't want to waste platinum? The calculator provides answers to these questions. Rash resets can cost you a lot of platinum and I'm sure you'd rather spend it in a differnt way. Instaed of wasting it, use the calculator to check if you can have high enough attributes and skill levels with your current level.",
-      "intro-header-2": "Is there any way for me to share my build with other Pride of Taern players?",
+      "intro-desc-1":
+        "Don't know what the best items for you level are? Would you like to know if you're going to have enough skill and attribute points after a reset because you don't want to waste platinum? The calculator provides answers to these questions. Rash resets can cost you a lot of platinum and I'm sure you'd rather spend it in a differnt way. Instaed of wasting it, use the calculator to check if you can have high enough attributes and skill levels with your current level.",
+      "intro-header-2":
+        "Is there any way for me to share my build with other Pride of Taern players?",
       "intro-desc-2": `Of course! All you need to do is click the Export Build button at the bottom of the screen. You will see a link to your build that you can copy and then paste wherever you want.`,
-      "intro-header-3": "How do I use the skills and attributes calculator for Pride of Taern?",
-      "intro-desc-3-1": "Using the calculator is very simple. Just fill out the form above with:",
+      "intro-header-3":
+        "How do I use the skills and attributes calculator for Pride of Taern?",
+      "intro-desc-3-1":
+        "Using the calculator is very simple. Just fill out the form above with:",
       "intro-desc-3-bullet-1": `The class you want to add the skills and attributes to (the Choose Your Class field).`,
       "intro-desc-3-bullet-2": `The level for which you want to make calculations (the Character Level field).`,
       "intro-desc-3-bullet-3": `Click Submit.`,
       "intro-desc-3-2": `Once the above steps are complete, you'll see the calculator. First you'll see the tab with a list of attributes and equipment, but you can also click on the other tab to see skills (both base and class skills). You can use the buttons to increase/decrease attributes and upgrade/downgrade skills. Click on equipment slots to equip items. You can also create your own items or shop items using the hammer and anvil icon on the items list.
       If you want to start your calculations again, click the Reset button.`,
-      "intro-header-4": "Some items have random attribute bonuses and I upgrade my equipment regularly. How can I achieve this in the calculator?",
+      "intro-header-4":
+        "Some items have random attribute bonuses and I upgrade my equipment regularly. How can I achieve this in the calculator?",
       "intro-desc-4-1": "After equipping an item, click on the upgrade button",
-      "intro-desc-4-2": "A new menu will open where you will be able to modify the attributes of the item as you see fit.",
+      "intro-desc-4-2":
+        "A new menu will open where you will be able to modify the attributes of the item as you see fit.",
       "intro-header-5": "What is the anvil icon used for",
-      "intro-desc-5": "After clicking the icon, you'll be able to create your own item! This feature can also be used to personalize your build by adding a name and an image to the item!",
+      "intro-desc-5":
+        "After clicking the icon, you'll be able to create your own item! This feature can also be used to personalize your build by adding a name and an image to the item!",
       "intro-header-6": "What is The Pride of Taern?",
-      "intro-desc-6": "The Pride of Taern is a Polish isometric MMORPG with turn-based combat system. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests and tasks, and dynamic events.",
+      "intro-desc-6":
+        "The Pride of Taern is a Polish isometric MMORPG with turn-based combat system. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests and tasks, and dynamic events.",
       "Statystyki i przedmioty": "Attributes and Items",
-      "Umiejętności": "Skills",
+      Umiejętności: "Skills",
       //build exporter
       "Eksportuj build": "Export Build",
       "Link do twojego buildu": "Link to Your Build",
       "Skopiuj do schowka": "Copy to Clipboard",
       "export-in-progress": "Export in progress...",
       "export-error": "An error has occured, please try again later!",
-      "build-copied": "The link to your build has been copied to clipboard! Press Ctrl+V to paste it wherever you want!",
+      "build-copied":
+        "The link to your build has been copied to clipboard! Press Ctrl+V to paste it wherever you want!",
       //level changer
-      "Poziom": "Level",
+      Poziom: "Level",
       //alert
-      "Zamknij": "Close",
+      Zamknij: "Close",
       //stats calculator
-      "strength": "Strength",
-      "agility": "Agility",
-      "power": "Power",
-      "knowledge": "Knowledge",
-      "hp": "HP",
-      "mana": "Mana",
-      "endurance": "Stamina",
-      "bluntRes": "Crushing Resistance",
-      "cutRes": "Slashing Resistance",
-      "pierceRes": "Piercing Resistance",
-      "fireRes": "Fire Resistance",
-      "energyRes": "Energy Resistance",
-      "curseRes": "Mental Resistance",
-      "frostRes": "Cold Resistance",
+      strength: "Strength",
+      agility: "Agility",
+      power: "Power",
+      knowledge: "Knowledge",
+      hp: "HP",
+      mana: "Mana",
+      endurance: "Stamina",
+      bluntRes: "Crushing Resistance",
+      cutRes: "Slashing Resistance",
+      pierceRes: "Piercing Resistance",
+      fireRes: "Fire Resistance",
+      energyRes: "Energy Resistance",
+      curseRes: "Mental Resistance",
+      frostRes: "Cold Resistance",
       "Punkty statystyk": "Attribute Points",
-      "Obrażenia": "Damage",
+      Obrażenia: "Damage",
       "char-power": "Character Power",
       //item creator
-      "Wartość": "Value",
+      Wartość: "Value",
       "Stwórz własny przedmiot": "Create a custom item",
       "Wybierz parametr": "Choose attribute",
       "no-parameters-chosen": "No attribute has been chosen!",
+      armor: "Custom armor",
+      helmet: "Custom helmet",
+      neck: "Custom necklace",
+      gloves: "Custom gloves",
+      weapon: "Custom weapon",
+      shield: "Custom shield",
+      belt: "Custom belt",
+      boots: "Custom boots",
+      ring1: "Custom ring",
+      ring2: "Custom ring",
+      pants: "Custom pants",
+      cape: "Custom cape",
       //item enhancement
       "change-stats-1": "Increse/decraese attributes on items",
       "change-stats-2": "to account for upgrades or random attributes",
       //special slot
-      "Nazwa": "Name",
+      Nazwa: "Name",
       "Wpisz nazwę": "Enter name",
       "image-url": "Image (URL)",
       "Wklej adres obrazka": "Paste image URL",
+      //items list
+      "create-item": "Create a new item in this slot",
+      "no-items": "No items after filters have been applied.",
+      //equipment
+      class: "Class",
+      rare: "Rares",
+      psychoRare: "Psycho",
+      set: "Sets",
     },
   },
 };

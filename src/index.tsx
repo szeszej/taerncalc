@@ -20,7 +20,6 @@ import * as serviceWorker from "./serviceWorker";
 //Components
 import { App } from "./App";
 import { Alert } from "./components/shared/Alert";
-import { Intro } from "./components/Intro"
 
 //Build import related
 import {
@@ -38,17 +37,19 @@ import { BrowserRouter as Router} from "react-router-dom";
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
-//selecting calculator node
-const calculator = document.getElementById("calculator")!;
-
 (function () {
   //Rendering the app if URL parameters are present (importing build)
   let urlVars = getUrlVars(window.location.href);
   if (urlVars.hasOwnProperty("id")) {
     const alert = document.getElementById("alert")!;
+    const root = document.getElementById("root");
     ReactDOM.render(
-      <Intro />,
-      calculator
+      <Provider store={store}>
+      <Router>
+        <App isBuildImported={true}/>
+      </Router>
+      </Provider>,
+      root
     );
     ReactDOM.render(
       <Alert message={i18n.t("importing-build")} spinner={true} />,
@@ -108,7 +109,7 @@ const calculator = document.getElementById("calculator")!;
             <App isBuildImported={true}/>
           </Router>
           </Provider>,
-          calculator
+          root
         );
       })
       .catch(() => {
@@ -132,7 +133,7 @@ const calculator = document.getElementById("calculator")!;
             <App isBuildImported={false}/>
             </Router>
           </Provider>,
-          calculator
+          root
         );
       });
   } else {
@@ -147,7 +148,7 @@ const calculator = document.getElementById("calculator")!;
         <App isBuildImported={false}/>
         </Router>
       </Provider>,
-      calculator
+      document.getElementById("root")
     );
   }
 })();

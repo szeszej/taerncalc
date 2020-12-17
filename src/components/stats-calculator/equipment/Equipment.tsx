@@ -23,11 +23,13 @@ import {
 
 //Shared functionality
 import { confirmAlert } from "react-confirm-alert";
-import translateProperty from "../../../shared/translate-property";
 
 //Types
 import { Equipment } from "../../../store/equipment-reducer/equipment-reducer";
 import { Item } from "../../../data/models/item.model";
+
+//i18l
+import { withTranslation } from "react-i18next";
 
 class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -182,6 +184,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     return itemsToFilter;
   }
   render() {
+    const { t } = this.props
     let classBackground = {
       backgroundImage: `url("images/` + this.props.class + `.svg")`,
     };
@@ -269,7 +272,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                 })
           }
         >
-          {translateProperty(filterType)}
+          {t(filterType)}
         </label>
       </div>
     ));
@@ -281,7 +284,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
       if (this.state.filters[filterType]) {
         return (
           <div className="chosenFilter">
-            <p>{translateProperty(filterType)}</p>
+            <p>{t(filterType)}</p>
             <button
               onClick={() =>
                 this.setState((prevState) => {
@@ -464,10 +467,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const EquipmentComponent = connector(ConnectedEquipment);
+export const EquipmentComponent = withTranslation()(connector(ConnectedEquipment));
 
 //Types
-type PropTypes = ConnectedProps<typeof connector>;
+type PropTypes = ConnectedProps<typeof connector> & OwnProps;
+
+interface OwnProps {
+  t(string: string): string;
+}
 
 interface StateTypes {
   listToDisplay: keyof Equipment | "" | "search" | "filters";

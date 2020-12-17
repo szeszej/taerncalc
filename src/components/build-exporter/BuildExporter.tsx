@@ -21,6 +21,7 @@ import { Alert } from "../shared/Alert"
 
 //i18l
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 
 class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -113,7 +114,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
           ReactDOM.render(<Alert message={this.props.t("export-error")} spinner={false} />, document.getElementById("alert")!)
         } else {
           let buildId = JSON.parse(body).name.substring(1)
-          let link = "https://kalkulatortaern.github.io/?id=" + buildId;
+          let link = "https://kalkulatortaern.github.io/" + i18n.language + "?id=" + buildId;
           this.setState({
             showExport: true,
             exportLink: link,

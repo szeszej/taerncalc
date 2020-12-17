@@ -38,6 +38,7 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
       charClass: "",
       charLevel: "",
       isCalculatorGenerated: false,
+      cookieConsent: false,
     };
     this.generateCalculator = this.generateCalculator.bind(this);
   }
@@ -46,15 +47,15 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
       this.setState({
         charClass: this.props.className,
         charLevel: this.props.level.toString(),
-        isCalculatorGenerated: true
-       });
+        isCalculatorGenerated: true,
+      });
     }
   }
   componentDidUpdate(prevProps: PropTypes) {
     if (prevProps.level !== this.props.level) {
       this.setState({
         charLevel: this.props.level.toString(),
-       });
+      });
     }
   }
   generateCalculator(): void {
@@ -68,134 +69,167 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     const { t } = this.props;
-    let urlParams = getUrlVars(window.location.href).hasOwnProperty("id") ? "/?id=" + getUrlVars(window.location.href).id : ""
+    let urlParams = getUrlVars(window.location.href).hasOwnProperty("id")
+      ? "/?id=" + getUrlVars(window.location.href).id
+      : "";
     return (
-      <div>
-      <div className="header">
-        <div className="logo"><img src="images/logo.png" alt="Pride of Taern" /></div>
-        <div className="title">
-            <h1>Kalkulator buildów Pride of Taern 2.0</h1>
+      <div className="wrapper">
+        <div className="header">
+          <div className="logo">
+            <img src="images/logo.png" alt="Pride of Taern" />
+          </div>
+          <div className="title">
+            <h1>{t("h1")}</h1>
+          </div>
         </div>
-      </div>
-      <div className="leftSidebar"></div>
-      <div className="calculator">
-        <Helmet>
-          <title>{t("page-title")}</title>
-          <meta name="description" content={t("meta-description")} />
-        </Helmet>
-        <div className="languages">
-          <Link
-            to={
-              "" + urlParams
-            }
-          >
-            <button
-              id="pl"
-              onClick={() => {
-                i18n.changeLanguage("pl");
-                ReactGA.event({
-                  category: "Change Lang",
-                  action: "Click",
-                  label: "pl",
-                });
+        <div className="leftSidebar"></div>
+        <div className="calculator">
+          <Helmet>
+            <title>{t("page-title")}</title>
+            <meta name="description" content={t("meta-description")} />
+          </Helmet>
+          <div className="languages">
+            <Link to={"" + urlParams}>
+              <button
+                id="pl"
+                onClick={() => {
+                  i18n.changeLanguage("pl");
+                  ReactGA.event({
+                    category: "Language",
+                    action: "Change",
+                    label: "pl",
+                  });
+                }}
+              ></button>
+            </Link>
+            <Link to={"/en" + urlParams}>
+              <button
+                id="en"
+                onClick={() => {
+                  i18n.changeLanguage("en");
+                  ReactGA.event({
+                    category: "Language",
+                    action: "Change",
+                    label: "en",
+                  });
+                }}
+              ></button>
+            </Link>
+            {i18n.language === "en" &&
+            this.props.location.pathname !== "/en" ? (
+              <Redirect to={"/en" + urlParams} />
+            ) : i18n.language === "pl" &&
+              this.props.location.pathname !== "/pl" ? (
+              <Redirect to={"/pl" + urlParams} />
+            ) : null}
+          </div>
+          <div id="classLvlWrapper">
+            <form
+              id="classLvl"
+              onSubmit={(event) => {
+                event.preventDefault();
+                if (this.state.isCalculatorGenerated) {
+                  confirmNewBuildCreation(this.generateCalculator);
+                } else {
+                  this.generateCalculator();
+                }
               }}
-            ></button>
-          </Link>
-          <Link
-            to={
-              "/en" + urlParams
-            }
-          >
-            <button
-              id="en"
-              onClick={() => {
-                i18n.changeLanguage("en");
-                ReactGA.event({
-                  category: "Change Lang",
-                  action: "Click",
-                  label: "en",
-                });
-              }}
-            ></button>
-          </Link>
-          {i18n.language === "en" && this.props.location.pathname !== "/en" ? (
-            <Redirect
-              to={
-                "/en" + urlParams
-              }
-            />
-          ) : i18n.language === "pl" && this.props.location.pathname !== "" ? (
-            <Redirect
-              to={
-                "" + urlParams
-              }
-            />
-          ) : null}
-        </div>
-        <div id="classLvlWrapper">
-          <form
-            id="classLvl"
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (this.state.isCalculatorGenerated) {
-                confirmNewBuildCreation(this.generateCalculator);
-              } else {
-                this.generateCalculator();
-              }
-            }}
-          >
-            <select
-              id="charClass"
-              required
-              onChange={(event) =>
-                this.setState({ charClass: event.currentTarget.value })
-              }
-              defaultValue=""
             >
-              <option disabled value={this.state.charClass} className="placeholder">
-                {t("Wybierz klasę")}
-              </option>
-              <option value="barbarian">{t("Barbarzyńca")}</option>
-              <option value="knight">{t("Rycerz")}</option>
-              <option value="sheed">{t("Sheed")}</option>
-              <option value="druid">{t("Druid")}</option>
-              <option value="firemage">{t("Mag Ognia")}</option>
-              <option value="archer">{t("Łucznik")}</option>
-              <option value="voodoo">{t("VooDoo")}</option>
-            </select>
-            <input
-              type="number"
-              min="1"
-              max="140"
-              placeholder={t("Poziom postaci")}
-              id="charLvl"
-              value={this.state.charLevel}
-              required
-              onChange={(event) =>
-                this.setState({ charLevel: event.currentTarget.value })
-              }
-            />
-            <input className="submit" type="submit" value={t("Zatwierdź")} />
-          </form>
+              <select
+                id="charClass"
+                required
+                onChange={(event) =>
+                  this.setState({ charClass: event.currentTarget.value })
+                }
+                defaultValue=""
+              >
+                <option
+                  disabled
+                  value={this.state.charClass}
+                  className="placeholder"
+                >
+                  {t("Wybierz klasę")}
+                </option>
+                <option value="barbarian">{t("Barbarzyńca")}</option>
+                <option value="knight">{t("Rycerz")}</option>
+                <option value="sheed">{t("Sheed")}</option>
+                <option value="druid">{t("Druid")}</option>
+                <option value="firemage">{t("Mag Ognia")}</option>
+                <option value="archer">{t("Łucznik")}</option>
+                <option value="voodoo">{t("VooDoo")}</option>
+              </select>
+              <input
+                type="number"
+                min="1"
+                max="140"
+                placeholder={t("Poziom postaci")}
+                id="charLvl"
+                value={this.state.charLevel}
+                required
+                onChange={(event) =>
+                  this.setState({ charLevel: event.currentTarget.value })
+                }
+              />
+              <input className="submit" type="submit" value={t("Zatwierdź")} />
+            </form>
+          </div>
+          <div id="calc">
+            {this.state.isCalculatorGenerated ? <Calculator /> : <Intro />}
+          </div>
         </div>
-        <div id="calc">
-          {this.state.isCalculatorGenerated ? <Calculator /> : <Intro />}
+        <div className="rightSidebar"></div>
+        <div className="footer">
+          <div className="authors">
+            <p className="created">
+              {t("created")}{" "}
+              <a
+                href="https://github.com/szeszej/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                szeszej
+              </a>
+              .
+            </p>
+            <p className="created">
+              {t("suggestions")}{" "}
+              <a
+                href="https://forum.taern.pl/viewtopic.php?f=279&t=56507"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("suggestions-target")}
+              </a>
+              .
+            </p>
+            <p className="created">{t("disclaimer")}</p>
+            <p>
+              {t("disclaimer-2")}{" "}
+              <a
+                href="https://game-icons.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Game-icons.net
+              </a>
+              .
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="rightSidebar"></div>
-      <div className="footer">
-        <div className="authors">
-          <p className="created">Stworzone przez <a href="https://github.com/szeszej/" target="_blank">szeszej</a>.</p>
-          <p className="created">Propozycje i błędy można zgłaszać przez <a href="https://forum.taern.pl/viewtopic.php?f=279&t=56507" target="_blank">forum Taernu</a>.</p>
-          <p className="created">Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.
-          </p>
-          <p>Pozostałe grafiki pochodzą z <a href="https://game-icons.net/">Game-icons.net</a>.</p>
-        </div>
-      </div>
-      {!localStorage.getItem("cookieconsent") ? <div id="cookieconsent">
-        Ta strona używa cookies. Kontynuując używanie jej, zgadzasz się na ich użycie w celach analitycznych.
-        <button id="cookieButton" onClick={() => localStorage.setItem("cookieconsent", "true")}>Rozumiem</button>
-      </div>: null}
+        {!localStorage.getItem("cookieconsent") && !this.state.cookieConsent ? (
+          <div id="cookieconsent">
+            {t("cookies")}
+            <button
+              id="cookieButton"
+              onClick={() => {
+                localStorage.setItem("cookieconsent", "true");
+                this.setState({ cookieConsent: true });
+              }}
+            >
+              {t("cookies-confirm")}
+            </button>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -228,6 +262,7 @@ interface StateTypes {
   charClass: string;
   charLevel: string;
   isCalculatorGenerated: boolean;
+  cookieConsent: boolean;
 }
 
 interface OwnProps {
