@@ -46,7 +46,7 @@ ReactGA.initialize("UA-142836926-3");
     ReactDOM.render(
       <Provider store={store}>
       {/* <Router> */}
-        <App isBuildImported={true}/>
+        <App isBuildImported={false}/>
       {/* </Router> */}
       </Provider>,
       root
@@ -102,6 +102,7 @@ ReactGA.initialize("UA-142836926-3");
           response
         );
         ReactDOM.unmountComponentAtNode(alert);
+        ReactDOM.unmountComponentAtNode(root!);
         store.dispatch(importCharacter(initialProperties));
         ReactDOM.render(
           <Provider store={store}>

@@ -23,6 +23,7 @@ import {
 
 //Shared functionality
 import { confirmAlert } from "react-confirm-alert";
+import i18n from "i18next";
 
 //Types
 import { Equipment } from "../../../store/equipment-reducer/equipment-reducer";
@@ -355,11 +356,15 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
             this.state.listToDisplay === "search" ? (
               <ItemsSearchList
                 items={this.props.items.filter(
-                  (x) =>
-                    x.name
+                  (x) => this.props.i18n.language === "pl" ?
+                    (x.name
                       .toLowerCase()
                       .includes(this.state.searchString.toLowerCase()) &&
-                    (x.class === null || x.class === this.props.class)
+                    (x.class === null || x.class === this.props.class)) :
+                    (t(x.name)
+                      .toLowerCase()
+                      .includes(this.state.searchString.toLowerCase()) &&
+                    (x.class === null || x.class === this.props.class))
                 )}
                 class={this.props.class}
                 level={this.props.level}
@@ -475,6 +480,7 @@ type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
   t(string: string): string;
+  i18n: typeof i18n
 }
 
 interface StateTypes {

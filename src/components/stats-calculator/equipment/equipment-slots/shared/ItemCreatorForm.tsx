@@ -168,7 +168,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           {options}
         </select>
         <input
-          value={x.value ? x.value : undefined}
+          value={x.value ? x.value : ""}
           onChange={(event) =>
             this.handleChange(+event.currentTarget.value, index)
           }

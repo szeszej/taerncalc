@@ -195,12 +195,13 @@ body {
     }
   }
 
-  #calculator {
-    grid-area: content;
-    background-color: #d6cca9;
-  }
+  // #calculator {
+  //   grid-area: content;
+  //   background-color: #d6cca9;
+  // }
 
   .calculator {
+    grid-area: content;
     padding-bottom: 2em;
     display: grid;
     grid-template-rows: 8em auto;

@@ -98,7 +98,7 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
     return (
       <div className="itemTooltip" onClick={(event) => event.stopPropagation()}>
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>
-          {t(this.props.item.name)}
+          {!this.props.item.isCustom ? t(this.props.item.name) : t(this.props.item.type + "-count", {number: this.props.item.name.slice(-1)})}
         </p>
         {this.props.item.set && equippedSet ? (
           <p className="itemSet" style={{ color: "#3DEF01" }}>
@@ -484,5 +484,5 @@ interface OwnProps {
   agility?: number;
   power?: number;
   knowledge?: number;
-  t(string: string): string;
+  t(string: string, interpolation?: {[key: string]: string} ): string;
 }
