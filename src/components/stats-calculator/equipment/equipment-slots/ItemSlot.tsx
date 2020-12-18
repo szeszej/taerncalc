@@ -118,8 +118,6 @@ class ConnectedItemSlot extends React.Component<PropTypes, StateTypes> {
       ></button>
     )
     let noItemsWarning = (<div className="noItemsWarning">!</div>)
-    console.log(this.props.inSlot);
-
     return (
       <div
         className={
