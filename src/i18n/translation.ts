@@ -749,7 +749,7 @@ export const resources = {
       Yurugu: "Yurugu",
       Zadry: "Splinters",
       "Zagłada Ludów": "Nation's Doom",
-      Zalla: "Armory",
+      Zalla: "Zalla",
       "Zemsta Ivravula": "Revenge of Ivravul",
       Ziraki: "Zeeraks",
       "Allakaja Kondycji": "Allakaya of Stamina",

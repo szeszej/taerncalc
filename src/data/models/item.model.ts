@@ -35,7 +35,7 @@ export class Item {
     properties.forEach((itemProperty) => {
       this[itemProperty] = item[itemProperty] ? item[itemProperty]! : 0;
     });
-    this.isCustom = item.hasOwnProperty("isCustom") ? true : false;
+    this.isCustom = item.isCustom ? item.isCustom : false;
     this.randomStats = (item.hasOwnProperty("randomStats") && item.randomStats === true) || (item.set && item.reqLvl === 100) ? true : false;
     this.enhancements = item.enhancements
       ? item.enhancements
