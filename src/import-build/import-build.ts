@@ -118,6 +118,9 @@ export function importBuildFromDatabase(
             endurance: 0,
             damage: 0,
           };
+      if (temporaryEquipment[key as keyof Equipment]! && temporaryEquipment[key as keyof Equipment]!.isCustom && !(temporaryEquipment[key as keyof Equipment]!.name.includes("Własn") || temporaryEquipment[key as keyof Equipment]!.name.includes("Custom "))) {
+        temporaryEquipment[key as keyof Equipment]!.isCustom = false;
+      }
       isNewEquipmentNeeded = true;
     }
   }

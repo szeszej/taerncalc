@@ -141,11 +141,11 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
                 onChange={(event) =>
                   this.setState({ charClass: event.currentTarget.value })
                 }
-                defaultValue=""
+                value={this.state.charClass}
               >
                 <option
                   disabled
-                  value={this.state.charClass}
+                  value={""}
                   className="placeholder"
                 >
                   {t("Wybierz klasę")}

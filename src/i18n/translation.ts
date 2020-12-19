@@ -558,6 +558,8 @@ export const resources = {
       "Modyfikator trafień fizycznych": "Modyfikator trafień fizycznych",
       "Modyfikator trafień dystansowych": "Modyfikator trafień dystansowych",
       "Modyfikator trafień magicznych": "Modyfikator trafień magicznych",
+      //item search
+      "no-items-found": "Nie znaleziono pasujących przedmiotów."
     },
   },
   en: {
@@ -1116,6 +1118,8 @@ export const resources = {
       "Modyfikator trafień fizycznych": "Physical hit chance",
       "Modyfikator trafień dystansowych": "Ranged hit chance",
       "Modyfikator trafień magicznych": "Magic hit chance",
+      //item search
+      "no-items-found": "No items matching this name."
     },
   },
 };

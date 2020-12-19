@@ -211,7 +211,7 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         ) : null}
         {this.props.item.damageType ? (
           <p className="itemProperty">
-            {t("Typ obrażeń")}: {this.props.item.damageType}
+            {t("Typ obrażeń")}: {t(this.props.item.damageType)}
           </p>
         ) : null}
         {this.props.item.damage ? (

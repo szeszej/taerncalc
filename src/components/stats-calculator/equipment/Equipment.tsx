@@ -285,7 +285,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     let chosenFilters = activeFilters.map((filterType) => {
       if (this.state.filters[filterType]) {
         return (
-          <div className="chosenFilter">
+          <div className="chosenFilter" key={filterType}>
             <p>{t(filterType)}</p>
             <button
               onClick={() =>
