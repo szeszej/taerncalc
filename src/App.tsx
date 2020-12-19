@@ -192,7 +192,7 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
             <p className="created">
               {t("suggestions")}{" "}
               <a
-                href="https://forum.taern.pl/viewtopic.php?f=279&t=56507"
+                href={t("suggestion-target-link")}
                 target="_blank"
                 rel="noopener noreferrer"
               >

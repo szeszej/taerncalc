@@ -10,6 +10,7 @@ export const resources = {
       created: "Stworzone przez",
       suggestions: "Propozycje i błędy można zgłaszać przez",
       "suggestions-target": "forum Taernu",
+      "suggestion-target-link": "https://forum.taern.pl/viewtopic.php?f=279&t=56507",
       disclaimer:
         "Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.",
       "disclaimer-2": "Pozostałe grafiki pochodzą z",
@@ -18,6 +19,7 @@ export const resources = {
       "cookies-confirm": "Rozumiem",
       //classes
       Barbarzyńca: "Barbarzyńca",
+      Sheed: "Sheed",
       Rycerz: "Rycerz",
       Druid: "Druid",
       "Mag Ognia": "Mag Ognia",
@@ -29,6 +31,7 @@ export const resources = {
       firemage: "Mag Ognia",
       archer: "Łucznik",
       voodoo: "VooDoo",
+      sheed: "Sheed",
       //character form
       "Wybierz klasę": "Wybierz klasę",
       "Poziom postaci": "Poziom postaci",
@@ -570,6 +573,7 @@ export const resources = {
       created: "Created by",
       suggestions: "Please post all suggestions and feedback on",
       "suggestions-target": "the Taern forum",
+      "suggestion-target-link": "https://forum.taern.com/viewtopic.php?f=5&t=23506",
       disclaimer:
         "Pride of Taern, all item images and the logo are a property of Whitemoon System.",
       "disclaimer-2": "All other images are from",
@@ -582,6 +586,7 @@ export const resources = {
         "Curious how many skills points you'll have on a certaon level? Want to plan your character's development? Take a look here!",
       //classes
       Barbarzyńca: "Barbarian",
+      Sheed: "Sheed",
       Rycerz: "Knight",
       Druid: "Druid",
       "Mag Ognia": "Fire Mage",
@@ -593,6 +598,7 @@ export const resources = {
       firemage: "Fire Mage",
       archer: "Archer",
       voodoo: "VooDoo",
+      sheed: "Sheed",
       //character form
       "Wybierz klasę": "Choose Your Class",
       "Poziom postaci": "Character Level",
@@ -932,7 +938,7 @@ export const resources = {
       //intro
       "intro-header-1": "Why do I need the Pride of Taern Build Calculator?",
       "intro-desc-1":
-        "Don't know what the best items for you level are? Would you like to know if you're going to have enough skill and attribute points after a reset because you don't want to waste platinum? The calculator provides answers to these questions. Rash resets can cost you a lot of platinum and I'm sure you'd rather spend it in a differnt way. Instaed of wasting it, use the calculator to check if you can have high enough attributes and skill levels with your current level.",
+        "Don't know what the best items for you level are? Would you like to know if you're going to have enough skill and attribute points after a reset because you don't want to waste platinum? The calculator provides answers to these questions. Rash resets can cost you a lot of platinum and I'm sure you'd rather spend it in a different way. Instead of wasting it, use the calculator to check if you can have high enough attributes and skill levels with your current level.",
       "intro-header-2":
         "Is there any way for me to share my build with other Pride of Taern players?",
       "intro-desc-2": `Of course! All you need to do is click the Export Build button at the bottom of the screen. You will see a link to your build that you can copy and then paste wherever you want.`,
