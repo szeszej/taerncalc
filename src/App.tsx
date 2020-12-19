@@ -74,6 +74,10 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
     //   : "";
     return (
       <div className="wrapper">
+        <Helmet>
+          <title>{t("page-title")}</title>
+          <meta name="description" content={t("meta-description")} />
+        </Helmet>
         <div className="header">
           <div className="logo">
             <img src="images/logo.png" alt="Pride of Taern" />
@@ -84,36 +88,34 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
         </div>
         <div className="leftSidebar"></div>
         <div className="calculator">
-          <Helmet>
-            <title>{t("page-title")}</title>
-            <meta name="description" content={t("meta-description")} />
-          </Helmet>
           <div className="languages">
             {/* <Link to={"" + urlParams}> */}
-              <button
-                id="pl"
-                onClick={() => {
-                  i18n.changeLanguage("pl");
-                  ReactGA.event({
-                    category: "Language",
-                    action: "Change",
-                    label: "pl",
-                  });
-                }}
-              ></button>
+            <button
+              id="pl"
+              onClick={() => {
+                i18n.changeLanguage("pl");
+                ReactGA.event({
+                  category: "Language",
+                  action: "Change",
+                  label: "pl",
+                });
+              }}
+              title="Polski"
+            ></button>
             {/* </Link> */}
             {/* <Link to={"/en" + urlParams}> */}
-              <button
-                id="en"
-                onClick={() => {
-                  i18n.changeLanguage("en");
-                  ReactGA.event({
-                    category: "Language",
-                    action: "Change",
-                    label: "en",
-                  });
-                }}
-              ></button>
+            <button
+              id="en"
+              onClick={() => {
+                i18n.changeLanguage("en");
+                ReactGA.event({
+                  category: "Language",
+                  action: "Change",
+                  label: "en",
+                });
+              }}
+              title="English"
+            ></button>
             {/* </Link> */}
             {/* {i18n.language === "en" &&
             this.props.location.pathname !== "/en" ? (
@@ -143,11 +145,7 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
                 }
                 value={this.state.charClass}
               >
-                <option
-                  disabled
-                  value={""}
-                  className="placeholder"
-                >
+                <option disabled value={""} className="placeholder">
                   {t("Wybierz klasę")}
                 </option>
                 <option value="barbarian">{t("Barbarzyńca")}</option>
@@ -254,8 +252,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 export const App = withTranslation()(connector(ConnectedApp));
 
 //Types
-type PropTypes = ConnectedProps<typeof connector> &
-  OwnProps;
+type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface StateTypes {
   charClass: string;

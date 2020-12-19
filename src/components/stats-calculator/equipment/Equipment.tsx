@@ -41,6 +41,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     this.hideItemsList = this.hideItemsList.bind(this);
     this.changePsychoLvl = this.changePsychoLvl.bind(this);
     this.checkIfAnyItemIsEquipped = this.checkIfAnyItemIsEquipped.bind(this);
+    this.applyItemFilters = this.applyItemFilters.bind(this);
     this.state = {
       listToDisplay: "",
       showOtherProperties: false,
@@ -50,6 +51,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         rare: false,
         psychoRare: false,
         set: false,
+        epic: false,
         strength: false,
         agility: false,
         power: false,
@@ -169,21 +171,27 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         itemsToFilter = this.state.filters[filterType]
           ? itemsToFilter.filter((item) => item.class === this.props.class)
           : itemsToFilter;
-      } else if (filterType === "rare" || filterType === "psychoRare") {
-        let transcribedFilter = filterType === "rare" ? "Rzadki" : "Psychorare";
-        itemsToFilter = this.state.filters[filterType]
-          ? itemsToFilter.filter((item) => item.rarity === transcribedFilter)
-          : itemsToFilter;
-      } else if (filterType === "set") {
-        itemsToFilter = this.state.filters[filterType]
-          ? itemsToFilter.filter((item) => item.set)
-          : itemsToFilter;
-      } else {
+      } else if (!(this.state.filters.set || this.state.filters.psychoRare || this.state.filters.rare || this.state.filters.epic)) {
         itemsToFilter = this.state.filters[filterType]
           ? itemsToFilter.filter((item) => item[filterType as keyof Item]! > 0)
           : itemsToFilter;
       }
     });
+    if (this.state.filters.set || this.state.filters.psychoRare || this.state.filters.rare || this.state.filters.epic) {
+      itemsToFilter = itemsToFilter.filter((item) => {
+        if (this.state.filters.set && item.set) {
+          return true
+        } else if (this.state.filters.psychoRare && item.rarity === "Psychorare") {
+          return true
+        } else if (this.state.filters.rare && item.rarity === "Rzadki") {
+          return true
+        } else if (this.state.filters.epic && item.rarity === "Epik") {
+          return true
+        } else {
+          return false
+        }
+      })
+    }
     return itemsToFilter;
   }
   render() {
@@ -319,6 +327,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
               rare: false,
               psychoRare: false,
               set: false,
+              epic: false,
               strength: false,
               agility: false,
               power: false,
@@ -500,6 +509,7 @@ interface StateTypes {
     rare: boolean;
     psychoRare: boolean;
     set: boolean;
+    epic: boolean;
     fireRes: boolean;
     energyRes: boolean;
     frostRes: boolean;

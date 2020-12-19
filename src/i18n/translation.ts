@@ -470,13 +470,14 @@ export const resources = {
       rare: "Rzadkie",
       psychoRare: "Psycho",
       set: "Zestawy",
+      epic: "Epiki",
       "unequip-all": "Czy na pewno chcesz zdjąć wszystkie przedmioty?",
       Tak: "Tak",
       Nie: "Nie",
       "Resetuj filtry": "Resetuj filtry",
       "active-filters": "Lista aktywnych filtrów",
       "add-filters": "Dodaj filtry do list przedmiotów",
-      //psychoslot (uzupełnić tłumaczenia psychowłaściwości)
+      //psychoslot
       "Dodatkowe właściwości": "Dodatkowe właściwości",
       "psycho-summary": "Podsumowanie właściwości psycho",
       //item slot
@@ -1031,13 +1032,14 @@ export const resources = {
       rare: "Rares",
       psychoRare: "Psycho",
       set: "Sets",
+      epic: "Epics",
       "unequip-all": "Are you sure you want to unequip all items?",
       Tak: "Yes",
       Nie: "No",
       "Resetuj filtry": "Reset filters",
       "active-filters": "List of active filters",
       "add-filters": "Add filters to item lists",
-      //psychoslot (uzupełnić tłumaczenia psychowłaściwości)
+      //psychoslot
       "Dodatkowe właściwości": "Additional Properties",
       "psycho-summary": "Psycho properties summary",
       //item slot
