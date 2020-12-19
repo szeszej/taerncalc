@@ -170,8 +170,9 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           ? itemsToFilter.filter((item) => item.class === this.props.class)
           : itemsToFilter;
       } else if (filterType === "rare" || filterType === "psychoRare") {
+        let transcribedFilter = filterType === "rare" ? "Rzadki" : "Psychorare";
         itemsToFilter = this.state.filters[filterType]
-          ? itemsToFilter.filter((item) => item.rarity === filterType)
+          ? itemsToFilter.filter((item) => item.rarity === transcribedFilter)
           : itemsToFilter;
       } else if (filterType === "set") {
         itemsToFilter = this.state.filters[filterType]

@@ -214,7 +214,7 @@ class ConnectedItemEnhancementForm extends React.Component<
         <div className={"title"}>
           <p>{t("change-stats-1")}</p>
           <p className="subtitle">
-            {t("(w ramach ulepszania bądź losowych statysyk)")}
+            {t("change-stats-2")}
           </p>
         </div>
         <div className={"propertyList"}>
