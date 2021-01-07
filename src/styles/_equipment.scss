@@ -358,6 +358,9 @@
 
     .addItem {
       background-image: url("/images/plus.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 95%;
     }
 
     .addProperty {

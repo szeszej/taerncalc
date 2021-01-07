@@ -493,7 +493,7 @@ const skillsDatabase: SkillsOfAllClasses = {
   },
   barbarian: {
     skill1: {
-      name: "Dynka",
+      name: "Dyńka",
       image: "images/Dynka.jpg",
     },
     skill2: {
@@ -525,7 +525,7 @@ const skillsDatabase: SkillsOfAllClasses = {
       image: "images/Ryk.jpg",
     },
     skill9: {
-      name: "Krytyczne",
+      name: "Krytyczne uderzenie",
       image: "images/Krytyczne.jpg",
     },
   },
@@ -611,11 +611,11 @@ const skillsDatabase: SkillsOfAllClasses = {
       image: "images/Magiczna_iskra.jpg",
     },
     skill2: {
-      name: "Wrażliwość na ogień",
+      name: "Wrażliwość na Ogień",
       image: "images/Wrażliwość_na_ogień.jpg",
     },
     skill3: {
-      name: "Ognista sfera",
+      name: "Ognista Sfera",
       image: "images/Ognista_sfera.jpg",
     },
     skill4: {
@@ -623,7 +623,7 @@ const skillsDatabase: SkillsOfAllClasses = {
       image: "images/Inkantacja.jpg",
     },
     skill5: {
-      name: "Aura rozproszenia",
+      name: "Aura Rozproszenia",
       image: "images/Aura.jpg",
     },
     skill6: {
@@ -653,7 +653,7 @@ const skillsDatabase: SkillsOfAllClasses = {
       image: "images/Krótkie_spięcie.jpeg",
     },
     skill3: {
-      name: "Zatruta strzała",
+      name: "Zatruta Strzała",
       image: "images/Zatruta_strzała.jpg",
     },
     skill4: {
@@ -715,7 +715,7 @@ const skillsDatabase: SkillsOfAllClasses = {
       image: "images/Aura_cienia.jpg",
     },
     skill9: {
-      name: "Ukazanie śmierci",
+      name: "Ukazanie Śmierci",
       image: "images/Ukazanie_śmierci.jpg",
     },
   },

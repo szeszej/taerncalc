@@ -8,7 +8,10 @@ import { ItemComponent } from "./ItemComponent";
 import { Item } from "../../../../../data/models/item.model";
 import { Equipment } from "../../../../../store/equipment-reducer/equipment-reducer";
 
-export class ItemsSearchList extends React.Component<PropTypes, StateTypes> {
+//i18l
+import { withTranslation } from "react-i18next";
+
+class ConnectedItemsSearchList extends React.Component<PropTypes, StateTypes> {
   render() {
     let closeButton = (
       <button
@@ -126,7 +129,7 @@ export class ItemsSearchList extends React.Component<PropTypes, StateTypes> {
         ) : (
           <div className="notFound">
             <p className="notFoundMessage">
-              Nie znaleziono pasujących przedmiotów.
+              {this.props.t("no-items-found")}
             </p>
           </div>
         )}
@@ -136,6 +139,8 @@ export class ItemsSearchList extends React.Component<PropTypes, StateTypes> {
     );
   }
 }
+
+export const ItemsSearchList = withTranslation()(ConnectedItemsSearchList)
 
 //Types
 interface PropTypes {
@@ -149,6 +154,7 @@ interface PropTypes {
   isRing1Equipped: boolean;
   equipItem(item: Item, slot: keyof Equipment, search?: boolean): void;
   hideItemsList(): void;
+  t(string: string): string;
 }
 
 interface StateTypes {

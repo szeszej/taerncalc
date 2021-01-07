@@ -4,13 +4,13 @@ import React from "react";
 //Components
 import { ItemTooltip } from "./shared/ItemTooltip";
 
-//Shared functionality
-import translateProperty from "../../../../shared/translate-property";
+//i18l
+import { withTranslation } from "react-i18next";
 
 //Types
 import { Item } from "../../../../data/models/item.model";
 
-export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
+class ConnecedSpecialSlot extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
     this.state = {
@@ -77,6 +77,7 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
     });
   }
   render() {
+    const { t } = this.props
     let unequipButton = (
       <button
         className={"unequipButton"}
@@ -127,10 +128,10 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
     );
     let propertyInputs = filteredProperties.map((x) => (
       <div key={x} className="property">
-        <p>{translateProperty(x)}:</p>
+        <p>{t(x)}:</p>
         <input
           type="number"
-          placeholder={translateProperty(x)}
+          placeholder={t(x)}
           value={
             this.state[x as keyof SpecialItemProperties] === 0
               ? ""
@@ -149,6 +150,7 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
     return (
       <div
         className="special"
+        title={t("Stwórz własny przedmiot")}
         onClick={() =>
           this.hideTooltipWithListUp(
             this.hideTooltip,
@@ -173,16 +175,16 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
         {this.props.listToDisplay === this.props.type ? (
           <div className={"itemsList"}>
             <div className={"title"}>
-              <p>Stwórz własny przedmiot</p>
+              <p>{t("Stwórz własny przedmiot")}</p>
             </div>
             <form onSubmit={this.handleSubmit} className="propertyList">
               <div className="property">
-                <p>Nazwa: </p>
+                <p>{t("Nazwa")}: </p>
                 <input
                   className="textInput"
                   type="text"
                   maxLength={30}
-                  placeholder="Wpisz nazwę"
+                  placeholder={t("Wpisz nazwę")}
                   value={this.state.name}
                   onChange={(event) =>
                     this.handleChange(event.target.value, "name")
@@ -190,11 +192,11 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
                 ></input>
               </div>
               <div className="property">
-                <p>Obrazek (URL): </p>
+                <p>{t("image-url")}: </p>
                 <input
                   className="textInput"
                   type="text"
-                  placeholder="Wklej adres obrazka"
+                  placeholder={t("Wklej adres obrazka")}
                   value={
                     this.state.image === "anvilcolor.svg"
                       ? ""
@@ -207,7 +209,7 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
               </div>
               {propertyInputs}
               <div className="submit">
-                <input type="submit" value="Zatwierdź"></input>
+                <input type="submit" value={t("Zatwierdź")}></input>
               </div>
             </form>
             {closeButton}
@@ -223,6 +225,8 @@ export class SpecialSlot extends React.Component<PropTypes, StateTypes> {
   }
 }
 
+export const SpecialSlot = withTranslation()(ConnecedSpecialSlot)
+
 interface PropTypes {
   type: "special"
   inSlot: Item | null
@@ -231,6 +235,7 @@ interface PropTypes {
   unequipItem(slot: "special"): void
   showItemsList(type: "special"): void
   hideItemsList(): void
+  t(string: string): string;
 }
 
 interface StateTypes extends SpecialItemProperties {

@@ -19,6 +19,9 @@ import { Equipment } from "../../store/equipment-reducer/equipment-reducer";
 //Components
 import { Alert } from "../shared/Alert"
 
+//i18l
+import { withTranslation } from "react-i18next";
+
 class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
@@ -97,7 +100,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
     let request = require("request");
     this.setState({
       showExport: true,
-      exportLink: "Eksportowanie w toku...",
+      exportLink: this.props.t("export-in-progress"),
     });
     request(
       {
@@ -107,7 +110,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       },
       (err: string, response: string, body: string) => {
         if (err || JSON.parse(body).error) {
-          ReactDOM.render(<Alert message={"Wystąpił błąd, spróbuj ponownie później!"} spinner={false} />, document.getElementById("alert")!)
+          ReactDOM.render(<Alert message={this.props.t("export-error")} spinner={false} />, document.getElementById("alert")!)
         } else {
           let buildId = JSON.parse(body).name.substring(1)
           let link = "https://kalkulatortaern.github.io/?id=" + buildId;
@@ -140,16 +143,17 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
       document.getSelection()!.removeAllRanges();
       document.getSelection()!.addRange(selected);
     }
-    ReactDOM.render(<Alert message={"Adres buildu skopiowany do schowka! Użyj Ctrl+V, aby wkleić go gdzie chcesz!"} spinner={false} />, document.getElementById("alert")!)
+    ReactDOM.render(<Alert message={this.props.t("build-copied")} spinner={false} />, document.getElementById("alert")!)
   }
   render() {
+    const { t } = this.props;
     return (
       <div className={"exportBuild"}>
         <button
           className={"exportButton"}
           onClick={() => this.createUrlForExport()}
         >
-          Eksportuj build{" "}
+          {t("Eksportuj build")}
         </button>
         <div
           className="exportLink"
@@ -157,7 +161,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
             this.state.showExport ? { display: "flex" } : { display: "none" }
           }
         >
-          <label htmlFor="exportOutput">Link do twojego buildu:</label>
+          <label htmlFor="exportOutput">{t("Link do twojego buildu")}:</label>
           <textarea
             readOnly
             id="exportOutput"
@@ -169,7 +173,7 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
               this.state.exportLink === "Eksportowanie w toku..." ? true : false
             }
           >
-            Skopiuj do schowka
+            {t("Skopiuj do schowka")}
           </button>
         </div>
       </div>
@@ -178,12 +182,16 @@ class ConnectedBuildExporter extends React.Component<PropTypes, StateTypes> {
 }
 
 //Types
-type PropTypes = ConnectedProps<typeof connector>;
+type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 type StateTypes = {
   showExport: boolean;
   exportLink: string;
 };
+
+interface OwnProps {
+    t(string: string): string;
+}
 
 export interface BuildForExport {
   class: string
@@ -257,4 +265,4 @@ const mapStateToProps = (state: RootState) => {
 
 const connector = connect(mapStateToProps);
 
-export const BuildExporter = connector(ConnectedBuildExporter);
+export const BuildExporter = withTranslation()(connector(ConnectedBuildExporter));

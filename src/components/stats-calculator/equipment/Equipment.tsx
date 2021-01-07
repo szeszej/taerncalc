@@ -23,11 +23,14 @@ import {
 
 //Shared functionality
 import { confirmAlert } from "react-confirm-alert";
-import translateProperty from "../../../shared/translate-property";
+import i18n from "i18next";
 
 //Types
 import { Equipment } from "../../../store/equipment-reducer/equipment-reducer";
 import { Item } from "../../../data/models/item.model";
+
+//i18l
+import { withTranslation } from "react-i18next";
 
 class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -38,6 +41,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     this.hideItemsList = this.hideItemsList.bind(this);
     this.changePsychoLvl = this.changePsychoLvl.bind(this);
     this.checkIfAnyItemIsEquipped = this.checkIfAnyItemIsEquipped.bind(this);
+    this.applyItemFilters = this.applyItemFilters.bind(this);
     this.state = {
       listToDisplay: "",
       showOtherProperties: false,
@@ -47,6 +51,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         rare: false,
         psychoRare: false,
         set: false,
+        epic: false,
         strength: false,
         agility: false,
         power: false,
@@ -112,13 +117,14 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     this.props.changePsychoLvl(slot, value);
   }
   unequipItems() {
+    const { t } = this.props
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
           <div className="backdrop">
             <div className="alert-box">
               <p className="alert-text">
-                Czy na pewno chcesz zdjąć wszystkie przedmioty?
+                {t("unequip-all")}
               </p>
               <div className="alert-box-actions">
                 <button
@@ -128,10 +134,10 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                     onClose();
                   }}
                 >
-                  Tak
+                  {t("Tak")}
                 </button>
                 <button className="alert-box-action" onClick={onClose}>
-                  Nie
+                  {t("Nie")}
                 </button>
               </div>
               <button className="close-button" onClick={onClose}>
@@ -165,23 +171,31 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         itemsToFilter = this.state.filters[filterType]
           ? itemsToFilter.filter((item) => item.class === this.props.class)
           : itemsToFilter;
-      } else if (filterType === "rare" || filterType === "psychoRare") {
-        itemsToFilter = this.state.filters[filterType]
-          ? itemsToFilter.filter((item) => item.rarity === filterType)
-          : itemsToFilter;
-      } else if (filterType === "set") {
-        itemsToFilter = this.state.filters[filterType]
-          ? itemsToFilter.filter((item) => item.set)
-          : itemsToFilter;
-      } else {
+      } else if (!(this.state.filters.set || this.state.filters.psychoRare || this.state.filters.rare || this.state.filters.epic)) {
         itemsToFilter = this.state.filters[filterType]
           ? itemsToFilter.filter((item) => item[filterType as keyof Item]! > 0)
           : itemsToFilter;
       }
     });
+    if (this.state.filters.set || this.state.filters.psychoRare || this.state.filters.rare || this.state.filters.epic) {
+      itemsToFilter = itemsToFilter.filter((item) => {
+        if (this.state.filters.set && item.set) {
+          return true
+        } else if (this.state.filters.psychoRare && item.rarity === "Psychorare") {
+          return true
+        } else if (this.state.filters.rare && item.rarity === "Rzadki") {
+          return true
+        } else if (this.state.filters.epic && item.rarity === "Epik") {
+          return true
+        } else {
+          return false
+        }
+      })
+    }
     return itemsToFilter;
   }
   render() {
+    const { t } = this.props
     let classBackground = {
       backgroundImage: `url("images/` + this.props.class + `.svg")`,
     };
@@ -269,18 +283,19 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                 })
           }
         >
-          {translateProperty(filterType)}
+          {t(filterType)}
         </label>
       </div>
     ));
     let activeFilters = filterTypes.filter(
       (filterType) => this.state.filters[filterType]
     );
+    // eslint-disable-next-line
     let chosenFilters = activeFilters.map((filterType) => {
       if (this.state.filters[filterType]) {
         return (
-          <div className="chosenFilter">
-            <p>{translateProperty(filterType)}</p>
+          <div className="chosenFilter" key={filterType}>
+            <p>{t(filterType)}</p>
             <button
               onClick={() =>
                 this.setState((prevState) => {
@@ -312,6 +327,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
               rare: false,
               psychoRare: false,
               set: false,
+              epic: false,
               strength: false,
               agility: false,
               power: false,
@@ -327,7 +343,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           })
         }
       >
-        Resetuj filtry
+        {t("Resetuj filtry")}
       </button>
     );
     return (
@@ -342,7 +358,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                   listToDisplay: "search",
                 })
               }
-              placeholder="Wpisz nazwę"
+              placeholder={t("Wpisz nazwę")}
               value={this.state.searchString}
               onClick={() => this.setState({ listToDisplay: "search" })}
             />
@@ -350,11 +366,15 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
             this.state.listToDisplay === "search" ? (
               <ItemsSearchList
                 items={this.props.items.filter(
-                  (x) =>
-                    x.name
+                  (x) => this.props.i18n.language === "pl" ?
+                    (x.name
                       .toLowerCase()
                       .includes(this.state.searchString.toLowerCase()) &&
-                    (x.class === null || x.class === this.props.class)
+                    (x.class === null || x.class === this.props.class)) :
+                    (t(x.name)
+                      .toLowerCase()
+                      .includes(this.state.searchString.toLowerCase()) &&
+                    (x.class === null || x.class === this.props.class))
                 )}
                 class={this.props.class}
                 level={this.props.level}
@@ -373,7 +393,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
             <div className="filtersList">
               <div
                 className="chosenFilters"
-                data-placeholder="Lista aktywnych filtrów"
+                data-placeholder={t("active-filters")}
               >
                 {chosenFilters.length > 4
                   ? chosenFilters.slice(0, 4)
@@ -395,14 +415,14 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
               {this.state.listToDisplay === "filters" ? (
                 <div className="itemsList filtersForm">
                   <div className="title">
-                    <p>Dodaj filtry do list przedmiotów</p>
+                    <p>{t("add-filters")}</p>
                   </div>
                   <div className="filterLines">{checkBoxes}</div>
                   <div className="submit">
                     <button
                       onClick={() => this.setState({ listToDisplay: "" })}
                     >
-                      Zatwierdź
+                      {t("Zatwierdź")}
                     </button>
                     {filtersResetButton}
                     {filtersCloseButton}
@@ -463,10 +483,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const EquipmentComponent = connector(ConnectedEquipment);
+export const EquipmentComponent = withTranslation()(connector(ConnectedEquipment));
 
 //Types
-type PropTypes = ConnectedProps<typeof connector>;
+type PropTypes = ConnectedProps<typeof connector> & OwnProps;
+
+interface OwnProps {
+  t(string: string): string;
+  i18n: typeof i18n
+}
 
 interface StateTypes {
   listToDisplay: keyof Equipment | "" | "search" | "filters";
@@ -484,6 +509,7 @@ interface StateTypes {
     rare: boolean;
     psychoRare: boolean;
     set: boolean;
+    epic: boolean;
     fireRes: boolean;
     energyRes: boolean;
     frostRes: boolean;

@@ -10,7 +10,10 @@ import { checkWhichSetsAreEquipped } from "../../../../shared/check-which-sets-a
 //Data
 import { itemSets } from "../../../../data/item-sets";
 
-export class PsychoSlot extends React.Component<Props, State> {
+//i18l
+import { withTranslation } from "react-i18next";
+
+class ConnectedPsychoSlot extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -18,6 +21,7 @@ export class PsychoSlot extends React.Component<Props, State> {
     };
   }
   calculateOtherProperties(equipment: Equipment) {
+    const { t } = this.props
     let setsEquipped = checkWhichSetsAreEquipped(equipment);
     let propertiesOfSets = this.checkPropertiesOfSets(setsEquipped);
     let propertiesOfEquippedItems = this.checkOtherPropertiesOfItems(equipment);
@@ -38,13 +42,13 @@ export class PsychoSlot extends React.Component<Props, State> {
       if (property === "Dodatkowe PA" || property === "Oszukać przeznaczenie") {
         return (
           <p key={property}>
-            {property}: {propertiesOfEquippedItems[property]}
+            {t(property)}: {propertiesOfEquippedItems[property]}
           </p>
         );
       } else {
         return (
           <p key={property}>
-            {property}: {propertiesOfEquippedItems[property]}%
+            {t(property)}: {propertiesOfEquippedItems[property]}%
           </p>
         );
       }
@@ -102,12 +106,13 @@ export class PsychoSlot extends React.Component<Props, State> {
     return setsProperties;
   }
   render() {
+    const { t } = this.props
     let otherPropertiesTags = this.calculateOtherProperties(
       this.props.equipment
     );
     let otherPropertiesList = (
       <div className="itemTooltip">
-        <p className="propertiesHeader">Dodatkowe właściwości:</p>
+        <p className="propertiesHeader">{t("Dodatkowe właściwości")}:</p>
         {otherPropertiesTags}
       </div>
     );
@@ -128,7 +133,7 @@ export class PsychoSlot extends React.Component<Props, State> {
           otherPropertiesList
         ) : this.state.showOtherProperties ? (
           <div className="itemTooltip">
-            <p className="noProperties">Podsumowanie właściwości psycho</p>
+            <p className="noProperties">{t("psycho-summary")}</p>
           </div>
         ) : null}
       </div>
@@ -136,9 +141,12 @@ export class PsychoSlot extends React.Component<Props, State> {
   }
 }
 
+export const PsychoSlot = withTranslation()(ConnectedPsychoSlot)
+
 //Types
 interface Props {
   equipment: Equipment;
+  t(string: string): string;
 }
 
 interface State {

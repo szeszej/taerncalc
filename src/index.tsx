@@ -6,7 +6,6 @@ import ReactGA from "react-ga";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store/store";
-import { initializeCharacter } from "./store/character-reducer/character-reducer";
 import { importCharacter } from "./store/character-reducer/character-reducer";
 
 //Styles
@@ -28,80 +27,32 @@ import {
   getUrlVars,
 } from "./import-build/import-build";
 
-//Shared functionality
-import { confirmNewBuildCreation } from "./shared/new-build-confirmation"
+//i18n
+import "./i18n/i18n";
+import i18n from "i18next";
+
+// //Router
+// import { BrowserRouter as Router} from "react-router-dom";
 
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-3");
 
-//selecting calculator node
-const calculator = document.getElementById("calc")!;
-
-//Adding event listener for the character form
-document.getElementById("classLvl")!.addEventListener(
-  "submit",
-  function (event) {
-    event.preventDefault();
-    checkCalc((document.getElementById("charClass") as HTMLSelectElement)!.value, +(document.getElementById("charLvl") as HTMLInputElement)!.value);
-  },
-  false
-);
-
-//Checking if the calculator is already loaded and showing confirmation message
-function checkCalc(charClass: string, charLvl: number) {
-  if (calculator.classList.contains("enabled")) {
-    confirmNewBuildCreation({
-      renderApp: renderApp,
-      charClass: charClass,
-      charLvl: charLvl
-    })
-  } else {
-    renderApp(charClass, charLvl);
-  }
-}
-
-//Rendering the app
-function renderApp(charClass: string, charLvl: number) {
-  ReactDOM.unmountComponentAtNode(calculator);
-  calculator.classList.add("enabled");
-  ReactGA.event({
-    category: "Form",
-    action: "Submit",
-    label: charClass + " " + charLvl,
-  });
-  store.dispatch(
-    initializeCharacter({
-      className: charClass,
-      level: charLvl,
-    })
-  );
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    calculator
-  );
-}
-
 (function () {
-  //Checking for cookie consent
-  if (!localStorage.getItem("cookieconsent")) {
-    document.getElementById("cookieconsent")!.style.display = "block";
-    document.getElementById("cookieButton")!.addEventListener(
-      "click",
-      function () {
-        document.getElementById("cookieconsent")!.style.display = "none";
-        localStorage.setItem("cookieconsent", "true");
-      },
-      false
-    );
-  }
   //Rendering the app if URL parameters are present (importing build)
   let urlVars = getUrlVars(window.location.href);
   if (urlVars.hasOwnProperty("id")) {
     const alert = document.getElementById("alert")!;
+    const root = document.getElementById("root");
     ReactDOM.render(
-      <Alert message="Importowanie buildu..." spinner={true} />,
+      <Provider store={store}>
+      {/* <Router> */}
+        <App isBuildImported={false}/>
+      {/* </Router> */}
+      </Provider>,
+      root
+    );
+    ReactDOM.render(
+      <Alert message={i18n.t("importing-build")} spinner={true} />,
       alert
     );
     let loadBuildFromDatabase = new Promise<ImportedBuild>((resolve, reject) => {
@@ -131,6 +82,11 @@ function renderApp(charClass: string, charLvl: number) {
           action: "Build Imported",
           label: window.location.href,
         });
+        ReactGA.event({
+          category: "Language",
+          action: "Page Load",
+          label: i18n.language,
+        })
         let request = require("request");
         let urlVars = getUrlVars(window.location.href);
         request(
@@ -146,29 +102,56 @@ function renderApp(charClass: string, charLvl: number) {
           response
         );
         ReactDOM.unmountComponentAtNode(alert);
-        calculator.classList.add("enabled");
+        ReactDOM.unmountComponentAtNode(root!);
         store.dispatch(importCharacter(initialProperties));
         ReactDOM.render(
           <Provider store={store}>
-            <App />
+          {/* <Router> */}
+            <App isBuildImported={true}/>
+          {/* </Router> */}
           </Provider>,
-          calculator
+          root
         );
       })
       .catch(() => {
         ReactDOM.unmountComponentAtNode(alert);
+        ReactGA.event({
+          category: "Language",
+          action: "Page Load",
+          label: i18n.language,
+        })
         ReactDOM.render(
           <Alert
-            message="Importowanie nie powiodło się. Spróbuj ponownie później"
+            message={i18n.t("import-failed")}
             spinner={false}
           />,
           alert
         );
+        ReactDOM.render(
+
+          <Provider store={store}>
+          {/* <Router> */}
+            <App isBuildImported={false}/>
+            {/* </Router> */}
+          </Provider>,
+          root
+        );
       });
+  } else {
+    ReactGA.event({
+      category: "Language",
+      action: "Page Load",
+      label: i18n.language,
+    })
+    ReactDOM.render(
+      <Provider store={store}>
+      {/* <Router> */}
+        <App isBuildImported={false}/>
+        {/* </Router> */}
+      </Provider>,
+      document.getElementById("root")
+    );
   }
 })();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

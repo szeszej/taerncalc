@@ -20,37 +20,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#d6cca9" />
   <meta name="msapplication-TileImage" content="favicon.ico">
+
+  <base href="/">
 </head>
 
 <body>
   <div id="alert"></div>
-  <div class="wrapper">
+  <div id="root">
+    <noscript>
     <div class="header">
       <div class="logo"><img src="images/logo.png" alt="Pride of Taern"></div>
       <div class="title">
-          <h1>Kalkulator buildów Pride of Taern 2.0</h1>
+          <h1>Kalkulator buildów Pride of Taern</h1>
       </div>
     </div>
     <div class="leftSidebar"></div>
-    <div class="calculator">
-      <div id="classLvlWrapper">
-        <form id="classLvl">
-          <select id="charClass" required>
-            <option selected disabled value="" class="placeholder">Wybierz klasę</option>
-            <option value="barbarian">Barbarzyńca</option>
-            <option value="knight">Rycerz</option>
-            <option value="sheed">Sheed</option>
-            <option value="druid">Druid</option>
-            <option value="firemage">Mag Ognia</option>
-            <option value="archer">Łucznik</option>
-            <option value="voodoo">VooDoo</option>
-          </select>
-          <input type="number" min="1" max="140" placeholder="Poziom postaci" id="charLvl" required></input>
-          <input class="submit" type="submit" value="Zatwierdź" ></input>
-        </form>
-      </div>
+
       <div id="calc">
         <div class=intro>
+          <h2 style="color:red;">DO POPRAWNEGO DZIAŁANIA KALKULATORA KONIECZNE JEST WŁĄCZENIE JAVASCRIPTU!</h2>
           <h2>Po co mi kalkulator buildów Pride of Taern?</h2>
           <p>Nie masz pojęcia, jakie są najlepszy itemy na twój level? Chcesz wiedzieć, czy po resecie starczy ci punktów, żeby wykupić odpowiednie umiejętności i nie chcesz zmarnować platyny? Na takie
             właśnie pytania odpowiada niniejszy kalkulator. Nieprzemyślane resety mogą was kosztować cenną platynę, którą przecież lepiej wydać inaczej. Zamiast ją marnować, lepiej użyć kalkulatora i sprawdzić, czy z obecnym poziomem uda ci się
@@ -69,7 +57,7 @@
             Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset". Żeby wyekwipować przedmiot, kliknij na odpowiedni slot w ekwipunku.
           </p>
           <h2>Niektóre przedmioty mają losowe statystyki, a niektóre z moich przedmiotów są ulepszone - jak mogę odzwierciedlić to w kalkulatorze?</h2>
-          <p>Po wyekwipowaniu przedmioty, kliknij przycisk gwiazdki (★). Otworzy się menu, w którym będziesz mógł dowolnie modyfikować podstawowe parametry przedmiotu.</p>
+          <p>Po wyekwipowaniu przedmioty, kliknij przycisk ulepszenia (<img class="imageInText" src="images/upgrade.png" alt="upgrade">). Otworzy się menu, w którym będziesz mógł dowolnie modyfikować podstawowe parametry przedmiotu.</p>
           <h2>Do czego służy ikonka kowadła (<img class="imageInText" src="images/star.svg" alt="kowadło">)?</h2>
           <p>Po kliknięciu w tę ikonkę możecie sami stworzyć przedmiot! Dodatkowo funkcja ta umożliwia personalizację buildu i przedmiotu - możecie mu nadawać własną nazwę i obrazek!</p>
           <h2>Czym jest The Pride of Taern?</h2>
@@ -77,19 +65,17 @@
             potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.</p>
         </div>
       </div>
-    </div>
+
     <div class="rightSidebar"></div>
     <div class="footer">
       <div class="authors">
-        <p class="created">Stworzone przez <a href="https://github.com/szeszej/" target="_blank">szeszej</a></p>
-        <p class="created">Propozycje i błędy można zgłaszać przez <a href="https://forum.taern.pl/viewtopic.php?f=279&t=56507" target="_blank">forum Taernu</a></p>
-        <p class="created">Gra Taern, a także wszystkie grafiki i logo, są własnością Whitemoon System
+        <p class="created">Stworzone przez <a href="https://github.com/szeszej/" target="_blank">szeszej</a>.</p>
+        <p class="created">Propozycje i błędy można zgłaszać przez <a href="https://forum.taern.pl/viewtopic.php?f=279&t=56507" target="_blank">forum Taernu</a>.</p>
+        <p class="created">Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.
         </p>
+        <p>Pozostałe grafiki pochodzą z <a href="https://game-icons.net/">Game-icons.net</a>.</p>
       </div>
     </div>
-    <div id="cookieconsent">
-      Ta strona używa cookies. Kontynuując używanie jej, zgadzasz się na ich użycie w celach analitycznych.
-      <button id="cookieButton">Rozumiem</button>
-    </div>
+    </noscript>
   </div>
 </body>

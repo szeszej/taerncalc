@@ -2,7 +2,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-export function Alert(props: PropTypes) {
+//i18l
+import { withTranslation } from "react-i18next";
+
+ function ConnectedAlert(props: PropTypes) {
   function closeAlert ():void {
       let alertBox = document.getElementById("alert")!
       ReactDOM.unmountComponentAtNode(alertBox)
@@ -17,7 +20,7 @@ export function Alert(props: PropTypes) {
         ) : (
           <div>
             <button type="button" name="button" className="alert-box-action" onClick={closeAlert} >
-              Zamknij
+              {props.t("Zamknij")}
             </button>
           </div>
         )}
@@ -29,4 +32,7 @@ export function Alert(props: PropTypes) {
 interface PropTypes {
   message: string;
   spinner: boolean;
+  t(string: string): string;
 }
+
+export const Alert = withTranslation()(ConnectedAlert)

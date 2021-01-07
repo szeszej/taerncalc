@@ -9,8 +9,10 @@ import { ItemCreatorForm } from "../shared/ItemCreatorForm"
 import { Item } from "../../../../../data/models/item.model"
 import { Equipment } from "../../../../../store/equipment-reducer/equipment-reducer"
 
+//i18l
+import { withTranslation } from "react-i18next";
 
-export class ItemsList extends React.Component<PropTypes, StateTypes> {
+class ConnectedItemsList extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props)
     this.state = {
@@ -29,52 +31,8 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
       displayAddItemForm: false
     })
   }
-  translateSlot(slotName: string): string {
-    let inPolish = "";
-    switch (slotName) {
-      case "armor":
-        inPolish = "Własny pancerz";
-        break;
-      case "helmet":
-        inPolish = "Własny hełm";
-        break;
-      case "neck":
-        inPolish = "Własny naszyjnik";
-        break;
-      case "gloves":
-        inPolish = "Własne rękawice";
-        break;
-      case "weapon":
-        inPolish = "Własna broń";
-        break;
-      case "shield":
-        inPolish = "Własna tarcza";
-        break;
-      case "belt":
-        inPolish = "Własny pas";
-        break;
-      case "boots":
-        inPolish = "Własne buty";
-        break;
-      case "ring1":
-        inPolish = "Własny pierścień";
-        break;
-      case "ring2":
-        inPolish = "Własny pierścień";
-        break;
-      case "pants":
-        inPolish = "Własne spodnie";
-        break;
-      case "cape":
-        inPolish = "Własny płaszcz";
-        break;
-      default:
-        inPolish = "błąd";
-        break;
-    }
-    return inPolish;
-  }
   render() {
+    const { t } = this.props
     let closeButton = (
       <button
         className="closeList"
@@ -115,7 +73,7 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
             hideItemsList={this.props.hideItemsList}
           />
         ))}
-        <div className="itemOnList addItem" onClick={this.showAddItemForm}></div>
+        <div className="itemOnList addItem" title={t("create-item")} onClick={this.showAddItemForm}></div>
       </div>
     );
     let unequippableItemsComponents = (
@@ -136,13 +94,13 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
     );
     return (
       <div className="itemsList">
-        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={this.translateSlot(this.props.type) + " " + (this.props.items.filter(x => x.isCustom).length + 1)} type={this.props.type} closeList={this.props.hideItemsList} /> : null}
+        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={t(this.props.type) + " " + (this.props.items.filter(x => x.isCustom).length + 1)} type={this.props.type} closeList={this.props.hideItemsList} /> : null}
         {this.props.items.length ? (
           equippableItemsComponents
         ) : (
           <div className="notFound">
             <p className="notFoundMessage">
-              Brak przedmiotów po zastosowaniu filtrów.
+              {t("no-items")}
             </p>
           </div>
         )}
@@ -152,6 +110,8 @@ export class ItemsList extends React.Component<PropTypes, StateTypes> {
     );
   }
 }
+
+export const ItemsList = withTranslation()(ConnectedItemsList)
 
 //Types
 interface PropTypes {
@@ -165,6 +125,7 @@ interface PropTypes {
   knowledge: number
   hideItemsList(): void
   equipItem(item: Item, slot: keyof Equipment): void
+  t(string: string): string;
 }
 
 interface StateTypes {

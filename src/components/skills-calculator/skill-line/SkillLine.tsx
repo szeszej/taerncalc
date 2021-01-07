@@ -11,20 +11,21 @@ export function SkillLine(props: PropTypes) {
   let notMeetingRequirements = {
     color: "red",
   };
+  const { t } = props;
   return (
     <div className="skillLine">
       <div className="image">
-        <img src={props.skill.image} alt={props.skill.name} />
+        <img src={props.skill.image} alt={t(props.skill.name)} />
       </div>
       <div className="skillName">
-        <p>{props.skill.name}</p>
+        <p>{t(props.skill.name)}</p>
       </div>
       <div className="skillValue">
         <p>{props.skill.level}</p>
       </div>
       {props.skill.level === props.skill.maxLvl ? (
         <div className="reqLvl">
-          <p>Maks. poziom osiągnięty</p>
+          <p>{t("max-skill-lvl-reached")}</p>
         </div>
       ) : (
         <div
@@ -36,7 +37,7 @@ export function SkillLine(props: PropTypes) {
           }
         >
           <div className="reqLvlText">
-            <p>Poz. wym. do awansu:</p>
+            <p>{t("req-lvl-upgrade-skill")}:</p>
           </div>
           <div className="reqLvlNumber">
             <p>{props.skill.requiredCharLevel}</p>
@@ -77,4 +78,5 @@ interface PropTypes {
   checkIfSkillCanIncrease(newLvl: number): boolean;
   spendSkillPoints(prevLvl: number, newLvl: number, skill: number): void;
   number: number;
+  t(string: string): string;
 }
