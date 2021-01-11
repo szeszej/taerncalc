@@ -12,16 +12,17 @@ import { calculateOtherProperties } from "../../../../shared/calculate-other-pro
 import { withTranslation } from "react-i18next";
 
 function ConnectedRegenerationTooltip (props: PropTypes) {
-  let regenRate = 0.05
+  let { t } = props
+  let regenRate = 5
   let otherProperties = calculateOtherProperties(props.equipment)
   if (props.stat === "mana" && otherProperties["Regeneracja many"]) {
-    regenRate += otherProperties["Regeneracja many"] / 100
+    regenRate += otherProperties["Regeneracja many"]
   } else if (otherProperties["Regeneracja kondycji"]) {
-    regenRate += otherProperties["Regeneracja kondycji"] / 100
+    regenRate += otherProperties["Regeneracja kondycji"]
   }
   return (
     <div className="regenTooltip">
-      Regeneracja {props.stat === "mana" ? "many" : "kondycji"}: {regenRate * 100}%<br />({Math.floor(regenRate * props.value)} punktów na rundę)
+      {t("Regeneracja")} {props.stat === "mana" ? t("many") : t("kondycji")}: {regenRate}%<br />({Math.floor((regenRate / 100) * props.value)} {t("punktów na rundę")})
     </div>
   )
 }

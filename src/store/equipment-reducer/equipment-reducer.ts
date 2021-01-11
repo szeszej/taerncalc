@@ -24,6 +24,7 @@ export const initialEquipment: Equipment = {
   ring2: null,
   boots: null,
   special: null,
+  guild: null
 };
 
 export interface Equipment {
@@ -40,6 +41,7 @@ export interface Equipment {
   ring2: Item | null;
   boots: Item | null;
   special: Item | null;
+  guild: Item | null
 }
 
 export default function equipmentReducer(

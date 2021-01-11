@@ -480,6 +480,8 @@ export const resources = {
       "Resetuj filtry": "Resetuj filtry",
       "active-filters": "Lista aktywnych filtrów",
       "add-filters": "Dodaj filtry do list przedmiotów",
+      "Zdejmij wszystkie przedmioty": "Zdejmij wszystkie przedmioty",
+      "Buffy gildiowe": "Buffy gildiowe",
       //psychoslot
       "Dodatkowe właściwości": "Dodatkowe właściwości",
       "psycho-summary": "Podsumowanie właściwości psycho",
@@ -563,7 +565,12 @@ export const resources = {
       "Modyfikator trafień dystansowych": "Modyfikator trafień dystansowych",
       "Modyfikator trafień magicznych": "Modyfikator trafień magicznych",
       //item search
-      "no-items-found": "Nie znaleziono pasujących przedmiotów."
+      "no-items-found": "Nie znaleziono pasujących przedmiotów.",
+      //regen tooltip
+      "Regeneracja": "Regeneracja",
+      "many": "many",
+      "kondycji": "kondycji",
+      "punktów na rundę": "punktów na rundę"
     },
   },
   en: {
@@ -1045,6 +1052,8 @@ export const resources = {
       "Resetuj filtry": "Reset filters",
       "active-filters": "List of active filters",
       "add-filters": "Add filters to item lists",
+      "Zdejmij wszystkie przedmioty": "Unequip all items",
+      "Buffy gildiowe": "Guild buffs",
       //psychoslot
       "Dodatkowe właściwości": "Additional Properties",
       "psycho-summary": "Psycho properties summary",
@@ -1127,7 +1136,12 @@ export const resources = {
       "Modyfikator trafień dystansowych": "Ranged hit chance",
       "Modyfikator trafień magicznych": "Magic hit chance",
       //item search
-      "no-items-found": "No items matching this name."
+      "no-items-found": "No items matching this name.",
+      //regen tooltip
+      "Regeneracja": "Regeneration of",
+      "many": "mana",
+      "kondycji": "stamina",
+      "punktów na rundę": "points per round"
     },
   },
 };

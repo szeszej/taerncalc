@@ -176,6 +176,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
           type="number"
           min={1}
           max={999}
+          disabled={this.state.properties[index].property === "placeholder"}
         ></input>
         <button
           onClick={(event) => this.handleClick(event, this.addNewSelect)}

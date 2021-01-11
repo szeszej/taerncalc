@@ -158,4 +158,4 @@ export interface RawItem {
     otherProperties?: [string, number, number][]
 }
 
-export type ItemTypes = "armor" |  "helmet"  | "neck" | "gloves" |  "cape" | "weapon" | "shield" | "pants" | "belt" | "ring" | "boots" | "special"
+export type ItemTypes = "armor" |  "helmet"  | "neck" | "gloves" |  "cape" | "weapon" | "shield" | "pants" | "belt" | "ring" | "boots" | "special" | "guild"

@@ -7,24 +7,25 @@ import { Dispatch } from "redux";
 
 //Action creators
 import {
-  enhanceItem,
+  equipItem,
+  unequipItem,
   Equipment,
 } from "../../../../../store/equipment-reducer/equipment-reducer";
+
+//Models
+import { Item, RawItem, ItemTypes } from "../../../../../data/models/item.model";
 
 //i18l
 import { withTranslation } from "react-i18next";
 
-class ConnectedItemEnhancementForm extends React.Component<
-  PropTypes,
-  StateTypes
-> {
+class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
     this.state = {
       properties: [
         {
           property: "placeholder",
-          value: 0,
+          value: null,
         },
       ],
       propertiesUsed: [],
@@ -32,39 +33,14 @@ class ConnectedItemEnhancementForm extends React.Component<
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.addNewSelect = this.addNewSelect.bind(this);
-    this.enhanceItem = this.enhanceItem.bind(this);
-  }
-  //If item enhancements already exist
-  componentDidMount() {
-    let areEnhancementsPresent: boolean = false;
-    if (this.props.enhancements) {
-      for (const key in this.props.enhancements) {
-        if (this.props.enhancements.hasOwnProperty(key)) {
-          if (this.props.enhancements && this.props.enhancements[key as keyof Enhancements] !== 0) {
-            areEnhancementsPresent = true;
-            this.setState((prevState) => {
-              let newState = { ...prevState };
-              newState.properties.push({
-                property: key,
-                value: this.props.enhancements![key as keyof Enhancements],
-              });
-              return newState;
-            });
-          }
-        }
-      }
-      if (areEnhancementsPresent) {
-        this.setState((prevState) => {
-          let newState = { ...prevState };
-          newState.properties.shift();
-          return newState;
-        });
-      }
-    }
+    this.createItem = this.createItem.bind(this);
   }
   //Creating a new item to add to the database
-  enhanceItem(): void {
-    let enhancements: Enhancements = {
+  createItem(): void {
+    let guildBuffs: GuildBuffs = {
+      name: this.props.t("Buffy gildiowe"),
+      image: "",
+      type: "guild",
       strength: 0,
       agility: 0,
       power: 0,
@@ -72,19 +48,30 @@ class ConnectedItemEnhancementForm extends React.Component<
       hp: 0,
       mana: 0,
       endurance: 0,
-      damage: 0,
+      bluntRes: 0,
+      pierceRes: 0,
+      cutRes: 0,
+      fireRes: 0,
+      frostRes: 0,
+      curseRes: 0,
+      energyRes: 0,
+      isCustom: true,
     };
-    if (!this.state.properties.every((x) => x.property === "placeholder")) {
+    if (
+      !this.state.properties.every((x) => x.property === "placeholder") &&
+      !this.state.properties.every((x) => x.value === 0)
+    ) {
       //Fix the line below?
       this.state.properties.forEach((x) => {
         if (x.property !== "placeholder" && x.value !== null) {
-          enhancements[x.property as keyof Enhancements] = x.value;
+          (guildBuffs[x.property as keyof GuildBuffs] as any) = x.value;
         }
       });
-      this.props.enhanceItem(this.props.type, enhancements);
-      this.props.closeForm();
+      let createdItem = new Item(guildBuffs)
+      this.props.equipItem("guild", createdItem);
+      this.props.closeList();
     } else {
-      window.alert("Nie określono żadnych parametrów niezerowych!");
+      window.alert(this.props.t("Nie określono żadnych parametrów!"));
     }
   }
   //Needed to prevent bubbling
@@ -126,32 +113,27 @@ class ConnectedItemEnhancementForm extends React.Component<
     let closeButton = (
       <button
         className="closeList"
-        onClick={(event) => this.handleClick(event, this.props.closeForm)}
+        onClick={(event) => this.handleClick(event, this.props.closeList)}
       >
         ×
       </button>
     );
-    let properties =
-      this.props.type === "weapon"
-        ? [
-            "strength",
-            "agility",
-            "power",
-            "knowledge",
-            "hp",
-            "mana",
-            "endurance",
-            "damage",
-          ]
-        : [
-            "strength",
-            "agility",
-            "power",
-            "knowledge",
-            "hp",
-            "mana",
-            "endurance",
-          ];
+    let properties = [
+      "strength",
+      "agility",
+      "power",
+      "knowledge",
+      "hp",
+      "mana",
+      "endurance",
+      "cutRes",
+      "bluntRes",
+      "pierceRes",
+      "fireRes",
+      "energyRes",
+      "frostRes",
+      "curseRes",
+    ];
     let options = [
       <option
         key="placeholder"
@@ -160,7 +142,7 @@ class ConnectedItemEnhancementForm extends React.Component<
         className="placeholder"
       >
         {t("Wybierz parametr")}
-      </option>,
+      </option>
     ];
     properties.forEach((x) =>
       options.push(
@@ -185,13 +167,13 @@ class ConnectedItemEnhancementForm extends React.Component<
           {options}
         </select>
         <input
-          value={x.value ? x.value : undefined}
+          value={x.value ? x.value : ""}
           onChange={(event) =>
             this.handleChange(+event.currentTarget.value, index)
           }
           placeholder={t("Wartość")}
           type="number"
-          min={-999}
+          min={1}
           max={999}
           disabled={this.state.properties[index].property === "placeholder"}
         ></input>
@@ -203,20 +185,11 @@ class ConnectedItemEnhancementForm extends React.Component<
     ));
     return (
       <form
-        onSubmit={(event) => this.handleClick(event, this.enhanceItem)}
-        className="itemsList addItemForm enhanceForm"
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
-        onMouseEnter={(event) => {
-          event.stopPropagation();
-        }}
+        onSubmit={(event) => this.handleClick(event, this.createItem)}
+        className={"itemsList addItemForm"}
       >
         <div className={"title"}>
-          <p>{t("change-stats-1")}</p>
-          <p className="subtitle">
-            {t("change-stats-2")}
-          </p>
+          <p>{t("Stwórz własny przedmiot")}</p>
         </div>
         <div className={"propertyList"}>
           {propertySelects}
@@ -234,9 +207,7 @@ class ConnectedItemEnhancementForm extends React.Component<
 type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
-  type: keyof Equipment;
-  enhancements: Enhancements | null;
-  closeForm(): void;
+  closeList(): void;
   t(string: string): string;
 }
 
@@ -245,7 +216,9 @@ interface StateTypes {
   propertiesUsed: string[];
 }
 
-interface Enhancements {
+interface GuildBuffs extends RawItem {
+  name: string;
+  type: ItemTypes;
   strength: number;
   agility: number;
   power: number;
@@ -253,17 +226,25 @@ interface Enhancements {
   hp: number;
   mana: number;
   endurance: number;
-  damage: number;
+  bluntRes: number;
+  pierceRes: number;
+  cutRes: number;
+  fireRes: number;
+  frostRes: number;
+  curseRes: number;
+  energyRes: number;
 }
 
 //Redux
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    enhanceItem: (slot: keyof Equipment, enhancements: Enhancements) =>
-      dispatch(enhanceItem({ slot: slot, enhancements: enhancements })),
+    unequipItem: (slot: keyof Equipment) =>
+      dispatch(unequipItem({ slot: slot })),
+    equipItem: (slot: keyof Equipment, item: Item) =>
+      dispatch(equipItem({ slot: slot, item: item })),
   };
 };
 
 const connector = connect(null, mapDispatchToProps);
 
-export const ItemEnhancementForm = withTranslation()(connector(ConnectedItemEnhancementForm));
+export const GuildBuffsForm = withTranslation()(connector(ConnectedGuildBuffsForm));

@@ -67,8 +67,8 @@
                   }
                   .regenTooltip {
                     position: absolute;
-                    left: 90%;
-                    bottom: 90%;
+                    left: 60%;
+                    bottom: 60%;
                     font-size: 0.75em;
                     background-color: black;
                     color: white;
@@ -76,6 +76,8 @@
                     width: max-content;
                     border: 2px solid #d6c1a9;
                     padding: 5px;
+                    padding-left: 8px;
+                    padding-right: 8px;
                     border-radius: 5px;
                     opacity: 0.9;
                     cursor: default;
@@ -145,6 +147,10 @@
   .statsCalculator .stats .linesAndEq .statsAndRes .resLines,
   .statsCalculator .stats .linesAndEq .statsAndRes .statLines {
     width: 90%;
+  }
+  .statsCalculator .stats .linesAndEq .statsAndRes .statLines .statLine .statNameButtons .statName .tooltipIcon .regenTooltip {
+    left: -60%;
+    bottom: 90%;
   }
 }
 }

@@ -7,6 +7,7 @@ import { ItemSlot } from "./equipment-slots/ItemSlot";
 import { SpecialSlot } from "./equipment-slots/SpecialSlot";
 import { PsychoSlot } from "./equipment-slots/PsychoSlot";
 import { ItemsSearchList } from "./equipment-slots/item-display/ItemSearchList";
+import { GuildBuffsForm } from "./equipment-slots/shared/GuildBuffsForm";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
@@ -200,7 +201,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
       backgroundImage: `url("images/` + this.props.class + `.svg")`,
     };
     let equipment = Object.keys(this.props.equipment);
-    let equipmentSlots = equipment.filter((x) => x !== "special");
+    let equipmentSlots = equipment.filter((x) => x !== "special" && x !== "guild");
     let equipmentSlotComponents = equipmentSlots.map((x) => (
       <ItemSlot
         key={x}
@@ -439,8 +440,14 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
             <button
               className="empty"
               onClick={() => this.unequipItems()}
+              title={t("Zdejmij wszystkie przedmioty")}
             ></button>
           ) : null}
+          <button
+            className="guild empty"
+            onClick={() => this.setState({listToDisplay: "guild"})}
+            title={t("Buffy gildiowe")}
+          >{this.state.listToDisplay === "guild" ? <GuildBuffsForm closeList={this.hideItemsList} /> : null}</button>
         </div>
         <SpecialSlot
           type={"special"}
@@ -494,7 +501,7 @@ interface OwnProps {
 }
 
 interface StateTypes {
-  listToDisplay: keyof Equipment | "" | "search" | "filters";
+  listToDisplay: keyof Equipment | "" | "search" | "filters" | "guild";
   showOtherProperties: boolean;
   searchString: string;
   filters: {
