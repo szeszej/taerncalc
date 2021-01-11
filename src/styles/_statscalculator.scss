@@ -56,6 +56,41 @@
 
               .statName {
                 text-align: center;
+
+                .tooltipIcon {
+                  display: inline-block;
+                  position: relative;
+                  cursor: pointer;
+                  img {
+                    width: 1em;
+                    height: 1em;
+                  }
+                  .regenTooltip {
+                    position: absolute;
+                    left: 90%;
+                    bottom: 90%;
+                    font-size: 0.75em;
+                    background-color: black;
+                    color: white;
+                    z-index: 3;
+                    width: max-content;
+                    border: 2px solid #d6c1a9;
+                    padding: 5px;
+                    border-radius: 5px;
+                    opacity: 0.9;
+                    cursor: default;
+                    animation: fadein 1s;
+                    @keyframes fadein {
+                      from {
+                        opacity: 0;
+                      }
+
+                      to {
+                        opacity: 0.9;
+                      }
+                    }
+                  }
+                }
               }
 
               .statButtons {

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { StatIncrementButton } from "./stat-buttons/StatIncrementButton";
 import { StatDecrementButton } from "./stat-buttons/StatDecrementButton";
+import { RegenerationTooltip } from "./regeneration-tooltip/RegenerationTooltip";
 
 export function StatLine(props: Props) {
+  const [tooltip, showTooltip] = useState(false);
   let buttonValues = [-10, -1, 1, 10];
   let buttonElements = buttonValues.map((buttonValue) =>
     buttonValue < 0 ? (
@@ -34,7 +36,24 @@ export function StatLine(props: Props) {
       />
       <div className="statNameButtons">
         <div className="statName">
-          {props.statName} {props.value} ({props.value + props.fromItems})
+          {props.statName} {props.value} ({props.value + props.fromItems}){" "}
+          {props.stat === "mana" || props.stat === "endurance" ? (
+            <div
+              className="tooltipIcon"
+              onMouseEnter={() => showTooltip(true)}
+              onTouchStart={() => showTooltip(true)}
+              onMouseLeave={() => showTooltip(false)}
+              onTouchEnd={() => showTooltip(false)}
+            >
+              <img src="images/tooltip.svg" alt="tooltip" />
+              {tooltip ? (
+                <RegenerationTooltip
+                  stat={props.stat}
+                  value={props.value + props.fromItems}
+                />
+              ) : null}
+            </div>
+          ) : null}
         </div>
         <div className="statButtons">{buttonElements}</div>
       </div>
