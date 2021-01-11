@@ -174,7 +174,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
           placeholder={t("Wartość")}
           type="number"
           min={1}
-          max={999}
+          max={this.state.properties[index].property === "strength" || this.state.properties[index].property === "agility" || this.state.properties[index].property === "power" || this.state.properties[index].property === "knowledge" ? 20 : this.state.properties[index].property === "hp" || this.state.properties[index].property === "mana" || this.state.properties[index].property === "endurance" ? 200 : 40}
           disabled={this.state.properties[index].property === "placeholder"}
         ></input>
         <button

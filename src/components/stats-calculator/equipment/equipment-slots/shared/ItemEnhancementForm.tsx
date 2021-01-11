@@ -84,7 +84,7 @@ class ConnectedItemEnhancementForm extends React.Component<
       this.props.enhanceItem(this.props.type, enhancements);
       this.props.closeForm();
     } else {
-      window.alert("Nie określono żadnych parametrów niezerowych!");
+      window.alert(this.props.t("Nie określono żadnych parametrów!"));
     }
   }
   //Needed to prevent bubbling
