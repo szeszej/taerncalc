@@ -6,8 +6,8 @@ import ReactGA from "react-ga";
 import { ItemSlot } from "./equipment-slots/ItemSlot";
 import { SpecialSlot } from "./equipment-slots/SpecialSlot";
 import { PsychoSlot } from "./equipment-slots/PsychoSlot";
+import { GuildSlot } from "./equipment-slots/GuildSlot";
 import { ItemsSearchList } from "./equipment-slots/item-display/ItemSearchList";
-import { GuildBuffsForm } from "./equipment-slots/shared/GuildBuffsForm";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
@@ -118,15 +118,13 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     this.props.changePsychoLvl(slot, value);
   }
   unequipItems() {
-    const { t } = this.props
+    const { t } = this.props;
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
           <div className="backdrop">
             <div className="alert-box">
-              <p className="alert-text">
-                {t("unequip-all")}
-              </p>
+              <p className="alert-text">{t("unequip-all")}</p>
               <div className="alert-box-actions">
                 <button
                   className="alert-box-action"
@@ -172,36 +170,53 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         itemsToFilter = this.state.filters[filterType]
           ? itemsToFilter.filter((item) => item.class === this.props.class)
           : itemsToFilter;
-      } else if (!(this.state.filters.set || this.state.filters.psychoRare || this.state.filters.rare || this.state.filters.epic)) {
+      } else if (
+        !(
+          this.state.filters.set ||
+          this.state.filters.psychoRare ||
+          this.state.filters.rare ||
+          this.state.filters.epic
+        )
+      ) {
         itemsToFilter = this.state.filters[filterType]
           ? itemsToFilter.filter((item) => item[filterType as keyof Item]! > 0)
           : itemsToFilter;
       }
     });
-    if (this.state.filters.set || this.state.filters.psychoRare || this.state.filters.rare || this.state.filters.epic) {
+    if (
+      this.state.filters.set ||
+      this.state.filters.psychoRare ||
+      this.state.filters.rare ||
+      this.state.filters.epic
+    ) {
       itemsToFilter = itemsToFilter.filter((item) => {
         if (this.state.filters.set && item.set) {
-          return true
-        } else if (this.state.filters.psychoRare && item.rarity === "Psychorare") {
-          return true
+          return true;
+        } else if (
+          this.state.filters.psychoRare &&
+          item.rarity === "Psychorare"
+        ) {
+          return true;
         } else if (this.state.filters.rare && item.rarity === "Rzadki") {
-          return true
+          return true;
         } else if (this.state.filters.epic && item.rarity === "Epik") {
-          return true
+          return true;
         } else {
-          return false
+          return false;
         }
-      })
+      });
     }
     return itemsToFilter;
   }
   render() {
-    const { t } = this.props
+    const { t } = this.props;
     let classBackground = {
       backgroundImage: `url("images/` + this.props.class + `.svg")`,
     };
     let equipment = Object.keys(this.props.equipment);
-    let equipmentSlots = equipment.filter((x) => x !== "special" && x !== "guild");
+    let equipmentSlots = equipment.filter(
+      (x) => x !== "special" && x !== "guild"
+    );
     let equipmentSlotComponents = equipmentSlots.map((x) => (
       <ItemSlot
         key={x}
@@ -344,7 +359,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
           })
         }
       >
-        {t("Resetuj filtry")}
+        {t("Resetuj")}
       </button>
     );
     return (
@@ -366,16 +381,16 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
             {this.state.searchString &&
             this.state.listToDisplay === "search" ? (
               <ItemsSearchList
-                items={this.props.items.filter(
-                  (x) => this.props.i18n.language === "pl" ?
-                    (x.name
-                      .toLowerCase()
-                      .includes(this.state.searchString.toLowerCase()) &&
-                    (x.class === null || x.class === this.props.class)) :
-                    (t(x.name)
-                      .toLowerCase()
-                      .includes(this.state.searchString.toLowerCase()) &&
-                    (x.class === null || x.class === this.props.class))
+                items={this.props.items.filter((x) =>
+                  this.props.i18n.language === "pl"
+                    ? x.name
+                        .toLowerCase()
+                        .includes(this.state.searchString.toLowerCase()) &&
+                      (x.class === null || x.class === this.props.class)
+                    : t(x.name)
+                        .toLowerCase()
+                        .includes(this.state.searchString.toLowerCase()) &&
+                      (x.class === null || x.class === this.props.class)
                 )}
                 class={this.props.class}
                 level={this.props.level}
@@ -426,8 +441,8 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
                       {t("Zatwierdź")}
                     </button>
                     {filtersResetButton}
-                    {filtersCloseButton}
                   </div>
+                  {filtersCloseButton}
                 </div>
               ) : null}
             </div>
@@ -443,11 +458,13 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
               title={t("Zdejmij wszystkie przedmioty")}
             ></button>
           ) : null}
-          <button
-            className="guild empty"
-            onClick={() => this.setState({listToDisplay: "guild"})}
-            title={t("Buffy gildiowe")}
-          >{this.state.listToDisplay === "guild" ? <GuildBuffsForm closeList={this.hideItemsList} /> : null}</button>
+          <GuildSlot
+            showItemsList={this.showItemsList}
+            hideItemsList={this.hideItemsList}
+            listToDisplay={this.state.listToDisplay}
+            t={t}
+            inSlot={this.props.equipment.guild}
+          />
         </div>
         <SpecialSlot
           type={"special"}
@@ -490,14 +507,16 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const EquipmentComponent = withTranslation()(connector(ConnectedEquipment));
+export const EquipmentComponent = withTranslation()(
+  connector(ConnectedEquipment)
+);
 
 //Types
 type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
   t(string: string): string;
-  i18n: typeof i18n
+  i18n: typeof i18n;
 }
 
 interface StateTypes {

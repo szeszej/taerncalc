@@ -1,5 +1,6 @@
 //React
 import React from "react";
+import ReactGA from "react-ga";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
@@ -68,6 +69,11 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
         }
       });
       let createdItem = new Item(itemProperties)
+      ReactGA.event({
+        category: "Items",
+        action: "Item Created",
+        label: this.props.name,
+      });
       this.props.addItem(createdItem);
       this.props.equipItem(this.props.type as keyof Equipment, createdItem);
       this.props.closeList();

@@ -477,7 +477,7 @@ export const resources = {
       "unequip-all": "Czy na pewno chcesz zdjąć wszystkie przedmioty?",
       Tak: "Tak",
       Nie: "Nie",
-      "Resetuj filtry": "Resetuj filtry",
+      "Resetuj": "Resetuj",
       "active-filters": "Lista aktywnych filtrów",
       "add-filters": "Dodaj filtry do list przedmiotów",
       "Zdejmij wszystkie przedmioty": "Zdejmij wszystkie przedmioty",
@@ -567,10 +567,9 @@ export const resources = {
       //item search
       "no-items-found": "Nie znaleziono pasujących przedmiotów.",
       //regen tooltip
-      "Regeneracja": "Regeneracja",
-      "many": "many",
-      "kondycji": "kondycji",
-      "punktów na rundę": "punktów na rundę"
+      "punktów na rundę": "punktów na rundę",
+      //guild buffs
+      "Dodaj buffy gildiowe": "Dodaj buffy gildiowe",
     },
   },
   en: {
@@ -1049,7 +1048,7 @@ export const resources = {
       "unequip-all": "Are you sure you want to unequip all items?",
       Tak: "Yes",
       Nie: "No",
-      "Resetuj filtry": "Reset filters",
+      "Resetuj": "Reset",
       "active-filters": "List of active filters",
       "add-filters": "Add filters to item lists",
       "Zdejmij wszystkie przedmioty": "Unequip all items",
@@ -1138,10 +1137,9 @@ export const resources = {
       //item search
       "no-items-found": "No items matching this name.",
       //regen tooltip
-      "Regeneracja": "Regeneration of",
-      "many": "mana",
-      "kondycji": "stamina",
-      "punktów na rundę": "points per round"
+      "punktów na rundę": "points per round",
+      //guild buffs
+      "Dodaj buffy gildiowe": "Add guild buffs",
     },
   },
 };

@@ -22,7 +22,7 @@ function ConnectedRegenerationTooltip (props: PropTypes) {
   }
   return (
     <div className="regenTooltip">
-      {t("Regeneracja")} {props.stat === "mana" ? t("many") : t("kondycji")}: {regenRate}%<br />({Math.floor((regenRate / 100) * props.value)} {t("punktów na rundę")})
+      {t(props.stat === "mana" ? "Regeneracja many" : "Regeneracja kondycji")}: {regenRate}%<br />({Math.floor((regenRate / 100) * props.value)} {t("punktów na rundę")})
     </div>
   )
 }

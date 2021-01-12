@@ -147,7 +147,7 @@
             width: 85%;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
             margin-top: 1em;
 
             input,
@@ -159,7 +159,7 @@
               cursor: pointer;
               background-color: black;
               border: 2px solid #ec8c42;
-
+              width: 6em;
               &:hover {
                 background-color: #322f3e;
               }
@@ -455,6 +455,16 @@
           }
         }
       }
+      .guildBuffsSubmit {
+        width: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 1em;
+        button {
+          width: 6em;
+        }
+      }
     }
     .notFound {
       margin: 0 auto;
@@ -480,8 +490,8 @@
     cursor: default;
     animation: fadein 1s;
     line-height: 0.3em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
     @keyframes fadein {
       from {
         opacity: 0;
@@ -731,8 +741,8 @@
       right: 0;
       top: 0;
       border-radius: 0;
-      height: 3.5rem;
-      width: 3.5rem;
+      height: 4em;
+      width: 4em;
       background-image: url("/images/empty.svg");
       background-size: contain;
       background-position: center;
@@ -742,6 +752,12 @@
     .guild {
       left: 0;
       background-image: url("/images/guild.svg");
+      background-color: #bdac6f;
+      border: 2px solid $border-color;
+      cursor: pointer;
+    }
+    .guild:hover {
+      background-color: #bd996f;
     }
   }
 }
@@ -821,12 +837,12 @@
       }
       .itemTooltip {
         right: auto;
-        left: -20%;
+        left: -40%;
         bottom: 100%;
         font-size: 0.9em;
         line-height: 1.4em;
         padding: 3px;
-        max-width: 13em;
+        max-width: 12em;
         user-select: none;
         p {
           margin-top: 0.3em;

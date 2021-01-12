@@ -1,5 +1,6 @@
 //React
 import React from "react";
+import ReactGA from "react-ga";
 
 //Redux
 import { connect, ConnectedProps } from "react-redux";
@@ -13,7 +14,12 @@ import {
 } from "../../../../../store/equipment-reducer/equipment-reducer";
 
 //Models
-import { Item, RawItem, ItemTypes } from "../../../../../data/models/item.model";
+import {
+  Item,
+  RawItem,
+  ItemTypes,
+  NumericItemValues,
+} from "../../../../../data/models/item.model";
 
 //i18l
 import { withTranslation } from "react-i18next";
@@ -35,10 +41,50 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
     this.addNewSelect = this.addNewSelect.bind(this);
     this.createItem = this.createItem.bind(this);
   }
-  //Creating a new item to add to the database
+  componentDidMount() {
+    let areGuildBuffsPresent: boolean = false;
+    let properties = [
+      "strength",
+      "agility",
+      "power",
+      "knowledge",
+      "hp",
+      "mana",
+      "endurance",
+      "cutRes",
+      "bluntRes",
+      "pierceRes",
+      "fireRes",
+      "energyRes",
+      "frostRes",
+      "curseRes",
+    ];
+    if (this.props.item) {
+      properties.forEach((property) => {
+        if (this.props.item![property as keyof Item] !== 0) {
+          areGuildBuffsPresent = true;
+          this.setState((prevState) => {
+            let newState = { ...prevState };
+            newState.properties.push({
+              property: property,
+              value: this.props.item![property as keyof NumericItemValues],
+            });
+            return newState;
+          });
+        }
+      });
+    }
+    if (areGuildBuffsPresent) {
+      this.setState((prevState) => {
+        let newState = { ...prevState };
+        newState.properties.shift();
+        return newState;
+      });
+    }
+  }
   createItem(): void {
     let guildBuffs: GuildBuffs = {
-      name: this.props.t("Buffy gildiowe"),
+      name: "Buffy gildiowe",
       image: "",
       type: "guild",
       strength: 0,
@@ -55,7 +101,6 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
       frostRes: 0,
       curseRes: 0,
       energyRes: 0,
-      isCustom: true,
     };
     if (
       !this.state.properties.every((x) => x.property === "placeholder") &&
@@ -67,7 +112,12 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
           (guildBuffs[x.property as keyof GuildBuffs] as any) = x.value;
         }
       });
-      let createdItem = new Item(guildBuffs)
+      let createdItem = new Item(guildBuffs);
+      ReactGA.event({
+        category: "Items",
+        action: "Item Choice",
+        label: "Buffy gildiowe",
+      });
       this.props.equipItem("guild", createdItem);
       this.props.closeList();
     } else {
@@ -109,7 +159,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
     });
   }
   render() {
-    const { t } = this.props
+    const { t } = this.props;
     let closeButton = (
       <button
         className="closeList"
@@ -142,7 +192,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
         className="placeholder"
       >
         {t("Wybierz parametr")}
-      </option>
+      </option>,
     ];
     properties.forEach((x) =>
       options.push(
@@ -174,7 +224,18 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
           placeholder={t("Wartość")}
           type="number"
           min={1}
-          max={this.state.properties[index].property === "strength" || this.state.properties[index].property === "agility" || this.state.properties[index].property === "power" || this.state.properties[index].property === "knowledge" ? 20 : this.state.properties[index].property === "hp" || this.state.properties[index].property === "mana" || this.state.properties[index].property === "endurance" ? 200 : 40}
+          max={
+            this.state.properties[index].property === "strength" ||
+            this.state.properties[index].property === "agility" ||
+            this.state.properties[index].property === "power" ||
+            this.state.properties[index].property === "knowledge"
+              ? 20
+              : this.state.properties[index].property === "hp" ||
+                this.state.properties[index].property === "mana" ||
+                this.state.properties[index].property === "endurance"
+              ? 200
+              : 40
+          }
           disabled={this.state.properties[index].property === "placeholder"}
         ></input>
         <button
@@ -183,18 +244,38 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
         ></button>
       </div>
     ));
+    let resetButton = (
+      <button
+        onClick={(event) => {
+          event.preventDefault();
+          this.props.unequipItem("guild");
+          this.setState({
+            properties: [
+              {
+                property: "placeholder",
+                value: null,
+              },
+            ],
+            propertiesUsed: [],
+          });
+        }}
+      >
+        {t("Resetuj")}
+      </button>
+    );
     return (
       <form
         onSubmit={(event) => this.handleClick(event, this.createItem)}
         className={"itemsList addItemForm"}
       >
         <div className={"title"}>
-          <p>{t("Stwórz własny przedmiot")}</p>
+          <p>{t("Dodaj buffy gildiowe")}</p>
         </div>
         <div className={"propertyList"}>
           {propertySelects}
-          <div className="submit">
+          <div className="submit guildBuffsSubmit">
             <button type="submit">{t("Zatwierdź")}</button>
+            {resetButton}
           </div>
         </div>
         {closeButton}
@@ -207,6 +288,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
 type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 
 interface OwnProps {
+  item: Item | null;
   closeList(): void;
   t(string: string): string;
 }
@@ -247,4 +329,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(null, mapDispatchToProps);
 
-export const GuildBuffsForm = withTranslation()(connector(ConnectedGuildBuffsForm));
+export const GuildBuffsForm = withTranslation()(
+  connector(ConnectedGuildBuffsForm)
+);
