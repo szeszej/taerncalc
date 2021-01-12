@@ -128,6 +128,7 @@ class ConnecedSpecialSlot extends React.Component<PropTypes, StateTypes> {
     );
     let propertyInputs = filteredProperties.map((x) => (
       <div key={x} className="property">
+        <img src={"images/" + x + ".svg"} alt={x}/>
         <p>{t(x)}:</p>
         <input
           type="number"

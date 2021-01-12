@@ -123,7 +123,7 @@
           background-size: 80%;
         }
         .filtersForm {
-          width: 20em;
+          width: 25em;
           min-width: 0;
           margin: 0;
           top: 100%;
@@ -137,7 +137,11 @@
             flex-wrap: wrap;
             margin-left: 1em;
             .filterLine {
+              display: flex;
+              align-items: center;
               width: 50%;
+              margin-top: 2px;
+              margin-bottom: 2px;
               label {
                 margin-left: 0.5em;
               }
@@ -147,7 +151,7 @@
             width: 85%;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-evenly;
             margin-top: 1em;
 
             input,
@@ -409,12 +413,16 @@
       align-items: center;
 
       .property {
-        width: 80%;
+        width: 90%;
         margin: 2px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+
+        img {
+          width: 1.5em;
+        }
 
         input {
           height: 1.5em;
@@ -424,7 +432,7 @@
 
         select {
           font-size: 1em;
-          width: 50%;
+          width: 45%;
           background-position: right 0.4em top 50%, 0 0;
           padding-left: 0.5em;
         }
@@ -620,6 +628,10 @@
           align-items: center;
           justify-content: space-between;
 
+          img {
+            margin-right: 0.5em;
+          }
+
           input,
           p {
             height: 1.25em;
@@ -763,6 +775,9 @@
 }
 
 @media only screen and (max-width: 1050px) {
+  .equipment .filters .filter .filtersList .filtersForm {
+    left: -60%;
+  }
   .equipment {
     .armor,
     .belt,
@@ -786,9 +801,6 @@
 }
 
 @media only screen and (max-width: 520px) {
-  .equipment .filters .filter .filtersList .filtersForm {
-    left: -30%;
-  }
   .equipment {
     max-width: 81vw;
     .armor,

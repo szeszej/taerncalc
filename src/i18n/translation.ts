@@ -428,6 +428,7 @@ export const resources = {
       frostRes: "Odp. na zimno",
       "Punkty statystyk": "Punkty statystyk",
       Obrażenia: "Obrażenia",
+      damage: "Obrażenia",
       "char-power": "Power",
       //item creator
       Wartość: "Wartość",
@@ -999,6 +1000,7 @@ export const resources = {
       frostRes: "Cold Res.",
       "Punkty statystyk": "Attribute Points",
       Obrażenia: "Damage",
+      damage: "Damage",
       "char-power": "Character Power",
       //item creator
       Wartość: "Value",

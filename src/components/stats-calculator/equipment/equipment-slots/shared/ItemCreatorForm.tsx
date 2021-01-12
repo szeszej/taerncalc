@@ -141,6 +141,9 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
       "frostRes",
       "curseRes",
     ];
+    if (this.props.type === "weapon") {
+      properties.push("damage")
+    }
     let options = [
       <option
         key="placeholder"
@@ -164,6 +167,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
     );
     let propertySelects = this.state.properties.map((x, index) => (
       <div className="property" key={index}>
+      <img src={"images/" + x.property + ".svg"} alt={x.property}/>
         <select
           required
           value={x.property}

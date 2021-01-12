@@ -48,11 +48,11 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
       showOtherProperties: false,
       searchString: "",
       filters: {
-        class: false,
         rare: false,
         psychoRare: false,
         set: false,
         epic: false,
+        class: false,
         strength: false,
         agility: false,
         power: false,
@@ -253,6 +253,7 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
     let filterTypes = Object.keys(this.state.filters);
     let checkBoxes = filterTypes.map((filterType) => (
       <div key={filterType} className="filterLine">
+        <img src={"images/" + filterType + ".svg"} alt={filterType}/>
         <input
           type="checkbox"
           className="filterInput"

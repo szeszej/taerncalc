@@ -175,6 +175,7 @@ class ConnectedItemEnhancementForm extends React.Component<
     );
     let propertySelects = this.state.properties.map((x, index) => (
       <div className="property" key={index}>
+      <img src={"images/" + x.property + ".svg"} alt={x.property} />
         <select
           required
           value={x.property}
