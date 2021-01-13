@@ -168,6 +168,9 @@
                 background-color: #322f3e;
               }
             }
+            button.resetFilters  {
+              color: #e81327;
+            }
           }
         }
       }
@@ -371,6 +374,13 @@
       background-image: url("/images/plus-icon.png");
       background-position: center;
       background-repeat: no-repeat;
+      background-size: 90%;
+    }
+
+    .removeProperty {
+      background-image: url("/images/minus-icon.png");
+      background-position: center;
+      background-repeat: no-repeat;
       background-size: 80%;
     }
 
@@ -404,7 +414,7 @@
       }
     }
     .addItemForm {
-      min-width: 25em;
+      min-width: 27em;
       margin-left: 1em;
     }
     .propertyList {
@@ -413,7 +423,7 @@
       align-items: center;
 
       .property {
-        width: 90%;
+        width: 95%;
         margin: 2px;
         display: flex;
         flex-direction: row;
@@ -834,9 +844,7 @@
           align-items: center;
           justify-content: space-evenly;
           margin-top: 1em;
-
-          input,
-          button:not(.closeList) {
+          .submitButton, .resetFilters {
             border-radius: 8px;
             font-size: 1.3em;
             color: #d7d50e;
@@ -846,8 +854,11 @@
             border: 2px solid #ec8c42;
             width: 6em;
             &:hover {
-              opacity: 0.8;
+              background-color: #322f3e;
             }
+          }
+          .resetFilters {
+            color: #e81327;
           }
         }
       }

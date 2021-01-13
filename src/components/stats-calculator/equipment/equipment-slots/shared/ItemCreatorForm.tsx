@@ -115,6 +115,13 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
       return newState;
     });
   }
+  removeSelect(index: number): void {
+    this.setState((currentState) => {
+      let newState = { ...currentState };
+      newState.properties.splice(index, 1);
+      return newState;
+    });
+  }
   render() {
     const { t } = this.props
     let closeButton = (
@@ -191,6 +198,15 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
         <button
           onClick={(event) => this.handleClick(event, this.addNewSelect)}
           className="addProperty"
+        ></button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            this.removeSelect(index);
+          }}
+          disabled={this.state.properties.length < 2}
+          className="removeProperty"
         ></button>
       </div>
     ));

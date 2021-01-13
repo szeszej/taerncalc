@@ -40,7 +40,10 @@ class ConnectedItemEnhancementForm extends React.Component<
     if (this.props.enhancements) {
       for (const key in this.props.enhancements) {
         if (this.props.enhancements.hasOwnProperty(key)) {
-          if (this.props.enhancements && this.props.enhancements[key as keyof Enhancements] !== 0) {
+          if (
+            this.props.enhancements &&
+            this.props.enhancements[key as keyof Enhancements] !== 0
+          ) {
             areEnhancementsPresent = true;
             this.setState((prevState) => {
               let newState = { ...prevState };
@@ -121,8 +124,15 @@ class ConnectedItemEnhancementForm extends React.Component<
       return newState;
     });
   }
+  removeSelect(index: number): void {
+    this.setState((currentState) => {
+      let newState = { ...currentState };
+      newState.properties.splice(index, 1);
+      return newState;
+    });
+  }
   render() {
-    const { t } = this.props
+    const { t } = this.props;
     let closeButton = (
       <button
         className="closeList"
@@ -175,7 +185,7 @@ class ConnectedItemEnhancementForm extends React.Component<
     );
     let propertySelects = this.state.properties.map((x, index) => (
       <div className="property" key={index}>
-      <img src={"images/" + x.property + ".svg"} alt={x.property} />
+        <img src={"images/" + x.property + ".svg"} alt={x.property} />
         <select
           required
           value={x.property}
@@ -200,6 +210,15 @@ class ConnectedItemEnhancementForm extends React.Component<
           onClick={(event) => this.handleClick(event, this.addNewSelect)}
           className="addProperty"
         ></button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            this.removeSelect(index);
+          }}
+          disabled={this.state.properties.length < 2}
+          className="removeProperty"
+        ></button>
       </div>
     ));
     return (
@@ -215,9 +234,7 @@ class ConnectedItemEnhancementForm extends React.Component<
       >
         <div className={"title"}>
           <p>{t("change-stats-1")}</p>
-          <p className="subtitle">
-            {t("change-stats-2")}
-          </p>
+          <p className="subtitle">{t("change-stats-2")}</p>
         </div>
         <div className={"propertyList"}>
           {propertySelects}
@@ -267,4 +284,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connector = connect(null, mapDispatchToProps);
 
-export const ItemEnhancementForm = withTranslation()(connector(ConnectedItemEnhancementForm));
+export const ItemEnhancementForm = withTranslation()(
+  connector(ConnectedItemEnhancementForm)
+);
