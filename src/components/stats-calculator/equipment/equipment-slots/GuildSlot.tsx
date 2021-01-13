@@ -22,7 +22,7 @@ export function GuildSlot(props: Props) {
       style={props.inSlot ? {backgroundImage: `url("/images/guild-color.svg")`} : undefined}
     >
       {props.listToDisplay === "guild" ?
-        <GuildBuffsForm item={props.inSlot} closeList={props.hideItemsList} />
+        <GuildBuffsForm closeList={props.hideItemsList} />
        : tooltip && props.inSlot ? <ItemTooltip item={props.inSlot}/> : null}
     </div>
   );

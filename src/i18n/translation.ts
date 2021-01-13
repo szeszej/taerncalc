@@ -571,6 +571,10 @@ export const resources = {
       "punktów na rundę": "punktów na rundę",
       //guild buffs
       "Dodaj buffy gildiowe": "Dodaj buffy gildiowe",
+      "manaUsage": "Zużycie many",
+      "enduranceUsage": "Zużycie kondycji",
+      "regeneration": "Regeneracja",
+      "physRes": "Odp. fizyczne"
     },
   },
   en: {
@@ -1142,6 +1146,10 @@ export const resources = {
       "punktów na rundę": "points per round",
       //guild buffs
       "Dodaj buffy gildiowe": "Add guild buffs",
+      "manaUsage": "Mana usage",
+      "enduranceUsage": "Stamina usage",
+      "regeneration": "Regeneration",
+      "physRes": "Physical Res."
     },
   },
 };

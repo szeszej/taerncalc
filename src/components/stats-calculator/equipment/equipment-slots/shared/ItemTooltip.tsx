@@ -32,40 +32,47 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
     return color;
   }
   render() {
-    const { t } = this.props
+    const { t } = this.props;
     let otherProperties = this.props.item
-      ? this.props.item.otherProperties.map((x) => {
-          if (x[0] === "Dodatkowe PA") {
-            return (
-              <p
-                style={
-                  this.props.item.psychoLvl
-                    ? this.nameColor("Psychorare")
-                    : { color: "gray" }
-                }
-                key={x[0]}
-              >
-                {t(x[0])}: {x[1]}
-              </p>
-            );
-          } else {
-            return (
-              <p
-                style={
-                  this.props.item.psychoLvl
-                    ? this.nameColor("Psychorare")
-                    : { color: "gray" }
-                }
-                key={x[0]}
-              >
-                {t(x[0])}: {x[1] > 0 ? "+" : null}
-                {x[1] + x[2] * (this.props.item.psychoLvl - 1)}% (
-                {x[2] > 0 ? "+" : null}
-                {x[2]}% {t("co poziom")})
-              </p>
-            );
-          }
-        })
+      ? this.props.item.type === "guild"
+        ? this.props.item.otherProperties.map((x) => (
+            <p style={this.nameColor("Psychorare")} key={x[0]}>
+              {t(x[0])}: {x[1] > 0 ? "+" : null}
+              {x[1]}%
+            </p>
+          ))
+        : this.props.item.otherProperties.map((x) => {
+            if (x[0] === "Dodatkowe PA") {
+              return (
+                <p
+                  style={
+                    this.props.item.psychoLvl
+                      ? this.nameColor("Psychorare")
+                      : { color: "gray" }
+                  }
+                  key={x[0]}
+                >
+                  {t(x[0])}: {x[1]}
+                </p>
+              );
+            } else {
+              return (
+                <p
+                  style={
+                    this.props.item.psychoLvl
+                      ? this.nameColor("Psychorare")
+                      : { color: "gray" }
+                  }
+                  key={x[0]}
+                >
+                  {t(x[0])}: {x[1] > 0 ? "+" : null}
+                  {x[1] + x[2] * (this.props.item.psychoLvl - 1)}% (
+                  {x[2] > 0 ? "+" : null}
+                  {x[2]}% {t("co poziom")})
+                </p>
+              );
+            }
+          })
       : null;
     let notMeetingRequirements = {
       color: "red",
@@ -98,7 +105,11 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
     return (
       <div className="itemTooltip" onClick={(event) => event.stopPropagation()}>
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>
-          {!this.props.item.isCustom ? t(this.props.item.name) : t(this.props.item.type + "-count", {number: this.props.item.name.slice(-1)})}
+          {!this.props.item.isCustom
+            ? t(this.props.item.name)
+            : t(this.props.item.type + "-count", {
+                number: this.props.item.name.slice(-1),
+              })}
         </p>
         {this.props.item.set && equippedSet ? (
           <p className="itemSet" style={{ color: "#3DEF01" }}>
@@ -283,7 +294,8 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
                 : negativeStats
             }
           >
-            {t("power")}: {this.props.item.calculateTotalStat("power") >= 0 ? "+" : null}
+            {t("power")}:{" "}
+            {this.props.item.calculateTotalStat("power") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("power")}
             {this.props.item.enhancements.power ? (
               <span style={{ color: "orange" }}>
@@ -346,7 +358,8 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
                 : negativeStats
             }
           >
-            {t("mana")}: {this.props.item.calculateTotalStat("mana") >= 0 ? "+" : null}
+            {t("mana")}:{" "}
+            {this.props.item.calculateTotalStat("mana") >= 0 ? "+" : null}
             {this.props.item.calculateTotalStat("mana")}
             {this.props.item.enhancements.mana ? (
               <span style={{ color: "orange" }}>
@@ -438,7 +451,8 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         ) : null}
         {equippedSet && equippedSet.knowledge && setProperties ? (
           <p className="itemProperty" style={setColor}>
-            {t("knowledge")}: +{setProperties.knowledge} ({equippedSet.knowledge})
+            {t("knowledge")}: +{setProperties.knowledge} (
+            {equippedSet.knowledge})
           </p>
         ) : null}
         {equippedSet && equippedSet.hp && setProperties ? (
@@ -448,7 +462,8 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         ) : null}
         {equippedSet && equippedSet.endurance && setProperties ? (
           <p className="itemProperty" style={setColor}>
-            {t("endurance")}: +{setProperties.endurance} ({equippedSet.endurance})
+            {t("endurance")}: +{setProperties.endurance} (
+            {equippedSet.endurance})
           </p>
         ) : null}
         {equippedSet && equippedSet.mana && setProperties ? (
@@ -484,5 +499,5 @@ interface OwnProps {
   agility?: number;
   power?: number;
   knowledge?: number;
-  t(string: string, interpolation?: {[key: string]: string} ): string;
+  t(string: string, interpolation?: { [key: string]: string }): string;
 }
