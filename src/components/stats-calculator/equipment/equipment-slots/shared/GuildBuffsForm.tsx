@@ -18,7 +18,7 @@ import {
 import {
   Item,
   RawItem,
-  ItemTypes
+  ItemTypes,
 } from "../../../../../data/models/item.model";
 
 //i18l
@@ -28,7 +28,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
     this.state = {
-      templeLevel: 0,
+      templeLevel: 1,
       properties: {
         strength: false,
         agility: false,
@@ -37,11 +37,11 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
         hp: false,
         mana: false,
         endurance: false,
-        physRes: false,
         fireRes: false,
         energyRes: false,
         frostRes: false,
         curseRes: false,
+        physRes: false,
         manaUsage: false,
         enduranceUsage: false,
         regeneration: false,
@@ -59,47 +59,135 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
       "mana",
       "endurance",
       "cutRes",
-      "bluntRes",
-      "pierceRes",
       "fireRes",
       "energyRes",
       "frostRes",
       "curseRes",
     ];
     if (this.props.item) {
+      this.setState({
+        templeLevel: this.props.item.psychoLvl,
+      });
       properties.forEach((property) => {
-        if (this.props.item![property as keyof Item] !== 0) {
+        if (
+          this.props.item![property as keyof Item] !== 0 &&
+          property !== "cutRes"
+        ) {
           this.setState((prevState) => {
             let newState = { ...prevState };
-            newState.properties[property] = true
+            newState.properties[property] = true;
+            return newState;
+          });
+        } else if (
+          this.props.item![property as keyof Item] !== 0 &&
+          property === "cutRes"
+        ) {
+          this.setState((prevState) => {
+            let newState = { ...prevState };
+            newState.properties.physRes = true;
             return newState;
           });
         }
       });
       this.props.item.otherProperties.forEach((property) => {
-        if (
-          property[0] === "Zużycie many"
-        ) {
+        if (property[0] === "Zużycie many") {
           this.setState((prevState) => {
             let newState = { ...prevState };
-            newState.properties.manaUsage = true
+            newState.properties.manaUsage = true;
             return newState;
           });
         } else if (property[0] === "Zużycie kondycji") {
           this.setState((prevState) => {
             let newState = { ...prevState };
-            newState.properties.enduranceUsage = true
+            newState.properties.enduranceUsage = true;
             return newState;
           });
         } else if (property[0] === "Regeneracja many") {
           this.setState((prevState) => {
             let newState = { ...prevState };
-            newState.properties.regeneration = true
+            newState.properties.regeneration = true;
             return newState;
           });
         }
       });
     }
+  }
+  componentDidUpdate(prevProps: PropTypes, prevState: StateTypes) {
+    if (prevState.templeLevel !== this.state.templeLevel) {
+      if (this.state.templeLevel < 5) {
+        this.setState((prevState) => {
+            let newState = { ...prevState };
+            newState.properties.manaUsage = false;
+            newState.properties.enduranceUsage = false;
+            newState.properties.regeneration = false;
+            return newState;
+          })
+      }
+      if (this.state.templeLevel < 4) {
+        this.setState((prevState) => {
+            let newState = { ...prevState };
+            newState.properties.physRes = false;
+            return newState;
+          })
+      }
+      if (this.state.templeLevel < 3) {
+        this.setState((prevState) => {
+            let newState = { ...prevState };
+            newState.properties.fireRes = false;
+            newState.properties.frostRes = false;
+            newState.properties.energyRes = false;
+            newState.properties.curseRes = false;
+            return newState;
+          })
+      }
+      if (this.state.templeLevel < 2) {
+        this.setState((prevState) => {
+            let newState = { ...prevState };
+            newState.properties.hp = false;
+            newState.properties.mana = false;
+            newState.properties.endurance = false;
+            return newState;
+          })
+      }
+    }
+  }
+  checkIfBoxShouldBeDisabled(property?: string): boolean {
+    //check if 3 buffs are already chosen
+    let buffs = Object.keys(this.state.properties);
+    let areThreeBuffsUsed = buffs.reduce(
+      (accum, buff) => (this.state.properties[buff] ? (accum += 1) : accum),
+      0
+    );
+    if (areThreeBuffsUsed >= 3) {
+      return true;
+    }
+    let isTempleHighEnoughLevel = property
+      ? property === "strength" ||
+        property === "agility" ||
+        property === "power" ||
+        property === "knowledge"
+        ? false
+        : (property === "hp" ||
+            property === "mana" ||
+            property === "endurance") &&
+          this.state.templeLevel > 1
+        ? false
+        : (property === "fireRes" ||
+            property === "energyRes" ||
+            property === "curseRes" ||
+            property === "frostRes") &&
+          this.state.templeLevel > 2
+        ? false
+        : property === "physRes" && this.state.templeLevel > 3
+        ? false
+        : this.state.templeLevel > 4
+        ? false
+        : true
+      : false;
+    if (isTempleHighEnoughLevel) {
+      return true;
+    }
+    return false;
   }
   calculateBuffValue(attribute: string): number {
     let maxAttrValue =
@@ -116,6 +204,8 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
         ? 10
         : attribute === "regeneration"
         ? 1
+        : attribute === "physRes"
+        ? 20
         : 40;
     let templeLevelCoeff = this.state.templeLevel
       ? 0.4 + 0.1 * this.state.templeLevel
@@ -155,6 +245,17 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
       default:
         charLevelCoeff = 1;
     }
+    if (
+      (attribute === "fireRes" ||
+        attribute === "energyRes" ||
+        attribute === "curseRes" ||
+        attribute === "frostRes") &&
+      this.state.templeLevel === 3
+    ) {
+      return Math.floor(30 * charLevelCoeff);
+    } else if (attribute === "regeneration") {
+      return Math.floor(maxAttrValue * templeLevelCoeff * charLevelCoeff * 10) / 10
+    }
     return Math.floor(maxAttrValue * templeLevelCoeff * charLevelCoeff);
   }
   createItem(): void {
@@ -162,7 +263,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
       name: "Buffy gildiowe",
       image: "",
       type: "guild",
-      psychoLvl: 1,
+      psychoLvl: this.state.templeLevel,
       strength: 0,
       agility: 0,
       power: 0,
@@ -180,32 +281,51 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
       otherProperties: [],
     };
     let properties = Object.keys(this.state.properties);
-      properties.forEach((property) => {
-        if (this.state.properties[property]) {
-          if (property === "manaUsage")
-          guildBuffs.otherProperties.push(["Zużycie many", -this.calculateBuffValue(property), 0]);
+    properties.forEach((property) => {
+      if (this.state.properties[property]) {
+        if (property === "manaUsage") {
+          guildBuffs.otherProperties.push([
+            "Zużycie many",
+            -this.calculateBuffValue(property),
+            0,
+          ]);
         } else if (property === "enduranceUsage") {
-          guildBuffs.otherProperties.push(["Zużycie kondycji", -this.calculateBuffValue(property), 0]);
+          guildBuffs.otherProperties.push([
+            "Zużycie kondycji",
+            -this.calculateBuffValue(property),
+            0,
+          ]);
         } else if (property === "regeneration") {
-          guildBuffs.otherProperties.push(["Regeneracja many", this.calculateBuffValue(property), 0]);
-          guildBuffs.otherProperties.push(["Regeneracja kondycji", this.calculateBuffValue(property), 0]);
+          guildBuffs.otherProperties.push([
+            "Regeneracja many",
+            this.calculateBuffValue(property),
+            0,
+          ]);
+          guildBuffs.otherProperties.push([
+            "Regeneracja kondycji",
+            this.calculateBuffValue(property),
+            0,
+          ]);
         } else if (property === "physRes") {
           guildBuffs.bluntRes = this.calculateBuffValue(property);
           guildBuffs.pierceRes = this.calculateBuffValue(property);
           guildBuffs.cutRes = this.calculateBuffValue(property);
         } else {
           //Fix the line below?
-          (guildBuffs[property as keyof GuildBuffs] as any) = this.calculateBuffValue(property);
+          (guildBuffs[
+            property as keyof GuildBuffs
+          ] as any) = this.calculateBuffValue(property);
         }
-      });
-      let createdItem = new Item(guildBuffs);
-      ReactGA.event({
-        category: "Items",
-        action: "Item Choice",
-        label: "Buffy gildiowe",
-      });
-      this.props.equipItem("guild", createdItem);
-      this.props.closeList();
+      }
+    });
+    let createdItem = new Item(guildBuffs);
+    ReactGA.event({
+      category: "Items",
+      action: "Buffy gildiowe",
+      label: "Buffy gildiowe",
+    });
+    this.props.equipItem("guild", createdItem);
+    this.props.closeList();
   }
   //Needed to prevent bubbling
   handleClick(event: React.FormEvent, functionToRun: () => void): void {
@@ -226,7 +346,26 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
     let properties = Object.keys(this.state.properties);
     let checkBoxes = properties.map((property) => (
       <div key={property} className="filterLine">
-        <img src={"images/" + property + ".svg"} alt={property} />
+        <img
+          src={"images/" + property + ".svg"}
+          alt={property}
+          onClick={() =>
+            !this.checkIfBoxShouldBeDisabled(property) ||
+            this.state.properties[property]
+              ? this.state.properties[property]
+                ? this.setState((prevState) => {
+                    let newState = { ...prevState };
+                    newState.properties[property] = false;
+                    return newState;
+                  })
+                : this.setState((prevState) => {
+                    let newState = { ...prevState };
+                    newState.properties[property] = true;
+                    return newState;
+                  })
+              : null
+          }
+        />
         <input
           type="checkbox"
           className="filterInput"
@@ -246,21 +385,29 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
                 })
           }
           checked={this.state.properties[property]}
+          disabled={
+            this.state.properties[property]
+              ? false
+              : this.checkIfBoxShouldBeDisabled(property)
+          }
         />
         <label
           htmlFor={property}
           onClick={() =>
+            !this.checkIfBoxShouldBeDisabled(property) ||
             this.state.properties[property]
-              ? this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  newState.properties[property] = false;
-                  return newState;
-                })
-              : this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  newState.properties[property] = true;
-                  return newState;
-                })
+              ? this.state.properties[property]
+                ? this.setState((prevState) => {
+                    let newState = { ...prevState };
+                    newState.properties[property] = false;
+                    return newState;
+                  })
+                : this.setState((prevState) => {
+                    let newState = { ...prevState };
+                    newState.properties[property] = true;
+                    return newState;
+                  })
+              : null
           }
         >
           {t(property)}
@@ -274,6 +421,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
           event.preventDefault();
           this.props.unequipItem("guild");
           this.setState({
+            templeLevel: 1,
             properties: {
               strength: false,
               agility: false,
@@ -282,11 +430,11 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
               hp: false,
               mana: false,
               endurance: false,
-              physRes: false,
               fireRes: false,
               energyRes: false,
               frostRes: false,
               curseRes: false,
+              physRes: false,
               manaUsage: false,
               enduranceUsage: false,
               regeneration: false,
@@ -300,14 +448,34 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
     return (
       <form
         onSubmit={(event) => this.handleClick(event, this.createItem)}
-        className={"itemsList filtersForm"}
+        className="itemsList filtersForm"
       >
-        <div className={"title"}>
+        <div className="title">
           <p>{t("Dodaj buffy gildiowe")}</p>
         </div>
-        <div className={"filterLines"}>
-          {checkBoxes}
+        <div className="templeLevel">
+          <img src={"images/temple.svg"} alt="temple" />
+          <label>{t("Poziom świątyni")}:</label>
+          <div className="templeRange">
+            <div
+              className="templeValue"
+              style={{ left: this.state.templeLevel - 1 + "em" }}
+            >
+              <div className="value">{this.state.templeLevel}</div>
+            </div>
+            <input
+              type="range"
+              name="temple"
+              min={1}
+              max={6}
+              value={this.state.templeLevel}
+              onChange={(event) => this.setState({ templeLevel: +event.currentTarget.value })
+              }
+            />
+          </div>
         </div>
+        <div className={"filterLines"}>{checkBoxes}</div>
+        {/*this.checkIfBoxShouldBeDisabled() ? <span>Wybrano już 3 buffy!</span> : null*/}
         <div className="submit">
           <button type="submit">{t("Zatwierdź")}</button>
           {resetButton}

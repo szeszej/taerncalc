@@ -574,7 +574,8 @@ export const resources = {
       "manaUsage": "Zużycie many",
       "enduranceUsage": "Zużycie kondycji",
       "regeneration": "Regeneracja",
-      "physRes": "Odp. fizyczne"
+      "physRes": "Odp. fizyczne",
+      "Poziom świątyni": "Poziom świątyni",
     },
   },
   en: {
@@ -1149,7 +1150,8 @@ export const resources = {
       "manaUsage": "Mana usage",
       "enduranceUsage": "Stamina usage",
       "regeneration": "Regeneration",
-      "physRes": "Physical Res."
+      "physRes": "Physical Res.",
+      "Poziom świątyni": "Temple level",
     },
   },
 };

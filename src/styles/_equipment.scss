@@ -757,6 +757,100 @@
       background-color: #bdac6f;
       border: 2px solid $border-color;
       cursor: pointer;
+      img {
+        height: 2em;
+        width: 2em;
+        display: inline;
+        margin-right: 0.5em;
+      }
+      .filtersForm {
+        width: 25em;
+        min-width: 0;
+        margin: 0;
+        top: 100%;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        // span {
+        //   color: red;
+        // }
+        .templeLevel {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 1em;
+          margin-top: 0.5em;
+          width: 75%;
+          .templeRange {
+            width: 7em;
+            position: relative;
+            input {
+              width: 6em;
+              font-size: 1em;
+            }
+            .templeValue {
+              font-size: 1em;
+              background: white;
+              color: black;
+              padding: 2px 6px;
+              position: absolute;
+              border-radius: 4px;
+              top: -1.5em;
+              .value {
+                font-size: 0.75em
+              }
+            }
+            .templeValue::after {
+              content: "";
+              position: absolute;
+              width: 4px;
+              height: 4px;
+              background: white;
+              bottom: -1px;
+              left: 40%;
+            }
+          }
+        }
+        .filterLines {
+          display: flex;
+          flex-wrap: wrap;
+          margin-left: 1em;
+          .filterLine {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            label {
+              margin-left: 0.5em;
+            }
+          }
+        }
+        .submit {
+          width: 85%;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          margin-top: 1em;
+
+          input,
+          button:not(.closeList) {
+            border-radius: 8px;
+            font-size: 1.3em;
+            color: #d7d50e;
+            box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            background-color: black;
+            border: 2px solid #ec8c42;
+            width: 6em;
+            &:hover {
+              background-color: #322f3e;
+            }
+          }
+        }
+      }
     }
     .guild:hover {
       background-color: #bd996f;
@@ -793,6 +887,9 @@
 @media only screen and (max-width: 520px) {
   .equipment .filters .filter .filtersList .filtersForm {
     left: -60%;
+  }
+  .equipment .middle .guild .filtersForm .templeLevel .templeRange input {
+    width: 6.3em;
   }
   .equipment {
     max-width: 81vw;
