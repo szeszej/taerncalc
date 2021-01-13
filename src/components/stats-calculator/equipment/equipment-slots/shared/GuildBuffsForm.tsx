@@ -116,38 +116,38 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
     if (prevState.templeLevel !== this.state.templeLevel) {
       if (this.state.templeLevel < 5) {
         this.setState((prevState) => {
-            let newState = { ...prevState };
-            newState.properties.manaUsage = false;
-            newState.properties.enduranceUsage = false;
-            newState.properties.regeneration = false;
-            return newState;
-          })
+          let newState = { ...prevState };
+          newState.properties.manaUsage = false;
+          newState.properties.enduranceUsage = false;
+          newState.properties.regeneration = false;
+          return newState;
+        });
       }
       if (this.state.templeLevel < 4) {
         this.setState((prevState) => {
-            let newState = { ...prevState };
-            newState.properties.physRes = false;
-            return newState;
-          })
+          let newState = { ...prevState };
+          newState.properties.physRes = false;
+          return newState;
+        });
       }
       if (this.state.templeLevel < 3) {
         this.setState((prevState) => {
-            let newState = { ...prevState };
-            newState.properties.fireRes = false;
-            newState.properties.frostRes = false;
-            newState.properties.energyRes = false;
-            newState.properties.curseRes = false;
-            return newState;
-          })
+          let newState = { ...prevState };
+          newState.properties.fireRes = false;
+          newState.properties.frostRes = false;
+          newState.properties.energyRes = false;
+          newState.properties.curseRes = false;
+          return newState;
+        });
       }
       if (this.state.templeLevel < 2) {
         this.setState((prevState) => {
-            let newState = { ...prevState };
-            newState.properties.hp = false;
-            newState.properties.mana = false;
-            newState.properties.endurance = false;
-            return newState;
-          })
+          let newState = { ...prevState };
+          newState.properties.hp = false;
+          newState.properties.mana = false;
+          newState.properties.endurance = false;
+          return newState;
+        });
       }
     }
   }
@@ -207,56 +207,53 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
         : attribute === "physRes"
         ? 20
         : 40;
-    let templeLevelCoeff = this.state.templeLevel
-      ? 0.4 + 0.1 * this.state.templeLevel
-      : 0;
-    let charLevelCoeff = 0;
+    // if ((attribute === "fireRes" || attribute === "curseRes" || attribute === "frostRes" || attribute === "energyRes") ) {
+    //
+    // }
     switch (true) {
       case this.props.level < 10:
-        charLevelCoeff = 0;
-        break;
+        return 0;
       case this.props.level < 20:
-        charLevelCoeff = 0.1;
-        break;
+        return maxAttrValue * 0.1;
       case this.props.level < 30:
-        charLevelCoeff = 0.2;
-        break;
+        return maxAttrValue * 0.2;
       case this.props.level < 40:
-        charLevelCoeff = 0.3;
-        break;
+        return maxAttrValue * 0.3;
       case this.props.level < 50:
-        charLevelCoeff = 0.4;
-        break;
+        return maxAttrValue * 0.4;
       case this.props.level < 60:
-        charLevelCoeff = 0.5;
-        break;
+        return maxAttrValue * 0.5;
       case this.props.level < 70:
-        charLevelCoeff = 0.6;
-        break;
+        switch (true) {
+          case this.state.templeLevel === 1:
+            return maxAttrValue * 0.5;
+          default:
+            return maxAttrValue * 0.6;
+        }
       case this.props.level < 80:
-        charLevelCoeff = 0.7;
-        break;
+        switch (true) {
+          case this.state.templeLevel < 3:
+            return maxAttrValue * (0.5 + (this.state.templeLevel - 1) * 0.1);
+          default:
+            return maxAttrValue * 0.7;
+        }
       case this.props.level < 90:
-        charLevelCoeff = 0.8;
-        break;
+        switch (true) {
+          case this.state.templeLevel < 4:
+            return maxAttrValue * (0.5 + (this.state.templeLevel - 1) * 0.1);
+          default:
+            return maxAttrValue * 0.8;
+        }
       case this.props.level < 100:
-        charLevelCoeff = 0.9;
-        break;
+        switch (true) {
+          case this.state.templeLevel < 5:
+            return maxAttrValue * (0.5 + (this.state.templeLevel - 1) * 0.1);
+          default:
+            return maxAttrValue * 0.9;
+        }
       default:
-        charLevelCoeff = 1;
+        return maxAttrValue * (0.5 + (this.state.templeLevel - 1) * 0.1);
     }
-    if (
-      (attribute === "fireRes" ||
-        attribute === "energyRes" ||
-        attribute === "curseRes" ||
-        attribute === "frostRes") &&
-      this.state.templeLevel === 3
-    ) {
-      return Math.floor(30 * charLevelCoeff);
-    } else if (attribute === "regeneration") {
-      return Math.floor(maxAttrValue * templeLevelCoeff * charLevelCoeff * 10) / 10
-    }
-    return Math.floor(maxAttrValue * templeLevelCoeff * charLevelCoeff);
   }
   createItem(): void {
     let guildBuffs: GuildBuffs = {
@@ -289,13 +286,19 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
             -this.calculateBuffValue(property),
             0,
           ]);
-        } else if (property === "enduranceUsage" && this.calculateBuffValue(property)) {
+        } else if (
+          property === "enduranceUsage" &&
+          this.calculateBuffValue(property)
+        ) {
           guildBuffs.otherProperties.push([
             "Zużycie kondycji",
             -this.calculateBuffValue(property),
             0,
           ]);
-        } else if (property === "regeneration" && this.calculateBuffValue(property)) {
+        } else if (
+          property === "regeneration" &&
+          this.calculateBuffValue(property)
+        ) {
           guildBuffs.otherProperties.push([
             "Regeneracja many",
             this.calculateBuffValue(property),
@@ -469,7 +472,8 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
               min={1}
               max={6}
               value={this.state.templeLevel}
-              onChange={(event) => this.setState({ templeLevel: +event.currentTarget.value })
+              onChange={(event) =>
+                this.setState({ templeLevel: +event.currentTarget.value })
               }
             />
           </div>
