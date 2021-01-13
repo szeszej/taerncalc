@@ -481,7 +481,7 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
         <div className={"filterLines"}>{checkBoxes}</div>
         {/*this.checkIfBoxShouldBeDisabled() ? <span>Wybrano już 3 buffy!</span> : null*/}
         <div className="submit">
-          <button type="submit">{t("Zatwierdź")}</button>
+          <button type="submit" className="submitButton">{t("Zatwierdź")}</button>
           {resetButton}
         </div>
         {closeButton}

@@ -841,12 +841,12 @@
             font-size: 1.3em;
             color: #d7d50e;
             box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-            cursor: pointer;
             background-color: black;
+            cursor: pointer;
             border: 2px solid #ec8c42;
             width: 6em;
             &:hover {
-              background-color: #322f3e;
+              opacity: 0.8;
             }
           }
         }
@@ -890,6 +890,9 @@
   }
   .equipment .middle .guild .filtersForm .templeLevel .templeRange input {
     width: 6.3em;
+  }
+  .equipment .middle .guild .filtersForm {
+    left: -80%;
   }
   .equipment {
     max-width: 81vw;
