@@ -283,19 +283,19 @@ class ConnectedGuildBuffsForm extends React.Component<PropTypes, StateTypes> {
     let properties = Object.keys(this.state.properties);
     properties.forEach((property) => {
       if (this.state.properties[property]) {
-        if (property === "manaUsage") {
+        if (property === "manaUsage" && this.calculateBuffValue(property)) {
           guildBuffs.otherProperties.push([
             "Zużycie many",
             -this.calculateBuffValue(property),
             0,
           ]);
-        } else if (property === "enduranceUsage") {
+        } else if (property === "enduranceUsage" && this.calculateBuffValue(property)) {
           guildBuffs.otherProperties.push([
             "Zużycie kondycji",
             -this.calculateBuffValue(property),
             0,
           ]);
-        } else if (property === "regeneration") {
+        } else if (property === "regeneration" && this.calculateBuffValue(property)) {
           guildBuffs.otherProperties.push([
             "Regeneracja many",
             this.calculateBuffValue(property),
