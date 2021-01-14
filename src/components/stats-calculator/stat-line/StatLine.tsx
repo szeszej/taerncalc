@@ -45,7 +45,15 @@ export function StatLine(props: Props) {
               onMouseLeave={() => showTooltip(false)}
               onTouchEnd={() => showTooltip(false)}
             >
-              <img src="images/tooltip.svg" alt="tooltip" />
+              <img
+                src="images/tooltip.svg"
+                alt="tooltip"
+                onContextMenu={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  return false;
+                }}
+              />
               {tooltip ? (
                 <RegenerationTooltip
                   stat={props.stat}
