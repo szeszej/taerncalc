@@ -5,7 +5,6 @@ export class Skill {
   constructor(charClass: string, number: number) {
     this.name = database[charClass]["skill" + number].name;
     this.description = database[charClass]["skill" + number].description;
-    this.table = database[charClass]["skill" + number].table;
     this.minLvl = 0;
     this.maxLvl = 7;
     this.level = 0;
@@ -58,8 +57,7 @@ export class Skill {
 
 export interface Skill {
   name: string
-  description?: JSX.Element
-  table?: JSX.Element
+  description: string
   image: string
   minLvl: number
   maxLvl: number
