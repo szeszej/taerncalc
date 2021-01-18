@@ -6,11 +6,11 @@ import { basicSkillsDatabase, classSkillsDatabase } from "../skills"
 
 export class SkillSet {
   constructor(className: string) {
-    for (let i = 1; i <= 9; i++) {
-      this["skill" + i] = new Skill(basicSkillsDatabase["skill" + i], i);
+    for (let i = 1; i <= 8; i++) {
+      this["skill" + i] = new Skill(basicSkillsDatabase["skill" + i]);
     }
-    for (let i = 10; i <= 17; i++) {
-      this["skill" + i] = new Skill(classSkillsDatabase[className]["skill" + i]);
+    for (let i = 9; i <= 17; i++) {
+      this["skill" + i] = new Skill(classSkillsDatabase[className]["skill" + (i - 8)], i - 8);
     }
   }
 }

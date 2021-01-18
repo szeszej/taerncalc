@@ -68,6 +68,9 @@ export function SkillLine(props: PropTypes) {
           />
         </div>
       </div>
+      <div className="expand">
+        <img src="images/arrdown.svg" alt="expand" />
+      </div>
     </div>
   );
 }

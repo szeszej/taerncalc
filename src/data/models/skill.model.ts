@@ -51,6 +51,7 @@ export class Skill {
         this.initReqLvl = rawSkill.initReqLvl ? rawSkill.initReqLvl : 0;
         break;
     }
+    this.requiredCharLevelInc = rawSkill.requiredCharLevelInc ? rawSkill.requiredCharLevelInc : 1
     this.manaCost = rawSkill.cost.mana ? rawSkill.cost.mana : null
     this.enduranceCost = rawSkill.cost.endurance ? rawSkill.cost.endurance : null
     this.target = rawSkill.target ? rawSkill.target : "single"

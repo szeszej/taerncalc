@@ -1407,7 +1407,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
           effect: [-1, -1, -2, -2, -3, -3, -3],
         },
         {
-          name: "Wyssanie kondycji",
+          name: "Utrata kondycji",
           effect: calculateLinearEffect(33, 0),
         },
         {
