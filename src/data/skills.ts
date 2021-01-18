@@ -1980,7 +1980,7 @@ function calculateLinearEffect(
     0,
     0,
   ];
-  for (let index = 0; index < 7; index++) {
+  for (let index = 0; index <= 7; index++) {
     values[index] = startingValue + index * increment;
   }
   return values;
