@@ -1,8 +1,7 @@
-//Database
-import database from "../skills"
+import { RawSkill } from "../skills";
 
 export class Skill {
-  constructor(charClass: string, number: number) {
+  constructor(rawSkill: RawSkill, number?: number) {
     this.name = database[charClass]["skill" + number].name;
     this.description = database[charClass]["skill" + number].description;
     this.minLvl = 0;

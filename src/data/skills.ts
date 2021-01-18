@@ -1,4 +1,4 @@
-const skillsDatabase: AllRawSkills = {
+export const classSkillsDatabase: AllRawClassSkills = {
   knight: {
     skill1: {
       name: "Szybkie Cięcie",
@@ -1346,55 +1346,438 @@ const skillsDatabase: AllRawSkills = {
     skill7: {
       name: "Strzał strategiczny",
       image: "images/Strzał_strategiczny.jpg",
+      description:
+        "Trafiony przeciwnik gorzej broni się przed lecącymi w jego stronę pociskami. Strzała tkwi w ciele, boli, przeszkadza. Każdy atak przez to kosztuje również dużo więcej kondycji.",
+      type: "attack",
+      attackType: "ranged",
+      hitType: "agility",
+      damageFormula: {
+        strengthCoeff: 0.7,
+        agilityCoeff: 0.3,
+        weapon: true,
+      },
+      damageMod: calculateLinearEffect(80, 8),
+      hittingMod: calculateLinearEffect(90, 3),
+      cost: {
+        endurance: calculateLinearEffect(20, 3)
+      },
+      target: "single",
+      duration: [2, 2, 2, 3, 3, 3, 4],
+      effects: [
+        {
+          name: "Dodatkowe PA",
+          type: "numeric",
+          effect: [-1, -1, -2, -2, -3, -3, -3],
+        },
+        {
+          name: "Zużycie kondycji",
+          effect: [15, 20, 20, 25, 25, 30, 35],
+        },
+        {
+          name: "Obrona dystansowa",
+          effect: calculateLinearEffect(-10, -2),
+        },
+      ],
     },
     skill8: {
       name: "Lodowa strzała",
       image: "images/Lodowa_strzała.jpg",
+      description:
+        "Zaatakowany przeciwnik odnosi obrażenia od lodu i dodatkowo ma szanse zostać przeszyty zimnem. W konsekwencji jego ruchy są spowolnione a sfera zimna w jakiej się znajdzie niekorzystnie wpływa na jego formę i prowadzi do stopniowej utraty kondycji oraz obniża jego odporność na chłód.",
+      type: "attack",
+      attackType: "ranged",
+      hitType: "agility",
+      damageFormula: {
+        strengthCoeff: 0.7,
+        agilityCoeff: 0.3,
+        weapon: true,
+      },
+      damageMod: [170, 180, 190, 205, 220, 233, 260],
+      hittingMod: [100, 103, 106, 109, 112, 116, 117],
+      cost: {
+        endurance: [15, 18, 20, 22, 24, 27, 29],
+        mana: [10, 12, 13, 15, 16, 18, 19]
+      },
+      target: "single",
+      duration: [3, 3, 3, 3, 3, 3, 4],
+      effects: [
+        {
+          name: "Dodatkowe PA",
+          type: "numeric",
+          effect: [-1, -1, -2, -2, -3, -3, -3],
+        },
+        {
+          name: "Wyssanie kondycji",
+          effect: calculateLinearEffect(33, 0),
+        },
+        {
+          name: "Odp. na zimno",
+          type: "numeric",
+          effect: [20, 23, 26, 29, 32, 35, 39],
+        },
+        {
+          name: "Szansa na efekt",
+          effect: [10, 12, 14, 16, 18, 20, 24],
+        },
+      ],
     },
     skill9: {
       name: "Grad strzał",
       image: "images/Grad_strzał.jpg",
+      description:
+        "Odpowiednio wyszkolony łucznik wysyła w powietrze rój pocisków, które spadając osiągają ogromną prędkość i sieją spustoszenie nawet wśród pancernych chorągwi.",
+      type: "attack",
+      attackType: "ranged",
+      hitType: "agility",
+      damageFormula: {
+        strengthCoeff: 0.7,
+        agilityCoeff: 0.3,
+        weapon: true,
+      },
+      damageMod: calculateLinearEffect(100, 16),
+      hittingMod: calculateLinearEffect(90, 2),
+      cost: {
+        endurance: calculateLinearEffect(40, 6)
+      },
+      target: "group",
     },
   },
   voodoo: {
     skill1: {
       name: "Ukłucie lalki",
       image: "images/Ukłucie_lalki.jpg",
+      description:
+        "Mocny urok ofensywny. Pomija odporność na uroki przy liczeniu trafienia.",
+      type: "attack",
+      attackType: "mental",
+      hitType: "knowledge",
+      damageFormula: {
+        powerCoeff: 1.4,
+        knoCoeff: 0.6,
+      },
+      damageMod: calculateLinearEffect(86, 14),
+      hittingMod: calculateLinearEffect(90, 3),
+      cost: {
+        mana: calculateLinearEffect(20, 3),
+      },
+      target: "single",
     },
     skill2: {
       name: "Szpila w oko",
       image: "images/Szpila_w_oko.jpg",
+      description:
+        "Szpila w oko to potężny urok, który zadając niewielkie obrażenia powoduje oślepienie przeciwnika, poważnie ograniczając jego zdolności bojowe.",
+      type: "attack",
+      attackType: "mental",
+      hitType: "knowledge",
+      damageFormula: {
+        powerCoeff: 1.4,
+        knoCoeff: 0.6,
+      },
+      damageMod: calculateLinearEffect(40, 4),
+      hittingMod: calculateLinearEffect(100, 3),
+      cost: {
+        mana: [30, 35, 39, 44, 48, 53, 57],
+      },
+      target: "single",
+      duration: [2, 2, 2, 3, 3, 3, 3],
+      effects: [
+        {
+          name: "Modyfikator trafień dystansowych",
+          effect: [-30, -34, -38, -42, -46, -50, -55],
+        },
+        {
+          name: "Obrona dystansowa",
+          effect: [-30, -34, -38, -42, -46, -50, -55],
+        },
+        {
+          name: "Modyfikator trafień fizycznych",
+          effect: [-25, -28, -32, -35, -38, -41, -45],
+        },
+        {
+          name: "Obrona wręcz",
+          effect: [-25, -28, -32, -35, -38, -41, -45],
+        },
+      ],
     },
     skill3: {
       name: "Wyssanie duszy",
       image: "images/Wyssanie_duszy.jpg",
+      description:
+        "Umiejętność żerowania na przeciwnikach stanowi istotę przetrwania czarownika w starciu, Voodoo atakując przeciwnika wręcz, poprzez dotyk przenika przez duchowe bariery ofiary i transferuje jego Manę, powiększając własne zasoby energetyczne.",
+      type: "attack",
+      attackType: "melee",
+      hitType: "agility",
+      damageFormula: {
+        powerCoeff: 1.4,
+        knoCoeff: 0.6,
+      },
+      damageMod: calculateLinearEffect(48, 8),
+      hittingMod: [100, 103, 106, 109, 112, 115, 120],
+      cost: {
+        endurance: calculateLinearEffect(20, 3),
+      },
+      target: "single",
+      effects: [
+        {
+          name: "Wyssanie many",
+          effect: [50, 55, 60, 65, 70, 75, 85],
+        }
+      ],
     },
     skill4: {
       name: "Hak w brzuch",
       image: "images/Hak_w_brzuch.jpg",
+      description:
+        "Urok zadaje poważne obrażenia, stanowi niezwykle groźną umiejętność czarownika Voodoo. Dodatkowo powoduje krwotok, który systematycznie osłabia przeciwnika. Pomija odporność na uroki przy liczeniu trafienia.",
+      type: "attack",
+      attackType: "mental",
+      hitType: "knowledge",
+      damageFormula: {
+        powerCoeff: 1.4,
+        knoCoeff: 0.6,
+      },
+      damageMod: calculateLinearEffect(80, 8),
+      hittingMod: [90, 93, 96, 99, 102, 105, 110],
+      cost: {
+        mana: [30, 35, 39, 44, 48, 53, 57],
+      },
+      target: "single",
+      duration: calculateLinearEffect(3, 0),
+      effects: [
+        {
+          name: "Krwawienie",
+          cumulative: true,
+          effect: calculateLinearEffect(80, 8),
+        }
+      ],
     },
     skill5: {
       name: "Zatrucie",
       image: "images/Zatrucie.jpg",
+      description:
+        "Ofiara doświadcza negatywnego uroku, który miesza jej władze umysłowe z taki sposób, że doznaje ona wszelkich objawów fizycznego zatrucia. Zwiększone zostaje jej zużycie many oraz kondycji, jak i zmniejszona siła ataku każdej strefy.",
+      type: "attack",
+      attackType: "mental",
+      hitType: "knowledge",
+      hittingMod: calculateLinearEffect(100, 3),
+      cost: {
+        mana: [30, 35, 39, 44, 48, 53, 57],
+      },
+      target: "single",
+      duration: [3, 3, 4, 4, 5, 5, 5],
+      effects: [
+        {
+          name: "Modyfikator obrażeń fizycznych",
+          effect: [-5, -6, -8, -9, -11, -13, -15],
+        },
+        {
+          name: "Modyfikator obrażeń magicznych",
+          effect: [-20, -22, -24, -26, -28, -31, -35],
+        },
+        {
+          name: "Zużycie kondycji",
+          effect: calculateLinearEffect(30, 3),
+        },
+        {
+          name: "Zużycie many",
+          effect: calculateLinearEffect(30, 3),
+        }
+      ],
     },
     skill6: {
       name: "Uderzenie cienia",
       image: "images/Uderzenie_cienia.jpg",
+      description:
+        "Przepełniony złowrogim mrokiem VooDoo jest w stanie wyemitować potężny impuls cienia, niszczący życiową energię zaatakowanego przeciwnika.",
+      type: "attack",
+      attackType: "ranged",
+      hitType: "knowledge",
+      damageFormula: {
+        powerCoeff: 1.4,
+        knoCoeff: 0.6,
+      },
+      damageMod: calculateLinearEffect(116, 14),
+      hittingMod: calculateLinearEffect(100, 5),
+      cost: {
+        mana: [15, 17, 19, 21, 24, 26, 28],
+      },
+      target: "single",
+      effects: [
+        {
+          name: "Szansa na zatrucie",
+          effect: [0, 0, 15, 17, 19, 21, 24],
+          //zatrucie o 2 poziomy niższe niż uderzenie
+        }
+      ],
     },
     skill7: {
       name: "Otępienie",
       image: "images/Otępienie.jpg",
+      description:
+        "Otępienie prowadzi do zmniejszenia odporności na uroki oraz skuteczności obrony magicznej i ataków magicznych.",
+      type: "attack",
+      attackType: "mental",
+      hitType: "knowledge",
+      hittingMod: calculateLinearEffect(100, 3),
+      cost: {
+        mana: calculateLinearEffect(20, 3),
+      },
+      target: "single",
+      duration: [3, 3, 4, 4, 5, 5, 6],
+      effects: [
+        {
+          name: "Modyfikator trafień magicznych",
+          effect: [-5, -6, -8, -9, -11, -13, -15],
+        },
+        {
+          name: "Obrona przeciw urokom",
+          effect: [-20, -22, -24, -26, -28, -31, -35],
+        },
+        {
+          name: "Odp. na uroki",
+          type: "numeric",
+          effect: [0, -5, -10, -15, -20, -30, -45],
+        },
+      ],
     },
     skill8: {
       name: "Aura cienia",
       image: "images/Aura_cienia.jpg",
+      description:
+        "Przerażeni własnym mrokiem przeciwnicy, widząc tylko cień, nie są w stanie w pełni skutecznie używać ataku ani obrony dystansowej.",
+      type: "attack",
+      attackType: "mental",
+      hitType: "knowledge",
+      hittingMod: calculateLinearEffect(90, 2),
+      cost: {
+        mana: calculateLinearEffect(60, 9),
+      },
+      target: "group",
+      duration: [4, 4, 5, 5, 6, 6, 6],
+      effects: [
+        {
+          name: "Modyfikator trafień dystansowych",
+          effect: calculateLinearEffect(-24, -4),
+        },
+        {
+          name: "Obrona dystansowa",
+          effect: calculateLinearEffect(-24, -4),
+        }
+      ],
     },
     skill9: {
       name: "Ukazanie Śmierci",
       image: "images/Ukazanie_śmierci.jpg",
+      description:
+        "Intencją czarownika jest sprowadzenie natychmiastowego zgonu na zaatakowaną osobę. Ofiara musi być bardzo osłabiona (działające efekty: zatrucie, oślepienie, otępienie, w PvE nie więcej niż 4000 lub 60% PŻ). W przypadku kiedy cel główny zawodzi, Ukazanie śmierci wywołuje u ofiary potężny szok, którego konsekwencją jest zupełne osłabienie ataków i obrony.",
+      type: "attack",
+      attackType: "mental",
+      hitType: "knowledge",
+      hittingMod: calculateLinearEffect(100, 3),
+      cost: {
+        mana: [50, 58, 65, 73, 80, 88, 95],
+      },
+      target: "group",
+      duration: [4, 4, 5, 5, 6, 6, 6],
+      effects: [
+        {
+          name: "Szansa na zabicie",
+          effect: [20, 21, 22, 23, 24, 26, 30],
+        },
+        {
+          name: "Skuteczność ataków",
+          effect: [-30, -34, -38, -42, -46, -50, -55],
+        },
+        {
+          name: "Skuteczność obrony",
+          effect: [-30, -34, -38, -42, -46, -50, -55],
+        }
+      ],
     },
   },
 };
+
+export const basicSkillsDatabase: RawBasicSkills = {
+  skill1: {
+    name: "Cios pięścią",
+    level: 1,
+    minLvl: 1,
+    requiredCharLevel: 1,
+    initReqLvl: 1,
+    image: "images/Cios_pięścią.jpg",
+  },
+  skill2: {
+    name: "Okrzyk bojowy",
+    level: 1,
+    maxLvl: 7,
+    minLvl: 1,
+    requiredCharLevel: 1,
+    requiredCharLevelInc: 1,
+    initReqLvl: 1,
+    image: "images/Okrzyk_bojowy.jpg",
+  },
+  skill3: {
+    name: "Rzut kamieniem",
+    level: 1,
+    maxLvl: 7,
+    minLvl: 1,
+    requiredCharLevel: 1,
+    requiredCharLevelInc: 1,
+    initReqLvl: 1,
+    image: "images/Rzut_kamieniem.jpg",
+  },
+  skill4: {
+    name: "Strzał",
+    level: 1,
+    maxLvl: 7,
+    minLvl: 1,
+    requiredCharLevel: 1,
+    requiredCharLevelInc: 1,
+    initReqLvl: 1,
+    image: "images/Strzał.jpg",
+  },
+  skill5: {
+    name: "Zwykły atak",
+    level: 1,
+    maxLvl: 7,
+    minLvl: 1,
+    requiredCharLevel: 1,
+    requiredCharLevelInc: 1,
+    initReqLvl: 1,
+    image: "images/Zwykły_atak.jpg",
+  },
+  skill6: {
+    name: "Ucieczka",
+    level: 1,
+    maxLvl: 1,
+    minLvl: 1,
+    requiredCharLevel: 1,
+    requiredCharLevelInc: 1,
+    initReqLvl: 1,
+    image: "images/Ucieczka.jpg",
+  },
+  skill7: {
+    name: "Wataha",
+    level: 0,
+    maxLvl: 7,
+    minLvl: 0,
+    requiredCharLevel: 35,
+    requiredCharLevelInc: 10,
+    initReqLvl: 35,
+    image: "images/Wataha.jpg",
+  },
+  skill8: {
+    name: "Wyrwanie z korzeni",
+    level: 1,
+    maxLvl: 1,
+    minLvl: 1,
+    initReqLvl: 1,
+    requiredCharLevel: 1,
+    requiredCharLevelInc: 1,
+    image: "images/Rootbreaker.jpg",
+  }
+}
 
 export interface AllRawSkills {
   knight: RawSkills;
@@ -1404,7 +1787,8 @@ export interface AllRawSkills {
   firemage: RawSkills;
   archer: RawSkills;
   voodoo: RawSkills;
-  [index: string]: RawSkills;
+  basic: RawBasicSkills;
+  [index: string]: RawSkills | RawBasicSkills;
 }
 
 export interface RawSkills {
@@ -1417,6 +1801,18 @@ export interface RawSkills {
   skill7: Attack | Buff;
   skill8: Attack | Buff;
   skill9: Attack | Buff;
+  [index: string]: Attack | Buff;
+}
+
+export interface RawBasicSkills {
+  skill1: Attack | Buff;
+  skill2: Attack | Buff;
+  skill3: Attack | Buff;
+  skill4: Attack | Buff;
+  skill5: Attack | Buff;
+  skill6: Attack | Buff;
+  skill7: Attack | Buff;
+  skill8: Attack | Buff;
   [index: string]: Attack | Buff;
 }
 
@@ -1439,6 +1835,12 @@ export interface RawSkill {
   };
   damageMod?: [number, number, number, number, number, number, number];
   effects?: Effect[];
+  level? : number;
+  minLvl? : number;
+  maxLvl?: number;
+  requiredCharLevel?: number;
+  initReqLvl?: number;
+  requiredCharLevelInc?: number;
 }
 
 export interface Attack extends RawSkill {
@@ -1464,6 +1866,7 @@ export interface Effect {
   cumulative?: boolean;
   duration?: [number, number, number, number, number, number, number];
   scaling?: string;
+  // effectChance?: [number, number, number, number, number, number, number],
   effect: [number, number, number, number, number, number, number];
 }
 
@@ -1485,5 +1888,3 @@ function calculateLinearEffect(
   }
   return values;
 }
-
-export default skillsDatabase;
