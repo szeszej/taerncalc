@@ -1359,7 +1359,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       damageMod: calculateLinearEffect(80, 8),
       hittingMod: calculateLinearEffect(90, 3),
       cost: {
-        endurance: calculateLinearEffect(20, 3)
+        endurance: calculateLinearEffect(20, 3),
       },
       target: "single",
       duration: [2, 2, 2, 3, 3, 3, 4],
@@ -1396,7 +1396,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       hittingMod: [100, 103, 106, 109, 112, 116, 117],
       cost: {
         endurance: [15, 18, 20, 22, 24, 27, 29],
-        mana: [10, 12, 13, 15, 16, 18, 19]
+        mana: [10, 12, 13, 15, 16, 18, 19],
       },
       target: "single",
       duration: [3, 3, 3, 3, 3, 3, 4],
@@ -1437,7 +1437,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       damageMod: calculateLinearEffect(100, 16),
       hittingMod: calculateLinearEffect(90, 2),
       cost: {
-        endurance: calculateLinearEffect(40, 6)
+        endurance: calculateLinearEffect(40, 6),
       },
       target: "group",
     },
@@ -1522,7 +1522,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "Wyssanie many",
           effect: [50, 55, 60, 65, 70, 75, 85],
-        }
+        },
       ],
     },
     skill4: {
@@ -1549,7 +1549,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
           name: "Krwawienie",
           cumulative: true,
           effect: calculateLinearEffect(80, 8),
-        }
+        },
       ],
     },
     skill5: {
@@ -1582,7 +1582,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "Zużycie many",
           effect: calculateLinearEffect(30, 3),
-        }
+        },
       ],
     },
     skill6: {
@@ -1608,7 +1608,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
           name: "Szansa na zatrucie",
           effect: [0, 0, 15, 17, 19, 21, 24],
           //zatrucie o 2 poziomy niższe niż uderzenie
-        }
+        },
       ],
     },
     skill7: {
@@ -1663,7 +1663,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "Obrona dystansowa",
           effect: calculateLinearEffect(-24, -4),
-        }
+        },
       ],
     },
     skill9: {
@@ -1692,7 +1692,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "Skuteczność obrony",
           effect: [-30, -34, -38, -42, -46, -50, -55],
-        }
+        },
       ],
     },
   },
@@ -1706,46 +1706,118 @@ export const basicSkillsDatabase: RawBasicSkills = {
     requiredCharLevel: 1,
     initReqLvl: 1,
     image: "images/Cios_pięścią.jpg",
+    description:
+      "Podstawowy atak fizyczny. Ma większą szansę powodzenia niż atak za pomocą oręża, lecz zadaje mniejszą liczbę obrażeń. Zastosowanie kastetu zwiększa siłę ataku.",
+    type: "attack",
+    attackType: "melee",
+    hitType: "agility",
+    damageFormula: {
+      strengthCoeff: 0.7,
+      agilityCoeff: 0.3,
+      weapon: true,
+    },
+    damageMod: calculateLinearEffect(80, 10),
+    hittingMod: calculateLinearEffect(120, 5),
+    cost: {
+      endurance: [8, 9, 10, 12, 13, 14, 15],
+    },
+    target: "single",
   },
   skill2: {
     name: "Okrzyk bojowy",
     level: 1,
-    maxLvl: 7,
     minLvl: 1,
     requiredCharLevel: 1,
-    requiredCharLevelInc: 1,
     initReqLvl: 1,
     image: "images/Okrzyk_bojowy.jpg",
+    description:
+      "Podstawowy urok. Wywołuje lęk u przeciwnika, obniżając jego skuteczność. Zmniejsza szansę powodzenia jego ataków fizycznych, dystansowych oraz magicznych.",
+    type: "attack",
+    attackType: "mental",
+    hitType: "knowledge",
+    hittingMod: calculateLinearEffect(100, 0),
+    cost: {
+      mana: [30, 35, 39, 44, 48, 53, 57],
+    },
+    target: "single",
+    duration: [5, 5, 6, 6, 6, 6, 6],
+    effects: [
+      {
+        name: "Skuteczność ataków",
+        effect: calculateLinearEffect(-15, -5),
+      },
+    ],
   },
   skill3: {
     name: "Rzut kamieniem",
     level: 1,
-    maxLvl: 7,
     minLvl: 1,
     requiredCharLevel: 1,
-    requiredCharLevelInc: 1,
     initReqLvl: 1,
     image: "images/Rzut_kamieniem.jpg",
+    description:
+      "Podstawowy atak dystansowy. Zadaje niewielką liczbę obrażeń, ale może być wykonywany nawet gdy postać wyposażona jest w miecz i tarczę. Nie wymaga żadnej broni dystansowej.",
+    type: "attack",
+    attackType: "ranged",
+    hitType: "agility",
+    damageFormula: {
+      strengthCoeff: 1.26,
+      agilityCoeff: 0.54,
+    },
+    damageMod: calculateLinearEffect(90, 8),
+    hittingMod: calculateLinearEffect(110, 5),
+    cost: {
+      endurance: [8, 9, 10, 12, 13, 14, 15],
+    },
+    target: "single",
   },
   skill4: {
     name: "Strzał",
     level: 1,
-    maxLvl: 7,
     minLvl: 1,
     requiredCharLevel: 1,
-    requiredCharLevelInc: 1,
     initReqLvl: 1,
     image: "images/Strzał.jpg",
+    description:
+      "Podstawowy atak dystansowy przy użyciu broni dalekiego zasięgu. Korzystając z tej umiejętności możemy atakować za pomocą łuku.",
+    type: "attack",
+    attackType: "ranged",
+    hitType: "agility",
+    damageFormula: {
+      strengthCoeff: 0.7,
+      agilityCoeff: 0.3,
+      weapon: true,
+    },
+    damageMod: calculateLinearEffect(100, 14),
+    hittingMod: [100, 103, 107, 110, 112, 115, 120],
+    cost: {
+      endurance: [10, 11, 13, 14, 16, 17, 19],
+    },
+    target: "single",
   },
   skill5: {
     name: "Zwykły atak",
     level: 1,
-    maxLvl: 7,
     minLvl: 1,
     requiredCharLevel: 1,
-    requiredCharLevelInc: 1,
     initReqLvl: 1,
     image: "images/Zwykły_atak.jpg",
+    description:
+      "Podstawowy atak dystansowy przy użyciu broni dalekiego zasięgu. Korzystając z tej umiejętności możemy atakować za pomocą łuku.",
+    type: "attack",
+    attackType: "melee",
+    hitType: "agility",
+    damageFormula: {
+      strengthCoeff: 0.7,
+      agilityCoeff: 0.3,
+      weapon: true,
+    },
+    damageMod: calculateLinearEffect(100, 14),
+    hittingMod: [100, 103, 107, 110, 112, 115, 120],
+    cost: {
+      endurance: [10, 11, 13, 14, 16, 17, 19],
+    },
+    target: "single",
   },
   skill6: {
     name: "Ucieczka",
@@ -1753,19 +1825,37 @@ export const basicSkillsDatabase: RawBasicSkills = {
     maxLvl: 1,
     minLvl: 1,
     requiredCharLevel: 1,
-    requiredCharLevelInc: 1,
     initReqLvl: 1,
     image: "images/Ucieczka.jpg",
+    description:
+      "Umiejętność przydatna gdy nie ma już wątpliwości, że walka skończy się porażką. Jeśli uda się z niej skorzystać postać wycofuje się do ostatniego bezpiecznego miejsca, w którym była. Ucieczka jest pewną formą pozytywnego uroku - każdy przydzielony jej PA zwiększa szansę dania nóg za pas o 20%.",
+    type: "buff",
+    target: "self",
+    cost: {},
   },
   skill7: {
     name: "Wataha",
-    level: 0,
-    maxLvl: 7,
-    minLvl: 0,
     requiredCharLevel: 35,
     requiredCharLevelInc: 10,
     initReqLvl: 35,
     image: "images/Wataha.jpg",
+    description:
+      "Umiejętność przydatna gdy nie ma już wątpliwości, że walka skończy się porażką. Jeśli uda się z niej skorzystać postać wycofuje się do ostatniego bezpiecznego miejsca, w którym była. Ucieczka jest pewną formą pozytywnego uroku - każdy przydzielony jej PA zwiększa szansę dania nóg za pas o 20%.",
+    type: "buff",
+    target: "self",
+    cost: {},
+    effects: [
+      {
+        name: "Suma rang pupili",
+        effect: [3, 4, 5, 6, 8, 12, 19],
+        type: "numeric",
+      },
+      {
+        name: "Maks. ilość pupili",
+        effect: [2, 2, 2, 2, 2, 3, 3],
+        type: "numeric",
+      },
+    ],
   },
   skill8: {
     name: "Wyrwanie z korzeni",
@@ -1774,12 +1864,18 @@ export const basicSkillsDatabase: RawBasicSkills = {
     minLvl: 1,
     initReqLvl: 1,
     requiredCharLevel: 1,
-    requiredCharLevelInc: 1,
     image: "images/Rootbreaker.jpg",
-  }
-}
+    description:
+      "Lata doświadczeń w boju pozwoliły wypracować umiejętność wyrwania się z uwięzi Korzeni. Wyrwanie z korzenia wymaga tyle PA, na ile rund są wrzucone Korzenie x 2. (np. Korzenie na 2 rundy, więc 4 PA). Działa tylko na rzucającego.",
+    type: "buff",
+    target: "self",
+    cost: {
+      endurance: calculateLinearEffect(30, 0),
+    },
+  },
+};
 
-export interface AllRawSkills {
+export interface AllRawClassSkills {
   knight: RawSkills;
   barbarian: RawSkills;
   sheed: RawSkills;
@@ -1787,7 +1883,6 @@ export interface AllRawSkills {
   firemage: RawSkills;
   archer: RawSkills;
   voodoo: RawSkills;
-  basic: RawBasicSkills;
   [index: string]: RawSkills | RawBasicSkills;
 }
 
@@ -1825,6 +1920,7 @@ export interface RawSkill {
     endurance?: [number, number, number, number, number, number, number];
   };
   target: "self" | "single" | "group";
+  type: "attack" | "buff";
   damageFormula?: {
     strengthCoeff?: number;
     agilityCoeff?: number;
@@ -1835,28 +1931,29 @@ export interface RawSkill {
   };
   damageMod?: [number, number, number, number, number, number, number];
   effects?: Effect[];
-  level? : number;
-  minLvl? : number;
+  level?: number;
+  minLvl?: number;
   maxLvl?: number;
   requiredCharLevel?: number;
   initReqLvl?: number;
   requiredCharLevelInc?: number;
+  duration?: [number, number, number, number, number, number, number];
+  attackType?: "melee" | "ranged" | "mental";
+  hitType?: "agility" | "knowledge";
+  hittingMod?: [number, number, number, number, number, number, number];
+  healing?: boolean;
+  //(1.3 * Moc + 0.7 * Wiedza) * Siła leczenia * (1 + (modyfikator obrażeń / 2))
+  difficulty?: [number, number, number, number, number, number, number];
 }
 
 export interface Attack extends RawSkill {
   type: "attack";
   attackType: "melee" | "ranged" | "mental";
   hitType: "agility" | "knowledge";
-  hittingMod?: [number, number, number, number, number, number, number];
-  duration?: [number, number, number, number, number, number, number];
 }
 
 export interface Buff extends RawSkill {
   type: "buff";
-  healing?: boolean;
-  //(1.3 * Moc + 0.7 * Wiedza) * Siła leczenia * (1 + (modyfikator obrażeń / 2))
-  duration: [number, number, number, number, number, number, number];
-  difficulty: [number, number, number, number, number, number, number];
 }
 
 export interface Effect {
