@@ -1,8 +1,10 @@
 //React
 import React from "react";
+import { Transition } from "react-transition-group";
 
 //Components
 import { SkillButton } from "./skill-buttons/SkillButton";
+import { SkillTooltip } from "./skill-tooltip/SkillTooltip";
 
 //Types
 import { Skill } from "../../../data/models/skill.model";
@@ -12,6 +14,7 @@ export function SkillLine(props: PropTypes) {
     color: "red",
   };
   const { t } = props;
+
   return (
     <div className="skillLine">
       <div className="image">
@@ -68,12 +71,35 @@ export function SkillLine(props: PropTypes) {
           />
         </div>
       </div>
-      <div className="expand">
-        <img src="images/arrdown.svg" alt="expand" />
+      <div
+        className="expand"
+        onClick={() =>
+          props.expanded === props.skill.name
+            ? props.showTooltip("")
+            : props.showTooltip(props.skill.name)
+        }
+      >
+        {props.expanded === props.skill.name ? (
+          <img src="images/arrup.png" alt="expand" />
+        ) : (
+          <img src="images/arrdown.png" alt="expand" />
+        )}
       </div>
+      <Transition
+        in={props.expanded === props.skill.name}
+        addEndListener={(node, done) => {}}
+      >
+        {(state) => (
+          <SkillTooltip
+            skill={props.skill}
+            state={state}
+          />
+        )}
+      </Transition>
     </div>
   );
 }
+// {props.expanded === props.skill.name ? <SkillTooltip skill={props.skill} expanded={props.expanded === props.skill.name} /> : null}
 
 interface PropTypes {
   level: number;
@@ -82,4 +108,6 @@ interface PropTypes {
   spendSkillPoints(prevLvl: number, newLvl: number, skill: number): void;
   number: number;
   t(string: string): string;
+  showTooltip(skillName: string): void;
+  expanded: string;
 }

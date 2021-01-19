@@ -1,4 +1,4 @@
-$border-color: #d6c1a9;
+$border-color: #b9bd6f;
 
 .skillCalculator {
   width: 85%;
@@ -24,25 +24,28 @@ $border-color: #d6c1a9;
       align-items: center;
 
       .skillLine {
-        border: 2px solid #b9bd6f;
+        border: 2px solid $border-color;
         // background-color: #d4d6a9;
         position: relative;
         font-size: 0.75em;
         width: 90%;
         margin: 1em;
         display: grid;
-        grid-template-areas: "image name skillvalue buttons expand" "image reqlvl skillvalue buttons expand" "tooltip tooltip tooltip tooltip tooltip";
+        grid-template-areas: "image name skillvalue buttons expand" "image reqlvl skillvalue buttons expand" "tooltip tooltip tooltip tooltip expand";
         grid-template-columns: 8em 4.5fr 2fr 2fr 2em;
-        grid-template-rows: 2.5em auto 0;
+        grid-template-rows: 2.5em auto auto;
         border-radius: 4px;
-        height: 10em;
+        overflow: hidden;
+        // min-height: 10em;
         .image {
           display: flex;
           grid-area: image;
           margin-left: 1em;
           align-self: center;
+          margin-top: 2em;
+          margin-bottom: 2em;
           img {
-            border: 3px solid #b9bd6f;
+            border: 3px solid $border-color;
             border-radius: 50%;
           }
         }
@@ -56,11 +59,11 @@ $border-color: #d6c1a9;
           font-size: 1.5em;
           font-weight: bold;
           letter-spacing: 1px;
-          margin-top: 1em;
+          margin-top: 2em;
         }
 
         .skillValue {
-          border: 2px solid #b9bd6f;
+          border: 2px solid $border-color;
           grid-area: skillvalue;
           display: flex;
           align-items: center;
@@ -70,7 +73,8 @@ $border-color: #d6c1a9;
           border-radius: 5px;
           height: 2em;
           align-self: center;
-
+          margin-top: 0.25em;
+          margin-bottom: 0.25em;
           p {
             margin: 0;
             margin-block-start: 0;
@@ -108,7 +112,7 @@ $border-color: #d6c1a9;
           flex-direction: column;
           align-items: center;
           justify-content: space-around;
-          border-right: 2px solid #b9bd6f;
+          border-right: 2px solid $border-color;
           button {
             height: 3em;
             width: 3em;
@@ -121,10 +125,28 @@ $border-color: #d6c1a9;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          background-color: #b9bd6f;
+          background-color: $border-color;
           &:hover {
             background-color: #9ea33f;
           }
+        }
+        .skillTooltip {
+          grid-area: tooltip;
+          border-right: 2px solid $border-color;
+          margin-left: 1em;
+          // max-height: 0;
+          transition: max-height 1s
+          // animation: slide 1s;
+          // animation-fill-mode: forwards;
+          // @keyframes slide {
+          //   from {
+          //     max-height: 0;
+          //   }
+          //
+          //   to {
+          //     max-height: 10em;
+          //   }
+          // }
         }
       }
     }

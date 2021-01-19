@@ -16,12 +16,19 @@ import { resetSkillPoints } from "../../store/skills-reducer/skills-reducer";
 //i18l
 import { withTranslation } from "react-i18next";
 
-export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
+export class ConnectedSkillsCalculator extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
+    this.state = {
+      tooltipToShow: ""
+    }
     this.spendSkillPoints = this.spendSkillPoints.bind(this);
     this.checkIfSkillCanIncrease = this.checkIfSkillCanIncrease.bind(this);
     this.reset = this.reset.bind(this);
+    this.showTooltip = this.showTooltip.bind(this)
+  }
+  showTooltip(skillName: string): void {
+    this.setState({tooltipToShow: skillName})
   }
   reset() {
     this.props.resetSkillPoints();
@@ -52,6 +59,8 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
         spendSkillPoints={this.spendSkillPoints}
         number={x}
         t={t}
+        showTooltip={this.showTooltip}
+        expanded={this.state.tooltipToShow}
       />
     ));
     let classSkillsComponents = classSkills.map((x) => (
@@ -63,6 +72,8 @@ export class ConnectedSkillsCalculator extends React.Component<PropTypes> {
         spendSkillPoints={this.spendSkillPoints}
         number={x}
         t={t}
+        showTooltip={this.showTooltip}
+        expanded={this.state.tooltipToShow}
       />
     ));
     return (
@@ -126,6 +137,10 @@ type PropTypes = ConnectedProps<typeof connector> & OwnProps;
 interface OwnProps {
   active: string;
   t(string: string): string;
+}
+
+interface StateTypes {
+  tooltipToShow: string
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
