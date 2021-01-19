@@ -576,6 +576,15 @@ export const resources = {
       "regeneration": "Regeneracja",
       "physRes": "Odp. fizyczne",
       "Poziom świątyni": "Poziom świątyni",
+      //skill tooltip
+      broń: "broń",
+      Formuła: "Formuła",
+      Trudność: "Trudność",
+      "req-ap": "Wym. PA",
+      "know-req": "Wym. wiedza na",
+      "PA:": "PA",
+      "current-kno": "Obecna wiedza",
+      Osiągnięto: "Osiągnięto"
     },
   },
   en: {

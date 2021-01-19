@@ -129,24 +129,44 @@ $border-color: #b9bd6f;
           &:hover {
             background-color: #9ea33f;
           }
+          img {
+            transition: transform 1s;
+          }
         }
         .skillTooltip {
           grid-area: tooltip;
           border-right: 2px solid $border-color;
-          margin-left: 1em;
-          // max-height: 0;
-          transition: max-height 1s
-          // animation: slide 1s;
-          // animation-fill-mode: forwards;
-          // @keyframes slide {
-          //   from {
-          //     max-height: 0;
-          //   }
-          //
-          //   to {
-          //     max-height: 10em;
-          //   }
-          // }
+          transition: max-height 2s;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding-left: 1em;
+          padding-right: 1em;
+          font-size: 1.25em;
+          p {
+            line-height: 0.7em;
+          }
+          hr {
+            width: 100%;
+            border: 0;
+            border-bottom: 1px dashed $border-color;
+            background: #999;
+          }
+          .tooltipLine {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            .description {
+              text-align: justify;
+            }
+            .damage {
+              font-size: 1.1em;
+            }
+            img {
+              width: 2em;
+              margin-right: 1em;
+            }
+          }
         }
       }
     }

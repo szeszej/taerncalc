@@ -14,7 +14,12 @@ export function SkillLine(props: PropTypes) {
     color: "red",
   };
   const { t } = props;
-
+  const transitionStyles: { [id: string]: React.CSSProperties } = {
+    entering: { transform: "scaleY(-1)" },
+    entered: { transform: "scaleY(-1)" },
+    exiting: { transform: "scaleY(1)"},
+    exited: { transform: "scaleY(1)" },
+  };
   return (
     <div className="skillLine">
       <div className="image">
@@ -79,11 +84,10 @@ export function SkillLine(props: PropTypes) {
             : props.showTooltip(props.skill.name)
         }
       >
-        {props.expanded === props.skill.name ? (
-          <img src="images/arrup.png" alt="expand" />
-        ) : (
-          <img src="images/arrdown.png" alt="expand" />
-        )}
+        <Transition in={props.expanded === props.skill.name}
+        addEndListener={(node, done) => {}}>
+          {(state) => <img src="images/arrdown.svg" alt="expand" style={transitionStyles[state]} />}
+        </Transition>
       </div>
       <Transition
         in={props.expanded === props.skill.name}
@@ -99,7 +103,11 @@ export function SkillLine(props: PropTypes) {
     </div>
   );
 }
-// {props.expanded === props.skill.name ? <SkillTooltip skill={props.skill} expanded={props.expanded === props.skill.name} /> : null}
+// {props.expanded === props.skill.name ? (
+//   <img src="images/arrup.png" alt="expand" />
+// ) : (
+//   <img src="images/arrdown.png" alt="expand" />
+// )}
 
 interface PropTypes {
   level: number;
