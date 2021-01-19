@@ -156,15 +156,29 @@ $border-color: #b9bd6f;
             display: flex;
             flex-direction: row;
             align-content: center;
-            .description {
-              text-align: justify;
-            }
             .damage {
               font-size: 1.1em;
             }
             img {
               width: 2em;
               margin-right: 1em;
+            }
+          }
+          .basicInfo {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            .descriptionLine {
+              display: flex;
+              flex-direction: row;
+              margin-bottom: 1em;
+              img {
+                width: 2em;
+                margin-right: 1em;
+              }
+              .description {
+                text-align: justify;
+              }
             }
           }
         }

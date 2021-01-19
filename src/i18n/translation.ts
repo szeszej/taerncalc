@@ -584,7 +584,18 @@ export const resources = {
       "know-req": "Wym. wiedza na",
       "PA:": "PA",
       "current-kno": "Obecna wiedza",
-      Osiągnięto: "Osiągnięto"
+      Osiągnięto: "Osiągnięto",
+      self: "rzucający",
+      single: "pojedynczy",
+      group: "grupowy",
+      Cel: "Cel",
+      "Rodzaj umiejętności": "Rodzaj umiejętności",
+      attack: "atak",
+      buff: "urok pozytywny",
+      "Strefa ataku": "Strefa ataku",
+      melee: "wręcz",
+      ranged: "dystansowy",
+      mental: "urok"
     },
   },
   en: {

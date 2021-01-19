@@ -118,10 +118,6 @@ export class Skill {
         : 0;
     return totalDamage;
   }
-  calculateAP(knowledge: number, level: number) {
-    let requiredAP = this.level && this.difficulty ? Math.floor(this.difficulty[this.level - 1] / (knowledge + level + 40)) : 0
-    return requiredAP > 0 && requiredAP < 1 ? 1 : requiredAP
-  }
   calculateKnoRequired(level: number, points: number) {
     let requiredKno = this.level && this.difficulty ? Math.floor((this.difficulty[this.level - 1] / points)) - level - 40 : 0
     return requiredKno < 10 ? 10 : requiredKno
