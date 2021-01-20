@@ -144,7 +144,9 @@ $border-color: #b9bd6f;
           padding-right: 1em;
           font-size: 1.25em;
           p {
-            line-height: 0.7em;
+            line-height: 1.2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
           }
           hr {
             width: 100%;
@@ -167,7 +169,7 @@ $border-color: #b9bd6f;
           .basicInfo {
             display: flex;
             flex-direction: column;
-            width: 90%;
+            width: 95%;
             .descriptionLine {
               display: flex;
               flex-direction: row;
@@ -178,6 +180,31 @@ $border-color: #b9bd6f;
               }
               .description {
                 text-align: justify;
+              }
+              table,
+              th,
+              td {
+                border: 1px solid black;
+                text-align: center;
+              }
+              table {
+                margin-top: 1em;
+                width: 100%;
+                .currentLevel {
+                  background-color: $border-color;
+                }
+                img {
+                  display: inline;
+                  width: 1.3em;
+                  margin-right: 0.5em;
+                  margin-bottom: -0.3em;
+                  // justify-self: start;
+                }
+                .rowName {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
               }
             }
           }

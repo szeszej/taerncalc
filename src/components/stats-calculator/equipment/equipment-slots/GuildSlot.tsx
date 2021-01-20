@@ -15,15 +15,25 @@ export function GuildSlot(props: Props) {
     <div
       className="guild empty"
       onClick={() => props.showItemsList("guild")}
-      onMouseEnter={props.inSlot ? () => toggleTooltip(true) : undefined}
-      onMouseLeave={props.inSlot ? () => toggleTooltip(false) : undefined}
-      onTouchStart={props.inSlot ? () => toggleTooltip(true) : undefined}
-      onTouchEnd={props.inSlot ? () => toggleTooltip(false) : undefined}
-      style={props.inSlot ? {backgroundImage: `url("/images/guild-color.svg")`} : undefined}
+      onMouseEnter={() => toggleTooltip(true)}
+      onMouseLeave={() => toggleTooltip(false)}
+      onTouchStart={() => toggleTooltip(true)}
+      onTouchEnd={() => toggleTooltip(false)}
+      style={
+        props.inSlot
+          ? { backgroundImage: `url("/images/guild-color.svg")` }
+          : undefined
+      }
     >
-      {props.listToDisplay === "guild" ?
+      {props.listToDisplay === "guild" ? (
         <GuildBuffsForm closeList={props.hideItemsList} />
-       : tooltip && props.inSlot ? <ItemTooltip item={props.inSlot}/> : null}
+      ) : tooltip && props.inSlot ? (
+        <ItemTooltip item={props.inSlot} />
+      ) : tooltip ? (
+        <div className="itemTooltip">
+          <p className="noProperties">{props.t("Buffy gildiowe")}</p>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -34,13 +34,248 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         ? `+ ${damageFormula.manaCoeff} * ${this.props.t("mana")}`
         : "";
     damageText +=
-      damageFormula && damageFormula.weapon ? `+ ${this.props.t("broń")}` : "";
+      damageFormula && damageFormula.weapon ? ` + ${this.props.t("broń")}` : "";
     return damageText;
+  }
+  createInfoTable(): JSX.Element {
+    const skillLevels =
+      this.props.skill.maxLvl === 7
+        ? ["I", "II", "III", "IV", "V", "VI", "VII"]
+        : ["I"];
+    const allEqual = (arr: number[]) => arr.every((val) => val === arr[0]);
+    const effectsHeaders = (
+      <tr>
+        <th></th>
+        {skillLevels.map((level, index) => (
+          <th
+            className={
+              this.props.skill.level && this.props.skill.level - 1 === index
+                ? "currentLevel"
+                : undefined
+            }
+          >
+            {level}
+          </th>
+        ))}
+      </tr>
+    );
+    const hittingMod = this.props.skill.hittingMod ? (
+      <tr>
+        <td>
+          <img src={`images/hittingMod.svg`} alt="hittingMod" />
+          {this.props.t("Szansa trafienia")}
+        </td>
+        {allEqual(this.props.skill.hittingMod) ? (
+          <td
+            className={this.props.skill.level ? "currentLevel" : undefined}
+            colSpan={7}
+          >
+            {Math.floor(this.props.skill.hittingMod[0] * 10) / 10}%
+          </td>
+        ) : (
+          this.props.skill.hittingMod.map((x, index) => (
+            <td
+              className={
+                this.props.skill.level && this.props.skill.level - 1 === index
+                  ? "currentLevel"
+                  : undefined
+              }
+            >
+              {Math.floor(x * 10) / 10}%
+            </td>
+          ))
+        )}
+      </tr>
+    ) : null;
+    const damageMod = this.props.skill.damageMod ? (
+      <tr>
+        <td>
+          <img
+            src={`images/${
+              this.props.skill.healing ? "healing" : "damage"
+            }.svg`}
+            alt="damage"
+          />
+          {this.props.skill.healing
+            ? this.props.t("Siła leczenia")
+            : this.props.t("Obrażenia")}
+        </td>
+        {allEqual(this.props.skill.damageMod) ? (
+          <td
+            className={this.props.skill.level ? "currentLevel" : undefined}
+            colSpan={7}
+          >
+            {Math.floor(this.props.skill.damageMod[0] * 10) / 10}%
+          </td>
+        ) : (
+          this.props.skill.damageMod.map((x, index) => (
+            <td
+              className={
+                this.props.skill.level && this.props.skill.level - 1 === index
+                  ? "currentLevel"
+                  : undefined
+              }
+            >
+              {Math.floor(x * 10) / 10}%
+            </td>
+          ))
+        )}
+      </tr>
+    ) : null;
+    const manaCost = this.props.skill.manaCost ? (
+      <tr>
+        <td>
+          <img src={`images/mana.svg`} alt="mana" />
+          {this.props.t("mana")}
+        </td>
+        {allEqual(this.props.skill.manaCost) ? (
+          <td
+            className={this.props.skill.level ? "currentLevel" : undefined}
+            colSpan={7}
+          >
+            {Math.floor(this.props.skill.manaCost[0] * 10) / 10}
+          </td>
+        ) : (
+          this.props.skill.manaCost.map((x, index) => (
+            <td
+              className={
+                this.props.skill.level && this.props.skill.level - 1 === index
+                  ? "currentLevel"
+                  : undefined
+              }
+            >
+              {Math.floor(x * 10) / 10}
+            </td>
+          ))
+        )}
+      </tr>
+    ) : null;
+    const enduranceCost = this.props.skill.enduranceCost ? (
+      <tr>
+        <td>
+          <img src={`images/endurance.svg`} alt="endurance" />
+          {this.props.t("endurance")}
+        </td>
+        {allEqual(this.props.skill.enduranceCost) ? (
+          <td
+            className={this.props.skill.level ? "currentLevel" : undefined}
+            colSpan={7}
+          >
+            {Math.floor(this.props.skill.enduranceCost[0] * 10) / 10}
+          </td>
+        ) : (
+          this.props.skill.enduranceCost.map((x, index) => (
+            <td
+              className={
+                this.props.skill.level && this.props.skill.level - 1 === index
+                  ? "currentLevel"
+                  : undefined
+              }
+            >
+              {Math.floor(x * 10) / 10}
+            </td>
+          ))
+        )}
+      </tr>
+    ) : null;
+    const effectsTables = this.props.skill.effects
+      ? this.props.skill.effects.map((effect) => (
+          <tr>
+            <td>{this.props.t(effect.name)}</td>
+            {allEqual(effect.effect) ? (
+              <td
+                className={this.props.skill.level ? "currentLevel" : undefined}
+                colSpan={7}
+              >
+                {effect.effect[0] > 0 ? "+" : null}
+                {Math.floor(effect.effect[0] * 10) / 10}
+                {effect.type === "numeric" ? null : "%"}
+              </td>
+            ) : (
+              effect.effect.map((x, index) => (
+                <td
+                  className={
+                    this.props.skill.level &&
+                    this.props.skill.level - 1 === index
+                      ? "currentLevel"
+                      : undefined
+                  }
+                >
+                  {x > 0 ? "+" : null}
+                  {Math.floor(x * 10) / 10}
+                  {effect.type === "numeric" ? null : "%"}
+                </td>
+              ))
+            )}
+          </tr>
+        ))
+      : null;
+    const duration = this.props.skill.duration ? (
+      <tr>
+        <td>
+          <img src={`images/duration.svg`} alt="duration" />
+          {this.props.t("Czas trwania")}
+        </td>
+        {allEqual(this.props.skill.duration) ? (
+          <td
+            className={this.props.skill.level ? "currentLevel" : undefined}
+            colSpan={7}
+          >
+            {Math.floor(this.props.skill.duration[0] * 10) / 10}
+          </td>
+        ) : (
+          this.props.skill.duration.map((x, index) => (
+            <td
+              className={
+                this.props.skill.level && this.props.skill.level - 1 === index
+                  ? "currentLevel"
+                  : undefined
+              }
+            >
+              {Math.floor(x * 10) / 10}
+            </td>
+          ))
+        )}
+      </tr>
+    ) : null;
+    const difficulty = this.props.skill.difficulty ? (
+      <tr>
+        <td className="rowName">
+          <img src={`images/difficulty.svg`} alt="difficulty" />
+          {this.props.t("Trudność")}
+        </td>
+        {this.props.skill.difficulty.map((x, index) => (
+          <td
+            className={
+              this.props.skill.level && this.props.skill.level - 1 === index
+                ? "currentLevel"
+                : undefined
+            }
+          >
+            {Math.floor(x * 10) / 10}
+          </td>
+        ))}
+      </tr>
+    ) : null;
+    return (
+      <div className="descriptionLine">
+        <table>
+          {effectsHeaders}
+          {hittingMod}
+          {damageMod}
+          {enduranceCost}
+          {manaCost}
+          {difficulty}
+          {duration}
+          {effectsTables}
+        </table>
+      </div>
+    );
   }
   render() {
     const transitionStyles: { [id: string]: React.CSSProperties } = {
-      entering: { maxHeight: "100em" },
-      entered: { maxHeight: "100em" },
+      entering: { maxHeight: "70em" },
+      entered: { maxHeight: "70em" },
       exiting: { maxHeight: 0 },
       exited: { maxHeight: 0 },
     };
@@ -72,33 +307,60 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         <div className="basicInfo">
           <div className="descriptionLine">
             <img
-              src={`images/${this.props.skill.type}.svg`}
+              src={`images/${
+                this.props.skill.type === "attack" &&
+                !this.props.skill.damageMod &&
+                !this.props.skill.damageFormula
+                  ? "debuff"
+                  : this.props.skill.type
+              }.svg`}
               alt="attack type"
             />
             <div className="description">
-              {t("Rodzaj umiejętności")}: {t(this.props.skill.type)}
+              {t("Rodzaj umiejętności")}:{" "}
+              {t(
+                this.props.skill.type === "attack" &&
+                  !this.props.skill.damageMod &&
+                  !this.props.skill.damageFormula
+                  ? "debuff"
+                  : this.props.skill.type
+              )}
             </div>
           </div>
           {this.props.skill.type === "attack" && this.props.skill.attackType ? (
-                      <div className="descriptionLine">
+            <div className="descriptionLine">
+              <img
+                src={`images/${this.props.skill.attackType}.svg`}
+                alt="attack type"
+              />
+              <div className="description">
+                {t("Strefa ataku")}: {t(this.props.skill.attackType)}
+              </div>
+            </div>
+          ) : null}
+          {this.props.skill.type === "attack" && this.props.skill.hitType ? (
+            <div className="descriptionLine">
+              <img
+                src={`images/${this.props.skill.hitType}.svg`}
+                alt="hit type"
+              />
+              <div className="description">
+                {t("Atrybut do trafienia")}: {t(this.props.skill.hitType)}
+              </div>
+            </div>
+          ) : null}
+          <div className="descriptionLine">
             <img
-              src={`images/${this.props.skill.attackType}.svg`}
+              src={`images/${this.props.skill.target}.svg`}
               alt="attack type"
             />
             <div className="description">
-              {t("Strefa ataku")}: {t(this.props.skill.attackType)}
-            </div></div>
-          ) : null}
+              {t("Cel")}: {t(this.props.skill.target)}
+            </div>
+          </div>
           <div className="descriptionLine">
-          <img
-            src={`images/${this.props.skill.target}.svg`}
-            alt="attack type"
-          />
-          <div className="description">
-            {t("Cel")}: {t(this.props.skill.target)}
+            <div className="description">{this.props.skill.description}</div>
           </div>
-          </div>
-          <div className="description">{this.props.skill.description}</div>
         </div>
         {this.props.skill.level && this.props.skill.damageFormula ? (
           <hr />
@@ -114,6 +376,26 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
               <p>
                 {t("Obrażenia")}:{" "}
                 {this.props.skill.calculateDamage(
+                  this.props.stats,
+                  this.props.otherProperties
+                )}
+              </p>
+            </div>
+          </div>
+        ) : null}
+        {this.props.skill.level && this.props.skill.healing ? (
+          <div className="tooltipLine">
+            <img src="images/healing.svg" alt="damage" />
+            <div className="damage">
+              <p>
+                {t("Formuła")}:{" "}
+                {`(1.3 * ${t("power")} + 0.7 * ${t("knowledge")}) * ${t(
+                  "Siła leczenia"
+                )} * (1 + ${t("Modyfikator obrażeń")} / 2)`}
+              </p>
+              <p>
+                {t("Leczenie")}:{" "}
+                {this.props.skill.calculateHealing(
                   this.props.stats,
                   this.props.otherProperties
                 )}
@@ -168,6 +450,10 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
               </p>
             </div>
           </div>
+        ) : null}
+        {this.props.skill.name !== "Ucieczka" ? <hr /> : null}
+        {this.props.skill.name !== "Ucieczka" ? (
+          <div className="basicInfo">{this.createInfoTable()}</div>
         ) : null}
       </div>
     );

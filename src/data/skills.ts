@@ -2,7 +2,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
   knight: {
     skill1: {
       name: "Szybkie Cięcie",
-      description: "Silniejszy i celniejszy niż podstawowy Cios bronią.",
+      description: "Silniejszy i celniejszy niż podstawowy cios bronią.",
       image: "images/Szybkie_Cięcie.jpg",
       type: "attack",
       attackType: "melee",
@@ -182,7 +182,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
           effect: [1, 2, 6, 8, 10, 12, 14],
         },
         {
-          name: "Odp. magiczne",
+          name: "magicRes",
           type: "numeric",
           effect: calculateLinearEffect(11, 4),
         },
@@ -739,7 +739,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       name: "Leczenie",
       image: "images/Leczenie.jpg",
       description:
-        "Podstawowa umiejętność i sens klasy druida, pozwala na uleczenie części hp w czasie walki. Każde leczenie dorzuca 2 tury trwania debuffa obniżającego efektywność kolejnego leczenia (każda runda trwania = 10% słabsze leczenie). Max czas trwania debuffa = 1 + 0.1 * [poziom leczącej postaci]. Debuff ten zwiększa jednak zadawane przez druida obrażenia Uderzeniem o 4% podstawowych obrażeń za każdą rundę trwania.",
+        "Podstawowa umiejętność i sens klasy druida, pozwala na uleczenie części hp w czasie walki. Każde leczenie dorzuca 2 tury trwania debuffa obniżającego efektywność kolejnego leczenia (każda runda trwania = 10% słabsze leczenie). Max czas trwania debuffa = 1 + 0.1 * (poziom leczącej postaci). Debuff ten zwiększa jednak zadawane przez druida obrażenia Uderzeniem o 4% podstawowych obrażeń za każdą rundę trwania.",
       type: "buff",
       duration: calculateLinearEffect(2, 0),
       target: "single",
@@ -753,6 +753,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "Obrażenia od Uderzenia",
           cumulative: true,
+          targetSelf: true,
           effect: calculateLinearEffect(4, 0),
         },
         {
@@ -794,7 +795,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         knoCoeff: 0.7,
       },
       damageMod: [40, 46, 52, 60, 68, 76, 88],
-      hittingMod: calculateLinearEffect(0, 1),
+      hittingMod: calculateLinearEffect(100, 1),
       cost: {
         mana: [30, 35, 39, 44, 48, 53, 57],
       },
@@ -908,6 +909,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "Obrażenia od Uderzenia",
           cumulative: true,
+          targetSelf: true,
           effect: calculateLinearEffect(4, 0),
         },
         {
@@ -942,7 +944,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
           effect: [-15, -18, -21, -24, -27, -30, -35],
         },
         {
-          name: "Uniemożliwienie ataków wręcz",
+          name: "Unieruchomienie",
           effect: calculateLinearEffect(100, 0),
         },
       ],
@@ -983,7 +985,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       duration: [3, 3, 4, 4, 5, 5, 6],
       effects: [
         {
-          name: "Odp. na ogień",
+          name: "fireRes",
           type: "numeric",
           effect: calculateLinearEffect(35, 3),
         },
@@ -1034,14 +1036,14 @@ export const classSkillsDatabase: AllRawClassSkills = {
           effect: [16, 18, 20, 22, 24, 26, 29],
         },
         {
-          name: "Odp. na uroki",
+          name: "curseRes",
           cumulative: true,
           type: "numeric",
           scaling: "charLvl",
           effect: [-0.1, -0.11, -0.13, -0.15, -0.17, -0.19, -0.21],
         },
         {
-          name: "Odp. na ogień",
+          name: "fireRes",
           cumulative: true,
           type: "numeric",
           scaling: "charLvl",
@@ -1338,7 +1340,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       duration: [2, 2, 3, 3, 4, 4, 4],
       effects: [
         {
-          name: "Skuteczność ataku",
+          name: "Skuteczność ataków",
           effect: calculateLinearEffect(-22, -4),
         },
       ],
@@ -1411,7 +1413,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
           effect: calculateLinearEffect(33, 0),
         },
         {
-          name: "Odp. na zimno",
+          name: "frostRes",
           type: "numeric",
           effect: [20, 23, 26, 29, 32, 35, 39],
         },
@@ -1635,7 +1637,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
           effect: [-20, -22, -24, -26, -28, -31, -35],
         },
         {
-          name: "Odp. na uroki",
+          name: "curseRes",
           type: "numeric",
           effect: [0, -5, -10, -15, -20, -30, -45],
         },
@@ -1840,7 +1842,7 @@ export const basicSkillsDatabase: RawBasicSkills = {
     initReqLvl: 35,
     image: "images/Wataha.jpg",
     description:
-      "Umiejętność przydatna gdy nie ma już wątpliwości, że walka skończy się porażką. Jeśli uda się z niej skorzystać postać wycofuje się do ostatniego bezpiecznego miejsca, w którym była. Ucieczka jest pewną formą pozytywnego uroku - każdy przydzielony jej PA zwiększa szansę dania nóg za pas o 20%.",
+      "Umiejętność wykształcona przez wojowników samotników. Przemierzając rozległe krainy, udręczeni walką o przetrwanie i samotnością wykształcili w sobie unikalny system porozumiewania się ze zwierzakami. Dzięki niemu potrafią współpracować z więcej niż jednym zwierzem w drużynie.",
     type: "buff",
     target: "self",
     cost: {},
@@ -1851,7 +1853,7 @@ export const basicSkillsDatabase: RawBasicSkills = {
         type: "numeric",
       },
       {
-        name: "Maks. ilość pupili",
+        name: "max-pets",
         effect: [2, 2, 2, 2, 2, 3, 3],
         type: "numeric",
       },
@@ -1980,7 +1982,7 @@ function calculateLinearEffect(
     0,
     0,
   ];
-  for (let index = 0; index <= 7; index++) {
+  for (let index = 0; index < 7; index++) {
     values[index] = startingValue + index * increment;
   }
   return values;

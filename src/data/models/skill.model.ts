@@ -118,6 +118,27 @@ export class Skill {
         : 0;
     return totalDamage;
   }
+  calculateHealing(
+    damageStats: DamageStats,
+    otherProperties: OtherProperties
+  ): number {
+    //(1.3 * Moc + 0.7 * Wiedza) * Siła leczenia * (1 + (modyfikator obrażeń / 2))
+    let totalHealing =
+      this.damageMod && this.healing
+        ? Math.floor(
+            (damageStats.power * 1.3 +
+              damageStats.knowledge * 0.7) *
+              ((this.level ? this.damageMod[this.level - 1] : 0) / 100) *
+              // (otherProperties["Modyfikator obrażeń fizycznych"]
+              //   ? 1 + otherProperties["Modyfikator obrażeń fizycznych"] / 100
+              //   : 1) *
+              (otherProperties["Modyfikator obrażeń magicznych"]
+                ? 1 + otherProperties["Modyfikator obrażeń magicznych"] / 200
+                : 1)
+          )
+        : 0;
+    return totalHealing;
+  }
   calculateKnoRequired(level: number, points: number) {
     let requiredKno = this.level && this.difficulty ? Math.floor((this.difficulty[this.level - 1] / points)) - level - 40 : 0
     return requiredKno < 10 ? 10 : requiredKno
