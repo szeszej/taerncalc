@@ -585,9 +585,9 @@ export const resources = {
       "PA:": "PA",
       "current-kno": "Obecna wiedza",
       Osiągnięto: "Osiągnięto",
-      self: "rzucający",
-      single: "pojedynczy",
-      group: "grupowy",
+      self: "Rzucający",
+      single: "Pojedynczy",
+      group: "Grupowy",
       Cel: "Cel",
       "Rodzaj umiejętności": "Rodzaj umiejętności",
       attack: "Atak",
@@ -602,6 +602,8 @@ export const resources = {
       "Modyfikator obrażeń": "Modyfikator obrażeń",
       "Szansa trafienia": "Szansa trafienia",
       "Czas trwania": "Czas trwania",
+      "avg-damage": "Średnie obrażenia (bez uwzgl. odporności)",
+      "potrzeba": "potrzeba",
       //skill effects
       "Obrażenia od Potężnego uderzenia": "Obrażenia od Potężnego uderzenia",
       "Ilość bloków": "Ilość bloków",
@@ -629,7 +631,8 @@ export const resources = {
       "Szansa na zatrucie": "Szansa na zatrucie",
       "Szansa na zabicie": "Szansa na zabicie",
       "Suma rang pupili": "Suma rang pupili",
-      "max-pets": "Maks. ilość pupili"
+      "max-pets": "Maks. ilość pupili",
+      "Obrażenia od ognia": "Obrażenia od ognia"
     },
   },
   en: {
@@ -1232,6 +1235,8 @@ export const resources = {
       "Modyfikator obrażeń": "Damage modifier",
       "Szansa trafienia": "Hit chance",
       "Czas trwania": "Duration",
+      "avg-damage": "Avg. damage (not including resistances)",
+      "potrzeba": "still needed:",
       //skill effects
       "Obrażenia od Potężnego uderzenia": "Mighty Blow damage",
       "Ilość bloków": "Number of blocks",
@@ -1246,7 +1251,7 @@ export const resources = {
       "Skuteczność obrony": "Defence success chance",
       "Liczba uników": "Number of dodges",
       "Skuteczność uników": "Chance to dodge",
-      "Obrażenia od Uderzenia": "Bashd damage",
+      "Obrażenia od Uderzenia": "Bash damage",
       "Siła odczarowania": "Dispel power",
       "Unieruchomienie": "Immobilization",
       "Szansa trafienia odłamkiem": "Fragment chance",
@@ -1256,7 +1261,8 @@ export const resources = {
       "Szansa na zatrucie": "Chance to poison",
       "Szansa na zabicie": "Chance to kill",
       "Suma rang pupili": "Total pet rank",
-      "max-pets": "Max. pets"
+      "max-pets": "Max. pets",
+      "Obrażenia od ognia": "Fire damage"
     },
   },
 };

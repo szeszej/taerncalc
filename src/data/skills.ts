@@ -1031,7 +1031,8 @@ export const classSkillsDatabase: AllRawClassSkills = {
       },
       effects: [
         {
-          name: "Dodatkowe obrażenia od ognia",
+          //zmienić?
+          name: "Obrażenia od ognia",
           cumulative: true,
           effect: [16, 18, 20, 22, 24, 26, 29],
         },
@@ -1830,7 +1831,7 @@ export const basicSkillsDatabase: RawBasicSkills = {
     initReqLvl: 1,
     image: "images/Ucieczka.jpg",
     description:
-      "Umiejętność przydatna gdy nie ma już wątpliwości, że walka skończy się porażką. Jeśli uda się z niej skorzystać postać wycofuje się do ostatniego bezpiecznego miejsca, w którym była. Ucieczka jest pewną formą pozytywnego uroku - każdy przydzielony jej PA zwiększa szansę dania nóg za pas o 20%.",
+      "Umiejętność przydatna, gdy nie ma już wątpliwości, że walka skończy się porażką. Jeśli uda się z niej skorzystać postać wycofuje się do ostatniego bezpiecznego miejsca, w którym była. Ucieczka jest pewną formą pozytywnego uroku - każdy przydzielony jej PA zwiększa szansę dania nóg za pas o 20%.",
     type: "buff",
     target: "self",
     cost: {},

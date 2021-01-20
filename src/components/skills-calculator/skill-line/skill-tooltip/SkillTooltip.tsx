@@ -45,9 +45,10 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
     const allEqual = (arr: number[]) => arr.every((val) => val === arr[0]);
     const effectsHeaders = (
       <tr>
-        <th></th>
+        <th className="emptyCell"></th>
         {skillLevels.map((level, index) => (
           <th
+            key={level}
             className={
               this.props.skill.level && this.props.skill.level - 1 === index
                 ? "currentLevel"
@@ -75,6 +76,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         ) : (
           this.props.skill.hittingMod.map((x, index) => (
             <td
+              key={index}
               className={
                 this.props.skill.level && this.props.skill.level - 1 === index
                   ? "currentLevel"
@@ -110,6 +112,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         ) : (
           this.props.skill.damageMod.map((x, index) => (
             <td
+              key={index}
               className={
                 this.props.skill.level && this.props.skill.level - 1 === index
                   ? "currentLevel"
@@ -138,6 +141,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         ) : (
           this.props.skill.manaCost.map((x, index) => (
             <td
+              key={index}
               className={
                 this.props.skill.level && this.props.skill.level - 1 === index
                   ? "currentLevel"
@@ -166,6 +170,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         ) : (
           this.props.skill.enduranceCost.map((x, index) => (
             <td
+              key={index}
               className={
                 this.props.skill.level && this.props.skill.level - 1 === index
                   ? "currentLevel"
@@ -180,7 +185,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
     ) : null;
     const effectsTables = this.props.skill.effects
       ? this.props.skill.effects.map((effect) => (
-          <tr>
+          <tr key={effect.name}>
             <td>{this.props.t(effect.name)}</td>
             {allEqual(effect.effect) ? (
               <td
@@ -194,6 +199,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
             ) : (
               effect.effect.map((x, index) => (
                 <td
+                  key={index}
                   className={
                     this.props.skill.level &&
                     this.props.skill.level - 1 === index
@@ -201,7 +207,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
                       : undefined
                   }
                 >
-                  {x > 0 ? "+" : null}
+                  {x > 0 && this.props.skill.name !== "Wataha" ? "+" : null}
                   {Math.floor(x * 10) / 10}
                   {effect.type === "numeric" ? null : "%"}
                 </td>
@@ -226,6 +232,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         ) : (
           this.props.skill.duration.map((x, index) => (
             <td
+              key={index}
               className={
                 this.props.skill.level && this.props.skill.level - 1 === index
                   ? "currentLevel"
@@ -246,6 +253,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
         </td>
         {this.props.skill.difficulty.map((x, index) => (
           <td
+            key={index}
             className={
               this.props.skill.level && this.props.skill.level - 1 === index
                 ? "currentLevel"
@@ -260,14 +268,16 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
     return (
       <div className="descriptionLine">
         <table>
-          {effectsHeaders}
-          {hittingMod}
-          {damageMod}
-          {enduranceCost}
-          {manaCost}
-          {difficulty}
-          {duration}
-          {effectsTables}
+          <tbody>
+            {effectsHeaders}
+            {hittingMod}
+            {damageMod}
+            {enduranceCost}
+            {manaCost}
+            {difficulty}
+            {duration}
+            {effectsTables}
+          </tbody>
         </table>
       </div>
     );
@@ -283,8 +293,8 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
     const knowRequired = [3, 2, 1].map((AP) =>
       this.props.skill.calculateKnoRequired(this.props.level, AP)
     );
-    const knowRequiredParagraphs = [3, 2, 1].map((knowRequired) => (
-      <p>
+    const knowRequiredParagraphs = [3, 2, 1].map((knowRequired, index) => (
+      <p key={index}>
         {t("know-req")} {knowRequired} {t("PA")}:{" "}
         {this.props.skill.calculateKnoRequired(this.props.level, knowRequired)}{" "}
         (
@@ -374,7 +384,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
                 {this.createDamageLine(this.props.skill.damageFormula)}
               </p>
               <p>
-                {t("Obrażenia")}:{" "}
+                {t("avg-damage")}:{" "}
                 {this.props.skill.calculateDamage(
                   this.props.stats,
                   this.props.otherProperties

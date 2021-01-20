@@ -106,14 +106,25 @@ export class Skill {
               damageStats.power * this.damageFormula.powerCoeff +
               damageStats.knowledge * this.damageFormula.knoCoeff +
               damageStats.mana * this.damageFormula.manaCoeff +
-              damageStats.weaponDamage * +this.damageFormula.weapon) *
+              damageStats.weaponDamage * + this.damageFormula.weapon) *
               ((this.level ? this.damageMod[this.level - 1] : 0) / 100) *
-              (otherProperties["Modyfikator obrażeń fizycznych"]
-                ? 1 + otherProperties["Modyfikator obrażeń fizycznych"] / 100
-                : 1) *
-              (otherProperties["Modyfikator obrażeń magicznych"]
-                ? 1 + otherProperties["Modyfikator obrażeń magicznych"] / 100
-                : 1)
+              (1 +
+                (otherProperties["Modyfikator obrażeń fizycznych"]
+                  ? otherProperties["Modyfikator obrażeń fizycznych"] / 100
+                  : 0) +
+                (otherProperties["Modyfikator obrażeń magicznych"]
+                  ? otherProperties["Modyfikator obrażeń magicznych"] / 100
+                  : 0)) *
+              (1 +
+                (otherProperties["Dodatkowe obrażenia od ognia"]
+                  ? otherProperties["Dodatkowe obrażenia od ognia"] / 100
+                  : 0) +
+                (otherProperties["Dodatkowe obrażenia od energii"]
+                  ? otherProperties["Dodatkowe obrażenia od energii"] / 100
+                  : 0) +
+                (otherProperties["Dodatkowe obrażenia od zimna"]
+                  ? otherProperties["Dodatkowe obrażenia od zimna"] / 100
+                  : 0))
           )
         : 0;
     return totalDamage;
@@ -126,12 +137,8 @@ export class Skill {
     let totalHealing =
       this.damageMod && this.healing
         ? Math.floor(
-            (damageStats.power * 1.3 +
-              damageStats.knowledge * 0.7) *
+            (damageStats.power * 1.3 + damageStats.knowledge * 0.7) *
               ((this.level ? this.damageMod[this.level - 1] : 0) / 100) *
-              // (otherProperties["Modyfikator obrażeń fizycznych"]
-              //   ? 1 + otherProperties["Modyfikator obrażeń fizycznych"] / 100
-              //   : 1) *
               (otherProperties["Modyfikator obrażeń magicznych"]
                 ? 1 + otherProperties["Modyfikator obrażeń magicznych"] / 200
                 : 1)
@@ -140,8 +147,11 @@ export class Skill {
     return totalHealing;
   }
   calculateKnoRequired(level: number, points: number) {
-    let requiredKno = this.level && this.difficulty ? Math.floor((this.difficulty[this.level - 1] / points)) - level - 40 : 0
-    return requiredKno < 10 ? 10 : requiredKno
+    let requiredKno =
+      this.level && this.difficulty
+        ? Math.floor(this.difficulty[this.level - 1] / points) - level - 40
+        : 0;
+    return requiredKno < 10 ? 10 : requiredKno;
   }
 }
 

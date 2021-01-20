@@ -25,7 +25,6 @@ $border-color: #b9bd6f;
 
       .skillLine {
         border: 2px solid $border-color;
-        // background-color: #d4d6a9;
         position: relative;
         font-size: 0.75em;
         width: 90%;
@@ -56,7 +55,7 @@ $border-color: #b9bd6f;
           align-items: center;
           justify-content: center;
           text-align: center;
-          font-size: 1.5em;
+          font-size: 1.7em;
           font-weight: bold;
           letter-spacing: 1px;
           margin-top: 2em;
@@ -95,6 +94,7 @@ $border-color: #b9bd6f;
             align-items: flex-start;
             justify-content: center;
             margin-right: 0.7em;
+            font-size: 1.15em;
           }
 
           .reqLvlNumber {
@@ -102,6 +102,7 @@ $border-color: #b9bd6f;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
+            font-size: 1.15em;
           }
         }
 
@@ -173,7 +174,7 @@ $border-color: #b9bd6f;
             .descriptionLine {
               display: flex;
               flex-direction: row;
-              margin-bottom: 1em;
+              margin-bottom: 0.75em;
               img {
                 width: 2em;
                 margin-right: 1em;
@@ -181,14 +182,14 @@ $border-color: #b9bd6f;
               .description {
                 text-align: justify;
               }
-              table,
               th,
               td {
                 border: 1px solid black;
                 text-align: center;
               }
               table {
-                margin-top: 1em;
+                margin-top: 0.75em;
+                margin-bottom: 0.75em;
                 width: 100%;
                 .currentLevel {
                   background-color: $border-color;
@@ -204,6 +205,9 @@ $border-color: #b9bd6f;
                   display: flex;
                   justify-content: center;
                   align-items: center;
+                }
+                .emptyCell {
+                  border: 0px solid black;
                 }
               }
             }
