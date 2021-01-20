@@ -101,11 +101,11 @@ export class Skill {
     let totalDamage =
       this.damageFormula && this.damageMod
         ? Math.floor(
-            (damageStats.strength * this.damageFormula.strengthCoeff +
-              damageStats.agility * this.damageFormula.agilityCoeff +
-              damageStats.power * this.damageFormula.powerCoeff +
-              damageStats.knowledge * this.damageFormula.knoCoeff +
-              damageStats.mana * this.damageFormula.manaCoeff +
+            (Math.floor(damageStats.strength * this.damageFormula.strengthCoeff) +
+              Math.floor(damageStats.agility * this.damageFormula.agilityCoeff) +
+              Math.floor(damageStats.power * this.damageFormula.powerCoeff) +
+              Math.floor(damageStats.knowledge * this.damageFormula.knoCoeff) +
+              Math.floor(damageStats.mana * this.damageFormula.manaCoeff) +
               damageStats.weaponDamage * + this.damageFormula.weapon) *
               ((this.level ? this.damageMod[this.level - 1] : 0) / 100) *
               (1 +
@@ -137,7 +137,7 @@ export class Skill {
     let totalHealing =
       this.damageMod && this.healing
         ? Math.floor(
-            (damageStats.power * 1.3 + damageStats.knowledge * 0.7) *
+            (Math.floor(damageStats.power * 1.3) + Math.floor(damageStats.knowledge * 0.7)) *
               ((this.level ? this.damageMod[this.level - 1] : 0) / 100) *
               (otherProperties["Modyfikator obrażeń magicznych"]
                 ? 1 + otherProperties["Modyfikator obrażeń magicznych"] / 200

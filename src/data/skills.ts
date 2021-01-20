@@ -901,7 +901,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       target: "group",
       healing: true,
       difficulty: calculateLinearEffect(240, 60),
-      damageMod: calculateLinearEffect(80, 10),
+      damageMod: [80, 92, 104, 114, 130, 145, 160],
       cost: {
         mana: [60, 69, 78, 87, 96, 105, 116],
       },
