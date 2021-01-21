@@ -35,7 +35,8 @@ import i18n from "i18next";
 // import { BrowserRouter as Router} from "react-router-dom";
 
 //Starting GA tracking
-ReactGA.initialize("UA-142836926-3");
+ReactGA.initialize("UA-142836926-4");
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 (function () {
   //Rendering the app if URL parameters are present (importing build)
