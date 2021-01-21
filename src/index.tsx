@@ -12,7 +12,7 @@ import { importCharacter } from "./store/character-reducer/character-reducer";
 import "./styles/index.scss";
 
 //Types
-import { ImportedBuild } from "./import-build/import-build"
+import { ImportedBuild } from "./import-build/import-build";
 
 //Other
 import * as serviceWorker from "./serviceWorker";
@@ -31,8 +31,8 @@ import {
 import "./i18n/i18n";
 import i18n from "i18next";
 
-// //Router
-// import { BrowserRouter as Router} from "react-router-dom";
+//Router
+import { BrowserRouter as Router } from "react-router-dom";
 
 //Starting GA tracking
 ReactGA.initialize("UA-142836926-4");
@@ -46,9 +46,9 @@ ReactGA.pageview(window.location.pathname + window.location.search);
     const root = document.getElementById("root");
     ReactDOM.render(
       <Provider store={store}>
-      {/* <Router> */}
-        <App isBuildImported={false}/>
-      {/* </Router> */}
+        <Router>
+          <App isBuildImported={false} />
+        </Router>
       </Provider>,
       root
     );
@@ -56,25 +56,27 @@ ReactGA.pageview(window.location.pathname + window.location.search);
       <Alert message={i18n.t("importing-build")} spinner={true} />,
       alert
     );
-    let loadBuildFromDatabase = new Promise<ImportedBuild>((resolve, reject) => {
-      let request = require("request");
-      request(
-        {
-          uri:
-            "https://taencalc.firebaseio.com/builds/-" + urlVars.id + ".json",
-          method: "GET",
-        },
-        (err: string, response: string, body: string) => {
-          console.log(JSON.parse(body));
-          let importedBuild: ImportedBuild = JSON.parse(body)
-          if (importedBuild === null) {
-            reject();
-          } else {
-            resolve(importedBuild);
+    let loadBuildFromDatabase = new Promise<ImportedBuild>(
+      (resolve, reject) => {
+        let request = require("request");
+        request(
+          {
+            uri:
+              "https://taencalc.firebaseio.com/builds/-" + urlVars.id + ".json",
+            method: "GET",
+          },
+          (err: string, response: string, body: string) => {
+            console.log(JSON.parse(body));
+            let importedBuild: ImportedBuild = JSON.parse(body);
+            if (importedBuild === null) {
+              reject();
+            } else {
+              resolve(importedBuild);
+            }
           }
-        }
-      );
-    });
+        );
+      }
+    );
     loadBuildFromDatabase
       .then((response) => {
         //Letting GA know a build was imported
@@ -87,29 +89,31 @@ ReactGA.pageview(window.location.pathname + window.location.search);
           category: "Language",
           action: "Page Load",
           label: i18n.language,
-        })
+        });
         let request = require("request");
         let urlVars = getUrlVars(window.location.href);
         request(
           {
-            uri: "https://taencalc.firebaseio.com/builds/-" + urlVars.id + "/lastAccess.json",
+            uri:
+              "https://taencalc.firebaseio.com/builds/-" +
+              urlVars.id +
+              "/lastAccess.json",
             method: "PUT",
-            body: JSON.stringify(new Date())
+            body: JSON.stringify(new Date()),
           },
           (err: string, response: string, body: string) => {
             console.log(err, JSON.parse(body));
-          })
-        let initialProperties = importBuildFromDatabase(
-          response
+          }
         );
+        let initialProperties = importBuildFromDatabase(response);
         ReactDOM.unmountComponentAtNode(alert);
         ReactDOM.unmountComponentAtNode(root!);
         store.dispatch(importCharacter(initialProperties));
         ReactDOM.render(
           <Provider store={store}>
-          {/* <Router> */}
-            <App isBuildImported={true}/>
-          {/* </Router> */}
+            <Router>
+              <App isBuildImported={true} />
+            </Router>
           </Provider>,
           root
         );
@@ -120,20 +124,16 @@ ReactGA.pageview(window.location.pathname + window.location.search);
           category: "Language",
           action: "Page Load",
           label: i18n.language,
-        })
+        });
         ReactDOM.render(
-          <Alert
-            message={i18n.t("import-failed")}
-            spinner={false}
-          />,
+          <Alert message={i18n.t("import-failed")} spinner={false} />,
           alert
         );
         ReactDOM.render(
-
           <Provider store={store}>
-          {/* <Router> */}
-            <App isBuildImported={false}/>
-            {/* </Router> */}
+            <Router>
+              <App isBuildImported={false} />
+            </Router>
           </Provider>,
           root
         );
@@ -143,12 +143,12 @@ ReactGA.pageview(window.location.pathname + window.location.search);
       category: "Language",
       action: "Page Load",
       label: i18n.language,
-    })
+    });
     ReactDOM.render(
       <Provider store={store}>
-      {/* <Router> */}
-        <App isBuildImported={false}/>
-        {/* </Router> */}
+        <Router>
+          <App isBuildImported={false} />
+        </Router>
       </Provider>,
       document.getElementById("root")
     );

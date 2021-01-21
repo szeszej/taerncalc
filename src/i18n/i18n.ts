@@ -22,7 +22,7 @@ i18n
       escapeValue: false, // react already safes from xss
     },
     detection: {
-      order: ["localStorage", "navigator"],
+      order: ["path", "localStorage", "navigator"],
       caches: ["localStorage"],
       checkWhitelist: true,
     },
