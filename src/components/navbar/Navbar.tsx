@@ -17,8 +17,6 @@ function ConnectedNavbar(props: Props) {
   let urlParams = getUrlVars(window.location.href).hasOwnProperty("id")
     ? "?id=" + getUrlVars(window.location.href).id
     : "";
-    console.log(props);
-
   return (
     <div className="navbar">
       <nav className="navigation">

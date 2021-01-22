@@ -7,7 +7,7 @@ import { withTranslation } from "react-i18next";
 function ConnectedError(props: PropTypes) {
   const { t } = props;
   return (
-    <div className="home">
+    <div className="error">
       <div className="intro">
         <h2>404!!!</h2>
       </div>

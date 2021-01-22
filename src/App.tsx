@@ -5,7 +5,7 @@ import React, { Suspense } from "react";
 import { LoadingMessage } from "./components/shared/LoadingMessage";
 import { Navbar } from "./components/navbar/Navbar";
 import { Home } from "./components/home/Home";
-import { Error } from "./components/Error/Error";
+import { Error } from "./components/error/Error";
 
 //Router
 import { Switch, Route, Redirect } from "react-router-dom";

@@ -10,7 +10,8 @@ export const resources = {
       created: "Stworzone przez",
       suggestions: "Propozycje i błędy można zgłaszać przez",
       "suggestions-target": "forum Taernu",
-      "suggestion-target-link": "https://forum.taern.pl/viewtopic.php?f=279&t=56507",
+      "suggestion-target-link":
+        "https://forum.taern.pl/viewtopic.php?f=279&t=56507",
       disclaimer:
         "Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.",
       "disclaimer-2": "Pozostałe grafiki pochodzą z",
@@ -395,7 +396,7 @@ export const resources = {
         "Po kliknięciu w tę ikonkę możecie sami stworzyć przedmiot! Dodatkowo funkcja ta umożliwia personalizację buildu i przedmiotu - możecie mu nadawać własną nazwę i obrazek!",
       "intro-header-6": "Czym jest The Pride of Taern?",
       "intro-desc-6":
-        "The Pride of Taern jest polską grą MMORPG w rzucie izometrycznym i turową walką. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.",
+        "The Pride of Taern to polska gra MMORPG, która łączy w sobie cechy klasycznych, izometrycznych RPG-ów z dynamicznym turowym systemem walki i dojrzałą, nieliniową fabułą. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.",
       //calculator
       "Statystyki i przedmioty": "Statystyki i przedmioty",
       Umiejętności: "Umiejętności",
@@ -478,7 +479,7 @@ export const resources = {
       "unequip-all": "Czy na pewno chcesz zdjąć wszystkie przedmioty?",
       Tak: "Tak",
       Nie: "Nie",
-      "Resetuj": "Resetuj",
+      Resetuj: "Resetuj",
       "active-filters": "Lista aktywnych filtrów",
       "add-filters": "Dodaj filtry do list przedmiotów",
       "Zdejmij wszystkie przedmioty": "Zdejmij wszystkie przedmioty",
@@ -571,10 +572,10 @@ export const resources = {
       "punktów na rundę": "punktów na rundę",
       //guild buffs
       "Dodaj buffy gildiowe": "Dodaj buffy gildiowe",
-      "manaUsage": "Zużycie many",
-      "enduranceUsage": "Zużycie kondycji",
-      "regeneration": "Regeneracja",
-      "physRes": "Odp. fizyczne",
+      manaUsage: "Zużycie many",
+      enduranceUsage: "Zużycie kondycji",
+      regeneration: "Regeneracja",
+      physRes: "Odp. fizyczne",
       "Poziom świątyni": "Poziom świątyni",
       //skill tooltip
       broń: "broń",
@@ -603,24 +604,24 @@ export const resources = {
       "Szansa trafienia": "Szansa trafienia",
       "Czas trwania": "Czas trwania",
       "avg-damage": "Średnie obrażenia (bez uwzgl. odporności)",
-      "potrzeba": "potrzeba",
+      potrzeba: "potrzeba",
       //skill effects
       "Obrażenia od Potężnego uderzenia": "Obrażenia od Potężnego uderzenia",
       "Ilość bloków": "Ilość bloków",
       "Skuteczność bloku": "Skuteczność bloku",
       "Koszt many na rundę": "Koszt many na rundę",
       "Skuteczność ochrony": "Skuteczność ochrony",
-      "magicRes": "Odp. magiczne",
+      magicRes: "Odp. magiczne",
       "Zadawane obrażenia": "Zadawane obrażenia",
       "Skuteczność ataków": "Skuteczność ataków",
       "Wzmaga krwawienie": "Wzmaga krwawienie",
-      "Krwawienie": "Krwawienie",
+      Krwawienie: "Krwawienie",
       "Skuteczność obrony": "Skuteczność obrony",
       "Liczba uników": "Liczba uników",
       "Skuteczność uników": "Skuteczność uników",
       "Obrażenia od Uderzenia": "Obrażenia od Uderzenia",
       "Siła odczarowania": "Siła odczarowania",
-      "Unieruchomienie": "Unieruchomienie",
+      Unieruchomienie: "Unieruchomienie",
       "Odp. na ogień": "Odp. na ogień",
       "Odp. na uroki": "Odp. na uroki",
       "Szansa trafienia odłamkiem": "Szansa trafienia odłamkiem",
@@ -634,10 +635,15 @@ export const resources = {
       "max-pets": "Maks. ilość pupili",
       "Obrażenia od ognia": "Obrażenia od ognia",
       //lazy loading
-      "loading": "Wczytywanie danych...",
+      loading: "Wczytywanie danych...",
       //routes
-      "home": "Strona główna",
-      "calc": "Kalkulator Buildów"
+      home: "Strona główna",
+      calc: "Kalkulator Buildów",
+      //home
+      "intro-header-7": "Do czego służy Taern Toolbox?",
+      "intro-desc-7": `Taern Toolbox jest to zestaw narzędzi, które mają za zadanie ułatwić grę w The Pride of Taern. Znajdziesz tutaj przede wszystkim kalkulator buildów, który pozwoli Ci zaplanować rozwój swojej postaci od 1 do 140 poziomu. Jest to narzędzie kompleksowe, które oprócz dobrania sobie odpowiedniego ekwipunku i statystyk, pozwoli Ci także obliczyć zadawane obrażenia bądź wymaganą wiedzę (trudność) do umiejętności. W kalkulator buildów dostępne są również wszytkie tabelki z wiki Taernu, dzięki czemu wszystkie potrzebne Ci informacje znajdziesz w jednym miejscu.`,
+      "intro-desc-8": `Jeśli nie masz ochoty wpisywać całego buildu, możesz także przejść do zakładki "Kalkulator trudności", która bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera ona również tabelki trudności, dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
+      "intro-desc-9": `Zakładka "Przedmioty legendarne" z kolei zawiera spis wszystkich przedmiotów dostępnych dla graczy w The Pride of Taern. Znajdują się tam przedmioty rzadkie (rary), ale również psychorary i najważniejsze z nich - epiki. Korzystając z tej zakładki będziesz mógł filtrować przedmioty po interesujących Cię statysykach, wyszukiwać je po nazwie, sprawdzić z jakich przeciwników wypadają, a także wiele różnych rzeczy. Tutaj również nie musisz specjalnie tworzyć buildu dla swojej postaci, aby obejrzeć spis przedmiotów.`,
     },
   },
   en: {
@@ -647,7 +653,8 @@ export const resources = {
       created: "Created by",
       suggestions: "Please post all suggestions and feedback on",
       "suggestions-target": "the Taern forum",
-      "suggestion-target-link": "https://forum.taern.com/viewtopic.php?f=5&t=23506",
+      "suggestion-target-link":
+        "https://forum.taern.com/viewtopic.php?f=5&t=23506",
       disclaimer:
         "Pride of Taern, all item images and the logo are a property of Whitemoon System.",
       "disclaimer-2": "All other images are from",
@@ -1035,7 +1042,7 @@ export const resources = {
         "After clicking the icon, you'll be able to create your own item! This feature can also be used to personalize your build by adding a name and an image to the item!",
       "intro-header-6": "What is The Pride of Taern?",
       "intro-desc-6":
-        "The Pride of Taern is a Polish isometric MMORPG with turn-based combat system. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests and tasks, and dynamic events.",
+        "The Pride of Taern is a Polish MMORPG game, which combines traits of classic, isometric RPGs with a dynamic, turn-based combat system and a mature and non-linear plot. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests and tasks, and dynamic events.",
       "Statystyki i przedmioty": "Attributes and Items",
       Umiejętności: "Skills",
       //build exporter
@@ -1117,7 +1124,7 @@ export const resources = {
       "unequip-all": "Are you sure you want to unequip all items?",
       Tak: "Yes",
       Nie: "No",
-      "Resetuj": "Reset",
+      Resetuj: "Reset",
       "active-filters": "List of active filters",
       "add-filters": "Add filters to item lists",
       "Zdejmij wszystkie przedmioty": "Unequip all items",
@@ -1209,10 +1216,10 @@ export const resources = {
       "punktów na rundę": "points per round",
       //guild buffs
       "Dodaj buffy gildiowe": "Add guild buffs",
-      "manaUsage": "Mana usage",
-      "enduranceUsage": "Stamina usage",
-      "regeneration": "Regeneration",
-      "physRes": "Physical Res.",
+      manaUsage: "Mana usage",
+      enduranceUsage: "Stamina usage",
+      regeneration: "Regeneration",
+      physRes: "Physical Res.",
       "Poziom świątyni": "Temple level",
       //skill tooltip
       broń: "weapon",
@@ -1241,24 +1248,24 @@ export const resources = {
       "Szansa trafienia": "Hit chance",
       "Czas trwania": "Duration",
       "avg-damage": "Avg. damage (not including resistances)",
-      "potrzeba": "still needed:",
+      potrzeba: "still needed:",
       //skill effects
       "Obrażenia od Potężnego uderzenia": "Mighty Blow damage",
       "Ilość bloków": "Number of blocks",
       "Skuteczność bloku": "Block effectivness",
       "Koszt many na rundę": "Mana cost per round",
       "Skuteczność ochrony": "Protection chance",
-      "magicRes": "Magical Res.",
+      magicRes: "Magical Res.",
       "Zadawane obrażenia": "Damage dealt",
       "Skuteczność ataków": "Attacks hit chance",
       "Wzmaga krwawienie": "Increases bleeding",
-      "Krwawienie": "Bleeding",
+      Krwawienie: "Bleeding",
       "Skuteczność obrony": "Defence success chance",
       "Liczba uników": "Number of dodges",
       "Skuteczność uników": "Chance to dodge",
       "Obrażenia od Uderzenia": "Bash damage",
       "Siła odczarowania": "Dispel power",
-      "Unieruchomienie": "Immobilization",
+      Unieruchomienie: "Immobilization",
       "Szansa trafienia odłamkiem": "Fragment chance",
       "Szansa na efekt": "Effect chance",
       "Obrażenia od Precyzyjnego strzału": "Precise Shot damage",
@@ -1269,10 +1276,10 @@ export const resources = {
       "max-pets": "Max. pets",
       "Obrażenia od ognia": "Fire damage",
       //lazy loading
-      "loading": "Loading data...",
+      loading: "Loading data...",
       //routes
-      "home": "Home",
-      "calc": "Build Calculator"
+      home: "Home",
+      calc: "Build Calculator",
     },
   },
 };
