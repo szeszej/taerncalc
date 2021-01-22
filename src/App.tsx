@@ -5,12 +5,14 @@ import React, { Suspense } from "react";
 import { LoadingMessage } from "./components/shared/LoadingMessage";
 import { Navbar } from "./components/navbar/Navbar";
 import { Home } from "./components/home/Home";
+import { Error } from "./components/Error/Error";
 
 //Router
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 //i18l
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 
 //Helmet
 import { Helmet } from "react-helmet";
@@ -29,6 +31,8 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     const { t } = this.props;
+    console.log(i18n.language);
+
     return (
       <div className="wrapper">
         <Helmet>
@@ -47,11 +51,17 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
         <Navbar />
         <Suspense fallback={<LoadingMessage />}>
           <Switch>
-            <Route path="/:lang/calc">
+            <Route path={`/${i18n.language}/calc`}>
               <Calculator isBuildImported={this.props.isBuildImported} />
             </Route>
-            <Route path="/:lang">
+            <Route path={`/${i18n.language}/404`}>
+              <Error />
+            </Route>
+            <Route exact path={`/${i18n.language}`}>
               <Home />
+            </Route>
+            <Route path="*">
+              <Redirect to="/404" />
             </Route>
           </Switch>
         </Suspense>

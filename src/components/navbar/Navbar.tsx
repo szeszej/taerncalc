@@ -60,7 +60,7 @@ function ConnectedNavbar(props: Props) {
             title="English"
           ></button>
         </Link>
-        {urlParams ? <Redirect to={`/${i18n.language}/calc${urlParams}`} /> :
+        {urlParams ? <Redirect to={`/${i18n.language}/calc${urlParams}`} /> : !props.location.pathname.includes("/en") && !props.location.pathname.includes("/pl") ? <Redirect to={"/" + i18n.language + props.location.pathname} /> :
           i18n.language === "en" && !props.location.pathname.includes("/en") ? (
           <Redirect to={"/" + i18n.language + props.location.pathname.substring(3)} />
         ) : i18n.language === "pl" && !props.location.pathname.includes("/pl") ? (
