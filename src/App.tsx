@@ -57,8 +57,11 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
             <Route path={`/${i18n.language}/404`}>
               <Error />
             </Route>
-            <Route exact path={`/${i18n.language}`}>
+            <Route path={`/${i18n.language}`}>
               <Home />
+            </Route>
+            <Route exact path={"/"}>
+              <Redirect to={`/${i18n.language}`} />
             </Route>
             <Route path="*">
               <Redirect to="/404" />
