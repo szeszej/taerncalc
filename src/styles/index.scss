@@ -54,6 +54,27 @@ body {
     }
   }
 
+  .loadingCalc {
+    min-height: 40em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .loadingMsg {
+      margin-top: 2em;
+      font-size: 3em;
+    }
+    .spinner {
+      width: 5em;
+      height: 5em;
+    }
+  }
+
+  & > .loadingCalc {
+    grid-area: content;
+    background-color: #d6cca9;
+    min-height: 60em;
+  }
+
   button,
   input,
   select {
@@ -194,11 +215,6 @@ body {
       margin-left: 1em;
     }
   }
-
-  // #calculator {
-  //   grid-area: content;
-  //   background-color: #d6cca9;
-  // }
 
   .calculator {
     grid-area: content;

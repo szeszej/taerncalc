@@ -4,6 +4,7 @@ import ReactGA from "react-ga";
 //Types
 import { SkillSet } from "../data/models/skill-set.model";
 import { Item, RawItem } from "../data/models/item.model";
+import { ItemForExport } from "../components/calculator/build-exporter/BuildExporter"
 import { ImportCharacterActionPayload } from "../store/character-reducer/character-reducer";
 import { StatsState } from "../store/stats-reducer/stats-reducer";
 import { Equipment } from "../store/equipment-reducer/equipment-reducer";
@@ -79,47 +80,28 @@ export function importBuildFromDatabase(
         (item) =>
           item.name === data.equipment[key as keyof ImportedEquipment]!.name
       );
-      if (
-        isItemInDatabase &&
-        !data.equipment[key as keyof ImportedEquipment]!.psychoLvl
-      ) {
-        temporaryEquipment[key as keyof Equipment] = isItemInDatabase;
+      if (isItemInDatabase) {
+        temporaryEquipment[key as keyof Equipment] = new Item(isItemInDatabase);
+        temporaryEquipment[key as keyof Equipment]!.psychoLvl = data
+          .equipment[key as keyof ImportedEquipment]!.psychoLvl ? data
+            .equipment[key as keyof ImportedEquipment]!.psychoLvl! : 0;
+        temporaryEquipment[key as keyof Equipment]!.enhancements = data
+          .equipment[key as keyof ImportedEquipment]!.enhancements
+          ? data.equipment[key as keyof ImportedEquipment]!.enhancements!
+          : {
+              strength: 0,
+              agility: 0,
+              power: 0,
+              knowledge: 0,
+              hp: 0,
+              mana: 0,
+              endurance: 0,
+              damage: 0,
+            };
       } else {
-        if (
-          data.equipment[key as keyof ImportedEquipment]!.name ===
-          "Aquariusy II"
-        ) {
-          temporaryEquipment[key as keyof Equipment] = itemsDatabase.find(
-            (item) => item.name === "Aquariusy II v1"
-          )!;
-        } else if (
-          data.equipment[key as keyof ImportedEquipment]!.name === "Tsunami II"
-        ) {
-          temporaryEquipment[key as keyof Equipment] = itemsDatabase.find(
-            (item) => item.name === "Tsunami II v1"
-          )!;
-        } else {
-          temporaryEquipment[key as keyof Equipment] = new Item(
-            data.equipment[key as keyof ImportedEquipment]!
-          );
-        }
-      }
-      temporaryEquipment[key as keyof Equipment]!.enhancements = data.equipment[
-        key as keyof ImportedEquipment
-      ]!.enhancements
-        ? data.equipment[key as keyof ImportedEquipment]!.enhancements!
-        : {
-            strength: 0,
-            agility: 0,
-            power: 0,
-            knowledge: 0,
-            hp: 0,
-            mana: 0,
-            endurance: 0,
-            damage: 0,
-          };
-      if (temporaryEquipment[key as keyof Equipment]! && temporaryEquipment[key as keyof Equipment]!.isCustom && !(temporaryEquipment[key as keyof Equipment]!.name.includes("Własn") || temporaryEquipment[key as keyof Equipment]!.name.includes("Custom "))) {
-        temporaryEquipment[key as keyof Equipment]!.isCustom = false;
+        temporaryEquipment[key as keyof Equipment] = new Item(
+          data.equipment[key as keyof ImportedEquipment]!
+        );
       }
       isNewEquipmentNeeded = true;
     }
@@ -151,7 +133,7 @@ export interface ImportedBuild {
   skills: ImportedSkills;
   equipment: ImportedEquipment;
   stats: ImportedStats;
-  lastAccess: Date
+  lastAccess: Date;
 }
 
 export interface ImportedSkills {
@@ -177,19 +159,19 @@ export interface ImportedSkills {
 }
 
 export interface ImportedEquipment {
-  armor?: RawItem;
-  helmet?: RawItem;
-  neck?: RawItem;
-  gloves?: RawItem;
-  cape?: RawItem;
-  weapon?: RawItem;
-  shield?: RawItem;
-  pants?: RawItem;
-  belt?: RawItem;
-  ring1?: RawItem;
-  ring2?: RawItem;
-  boots?: RawItem;
-  special?: RawItem;
+  armor?: RawItem | ItemForExport;
+  helmet?: RawItem | ItemForExport;
+  neck?: RawItem | ItemForExport;
+  gloves?: RawItem | ItemForExport;
+  cape?: RawItem | ItemForExport;
+  weapon?: RawItem | ItemForExport;
+  shield?: RawItem | ItemForExport;
+  pants?: RawItem | ItemForExport;
+  belt?: RawItem | ItemForExport;
+  ring1?: RawItem | ItemForExport;
+  ring2?: RawItem | ItemForExport;
+  boots?: RawItem | ItemForExport;
+  special?: RawItem | ItemForExport;
 }
 
 export interface ImportedStats {

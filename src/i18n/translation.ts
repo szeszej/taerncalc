@@ -632,7 +632,9 @@ export const resources = {
       "Szansa na zabicie": "Szansa na zabicie",
       "Suma rang pupili": "Suma rang pupili",
       "max-pets": "Maks. ilość pupili",
-      "Obrażenia od ognia": "Obrażenia od ognia"
+      "Obrażenia od ognia": "Obrażenia od ognia",
+      //lazy loading
+      "loading": "Wczytywanie danych..."
     },
   },
   en: {
@@ -1262,7 +1264,9 @@ export const resources = {
       "Szansa na zabicie": "Chance to kill",
       "Suma rang pupili": "Total pet rank",
       "max-pets": "Max. pets",
-      "Obrażenia od ognia": "Fire damage"
+      "Obrażenia od ognia": "Fire damage",
+      //lazy loading
+      "loading": "Loading data..."
     },
   },
 };
