@@ -94,7 +94,7 @@ export class ItemSet {
     let propertyValues = this.otherProperties.map((x) => {
       let valueDependingOnPieces: number = 0;
       if (x[1] !== 1) {
-        valueDependingOnPieces = Math.floor(x[1] * valueModifier * 10) / 10;
+        valueDependingOnPieces = Math.floor(x[1] * valueModifier * 100) / 100;
         let otherPropertyAsString = x[1] < 0 ? i18n.t(x[0]) + ": -" + Math.abs(valueDependingOnPieces) + "% (" + x[1] + "%)" : i18n.t(x[0]) + ": +" + valueDependingOnPieces + "% (" + x[1] + "%)"
         return otherPropertyAsString;
       } else {
@@ -109,7 +109,7 @@ export class ItemSet {
     let otherPropertyValues: [string, number][] = this.otherProperties.map(x => {
       let valueDependingOnPieces: number = 0;
       if (x[1] !== 1) {
-        valueDependingOnPieces = Math.floor(x[1] * valueModifier * 10) / 10;
+        valueDependingOnPieces = Math.floor(x[1] * valueModifier * 100) / 100;
         return [i18n.t(x[0]), valueDependingOnPieces];
       } else {
         valueDependingOnPieces = valueModifier === 1 ? 1 : 0;

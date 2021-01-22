@@ -1,8 +1,8 @@
 export class Item {
   constructor(item: RawItem | Item) {
     this.name = item.name;
-    this.type = item.type;
-    this.image = item.image;
+    this.type = item.type ? item.type : "guild";
+    this.image = item.image ? item.image : "";
     this.otherProperties = item.otherProperties ? item.otherProperties : [];
     this.rarity = item.rarity ? item.rarity : "Rzadki";
     this.class = item.class ? item.class : null;
@@ -124,8 +124,8 @@ export interface NumericItemValues {
 
 export interface RawItem {
     name: string
-    type: ItemTypes
-    image: string
+    type?: ItemTypes
+    image?: string
     rarity?: string
     class?: string
     set?: string

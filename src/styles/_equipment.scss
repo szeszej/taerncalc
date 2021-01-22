@@ -741,7 +741,10 @@
       }
     }
   }
-
+  .noProperties {
+    font-size: 1.2em;
+    margin: 0.3em;
+  }
   .middle {
     grid-area: middle;
     background-size: contain;

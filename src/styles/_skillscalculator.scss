@@ -1,7 +1,7 @@
-$border-color: #d6c1a9;
+$border-color: #b9bd6f;
 
 .skillCalculator {
-  width: 75%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,25 +24,25 @@ $border-color: #d6c1a9;
       align-items: center;
 
       .skillLine {
-        // border: 2px solid $border-color;
-        // background-color: #d4d6a9;
+        border: 2px solid $border-color;
         position: relative;
         font-size: 0.75em;
-        width: 80%;
+        width: 90%;
         margin: 1em;
         display: grid;
-        grid-template-areas: "image name skillvalue buttons" "image reqlvl skillvalue buttons";
-        grid-template-columns: 7em 5fr 2fr 2fr;
-        grid-template-rows: 2.5em auto;
-        padding: 1em;
-        // border-radius: 8px;
+        grid-template-areas: "image name skillvalue buttons expand" "image reqlvl skillvalue buttons expand" "tooltip tooltip tooltip tooltip expand";
+        grid-template-columns: 8em 4.5fr 2fr 2fr 2em;
+        grid-template-rows: 2.5em auto auto;
+        border-radius: 4px;
+        overflow: hidden;
+        // min-height: 10em;
         .image {
           display: flex;
           grid-area: image;
-          height: 7em;
+          margin-left: 1em;
           align-self: center;
-          margin-right: 0.5em;
-
+          margin-top: 2em;
+          margin-bottom: 2em;
           img {
             border: 3px solid $border-color;
             border-radius: 50%;
@@ -55,22 +55,25 @@ $border-color: #d6c1a9;
           align-items: center;
           justify-content: center;
           text-align: center;
-          font-size: 1.5em;
+          font-size: 1.7em;
           font-weight: bold;
           letter-spacing: 1px;
+          margin-top: 2em;
         }
 
         .skillValue {
-          border: 2px solid #b9bd6f;
+          border: 2px solid $border-color;
           grid-area: skillvalue;
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 4em;
           line-height: 0;
-          // background-color: #b9bd6f;
           border-radius: 5px;
-
+          height: 2em;
+          align-self: center;
+          margin-top: 0.25em;
+          margin-bottom: 0.25em;
           p {
             margin: 0;
             margin-block-start: 0;
@@ -91,6 +94,7 @@ $border-color: #d6c1a9;
             align-items: flex-start;
             justify-content: center;
             margin-right: 0.7em;
+            font-size: 1.15em;
           }
 
           .reqLvlNumber {
@@ -98,6 +102,7 @@ $border-color: #d6c1a9;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
+            font-size: 1.15em;
           }
         }
 
@@ -108,10 +113,104 @@ $border-color: #d6c1a9;
           flex-direction: column;
           align-items: center;
           justify-content: space-around;
-
+          border-right: 2px solid $border-color;
           button {
             height: 3em;
             width: 3em;
+          }
+        }
+
+        .expand {
+          grid-area: expand;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          background-color: $border-color;
+          &:hover {
+            background-color: #9ea33f;
+          }
+          img {
+            transition: transform 1s;
+          }
+        }
+        .skillTooltip {
+          grid-area: tooltip;
+          border-right: 2px solid $border-color;
+          transition: max-height 2s;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding-left: 1em;
+          padding-right: 1em;
+          font-size: 1.25em;
+          p {
+            line-height: 1.2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+          }
+          hr {
+            width: 100%;
+            border: 0;
+            border-bottom: 1px dashed $border-color;
+            background: #999;
+          }
+          .tooltipLine {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            .damage {
+              font-size: 1.1em;
+            }
+            img {
+              width: 2em;
+              margin-right: 1em;
+            }
+          }
+          .basicInfo {
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+            .descriptionLine {
+              display: flex;
+              flex-direction: row;
+              margin-bottom: 0.75em;
+              img {
+                width: 2em;
+                margin-right: 1em;
+              }
+              .description {
+                text-align: justify;
+              }
+              th,
+              td {
+                border: 1px solid black;
+                text-align: center;
+              }
+              table {
+                margin-top: 0.75em;
+                margin-bottom: 0.75em;
+                width: 100%;
+                .currentLevel {
+                  background-color: $border-color;
+                }
+                img {
+                  display: inline;
+                  width: 1.3em;
+                  margin-right: 0.5em;
+                  margin-bottom: -0.3em;
+                  // justify-self: start;
+                }
+                .rowName {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+                .emptyCell {
+                  border: 0px solid black;
+                }
+              }
+            }
           }
         }
       }
