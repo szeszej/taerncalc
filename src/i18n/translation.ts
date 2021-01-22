@@ -634,7 +634,10 @@ export const resources = {
       "max-pets": "Maks. ilość pupili",
       "Obrażenia od ognia": "Obrażenia od ognia",
       //lazy loading
-      "loading": "Wczytywanie danych..."
+      "loading": "Wczytywanie danych...",
+      //routes
+      "home": "Strona główna",
+      "calc": "Kalkulator Buildów"
     },
   },
   en: {
@@ -1266,7 +1269,10 @@ export const resources = {
       "max-pets": "Max. pets",
       "Obrażenia od ognia": "Fire damage",
       //lazy loading
-      "loading": "Loading data..."
+      "loading": "Loading data...",
+      //routes
+      "home": "Home",
+      "calc": "Build Calculator"
     },
   },
 };

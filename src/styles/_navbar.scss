@@ -1,0 +1,49 @@
+.navbar {
+  grid-area: navbar;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #bdac6f;
+
+  .navigation {
+    width: 80%;
+    ul {
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      text-transform: uppercase;
+    }
+  }
+
+  .languages {
+    display: flex;
+    margin-top: 0.8em;
+
+    button {
+      all: initial;
+      width: 3em;
+      height: 2em;
+    }
+    #pl {
+      background-image: url("/images/pl.png");
+      margin-right: 0.2em;
+      background-size: 70%;
+    }
+    #en {
+      background-image: url("/images/en.png");
+      background-size: 80%;
+    }
+    #pl,
+    #en {
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.7;
+      background-color: inherit;
+    }
+  }
+}

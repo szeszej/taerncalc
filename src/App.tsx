@@ -4,6 +4,10 @@ import React, { Suspense } from "react";
 //Components
 import { LoadingMessage } from "./components/shared/LoadingMessage";
 import { Navbar } from "./components/navbar/Navbar";
+import { Home } from "./components/home/Home";
+
+//Router
+import { Switch, Route } from "react-router-dom";
 
 //i18l
 import { withTranslation } from "react-i18next";
@@ -42,7 +46,14 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
         <div className="leftSidebar"></div>
         <Navbar />
         <Suspense fallback={<LoadingMessage />}>
-          <Calculator isBuildImported={this.props.isBuildImported} />
+          <Switch>
+            <Route path="/:lang/calc">
+              <Calculator isBuildImported={this.props.isBuildImported} />
+            </Route>
+            <Route path="/:lang">
+              <Home />
+            </Route>
+          </Switch>
         </Suspense>
         <div className="rightSidebar"></div>
         <div className="footer">

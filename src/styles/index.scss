@@ -3,6 +3,8 @@
 @import "statscalculator";
 @import "equipment";
 @import "alert-box";
+@import "navbar";
+@import "home";
 $main-font: "Eczar", serif;
 $border-color: #d6c1a9;
 $button-background: #bdac6f;
@@ -25,8 +27,8 @@ body {
   font-family: $main-font;
   display: grid;
   grid-template-columns: 10% auto 10%;
-  grid-template-rows: auto auto auto;
-  grid-template-areas: "header header header" "leftsidebar content rightsidebar" "footer footer footer";
+  grid-template-rows: auto 3em auto auto;
+  grid-template-areas: "header header header" "navbar navbar navbar" "leftsidebar content rightsidebar" "footer footer footer";
   margin: 0;
   background: black;
   .exportBuild {
@@ -230,37 +232,6 @@ body {
       display: none;
     }
 
-    .languages {
-      position: absolute;
-      right: 1em;
-      top: 1em;
-
-      button {
-        all: initial;
-        width: 3em;
-        height: 2em;
-      }
-      #pl {
-        background-image: url("/images/pl.png");
-        margin-right: 0.2em;
-        background-size: 70%;
-      }
-      #en {
-        background-image: url("/images/en.png");
-        background-size: 80%;
-      }
-      #pl,
-      #en {
-        background-repeat: no-repeat;
-        background-position: center;
-        cursor: pointer;
-      }
-      #pl:hover,
-      #en:hover {
-        opacity: 0.7;
-      }
-    }
-
     #classLvlWrapper {
       grid-area: classLevel;
       display: flex;
@@ -424,7 +395,7 @@ body {
   .wrapper {
     font-size: 12px;
     grid-template-columns: 100%;
-    grid-template-areas: "header" "content" "footer";
+    grid-template-areas: "header" "navbar" "content" "footer";
     .header {
       .title {
         h1 {
@@ -530,9 +501,5 @@ body {
         width: 100%;
       }
     }
-  }
-  .wrapper .calculator .languages {
-    display: flex;
-    flex-direction: column;
   }
 }
