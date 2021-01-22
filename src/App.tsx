@@ -17,6 +17,9 @@ import i18n from "i18next";
 //Helmet
 import { Helmet } from "react-helmet";
 
+//URL params
+import { getUrlVars } from "./import-build/import-build";
+
 //Lazy loading
 const Calculator = React.lazy(() =>
   import("./components/calculator/Calculator")
@@ -31,8 +34,9 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     const { t } = this.props;
-    console.log(i18n.language);
-
+    let urlParams = getUrlVars(window.location.href).hasOwnProperty("id")
+      ? "?id=" + getUrlVars(window.location.href).id
+      : "";
     return (
       <div className="wrapper">
         <Helmet>
@@ -51,20 +55,20 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
         <Navbar />
         <Suspense fallback={<LoadingMessage />}>
           <Switch>
-            <Route path={`/${i18n.language}/calc`}>
+            <Route exact path={`/${i18n.language}/calc`}>
               <Calculator isBuildImported={this.props.isBuildImported} />
             </Route>
             <Route path={`/${i18n.language}/404`}>
               <Error />
             </Route>
-            <Route path={`/${i18n.language}`}>
+            <Route exact path={`/${i18n.language}`}>
               <Home />
             </Route>
             <Route exact path={"/"}>
-              <Redirect to={`/${i18n.language}`} />
+              <Redirect to={`/${i18n.language + urlParams}`} />
             </Route>
             <Route path="*">
-              <Redirect to="/404" />
+              <Redirect to={`/${i18n.language}/404`} />
             </Route>
           </Switch>
         </Suspense>
