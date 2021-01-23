@@ -1,0 +1,17 @@
+.buffCalculator {
+  width: 100%;
+}
+
+.skillCalculator .skills .buffs {
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  .buffsHeader {
+    width: 100%;
+    text-align: center;
+  }
+  .buff {
+    width: 45%;
+  }
+}

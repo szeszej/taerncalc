@@ -25,6 +25,10 @@ const Calculator = React.lazy(() =>
   import("./components/calculator/Calculator")
 );
 
+const KnowledgeCalculator = React.lazy(() =>
+  import("./components/kno-calc/KnowledgeCalculator")
+);
+
 export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
@@ -57,6 +61,9 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
           <Switch>
             <Route exact path={`/${i18n.language}/calc`}>
               <Calculator isBuildImported={this.props.isBuildImported} />
+            </Route>
+            <Route exact path={`/${i18n.language}/know`}>
+              <KnowledgeCalculator />
             </Route>
             <Route path={`/${i18n.language}/404`}>
               <Error />

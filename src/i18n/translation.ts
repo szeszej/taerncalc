@@ -644,6 +644,12 @@ export const resources = {
       "intro-desc-7": `Taern Toolbox jest to zestaw narzędzi, które mają za zadanie ułatwić grę w The Pride of Taern. Znajdziesz tutaj przede wszystkim kalkulator buildów, który pozwoli Ci zaplanować rozwój swojej postaci od 1 do 140 poziomu. Jest to narzędzie kompleksowe, które oprócz dobrania sobie odpowiedniego ekwipunku i statystyk, pozwoli Ci także obliczyć zadawane obrażenia bądź wymaganą wiedzę (trudność) do umiejętności. W kalkulator buildów dostępne są również wszytkie tabelki z wiki Taernu, dzięki czemu wszystkie potrzebne Ci informacje znajdziesz w jednym miejscu.`,
       "intro-desc-8": `Jeśli nie masz ochoty wpisywać całego buildu, możesz także przejść do zakładki "Kalkulator trudności", która bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera ona również tabelki trudności, dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
       "intro-desc-9": `Zakładka "Przedmioty legendarne" z kolei zawiera spis wszystkich przedmiotów dostępnych dla graczy w The Pride of Taern. Znajdują się tam przedmioty rzadkie (rary), ale również psychorary i najważniejsze z nich - epiki. Korzystając z tej zakładki będziesz mógł filtrować przedmioty po interesujących Cię statysykach, wyszukiwać je po nazwie, sprawdzić z jakich przeciwników wypadają, a także wiele różnych rzeczy. Tutaj również nie musisz specjalnie tworzyć buildu dla swojej postaci, aby obejrzeć spis przedmiotów.`,
+      //error
+      "error": "Błąd 404 - Nie znaleziono strony",
+      "error-desc": "Któż sprowadził Cię w ten zakamarek internetu? Niestety nic tutaj nie znajdziesz. Wypróbuj za to nasze narzędzia:",
+      //know calc
+      "know-calc": "Kalkulator Wiedzy",
+      "Wymagana wiedza dla poziomu": "Wymagana wiedza dla poziomu",
     },
   },
   en: {

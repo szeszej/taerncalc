@@ -6,6 +6,7 @@
 @import "navbar";
 @import "home";
 @import "error";
+@import "kno-calc";
 $main-font: "Eczar", serif;
 $border-color: #d6c1a9;
 $button-background: #bdac6f;
@@ -459,6 +460,9 @@ body {
   }
 }
 @media only screen and (max-width: 660px) {
+  // .wrapper {
+  //   grid-template-rows: auto 5em auto auto;
+  // }
   .wrapper .header .title h1 {
     font-size: 1em;
   }

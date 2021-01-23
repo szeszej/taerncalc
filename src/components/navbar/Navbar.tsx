@@ -27,6 +27,9 @@ function ConnectedNavbar(props: Props) {
         <NavLink to={"/" + i18n.language + "/calc" + urlParams}>
           <li>{props.t("calc")}</li>
         </NavLink>
+        <NavLink to={"/" + i18n.language + "/know"}>
+          <li>{props.t("know-calc")}</li>
+        </NavLink>
       </ul>
       </nav>
       <div className="languages">

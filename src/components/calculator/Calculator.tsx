@@ -8,7 +8,7 @@ import { RootState } from "../../store/store";
 import { Dispatch } from "redux";
 
 //Components
-import { LevelChanger } from "./level-changer/LevelChanger";
+import { LevelChanger } from "../shared/level-changer/LevelChanger";
 import { BuildExporter } from "./build-exporter/BuildExporter";
 import { Intro } from "./intro/Intro";
 import { LoadingMessage } from "../../components/shared/LoadingMessage";
