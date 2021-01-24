@@ -20,8 +20,8 @@
       text-transform: uppercase;
       padding-inline-start: 0;
       margin-block-start: 0;
-    margin-block-end: 0;
-    height: 100%;
+      margin-block-end: 0;
+      height: 100%;
       a {
         height: 100%;
         display: flex;
@@ -29,6 +29,7 @@
         justify-content: center;
         padding-left: 2em;
         padding-right: 2em;
+        text-decoration: none;
       }
     }
     .selected {
