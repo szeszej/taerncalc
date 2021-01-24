@@ -79,6 +79,14 @@ body {
     min-height: 60em;
   }
 
+  a {
+    color: inherit;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
   button,
   input,
   select {
@@ -134,7 +142,6 @@ body {
     // flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 2px solid $button-background;
 
     .logo {
       img {
@@ -144,13 +151,14 @@ body {
     }
 
     .title {
-      h1 {
+      p {
         margin: 0;
         margin-top: 0.3em;
         text-align: center;
         text-transform: uppercase;
-        font-size: 3.5em;
+        font-size: 4em;
         letter-spacing: 0.05em;
+        font-weight: bold;
         // background: linear-gradient(to bottom, #cb93bd 9%,#be1414 50%,#f78b8b 92%);
         background: linear-gradient(
           to bottom,
@@ -380,8 +388,8 @@ body {
     font-size: 14px;
     .header {
       .title {
-        h1 {
-          font-size: 2.5em;
+        p {
+          font-size: 3.5em;
         }
       }
     }
@@ -400,8 +408,8 @@ body {
     grid-template-areas: "header" "navbar" "content" "footer";
     .header {
       .title {
-        h1 {
-          font-size: 2.2em;
+        p {
+          font-size: 3em;
         }
       }
     }
@@ -452,8 +460,8 @@ body {
   }
 }
 @media only screen and (max-width: 780px) {
-  .wrapper .header .title h1 {
-    font-size: 1.5em;
+  .wrapper .header .title p {
+    font-size: 2.5em;
   }
   .wrapper .header .logo img {
     max-height: 3em;
@@ -463,14 +471,16 @@ body {
   // .wrapper {
   //   grid-template-rows: auto 5em auto auto;
   // }
-  .wrapper .header .title h1 {
-    font-size: 1em;
+  .wrapper .header .title p {
+    font-size: 2em;
   }
 }
 @media only screen and (max-width: 520px) {
   .wrapper {
     font-size: 10px;
-
+    .header .title p {
+      font-size: 1.5em;
+    }
     .calculator {
       #classLvlWrapper {
         form {

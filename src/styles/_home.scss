@@ -37,7 +37,7 @@
 @media only screen and (max-width: 1050px) {
   .wrapper .home .intro .homeLine {
     flex-direction: column;
-    &:first-child {
+    &:nth-child(2) {
       flex-direction: column-reverse;
     }
     .homeDescription,

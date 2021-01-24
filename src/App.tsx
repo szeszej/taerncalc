@@ -52,7 +52,7 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
             <img src="images/logo.png" alt="Pride of Taern" />
           </div>
           <div className="title">
-            <h1>{t("h1")}</h1>
+            <p>{t("h1")}</p>
           </div>
         </div>
         <div className="leftSidebar"></div>

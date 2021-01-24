@@ -148,7 +148,7 @@ export class ConnectedBuffTooltip extends React.Component<PropTypes> {
                       : undefined
                   }
                 >
-                  {x > 0 && this.props.skill.name !== "Wataha" ? "+" : null}
+                  {x > 0 ? "+" : null}
                   {Math.floor(x * 10) / 10}
                   {effect.type === "numeric" ? null : "%"}
                 </td>
@@ -280,7 +280,7 @@ export class ConnectedBuffTooltip extends React.Component<PropTypes> {
             <img src="images/knowledge.svg" alt="knowledge" />
             <div className="damage">
               <p>
-                {t("Wymagana wiedza dla poziomu")} {this.props.level}:
+                {t("Wymagana wiedza dla poziomu")} {this.props.level} {t("na")}:
               </p>
               {knowRequiredParagraphs}
             </div>

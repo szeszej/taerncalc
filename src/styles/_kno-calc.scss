@@ -7,11 +7,17 @@
   width: 100%;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: center;
   .buffsHeader {
-    width: 100%;
-    text-align: center;
+    width: 80%;
+    font-size: 1.25em;
   }
   .buff {
     width: 45%;
+    grid-template-areas: "image name skillvalue buttons expand" "tooltip tooltip tooltip tooltip expand";
+    grid-template-rows: auto auto;
+    .skillName {
+      margin-top: 0;
+    }
   }
 }

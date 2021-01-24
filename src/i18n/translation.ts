@@ -6,7 +6,7 @@ export const resources = {
       "meta-description":
         "Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!",
       //home
-      h1: "Kalkulator buildów Pride of Taern",
+      h1: "The Pride of Taern Toolbox",
       created: "Stworzone przez",
       suggestions: "Propozycje i błędy można zgłaszać przez",
       "suggestions-target": "forum Taernu",
@@ -650,12 +650,14 @@ export const resources = {
       //know calc
       "know-calc": "Kalkulator Wiedzy",
       "Wymagana wiedza dla poziomu": "Wymagana wiedza dla poziomu",
+      "na": "na",
+      "buff-desc": "Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA."
     },
   },
   en: {
     translation: {
       //home
-      h1: "Pride of Taern Build Calculator",
+      h1: "Pride of Taern Toolbox",
       created: "Created by",
       suggestions: "Please post all suggestions and feedback on",
       "suggestions-target": "the Taern forum",

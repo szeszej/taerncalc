@@ -11,6 +11,9 @@ function ConnectedHome(props: PropTypes) {
     <div className="home">
       <div className="intro">
         <div className="homeLine">
+          <h1>{t("h1")}</h1>
+        </div>
+        <div className="homeLine">
         <img
           src={`images/screenshots/build calculator ${i18n.language}.png`}
           alt="build calculator screenshot"

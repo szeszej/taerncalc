@@ -21,13 +21,13 @@ function ConnectedNavbar(props: Props) {
     <div className="navbar">
       <nav className="navigation">
       <ul>
-        <NavLink to={"/" + i18n.language}>
+        <NavLink to={"/" + i18n.language} activeClassName="selected" exact>
           <li>{props.t("home")}</li>
         </NavLink>
-        <NavLink to={"/" + i18n.language + "/calc" + urlParams}>
+        <NavLink to={"/" + i18n.language + "/calc" + urlParams} activeClassName="selected">
           <li>{props.t("calc")}</li>
         </NavLink>
-        <NavLink to={"/" + i18n.language + "/know"}>
+        <NavLink to={"/" + i18n.language + "/know"} activeClassName="selected">
           <li>{props.t("know-calc")}</li>
         </NavLink>
       </ul>

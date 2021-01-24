@@ -7,21 +7,38 @@
   background-color: #bdac6f;
   text-align: center;
   position: relative;
+  border-top: 1px solid #bd996f;
+  border-bottom: 1px solid #bd996f;
   .navigation {
     width: 80%;
+    height: 100%;
     ul {
       list-style-type: none;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: flex-start;
       text-transform: uppercase;
       padding-inline-start: 0;
+      margin-block-start: 0;
+    margin-block-end: 0;
+    height: 100%;
+      a {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+    }
+    .selected {
+      background-color: #bd996f;
     }
   }
 
   .languages {
     display: flex;
-    margin-top: 0.8em;
+    margin-top: 0.7em;
 
     button {
       all: initial;
@@ -54,6 +71,9 @@
   .navbar {
     .navigation {
       width: 100%;
+      ul {
+        justify-content: space-evenly;
+      }
     }
     .languages {
       position: absolute;

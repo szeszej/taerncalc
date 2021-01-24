@@ -20,6 +20,12 @@ function ConnectedError(props: PropTypes) {
               <p>{t("calc")}</p>
             </div>
           </Link>
+          <Link to={`/${i18n.language}/know`}>
+            <div className="tool">
+              <img src="images/knowledge.svg" alt="knowledge" />
+              <p>{t("know-calc")}</p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

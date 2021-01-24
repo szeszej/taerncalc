@@ -28,11 +28,6 @@ export function BuffLine(props: PropTypes) {
       <div className="skillValue">
         <p>{props.skill.level}</p>
       </div>
-      {props.skill.level === props.skill.maxLvl ? (
-        <div className="reqLvl">
-          <p>{t("max-skill-lvl-reached")}</p>
-        </div>
-      ) : null}
       <div className="skillButtons">
         <div className="minusButton">
           <BuffButton

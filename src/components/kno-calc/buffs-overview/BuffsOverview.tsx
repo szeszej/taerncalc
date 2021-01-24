@@ -42,7 +42,7 @@ class ConnectedBuffsOverview extends React.Component<PropTypes, StateTypes> {
         <div className="skills">
           <div className="classSkills buffs">
             <div className="buffsHeader">
-              <p>{t("Umiejętności klasowe")}</p>
+              <p>{t("buff-desc")}</p>
             </div>
             {buffComponents}
           </div>
