@@ -2,9 +2,15 @@ export const resources = {
   pl: {
     translation: {
       //meta tags
-      "page-title": "Kalkulator buildów Pride of Taern",
-      "meta-description":
+      "page-title-calc": "Kalkulator buildów Pride of Taern",
+      "meta-description-calc":
         "Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!",
+      "page-title-home": "The Pride of Taern Toolbox",
+      "meta-description-home":
+        "Chcesz zaplanować rozwój postaci od 1 do 140 poziomu? Sprawdzić, ile wiedzy potrzebujesz na umiejętności? Zobaczyć spis rzadkich przedmiotów? Zajrzyj tutaj!",
+      "page-title-know": "Kalkulator wiedzy The Pride of Taern",
+      "meta-description-know":
+        "Chcesz obliczyć, ile wiedzy potrzeba na danym poziomie, aby używać umiejętności za odpowiednią ilość PA? Sprawdź nasz kalkulator, który obliczy to za Ciebie!",
       //home
       h1: "The Pride of Taern Toolbox",
       created: "Stworzone przez",
@@ -383,7 +389,7 @@ export const resources = {
       "intro-desc-3-bullet-1": `Dla jakiej klasy chcesz wyliczyć statystyki i umiejętności (pole "Wybierz klasę").`,
       "intro-desc-3-bullet-2": `Dla jakiego poziomu postaci chcesz dokonać obliczeń (pole "Poziom postaci")`,
       "intro-desc-3-bullet-3": `Kliknij "Zatwierdź"`,
-      "intro-desc-3-2": `Po przejściu powyższych korków wyświetli się kalkulator. Na początku będzie widoczna zakładka z listą statystyk i ekwipunkiem, ale możesz również przejść do drugiej zakładki z listą umiejętności (oddzielnie umiejętności klasowe i te dla każdej klasy). Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności. Kliknij na sloty w ekwipunku, aby wyekwipować przedmioty. Możesz również tworzyć własne przedmioty lub przedmioty sklepowe po kliknięciu na ikonkę młota i kowadła na liście przedmiotów.
+      "intro-desc-3-2": `Po przejściu powyższych kroków wyświetli się kalkulator. Na początku będzie widoczna zakładka z listą statystyk i ekwipunkiem, ale możesz również przejść do drugiej zakładki z listą umiejętności (oddzielnie umiejętności klasowe i te dla każdej klasy). Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności. Kliknij na sloty w ekwipunku, aby wyekwipować przedmioty. Możesz również tworzyć własne przedmioty lub przedmioty sklepowe po kliknięciu na ikonkę młota i kowadła na liście przedmiotów.
       Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset".`,
       "intro-header-4":
         "Niektóre przedmioty mają losowe statystyki, a niektóre z moich przedmiotów są ulepszone - jak mogę odzwierciedlić to w kalkulatorze?",
@@ -640,24 +646,31 @@ export const resources = {
       home: "Strona główna",
       calc: "Kalkulator Buildów",
       //home
-      "intro-header-7": "Do czego służy Taern Toolbox?",
-      "intro-desc-7": `Taern Toolbox jest to zestaw narzędzi, które mają za zadanie ułatwić grę w The Pride of Taern. Znajdziesz tutaj przede wszystkim kalkulator buildów, który pozwoli Ci zaplanować rozwój swojej postaci od 1 do 140 poziomu. Jest to narzędzie kompleksowe, które oprócz dobrania sobie odpowiedniego ekwipunku i statystyk, pozwoli Ci także obliczyć zadawane obrażenia bądź wymaganą wiedzę (trudność) do umiejętności. W kalkulator buildów dostępne są również wszytkie tabelki z wiki Taernu, dzięki czemu wszystkie potrzebne Ci informacje znajdziesz w jednym miejscu.`,
-      "intro-desc-8": `Jeśli nie masz ochoty wpisywać całego buildu, możesz także przejść do zakładki "Kalkulator trudności", która bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera ona również tabelki trudności, dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
+      "intro-header-7": "Do czego służy The Pride of Taern Toolbox?",
+      "intro-desc-7": `The Pride of Taern Toolbox jest to zestaw narzędzi, które mają za zadanie ułatwić grę w The Pride of Taern. Znajdziesz tutaj przede wszystkim kalkulator buildów, który pozwoli Ci zaplanować rozwój swojej postaci od 1 do 140 poziomu. Jest to narzędzie kompleksowe, które oprócz dobrania sobie odpowiedniego ekwipunku, ulepszenia go i dodaniu punktów statystyk, pozwoli Ci także obliczyć zadawane obrażenia bądź wymaganą wiedzę (trudność) do umiejętności. W kalkulator buildów dostępne są również wszytkie tabelki z wiki Taernu, dzięki czemu wszystkie potrzebne Ci informacje znajdziesz w jednym miejscu.`,
+      "intro-desc-8": `Jeśli nie masz ochoty wpisywać całego buildu, możesz także przejść do zakładki "Kalkulator wiedzy", która bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera ona również tabelki wiedzy (trudności), dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
       "intro-desc-9": `Zakładka "Przedmioty legendarne" z kolei zawiera spis wszystkich przedmiotów dostępnych dla graczy w The Pride of Taern. Znajdują się tam przedmioty rzadkie (rary), ale również psychorary i najważniejsze z nich - epiki. Korzystając z tej zakładki będziesz mógł filtrować przedmioty po interesujących Cię statysykach, wyszukiwać je po nazwie, sprawdzić z jakich przeciwników wypadają, a także wiele różnych rzeczy. Tutaj również nie musisz specjalnie tworzyć buildu dla swojej postaci, aby obejrzeć spis przedmiotów.`,
       //error
-      "error": "Błąd 404 - Nie znaleziono strony",
-      "error-desc": "Któż sprowadził Cię w ten zakamarek internetu? Niestety nic tutaj nie znajdziesz. Wypróbuj za to nasze narzędzia:",
+      error: "Błąd 404 - Nie znaleziono strony",
+      "error-desc":
+        "Któż sprowadził Cię w ten zakamarek internetu? Niestety nic tutaj nie znajdziesz. Wypróbuj za to nasze narzędzia:",
       //know calc
       "know-calc": "Kalkulator Wiedzy",
       "Wymagana wiedza dla poziomu": "Wymagana wiedza dla poziomu",
-      "na": "na",
-      "buff-desc": "Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA."
+      na: "na",
+      "buff-desc":
+        "Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA.",
+      "intro-header-1-know": "Po co mi kalkulator wiedzy The Pride of Taern?",
+      "intro-desc-1-know": `Kalkulator wiedzy The Pride of Taern to narzędzie, które bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera on również tabelki wiedzy (trudności), dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
+      "intro-header-3-know":
+        "Jak używać kalkulatora wiedzy The Pride of Taern?",
+      "intro-desc-3-2-know": `Po przejściu powyższych kroków wyświetli się kalkulator z listą umiejętności dla danej klasy, które wymagają wiedzy do rzucenia (a więc posiadają pewną trudność). Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA.`,
     },
   },
   en: {
     translation: {
       //home
-      h1: "Pride of Taern Toolbox",
+      h1: "The Pride of Taern Toolbox",
       created: "Created by",
       suggestions: "Please post all suggestions and feedback on",
       "suggestions-target": "the Taern forum",
@@ -670,9 +683,15 @@ export const resources = {
         "This website uses cookies. By continuing to use it, you consent to cookie usage for analytical purposes.",
       "cookies-confirm": "I understand",
       //meta tags
-      "page-title": "Pride of Taern Build Calculator",
-      "meta-description":
+      "page-title-calc": "Pride of Taern Build Calculator",
+      "meta-description-calc":
         "Curious how many skills points you'll have on a certaon level? Want to plan your character's development? Take a look here!",
+      "page-title-home": "The Pride of Taern Toolbox",
+      "meta-description-home":
+        "Do you want to plan your character's development from 1 to 140? Check how much knowledge you need for your abilities? Find all rare items? Take a look here!",
+      "page-title-know": "Pride of Taern Knowledge Calculator",
+      "meta-description-know":
+        "Do you want to know how much knowledge you need to use your abilities for the right number of AP? Our calculator will calculate this for you!",
       //classes
       Barbarzyńca: "Barbarian",
       Sheed: "Sheed",
@@ -1050,7 +1069,7 @@ export const resources = {
         "After clicking the icon, you'll be able to create your own item! This feature can also be used to personalize your build by adding a name and an image to the item!",
       "intro-header-6": "What is The Pride of Taern?",
       "intro-desc-6":
-        "The Pride of Taern is a Polish MMORPG game, which combines traits of classic, isometric RPGs with a dynamic, turn-based combat system and a mature and non-linear plot. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests and tasks, and dynamic events.",
+        "The Pride of Taern is a Polish MMORPG which combines features of classic isometric RPGs with a dynamic, turn-based combat system and a mature, non-linear plot. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests, tasks and dynamic events.",
       "Statystyki i przedmioty": "Attributes and Items",
       Umiejętności: "Skills",
       //build exporter
@@ -1288,6 +1307,26 @@ export const resources = {
       //routes
       home: "Home",
       calc: "Build Calculator",
+      //home
+      "intro-header-7": "What can I use The Pride of Taern Toolbox for?",
+      "intro-desc-7": `The Pride of Taern Toolbox is a set of tools whose aim is to make playing The Pride of Taern easier. The main feature of the toolbox is the build calculator that will allow you to plan your character's development from level 1 to 140. It's an advanced tool that'll not only let you choose your euipment, upgrade it, add attribute points but also will calculate your damage and knowledge requirements (difficulty) of abilities. The build calculator includes all tables from Taern's wikipedia so that you have all the information you need in one place.`,
+      "intro-desc-8": `If you don't feel like entering the whole build, you can also use the "Knowledge Calculator" tab that will allow you, without any unnecessary features, to calculate the amount of knowledge you need on a given character level to use your abilities with the right number of AP. The calculator also includes knowledge (difficulty) tables that will let you know how difficult each ability is.`,
+      "intro-desc-9": `The "Legendary Items" tab contains a list of all items available to players in The Pride o Taern. You'll see all rares, psychorares and the most important of them all - epics. To make the list easier to use, you can filter the items list by attributes, search by name, check which bosses drop each piece of equipment and many other things. It's a great way to see all the items if you don't feel like creating a character build right now.`,
+      //error
+      error: "Error 404 - Page Not Found",
+      "error-desc":
+        "Who led you astray? There's nothing of interest in here. On the other hand, you may want to check out our awesome tools:",
+      //know calc
+      "know-calc": "Knowledge Calculator",
+      "Wymagana wiedza dla poziomu": "Knowledge required at level",
+      na: "for",
+      "buff-desc":
+        "To see the knowledge required for a given ability you need to level it up (using the plus and minus buttons). After you set the right level, the expanded ability tooltip will show you how much knowledge you need for various AP numbers.",
+      "intro-header-1-know": "Why do I need The Pride of Taern Knowledge Calculator?",
+      "intro-desc-1-know": `The Pride of Taern Knowledge Calculator will allow you, without any unnecessary features, to calculate the amount of knowledge you need on a given character level to use your abilities with the right number of AP. The calculator also includes knowledge (difficulty) tables that will let you know how difficult each ability is.`,
+      "intro-header-3-know":
+        "How do I use The Pride of Taern Knowledge Calculator?",
+      "intro-desc-3-2-know": `After the above steps are complete, you will see the calculator with a list of abilities for the chosen class. Only abilities that require knowledge be used (those with difficulty) will be shown. To see the knowledge required for a given ability you need to level it up (using the plus and minus buttons). After you set the right level, the expanded ability tooltip will show you how much knowledge you need for various AP numbers.`,
     },
   },
 };

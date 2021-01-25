@@ -8,14 +8,11 @@ import { Home } from "./components/home/Home";
 import { Error } from "./components/error/Error";
 
 //Router
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Link, Switch, Route, Redirect } from "react-router-dom";
 
 //i18l
 import { withTranslation } from "react-i18next";
 import i18n from "i18next";
-
-//Helmet
-import { Helmet } from "react-helmet";
 
 //URL params
 import { getUrlVars } from "./import-build/import-build";
@@ -43,14 +40,12 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
       : "";
     return (
       <div className="wrapper">
-        <Helmet>
-          <title>{t("page-title")}</title>
-          <meta name="description" content={t("meta-description")} />
-        </Helmet>
         <div className="header">
+          <Link to={`/${i18n.language}`}>
           <div className="logo">
             <img src="images/logo.png" alt="Pride of Taern" />
           </div>
+          </Link>
           <div className="title">
             <p>{t("h1")}</p>
           </div>

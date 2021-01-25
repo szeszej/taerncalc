@@ -1,6 +1,9 @@
 //React
 import React from "react";
 
+//Helmet
+import { Helmet } from "react-helmet";
+
 //i18l
 import { withTranslation } from "react-i18next";
 import i18n from "i18next";
@@ -9,6 +12,17 @@ function ConnectedHome(props: PropTypes) {
   const { t } = props;
   return (
     <div className="home">
+    <Helmet>
+      <title>{t("page-title-home")}</title>
+      <meta name="description" content={t("meta-description-home")} />
+      <link rel="canonical" href={"https://toolbox.taern.com/" + i18n.language} />
+      <meta property="og:title" content={t("page-title-home")} />
+      <meta property="og:url" content={"https://toolbox.taern.com/" + i18n.language} />
+      <meta
+        property="og:description"
+        content={t("meta-description-home")}
+      />
+    </Helmet>
       <div className="intro">
         <div className="homeLine">
           <h1>{t("h1")}</h1>

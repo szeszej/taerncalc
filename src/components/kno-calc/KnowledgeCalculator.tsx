@@ -7,11 +7,15 @@ import { LevelChanger } from "../shared/level-changer/LevelChanger";
 import { Intro } from "./intro/Intro";
 import { BuffsOverview } from "./buffs-overview/BuffsOverview"
 
+//Helmet
+import { Helmet } from "react-helmet";
+
 //Shared functionality
 import { confirmNewBuildCreation } from "./../../shared/new-build-confirmation";
 
 //i18l
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 
 //types:
 import { Skill } from "../../data/models/skill.model"
@@ -71,6 +75,16 @@ class ConnectedKnowledgeCalculator extends React.Component<
     const { t } = this.props;
     return (
       <div className="calculator">
+      <Helmet>
+        <title>{t("page-title-know")}</title>
+        <meta name="description" content={t("meta-description-know")} />
+        <meta property="og:title" content={t("page-title-know")} />
+        <meta property="og:url" content={`https://toolbox.taern.com/${i18n.language}/know`} />
+        <meta
+          property="og:description"
+          content={t("meta-description-know")}
+        />
+      </Helmet>
         <div id="classLvlWrapper">
           <form
             id="classLvl"
