@@ -665,6 +665,8 @@ export const resources = {
       "intro-header-3-know":
         "Jak używać kalkulatora wiedzy The Pride of Taern?",
       "intro-desc-3-2-know": `Po przejściu powyższych kroków wyświetli się kalkulator z listą umiejętności dla danej klasy, które wymagają wiedzy do rzucenia (a więc posiadają pewną trudność). Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA.`,
+      //items list
+      "items-display": "Lista przedmiotów"
     },
   },
   en: {

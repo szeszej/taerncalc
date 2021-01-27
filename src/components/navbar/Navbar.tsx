@@ -30,6 +30,9 @@ function ConnectedNavbar(props: Props) {
         <NavLink to={"/" + i18n.language + "/know"} activeClassName="selected">
           <li>{props.t("know-calc")}</li>
         </NavLink>
+        <NavLink to={"/" + i18n.language + "/items"} activeClassName="selected">
+          <li>{props.t("items-display")}</li>
+        </NavLink>
       </ul>
       </nav>
       <div className="languages">
