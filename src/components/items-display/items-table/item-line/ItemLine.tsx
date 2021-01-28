@@ -16,11 +16,11 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
       color: "#0161E7",
     };
     if (rarity === "Psychorare") {
-      color.color = "#35CBEF";
+      color.color = "#37b5d4";
     } else if (rarity === "Set") {
-      color.color = "#3DEF01";
+      color.color = "#3ec211";
     } else if (rarity === "Epik") {
-      color.color = "#E7CC00";
+      color.color = "#b5a319";
     }
     return color;
   }
@@ -72,7 +72,7 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
     };
     //If it's a set item
     let setColor = {
-      color: "#3DEF01",
+      color: "#3ec211",
     };
     let equippedSet =
       this.props.item && this.props.item.set
@@ -109,7 +109,7 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         </td>
         <td className="type">
           {this.props.item.set && equippedSet ? (
-            <p className="itemSet" style={{ color: "#3DEF01" }}>
+            <p className="itemSet" style={setColor}>
               {t("Zestaw")}: {t(this.props.item.set)}
             </p>
           ) : null}

@@ -88,7 +88,15 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
         }
       });
     }
-    return itemsToFilter;
+    return itemsToFilter.filter((x) =>
+      this.props.i18n.language === "pl"
+        ? x.name
+            .toLowerCase()
+            .includes(this.state.searchString.toLowerCase())
+        : this.props.t(x.name)
+            .toLowerCase()
+            .includes(this.state.searchString.toLowerCase())
+    );
   }
   render() {
     const { t } = this.props;
@@ -218,17 +226,6 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
         {t("Resetuj")}
       </button>
     );
-    // items={this.props.items.filter((x) =>
-    //   this.props.i18n.language === "pl"
-    //     ? x.name
-    //         .toLowerCase()
-    //         .includes(this.state.searchString.toLowerCase()) &&
-    //       (x.class === null || x.class === this.props.class)
-    //     : t(x.name)
-    //         .toLowerCase()
-    //         .includes(this.state.searchString.toLowerCase()) &&
-    //       (x.class === null || x.class === this.props.class)
-    // )}
     return (
       <div className="itemsTable">
         <div className="filters">
