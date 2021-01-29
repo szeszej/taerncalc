@@ -24,6 +24,7 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
     this.applyItemFilters = this.applyItemFilters.bind(this);
     this.state = {
       searchString: "",
+      showRarityFilters: false,
       filters: {
         rare: false,
         psychoRare: false,
@@ -50,7 +51,9 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
     filterTypes.forEach((filterType) => {
       if (filterType === "class") {
         itemsToFilter = this.state.filters[filterType]
-          ? itemsToFilter.filter((item) => item.class === this.state.filters.class)
+          ? itemsToFilter.filter(
+              (item) => item.class === this.state.filters.class
+            )
           : itemsToFilter;
       } else if (
         !(
@@ -90,113 +93,50 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
     }
     return itemsToFilter.filter((x) =>
       this.props.i18n.language === "pl"
-        ? x.name
-            .toLowerCase()
-            .includes(this.state.searchString.toLowerCase())
-        : this.props.t(x.name)
+        ? x.name.toLowerCase().includes(this.state.searchString.toLowerCase())
+        : this.props
+            .t(x.name)
             .toLowerCase()
             .includes(this.state.searchString.toLowerCase())
     );
   }
   render() {
     const { t } = this.props;
-    let filterTypes = Object.keys(this.state.filters);
-    let checkBoxes = filterTypes.map((filterType) => (
-      <div key={filterType} className="filterLine">
-        <img
-          src={"images/" + filterType + ".svg"}
-          alt={filterType}
-          onClick={() =>
-            this.state.filters[filterType]
-              ? this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  newState.filters[filterType] = false;
-                  return newState;
-                })
-              : this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  ReactGA.event({
-                    category: "Filters",
-                    action: "Activate Filter",
-                    label: filterType,
-                  });
-                  newState.filters[filterType] = true;
-                  return newState;
-                })
-          }
-        />
-        <input
-          type="checkbox"
-          className="filterInput"
-          name={filterType}
-          value={filterType}
-          onChange={() =>
-            this.state.filters[filterType]
-              ? this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  newState.filters[filterType] = false;
-                  return newState;
-                })
-              : this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  ReactGA.event({
-                    category: "Filters",
-                    action: "Activate Filter",
-                    label: filterType,
-                  });
-                  newState.filters[filterType] = true;
-                  return newState;
-                })
-          }
-          checked={!!this.state.filters[filterType]}
-        />
-        <label
-          htmlFor={filterType}
-          onClick={() =>
-            this.state.filters[filterType]
-              ? this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  newState.filters[filterType] = false;
-                  return newState;
-                })
-              : this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  ReactGA.event({
-                    category: "Filters",
-                    action: "Activate Filter",
-                    label: filterType,
-                  });
-                  newState.filters[filterType] = true;
-                  return newState;
-                })
-          }
-        >
-          {t(filterType)}
-        </label>
-      </div>
-    ));
-    let activeFilters = filterTypes.filter(
-      (filterType) => this.state.filters[filterType]
-    );
-    // eslint-disable-next-line
-    let chosenFilters = activeFilters.map((filterType) => {
-      if (this.state.filters[filterType]) {
-        return (
-          <div className="chosenFilter" key={filterType}>
-            <p>{t(filterType)}</p>
-            <button
-              onClick={() =>
-                this.setState((prevState) => {
-                  let newState = { ...prevState };
-                  newState.filters[filterType] = false;
-                  return newState;
-                })
-              }
-            ></button>
+    let raritySelectCheckboxes = (
+      <form>
+        <div className="multiselect">
+          <div
+            className="selectBox"
+            onClick={() => this.setState((prevState) => { return {showRarityFilters: !prevState.showRarityFilters} })}
+          >
+            <select>
+              <option>{t("Rzadkość")}</option>
+            </select>
+            <div className="overSelect"></div>
           </div>
-        );
-      }
-    });
+          {this.state.showRarityFilters ? (
+            <div id="checkboxes">
+              <label htmlFor="one">
+                <input type="checkbox" id="one" />
+                {t("Rzadki")}
+              </label>
+              <label htmlFor="two">
+                <input type="checkbox" id="two" />
+                {t("Psychorare")}
+              </label>
+              <label htmlFor="three">
+                <input type="checkbox" id="three" />
+                {t("Zestaw")}
+              </label>
+              <label htmlFor="three">
+                <input type="checkbox" id="three" />
+                {t("Epik")}
+              </label>
+            </div>
+          ) : null}
+        </div>
+      </form>
+    );
     let filtersResetButton = (
       <button
         className="resetFilters"
@@ -218,7 +158,7 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
               fireRes: 0,
               energyRes: 0,
               frostRes: 0,
-              curseRes: 0
+              curseRes: 0,
             },
           })
         }
@@ -243,44 +183,23 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
           </div>
           <div className="filter">
             <img src="./images/funnel.svg" alt="filter" />
-            <div className="filtersList">
-              <div
-                className="chosenFilters"
-                data-placeholder={t("active-filters")}
-              >
-                {chosenFilters.length > 4
-                  ? chosenFilters.slice(0, 4)
-                  : chosenFilters}
-                {chosenFilters.length > 4 ? (
-                  <div className="chosenFilter manyFilters">
-                    {chosenFilters.length - 4}+
-                  </div>
-                ) : null}
-              </div>
-              <button
-                className="addFilter"
-              ></button>
-
-                <div className="itemsList filtersForm">
-                  <div className="title">
-                    <p>{t("add-filters")}</p>
-                  </div>
-                  <div className="filterLines">{checkBoxes}</div>
-                  <div className="submit">
-                    <button>
-                      {t("Zatwierdź")}
-                    </button>
-                    {filtersResetButton}
-                  </div>
-                </div>
-            </div>
+            <div className="filtersList">{raritySelectCheckboxes}</div>
           </div>
         </div>
         <table>
-        <tbody>
-        <tr><td className="image">{t("Obrazek")}</td><td className="name">{t("Nazwa")}</td><td className="type">{t("Typ")}</td><td className="requirements">{t("Wymagania")}</td><td className="attributes">{t("Statystyki")}</td><td className="psycho">{t("Psychowłaściwości")}</td></tr>
-        {this.applyItemFilters(this.props.items).map(item => <ItemLine item={item} />)}
-        </tbody>
+          <tbody>
+            <tr>
+              <td className="image">{t("Obrazek")}</td>
+              <td className="name">{t("Nazwa")}</td>
+              <td className="type">{t("Typ")}</td>
+              <td className="requirements">{t("Wymagania")}</td>
+              <td className="attributes">{t("Statystyki")}</td>
+              <td className="psycho">{t("Psychowłaściwości")}</td>
+            </tr>
+            {this.applyItemFilters(this.props.items).map((item) => (
+              <ItemLine item={item} />
+            ))}
+          </tbody>
         </table>
       </div>
     );
@@ -295,9 +214,7 @@ const mapStateToProps = (state: RootState) => {
 
 const connector = connect(mapStateToProps);
 
-export const ItemsTable = withTranslation()(
-  connector(ConnectedItemsTable)
-);
+export const ItemsTable = withTranslation()(connector(ConnectedItemsTable));
 
 //Types
 type PropTypes = ConnectedProps<typeof connector> & OwnProps;
@@ -309,6 +226,7 @@ interface OwnProps {
 
 interface StateTypes {
   searchString: string;
+  showRarityFilters: boolean;
   filters: {
     strength: number;
     agility: number;
