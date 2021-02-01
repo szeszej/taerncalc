@@ -83,27 +83,31 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         ? equippedSet.getValuesDependingOnPieces(equippedSet.totalPieces)
         : null;
     let otherSetProperties =
-      setProperties && setProperties.otherProperties
-        ? setProperties.otherProperties.map((x) => (
-            <p key={x} style={setColor}>
-              {x}
-            </p>
-          ))
+      equippedSet && this.props.item.set
+        ? equippedSet
+            .getOtherPropertiesValuesDependingOnPiecesAsArray(
+              equippedSet.totalPieces
+            )
+            .map((property) => (
+              <p key={property[0]} style={setColor}>
+                {property[0]}: {property[1]}
+                {property[0] !== "Dodatkowe PA" &&
+                property[0] !== "Oszukać przeznaczenie"
+                  ? "%"
+                  : null}
+              </p>
+            ))
         : null;
     return (
       <tr>
-        <td           className="image">
+        <td className="image">
           <img
-
             src={`images/items/${this.props.item.image}`}
             alt={this.props.item.name}
           />
         </td>
-        <td            className="name">
-          <p
-
-            style={this.nameColor(this.props.item.rarity)}
-          >
+        <td className="name">
+          <p style={this.nameColor(this.props.item.rarity)}>
             {t(this.props.item.name)}
           </p>
         </td>
@@ -375,40 +379,37 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
           ) : null}
           {equippedSet && equippedSet.strength && setProperties ? (
             <p className="itemProperty" style={setColor}>
-              {t("strength")}: +{setProperties.strength} ({equippedSet.strength}
-              )
+              {t("strength")}: +{setProperties.strength}
             </p>
           ) : null}
           {equippedSet && equippedSet.agility && setProperties ? (
             <p className="itemProperty" style={setColor}>
-              {t("agility")}: +{setProperties.agility} ({equippedSet.agility})
+              {t("agility")}: +{setProperties.agility}
             </p>
           ) : null}
           {equippedSet && equippedSet.power && setProperties ? (
             <p className="itemProperty" style={setColor}>
-              {t("power")}: +{setProperties.power} ({equippedSet.power})
+              {t("power")}: +{setProperties.power}
             </p>
           ) : null}
           {equippedSet && equippedSet.knowledge && setProperties ? (
             <p className="itemProperty" style={setColor}>
-              {t("knowledge")}: +{setProperties.knowledge} (
-              {equippedSet.knowledge})
+              {t("knowledge")}: +{setProperties.knowledge}
             </p>
           ) : null}
           {equippedSet && equippedSet.hp && setProperties ? (
             <p className="itemProperty" style={setColor}>
-              {t("hp")}: +{setProperties.hp} ({equippedSet.hp})
+              {t("hp")}: +{setProperties.hp}
             </p>
           ) : null}
           {equippedSet && equippedSet.endurance && setProperties ? (
             <p className="itemProperty" style={setColor}>
-              {t("endurance")}: +{setProperties.endurance} (
-              {equippedSet.endurance})
+              {t("endurance")}: +{setProperties.endurance}
             </p>
           ) : null}
           {equippedSet && equippedSet.mana && setProperties ? (
             <p className="itemProperty" style={setColor}>
-              {t("mana")}: +{setProperties.mana} ({equippedSet.mana})
+              {t("mana")}: +{setProperties.mana}
             </p>
           ) : null}
           {equippedSet && equippedSet.otherProperties

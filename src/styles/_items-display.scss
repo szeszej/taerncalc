@@ -2,6 +2,11 @@
   background-color: #d6cca9;
 }
 
+.itemsTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 table {
   width: 90%;
   margin: 0 auto;
@@ -35,7 +40,7 @@ table {
 
 .filters {
   grid-area: filters;
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   margin-bottom: 1em;
@@ -51,7 +56,7 @@ table {
     display: flex;
     align-items: center;
     position: relative;
-    width: 35%;
+    width: 20%;
     height: 2.3em;
     input {
       font-size: 1.2em;
@@ -62,23 +67,6 @@ table {
       background-image: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
       border: 1px solid #d6c1a9;
     }
-    .itemsList {
-      margin: 0;
-      top: 100%;
-      .moreItems {
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-color: black;
-        cursor: default;
-        p {
-          margin: 0;
-          padding-top: 3px;
-          font-size: 2em;
-        }
-      }
-    }
   }
   .filter {
     display: flex;
@@ -86,50 +74,59 @@ table {
     max-width: 60%;
     min-height: 2.4em;
     .filtersList {
-      box-sizing: border-box;
       position: relative;
       width: 90%;
       max-width: 90%;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
-      padding: 2px;
-      .multiselect {
-        width: 7em;
-        position: relative;
-      }
+      form {
+        height: 2em;
+        width: 8em;
+        .multiselect {
+          width: 100%;
+          position: relative;
+          height: 2em;
+        }
 
-      .selectBox {
-        position: relative;
-      }
+        .selectBox {
+          position: relative;
+          height: 100%;
+        }
 
-      .selectBox select {
-        width: 100%;
-        font-weight: bold;
-      }
+        .selectBox select {
+          width: 100%;
+          padding-left: 4px;
+        }
 
-      .overSelect {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-      }
+        .overSelect {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
 
-      #checkboxes {
-        position: absolute;
-        border: 1px #dadada solid;
-        width: 95%;
-        background-color: white;
-      }
+        #checkboxes {
+          position: absolute;
+          border: 1px solid #dadada;
+          width: 10em;
+          background-color: white;
+          background-image: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+          background-repeat: repeat;
+        }
 
-      #checkboxes label {
-        display: block;
-      }
+        #checkboxes label {
+          display: block;
+        }
 
-      #checkboxes label:hover {
-        background-color: #1e90ff;
+        #checkboxes label:hover {
+          background-color: #1e90ff;
+        }
       }
     }
+  }
+  .sort {
+    width: 20%;
   }
 }
