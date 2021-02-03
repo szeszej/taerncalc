@@ -648,7 +648,7 @@ export const resources = {
       "intro-header-7": "Do czego służy The Pride of Taern Toolbox?",
       "intro-desc-7": `The Pride of Taern Toolbox jest to zestaw narzędzi, które mają za zadanie ułatwić grę w The Pride of Taern. Znajdziesz tutaj przede wszystkim kalkulator buildów, który pozwoli Ci zaplanować rozwój swojej postaci od 1 do 140 poziomu. Jest to narzędzie kompleksowe, które oprócz dobrania sobie odpowiedniego ekwipunku, ulepszenia go i dodaniu punktów statystyk, pozwoli Ci także obliczyć zadawane obrażenia bądź wymaganą wiedzę (trudność) do umiejętności. W kalkulator buildów dostępne są również wszytkie tabelki z wiki Taernu, dzięki czemu wszystkie potrzebne Ci informacje znajdziesz w jednym miejscu.`,
       "intro-desc-8": `Jeśli nie masz ochoty wpisywać całego buildu, możesz także przejść do zakładki "Kalkulator wiedzy", która bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera ona również tabelki wiedzy (trudności), dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
-      "intro-desc-9": `Zakładka "Przedmioty legendarne" z kolei zawiera spis wszystkich przedmiotów dostępnych dla graczy w The Pride of Taern. Znajdują się tam przedmioty rzadkie (rary), ale również psychorary i najważniejsze z nich - epiki. Korzystając z tej zakładki będziesz mógł filtrować przedmioty po interesujących Cię statysykach, wyszukiwać je po nazwie, sprawdzić z jakich przeciwników wypadają, a także wiele różnych rzeczy. Tutaj również nie musisz specjalnie tworzyć buildu dla swojej postaci, aby obejrzeć spis przedmiotów.`,
+      "intro-desc-9": `Zakładka "Lista przedmiotów" z kolei zawiera spis wszystkich przedmiotów dostępnych dla graczy w The Pride of Taern. Znajdują się tam przedmioty rzadkie (rary), ale również psychorary i najważniejsze z nich - epiki. Korzystając z tej zakładki będziesz mógł filtrować przedmioty po interesujących Cię statystykach, wyszukiwać je po nazwie, a także wiele różnych rzeczy. Tutaj również nie musisz specjalnie tworzyć buildu dla swojej postaci, aby obejrzeć spis przedmiotów.`,
       //error
       error: "Błąd 404 - Nie znaleziono strony",
       "error-desc":
@@ -666,11 +666,18 @@ export const resources = {
       "intro-desc-3-2-know": `Po przejściu powyższych kroków wyświetli się kalkulator z listą umiejętności dla danej klasy, które wymagają wiedzy do rzucenia (a więc posiadają pewną trudność). Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA.`,
       //items list
       "items-display": "Lista przedmiotów",
-      "Klasa": "Klasa",
-      "Atrybut": "Atrybut",
-      "Sortowanie": "Sortowanie",
-      "reqLvl": "Wym. poziom",
-      "Rodzaj": "Rodzaj",
+      Rzadkość: "Rzadkość",
+      Klasa: "Klasa",
+      Atrybut: "Atrybut",
+      Sortowanie: "Sortowanie",
+      reqLvl: "Wym. poziom",
+      Rodzaj: "Rodzaj",
+      "items-intro": `Ta zakładka zawiera spis wszystkich przedmiotów rzadkich (rarów), psychorarów, setowych i epickich dostępnych dla graczy w The Pride of Taern. Listę przedmiotów możesz filtrować po interesujących Cię statystykach lub po prostu wyszukać przedmiot po nazwie. Dostępna jest również opcja posortowania gotowej listy.`,
+      "Obrazek": "Obrazek",
+      "Wymagania": "Wymagania",
+      "Statystyki": "Statystyki",
+      "Psychowłaściwości": "Psychowłaściwości",
+      "items-display-description": "Znajdziesz tutaj spis przedmiotów rzadkich, psychorarów, setowych i epickich dostępnych dla graczy w The Pride of Taern. Kliknij i zobacz je wszystkie!"
     },
   },
   en: {
@@ -1327,11 +1334,26 @@ export const resources = {
       na: "for",
       "buff-desc":
         "To see the knowledge required for a given ability you need to level it up (using the plus and minus buttons). After you set the right level, the expanded ability tooltip will show you how much knowledge you need for various AP numbers.",
-      "intro-header-1-know": "Why do I need The Pride of Taern Knowledge Calculator?",
+      "intro-header-1-know":
+        "Why do I need The Pride of Taern Knowledge Calculator?",
       "intro-desc-1-know": `The Pride of Taern Knowledge Calculator will allow you, without any unnecessary features, to calculate the amount of knowledge you need on a given character level to use your abilities with the right number of AP. The calculator also includes knowledge (difficulty) tables that will let you know how difficult each ability is.`,
       "intro-header-3-know":
         "How do I use The Pride of Taern Knowledge Calculator?",
       "intro-desc-3-2-know": `After the above steps are complete, you will see the calculator with a list of abilities for the chosen class. Only abilities that require knowledge be used (those with difficulty) will be shown. To see the knowledge required for a given ability you need to level it up (using the plus and minus buttons). After you set the right level, the expanded ability tooltip will show you how much knowledge you need for various AP numbers.`,
+      //items list
+      "items-display": "Items List",
+      Klasa: "Class",
+      Rzadkość: "Rarity",
+      Atrybut: "Attribute",
+      Sortowanie: "Sort",
+      reqLvl: "Req. level",
+      Rodzaj: "Type",
+      "items-intro": `This tab contains a list of all rare, psychorare, set and epic items available for players in The Pride of Taern. The items list can be filtered by using the filters below. You can also search for items by name and sort the list.`,
+      "Obrazek": "Image",
+      "Wymagania": "Requirements",
+      "Statystyki": "Attributes",
+      "Psychowłaściwości": "Psychoproperties",
+      "items-display-description": "Here you will find a list of all rares, psychorares, epics and set items available to players in The Pride of Taern. Click to see them all!"
     },
   },
 };

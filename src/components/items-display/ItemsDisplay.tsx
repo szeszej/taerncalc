@@ -16,13 +16,14 @@ class ConnectedItemsDisplay extends React.Component<PropTypes> {
   render() {
     const { t } = this.props;
     return (
+      <div className="calculator items">
       <div className="itemsDisplay">
       <Helmet>
-        <title>{t("page-title-calc")}</title>
+        <title>{t("items-display")}</title>
         <meta name="description" content={t("meta-description-calc")} />
-        <link rel="canonical" href={`https://toolbox.taern.com/${i18n.language}/calc`} />
-        <meta property="og:title" content={t("page-title-calc")} />
-        <meta property="og:url" content={`https://toolbox.taern.com/${i18n.language}/calc`} />
+        <link rel="canonical" href={`https://toolbox.taern.com/${i18n.language}/items`} />
+        <meta property="og:title" content={t("items-display")} />
+        <meta property="og:url" content={`https://toolbox.taern.com/${i18n.language}/items`} />
         <meta
           property="og:description"
           content={t("meta-description-calc")}
@@ -30,9 +31,10 @@ class ConnectedItemsDisplay extends React.Component<PropTypes> {
       </Helmet>
         <div id="calc">
           <h1>{t("items-display")}</h1>
-          <div className="intro"><p>Intro</p></div>
+          <div className="intro"><p>{t("items-intro")}</p></div>
         </div>
         <ItemsTable />
+      </div>
       </div>
     );
   }

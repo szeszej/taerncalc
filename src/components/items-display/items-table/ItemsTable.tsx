@@ -10,7 +10,7 @@ import i18n from "i18next";
 
 //Types
 import { Item } from "../../../data/models/item.model";
-import itemsDatabase from "../../../data/items"
+import itemsDatabase from "../../../data/items";
 
 //i18l
 import { withTranslation } from "react-i18next";
@@ -21,11 +21,7 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
     this.applyItemFilters = this.applyItemFilters.bind(this);
     this.state = {
       searchString: "",
-      showRarityFilters: false,
-      showAttributeFilters: false,
-      showClassFilters: false,
-      showSort: false,
-      showEquipmentFilters: false,
+      listToShow: "",
       sort: "",
       filters: {
         rare: false,
@@ -50,16 +46,39 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
         energyRes: 0,
         frostRes: 0,
         curseRes: 0,
+        armor: false,
+        helmet: false,
+        neck: false,
+        gloves: false,
+        cape: false,
+        weapon: false,
+        shield: false,
+        pants: false,
+        belt: false,
+        ring: false,
+        boots: false
       },
     };
   }
   applyItemFilters(items: Item[]): Item[] {
     let itemsToFilter = [...items];
-    const attributes = ["strength", "agility", "power", "knowledge", "hp", "mana", "endurance", "fireRes", "energyRes", "frostRes", "curseRes"]
+    const attributes = [
+      "strength",
+      "agility",
+      "power",
+      "knowledge",
+      "hp",
+      "mana",
+      "endurance",
+      "fireRes",
+      "energyRes",
+      "frostRes",
+      "curseRes",
+    ];
     attributes.forEach((filterType) => {
-        itemsToFilter = this.state.filters[filterType]
-          ? itemsToFilter.filter((item) => item[filterType as keyof Item]! > 0)
-          : itemsToFilter;
+      itemsToFilter = this.state.filters[filterType]
+        ? itemsToFilter.filter((item) => item[filterType as keyof Item]! > 0)
+        : itemsToFilter;
     });
     if (
       this.state.filters.set ||
@@ -94,7 +113,7 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
       this.state.filters.voodoo
     ) {
       itemsToFilter = itemsToFilter.filter((item) => {
-       if (this.state.filters.barbarian && item.class === "barbarian") {
+        if (this.state.filters.barbarian && item.class === "barbarian") {
           return true;
         } else if (this.state.filters.knight && item.class === "knight") {
           return true;
@@ -109,11 +128,54 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
         } else if (this.state.filters.voodoo && item.class === "voodoo") {
           return true;
         } else {
-          return false
+          return false;
         }
       });
     }
-    itemsToFilter = this.state.sort ? itemsToFilter.sort((a, b) => b[this.state.sort] - a[this.state.sort]) : itemsToFilter;
+    if (
+      this.state.filters.armor ||
+      this.state.filters.helmet ||
+      this.state.filters.neck ||
+      this.state.filters.gloves ||
+      this.state.filters.cape ||
+      this.state.filters.weapon ||
+      this.state.filters.shield ||
+      this.state.filters.pants ||
+      this.state.filters.belt ||
+      this.state.filters.ring ||
+      this.state.filters.boots
+    ) {
+      itemsToFilter = itemsToFilter.filter((item) => {
+        if (this.state.filters.armor && item.type === "armor") {
+          return true;
+        } else if (this.state.filters.helmet && item.type === "helmet") {
+          return true;
+        } else if (this.state.filters.neck && item.type === "neck") {
+          return true;
+        } else if (this.state.filters.gloves && item.type === "gloves") {
+          return true;
+        } else if (this.state.filters.cape && item.type === "cape") {
+          return true;
+        } else if (this.state.filters.weapon && item.type === "weapon") {
+          return true;
+        } else if (this.state.filters.shield && item.type === "shield") {
+          return true;
+        } else if (this.state.filters.pants && item.type === "pants") {
+          return true;
+        } else if (this.state.filters.belt && item.type === "belt") {
+          return true;
+        } else if (this.state.filters.ring && item.type === "ring") {
+          return true;
+        } else if (this.state.filters.boots && item.type === "boots") {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+    itemsToFilter = this.state.sort
+      ? itemsToFilter.sort((a, b) => b[this.state.sort] - a[this.state.sort])
+      : itemsToFilter;
     return itemsToFilter.filter((x) =>
       this.props.i18n.language === "pl"
         ? x.name.toLowerCase().includes(this.state.searchString.toLowerCase())
@@ -125,108 +187,190 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     const { t } = this.props;
-    const rarities = ["rare", "psychoRare", "set", "epic"]
+    const rarities = ["rare", "psychoRare", "set", "epic"];
     const raritySelectCheckboxes = (
       <form>
         <div className="multiselect">
           <div
             className="selectBox"
-            onClick={() => this.setState((prevState) => { return {showRarityFilters: !prevState.showRarityFilters} })}
+            onClick={() =>
+              this.setState((prevState) => {
+                return {
+                  listToShow: prevState.listToShow === "rarity" ? "" : "rarity",
+                };
+              })
+            }
           >
             <select>
               <option>{t("Rzadkość")}</option>
             </select>
             <div className="overSelect"></div>
           </div>
-          {this.state.showRarityFilters ? (
-            <div id="checkboxes">{rarities.map(rarity =>
-              <div key={rarity} onChange={() => this.setState((prevState) => {
-                let newState = {...prevState}
-                ReactGA.event({
-                  category: "Items Display",
-                  action: "Activate Filter",
-                  label: rarity,
-                });
-                newState.showRarityFilters = false
-                newState.filters[rarity] = !prevState.filters[rarity]
-                return newState
-              })}>
-              <label htmlFor={rarity}>
-                <input type="checkbox" id={rarity} checked={!!this.state.filters[rarity]} onChange={() => {}}/>
-                {t(rarity)}
-              </label></div>)}
-              </div>) : null
-            }
+          {this.state.listToShow === "rarity" ? (
+            <div id="checkboxes">
+              {rarities.map((rarity) => (
+                <div
+                  key={rarity}
+                  onChange={() =>
+                    this.setState((prevState) => {
+                      let newState = { ...prevState };
+                      ReactGA.event({
+                        category: "Items Display",
+                        action: "Activate Filter",
+                        label: rarity,
+                      });
+
+                      newState.filters[rarity] = !prevState.filters[rarity];
+                      return newState;
+                    })
+                  }
+                >
+                  <label htmlFor={rarity}>
+                    <input
+                      type="checkbox"
+                      id={rarity}
+                      checked={!!this.state.filters[rarity]}
+                      onChange={() => {}}
+                    />
+                    {t(rarity)}
+                  </label>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </form>
     );
-    const attributes = ["strength", "agility", "power", "knowledge", "hp", "mana", "endurance", "fireRes", "energyRes", "frostRes", "curseRes"]
+    const attributes = [
+      "strength",
+      "agility",
+      "power",
+      "knowledge",
+      "hp",
+      "mana",
+      "endurance",
+      "fireRes",
+      "energyRes",
+      "frostRes",
+      "curseRes",
+    ];
     const attributeSelectCheckboxes = (
       <form>
         <div className="multiselect">
           <div
             className="selectBox"
-            onClick={() => this.setState((prevState) => { return {showAttributeFilters: !prevState.showAttributeFilters} })}
+            onClick={() =>
+              this.setState((prevState) => {
+                return {
+                  listToShow:
+                    prevState.listToShow === "attributes" ? "" : "attributes",
+                };
+              })
+            }
           >
             <select>
               <option>{t("Atrybut")}</option>
             </select>
             <div className="overSelect"></div>
           </div>
-          {this.state.showAttributeFilters ? (
-            <div id="checkboxes">{attributes.map(attribute =>
-              <div key={attribute} onChange={() => this.setState((prevState) => {
-                let newState = {...prevState}
-                ReactGA.event({
-                  category: "Items Display",
-                  action: "Activate Filter",
-                  label: attribute,
-                });
-                newState.showAttributeFilters = false
-                newState.filters[attribute] = !prevState.filters[attribute]
-                return newState
-              })}>
-              <label htmlFor={attribute}>
-                <input type="checkbox" id={attribute} checked={!!this.state.filters[attribute]} onChange={() => {}}/>
-                {t(attribute)}
-              </label></div>)}
-              </div>) : null
-            }
+          {this.state.listToShow === "attributes" ? (
+            <div id="checkboxes">
+              {attributes.map((attribute) => (
+                <div
+                  key={attribute}
+                  onChange={() =>
+                    this.setState((prevState) => {
+                      let newState = { ...prevState };
+                      ReactGA.event({
+                        category: "Items Display",
+                        action: "Activate Filter",
+                        label: attribute,
+                      });
+
+                      newState.filters[attribute] = !prevState.filters[
+                        attribute
+                      ];
+                      return newState;
+                    })
+                  }
+                >
+                  <label htmlFor={attribute}>
+                    <input
+                      type="checkbox"
+                      id={attribute}
+                      checked={!!this.state.filters[attribute]}
+                      onChange={() => {}}
+                    />
+                    {t(attribute)}
+                  </label>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </form>
     );
-    const classes = ["barbarian", "knight", "sheed", "druid", "firemage", "archer", "voodoo"]
+    const classes = [
+      "barbarian",
+      "knight",
+      "sheed",
+      "druid",
+      "firemage",
+      "archer",
+      "voodoo",
+    ];
     const classSelectCheckboxes = (
       <form>
         <div className="multiselect">
           <div
             className="selectBox"
-            onClick={() => this.setState((prevState) => { return {showClassFilters: !prevState.showClassFilters} })}
+            onClick={() =>
+              this.setState((prevState) => {
+                return {
+                  listToShow: prevState.listToShow === "class" ? "" : "class",
+                };
+              })
+            }
           >
             <select>
               <option>{t("Klasa")}</option>
             </select>
             <div className="overSelect"></div>
           </div>
-          {this.state.showClassFilters ? (
-            <div id="checkboxes">{classes.map(className =>
-              <div key={className} onChange={() => this.setState((prevState) => {
-                let newState = {...prevState}
-                ReactGA.event({
-                  category: "Items Display",
-                  action: "Activate Filter",
-                  label: className,
-                });
-                newState.showClassFilters = false
-                newState.filters[className] = !prevState.filters[className]
-                return newState
-              })}>
-              <label htmlFor={className}>
-                <input type="checkbox" id={className} checked={!!this.state.filters[className]} onChange={() => {}}/>
-                {t(className)}
-              </label></div>)}
-              </div>) : null
-            }
+          {this.state.listToShow === "class" ? (
+            <div id="checkboxes">
+              {classes.map((className) => (
+                <div
+                  key={className}
+                  onChange={() =>
+                    this.setState((prevState) => {
+                      let newState = { ...prevState };
+                      ReactGA.event({
+                        category: "Items Display",
+                        action: "Activate Filter",
+                        label: className,
+                      });
+
+                      newState.filters[className] = !prevState.filters[
+                        className
+                      ];
+                      return newState;
+                    })
+                  }
+                >
+                  <label htmlFor={className}>
+                    <input
+                      type="checkbox"
+                      id={className}
+                      checked={!!this.state.filters[className]}
+                      onChange={() => {}}
+                    />
+                    {t(className)}
+                  </label>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </form>
     );
@@ -259,6 +403,17 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
               energyRes: 0,
               frostRes: 0,
               curseRes: 0,
+              armor: false,
+              helmet: false,
+              neck: false,
+              gloves: false,
+              cape: false,
+              weapon: false,
+              shield: false,
+              pants: false,
+              belt: false,
+              ring: false,
+              boots: false
             },
           })
         }
@@ -266,63 +421,127 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
         {t("Resetuj")}
       </button>
     );
-    const sortTypes = ["reqLvl", "strength", "agility", "power", "knowledge", "hp", "mana", "endurance", "fireRes", "energyRes", "frostRes", "curseRes"]
+    const sortTypes = [
+      "reqLvl",
+      "strength",
+      "agility",
+      "power",
+      "knowledge",
+      "hp",
+      "mana",
+      "endurance",
+      "fireRes",
+      "energyRes",
+      "frostRes",
+      "curseRes",
+    ];
     const sortChoice = (
       <form>
         <div className="multiselect">
           <div
             className="selectBox"
-            onClick={() => this.setState((prevState) => { return {showEquipmentFilters: !prevState.showEquipmentFilters} })}
+            onClick={() =>
+              this.setState((prevState) => {
+                return {
+                  listToShow: prevState.listToShow === "sort" ? "" : "sort",
+                };
+              })
+            }
           >
             <select>
               <option>{t("Sortowanie")}</option>
             </select>
             <div className="overSelect"></div>
           </div>
-          {this.state.showSort ? (
-            <div id="checkboxes">{sortTypes.map(sort =>
-              <div key={sort}>
-              <label htmlFor={sort}>
-                <input type="radio" value={sort} name="sort" id={sort} checked={this.state.sort === sort} onChange={(event) => this.setState({showEquipmentFilters: false, sort: event.currentTarget.value})} />
-                {t(sort)}
-              </label></div>)}
-              </div>) : null
-            }
+          {this.state.listToShow === "sort" ? (
+            <div id="checkboxes">
+              {sortTypes.map((sort) => (
+                <div key={sort}>
+                  <label htmlFor={sort}>
+                    <input
+                      type="radio"
+                      value={sort}
+                      name="sort"
+                      id={sort}
+                      checked={this.state.sort === sort}
+                      onChange={(event) =>
+                        this.setState({ sort: event.currentTarget.value })
+                      }
+                    />
+                    {t(sort)}
+                  </label>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </form>
     );
-    const equipmentTypes = ["armor",  "helmet", "neck", "gloves",  "cape", "weapon", "shield", "pants", "belt", "ring", "boots"]
+    const equipmentTypes = [
+      "armor",
+      "helmet",
+      "neck",
+      "gloves",
+      "cape",
+      "weapon",
+      "shield",
+      "pants",
+      "belt",
+      "ring",
+      "boots",
+    ];
     const equipmentSelectCheckboxes = (
       <form>
         <div className="multiselect">
           <div
             className="selectBox"
-            onClick={() => this.setState((prevState) => { return {showEquipmentFilters: !prevState.showEquipmentFilters} })}
+            onClick={() =>
+              this.setState((prevState) => {
+                return {
+                  listToShow:
+                    prevState.listToShow === "equipment" ? "" : "equipment",
+                };
+              })
+            }
           >
             <select>
               <option>{t("Rodzaj")}</option>
             </select>
             <div className="overSelect"></div>
           </div>
-          {this.state.showEquipmentFilters ? (
-            <div id="checkboxes">{equipmentTypes.map(equipmentType =>
-              <div key={equipmentType} onChange={() => this.setState((prevState) => {
-                let newState = {...prevState}
-                ReactGA.event({
-                  category: "Items Display",
-                  action: "Activate Filter",
-                  label: equipmentType,
-                });
-                newState.showEquipmentFilters = false
-                newState.filters[equipmentType] = !prevState.filters[equipmentType]
-                return newState
-              })}>
-              <label htmlFor={equipmentType}>
-                <input type="checkbox" id={equipmentType} checked={!!this.state.filters[equipmentType]} onChange={() => {}}/>
-                {t(equipmentType)}
-              </label></div>)}
-              </div>) : null
-            }
+          {this.state.listToShow === "equipment" ? (
+            <div id="checkboxes">
+              {equipmentTypes.map((equipmentType) => (
+                <div
+                  key={equipmentType}
+                  onChange={() =>
+                    this.setState((prevState) => {
+                      let newState = { ...prevState };
+                      ReactGA.event({
+                        category: "Items Display",
+                        action: "Activate Filter",
+                        label: equipmentType,
+                      });
+                      newState.filters[equipmentType] = !prevState.filters[
+                        equipmentType
+                      ];
+                      return newState;
+                    })
+                  }
+                >
+                  <label htmlFor={equipmentType}>
+                    <input
+                      type="checkbox"
+                      id={equipmentType}
+                      checked={!!this.state.filters[equipmentType]}
+                      onChange={() => {}}
+                    />
+                    {t(equipmentType)}
+                  </label>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </form>
     );
@@ -343,7 +562,12 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
           </div>
           <div className="filter">
             <img src="./images/funnel.svg" alt="filter" />
-            <div className="filtersList">{equipmentSelectCheckboxes}{raritySelectCheckboxes}{attributeSelectCheckboxes}{classSelectCheckboxes}</div>
+            <div className="filtersList">
+              {equipmentSelectCheckboxes}
+              {raritySelectCheckboxes}
+              {attributeSelectCheckboxes}
+              {classSelectCheckboxes}
+            </div>
           </div>
           <div className="filter sort">
             <img src="./images/sort.svg" alt="filter" />
@@ -356,7 +580,7 @@ class ConnectedItemsTable extends React.Component<PropTypes, StateTypes> {
             <tr>
               <td className="image">{t("Obrazek")}</td>
               <td className="name">{t("Nazwa")}</td>
-              <td className="type">{t("Typ")}</td>
+              <td className="type">{t("Rodzaj")}</td>
               <td className="requirements">{t("Wymagania")}</td>
               <td className="attributes">{t("Statystyki")}</td>
               <td className="psycho">{t("Psychowłaściwości")}</td>
@@ -380,11 +604,7 @@ interface PropTypes {
 
 interface StateTypes {
   searchString: string;
-  showRarityFilters: boolean;
-  showAttributeFilters: boolean;
-  showClassFilters: boolean;
-  showEquipmentFilters: boolean;
-  showSort: boolean;
+  listToShow: string;
   sort: string;
   filters: {
     barbarian: boolean;
@@ -409,6 +629,17 @@ interface StateTypes {
     energyRes: number;
     frostRes: number;
     curseRes: number;
+    armor: boolean;
+    helmet: boolean;
+    neck: boolean;
+    gloves: boolean;
+    cape: boolean;
+    weapon: boolean;
+    shield: boolean;
+    pants: boolean;
+    belt: boolean;
+    ring: boolean;
+    boots: boolean;
     [index: string]: boolean | number | string;
   };
 }
