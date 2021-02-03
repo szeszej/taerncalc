@@ -475,9 +475,9 @@ body {
   }
 }
 @media only screen and (max-width: 660px) {
-  // .wrapper {
-  //   grid-template-rows: auto 5em auto auto;
-  // }
+  .wrapper {
+    grid-template-rows: auto 5em auto auto;
+  }
   .wrapper .header .title p {
     font-size: 2em;
   }
