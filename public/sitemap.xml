@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>https://toolbox.taern.com/pl</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://toolbox.taern.com/en"/>
+</url>
+<url>
+  <loc>https://toolbox.taern.com/en</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="pl"
+               href="https://toolbox.taern.com/pl"/>
+</url>
+<url>
+  <loc>https://toolbox.taern.com/pl/calc</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://toolbox.taern.com/en/calc"/>
+</url>
+<url>
+  <loc>https://toolbox.taern.com/en/calc</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="pl"
+               href="https://toolbox.taern.com/pl/calc"/>
+</url>
+<url>
+  <loc>https://toolbox.taern.com/pl/know</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://toolbox.taern.com/en/know"/>
+</url>
+<url>
+  <loc>https://toolbox.taern.com/en/know</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="pl"
+               href="https://toolbox.taern.com/pl/know"/>
+</url>
+<url>
+  <loc>https://toolbox.taern.com/pl/items</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://toolbox.taern.com/en/items"/>
+</url>
+<url>
+  <loc>https://toolbox.taern.com/en/items</loc>
+  <xhtml:link
+               rel="alternate"
+               hreflang="pl"
+               href="https://toolbox.taern.com/pl/items"/>
+</url>
+
+</urlset>
