@@ -2,9 +2,9 @@ export const resources = {
   pl: {
     translation: {
       //meta tags
-      "page-title": "Kalkulator buildów Pride of Taern",
+      "page-title": "Strona przeniesiona na https://toolbox.taern.com",
       "meta-description":
-        "Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!",
+        "Strona przeniesiona na https://toolbox.taern.com",
       //home
       h1: "Kalkulator buildów Pride of Taern",
       created: "Stworzone przez",
@@ -634,7 +634,8 @@ export const resources = {
       "max-pets": "Maks. ilość pupili",
       "Obrażenia od ognia": "Obrażenia od ognia",
       //lazy loading
-      "loading": "Wczytywanie danych..."
+      "loading": "Wczytywanie danych...",
+      "page-moved": "Strona została przeniesiona. Za 5 sekund nastąpi przekierowanie na nowy adres. Jeśli to nie nastąpi, kliknij tutaj:"
     },
   },
   en: {
@@ -652,9 +653,9 @@ export const resources = {
         "This website uses cookies. By continuing to use it, you consent to cookie usage for analytical purposes.",
       "cookies-confirm": "I understand",
       //meta tags
-      "page-title": "Pride of Taern Build Calculator",
+      "page-title": "The website has been moved to https://toolbox.taern.com",
       "meta-description":
-        "Curious how many skills points you'll have on a certaon level? Want to plan your character's development? Take a look here!",
+        "The website has been moved to https://toolbox.taern.com",
       //classes
       Barbarzyńca: "Barbarian",
       Sheed: "Sheed",
@@ -1266,7 +1267,8 @@ export const resources = {
       "max-pets": "Max. pets",
       "Obrażenia od ognia": "Fire damage",
       //lazy loading
-      "loading": "Loading data..."
+      "loading": "Loading data...",
+      "page-moved": "The website has been moved. You will be redirected in 5 seconds. If it doesn't happen, please click here:"
     },
   },
 };

@@ -3,31 +3,31 @@ import React from 'react';
 
 //i18l
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
+
+//import Link
+import { getUrlVars } from "../../../import-build/import-build"
+
+//Helmet
+import { Helmet } from "react-helmet";
 
 function ConnectedIntro (props: PropTypes) {
-  const { t } = props
+  const { t } = props;
+  let id = getUrlVars(window.location.href).id ? "?id=" + getUrlVars(window.location.href).id : ""
   return (
     <div className="intro">
-      <h2>{t("intro-header-1")}</h2>
-      <p>{t("intro-desc-1")}</p>
-      <h2>{t("intro-header-2")}</h2>
-      <p>{t("intro-desc-2")}</p>
-      <h2>{t("intro-header-3")}</h2>
-      <p>{t("intro-desc-3-1")}</p>
-      <ol>
-        <li>{t("intro-desc-3-bullet-1")}</li>
-        <li>{t("intro-desc-3-bullet-2")}</li>
-        <li>{t("intro-desc-3-bullet-3")}</li>
-      </ol>
-      <p>
-        {t("intro-desc-3-2")}
-      </p>
-      <h2>{t("intro-header-4")}</h2>
-      <p>{t("intro-desc-4-1")} (<img className="imageInText" src="images/upgrade.png" alt="upgrade" />). {t("intro-desc-4-2")}</p>
-      <h2>{t("intro-header-5")} (<img className="imageInText" src="images/star.svg" alt="kowadło" />)?</h2>
-      <p>{t("intro-desc-5")}</p>
-      <h2>{t("intro-header-6")}</h2>
-      <p>{t("intro-desc-6")}</p>
+    <Helmet>
+      <title>{t("page-title")}</title>
+      <meta name="description" content={t("meta-description")} />
+      <meta http-equiv="refresh" content={"5; URL=" + "https://toolbox.taern.com/" + i18n.language + "/calc" + id} />
+    </Helmet>
+      <h2>{t("page-moved")}</h2>
+      <a
+        href={"https://toolbox.taern.com/" + i18n.language + "/calc" + id}
+        target="_blank"
+      >
+        {"https://toolbox.taern.com/" + i18n.language + "/calc" + id}
+      </a>
     </div>
   )
 }

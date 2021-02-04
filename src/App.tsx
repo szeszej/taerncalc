@@ -1,20 +1,12 @@
 //React
-import React, { Suspense } from "react";
+import React from "react";
 
-//Components
-import { LoadingMessage } from "./components/shared/LoadingMessage";
-import { Navbar } from "./components/navbar/Navbar";
+//components
+import { Intro } from "./components/calculator/intro/Intro"
 
 //i18l
 import { withTranslation } from "react-i18next";
 
-//Helmet
-import { Helmet } from "react-helmet";
-
-//Lazy loading
-const Calculator = React.lazy(() =>
-  import("./components/calculator/Calculator")
-);
 
 export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
@@ -25,12 +17,10 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     const { t } = this.props;
+    console.log(this.props);
+
     return (
       <div className="wrapper">
-        <Helmet>
-          <title>{t("page-title")}</title>
-          <meta name="description" content={t("meta-description")} />
-        </Helmet>
         <div className="header">
           <div className="logo">
             <img src="images/logo.png" alt="Pride of Taern" />
@@ -40,10 +30,11 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
           </div>
         </div>
         <div className="leftSidebar"></div>
-        <Navbar />
-        <Suspense fallback={<LoadingMessage />}>
-          <Calculator isBuildImported={this.props.isBuildImported} />
-        </Suspense>
+        <div className="calculator">
+        <div id="calc">
+        <Intro />
+        </div>
+        </div>
         <div className="rightSidebar"></div>
         <div className="footer">
           <div className="authors">

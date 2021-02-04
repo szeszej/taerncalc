@@ -162,15 +162,16 @@ body {
   }
 
   .intro {
-    text-align: justify;
+    text-align: center;
     background-color: #d6cca9;
     width: 80%;
     margin: 0 auto;
 
-    img {
-      display: inline;
-      max-height: 1em;
-      max-width: 1em;
+    h2 {
+      font-size: 4em;
+    }
+    a {
+      font-size: 2em;
     }
   }
 
@@ -220,7 +221,7 @@ body {
     grid-area: content;
     padding-bottom: 2em;
     display: grid;
-    grid-template-rows: 8em auto;
+    grid-template-rows: auto auto;
     grid-template-areas: "classLevel" "calculators";
     background-color: #d6cca9;
     position: relative;
@@ -433,7 +434,7 @@ body {
       }
     }
     .calculator {
-      grid-template-rows: 15em auto;
+      grid-template-rows: auto auto;
       clip-path: none;
 
       #classLvlWrapper {
