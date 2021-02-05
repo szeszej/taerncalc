@@ -16,7 +16,7 @@ import "./i18n/i18n";
 import { App } from "./App";
 
 //Starting GA tracking
-ReactGA.initialize("UA-142836926-4");
+ReactGA.initialize("UA-142836926-3");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 (function () {
