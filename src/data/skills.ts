@@ -709,7 +709,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       name: "Uderzenie Chi",
       image: "images/Uderzenie_chi.jpg",
       description:
-        "Uderzenie Chi to manifestacja mocy, siejąca zniszczenie pośród przeciwników Sheeda pod postacią potężnego ciosy wręcz. Dodatkowi Chi wypiera inny rodzaj energii - manę, którą po prostu spala przeciwnikowi.",
+        "Uderzenie Chi to manifestacja mocy, siejąca zniszczenie pośród przeciwników Sheeda pod postacią potężnego ciosy wręcz. Dodatkowo Chi wypiera inny rodzaj energii - manę, którą po prostu spala przeciwnikowi.",
       type: "attack",
       attackType: "melee",
       hitType: "agility",

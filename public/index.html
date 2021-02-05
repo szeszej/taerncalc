@@ -1,81 +1,149 @@
 <!DOCTYPE html>
 <html lang="pl">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-142836926-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142836926-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+      gtag("config", "UA-142836926-4");
+    </script>
 
-    gtag('config', 'UA-142836926-4');
-  </script>
+    <!--  Meta  -->
+    <title>The Pride of Taern Toolbox</title>
+    <!-- <meta name="description" content="Chcesz zaplanować rozwój postaci od 1 do 140 poziomu? Sprawdzić, ile wiedzy potrzebujesz na umiejętności? Zobaczyć spis rzadkich przedmiotów? Zajrzyj tutaj!" /> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#d6cca9" />
+    <meta name="msapplication-TileImage" content="favicon.ico" />
+    <base href="/" />
 
+    <!-- Open Graph data -->
+    <!-- <meta property="og:title" content="The Pride of Taern Toolbox" /> -->
+    <!-- <meta property="og:url" content="https://toolbox.taern.com" /> -->
+    <meta property="og:image" content="https://toolbox.taern.com/images/logo.png" />
+    <!-- <meta property="og:description" content="Chcesz zaplanować rozwój postaci od 1 do 140 poziomu? Sprawdzić, ile wiedzy potrzebujesz na umiejętności? Zobaczyć spis rzadkich przedmiotów? Zajrzyj tutaj!" /> -->
 
-  <!--  Meta  -->
-  <title>Kalkulator buildów Pride of Taern</title>
-  <meta name="description" content="Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#d6cca9" />
-  <meta name="msapplication-TileImage" content="favicon.ico">
+  </head>
 
-  <base href="/">
-</head>
-
-<body>
-  <div id="alert"></div>
-  <div id="root">
-    <noscript>
-    <div class="header">
-      <div class="logo"><img src="images/logo.png" alt="Pride of Taern"></div>
-      <div class="title">
-          <h1>Kalkulator buildów Pride of Taern</h1>
-      </div>
-    </div>
-    <div class="leftSidebar"></div>
-
-      <div id="calc">
-        <div class=intro>
-          <h2 style="color:red;">DO POPRAWNEGO DZIAŁANIA KALKULATORA KONIECZNE JEST WŁĄCZENIE JAVASCRIPTU!</h2>
-          <h2>Po co mi kalkulator buildów Pride of Taern?</h2>
-          <p>Nie masz pojęcia, jakie są najlepszy itemy na twój level? Chcesz wiedzieć, czy po resecie starczy ci punktów, żeby wykupić odpowiednie umiejętności i nie chcesz zmarnować platyny? Na takie
-            właśnie pytania odpowiada niniejszy kalkulator. Nieprzemyślane resety mogą was kosztować cenną platynę, którą przecież lepiej wydać inaczej. Zamiast ją marnować, lepiej użyć kalkulatora i sprawdzić, czy z obecnym poziomem uda ci się
-            osiągnąć odpowiednio wysokie poziomy umiejętności i parametrów. </p>
-          <h2>Czy mogę jakoś podzielić się swoim buildem z innymi graczami Pride of Taern?</h2>
-          <p>Jak najbardziej! Wystarczy, że klikniesz na przycisk "Eksportuj build" na samym dole ekranu, a następnie gotowy link do twojego buildu skopiujesz do schowka. Możesz potem wklejać go innym graczom na czacie w grze, na forum lub gdziekolwiek zechcesz.</p>
-          <h2>Jak używać kalkulatora umiejętności i statystyk Pride of Taern?</h2>
-          <p>Używanie kalkulatora jest bardzo proste - w formularzu powyżej wpisz:</p>
-          <ol>
-            <li>Dla jakiej klasy chcesz wyliczyć statystyki i umiejętności (pole "Wybierz klasę")</li>
-            <li>Dla jakiego poziomu postaci chcesz dokonać obliczeń (pole "Poziom postaci")</li>
-            <li>Kliknij "Zatwierdź"</li>
-          </ol>
-          <p>
-            Po przejściu powyższych korków wyświetli się kalkulator. Na początku będzie widoczna zakładka z listą statystyk i ekwipunkiem, ale możesz również przejść do drugiej zakładki z listą umiejętności (oddzielnie umiejętności klasowe i te dla każdej klasy). Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności. Kliknij na sloty w ekwipunku, aby wyekwipować przedmioty.
-            Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset". Żeby wyekwipować przedmiot, kliknij na odpowiedni slot w ekwipunku.
-          </p>
-          <h2>Niektóre przedmioty mają losowe statystyki, a niektóre z moich przedmiotów są ulepszone - jak mogę odzwierciedlić to w kalkulatorze?</h2>
-          <p>Po wyekwipowaniu przedmioty, kliknij przycisk ulepszenia (<img class="imageInText" src="images/upgrade.png" alt="upgrade">). Otworzy się menu, w którym będziesz mógł dowolnie modyfikować podstawowe parametry przedmiotu.</p>
-          <h2>Do czego służy ikonka kowadła (<img class="imageInText" src="images/star.svg" alt="kowadło">)?</h2>
-          <p>Po kliknięciu w tę ikonkę możecie sami stworzyć przedmiot! Dodatkowo funkcja ta umożliwia personalizację buildu i przedmiotu - możecie mu nadawać własną nazwę i obrazek!</p>
-          <h2>Czym jest The Pride of Taern?</h2>
-          <p>The Pride of Taern jest polską grą MMORPG w rzucie izometrycznym i turową walką. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki
-            potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.</p>
+  <body>
+    <div id="alert"></div>
+    <div id="root">
+      <noscript>
+        <div class="header">
+          <div class="logo">
+            <img src="images/logo.png" alt="Pride of Taern" />
+          </div>
+          <div class="title">
+            <h1>The Pride of Taern Toolbox</h1>
+          </div>
         </div>
-      </div>
+        <div class="leftSidebar"></div>
+        <div id="calc">
+          <div class="intro">
+            <h2 style="color: red;">
+              DO POPRAWNEGO DZIAŁANIA KALKULATORA KONIECZNE JEST WŁĄCZENIE
+              JAVASCRIPTU!
+            </h2>
+            <div class="homeLine"><h1>The Pride of Taern Toolbox</h1></div>
+            <div class="homeLine">
+              <img
+                src="images/screenshots/build calculator pl.png"
+                alt="build calculator screenshot"
+                class="screenshot"
+              />
+              <div class="homeDescription">
+                <h2>Do czego służy The Pride of Taern Toolbox?</h2>
+                <p>
+                  The Pride of Taern Toolbox jest to zestaw narzędzi, które mają
+                  za zadanie ułatwić grę w The Pride of Taern. Znajdziesz tutaj
+                  przede wszystkim kalkulator buildów, który pozwoli Ci
+                  zaplanować rozwój swojej postaci od 1 do 140 poziomu. Jest to
+                  narzędzie kompleksowe, które oprócz dobrania sobie
+                  odpowiedniego ekwipunku, ulepszenia go i dodaniu punktów
+                  statystyk, pozwoli Ci także obliczyć zadawane obrażenia bądź
+                  wymaganą wiedzę (trudność) do umiejętności. W kalkulator
+                  buildów dostępne są również wszytkie tabelki z wiki Taernu,
+                  dzięki czemu wszystkie potrzebne Ci informacje znajdziesz w
+                  jednym miejscu.
+                </p>
+                <p>
+                  Jeśli nie masz ochoty wpisywać całego buildu, możesz także
+                  przejść do zakładki "Kalkulator trudności", która bez zbędnych
+                  dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na
+                  danym poziomie postaci, aby używać umiejętności za odpowiednią
+                  ilość PA. Zawiera ona również tabelki wiedzy (trudności),
+                  dzięki którym dowiesz się, jak trudne są poszczególne
+                  umiejętności.
+                </p>
+                <p>
+                  Zakładka "Przedmioty legendarne" z kolei zawiera spis
+                  wszystkich przedmiotów dostępnych dla graczy w The Pride of
+                  Taern. Znajdują się tam przedmioty rzadkie (rary), ale również
+                  psychorary i najważniejsze z nich - epiki. Korzystając z tej
+                  zakładki będziesz mógł filtrować przedmioty po interesujących
+                  Cię statysykach, wyszukiwać je po nazwie, sprawdzić z jakich
+                  przeciwników wypadają, a także wiele różnych rzeczy. Tutaj
+                  również nie musisz specjalnie tworzyć buildu dla swojej
+                  postaci, aby obejrzeć spis przedmiotów.
+                </p>
+              </div>
+            </div>
+            <div class="homeLine">
+              <div class="homeDescription">
+                <h2>Czym jest The Pride of Taern?</h2>
+                <p>
+                  The Pride of Taern to polska gra MMORPG, która łączy w sobie
+                  cechy klasycznych, izometrycznych RPG-ów z dynamicznym turowym
+                  systemem walki i dojrzałą, nieliniową fabułą. Znajdziesz w
+                  niej ponad 300 lokacji, 466 potworów, 774 bohaterów
+                  niezależnych, 40 bossów, setki potężnych przedmiotów.
+                  Dodatkowo ponad 100 questów i zadań, a także dynamiczne
+                  eventy.
+                </p>
+              </div>
+              <img
+                src="images/screenshots/taern preview.jpg"
+                alt="taern preview"
+                class="screenshot"
+              />
+            </div>
+          </div>
+        </div>
 
-    <div class="rightSidebar"></div>
-    <div class="footer">
-      <div class="authors">
-        <p class="created">Stworzone przez <a href="https://github.com/szeszej/" target="_blank">szeszej</a>.</p>
-        <p class="created">Propozycje i błędy można zgłaszać przez <a href="https://forum.taern.pl/viewtopic.php?f=279&t=56507" target="_blank">forum Taernu</a>.</p>
-        <p class="created">Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.
-        </p>
-        <p>Pozostałe grafiki pochodzą z <a href="https://game-icons.net/">Game-icons.net</a>.</p>
-      </div>
+        <div class="rightSidebar"></div>
+        <div class="footer">
+          <div class="authors">
+            <p class="created">
+              Stworzone przez
+              <a href="https://github.com/szeszej/" target="_blank">szeszej</a>.
+            </p>
+            <p class="created">
+              Propozycje i błędy można zgłaszać przez
+              <a
+                href="https://forum.taern.pl/viewtopic.php?f=279&t=56507"
+                target="_blank"
+                >forum Taernu</a
+              >.
+            </p>
+            <p class="created">
+              Gra Taern, a także grafiki przedmiotów i logo, są własnością
+              Whitemoon System.
+            </p>
+            <p>
+              Pozostałe grafiki pochodzą z
+              <a href="https://game-icons.net/">Game-icons.net</a>.
+            </p>
+          </div>
+        </div>
+      </noscript>
     </div>
-    </noscript>
-  </div>
-</body>
+  </body>
+</html>

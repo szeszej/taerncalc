@@ -8,10 +8,13 @@ import { RootState } from "../../store/store";
 import { Dispatch } from "redux";
 
 //Components
-import { LevelChanger } from "./level-changer/LevelChanger";
+import { LevelChanger } from "../shared/level-changer/LevelChanger";
 import { BuildExporter } from "./build-exporter/BuildExporter";
 import { Intro } from "./intro/Intro";
 import { LoadingMessage } from "../../components/shared/LoadingMessage";
+
+//Helmet
+import { Helmet } from "react-helmet";
 
 //Actions
 import { changeLevel } from "../../store/character-reducer/character-reducer";
@@ -22,6 +25,7 @@ import { confirmNewBuildCreation } from "./../../shared/new-build-confirmation";
 
 //i18l
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 
 //Lazy loading
 const SkillsCalculator = React.lazy(() =>
@@ -86,6 +90,17 @@ class ConnectedCalculator extends React.Component<PropTypes, StateTypes> {
     };
     return (
       <div className="calculator">
+      <Helmet>
+        <title>{t("page-title-calc")}</title>
+        <meta name="description" content={t("meta-description-calc")} />
+        <link rel="canonical" href={`https://toolbox.taern.com/${i18n.language}/calc`} />
+        <meta property="og:title" content={t("page-title-calc")} />
+        <meta property="og:url" content={`https://toolbox.taern.com/${i18n.language}/calc`} />
+        <meta
+          property="og:description"
+          content={t("meta-description-calc")}
+        />
+      </Helmet>
         <div id="classLvlWrapper">
           <form
             id="classLvl"

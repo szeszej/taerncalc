@@ -1,0 +1,60 @@
+.wrapper {
+  .home {
+    grid-area: content;
+    padding-bottom: 2em;
+    background-color: #d6cca9;
+    position: relative;
+
+    .intro {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      .homeLine {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-top: 2em;
+        align-items: center;
+        justify-content: space-between;
+        .screenshot {
+          max-width: 100%;
+          display: block;
+          height: auto;
+          max-height: 100%;
+          border: 2px solid $border-color;
+          padding: 2px;
+          width: 45%;
+        }
+        .homeDescription {
+          margin: 1em;
+          width: 45%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .wrapper .home .intro .homeLine {
+    flex-direction: column;
+    &:nth-child(2) {
+      flex-direction: column-reverse;
+    }
+    .homeDescription,
+    .screenshot {
+      width: 80%;
+    }
+  }
+}
+@media only screen and (max-width: 520px) {
+  .wrapper .home .intro .homeLine {
+    margin-top: 0.5em;
+    &:first-child {
+      margin-top: 2em;
+    }
+    h1 {
+      text-align: center;
+      width: 60%;
+    }
+  }
+}

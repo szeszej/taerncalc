@@ -2,15 +2,22 @@ export const resources = {
   pl: {
     translation: {
       //meta tags
-      "page-title": "Kalkulator buildów Pride of Taern",
-      "meta-description":
+      "page-title-calc": "Kalkulator buildów Pride of Taern",
+      "meta-description-calc":
         "Nie wiesz, ile punktów umiejętności będziesz mieć na danym poziomie? Chcesz zaplanować rozwój swojej postaci? Zajrzyj tutaj!",
+      "page-title-home": "The Pride of Taern Toolbox",
+      "meta-description-home":
+        "Chcesz zaplanować rozwój postaci od 1 do 140 poziomu? Sprawdzić, ile wiedzy potrzebujesz na umiejętności? Zobaczyć spis rzadkich przedmiotów? Zajrzyj tutaj!",
+      "page-title-know": "Kalkulator wiedzy The Pride of Taern",
+      "meta-description-know":
+        "Chcesz obliczyć, ile wiedzy potrzeba na danym poziomie, aby używać umiejętności za odpowiednią ilość PA? Sprawdź nasz kalkulator, który obliczy to za Ciebie!",
       //home
-      h1: "Kalkulator buildów Pride of Taern",
+      h1: "The Pride of Taern Toolbox",
       created: "Stworzone przez",
       suggestions: "Propozycje i błędy można zgłaszać przez",
       "suggestions-target": "forum Taernu",
-      "suggestion-target-link": "https://forum.taern.pl/viewtopic.php?f=279&t=56507",
+      "suggestion-target-link":
+        "https://forum.taern.pl/viewtopic.php?f=279&t=56507",
       disclaimer:
         "Gra Taern, a także grafiki przedmiotów i logo, są własnością Whitemoon System.",
       "disclaimer-2": "Pozostałe grafiki pochodzą z",
@@ -382,7 +389,7 @@ export const resources = {
       "intro-desc-3-bullet-1": `Dla jakiej klasy chcesz wyliczyć statystyki i umiejętności (pole "Wybierz klasę").`,
       "intro-desc-3-bullet-2": `Dla jakiego poziomu postaci chcesz dokonać obliczeń (pole "Poziom postaci")`,
       "intro-desc-3-bullet-3": `Kliknij "Zatwierdź"`,
-      "intro-desc-3-2": `Po przejściu powyższych korków wyświetli się kalkulator. Na początku będzie widoczna zakładka z listą statystyk i ekwipunkiem, ale możesz również przejść do drugiej zakładki z listą umiejętności (oddzielnie umiejętności klasowe i te dla każdej klasy). Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności. Kliknij na sloty w ekwipunku, aby wyekwipować przedmioty. Możesz również tworzyć własne przedmioty lub przedmioty sklepowe po kliknięciu na ikonkę młota i kowadła na liście przedmiotów.
+      "intro-desc-3-2": `Po przejściu powyższych kroków wyświetli się kalkulator. Na początku będzie widoczna zakładka z listą statystyk i ekwipunkiem, ale możesz również przejść do drugiej zakładki z listą umiejętności (oddzielnie umiejętności klasowe i te dla każdej klasy). Możesz użyć przycisków, aby zwiększyć bądź zmniejszyć poziom statystyki lub umiejętności. Kliknij na sloty w ekwipunku, aby wyekwipować przedmioty. Możesz również tworzyć własne przedmioty lub przedmioty sklepowe po kliknięciu na ikonkę młota i kowadła na liście przedmiotów.
       Dodatkowo jeśli chcesz rozpocząć dodawanie od nowa, użyj przycisku "Reset".`,
       "intro-header-4":
         "Niektóre przedmioty mają losowe statystyki, a niektóre z moich przedmiotów są ulepszone - jak mogę odzwierciedlić to w kalkulatorze?",
@@ -395,7 +402,7 @@ export const resources = {
         "Po kliknięciu w tę ikonkę możecie sami stworzyć przedmiot! Dodatkowo funkcja ta umożliwia personalizację buildu i przedmiotu - możecie mu nadawać własną nazwę i obrazek!",
       "intro-header-6": "Czym jest The Pride of Taern?",
       "intro-desc-6":
-        "The Pride of Taern jest polską grą MMORPG w rzucie izometrycznym i turową walką. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.",
+        "The Pride of Taern to polska gra MMORPG, która łączy w sobie cechy klasycznych, izometrycznych RPG-ów z dynamicznym turowym systemem walki i dojrzałą, nieliniową fabułą. Znajdziesz w niej ponad 300 lokacji, 466 potworów, 774 bohaterów niezależnych, 40 bossów, setki potężnych przedmiotów. Dodatkowo ponad 100 questów i zadań, a także dynamiczne eventy.",
       //calculator
       "Statystyki i przedmioty": "Statystyki i przedmioty",
       Umiejętności: "Umiejętności",
@@ -435,18 +442,17 @@ export const resources = {
       "Stwórz własny przedmiot": "Stwórz własny przedmiot",
       "Wybierz parametr": "Wybierz parametr",
       "no-parameters-chosen": "Nie określono żadnych parametrów!",
-      armor: "Własny pancerz",
-      helmet: "Własny hełm",
-      neck: "Własny naszyjnik",
-      gloves: "Własne rękawice",
-      weapon: "Własna broń",
-      shield: "Własna tarcza",
-      belt: "Własny pas",
-      boots: "Własne buty",
-      ring1: "Własny pierścień",
-      ring2: "Własny pierścień",
-      pants: "Własne spodnie",
-      cape: "Własny płaszcz",
+      armor: "Pancerz",
+      helmet: "Hełm",
+      neck: "Naszyjnik",
+      gloves: "Rękawice",
+      weapon: "Broń",
+      shield: "Tarcza",
+      belt: "Pas",
+      boots: "Buty",
+      ring: "Pierścień",
+      pants: "Spodnie",
+      cape: "Płaszcz",
       "armor-count": "Własny pancerz {{number}}",
       "helmet-count": "Własny hełm {{number}}",
       "neck-count": "Własny naszyjnik {{number}}",
@@ -478,7 +484,7 @@ export const resources = {
       "unequip-all": "Czy na pewno chcesz zdjąć wszystkie przedmioty?",
       Tak: "Tak",
       Nie: "Nie",
-      "Resetuj": "Resetuj",
+      Resetuj: "Resetuj",
       "active-filters": "Lista aktywnych filtrów",
       "add-filters": "Dodaj filtry do list przedmiotów",
       "Zdejmij wszystkie przedmioty": "Zdejmij wszystkie przedmioty",
@@ -571,10 +577,10 @@ export const resources = {
       "punktów na rundę": "punktów na rundę",
       //guild buffs
       "Dodaj buffy gildiowe": "Dodaj buffy gildiowe",
-      "manaUsage": "Zużycie many",
-      "enduranceUsage": "Zużycie kondycji",
-      "regeneration": "Regeneracja",
-      "physRes": "Odp. fizyczne",
+      manaUsage: "Zużycie many",
+      enduranceUsage: "Zużycie kondycji",
+      regeneration: "Regeneracja",
+      physRes: "Odp. fizyczne",
       "Poziom świątyni": "Poziom świątyni",
       //skill tooltip
       broń: "broń",
@@ -603,24 +609,24 @@ export const resources = {
       "Szansa trafienia": "Szansa trafienia",
       "Czas trwania": "Czas trwania",
       "avg-damage": "Średnie obrażenia (bez uwzgl. odporności)",
-      "potrzeba": "potrzeba",
+      potrzeba: "potrzeba",
       //skill effects
       "Obrażenia od Potężnego uderzenia": "Obrażenia od Potężnego uderzenia",
       "Ilość bloków": "Ilość bloków",
       "Skuteczność bloku": "Skuteczność bloku",
       "Koszt many na rundę": "Koszt many na rundę",
       "Skuteczność ochrony": "Skuteczność ochrony",
-      "magicRes": "Odp. magiczne",
+      magicRes: "Odp. magiczne",
       "Zadawane obrażenia": "Zadawane obrażenia",
       "Skuteczność ataków": "Skuteczność ataków",
       "Wzmaga krwawienie": "Wzmaga krwawienie",
-      "Krwawienie": "Krwawienie",
+      Krwawienie: "Krwawienie",
       "Skuteczność obrony": "Skuteczność obrony",
       "Liczba uników": "Liczba uników",
       "Skuteczność uników": "Skuteczność uników",
       "Obrażenia od Uderzenia": "Obrażenia od Uderzenia",
       "Siła odczarowania": "Siła odczarowania",
-      "Unieruchomienie": "Unieruchomienie",
+      Unieruchomienie: "Unieruchomienie",
       "Odp. na ogień": "Odp. na ogień",
       "Odp. na uroki": "Odp. na uroki",
       "Szansa trafienia odłamkiem": "Szansa trafienia odłamkiem",
@@ -634,17 +640,55 @@ export const resources = {
       "max-pets": "Maks. ilość pupili",
       "Obrażenia od ognia": "Obrażenia od ognia",
       //lazy loading
-      "loading": "Wczytywanie danych..."
+      loading: "Wczytywanie danych...",
+      //routes
+      home: "Strona główna",
+      calc: "Kalkulator Buildów",
+      //home
+      "intro-header-7": "Do czego służy The Pride of Taern Toolbox?",
+      "intro-desc-7": `The Pride of Taern Toolbox jest to zestaw narzędzi, które mają za zadanie ułatwić grę w The Pride of Taern. Znajdziesz tutaj przede wszystkim kalkulator buildów, który pozwoli Ci zaplanować rozwój swojej postaci od 1 do 140 poziomu. Jest to narzędzie kompleksowe, które oprócz dobrania sobie odpowiedniego ekwipunku, ulepszenia go i dodaniu punktów statystyk, pozwoli Ci także obliczyć zadawane obrażenia bądź wymaganą wiedzę (trudność) do umiejętności. W kalkulator buildów dostępne są również wszytkie tabelki z wiki Taernu, dzięki czemu wszystkie potrzebne Ci informacje znajdziesz w jednym miejscu.`,
+      "intro-desc-8": `Jeśli nie masz ochoty wpisywać całego buildu, możesz także przejść do zakładki "Kalkulator wiedzy", która bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera ona również tabelki wiedzy (trudności), dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
+      "intro-desc-9": `Zakładka "Lista przedmiotów" z kolei zawiera spis wszystkich przedmiotów dostępnych dla graczy w The Pride of Taern. Znajdują się tam przedmioty rzadkie (rary), ale również psychorary i najważniejsze z nich - epiki. Korzystając z tej zakładki będziesz mógł filtrować przedmioty po interesujących Cię statystykach, wyszukiwać je po nazwie, a także wiele różnych rzeczy. Tutaj również nie musisz specjalnie tworzyć buildu dla swojej postaci, aby obejrzeć spis przedmiotów.`,
+      //error
+      error: "Błąd 404 - Nie znaleziono strony",
+      "error-desc":
+        "Któż sprowadził Cię w ten zakamarek internetu? Niestety nic tutaj nie znajdziesz. Wypróbuj za to nasze narzędzia:",
+      //know calc
+      "know-calc": "Kalkulator Wiedzy",
+      "Wymagana wiedza dla poziomu": "Wymagana wiedza dla poziomu",
+      na: "na",
+      "buff-desc":
+        "Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA.",
+      "intro-header-1-know": "Po co mi kalkulator wiedzy The Pride of Taern?",
+      "intro-desc-1-know": `Kalkulator wiedzy The Pride of Taern to narzędzie, które bez zbędnych dodatków pozwoli Ci obliczyć, ile wiedzy potrzebujesza na danym poziomie postaci, aby używać umiejętności za odpowiednią ilość PA. Zawiera on również tabelki wiedzy (trudności), dzięki którym dowiesz się, jak trudne są poszczególne umiejętności.`,
+      "intro-header-3-know":
+        "Jak używać kalkulatora wiedzy The Pride of Taern?",
+      "intro-desc-3-2-know": `Po przejściu powyższych kroków wyświetli się kalkulator z listą umiejętności dla danej klasy, które wymagają wiedzy do rzucenia (a więc posiadają pewną trudność). Aby zobaczyć wymaganą wiedzę dla danej umiejętności, musisz ustawić dla niej odpowiedni poziom (przy użyciu przycisków plus i minus). Po ustawieniu poziomu i rozwinięciu opisu umiejętności, zobaczysz wymaganą wiedzę na różne ilości PA.`,
+      //items list
+      "items-display": "Lista przedmiotów",
+      Rzadkość: "Rzadkość",
+      Klasa: "Klasa",
+      Atrybut: "Atrybut",
+      Sortowanie: "Sortowanie",
+      reqLvl: "Wym. poziom",
+      Rodzaj: "Rodzaj",
+      "items-intro": `Ta zakładka zawiera spis wszystkich przedmiotów rzadkich (rarów), psychorarów, setowych i epickich dostępnych dla graczy w The Pride of Taern. Listę przedmiotów możesz filtrować po interesujących Cię statystykach lub po prostu wyszukać przedmiot po nazwie. Dostępna jest również opcja posortowania gotowej listy.`,
+      "Obrazek": "Obrazek",
+      "Wymagania": "Wymagania",
+      "Statystyki": "Statystyki",
+      "Psychowłaściwości": "Psychowłaściwości",
+      "items-display-description": "Znajdziesz tutaj spis przedmiotów rzadkich, psychorarów, setowych i epickich dostępnych dla graczy w The Pride of Taern. Kliknij i zobacz je wszystkie!"
     },
   },
   en: {
     translation: {
       //home
-      h1: "Pride of Taern Build Calculator",
+      h1: "The Pride of Taern Toolbox",
       created: "Created by",
       suggestions: "Please post all suggestions and feedback on",
       "suggestions-target": "the Taern forum",
-      "suggestion-target-link": "https://forum.taern.com/viewtopic.php?f=5&t=23506",
+      "suggestion-target-link":
+        "https://forum.taern.com/viewtopic.php?f=5&t=23506",
       disclaimer:
         "Pride of Taern, all item images and the logo are a property of Whitemoon System.",
       "disclaimer-2": "All other images are from",
@@ -652,9 +696,15 @@ export const resources = {
         "This website uses cookies. By continuing to use it, you consent to cookie usage for analytical purposes.",
       "cookies-confirm": "I understand",
       //meta tags
-      "page-title": "Pride of Taern Build Calculator",
-      "meta-description":
+      "page-title-calc": "Pride of Taern Build Calculator",
+      "meta-description-calc":
         "Curious how many skills points you'll have on a certaon level? Want to plan your character's development? Take a look here!",
+      "page-title-home": "The Pride of Taern Toolbox",
+      "meta-description-home":
+        "Do you want to plan your character's development from 1 to 140? Check how much knowledge you need for your abilities? Find all rare items? Take a look here!",
+      "page-title-know": "Pride of Taern Knowledge Calculator",
+      "meta-description-know":
+        "Do you want to know how much knowledge you need to use your abilities for the right number of AP? Our calculator will calculate this for you!",
       //classes
       Barbarzyńca: "Barbarian",
       Sheed: "Sheed",
@@ -1032,7 +1082,7 @@ export const resources = {
         "After clicking the icon, you'll be able to create your own item! This feature can also be used to personalize your build by adding a name and an image to the item!",
       "intro-header-6": "What is The Pride of Taern?",
       "intro-desc-6":
-        "The Pride of Taern is a Polish isometric MMORPG with turn-based combat system. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests and tasks, and dynamic events.",
+        "The Pride of Taern is a Polish MMORPG which combines features of classic isometric RPGs with a dynamic, turn-based combat system and a mature, non-linear plot. It contains over 300 locations, 466 monsters, 774 NPCs, 40 bosses, hundreds of powerful items. Also over 100 quests, tasks and dynamic events.",
       "Statystyki i przedmioty": "Attributes and Items",
       Umiejętności: "Skills",
       //build exporter
@@ -1071,18 +1121,17 @@ export const resources = {
       "Stwórz własny przedmiot": "Create a custom item",
       "Wybierz parametr": "Choose attribute",
       "no-parameters-chosen": "No attribute has been chosen!",
-      armor: "Custom armor",
-      helmet: "Custom helmet",
-      neck: "Custom necklace",
-      gloves: "Custom gloves",
-      weapon: "Custom weapon",
-      shield: "Custom shield",
-      belt: "Custom belt",
-      boots: "Custom boots",
-      ring1: "Custom ring",
-      ring2: "Custom ring",
-      pants: "Custom pants",
-      cape: "Custom cape",
+      armor: "Armor",
+      helmet: "Helmet",
+      neck: "Necklace",
+      gloves: "Gloves",
+      weapon: "Weapon",
+      shield: "Shield",
+      belt: "Belt",
+      boots: "boots",
+      ring: "Ring",
+      pants: "Pants",
+      cape: "Cape",
       "armor-count": "Custom armor {{number}}",
       "helmet-count": "Custom helmet {{number}}",
       "neck-count": "Custom necklace {{number}}",
@@ -1114,7 +1163,7 @@ export const resources = {
       "unequip-all": "Are you sure you want to unequip all items?",
       Tak: "Yes",
       Nie: "No",
-      "Resetuj": "Reset",
+      Resetuj: "Reset",
       "active-filters": "List of active filters",
       "add-filters": "Add filters to item lists",
       "Zdejmij wszystkie przedmioty": "Unequip all items",
@@ -1206,10 +1255,10 @@ export const resources = {
       "punktów na rundę": "points per round",
       //guild buffs
       "Dodaj buffy gildiowe": "Add guild buffs",
-      "manaUsage": "Mana usage",
-      "enduranceUsage": "Stamina usage",
-      "regeneration": "Regeneration",
-      "physRes": "Physical Res.",
+      manaUsage: "Mana usage",
+      enduranceUsage: "Stamina usage",
+      regeneration: "Regeneration",
+      physRes: "Physical Res.",
       "Poziom świątyni": "Temple level",
       //skill tooltip
       broń: "weapon",
@@ -1238,24 +1287,24 @@ export const resources = {
       "Szansa trafienia": "Hit chance",
       "Czas trwania": "Duration",
       "avg-damage": "Avg. damage (not including resistances)",
-      "potrzeba": "still needed:",
+      potrzeba: "still needed:",
       //skill effects
       "Obrażenia od Potężnego uderzenia": "Mighty Blow damage",
       "Ilość bloków": "Number of blocks",
       "Skuteczność bloku": "Block effectivness",
       "Koszt many na rundę": "Mana cost per round",
       "Skuteczność ochrony": "Protection chance",
-      "magicRes": "Magical Res.",
+      magicRes: "Magical Res.",
       "Zadawane obrażenia": "Damage dealt",
       "Skuteczność ataków": "Attacks hit chance",
       "Wzmaga krwawienie": "Increases bleeding",
-      "Krwawienie": "Bleeding",
+      Krwawienie: "Bleeding",
       "Skuteczność obrony": "Defence success chance",
       "Liczba uników": "Number of dodges",
       "Skuteczność uników": "Chance to dodge",
       "Obrażenia od Uderzenia": "Bash damage",
       "Siła odczarowania": "Dispel power",
-      "Unieruchomienie": "Immobilization",
+      Unieruchomienie: "Immobilization",
       "Szansa trafienia odłamkiem": "Fragment chance",
       "Szansa na efekt": "Effect chance",
       "Obrażenia od Precyzyjnego strzału": "Precise Shot damage",
@@ -1266,7 +1315,45 @@ export const resources = {
       "max-pets": "Max. pets",
       "Obrażenia od ognia": "Fire damage",
       //lazy loading
-      "loading": "Loading data..."
+      loading: "Loading data...",
+      //routes
+      home: "Home",
+      calc: "Build Calculator",
+      //home
+      "intro-header-7": "What can I use The Pride of Taern Toolbox for?",
+      "intro-desc-7": `The Pride of Taern Toolbox is a set of tools whose aim is to make playing The Pride of Taern easier. The main feature of the toolbox is the build calculator that will allow you to plan your character's development from level 1 to 140. It's an advanced tool that'll not only let you choose your euipment, upgrade it, add attribute points but also will calculate your damage and knowledge requirements (difficulty) of abilities. The build calculator includes all tables from Taern's wikipedia so that you have all the information you need in one place.`,
+      "intro-desc-8": `If you don't feel like entering the whole build, you can also use the "Knowledge Calculator" tab that will allow you, without any unnecessary features, to calculate the amount of knowledge you need on a given character level to use your abilities with the right number of AP. The calculator also includes knowledge (difficulty) tables that will let you know how difficult each ability is.`,
+      "intro-desc-9": `The "Legendary Items" tab contains a list of all items available to players in The Pride o Taern. You'll see all rares, psychorares and the most important of them all - epics. To make the list easier to use, you can filter the items list by attributes, search by name, check which bosses drop each piece of equipment and many other things. It's a great way to see all the items if you don't feel like creating a character build right now.`,
+      //error
+      error: "Error 404 - Page Not Found",
+      "error-desc":
+        "Who led you astray? There's nothing of interest in here. On the other hand, you may want to check out our awesome tools:",
+      //know calc
+      "know-calc": "Knowledge Calculator",
+      "Wymagana wiedza dla poziomu": "Knowledge required at level",
+      na: "for",
+      "buff-desc":
+        "To see the knowledge required for a given ability you need to level it up (using the plus and minus buttons). After you set the right level, the expanded ability tooltip will show you how much knowledge you need for various AP numbers.",
+      "intro-header-1-know":
+        "Why do I need The Pride of Taern Knowledge Calculator?",
+      "intro-desc-1-know": `The Pride of Taern Knowledge Calculator will allow you, without any unnecessary features, to calculate the amount of knowledge you need on a given character level to use your abilities with the right number of AP. The calculator also includes knowledge (difficulty) tables that will let you know how difficult each ability is.`,
+      "intro-header-3-know":
+        "How do I use The Pride of Taern Knowledge Calculator?",
+      "intro-desc-3-2-know": `After the above steps are complete, you will see the calculator with a list of abilities for the chosen class. Only abilities that require knowledge be used (those with difficulty) will be shown. To see the knowledge required for a given ability you need to level it up (using the plus and minus buttons). After you set the right level, the expanded ability tooltip will show you how much knowledge you need for various AP numbers.`,
+      //items list
+      "items-display": "Items List",
+      Klasa: "Class",
+      Rzadkość: "Rarity",
+      Atrybut: "Attribute",
+      Sortowanie: "Sort",
+      reqLvl: "Req. level",
+      Rodzaj: "Type",
+      "items-intro": `This tab contains a list of all rare, psychorare, set and epic items available for players in The Pride of Taern. The items list can be filtered by using the filters below. You can also search for items by name and sort the list.`,
+      "Obrazek": "Image",
+      "Wymagania": "Requirements",
+      "Statystyki": "Attributes",
+      "Psychowłaściwości": "Psychoproperties",
+      "items-display-description": "Here you will find a list of all rares, psychorares, epics and set items available to players in The Pride of Taern. Click to see them all!"
     },
   },
 };

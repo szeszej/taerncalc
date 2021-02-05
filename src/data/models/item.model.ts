@@ -86,6 +86,7 @@ export interface Item extends NumericItemValues {
   enhancements: Enhancements
   calculateTotalStat(stat: keyof Enhancements): number
   otherProperties: [string, number, number][]
+  [index: string]: any
 }
 
 export interface Enhancements {

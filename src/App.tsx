@@ -4,16 +4,30 @@ import React, { Suspense } from "react";
 //Components
 import { LoadingMessage } from "./components/shared/LoadingMessage";
 import { Navbar } from "./components/navbar/Navbar";
+import { Home } from "./components/home/Home";
+import { Error } from "./components/error/Error";
+
+//Router
+import { Link, Switch, Route, Redirect } from "react-router-dom";
 
 //i18l
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 
-//Helmet
-import { Helmet } from "react-helmet";
+//URL params
+import { getUrlVars } from "./import-build/import-build";
 
 //Lazy loading
 const Calculator = React.lazy(() =>
   import("./components/calculator/Calculator")
+);
+
+const KnowledgeCalculator = React.lazy(() =>
+  import("./components/kno-calc/KnowledgeCalculator")
+);
+
+const ItemsDisplay = React.lazy(() =>
+  import("./components/items-display/ItemsDisplay")
 );
 
 export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
@@ -25,24 +39,47 @@ export class ConnectedApp extends React.Component<PropTypes, StateTypes> {
   }
   render() {
     const { t } = this.props;
+    let urlParams = getUrlVars(window.location.href).hasOwnProperty("id")
+      ? "?id=" + getUrlVars(window.location.href).id
+      : "";
     return (
       <div className="wrapper">
-        <Helmet>
-          <title>{t("page-title")}</title>
-          <meta name="description" content={t("meta-description")} />
-        </Helmet>
         <div className="header">
+          <Link to={`/${i18n.language}`}>
           <div className="logo">
             <img src="images/logo.png" alt="Pride of Taern" />
           </div>
+          </Link>
           <div className="title">
-            <h1>{t("h1")}</h1>
+            <p>{t("h1")}</p>
           </div>
         </div>
         <div className="leftSidebar"></div>
         <Navbar />
         <Suspense fallback={<LoadingMessage />}>
-          <Calculator isBuildImported={this.props.isBuildImported} />
+          <Switch>
+            <Route exact path={`/${i18n.language}/calc`}>
+              <Calculator isBuildImported={this.props.isBuildImported} />
+            </Route>
+            <Route exact path={`/${i18n.language}/know`}>
+              <KnowledgeCalculator />
+            </Route>
+            <Route exact path={`/${i18n.language}/items`}>
+              <ItemsDisplay />
+            </Route>
+            <Route path={`/${i18n.language}/404`}>
+              <Error />
+            </Route>
+            <Route exact path={`/${i18n.language}`}>
+              <Home />
+            </Route>
+            <Route exact path={"/"}>
+              <Redirect to={`/${i18n.language + urlParams}`} />
+            </Route>
+            <Route path="*">
+              <Redirect to={`/${i18n.language}/404`} />
+            </Route>
+          </Switch>
         </Suspense>
         <div className="rightSidebar"></div>
         <div className="footer">

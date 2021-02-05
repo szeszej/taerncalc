@@ -3,6 +3,11 @@
 @import "statscalculator";
 @import "equipment";
 @import "alert-box";
+@import "navbar";
+@import "home";
+@import "error";
+@import "kno-calc";
+@import "items-display";
 $main-font: "Eczar", serif;
 $border-color: #d6c1a9;
 $button-background: #bdac6f;
@@ -25,8 +30,8 @@ body {
   font-family: $main-font;
   display: grid;
   grid-template-columns: 10% auto 10%;
-  grid-template-rows: auto auto auto;
-  grid-template-areas: "header header header" "leftsidebar content rightsidebar" "footer footer footer";
+  grid-template-rows: auto 3em auto auto;
+  grid-template-areas: "header header header" "navbar navbar navbar" "leftsidebar content rightsidebar" "footer footer footer";
   margin: 0;
   background: black;
   .exportBuild {
@@ -73,6 +78,20 @@ body {
     grid-area: content;
     background-color: #d6cca9;
     min-height: 60em;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  h1 {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2.5em;
+  }
+
+  a:visited {
+    color: inherit;
   }
 
   button,
@@ -130,7 +149,6 @@ body {
     // flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 2px solid $button-background;
 
     .logo {
       img {
@@ -140,13 +158,14 @@ body {
     }
 
     .title {
-      h1 {
+      p {
         margin: 0;
         margin-top: 0.3em;
         text-align: center;
         text-transform: uppercase;
-        font-size: 3.5em;
+        font-size: 4em;
         letter-spacing: 0.05em;
+        font-weight: bold;
         // background: linear-gradient(to bottom, #cb93bd 9%,#be1414 50%,#f78b8b 92%);
         background: linear-gradient(
           to bottom,
@@ -228,37 +247,6 @@ body {
 
     .placeholder {
       display: none;
-    }
-
-    .languages {
-      position: absolute;
-      right: 1em;
-      top: 1em;
-
-      button {
-        all: initial;
-        width: 3em;
-        height: 2em;
-      }
-      #pl {
-        background-image: url("/images/pl.png");
-        margin-right: 0.2em;
-        background-size: 70%;
-      }
-      #en {
-        background-image: url("/images/en.png");
-        background-size: 80%;
-      }
-      #pl,
-      #en {
-        background-repeat: no-repeat;
-        background-position: center;
-        cursor: pointer;
-      }
-      #pl:hover,
-      #en:hover {
-        opacity: 0.7;
-      }
     }
 
     #classLvlWrapper {
@@ -407,8 +395,8 @@ body {
     font-size: 14px;
     .header {
       .title {
-        h1 {
-          font-size: 2.5em;
+        p {
+          font-size: 3.5em;
         }
       }
     }
@@ -424,11 +412,11 @@ body {
   .wrapper {
     font-size: 12px;
     grid-template-columns: 100%;
-    grid-template-areas: "header" "content" "footer";
+    grid-template-areas: "header" "navbar" "content" "footer";
     .header {
       .title {
-        h1 {
-          font-size: 2.2em;
+        p {
+          font-size: 3em;
         }
       }
     }
@@ -479,22 +467,27 @@ body {
   }
 }
 @media only screen and (max-width: 780px) {
-  .wrapper .header .title h1 {
-    font-size: 1.5em;
+  .wrapper .header .title p {
+    font-size: 2.5em;
   }
   .wrapper .header .logo img {
     max-height: 3em;
   }
 }
 @media only screen and (max-width: 660px) {
-  .wrapper .header .title h1 {
-    font-size: 1em;
+  .wrapper {
+    grid-template-rows: auto 5em auto auto;
+  }
+  .wrapper .header .title p {
+    font-size: 2em;
   }
 }
 @media only screen and (max-width: 520px) {
   .wrapper {
     font-size: 10px;
-
+    .header .title p {
+      font-size: 1.5em;
+    }
     .calculator {
       #classLvlWrapper {
         form {
@@ -530,9 +523,5 @@ body {
         width: 100%;
       }
     }
-  }
-  .wrapper .calculator .languages {
-    display: flex;
-    flex-direction: column;
   }
 }

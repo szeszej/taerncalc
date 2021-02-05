@@ -8,6 +8,7 @@ function ConnectedIntro (props: PropTypes) {
   const { t } = props
   return (
     <div className="intro">
+      <h1>{t("calc")}</h1>
       <h2>{t("intro-header-1")}</h2>
       <p>{t("intro-desc-1")}</p>
       <h2>{t("intro-header-2")}</h2>
@@ -26,8 +27,6 @@ function ConnectedIntro (props: PropTypes) {
       <p>{t("intro-desc-4-1")} (<img className="imageInText" src="images/upgrade.png" alt="upgrade" />). {t("intro-desc-4-2")}</p>
       <h2>{t("intro-header-5")} (<img className="imageInText" src="images/star.svg" alt="kowadło" />)?</h2>
       <p>{t("intro-desc-5")}</p>
-      <h2>{t("intro-header-6")}</h2>
-      <p>{t("intro-desc-6")}</p>
     </div>
   )
 }
