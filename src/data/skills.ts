@@ -232,7 +232,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       effects: [
         {
           name: "Zadawane obrażenia",
-          effect: calculateLinearEffect(2, 14),
+          effect: calculateLinearEffect(2, 2),
         },
         {
           name: "Skuteczność ataków",
