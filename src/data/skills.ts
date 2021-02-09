@@ -987,7 +987,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "fireRes",
           type: "numeric",
-          effect: calculateLinearEffect(35, 3),
+          effect: calculateLinearEffect(-35, -3),
         },
       ],
     },
