@@ -979,7 +979,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       attackType: "mental",
       hitType: "knowledge",
       cost: {
-        mana: [10, 11, 13, 15, 16, 17, 19],
+        mana: [30, 35, 39, 44, 48, 53, 57],
       },
       target: "single",
       duration: [3, 3, 4, 4, 5, 5, 6],
