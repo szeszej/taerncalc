@@ -151,6 +151,10 @@ export class Skill {
         : 0;
     return requiredKno < 10 ? 10 : requiredKno;
   }
+  //Needed for Incantation
+  calculateEffectScaling(effect: Effect, skillLevel: number, charLvl: number): number {
+    return effect.scaling ? Math.floor(effect.effect[skillLevel] * charLvl) : effect.effect[skillLevel]
+  }
 }
 
 export interface Skill {

@@ -208,7 +208,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
                   }
                 >
                   {x > 0 && this.props.skill.name !== "Wataha" ? "+" : null}
-                  {Math.floor(x * 10) / 10}
+                  {Math.floor(this.props.skill.calculateEffectScaling(effect, index, this.props.level) * 10) / 10}
                   {effect.type === "numeric" ? null : "%"}
                 </td>
               ))
