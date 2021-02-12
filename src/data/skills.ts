@@ -1020,10 +1020,10 @@ export const classSkillsDatabase: AllRawClassSkills = {
       name: "Inkantacja",
       image: "images/Inkantacja.jpg",
       description:
-        "Silny urok defensywny, który zwiększaja siłę rażenia innych czarów przez kilka tur. Umożliwia również rzucenie Meteoru, ale obniża odporności na ogień i uroki.",
+        "Silny czar ofensywny, zwiększający siłę rażenia innych czarów przez kilka tur. Umożliwia również rzucenie Meteoru, ale obniża odporności na ogień i uroki.",
       type: "buff",
       target: "self",
-      duration: calculateLinearEffect(5, 0),
+      duration: [5, 5, 5, 5, 6, 6, 6],
       difficulty: calculateLinearEffect(160, 40),
       cost: {
         mana: calculateLinearEffect(20, 3),

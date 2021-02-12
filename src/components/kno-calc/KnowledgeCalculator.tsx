@@ -84,6 +84,7 @@ class ConnectedKnowledgeCalculator extends React.Component<
           property="og:description"
           content={t("meta-description-know")}
         />
+        <link rel="canonical" href={`https://toolbox.taern.com/${i18n.language}/know`} />
       </Helmet>
         <div id="classLvlWrapper">
           <form
