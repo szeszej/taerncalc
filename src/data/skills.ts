@@ -1510,7 +1510,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         "Umiejętność żerowania na przeciwnikach stanowi istotę przetrwania czarownika w starciu, Voodoo atakując przeciwnika wręcz, poprzez dotyk przenika przez duchowe bariery ofiary i transferuje jego Manę, powiększając własne zasoby energetyczne.",
       type: "attack",
       attackType: "melee",
-      hitType: "agility",
+      hitType: "knowledge",
       damageFormula: {
         powerCoeff: 1.4,
         knoCoeff: 0.6,
