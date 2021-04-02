@@ -115,6 +115,7 @@ class ConnectedKnowledgeCalculator extends React.Component<
               <option value="druid">{t("Druid")}</option>
               <option value="firemage">{t("Mag Ognia")}</option>
               <option value="archer">{t("Łucznik")}</option>
+              <option value="voodoo">{t("Voodoo")}</option>
             </select>
             <input
               type="number"

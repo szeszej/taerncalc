@@ -136,7 +136,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
             className={this.props.skill.level ? "currentLevel" : undefined}
             colSpan={7}
           >
-            {Math.floor(this.props.skill.manaCost[0] * 10) / 10}
+            {this.props.skill.calculateTotalCost(1, this.props.otherProperties, "mana")}
           </td>
         ) : (
           this.props.skill.manaCost.map((x, index) => (
@@ -148,7 +148,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
                   : undefined
               }
             >
-              {Math.floor(x * 10) / 10}
+              {this.props.skill.calculateTotalCost(index, this.props.otherProperties, "mana")}
             </td>
           ))
         )}
@@ -165,7 +165,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
             className={this.props.skill.level ? "currentLevel" : undefined}
             colSpan={7}
           >
-            {Math.floor(this.props.skill.enduranceCost[0] * 10) / 10}
+            {this.props.skill.calculateTotalCost(1, this.props.otherProperties, "endurance")}
           </td>
         ) : (
           this.props.skill.enduranceCost.map((x, index) => (
@@ -177,7 +177,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
                   : undefined
               }
             >
-              {Math.floor(x * 10) / 10}
+              {this.props.skill.calculateTotalCost(index, this.props.otherProperties, "endurance")}
             </td>
           ))
         )}
@@ -369,7 +369,7 @@ export class ConnectedSkillTooltip extends React.Component<PropTypes> {
             </div>
           </div>
           <div className="descriptionLine">
-            <div className="description">{this.props.skill.description}</div>
+            <div className="description">{t(this.props.skill.description)}</div>
           </div>
         </div>
         {this.props.skill.level && this.props.skill.damageFormula ? (

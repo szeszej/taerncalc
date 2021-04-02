@@ -96,7 +96,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       },
       effects: [
         {
-          name: "Odp. fizyczne",
+          name: "physRes",
           type: "numeric",
           effect: [2, 8, 12, 18, 24, 30, 36],
         },
@@ -177,7 +177,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       },
       effects: [
         {
-          name: "Odp. fizyczne",
+          name: "physRes",
           type: "numeric",
           effect: [1, 2, 6, 8, 10, 12, 14],
         },
@@ -206,7 +206,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       },
       effects: [
         {
-          name: "Odp. fizyczne",
+          name: "physRes",
           type: "numeric",
           effect: calculateLinearEffect(-2, -8),
         },
@@ -334,12 +334,12 @@ export const classSkillsDatabase: AllRawClassSkills = {
       },
       effects: [
         {
-          name: "Odp. fizyczne",
+          name: "physRes",
           type: "numeric",
           effect: [8, 12, 15, 19, 22, 28, 35],
         },
         {
-          name: "Odp. magiczne",
+          name: "magicRes",
           type: "numeric",
           effect: [8, 12, 15, 19, 22, 28, 35],
         },
@@ -508,7 +508,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       damageMod: calculateLinearEffect(80, 8),
       hittingMod: [80, 82, 85, 88, 92, 95, 100],
       cost: {
-        endurance: [25, 29, 33, 37, 40, 44, 48],
+        endurance: [15, 17, 20, 22, 24, 26, 29],
       },
       target: "single",
       duration: calculateLinearEffect(1, 0),
@@ -676,7 +676,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         },
         {
           name: "Skuteczność uników",
-          effect: calculateLinearEffect(56, 4),
+          effect: [56, 60, 64, 70, 76, 84, 90],
         },
         {
           name: "Zużycie kondycji",
@@ -1010,7 +1010,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       damageMod: calculateLinearEffect(60, 10),
       effects: [
         {
-          name: "Odp. fizyczne",
+          name: "physRes",
           type: "numeric",
           effect: calculateLinearEffect(10, 0),
         },
@@ -1455,10 +1455,10 @@ export const classSkillsDatabase: AllRawClassSkills = {
       attackType: "mental",
       hitType: "knowledge",
       damageFormula: {
-        powerCoeff: 1.4,
-        knoCoeff: 0.6,
+        powerCoeff: 1,
+        knoCoeff: 1,
       },
-      damageMod: calculateLinearEffect(86, 14),
+      damageMod: calculateLinearEffect(180, 10),
       hittingMod: calculateLinearEffect(90, 3),
       cost: {
         mana: calculateLinearEffect(20, 3),
@@ -1515,8 +1515,8 @@ export const classSkillsDatabase: AllRawClassSkills = {
         powerCoeff: 1.4,
         knoCoeff: 0.6,
       },
-      damageMod: calculateLinearEffect(48, 8),
-      hittingMod: [100, 103, 106, 109, 112, 115, 120],
+      damageMod: calculateLinearEffect(40, 4),
+      hittingMod: calculateLinearEffect(76, 4),
       cost: {
         endurance: calculateLinearEffect(20, 3),
       },
@@ -1529,29 +1529,29 @@ export const classSkillsDatabase: AllRawClassSkills = {
       ],
     },
     skill4: {
-      name: "Hak w brzuch",
-      image: "images/Hak_w_brzuch.jpg",
-      description:
-        "Urok zadaje poważne obrażenia, stanowi niezwykle groźną umiejętność czarownika Voodoo. Dodatkowo powoduje krwotok, który systematycznie osłabia przeciwnika. Pomija odporność na uroki przy liczeniu trafienia.",
-      type: "attack",
-      attackType: "mental",
-      hitType: "knowledge",
-      damageFormula: {
-        powerCoeff: 1.4,
-        knoCoeff: 0.6,
-      },
-      damageMod: calculateLinearEffect(80, 8),
-      hittingMod: [90, 93, 96, 99, 102, 105, 110],
+      name: "Tarcza Cienia",
+      image: "images/Tarcza_cienia.jpg",
+      description: "tarcza-cienia-desc",
+      type: "buff",
+      difficulty: calculateLinearEffect(160, 40),
       cost: {
         mana: [30, 35, 39, 44, 48, 53, 57],
+        endurance: [10, 12, 13, 15, 16, 18, 19],
       },
-      target: "single",
-      duration: calculateLinearEffect(3, 0),
+      target: "self",
+      duration: calculateLinearEffect(2, 0),
       effects: [
         {
-          name: "Krwawienie",
-          cumulative: true,
-          effect: calculateLinearEffect(80, 8),
+          name: "Obrażenia w HP",
+          effect: calculateLinearEffect(67, -2),
+        },
+        {
+          name: "Obrażenia w manę",
+          effect: calculateLinearEffect(33, 2),
+        },
+        {
+          name: "Reduktor straconej many",
+          effect: calculateLinearEffect(53, 2),
         },
       ],
     },
@@ -1600,7 +1600,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         powerCoeff: 1.4,
         knoCoeff: 0.6,
       },
-      damageMod: calculateLinearEffect(116, 14),
+      damageMod: calculateLinearEffect(132, 8),
       hittingMod: calculateLinearEffect(100, 5),
       cost: {
         mana: [15, 17, 19, 21, 24, 26, 28],
@@ -1654,18 +1654,18 @@ export const classSkillsDatabase: AllRawClassSkills = {
       hitType: "knowledge",
       hittingMod: calculateLinearEffect(90, 2),
       cost: {
-        mana: calculateLinearEffect(60, 9),
+        mana: [30, 35, 39, 44, 48, 53, 57],
       },
       target: "group",
-      duration: [4, 4, 5, 5, 6, 6, 6],
+      duration: [2, 2, 3, 3, 4, 4, 4],
       effects: [
         {
           name: "Modyfikator trafień dystansowych",
-          effect: calculateLinearEffect(-24, -4),
+          effect: calculateLinearEffect(-22, -2),
         },
         {
           name: "Obrona dystansowa",
-          effect: calculateLinearEffect(-24, -4),
+          effect: calculateLinearEffect(-22, -2),
         },
       ],
     },
@@ -1679,22 +1679,27 @@ export const classSkillsDatabase: AllRawClassSkills = {
       hitType: "knowledge",
       hittingMod: calculateLinearEffect(100, 3),
       cost: {
-        mana: [50, 58, 65, 73, 80, 88, 95],
+        mana: calculateLinearEffect(40, 6),
       },
-      target: "group",
-      duration: [4, 4, 5, 5, 6, 6, 6],
+      target: "single",
+      duration: [2, 2, 3, 3, 4, 4, 4],
       effects: [
         {
           name: "Szansa na zabicie",
-          effect: [20, 21, 22, 23, 24, 26, 30],
+          effect: calculateLinearEffect(8, 2),
         },
         {
-          name: "Skuteczność ataków",
-          effect: [-30, -34, -38, -42, -46, -50, -55],
+          name: "Modyfikator trafień magicznych",
+          effect: calculateLinearEffect(-22, -2),
         },
         {
-          name: "Skuteczność obrony",
-          effect: [-30, -34, -38, -42, -46, -50, -55],
+          name: "Obrona przeciw urokom",
+          effect: calculateLinearEffect(-22, -2),
+        },
+        {
+          name: "curseRes",
+          type: "numeric",
+          effect: calculateLinearEffect(-22, -2),
         },
       ],
     },

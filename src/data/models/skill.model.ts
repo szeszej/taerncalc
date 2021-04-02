@@ -151,6 +151,20 @@ export class Skill {
         : 0;
     return requiredKno < 10 ? 10 : requiredKno;
   }
+  calculateTotalCost(level: number, otherProperties: OtherProperties, stat: "mana" | "endurance"): number {
+    if (stat === "mana" && this.manaCost) {
+      let basicCost = this.manaCost[level]
+      let alteredCost = otherProperties["Zużycie many"] ? Math.floor(basicCost * (1 + (otherProperties["Zużycie many"] / 100))) : basicCost
+      return alteredCost
+    } else if (stat === "endurance" && this.enduranceCost) {
+      let basicCost = this.enduranceCost[level]
+      let alteredCost = otherProperties["Zużycie kondycji"] ? Math.floor(basicCost * (1 + (otherProperties["Zużycie kondycji"] / 100))) : basicCost
+      return alteredCost
+    } else {
+      return 0
+    }
+    
+  }
   //Needed for Incantation
   calculateEffectScaling(effect: Effect, skillLevel: number, charLvl: number): number {
     return effect.scaling ? Math.floor(effect.effect[skillLevel] * charLvl) : effect.effect[skillLevel]
