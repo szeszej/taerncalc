@@ -2,7 +2,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
   knight: {
     skill1: {
       name: "Szybkie Cięcie",
-      description: "Silniejszy i celniejszy niż podstawowy cios bronią.",
+      description: `Podstawowy accumulator (bardziej pod grę solo), którego uczymy się na samym początku gry. Ma dobrą celność, ale niezbyt duże obrażenia (czyli tak naprawdę bez zmian jeśli chodzi o funkcjonalność jak na razie). Dodatkowo przy uderzeniu generuje punkty Honoru - jest to niezmywalny debuff (podobnie jak Leczeniu, ale nie schodzi co turę) na rycerzu, który będzie służył nam jako dodatkowy zasób. Niektóre umiejętności są ulepszone, jeśli mamy odpowiednią ilość punktów honoru, inne mogą być użyte jedynie, jeśli mamy odpowiednią ich ilość.`,
       image: "images/Szybkie_Cięcie.jpg",
       type: "attack",
       attackType: "melee",
@@ -18,11 +18,18 @@ export const classSkillsDatabase: AllRawClassSkills = {
         endurance: [12, 14, 16, 18, 19, 21, 23],
       },
       target: "single",
+      effects: [
+        {
+          name: "Generacja Honoru",
+          type: "numeric",
+          effect: [1, 1, 1, 2, 2, 2, 3],
+        },
+      ]
     },
     skill2: {
-      name: "Mierzony Cios",
+      name: "Uderzenie tarczą",
       description:
-        "Skutecznie przeprowadzony atak oszałamia ofiarę obniżając efektywność jej ataków dystansowych i uroków. Dodatkowo podnosi obrażenia Potężnego uderzenia o 15%.",
+        "Podstawowy spender (bardziej pod grę solo). Zadaje bardzo duże obrażenia, ale ma słabą szansę trafienia. Jednakże jeśli mamy przynajmniej 4 Honoru, tarcza zostaje naładowana świętą mocą. Atak zużywa wtedy 4 Honoru, zadaje obrażenia od elektryczności (niekoniecznie, ale może np. zadaje obrażenia elementarne, jeśli tarcza ma resy elementarne? tylko trzeba by je dodać do większej ilości tarcz), oszałamia wroga (debuff jak dotąd Mierzony Cios, ale być może efekt do zmiany), nie kosztuje kondycji i otrzymuje dodatowe +100% do szansy trafienia (ostatnie dwa efekty kluczowe).",
       image: "images/Mierzony_Cios.jpg",
       type: "attack",
       attackType: "melee",
@@ -32,8 +39,8 @@ export const classSkillsDatabase: AllRawClassSkills = {
         agilityCoeff: 0.3,
         weapon: true,
       },
-      damageMod: calculateLinearEffect(80, 8),
-      hittingMod: [100, 103, 107, 110, 112, 115, 118],
+      damageMod: calculateLinearEffect(160, 20),
+      hittingMod: [80, 83, 87, 90, 92, 94, 97],
       cost: {
         endurance: calculateLinearEffect(20, 3),
       },
@@ -47,17 +54,13 @@ export const classSkillsDatabase: AllRawClassSkills = {
           name: "Modyfikator trafień magicznych",
           effect: [-25, -28, -31, -34, -37, -41, -45],
         },
-        {
-          name: "Obrażenia od Potężnego uderzenia",
-          effect: calculateLinearEffect(15, 0),
-        },
       ],
       duration: [3, 3, 4, 4, 5, 5, 5],
     },
     skill3: {
       name: "Blok Tarczą",
       description:
-        "Dzięki morderczemu treningowi Rycerz wie, kiedy i jak należy postawić blok, aby udany atak nawet kilku przeciwników zadał minimalne obrażenia. Każdy udany blok jest o 3% słabszy od poprzedniego i nie wpływa na redukcję obrażeń od żywiołów zaklętą w broniach. Użyta równocześnie Ochrona osłabia o kolejne 3% skuteczność bloku. Taka zasłona obniża też szansę na trafienie przeciwnika w zwarciu o 22%.",
+        "Akumulator defensywny (przydatne w solo, ale raczej pod party). Za każdy zablokowany atak rycerz otrzymuje Honor. Dalej bez zmian. Każdy udany blok jest o 3% słabszy od poprzedniego. Taka zasłona obniża też szansę na trafienie przeciwnika w zwarciu o 22%.",
       image: "images/Blok_Tarczą.jpg",
       type: "buff",
       duration: calculateLinearEffect(1, 0),
@@ -80,12 +83,43 @@ export const classSkillsDatabase: AllRawClassSkills = {
           name: "Modyfikator trafień fizycznych",
           effect: calculateLinearEffect(-22, 0),
         },
+        {
+          name: "Generacja Honoru",
+          type: "numeric",
+          effect: [1, 1, 1, 1, 2, 2, 2],
+        },
       ],
     },
     skill4: {
+      name: "Wyzwanie",
+      description:
+        "Zastępuje Ochronę jako umiejętność typową do gry w party. Zamiast chronić jednego gracza (co jest bardzo pasywną zdolnością, która tak naprawdę może nic nie zrobić, bo gracz wcale nie musi być celem ataku), zmuszamy jednego wroga do atakowani w rycerza (co jest bardziej aktywną zdolnością, która daje graczowi więcej poczucia kontroli nad poczynaniami swojej postaci). Zdaję sobie sprawę, że będzie to wymagało przebalansowania walk w grze, ale żeby zrobić z rycerza postać mniej do afczenia, a bardziej do aktywnej gry, jest to według mnie zmiana konieczna i nieuchronna. Lepiej zrobić to teraz kiedy bossów, gdzie ma to znaczenie jest relatywnie mało, bo z BR będzie ich tylko przybywać. Oprócz tego zmusi to klasy dmg do zatroszcenia się bardziej o swoją przeżywalność, więc tutaj też zmniejszy się poziom afzcenia (acz mogą wymagać dostosowania umek pod przeżywalność). Dodatkowo na cel zostaje rzucony efekt Strach. Nie przekierowuje ataków obszarowych. Zmuszanie do ataku nie działa w PvP(?), tutaj aplikuje tylko Strach.",
+      image: "images/Ochrona.jpg",
+      type: "attack",
+      duration: [1, 1, 1, 1, 1, 2, 2],
+      target: "single",
+      attackType: "mental",
+      hitType: "knowledge",
+      hittingMod: calculateLinearEffect(150, 10),
+      cost: {
+        endurance: calculateLinearEffect(40, 6),
+      },
+      effects: [
+        {
+          name: "Skuteczność wyzwania",
+          effect: [70, 74, 78, 82, 86, 90, 95],
+        },
+        {
+          name: "Skuteczność ataków",
+          effect: calculateLinearEffect(-15, -5),
+        },
+      ],
+      
+    },
+    skill5: {
       name: "Trans",
       description:
-        "Nadnaturalne skupienie i niebywała koncentracja sprawiły, że Rycerz w stopniu doskonałym panuje nad swoimi ruchami, dzięki czemu jego trafienia są pewniejsze, a ekwipunek ulega wzmocnieniu. Skupiony na podtrzymaniu uroku jest on jednak bardziej podatny na ataki.",
+        "Akumulator, ale tylko w grze w party. W solo po prostu buff. Tutaj dwie zmiany - jako że kompletnie przerabiam Poświęcenie, to dodałem jego efekt tutaj (nie upieram się przy tej zmianie) i żeby lepiej współpracowało się z MO - polepsza również trafienia z dystansu i obrażenia magiczne. Rzucone na innego członka party, który nie ma jeszcze aktywnego Transu generuje Honor.",
       image: "images/Trans.jpg",
       type: "buff",
       duration: [3, 3, 4, 4, 5, 5, 5],
@@ -96,13 +130,16 @@ export const classSkillsDatabase: AllRawClassSkills = {
       },
       effects: [
         {
-          name: "physRes",
-          type: "numeric",
-          effect: [2, 8, 12, 18, 24, 30, 36],
-        },
-        {
           name: "Modyfikator trafień fizycznych",
           effect: calculateLinearEffect(14, 4),
+        },
+        {
+          name: "Modyfikator trafień dystansowych",
+          effect: calculateLinearEffect(14, 4),
+        },
+        {
+          name: "Modyfikator obrażeń",
+          effect: calculateLinearEffect(24, 4),
         },
         {
           name: "Obrona wręcz",
@@ -117,47 +154,28 @@ export const classSkillsDatabase: AllRawClassSkills = {
           type: "numeric",
           effect: calculateLinearEffect(2, 3),
         },
-      ],
-    },
-    skill5: {
-      name: "Ochrona",
-      description:
-        "Umiejętność Ochrony daje szansę, że ataki przeciwników wymierzone w bronioną przez rycerza postać zostaną przekierowane na rycerza. Działa na ataki wręcz oraz dystansowe, z wyłączeniem ataków obszarowych. Użyta ochrona osłabia o 3% skuteczność Bloku Tarczą.",
-      image: "images/Ochrona.jpg",
-      type: "buff",
-      duration: calculateLinearEffect(1, 0),
-      target: "single",
-      difficulty: calculateLinearEffect(120, 30),
-      cost: {
-        endurance: calculateLinearEffect(40, 6),
-      },
-      effects: [
         {
-          name: "Skuteczność ochrony",
-          effect: [70, 74, 78, 82, 86, 90, 95],
-        },
-        {
-          name: "Skuteczność bloku",
-          targetSelf: true,
-          effect: calculateLinearEffect(-3, 0),
+          name: "Generacja Honoru",
+          type: "numeric",
+          effect: [1, 1, 1, 2, 2, 2, 3],
         },
       ],
     },
     skill6: {
-      name: "Potężne Uderzenie",
+      name: "Święta Tarcza/Rzut Tarczą",
       description:
-        "Bardzo energochłonny atak zadaje ogromną ilość ran i dziesiątkuję przeciwników. Zawczasu oszołomione postacie otrzymują znacznie więcej obrażeń.",
+        "Alternatywny spender (do gry solo, gdy walczymy z kilkoma wrogami lub do zmiany obrony przeciwników). Dzięki nadnaturalnemu skupieniu i pomocy Taernijskich bóstw, rycerz jest w stanie stworzyć na wpół materialny obraz swojej tarczy, który leci w stronę wrogów i rani ich. Atak nie skaluje się od obrażeń broni, ale od sumy odporności tarczy. Jednakże jeśli mamy przynajmniej 4 Honoru, tarcza zostaje naładowana dodatkową mocą. Atak zużywa wtedy 4 Honoru, zadaje obrażenia od elektryczności (niekoniecznie, ale może np. zadaje obrażenia elementarne, jeśli tarcza ma resy elementarne? tylko trzeba by je dodać do większej ilości tarcz), zadaje dodatkowe +40% obrażeń, trafia dodatkowo wroga stojącego obok, nie kosztuje kondycji i otrzymuje dodatowe +100% do szansy trafienia (ostatnie cztery efekty raczej kluczowe, ew. bez dodatkowych obrażeń?).",
       image: "images/Potężne_Uderzenie.jpg",
       type: "attack",
-      attackType: "melee",
+      attackType: "ranged",
       hitType: "agility",
       damageFormula: {
         strengthCoeff: 0.7,
         agilityCoeff: 0.3,
         weapon: true,
       },
-      damageMod: calculateLinearEffect(160, 20),
-      hittingMod: [100, 103, 107, 110, 112, 114, 117],
+      damageMod: calculateLinearEffect(80, 8),
+      hittingMod: [100, 103, 107, 110, 112, 115, 118],
       cost: {
         endurance: calculateLinearEffect(20, 3),
       },
@@ -166,11 +184,11 @@ export const classSkillsDatabase: AllRawClassSkills = {
     skill7: {
       name: "Aura Czystości",
       description:
-        "Aura, która daje odporność na uroki oraz zmniejsza podatność na czary przeciwników. Aura może służyć tak Rycerzowi jak i wybranej przez niego sojuszniczej postaci.",
+        "Spender, raczej pod party, ale również solo, jeśli akurat będzie więcej Honoru. Umiejętność kosztuje 4 Honoru i nie może być rzucona jeśli nie mamy odpowiedniej jego ilości. Od rycerza promieniuje aura czystości, która znacznie zwiększa obronę wszystkich członków party. Kluczowe jest tutaj takie zbalansowanie tej umiejętności, aby nie mogła być używana co turę (np. duży koszt many lub Honoru), a jedynie sytuacyjnie - kiedy spodziewamy się, że party dostanie dużą ilość obrażeń w danej rundzie. Prawidłowe użycie tej umiejętności powinno odróżniać dobrego rycerza od słabego rycerza.",
       image: "images/Aura_Czystości.jpg",
       type: "buff",
-      duration: [3, 3, 4, 4, 5, 5, 5],
-      target: "single",
+      duration: calculateLinearEffect(1, 0),
+      target: "group",
       difficulty: calculateLinearEffect(160, 40),
       cost: {
         mana: [30, 35, 39, 44, 48, 53, 57],
@@ -179,64 +197,60 @@ export const classSkillsDatabase: AllRawClassSkills = {
         {
           name: "physRes",
           type: "numeric",
-          effect: [1, 2, 6, 8, 10, 12, 14],
+          effect: calculateLinearEffect(22, 3),
         },
         {
           name: "magicRes",
           type: "numeric",
-          effect: calculateLinearEffect(11, 4),
+          effect: calculateLinearEffect(22, 3),
         },
         {
           name: "Obrona przeciw urokom",
-          effect: calculateLinearEffect(9, 6),
+          effect: calculateLinearEffect(25, 5),
         },
       ],
     },
     skill8: {
       name: "Poświęcenie",
       description:
-        "Ofiarność i chęć czynienia dobra jest priorytetem Rycerza, dlatego w momencie zagrożenia wartości nadrzędnych Rycerz, rzuca na siebie urok pozytywny, który obniża jego obronę, wzmacnia za to ataki. Odsłaniając się i odnosząc większe obrażenia, dziesiątkuje wrogów broniąc zasad, za które gotów jest oddać życie.",
+        "Spender typowo pod party. Tutaj kompletnie zmieniam umiejętność, więc jej efekt przeniosłem do Transu. Umiejętność kosztuje 6 Honoru i nie może być rzucona jeśli nie mamy odpowiedniej jego ilości. Kodeks nakazuje rycerzowi przychodzić na ratunek swoim towarzyszom. Jeśli któryś z nich w tej turze miałby zginąć, rycerz przejmuje na siebie większość obrażeń. Może uratować max 1 osobę na rundę. Uratowana postać otrzymuje debuff Ocaleniec, który sprawia, że postać nie może być drugi raz uratowana podczas tej walki. Uratowana postć zostaje na 1HP(?). Jeśli nikt nie zginie w danej rundzie, połowa wydanego Honoru jest zwracana. Kluczowe jest tutaj takie zbalansowanie tej umiejętności, aby nie mogła być używana co turę (np. duży koszt many lub Honoru), a jedynie sytuacyjnie - kiedy jesteśmy prawie przekonani, że ktoś zginie. Prawidłowe użycie tej umiejętności powinno odróżniać dobrego rycerza od słabego rycerza.",
       image: "images/Poświęcenie.jpg",
       type: "buff",
-      duration: [4, 4, 5, 5, 6, 6, 6],
-      target: "single",
+      duration: calculateLinearEffect(1, 0),
+      target: "group",
       difficulty: calculateLinearEffect(120, 30),
       cost: {
-        mana: [30, 35, 39, 44, 48, 52, 57],
+        mana: [50, 55, 59, 64, 68, 72, 77],
       },
       effects: [
         {
-          name: "physRes",
-          type: "numeric",
-          effect: calculateLinearEffect(-2, -8),
+          name: "Obrażenia w rycerza od przejętego ataku",
+          effect: calculateLinearEffect(100, -10),
         },
-        {
-          name: "Modyfikator obrażeń fizycznych",
-          effect: calculateLinearEffect(24, 4),
-        },
+
       ],
     },
     skill9: {
       name: "Siła Jedności",
       description:
-        "Postacie pod wpływem siły jedności zadają większe obrażenia oraz są skuteczniejsze.",
+        "Spender, raczej pod party, ale również solo, jeśli akurat będzie więcej Honoru. Umiejętność kosztuje 6 Honoru i nie może być rzucona jeśli nie mamy odpowiedniej jego ilości. Rozkaz rzucony przez rycerza sprawia, że znacznie podnosi się skuteczność i siła ataków całej drużyny. Kluczowe jest tutaj takie zbalansowanie tej umiejętności, aby nie mogła być używana co turę (np. duży koszt many lub Honoru), a jedynie sytuacyjnie - kiedy potrzebujemy zadać dużą ilość obrażeń w danej rundzie. Prawidłowe użycie tej umiejętności powinno odróżniać dobrego rycerza od słabego rycerza.",
       image: "images/Siła_jedności.jpg",
       type: "buff",
-      duration: [2, 2, 3, 3, 4, 4, 4],
+      duration: calculateLinearEffect(1, 0),
       target: "group",
       difficulty: calculateLinearEffect(240, 60),
       cost: {
-        mana: calculateLinearEffect(20, 3),
+        mana: [50, 55, 59, 64, 68, 72, 77],
         endurance: [15, 17, 20, 22, 24, 26, 29],
       },
       effects: [
         {
           name: "Zadawane obrażenia",
-          effect: calculateLinearEffect(2, 2),
+          effect: calculateLinearEffect(22, 3),
         },
         {
           name: "Skuteczność ataków",
-          effect: [15, 17, 19, 21, 23, 25, 29],
+          effect: calculateLinearEffect(25, 5),
         },
       ],
     },
