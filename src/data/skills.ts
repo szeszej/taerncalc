@@ -2,7 +2,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
   knight: {
     skill1: {
       name: "Szybkie Cięcie",
-      description: `Podstawowy accumulator (bardziej pod grę solo), którego uczymy się na samym początku gry. Ma dobrą celność, ale niezbyt duże obrażenia (czyli tak naprawdę bez zmian jeśli chodzi o funkcjonalność jak na razie). Dodatkowo przy uderzeniu generuje punkty Honoru - jest to niezmywalny debuff (podobnie jak Leczeniu, ale nie schodzi co turę) na rycerzu, który będzie służył nam jako dodatkowy zasób. Niektóre umiejętności są ulepszone, jeśli mamy odpowiednią ilość punktów honoru, inne mogą być użyte jedynie, jeśli mamy odpowiednią ich ilość.`,
+      description: `Podstawowy accumulator (bardziej pod grę solo), którego uczymy się na samym początku gry. Ma dobrą celność, ale niezbyt duże obrażenia (czyli tak naprawdę bez zmian jeśli chodzi o funkcjonalność jak na razie). Dodatkowo przy uderzeniu generuje punkty Honoru - jest to niezmywalny debuff (podobnie jak Leczeniu, ale nie schodzi co turę) na rycerzu, który będzie służył nam jako dodatkowy zasób. Niektóre umiejętności są ulepszone, jeśli mamy odpowiednią ilość punktów honoru, inne mogą być użyte jedynie, jeśli mamy odpowiednią ich ilość. Generuje Honor nawet przy nietrafionym ataku, ale w takim przypadku z karą -1 do generacji. Jest to najsłabszy atak i jedyny, który skaluje się z obrażeniami od broni, więc nawet rycerz z epikiem nie powinien przegonić barby w obrażeniach.`,
       image: "images/Szybkie_Cięcie.jpg",
       type: "attack",
       attackType: "melee",
@@ -29,7 +29,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
     skill2: {
       name: "Uderzenie tarczą",
       description:
-        "Podstawowy spender (bardziej pod grę solo). Zadaje bardzo duże obrażenia, ale ma słabą szansę trafienia. Jednakże jeśli mamy przynajmniej 4 Honoru, tarcza zostaje naładowana świętą mocą. Atak zużywa wtedy 4 Honoru, zadaje obrażenia od elektryczności (niekoniecznie, ale może np. zadaje obrażenia elementarne, jeśli tarcza ma resy elementarne? tylko trzeba by je dodać do większej ilości tarcz), oszałamia wroga (debuff jak dotąd Mierzony Cios, ale być może efekt do zmiany), nie kosztuje kondycji i otrzymuje dodatowe +100% do szansy trafienia (ostatnie dwa efekty kluczowe).",
+        "Podstawowy spender (bardziej pod grę solo). Zadaje bardzo duże obrażenia, ale ma słabą szansę trafienia. Atak nie skaluje się od obrażeń broni, ale od sumy odporności tarczy. Jednakże jeśli mamy przynajmniej 4 Honoru, tarcza zostaje naładowana świętą mocą. Atak zużywa wtedy 4 Honoru, zadaje obrażenia od elektryczności (niekoniecznie, ale może np. zadaje obrażenia elementarne, jeśli tarcza ma resy elementarne? tylko trzeba by je dodać do większej ilości tarcz), oszałamia wroga (debuff jak dotąd Mierzony Cios, ale być może efekt do zmiany), nie kosztuje kondycji i otrzymuje dodatowe +100% do szansy trafienia (ostatnie dwa efekty kluczowe).",
       image: "images/Mierzony_Cios.jpg",
       type: "attack",
       attackType: "melee",
@@ -60,7 +60,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
     skill3: {
       name: "Blok Tarczą",
       description:
-        "Akumulator defensywny (przydatne w solo, ale raczej pod party). Za każdy zablokowany atak rycerz otrzymuje Honor. Dalej bez zmian. Każdy udany blok jest o 3% słabszy od poprzedniego. Taka zasłona obniża też szansę na trafienie przeciwnika w zwarciu o 22%.",
+        "Akumulator defensywny (przydatne w solo, ale raczej pod party). Za każdy zablokowany atak rycerz otrzymuje Honor. Generuje Honor nawet przy jeśli przeciwnik nie trafi, ale w takim przypadku z karą -1 do generacji. Dalej bez zmian. Każdy udany blok jest o 3% słabszy od poprzedniego. Taka zasłona obniża też szansę na trafienie przeciwnika w zwarciu o 22%.",
       image: "images/Blok_Tarczą.jpg",
       type: "buff",
       duration: calculateLinearEffect(1, 0),
@@ -93,7 +93,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
     skill4: {
       name: "Wyzwanie",
       description:
-        "Zastępuje Ochronę jako umiejętność typową do gry w party. Zamiast chronić jednego gracza (co jest bardzo pasywną zdolnością, która tak naprawdę może nic nie zrobić, bo gracz wcale nie musi być celem ataku), zmuszamy jednego wroga do atakowani w rycerza (co jest bardziej aktywną zdolnością, która daje graczowi więcej poczucia kontroli nad poczynaniami swojej postaci). Zdaję sobie sprawę, że będzie to wymagało przebalansowania walk w grze, ale żeby zrobić z rycerza postać mniej do afczenia, a bardziej do aktywnej gry, jest to według mnie zmiana konieczna i nieuchronna. Lepiej zrobić to teraz kiedy bossów, gdzie ma to znaczenie jest relatywnie mało, bo z BR będzie ich tylko przybywać. Oprócz tego zmusi to klasy dmg do zatroszcenia się bardziej o swoją przeżywalność, więc tutaj też zmniejszy się poziom afzcenia (acz mogą wymagać dostosowania umek pod przeżywalność). Dodatkowo na cel zostaje rzucony efekt Strach. Nie przekierowuje ataków obszarowych. Zmuszanie do ataku nie działa w PvP(?), tutaj aplikuje tylko Strach.",
+        "Zastępuje Ochronę jako umiejętność typową do gry w party. Zamiast chronić jednego gracza (co jest bardzo pasywną zdolnością, która tak naprawdę może nic nie zrobić, bo gracz wcale nie musi być celem ataku), zmuszamy jednego wroga do atakowani w rycerza (co jest bardziej aktywną zdolnością, która daje graczowi więcej poczucia kontroli nad poczynaniami swojej postaci). Zdaję sobie sprawę, że będzie to wymagało przebalansowania walk w grze, ale żeby zrobić z rycerza postać mniej do afczenia, a bardziej do aktywnej gry, jest to według mnie zmiana konieczna i nieuchronna. Lepiej zrobić to teraz kiedy bossów, gdzie ma to znaczenie jest relatywnie mało, bo z BR będzie ich tylko przybywać. Na pewno do pojedynczych bossów można dodać odporność na wyzwanie, która (wzorem tego jak działa odporność na Ukaz) zmniejsza skutecznosc Wyzwania, ale nie zmniejsza szansy na trafienie. Oprócz tego zmusi to klasy dmg do zatroszcenia się bardziej o swoją przeżywalność, więc tutaj też zmniejszy się poziom afzcenia (acz mogą wymagać dostosowania umek pod przeżywalność). Dodatkowo na cel zostaje rzucony efekt Strach. Nie przekierowuje ataków obszarowych. Zmuszanie do ataku nie działa w PvP(?), tutaj aplikuje tylko Strach (z dużo większą szansą trafienia, ale znacznie krótszym czasem działania).",
       image: "images/Ochrona.jpg",
       type: "attack",
       duration: [1, 1, 1, 1, 1, 2, 2],
@@ -162,9 +162,9 @@ export const classSkillsDatabase: AllRawClassSkills = {
       ],
     },
     skill6: {
-      name: "Święta Tarcza/Rzut Tarczą",
+      name: "Tarcza Światłości",
       description:
-        "Alternatywny spender (do gry solo, gdy walczymy z kilkoma wrogami lub do zmiany obrony przeciwników). Dzięki nadnaturalnemu skupieniu i pomocy Taernijskich bóstw, rycerz jest w stanie stworzyć na wpół materialny obraz swojej tarczy, który leci w stronę wrogów i rani ich. Atak nie skaluje się od obrażeń broni, ale od sumy odporności tarczy. Jednakże jeśli mamy przynajmniej 4 Honoru, tarcza zostaje naładowana dodatkową mocą. Atak zużywa wtedy 4 Honoru, zadaje obrażenia od elektryczności (niekoniecznie, ale może np. zadaje obrażenia elementarne, jeśli tarcza ma resy elementarne? tylko trzeba by je dodać do większej ilości tarcz), zadaje dodatkowe +40% obrażeń, trafia dodatkowo wroga stojącego obok, nie kosztuje kondycji i otrzymuje dodatowe +100% do szansy trafienia (ostatnie cztery efekty raczej kluczowe, ew. bez dodatkowych obrażeń?).",
+        "Alternatywny spender (do gry solo, gdy walczymy z kilkoma wrogami lub do zmiany obrony przeciwników). Dzięki nadnaturalnemu skupieniu i pomocy Taernijskich bóstw, rycerz jest w stanie stworzyć na wpół materialny obraz swojej tarczy, który leci w stronę wrogów i rani ich. Atak nie skaluje się od obrażeń broni, ale od sumy odporności tarczy. Jednakże jeśli mamy przynajmniej 4 Honoru, tarcza zostaje naładowana dodatkową mocą. Atak zużywa wtedy 4 Honoru, zadaje obrażenia od elektryczności (niekoniecznie, ale może np. zadaje obrażenia elementarne, jeśli tarcza ma resy elementarne? tylko trzeba by je dodać do większej ilości tarcz), zadaje dodatkowe +40% obrażeń, trafia dodatkowo wroga stojącego obok, nie kosztuje kondycji i otrzymuje dodatowe +100% do skuteczności ataku (ostatnie cztery efekty raczej kluczowe, ew. bez dodatkowych obrażeń?).",
       image: "images/Potężne_Uderzenie.jpg",
       type: "attack",
       attackType: "ranged",
@@ -213,7 +213,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
     skill8: {
       name: "Poświęcenie",
       description:
-        "Spender typowo pod party. Tutaj kompletnie zmieniam umiejętność, więc jej efekt przeniosłem do Transu. Umiejętność kosztuje 6 Honoru i nie może być rzucona jeśli nie mamy odpowiedniej jego ilości. Kodeks nakazuje rycerzowi przychodzić na ratunek swoim towarzyszom. Jeśli któryś z nich w tej turze miałby zginąć, rycerz przejmuje na siebie większość obrażeń. Może uratować max 1 osobę na rundę. Uratowana postać otrzymuje debuff Ocaleniec, który sprawia, że postać nie może być drugi raz uratowana podczas tej walki. Uratowana postć zostaje na 1HP(?). Jeśli nikt nie zginie w danej rundzie, połowa wydanego Honoru jest zwracana. Kluczowe jest tutaj takie zbalansowanie tej umiejętności, aby nie mogła być używana co turę (np. duży koszt many lub Honoru), a jedynie sytuacyjnie - kiedy jesteśmy prawie przekonani, że ktoś zginie. Prawidłowe użycie tej umiejętności powinno odróżniać dobrego rycerza od słabego rycerza.",
+        "Spender typowo pod party. Tutaj kompletnie zmieniam umiejętność, więc jej efekt przeniosłem do Transu. Umiejętność kosztuje 6 Honoru i nie może być rzucona jeśli nie mamy odpowiedniej jego ilości. Kodeks nakazuje rycerzowi przychodzić na ratunek swoim towarzyszom. Jeśli któryś z nich w tej turze miałby zginąć, rycerz przejmuje na siebie większość obrażeń. Może uratować max 1 osobę na rundę. Uratowana postać otrzymuje debuff Ocaleniec, który sprawia, że postać nie może być drugi raz uratowana podczas tej walki. Uratowana postć zostaje na 1HP(?) i przez resztę rundy jest traktowana jako martwa (ataki lecą w inne cele). Jeśli nikt nie zginie w danej rundzie, połowa wydanego Honoru jest zwracana. Kluczowe jest tutaj takie zbalansowanie tej umiejętności, aby nie mogła być używana co turę (np. duży koszt many lub Honoru), a jedynie sytuacyjnie - kiedy jesteśmy prawie przekonani, że ktoś zginie. Prawidłowe użycie tej umiejętności powinno odróżniać dobrego rycerza od słabego rycerza.",
       image: "images/Poświęcenie.jpg",
       type: "buff",
       duration: calculateLinearEffect(1, 0),
@@ -233,7 +233,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
     skill9: {
       name: "Siła Jedności",
       description:
-        "Spender, raczej pod party, ale również solo, jeśli akurat będzie więcej Honoru. Umiejętność kosztuje 6 Honoru i nie może być rzucona jeśli nie mamy odpowiedniej jego ilości. Rozkaz rzucony przez rycerza sprawia, że znacznie podnosi się skuteczność i siła ataków całej drużyny. Kluczowe jest tutaj takie zbalansowanie tej umiejętności, aby nie mogła być używana co turę (np. duży koszt many lub Honoru), a jedynie sytuacyjnie - kiedy potrzebujemy zadać dużą ilość obrażeń w danej rundzie. Prawidłowe użycie tej umiejętności powinno odróżniać dobrego rycerza od słabego rycerza.",
+        "Spender, raczej pod party, ale również solo, jeśli akurat będzie więcej Honoru. Umiejętność kosztuje 6 Honoru i nie może być rzucona jeśli nie mamy odpowiedniej jego ilości. Rozkaz rzucony przez rycerza sprawia, że znacznie podnosi się skuteczność i siła ataków całej drużyny. Kluczowe jest tutaj takie zbalansowanie tej umiejętności, aby nie mogła być używana co turę (np. duży koszt many lub Honoru), a jedynie sytuacyjnie - kiedy potrzebujemy zadać dużą ilość obrażeń w danej rundzie. Prawidłowe użycie tej umiejętności powinno odróżniać dobrego rycerza od słabego rycerza. Dodatkowo wymaga dobrej koordynacji w drużynie, żeby dmg był przygotowany.",
       image: "images/Siła_jedności.jpg",
       type: "buff",
       duration: calculateLinearEffect(1, 0),
