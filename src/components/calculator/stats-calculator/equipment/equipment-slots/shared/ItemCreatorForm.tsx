@@ -5,6 +5,7 @@ import ReactGA from "react-ga";
 //Redux
 import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
+import { RootState } from "../../../../../../store/store";
 
 //Action creators
 import { addItem } from "../../../../../../store/items-reducer/items-reducer";
@@ -40,7 +41,7 @@ class ConnectedItemCreatorForm extends React.Component<PropTypes, StateTypes> {
   createItem(): void {
     let itemProperties: CustomItem = {
       name: this.props.name,
-      image: this.props.type + "color.svg",
+      image: this.props.type !== "shield" ? this.props.type + "color.svg" : this.props.class === "knight" ? "shieldcolor.svg" : "bracerscolor.svg",
       type: this.props.type === "ring1" || this.props.type === "ring2" ? "ring" : this.props.type,
       strength: 0,
       agility: 0,
@@ -268,6 +269,12 @@ interface CustomItem extends RawItem {
 }
 
 //Redux
+const mapStateToProps = (state: RootState) => {
+  return {
+    class: state.character.className,
+  };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addItem: (item: Item) => dispatch(addItem({ item: item })),
@@ -276,6 +283,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export const ItemCreatorForm = withTranslation()(connector(ConnectedItemCreatorForm));

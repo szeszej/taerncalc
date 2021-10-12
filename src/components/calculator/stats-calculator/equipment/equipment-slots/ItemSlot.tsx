@@ -139,7 +139,10 @@ class ConnectedItemSlot extends React.Component<PropTypes, StateTypes> {
                 backgroundImage:
                   `url("/images/items/` + this.props.inSlot.image + '")',
               }
-            : undefined
+            : this.props.class !== "knight" && this.props.type === "shield" ? {
+              backgroundImage:
+                `url("/images/bracers.svg")`,
+            } : undefined
         }
       >
         {this.props.listToDisplay === this.props.type ? (
