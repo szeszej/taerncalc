@@ -102,13 +102,14 @@ class ConnectedEquipment extends React.Component<PropTypes, StateTypes> {
         label: item.name,
       });
     }
-    if (type === "weapon" && item.weaponType === "Dwuręczna") {
+    if (type === "weapon" && item.weaponType === "Dwuręczna" && this.props.class === "knight") {
       this.props.equipItem(type, item);
       this.props.unequipItem("shield");
     } else if (
       type === "shield" &&
       this.props.equipment.weapon !== null &&
-      this.props.equipment.weapon.weaponType === "Dwuręczna"
+      this.props.equipment.weapon.weaponType === "Dwuręczna" &&
+      this.props.class === "knight"
     ) {
       this.props.unequipItem("weapon");
       this.props.equipItem(type, item);
