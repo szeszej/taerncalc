@@ -274,24 +274,32 @@ export const classSkillsDatabase: AllRawClassSkills = {
       ],
     },
     skill2: {
-      name: "Atak dwuręczny",
-      image: "images/Dwuręczny.jpg",
+      name: "Wirujące ostrze",
+      image: "images/rzut toporem.png",
       description:
-        'Uderzenie dwuręczne to "sztuka" posługiwania się tym subtelnym narzędziem mordu, niemożliwa do opanowania dla nikogo spoza grona Barbarzyńców.',
+        'Barbarzyńca rzuca toporem w przeciwnika z tak wielką siłą, że oprócz zadania mu zwykłych obrażeń wywołuje u niego lekki wstrząs mózgu. W efekcie wróg zostaje zamroczony i przez to mniej celny.',
       type: "attack",
-      attackType: "melee",
+      attackType: "ranged",
       hitType: "agility",
       damageFormula: {
-        strengthCoeff: 0.8,
-        agilityCoeff: 0.2,
+        strengthCoeff: 1.2,
+        agilityCoeff: 0.8,
         weapon: true,
       },
-      damageMod: calculateLinearEffect(170, 20),
-      hittingMod: [95, 98, 101, 104, 107, 112, 117],
+      damageMod: calculateLinearEffect(77, 14),
+      hittingMod: calculateLinearEffect(111, 2),
       cost: {
-        endurance: [17, 20, 22, 25, 27, 30, 32],
+        endurance: [16, 18, 21, 24, 27, 30, 32],
       },
       target: "single",
+      duration: [2, 2, 2, 2, 3, 3, 3],
+      effects: [
+        {
+          name: "Skuteczność ataków",
+          type: "numeric",
+          effect: calculateLinearEffect(-11, -2),
+        },
+      ],
     },
     skill3: {
       name: "Taran",
@@ -401,55 +409,44 @@ export const classSkillsDatabase: AllRawClassSkills = {
       ],
     },
     skill7: {
-      name: "Zakażenie",
-      image: "images/Zakażenie.jpg",
+      name: "Amok",
+      image: "images/amok.png",
       description:
-        "Zakażenie jest urokiem negatywnym. Wymagane jest aktywne krwawienie.",
-      type: "attack",
-      attackType: "mental",
-      hitType: "knowledge",
-      damageFormula: {
-        strengthCoeff: 0.8,
-        agilityCoeff: 1.2,
-      },
-      damageMod: calculateLinearEffect(100, 10),
-      hittingMod: calculateLinearEffect(100, 3),
+        "Każdy negatywny efekt w zetknięciu z Barbarzyńcą w amoku okazuje się być o kilka poziomów słabszy, chociaż czas jego trwania się nie zmienia.",
+      type: "buff",
       cost: {
-        mana: calculateLinearEffect(20, 3),
+        mana: calculateLinearEffect(11, 2),
+        endurance: calculateLinearEffect(11, 2)
       },
-      target: "single",
-      duration: calculateLinearEffect(6, 0),
+      target: "self",
+      difficulty: calculateLinearEffect(80, 20),
+      duration: [1, 2, 2, 3, 3, 4, 5],
       effects: [
         {
-          name: "Zakażenie",
-          effect: calculateLinearEffect(100, 10),
+          name: "Obniżenie poziomu debuffów",
+          type: "numeric",
+          effect: [-1, -1, -2, -2, -3, -3, -3],
         },
       ],
     },
     skill8: {
-      name: "Ryk",
-      image: "images/Ryk.jpg",
+      name: "Tąpnięcie",
+      image: "images/tąpnięcie.png",
       description:
         "Diabelski ryk, który przeraża i paraliżuje słabsze psychicznie istoty, zapewniając Barbarzyńcy przewagę na polu bitwy.",
       type: "attack",
-      attackType: "mental",
-      hitType: "knowledge",
+      attackType: "melee",
+      hitType: "agility",
+      damageFormula: {
+        strengthCoeff: 1,
+        agilityCoeff: 0.4,
+      },
+      damageMod: calculateLinearEffect(220, 24),
+      hittingMod: [90, 93, 97, 100, 103, 107, 110],
       cost: {
-        mana: calculateLinearEffect(20, 3),
         endurance: [20, 23, 26, 29, 32, 35, 37],
       },
-      target: "single",
-      duration: [3, 3, 4, 4, 5, 5, 5],
-      effects: [
-        {
-          name: "Skuteczność ataków",
-          effect: [15, 18, 21, 24, 27, 30, 35],
-        },
-        {
-          name: "Skuteczność obrony",
-          effect: [15, 18, 21, 24, 27, 30, 35],
-        },
-      ],
+      target: "group"    
     },
     skill9: {
       name: "Krytyczne uderzenie",
@@ -794,13 +791,13 @@ export const classSkillsDatabase: AllRawClassSkills = {
         powerCoeff: 1.3,
         knoCoeff: 0.7,
       },
-      damageMod: [40, 46, 52, 60, 68, 76, 88],
+      damageMod: [78, 84, 92, 100, 110, 122, 135],
       hittingMod: calculateLinearEffect(100, 1),
       cost: {
-        mana: [30, 35, 39, 44, 48, 53, 57],
+        mana: [25, 29, 33, 36, 40, 44, 48],
       },
       target: "single",
-      duration: [3, 3, 4, 4, 4, 4, 5],
+      duration: [2, 2, 2, 2, 3, 3, 3],
       effects: [
         {
           name: "Dodatkowe PA",
@@ -810,25 +807,23 @@ export const classSkillsDatabase: AllRawClassSkills = {
       ],
     },
     skill4: {
-      name: "Wtapianie",
-      image: "images/Wtapianie.jpg",
+      name: "Naturalna odporność",
+      image: "images/naturalna odporność.png",
       description:
-        "Druid w naturalny sposób posiadł zdolność osiągania idealnej harmonii z naturą. Zastygły w bezruchu, zasłuchany w przyrodę, jest niemalże niewidzialny. Dopiero ruch może go zdradzić. Ta właściwość niebywale utrudnia trafienie Druida.",
+        "Dzięki głębokiemu poznaniu tajników natury Druid jest w stanie natychmiast wzmocnić swoją odporność fizyczną.",
       type: "buff",
       target: "single",
-      duration: [3, 3, 4, 4, 5, 5, 6],
+      duration: [3, 3, 4, 4, 5, 5, 5],
       difficulty: calculateLinearEffect(160, 40),
       cost: {
         mana: [30, 35, 39, 44, 48, 53, 57],
+        endurance: [10, 12, 13, 15, 16, 18, 19]
       },
       effects: [
         {
-          name: "Obrona wręcz",
-          effect: calculateLinearEffect(18, 2),
-        },
-        {
-          name: "Obrona dystansowa",
-          effect: calculateLinearEffect(18, 2),
+          name: "physRes",
+          type: "numeric",
+          effect: calculateLinearEffect(22, 4),
         },
       ],
     },
@@ -923,7 +918,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
       name: "Korzenie",
       image: "images/Korzenie.jpg",
       description:
-        "Sprzymierzona z Druidem flora oplata korzeniami wskazanego przeciwnika, przykuwając go do ziemi i uniemożliwiając wykonywanie ataków wręcz. Dodatkowo przeciwnik otrzymuje obrażenia wręcz.",
+        "Dzięki komunikacji ze światem roślin sprzymierzona z Druidem flora oplata korzeniami wskazanego przeciwnika. Zostaje on zraniony, czego skutki odczuwa przez dłuższy czas oraz trudniej jest mu się bronić z dystansu. Druid może też zacisnąć korzenie mocniej, co przykuwa wroga do ziemi, uniemożliwiając mu wykonywanie ataków wręcz. W PvP powtarzanie korzeni w jednej rundzie skutkuje karą -15% do trafienia dla rzucającego. Resetuje się co turę.",
       type: "attack",
       attackType: "mental",
       hitType: "knowledge",
@@ -932,7 +927,7 @@ export const classSkillsDatabase: AllRawClassSkills = {
         knoCoeff: 0.7,
       },
       damageMod: [100, 110, 120, 135, 150, 170, 195],
-      hittingMod: [-35, -33, -31, -30, -29, -28, -26],
+      hittingMod: [85, 87, 89, 90, 91, 92, 94],
       cost: {
         mana: [30, 35, 39, 44, 48, 53, 57],
       },
@@ -944,8 +939,8 @@ export const classSkillsDatabase: AllRawClassSkills = {
           effect: [-15, -18, -21, -24, -27, -30, -35],
         },
         {
-          name: "Unieruchomienie",
-          effect: calculateLinearEffect(100, 0),
+          name: "Czas trwania unieruchomienia",
+          effect: [2, 2, 2, 2, 3, 3, 3],
         },
       ],
     },
@@ -995,10 +990,10 @@ export const classSkillsDatabase: AllRawClassSkills = {
       name: "Ognista Sfera",
       image: "images/Ognista_sfera.jpg",
       description:
-        "Czar ochronny, powodujący, że osoba, która zaatakuje maga zostaje poparzona (działa na 10 pierwszych ataków).",
+        "Czar ochronny, powodujący, że osoba, która zaatakuje maga zostaje poparzona.",
       type: "buff",
       target: "single",
-      duration: [2, 2, 3, 3, 3, 3, 4],
+      duration: [2, 3, 3, 4, 4, 4, 5],
       difficulty: calculateLinearEffect(160, 40),
       cost: {
         mana: [30, 35, 39, 44, 48, 53, 57],
@@ -1007,12 +1002,17 @@ export const classSkillsDatabase: AllRawClassSkills = {
         powerCoeff: 1.4,
         knoCoeff: 0.6,
       },
-      damageMod: calculateLinearEffect(60, 10),
+      damageMod: calculateLinearEffect(66, 12),
       effects: [
         {
           name: "physRes",
           type: "numeric",
           effect: calculateLinearEffect(10, 0),
+        },
+        {
+          name: "Ładunki",
+          type: "numeric",
+          effect: [8, 9, 11, 12, 13, 15, 16],
         },
       ],
     },

@@ -335,7 +335,7 @@ export const resources = {
       "Wyssanie duszy": "Wyssanie duszy",
       "Hak w brzuch": "Hak w brzuch",
       "Tarcza Cienia": "Tarcza cienia",
-      "tarcza-cienia-desc":  "Voodoo rozpraszają siłę ciosu, którego część zostaje zniwelowana, część przejęta przez manę, a dopiero to, co zostanie, dociera do czarodzieja. W walce z innymi graczami siła uderzenia nie ulega zmniejszeniu zanim zostanie przechwycona przez manę. Gdy poziom many Voodoo jest niski (15% całkowitej ilości) tarcza cienia przestaje wykazywać swoje właściwości.",
+      "tarcza-cienia-desc": "Voodoo rozpraszają siłę ciosu, którego część zostaje zniwelowana, część przejęta przez manę, a dopiero to, co zostanie, dociera do czarodzieja. W walce z innymi graczami siła uderzenia nie ulega zmniejszeniu zanim zostanie przechwycona przez manę. Gdy poziom many Voodoo jest niski (15% całkowitej ilości) tarcza cienia przestaje wykazywać swoje właściwości.",
       Zatrucie: "Zatrucie",
       "Uderzenie cienia": "Uderzenie cienia",
       Otępienie: "Otępienie",
@@ -466,6 +466,7 @@ export const resources = {
       "ring-count": "Własny pierścień {{number}}",
       "pants-count": "Własne spodnie {{number}}",
       "cape-count": "Własny płaszcz {{number}}",
+      "vambraces-count": "Własne karwasze {{number}}",
       //item enhancement
       "change-stats-1": "Dodaj lub odejmij statystyki przedmiotu",
       "change-stats-2": "w ramach ulepszania bądź losowych statysyk",
@@ -679,7 +680,15 @@ export const resources = {
       "Wymagania": "Wymagania",
       "Statystyki": "Statystyki",
       "Psychowłaściwości": "Psychowłaściwości",
-      "items-display-description": "Znajdziesz tutaj spis przedmiotów rzadkich, psychorarów, setowych i epickich dostępnych dla graczy w The Pride of Taern. Kliknij i zobacz je wszystkie!"
+      "items-display-description": "Znajdziesz tutaj spis przedmiotów rzadkich, psychorarów, setowych i epickich dostępnych dla graczy w The Pride of Taern. Kliknij i zobacz je wszystkie!",
+      //nowe
+      "Ładunki": "Ładunki",
+      "Amok": "Amok",
+      "Tąpnięcie": "Tąpnięcie",
+      "Wirujące ostrze": "Wirujące ostrze",
+      "Naturalna odporność": "Naturalna odporność",
+      "Obniżenie poziomu debuffów": "Obniżenie poziomu debuffów",
+      "Czas trwania unieruchomienia": "Czas trwania unieruchomienia"
     },
   },
   en: {
@@ -1142,11 +1151,12 @@ export const resources = {
       "gloves-count": "Custom gloves {{number}}",
       "weapon-count": "Custom weapon {{number}}",
       "shield-count": "Custom shield {{number}}",
-      "belt-count": "Custom shield {{number}}",
+      "belt-count": "Custom belt {{number}}",
       "boots-count": "Custom boots {{number}}",
       "ring-count": "Custom ring {{number}}",
       "pants-count": "Custom pants {{number}}",
       "cape-count": "Custom cape {{number}}",
+      "vambraces-count": "Custom vambraces {{number}}",
       //item enhancement
       "change-stats-1": "Increse/decraese attributes on items",
       "change-stats-2": "to account for upgrades or random attributes",
@@ -1360,7 +1370,15 @@ export const resources = {
       "Wymagania": "Requirements",
       "Statystyki": "Attributes",
       "Psychowłaściwości": "Psychoproperties",
-      "items-display-description": "Here you will find a list of all rares, psychorares, epics and set items available to players in The Pride of Taern. Click to see them all!"
+      "items-display-description": "Here you will find a list of all rares, psychorares, epics and set items available to players in The Pride of Taern. Click to see them all!",
+      //nowe
+      "Ładunki": "Charges",
+      "Amok": "Amok",
+      "Tąpnięcie": "Earthquake",
+      "Wirujące ostrze": "Dirty Axing",
+      "Naturalna odporność": "Natural Resistance",
+      "Obniżenie poziomu debuffów": "Lowers debuff levels",
+      "Czas trwania unieruchomienia": "Immobilization duration"
     },
   },
 };

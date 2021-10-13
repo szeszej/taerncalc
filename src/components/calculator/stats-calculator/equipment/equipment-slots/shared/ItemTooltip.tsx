@@ -107,7 +107,9 @@ class ConnectedItemTooltip extends React.Component<PropTypes> {
         <p className="itemName" style={this.nameColor(this.props.item.rarity)}>
           {!this.props.item.isCustom
             ? t(this.props.item.name)
-            : t(this.props.item.type + "-count", {
+            : this.props.class !== "knight" && this.props.item.type === "shield" ? t("vambraces-count", {
+                number: this.props.item.name.slice(-1),
+              }) : t(this.props.item.type + "-count", {
                 number: this.props.item.name.slice(-1),
               })}
         </p>

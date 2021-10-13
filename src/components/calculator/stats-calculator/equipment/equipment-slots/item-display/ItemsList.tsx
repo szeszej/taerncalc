@@ -94,7 +94,7 @@ class ConnectedItemsList extends React.Component<PropTypes, StateTypes> {
     );
     return (
       <div className="itemsList">
-        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={t(this.props.type) + " " + (this.props.items.filter(x => x.isCustom).length + 1)} type={this.props.type} closeList={this.props.hideItemsList} /> : null}
+        {this.state.displayAddItemForm ? <ItemCreatorForm closeForm={this.hideAddItemForm} name={t(this.props.class === "knight" ? this.props.type : "vambraces-count") + " " + (this.props.items.filter(x => x.isCustom).length + 1)} type={this.props.type} closeList={this.props.hideItemsList} /> : null}
         {this.props.items.length ? (
           equippableItemsComponents
         ) : (
