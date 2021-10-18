@@ -441,12 +441,12 @@ export const classSkillsDatabase: AllRawClassSkills = {
         strengthCoeff: 1,
         agilityCoeff: 0.4,
       },
-      damageMod: calculateLinearEffect(220, 24),
-      hittingMod: [90, 93, 97, 100, 103, 107, 110],
+      damageMod: calculateLinearEffect(98, 16),
+      hittingMod: calculateLinearEffect(103, 1),
       cost: {
-        endurance: [20, 23, 26, 29, 32, 35, 37],
+        endurance: [45, 52, 59, 65, 72, 79, 86],
       },
-      target: "group"    
+      target: "group"
     },
     skill9: {
       name: "Krytyczne uderzenie",
